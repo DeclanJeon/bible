@@ -291,14 +291,16 @@ const getHermesProviderConfig = cache(async (): Promise<HermesProviderConfig> =>
   }
 
   const chatReady = !missing.length;
-  const agentCommand = chatReady ? null : await resolveHermesAgentOneshotCommand();
+  const agentCommand = await resolveHermesAgentOneshotCommand();
+  const preferChatCompletions = process.env.HERMES_CHAT_COMPLETIONS_FIRST === "1";
+  const transport = agentCommand && !preferChatCompletions ? "agent-oneshot" : chatReady ? "chat-completions" : agentCommand ? "agent-oneshot" : null;
 
   return {
     apiKey,
     baseUrl,
     model,
     ready: chatReady || !!agentCommand,
-    transport: chatReady ? "chat-completions" : agentCommand ? "agent-oneshot" : null,
+    transport,
     agentCommand,
     missing,
     sources: {
