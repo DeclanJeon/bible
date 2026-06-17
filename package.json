@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "benchmark:ko": "node scripts/run-korean-prompt-benchmark.mjs --fixture qa/korean-prompt-benchmark.json --locale ko",
+    "benchmark:en": "node scripts/run-korean-prompt-benchmark.mjs --fixture qa/english-prompt-benchmark.json --locale en",
+    "benchmark": "npm run benchmark:ko && npm run benchmark:en",
     "ingest:crossrefs": "python3 scripts/ingest_openbible_crossrefs.py",
     "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py"
   },

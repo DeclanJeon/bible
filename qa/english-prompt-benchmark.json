@@ -1,0 +1,218 @@
+[
+  {
+    "family": "alive-heaven",
+    "prompt": "Can living people go to heaven?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1TH 4:15-17"],
+    "expectedSupportCodes": ["1CO", "JOH", "MAT"],
+    "expectedGraphCodes": ["REV", "1CO", "MAT"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "alive-heaven",
+    "prompt": "How do the living enter heaven at Christ's coming?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1TH 4:15-17"],
+    "expectedSupportCodes": ["1CO", "JOH"],
+    "expectedGraphCodes": ["REV", "1TH", "1CO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "after-death-heaven",
+    "prompt": "Do we go to heaven immediately after death?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["LUK 23:43"],
+    "expectedSupportCodes": ["PHI", "2CO", "REV"],
+    "expectedGraphCodes": ["REV", "LUK", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "after-death-heaven",
+    "prompt": "Does a believer enter paradise right after dying?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["LUK 23:43"],
+    "expectedSupportCodes": ["PHI", "2CO"],
+    "expectedGraphCodes": ["REV", "LUK"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "resurrection-living",
+    "prompt": "What happens to living people at the resurrection?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1CO 15:51-52"],
+    "expectedSupportCodes": ["1TH", "PHI"],
+    "expectedGraphCodes": ["MAT", "1TH", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "resurrection-living",
+    "prompt": "Will the living be changed on the last day?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1CO 15:51-52"],
+    "expectedSupportCodes": ["1TH", "PHI"],
+    "expectedGraphCodes": ["MAT", "1TH", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life",
+    "prompt": "If I believe in Jesus, will I never die?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["JOH", "1JO"],
+    "expectedGraphCodes": ["1TH", "JOH", "1JO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life",
+    "prompt": "Does eternal life mean a believer will never die forever?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["JOH", "1JO"],
+    "expectedGraphCodes": ["1TH", "JOH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "kingdom-entry",
+    "prompt": "Can someone who says they are saved still fail to enter the kingdom?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["MAT 7:21"],
+    "expectedSupportCodes": ["MAT", "REV", "HEB"],
+    "expectedGraphCodes": ["ROM", "REV", "MAT"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "kingdom-entry",
+    "prompt": "Who actually enters the kingdom of heaven?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["MAT 7:21"],
+    "expectedSupportCodes": ["MAT", "REV"],
+    "expectedGraphCodes": ["ROM", "MAT", "REV"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "grief",
+    "prompt": "Someone I love died and I am overwhelmed with grief.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedSupportCodes": ["JOH", "PSA", "REV"],
+    "expectedGraphCodes": ["REV", "JOH", "1TH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "grief",
+    "prompt": "Is there any hope after losing a family member?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedSupportCodes": ["JOH", "PSA"],
+    "expectedGraphCodes": ["REV", "JOH", "PSA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "silence",
+    "prompt": "God feels silent even though I keep praying.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM", "PSA"],
+    "expectedGraphCodes": ["JOB", "PSA", "HAB"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "silence",
+    "prompt": "Why does God not answer my prayers at all?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM"],
+    "expectedGraphCodes": ["JOB", "PSA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "My guilt is crushing me and I feel like I cannot come to God.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedSupportCodes": ["ROM", "PSA"],
+    "expectedGraphCodes": ["PSA", "ROM", "1JO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "Has God really forgiven all my sin?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedSupportCodes": ["ROM", "PSA"],
+    "expectedGraphCodes": ["PSA", "ROM", "1JO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "I am afraid of the future and unsure about my calling.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedSupportCodes": ["EXO", "ISA", "JDG"],
+    "expectedGraphCodes": ["GEN", "EXO", "ISA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "I think God may be calling me, but I am afraid.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedSupportCodes": ["EXO", "ISA"],
+    "expectedGraphCodes": ["GEN", "EXO", "ISA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "wisdom",
+    "prompt": "I need wisdom because I am confused about a major decision.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedSupportCodes": ["PRO", "PSA", "COL"],
+    "expectedGraphCodes": ["PRO", "PSA", "JAM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "wisdom",
+    "prompt": "I have a big decision to make and I need wisdom.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedSupportCodes": ["PRO", "PSA"],
+    "expectedGraphCodes": ["PRO", "PSA", "JAM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "It is so hard to forgive someone who betrayed me.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedSupportCodes": ["EPH", "ROM", "COL"],
+    "expectedGraphCodes": ["LUK", "MAT", "ROM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "Forgiving a friend who betrayed me feels impossible.",
+    "locale": "en",
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedSupportCodes": ["EPH", "ROM"],
+    "expectedGraphCodes": ["LUK", "MAT", "COL"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life-variant",
+    "prompt": "If I die, will I live again?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["1CO", "1TH", "JOH"],
+    "expectedGraphCodes": ["1TH", "REV", "JOH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "silence-variant",
+    "prompt": "Why does God feel so silent to me?",
+    "locale": "en",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM", "PSA"],
+    "expectedGraphCodes": ["JOB", "PSA"],
+    "minConfidence": "high"
+  }
+]

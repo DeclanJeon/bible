@@ -1,0 +1,66 @@
+name: benchmark
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+
+      - name: Start app
+        run: |
+          npm start > /tmp/bible-app.log 2>&1 &
+          echo $! > /tmp/bible-app.pid
+
+      - name: Wait for app
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3000/ko >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/bible-app.log
+          exit 1
+
+      - name: Run Korean benchmark
+        env:
+          BENCHMARK_BASE_URL: http://127.0.0.1:3000
+        run: npm run benchmark:ko
+
+      - name: Run English benchmark
+        env:
+          BENCHMARK_BASE_URL: http://127.0.0.1:3000
+        run: npm run benchmark:en
+
+      - name: Stop app
+        if: always()
+        run: |
+          if [ -f /tmp/bible-app.pid ]; then
+            kill $(cat /tmp/bible-app.pid) || true
+          fi

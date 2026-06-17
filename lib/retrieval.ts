@@ -99,7 +99,7 @@ type RoutingRule = {
 
 const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
   {
-    match: /(살아있는|살아 남|산 자).*(천국|하늘나라|하늘)|((천국|하늘나라|하늘).*(살아있는|살아 남|산 자))/i,
+    match: /(살아있는|살아 남|산 자).*(천국|하늘나라|하늘)|((천국|하늘나라|하늘).*(살아있는|살아 남|산 자))|(living|alive).*(heaven|kingdom)|(heaven|kingdom).*(living|alive)/i,
     primaryReference: { code: "1TH", chapter: 4, startVerse: 15, endVerse: 17 },
     supportingReferences: [
       { code: "1CO", chapter: 15, startVerse: 51, endVerse: 52 },
@@ -113,7 +113,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["살아", "천국", "하늘", "죽은 자"],
   },
   {
-    match: /(죽으면|죽은 후|죽고 나면|바로).*(천국|하늘나라|낙원)|((천국|하늘나라|낙원).*(죽으면|죽은 후|바로))/i,
+    match: /(죽으면|죽은 후|죽고 나면|바로).*(천국|하늘나라|낙원)|((천국|하늘나라|낙원).*(죽으면|죽은 후|바로))|((after death|immediately|right after|right away).*(heaven|paradise))|((heaven|paradise).*(after death|immediately|right after))/i,
     primaryReference: { code: "LUK", chapter: 23, startVerse: 43, endVerse: 43 },
     supportingReferences: [
       { code: "PHI", chapter: 1, startVerse: 23, endVerse: 23 },
@@ -126,7 +126,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["죽으면", "천국", "낙원", "바로"],
   },
   {
-    match: /(부활).*(살아있는|살아 남|산 자)|((살아있는|살아 남|산 자).*(부활))|((마지막 날|마지막날|변화).*(살아|남은 자|산 자))/i,
+    match: /(부활).*(살아있는|살아 남|산 자)|((살아있는|살아 남|산 자).*(부활))|((마지막 날|마지막날|변화).*(살아|남은 자|산 자))|((resurrection|last day|changed).*(living|alive))|((living|alive).*(resurrection|last day|changed))/i,
     primaryReference: { code: "1CO", chapter: 15, startVerse: 51, endVerse: 52 },
     supportingReferences: [
       { code: "1TH", chapter: 4, startVerse: 15, endVerse: 17 },
@@ -138,7 +138,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["부활", "살아있는", "변화", "죽은 자"],
   },
   {
-    match: /(영원히 죽지|영생|예수 믿으면).*(죽지)|((죽지).*(영생|예수 믿으면))/i,
+    match: /(영원히 죽지|영생|예수 믿으면).*(죽지)|((죽지).*(영생|예수 믿으면))|((believe in jesus|eternal life).*(never die|death))|((never die).*(believe|eternal life))/i,
     primaryReference: { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 },
     supportingReferences: [
       { code: "JOH", chapter: 3, startVerse: 16, endVerse: 16 },
@@ -151,7 +151,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["영생", "예수", "죽지", "믿으면"],
   },
   {
-    match: /(죽어도|죽어).*(다시 살|살 수 있나)|((다시 살|부활).*(죽어도|죽어))/i,
+    match: /(죽어도|죽어).*(다시 살|살 수 있나)|((다시 살|부활).*(죽어도|죽어))|((die|death).*(live again|rise|resurrection))|((live again|rise).*(die|death))/i,
     primaryReference: { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 },
     supportingReferences: [
       { code: "1CO", chapter: 15, startVerse: 51, endVerse: 52 },
@@ -164,7 +164,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["죽어도", "다시 살", "부활", "생명"],
   },
   {
-    match: /(천국).*(못 들어|들어갈 수 있나|누가 들어가|들어가나)|((구원받은|구원).*(천국|하늘나라))|((천국|하늘나라).*(누가|어떻게).*(들어가))/i,
+    match: /(천국).*(못 들어|들어갈 수 있나|누가 들어가|들어가나)|((구원받은|구원).*(천국|하늘나라))|((천국|하늘나라).*(누가|어떻게).*(들어가))|((saved|kingdom|heaven).*(enter|fail to enter|who enters))|((who|actually).*(enter).*(kingdom|heaven))/i,
     primaryReference: { code: "MAT", chapter: 7, startVerse: 21, endVerse: 21 },
     supportingReferences: [
       { code: "MAT", chapter: 25, startVerse: 34, endVerse: 34 },
@@ -177,7 +177,20 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["천국", "구원", "들어갈", "못"],
   },
   {
-    match: /(사랑하는 사람|사람이|가족).*(죽어서|죽었|죽음|슬퍼|잃고)|((죽어서|죽음|슬퍼|잃고).*(사랑하는 사람|사람이|가족))|((슬픈데|슬퍼).*(소망))/i,
+    match: /(hope).*(losing).*(family member)|((losing).*(family member).*(hope))|((family member).*(loss|losing))/i,
+    primaryReference: { code: "1TH", chapter: 4, startVerse: 13, endVerse: 18 },
+    supportingReferences: [
+      { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 },
+      { code: "PSA", chapter: 34, startVerse: 18, endVerse: 18 },
+      { code: "REV", chapter: 21, startVerse: 4, endVerse: 4 },
+    ],
+    rationaleKo: "질문이 사랑하는 사람의 죽음 앞에서 슬픔과 소망을 함께 묻고 있어서, ‘소망 없는 다른 이와 같이 슬퍼하지 않게 하려 함이라’고 직접 말하는 데살로니가전서 4:13-18을 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt combines grief and hope after losing a family member, the primary passage is 1 Thessalonians 4:13-18, which directly addresses grief with resurrection hope.",
+    passageKeywordsKo: ["슬퍼하지", "소망", "죽은 자"],
+    semanticTermsKo: ["죽음", "슬퍼", "사랑하는", "소망"],
+  },
+  {
+    match: /(사랑하는 사람|사람이|가족).*(죽어서|죽었|죽음|슬퍼|잃고)|((죽어서|죽음|슬퍼|잃고).*(사랑하는 사람|사람이|가족))|((슬픈데|슬퍼).*(소망))|((someone i love|family member|loved one).*(died|death|grief|loss))|((grief|lost|loss|losing).*(hope|loved one|family|family member))|((hope).*(losing|lost).*(family member|loved one|family))|((family member|loved one).*(lost|losing|died|death))/i,
     primaryReference: { code: "1TH", chapter: 4, startVerse: 13, endVerse: 18 },
     supportingReferences: [
       { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 },
@@ -190,7 +203,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["죽음", "슬퍼", "사랑하는", "소망"],
   },
   {
-    match: /(침묵|응답이 없|응답이 없으|기도해도|잠잠|응답).*(하나님)|((하나님).*(침묵|기도해도|잠잠|응답))/i,
+    match: /(침묵|응답이 없|응답이 없으|기도해도|잠잠|응답).*(하나님)|((하나님).*(침묵|기도해도|잠잠|응답))|((god).*(silent|silence|not answer|no answer))|((prayer|prayers).*(silent|no answer|not answer))/i,
     primaryReference: { code: "PSA", chapter: 13, startVerse: 1, endVerse: 2 },
     supportingReferences: [
       { code: "HAB", chapter: 1, startVerse: 2, endVerse: 3 },
@@ -203,7 +216,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["침묵", "기도", "하나님", "응답"],
   },
   {
-    match: /(죄책감|내 죄|용서하셨|못 가겠어|정죄).*(하나님)|((하나님).*(죄책감|용서하셨|정죄))/i,
+    match: /(죄책감|내 죄|용서하셨|못 가겠어|정죄).*(하나님)|((하나님).*(죄책감|용서하셨|정죄))|((guilt|forgiven|forgive|condemnation).*(god|sin))|((has god).*(forgiven|forgive))/i,
     primaryReference: { code: "1JO", chapter: 1, startVerse: 9, endVerse: 9 },
     supportingReferences: [
       { code: "ROM", chapter: 8, startVerse: 1, endVerse: 1 },
@@ -216,7 +229,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["죄책감", "용서", "죄", "정죄"],
   },
   {
-    match: /(부르심|부르시는|두렵|두려워|미래|감당).*(모르겠|무섭|맞는지)|((모르겠|무섭|맞는지).*(부르심|부르시는|두렵|미래))/i,
+    match: /(부르심|부르시는|두렵|두려워|미래|감당).*(모르겠|무섭|맞는지)|((모르겠|무섭|맞는지).*(부르심|부르시는|두렵|미래))|((calling|future|afraid|fear).*(unsure|don't know|not sure))|((god).*(calling).*(afraid|fear))/i,
     primaryReference: { code: "JOS", chapter: 1, startVerse: 9, endVerse: 9 },
     supportingReferences: [
       { code: "EXO", chapter: 3, startVerse: 11, endVerse: 12 },
@@ -229,7 +242,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["두렵", "부르심", "미래", "감당"],
   },
   {
-    match: /(지혜|결정|혼란|분별|인도).*(싶|필요)|((싶|필요).*(지혜|결정|혼란))/i,
+    match: /(지혜|결정|혼란|분별|인도).*(싶|필요)|((싶|필요).*(지혜|결정|혼란))|((wisdom|decision|confused|guidance).*(need|major|big))|((decision).*(wisdom|confused))/i,
     primaryReference: { code: "JAM", chapter: 1, startVerse: 5, endVerse: 5 },
     supportingReferences: [
       { code: "PRO", chapter: 3, startVerse: 5, endVerse: 6 },
@@ -242,7 +255,7 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["지혜", "결정", "혼란", "인도"],
   },
   {
-    match: /(용서하기|용서하는|배신한|원수|분노|원망).*(힘들|어려)|((힘들|어려).*(용서|배신))/i,
+    match: /(용서하기|용서하는|배신한|원수|분노|원망).*(힘들|어려)|((힘들|어려).*(용서|배신))|((forgive|forgiving|betrayed|betrayal).*(hard|difficult|impossible))|((hard|difficult).*(forgive|betrayed))/i,
     primaryReference: { code: "MAT", chapter: 18, startVerse: 21, endVerse: 22 },
     supportingReferences: [
       { code: "EPH", chapter: 4, startVerse: 31, endVerse: 32 },
