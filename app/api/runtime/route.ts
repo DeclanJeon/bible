@@ -10,6 +10,7 @@ export async function GET() {
   return NextResponse.json({
     hermes: {
       ready: hermes.ready,
+      transport: hermes.transport,
     },
     embeddings: {
       ready: embeddings.ready,

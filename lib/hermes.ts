@@ -16,6 +16,8 @@ export type HermesProviderConfig = {
   baseUrl: string;
   model: string;
   ready: boolean;
+  transport: "chat-completions" | "agent-oneshot" | null;
+  agentCommand: string | null;
   missing: HermesProviderField[];
   sources: {
     apiKey: string | null;
@@ -26,7 +28,7 @@ export type HermesProviderConfig = {
 
 export type ReflectionGenerationResult = {
   response: ReflectionResponse;
-  provider: "deterministic" | "hermes" | "hermes-fallback";
+  provider: "deterministic" | "hermes" | "hermes-agent" | "hermes-fallback";
   model: string;
   note: string;
 };
@@ -101,6 +103,11 @@ function resolveHermesAgentPaths() {
       "python3",
     ].filter((value): value is string => !!value),
     configPath: process.env.HERMES_CONFIG_PATH ?? join(home, ".hermes", "config.yaml"),
+    hermesCandidates: [
+      process.env.HERMES_AGENT_CLI,
+      join(home, ".hermes", "hermes-agent", "venv", "bin", "hermes"),
+      "hermes",
+    ].filter((value): value is string => !!value),
   };
 }
 
@@ -147,6 +154,42 @@ async function resolveHermesAgentRuntimeCredentials(): Promise<HermesAgentRuntim
   }
 
   return null;
+}
+
+async function resolveHermesAgentOneshotCommand() {
+  if (process.env.HERMES_AGENT_ONESHOT === "0") {
+    return null;
+  }
+
+  const { root, hermesCandidates } = resolveHermesAgentPaths();
+  if (!(await fileExists(root))) {
+    return null;
+  }
+
+  for (const command of hermesCandidates) {
+    if (command.includes("/")) {
+      if (await fileExists(command)) return command;
+      continue;
+    }
+    return command;
+  }
+
+  return null;
+}
+
+export async function runHermesAgentOneshot(prompt: string, timeoutMs = 75_000) {
+  const command = await resolveHermesAgentOneshotCommand();
+  if (!command) return null;
+  const { stdout } = await execFile(command, ["--ignore-rules", "-z", prompt], {
+    timeout: timeoutMs,
+    cwd: process.cwd(),
+    env: {
+      ...process.env,
+      HERMES_ACCEPT_HOOKS: "1",
+    },
+    maxBuffer: 1024 * 1024,
+  });
+  return stdout.trim();
 }
 
 function describeMissingConfig(config: HermesProviderConfig) {
@@ -247,16 +290,21 @@ const getHermesProviderConfig = cache(async (): Promise<HermesProviderConfig> =>
     missing.push("baseUrl");
   }
 
+  const chatReady = !missing.length;
+  const agentCommand = chatReady ? null : await resolveHermesAgentOneshotCommand();
+
   return {
     apiKey,
     baseUrl,
     model,
-    ready: !missing.length,
+    ready: chatReady || !!agentCommand,
+    transport: chatReady ? "chat-completions" : agentCommand ? "agent-oneshot" : null,
+    agentCommand,
     missing,
     sources: {
       apiKey: envApiKey?.source ?? agentCredentials?.source ?? null,
       baseUrl: envBaseUrl?.source ?? agentCredentials?.source ?? null,
-      model: envModel?.source ?? (agentModel ? "hermes-agent-config:model.default" : "fallback:hermes-default"),
+      model: envModel?.source ?? (agentModel ? "hermes-agent-config:model.default" : agentCommand ? "hermes-agent:oneshot-default" : "fallback:hermes-default"),
     },
   };
 });
@@ -270,10 +318,6 @@ export async function generateReflectionWithHermes(
   deterministicReflection: ReflectionResponse,
 ): Promise<ReflectionGenerationResult> {
   const config = await resolveHermesProviderConfig();
-  if (!config.ready) {
-    return deterministicResult(deterministicReflection, describeMissingConfig(config));
-  }
-
   const contract = buildHermesContract(contractArgs);
   const system = [
     "You are Hermes operating in evidence-locked mode.",
@@ -282,7 +326,36 @@ export async function generateReflectionWithHermes(
     "Keep disputed items tentative.",
   ].join(" ");
 
+  if (!config.ready) {
+    return deterministicResult(deterministicReflection, describeMissingConfig(config));
+  }
+
   const user = JSON.stringify(contract);
+
+  if (config.transport === "agent-oneshot") {
+    try {
+      const content = await runHermesAgentOneshot(
+        `${system}\n\nEvidence contract JSON:\n${user}`,
+        90_000,
+      );
+      const parsed = validateGeneratedShape(extractJson(content ?? ""));
+      if (!parsed) {
+        return deterministicResult(deterministicReflection, "Hermes agent returned invalid JSON; using deterministic fallback.", "hermes-fallback");
+      }
+      return {
+        provider: "hermes-agent",
+        model: config.model,
+        note: `Hermes agent generated the final explanation from the evidence-locked contract (${config.sources.model}).`,
+        response: {
+          ...deterministicReflection,
+          ...parsed,
+        },
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown Hermes agent error";
+      return deterministicResult(deterministicReflection, `Hermes agent threw an error (${message}); using deterministic fallback.`, "hermes-fallback");
+    }
+  }
 
   try {
     const controller = new AbortController();

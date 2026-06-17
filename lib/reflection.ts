@@ -22,7 +22,7 @@ export type ReflectionResponse = {
   personalConnection: string;
   reflectionQuestions: string[];
   evidence: EvidencePassage[];
-  generationMode: "deterministic" | "hermes" | "hermes-fallback";
+  generationMode: "deterministic" | "hermes" | "hermes-agent" | "hermes-fallback";
   generationModel: string;
   generationNote: string;
 };

@@ -1,10 +1,10 @@
-import { resolveHermesProviderConfig } from "@/lib/hermes";
+import { resolveHermesProviderConfig, runHermesAgentOneshot } from "@/lib/hermes";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
 
 export type RagQueryPlan = {
   expansionTerms: string[];
   expansionSummary: string | null;
-  expansionProvider: "deterministic" | "hermes" | "hermes-fallback";
+  expansionProvider: "deterministic" | "hermes" | "hermes-agent" | "hermes-fallback";
   expansionModel: string;
   expansionNote: string;
 };
@@ -85,6 +85,32 @@ export async function buildRagQueryPlan(prompt: string, locale?: string): Promis
   ].join(" ");
   const user = JSON.stringify({ locale: appLocale, prompt, maxSearchTerms: MAX_TERMS });
 
+  const parsePlan = (content: string | null, provider: "hermes" | "hermes-agent", model: string, notePrefix: string): RagQueryPlan | null => {
+    const parsed = extractJson(content ?? "");
+    const expansionTerms = cleanTerms(parsed?.searchTerms);
+    if (!expansionTerms.length) return null;
+    const intentSummary = typeof parsed?.intentSummary === "string" ? parsed.intentSummary.trim().slice(0, 240) : null;
+    return {
+      expansionTerms,
+      expansionSummary: intentSummary || fallback.expansionSummary,
+      expansionProvider: provider,
+      expansionModel: model,
+      expansionNote: `${notePrefix} generated ${expansionTerms.length} Bible RAG search terms.`,
+    };
+  };
+
+  if (config.transport === "agent-oneshot") {
+    try {
+      const content = await runHermesAgentOneshot(`${system}\n\nQuery request JSON:\n${user}`, 60_000);
+      const plan = parsePlan(content, "hermes-agent", config.model, "Hermes agent");
+      if (plan) return plan;
+      return { ...fallback, expansionProvider: "hermes-fallback", expansionModel: "hermes-fallback", expansionNote: "Hermes agent RAG query planner returned no usable search terms." };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      return { ...fallback, expansionProvider: "hermes-fallback", expansionModel: "hermes-fallback", expansionNote: `Hermes agent RAG query planner threw (${message}).` };
+    }
+  }
+
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 12_000);
@@ -113,20 +139,12 @@ export async function buildRagQueryPlan(prompt: string, locale?: string): Promis
 
     const payload = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
     const content = payload.choices?.[0]?.message?.content ?? "";
-    const parsed = extractJson(content);
-    const expansionTerms = cleanTerms(parsed?.searchTerms);
-    if (!expansionTerms.length) {
+    const plan = parsePlan(content, "hermes", config.model, "Hermes");
+    if (!plan) {
       return { ...fallback, expansionProvider: "hermes-fallback", expansionModel: "hermes-fallback", expansionNote: "Hermes RAG query planner returned no usable search terms." };
     }
 
-    const intentSummary = typeof parsed?.intentSummary === "string" ? parsed.intentSummary.trim().slice(0, 240) : null;
-    return {
-      expansionTerms,
-      expansionSummary: intentSummary || fallback.expansionSummary,
-      expansionProvider: "hermes",
-      expansionModel: config.model,
-      expansionNote: `Hermes generated ${expansionTerms.length} Bible RAG search terms.`,
-    };
+    return plan;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     return { ...fallback, expansionProvider: "hermes-fallback", expansionModel: "hermes-fallback", expansionNote: `Hermes RAG query planner threw (${message}).` };
