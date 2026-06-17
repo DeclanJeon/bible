@@ -457,10 +457,10 @@ function formatPassageReference(reference: BibleReference) {
   return `${reference.code} ${tail}`;
 }
 
-function scoreVerse(verse: BibleVerse, promptTokens: string[], expandedPrompt: string) {
+function scoreVerse(verse: BibleVerse, promptTokens: string[], conceptPrompt: string) {
   const lowerText = verse.text.toLowerCase();
   const matchedTerms = [...new Set(promptTokens.filter((token) => lowerText.includes(token)))];
-  const matchedConcepts = PASSAGE_CONCEPTS.filter((rule) => rule.prompt.test(expandedPrompt) && rule.verse.test(verse.text)).map((rule) => rule.key);
+  const matchedConcepts = PASSAGE_CONCEPTS.filter((rule) => rule.prompt.test(conceptPrompt) && rule.verse.test(verse.text)).map((rule) => rule.key);
   let score = matchedTerms.length * 2 + matchedConcepts.length * 3;
   if (matchedTerms.length >= 2) score += 2;
   if (matchedConcepts.includes("heaven") && matchedConcepts.includes("alive")) score += 4;
@@ -472,11 +472,11 @@ function scoreVerse(verse: BibleVerse, promptTokens: string[], expandedPrompt: s
 function buildGlobalPassageCandidates(
   verses: BibleVerse[],
   promptTokens: string[],
-  expandedPrompt: string,
+  conceptPrompt: string,
   limit = 8,
 ): PassageCandidate[] {
   if (!verses.length) return [];
-  const scored = verses.map((verse, index) => ({ index, verse, ...scoreVerse(verse, promptTokens, expandedPrompt) }));
+  const scored = verses.map((verse, index) => ({ index, verse, ...scoreVerse(verse, promptTokens, conceptPrompt) }));
   const ordered = [...scored].filter((entry) => entry.score > 0).sort((a, b) => b.score - a.score);
   const candidates: PassageCandidate[] = [];
   const used = new Set<string>();
@@ -565,7 +565,7 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   const [allVerses, { corpora, idf }, clusterEmbeddings] = await Promise.all([loadVerses(appLocale), loadClusterCorpora(appLocale), loadClusterEmbeddings(appLocale)]);
   const promptEmbedding = clusterEmbeddings.vectors ? await createEmbedding(normalizedPrompt) : null;
   const embeddingEnabled = !!promptEmbedding && !!clusterEmbeddings.vectors && !!clusterEmbeddings.model;
-  const passageCandidates = buildGlobalPassageCandidates(allVerses, promptTokens, expandedPrompt);
+  const passageCandidates = buildGlobalPassageCandidates(allVerses, promptTokens, normalizedPrompt);
   const bestPassage = passageCandidates[0] ?? null;
 
   const scored = corpora.map(({ cluster, corpus, tf }) => {
