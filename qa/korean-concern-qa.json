@@ -1,0 +1,142 @@
+[
+  {
+    "family": "weariness",
+    "prompt": "요즘 일이 너무 힘들고 지쳐요",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["지침", "무거운", "수고"]
+  },
+  {
+    "family": "weariness",
+    "prompt": "무거운 부담 때문에 쉬고 싶어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["부담", "쉬게", "수고"]
+  },
+  {
+    "family": "silence",
+    "prompt": "기도해도 하나님이 침묵하시는 것 같아",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedExplanationTerms": ["침묵", "기도", "응답"]
+  },
+  {
+    "family": "silence",
+    "prompt": "왜 하나님은 내 기도에 아무 응답이 없으실까",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedExplanationTerms": ["응답", "기도", "하나님"]
+  },
+  {
+    "family": "grief",
+    "prompt": "가족을 잃고 너무 슬픈데 소망이 있을까",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedExplanationTerms": ["슬픔", "소망", "죽음"]
+  },
+  {
+    "family": "grief",
+    "prompt": "사랑하는 사람이 죽어서 너무 슬퍼",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedExplanationTerms": ["죽음", "슬픔", "소망"]
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "죄책감이 커서 하나님께 못 가겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedExplanationTerms": ["죄책감", "용서", "죄"]
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "하나님이 정말 내 죄를 용서하셨나",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedExplanationTerms": ["용서", "죄", "하나님"]
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "미래가 두렵고 부르심이 맞는지 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedExplanationTerms": ["두려", "부르심", "함께"]
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "하나님이 나를 부르시는 게 맞는지 두려워",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedExplanationTerms": ["두려", "부르심", "하나님"]
+  },
+  {
+    "family": "wisdom",
+    "prompt": "중요한 결정을 해야 해서 지혜가 필요해",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedExplanationTerms": ["지혜", "결정", "구하라"]
+  },
+  {
+    "family": "wisdom",
+    "prompt": "지혜롭게 결정하고 싶은데 혼란스러워",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedExplanationTerms": ["지혜", "결정", "혼란"]
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "배신한 친구를 용서하는 게 너무 어려워",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedExplanationTerms": ["배신", "용서", "어려"]
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "원망과 분노 때문에 용서하기 어려워",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedExplanationTerms": ["분노", "용서", "원망"]
+  },
+  {
+    "family": "alive-heaven",
+    "prompt": "살아있는 사람은 천국에 못가나",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1TH 4:15-17"],
+    "expectedExplanationTerms": ["살아", "천국", "공중"]
+  },
+  {
+    "family": "after-death-heaven",
+    "prompt": "죽으면 바로 천국에 가나",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["LUK 23:43"],
+    "expectedExplanationTerms": ["죽은", "천국", "낙원"]
+  },
+  {
+    "family": "resurrection-living",
+    "prompt": "부활 때 살아있는 사람은 어떻게 되나",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1CO 15:51-52"],
+    "expectedExplanationTerms": ["부활", "살아", "변화"]
+  },
+  {
+    "family": "unrelated",
+    "prompt": "오늘 점심 뭐 먹지",
+    "expectedReliable": false,
+    "expectedPrimaryRefs": [],
+    "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
+  },
+  {
+    "family": "ambiguous-shopping",
+    "prompt": "새 노트북을 살까 말까",
+    "expectedReliable": false,
+    "expectedPrimaryRefs": [],
+    "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
+  },
+  {
+    "family": "ambiguous-empty",
+    "prompt": "그냥 아무 생각이 없어",
+    "expectedReliable": false,
+    "expectedPrimaryRefs": [],
+    "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
+  }
+]

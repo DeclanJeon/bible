@@ -30,7 +30,19 @@ export type RetrievalResult = {
   supportingReferences: BibleReference[];
 };
 
-const STOP_WORDS = new Set([
+export function isRetrievalReliable(
+  retrieval: Pick<RetrievalResult, "confidence" | "passageScore" | "supportingReferences" | "reasons">,
+) {
+  return (
+    retrieval.confidence !== "low" &&
+    (retrieval.passageScore >= 5 ||
+      retrieval.supportingReferences.length > 0 ||
+      retrieval.reasons.passageKeywords.length >= 2)
+  );
+}
+
+
+const ENGLISH_STOP_WORDS = new Set([
   "the",
   "and",
   "that",
@@ -66,19 +78,67 @@ const STOP_WORDS = new Set([
   "doing",
 ]);
 
-const ENABLE_RUNTIME_CLUSTER_EMBEDDINGS = process.env.ENABLE_RUNTIME_CLUSTER_EMBEDDINGS === "1";
+const KOREAN_STOP_WORDS = new Set([
+  "그냥",
+  "너무",
+  "정말",
+  "진짜",
+  "계속",
+  "요즘",
+  "많이",
+  "조금",
+  "나는",
+  "내가",
+  "제가",
+  "저는",
+  "나를",
+  "저를",
+  "나의",
+  "내",
+  "제",
+  "우리",
+  "일이",
+  "일도",
+  "것",
+  "거",
+  "같아",
+  "같아요",
+  "싶어",
+  "싶어요",
+  "해야",
+  "하고",
+  "하는",
+  "오늘",
+  "점심",
+  "먹지",
+  "먹을",
+  "아무",
+  "생각",
+  "없어",
+  "없는",
+  "합니다",
+]);
+
+function normalizeKoreanToken(token: string) {
+  return token.replace(/(으로는|으로도|에게는|에게도|에서는|에서|에게|부터|까지|처럼|보다|라도|이며|이고|라는|이라|입니다|해요|어요|아요|이에요|예요|은|는|이|가|을|를|에|의|와|과|도|만|로|으로|요)$/u, "");
+}
 
 function tokenize(input: string) {
-  return (input.toLowerCase().match(/[a-z]+|[가-힣]+/g) ?? []).filter((token) => {
-    if (/^[a-z]+$/.test(token)) {
-      return token.length > 2 && !STOP_WORDS.has(token);
+  return (input.toLowerCase().match(/[a-z]+|[가-힣]+/g) ?? []).flatMap((rawToken) => {
+    if (/^[a-z]+$/.test(rawToken)) {
+      return rawToken.length > 2 && !ENGLISH_STOP_WORDS.has(rawToken) ? [rawToken] : [];
     }
-    return token.length > 1;
+
+    const token = normalizeKoreanToken(rawToken);
+    return token.length > 1 && !KOREAN_STOP_WORDS.has(rawToken) && !KOREAN_STOP_WORDS.has(token) ? [token] : [];
   });
 }
 
+const ENABLE_RUNTIME_CLUSTER_EMBEDDINGS = process.env.ENABLE_RUNTIME_CLUSTER_EMBEDDINGS === "1";
+
 const QUERY_EXPANSIONS = [
-  { match: /(기다|지치|침묵|조용|응답|delay|wait|silence|tired|unheard)/i, terms: "어느 때까지 잠잠 구원 도우소서 영혼 낙망 소망 wait hope silence help" },
+  { match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|부담|weary|burden|burnout|exhausted|tired)/i, terms: "수고 무거운 짐 부담 쉬게 하리라 위로 환난 견디게 피곤 능력 weary burden rest comfort" },
+  { match: /(기다|침묵|조용|응답|delay|wait|silence|unheard)/i, terms: "어느 때까지 잠잠 구원 도우소서 영혼 낙망 소망 wait hope silence help" },
   { match: /(회복|실패|수치|죄책|죄|restore|failure|shame|guilt|repent)/i, terms: "죄악 사하소서 깨끗 정한 마음 회개 긍휼 restore mercy repentance" },
   { match: /(두려|부르심|책임|감당|calling|afraid|fear|responsibility)/i, terms: "두려워 말라 강하고 담대 함께 보내리라 courage presence" },
   { match: /(슬픔|상실|애도|눈물|죽음|grief|loss|mourning|tears|death)/i, terms: "눈물 슬픔 애통 사망 위로 소망 comfort resurrection" },
@@ -267,6 +327,19 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     passageKeywordsKo: ["용서하여", "일흔 번씩 일곱 번"],
     semanticTermsKo: ["용서", "배신", "원수", "분노"],
   },
+  {
+    match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|무거운 짐|부담|weary|burden|burnout|exhausted|tired)/i,
+    primaryReference: { code: "MAT", chapter: 11, startVerse: 28, endVerse: 30 },
+    supportingReferences: [
+      { code: "ISA", chapter: 40, startVerse: 29, endVerse: 31 },
+      { code: "2CO", chapter: 1, startVerse: 3, endVerse: 6 },
+      { code: "GAL", chapter: 6, startVerse: 2, endVerse: 2 },
+    ],
+    rationaleKo: "입력이 지침·피곤함·무거운 부담을 말하기 때문에, ‘수고하고 무거운 짐 진 자들아 ... 쉬게 하리라’고 직접 초대하는 마태복음 11:28-30을 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt names weariness or a heavy burden, the primary passage is Matthew 11:28-30, where Jesus directly invites the weary and burdened to rest.",
+    passageKeywordsKo: ["수고", "무거운 짐", "쉬게"],
+    semanticTermsKo: ["힘들", "지쳐", "피곤", "부담"],
+  },
 ];
 
 const PASSAGE_CONCEPTS = [
@@ -381,7 +454,10 @@ function scoreVerse(verse: BibleVerse, promptTokens: string[], expandedPrompt: s
 function buildGlobalPassageCandidate(verses: BibleVerse[], promptTokens: string[], expandedPrompt: string): PassageCandidate | null {
   if (!verses.length) return null;
   const scored = verses.map((verse, index) => ({ index, verse, ...scoreVerse(verse, promptTokens, expandedPrompt) }));
-  const best = scored.sort((left, right) => right.score - left.score)[0];
+  let best = scored[0];
+  for (const entry of scored) {
+    if (entry.score > best.score) best = entry;
+  }
   if (!best || best.score <= 0) return null;
   let start = best.index;
   let end = best.index;

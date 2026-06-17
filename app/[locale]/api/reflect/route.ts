@@ -6,7 +6,7 @@ import { getPassageCrossReferences } from "@/lib/knowledge";
 import { generateReflectionWithHermes } from "@/lib/hermes";
 import { buildReflectionResponse } from "@/lib/reflection";
 import { getRelatedClustersFromReferences } from "@/lib/app-data";
-import { retrieveClusterForPrompt } from "@/lib/retrieval";
+import { isRetrievalReliable, retrieveClusterForPrompt } from "@/lib/retrieval";
 import { assessPromptSafety } from "@/lib/safety";
 
 const MAX_PROMPT_LENGTH = 2000;
@@ -64,26 +64,29 @@ export async function POST(
   });
   const appLocale = requestedLocale;
   const retrieval = await retrieveClusterForPrompt(normalizedPrompt, appLocale);
+  const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
   const primary = await getPassage(primaryReference, appLocale);
-  const graphSuggestions = await getPassageCrossReferences(primaryReference, 4, appLocale);
+  const graphSuggestions = hasReliablePrimary ? await getPassageCrossReferences(primaryReference, 4, appLocale) : [];
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
     summary: suggestion.supportLine || suggestion.excerpt,
     reference: suggestion.target,
   }));
-  const supportingReferences = retrieval.supportingReferences.length
-    ? retrieval.supportingReferences
-    : localizedCluster.supporting.length
-      ? localizedCluster.supporting
-      : graphSuggestions.map((suggestion) => suggestion.target);
+  const supportingReferences = hasReliablePrimary
+    ? retrieval.supportingReferences.length
+      ? retrieval.supportingReferences
+      : localizedCluster.supporting.length
+        ? localizedCluster.supporting
+        : graphSuggestions.map((suggestion) => suggestion.target)
+    : [];
   const cluster = {
     ...localizedCluster,
     primary: primaryReference,
     supporting: supportingReferences,
-    linkedTexts: localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
+    linkedTexts: hasReliablePrimary && localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
   };
   const supporting = await Promise.all(cluster.supporting.map((reference) => getPassage(reference, appLocale)));
   const deterministic = await buildReflectionResponse(cluster, normalizedPrompt, appLocale, {
@@ -98,16 +101,18 @@ export async function POST(
     ...supportingReferences.map((reference) => reference.code),
     ...graphSuggestions.map((suggestion) => suggestion.target.code),
   ];
-  const relatedClusters = getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => {
-    const localized = localizeStoryCluster(related, appLocale);
-    return {
-      slug: localized.slug,
-      title: localized.title,
-      pastoralPrompt: localized.pastoralPrompt,
-      starterPrompt: localized.starterPrompt,
-      themes: localized.themes,
-    };
-  });
+  const relatedClusters = hasReliablePrimary
+    ? getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => {
+        const localized = localizeStoryCluster(related, appLocale);
+        return {
+          slug: localized.slug,
+          title: localized.title,
+          pastoralPrompt: localized.pastoralPrompt,
+          starterPrompt: localized.starterPrompt,
+          themes: localized.themes,
+        };
+      })
+    : [];
   let finalResponse;
   if (appLocale === "ko") {
     finalResponse = {

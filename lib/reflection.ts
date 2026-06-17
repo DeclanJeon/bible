@@ -1,7 +1,7 @@
 import { getPassage, type BibleReference } from "@/lib/bible";
 import type { StoryCluster } from "@/lib/app-data";
 import { localizeRelationTypeLabel, resolveAppLocale } from "@/lib/content";
-import type { RetrievalResult } from "@/lib/retrieval";
+import { isRetrievalReliable, type RetrievalResult } from "@/lib/retrieval";
 import type { CrossReferenceSuggestion } from "@/lib/knowledge";
 
 export type EvidencePassage = {
@@ -74,9 +74,59 @@ export async function buildReflectionResponse(
       ? `매칭 점수 ${retrieval.score.toFixed(2)} · 본문 점수 ${retrieval.passageScore.toFixed(2)} · 신뢰도 ${retrieval.confidence}`
       : `Match score ${retrieval.score.toFixed(2)} · passage score ${retrieval.passageScore.toFixed(2)} · confidence ${retrieval.confidence}`
     : null;
-  const matchedTerms = retrieval?.reasons.passageKeywords.length ? retrieval.reasons.passageKeywords.join(", ") : concernTerms;
+  const directMatchedTerms = retrieval?.reasons.passageKeywords.length ? retrieval.reasons.passageKeywords.join(", ") : "";
+  const matchedTerms = directMatchedTerms || concernTerms;
   const rationale = retrieval?.rationale ?? "";
   const primaryEvidence = evidence[0];
+  const reliableRetrieval = retrieval ? isRetrievalReliable(retrieval) : true;
+
+  if (!reliableRetrieval) {
+    if (appLocale === "ko") {
+      const weakTerms = directMatchedTerms ? `현재 잡힌 단어는 ${directMatchedTerms} 정도입니다.` : "현재 직접 잡힌 본문 단어가 충분하지 않습니다.";
+      return {
+        concernSummary: `입력한 질문 “${prompt}”에 정확히 연결되는 중심 본문을 아직 확정하지 않았습니다. 자동 후보가 있더라도 최종 추천 본문처럼 단정하지 않습니다.`,
+        relevanceSummary: scoreLine ? `${scoreLine}. ${rationale || "직접 겹치는 본문 근거가 부족합니다."}` : "직접 겹치는 본문 근거가 부족합니다.",
+        whyTheseTexts: `${weakTerms} 그래서 ${primaryEvidence.reference}는 확정된 답이 아니라 검토 후보입니다. 사용자 입력의 핵심 표현과 본문 문장이 더 분명히 만나는 경우에만 핵심 본문으로 승격해야 합니다.`,
+        primaryStory: `검토 후보는 ${primaryEvidence.reference}입니다. 본문 일부는 “${primaryEvidence.excerpt}”입니다. 다만 이 후보가 질문을 직접 다룬다고 단정하지 말고, 더 구체적인 고민 표현으로 다시 검색하는 편이 안전합니다.`,
+        datePlaceAudience: `${primaryEvidence.title}의 책 배경은 보조 정보입니다. ${cluster.context.date.body} ${cluster.context.place.body}`,
+        originalAudience: `${cluster.context.audience.body} 현재 단계에서는 원청중 설명보다 먼저, 이 본문이 정말 사용자의 질문과 같은 문제를 말하는지 확인해야 합니다.`,
+        linkedScriptures: "중심 본문 신뢰도가 낮기 때문에 상호참조 확장은 보류합니다. 잘못 고른 본문에서 연결 본문을 넓히면 관련 없는 성구가 더 많이 따라올 수 있습니다.",
+        jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
+        personalConnection: `이번 매칭은 낮은 신뢰도입니다. 이 본문을 바로 개인 상황에 적용하지 말고, 입력을 더 구체화하거나 다른 후보 본문과 비교한 뒤 읽어야 합니다.`,
+        reflectionQuestions: [
+          `내 질문의 핵심은 감정, 상황, 교리 질문 중 무엇인가요?`,
+          `${primaryEvidence.reference}의 실제 문장이 내 질문의 어떤 표현과 직접 만나는지 확인할 수 있나요?`,
+          `더 정확한 본문을 찾기 위해 어떤 단어를 빼거나 추가해야 하나요?`,
+        ],
+        evidence,
+        generationMode: "deterministic",
+        generationModel: "deterministic-reflection-builder",
+        generationNote: "낮은 신뢰도 검색을 핵심 본문으로 단정하지 않는 결정형 응답입니다.",
+      };
+    }
+
+    const weakTerms = directMatchedTerms ? `The current matched terms are only ${directMatchedTerms}.` : "There are not enough direct passage terms yet.";
+    return {
+      concernSummary: `For the prompt “${prompt}”, no primary passage has been confirmed as a direct match yet. Any automatic candidate should be treated as tentative, not as the final recommended text.`,
+      relevanceSummary: scoreLine ? `${scoreLine}. ${rationale || "Direct passage evidence is weak."}` : "Direct passage evidence is weak.",
+      whyTheseTexts: `${weakTerms} Therefore ${primaryEvidence.reference} is only a review candidate. A passage should be promoted to primary only when the user's wording and the passage wording or concepts meet more clearly.`,
+      primaryStory: `The review candidate is ${primaryEvidence.reference}. Its excerpt is “${primaryEvidence.excerpt}”. Do not treat it as a direct answer until the prompt is narrowed or a stronger candidate is found.`,
+      datePlaceAudience: `Book context is secondary here: ${cluster.context.date.body} ${cluster.context.place.body}`,
+      originalAudience: `${cluster.context.audience.body} At this stage, first test whether this passage is addressing the same issue as the prompt.`,
+      linkedScriptures: "Cross-reference expansion is paused because the primary match is weak; expanding from a weak primary can amplify unrelated passages.",
+      jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
+      personalConnection: "This is a low-confidence match. Do not apply this passage directly to the personal situation without narrowing the prompt or comparing stronger candidates.",
+      reflectionQuestions: [
+        "Is the prompt mainly naming an emotion, a situation, or a doctrinal question?",
+        `Which exact words in ${primaryEvidence.reference} connect to the prompt?`,
+        "Which words should be removed or added to search more accurately?",
+      ],
+      evidence,
+      generationMode: "deterministic",
+      generationModel: "deterministic-reflection-builder",
+      generationNote: "Deterministic response that refuses to promote low-confidence retrieval as a primary answer.",
+    };
+  }
 
   if (appLocale === "ko") {
     return {

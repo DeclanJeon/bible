@@ -17,7 +17,7 @@ import { getBookMetadata } from "@/lib/book-metadata";
 import { getPassageCrossReferences } from "@/lib/knowledge";
 import { buildBibleHref, buildCompanionHref, buildGraphHref, buildPassageHref, buildStudyHref } from "@/lib/navigation";
 import { buildReflectionResponse } from "@/lib/reflection";
-import { retrieveClusterForPrompt } from "@/lib/retrieval";
+import { isRetrievalReliable, retrieveClusterForPrompt } from "@/lib/retrieval";
 import { assessPromptSafety } from "@/lib/safety";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
@@ -57,26 +57,29 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   });
   const copy = UI_COPY[appLocale].companion;
   const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale);
+  const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
   const primary = await getPassage(primaryReference, appLocale);
-  const graphSuggestions = await getPassageCrossReferences(primaryReference, 4, appLocale);
+  const graphSuggestions = hasReliablePrimary ? await getPassageCrossReferences(primaryReference, 4, appLocale) : [];
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
     summary: suggestion.supportLine || suggestion.excerpt,
     reference: suggestion.target,
   }));
-  const supportingReferences = retrieval.supportingReferences.length
-    ? retrieval.supportingReferences
-    : localizedCluster.supporting.length
-      ? localizedCluster.supporting
-      : graphSuggestions.map((suggestion) => suggestion.target);
+  const supportingReferences = hasReliablePrimary
+    ? retrieval.supportingReferences.length
+      ? retrieval.supportingReferences
+      : localizedCluster.supporting.length
+        ? localizedCluster.supporting
+        : graphSuggestions.map((suggestion) => suggestion.target)
+    : [];
   const cluster = {
     ...localizedCluster,
     primary: primaryReference,
     supporting: supportingReferences,
-    linkedTexts: localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
+    linkedTexts: hasReliablePrimary && localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
   };
   const supporting = await Promise.all(cluster.supporting.map((reference) => getPassage(reference, appLocale)));
   const deterministic = await buildReflectionResponse(cluster, userPrompt, appLocale, {
@@ -91,9 +94,9 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     ...supportingReferences.map((reference) => reference.code),
     ...graphSuggestions.map((suggestion) => suggestion.target.code),
   ];
-  const relatedClusters = getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) =>
-    localizeStoryCluster(related, appLocale),
-  );
+  const relatedClusters = hasReliablePrimary
+    ? getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => localizeStoryCluster(related, appLocale))
+    : [];
   const sources = localizeSourceLinks(APP_SOURCES, appLocale);
 
   const hydratedResponse = {
@@ -132,41 +135,53 @@ export default async function CompanionPage({ params, searchParams }: Props) {
       {/* Hero Section — always visible */}
       <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
         <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm text-[var(--muted)] italic leading-relaxed sm:rounded-2xl sm:px-5 sm:py-4 sm:text-base">&ldquo;{userPrompt}&rdquo;</div>
-        <h1 className="mt-3 text-xl font-bold text-[var(--ink)] tracking-tight leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">{cluster.title}</h1>
-        <p className="mt-2 text-sm font-medium text-[var(--gold)] sm:text-base">{primary.reference}</p>
+        <h1 className="mt-3 text-xl font-bold text-[var(--ink)] tracking-tight leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">
+          {hasReliablePrimary ? cluster.title : appLocale === "ko" ? "더 구체적인 연결이 필요합니다" : "A more specific connection is needed"}
+        </h1>
+        <p className="mt-2 text-sm font-medium text-[var(--gold)]">
+          {hasReliablePrimary ? primary.reference : appLocale === "ko" ? "낮은 신뢰도 검색" : "Low-confidence retrieval"}
+        </p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
         <p className="mt-3 rounded-lg border border-[var(--gold-border)] bg-[var(--gold-soft)] px-4 py-3 text-sm leading-relaxed text-[var(--ink)]">{hydratedResponse.relevanceSummary}</p>
         <div className="mt-3 sm:mt-5"><SafetyBanner safety={safety} /></div>
 
-        {/* Primary Passage with Collapsible verses */}
-        <div className="mt-8 rounded-2xl border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] p-6 lg:p-8">
-          <div className="text-base font-semibold text-[var(--gold)]">{primary.reference}</div>
-          <div className="mt-4 space-y-4 text-lg leading-relaxed text-[var(--text)]">
-            {primary.verses.slice(0, 3).map((verse) => (
-              <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
-            ))}
+        {hasReliablePrimary ? (
+          <div className="mt-8 rounded-2xl border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] p-6 lg:p-8">
+            <div className="text-base font-semibold text-[var(--gold)]">{primary.reference}</div>
+            <div className="mt-4 space-y-4 text-lg leading-relaxed text-[var(--text)]">
+              {primary.verses.slice(0, 3).map((verse) => (
+                <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
+              ))}
+            </div>
+            {primary.verses.length > 3 && (
+              <Collapsible trigger={<span>Show {primary.verses.length - 3} more verses</span>} className="mt-4">
+                <div className="space-y-4 text-lg leading-relaxed text-[var(--text)]">
+                  {primary.verses.slice(3).map((verse) => (
+                    <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
+                  ))}
+                </div>
+              </Collapsible>
+            )}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href={buildStudyHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold)]/90 transition">
+                <BookOpen className="h-4 w-4" />{copy.openStudyDesk}
+              </Link>
+              <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                <Compass className="h-4 w-4" />{UI_COPY[appLocale].sidebar.navGraph}
+              </Link>
+              <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
+              </Link>
+            </div>
           </div>
-          {primary.verses.length > 3 && (
-            <Collapsible trigger={<span>Show {primary.verses.length - 3} more verses</span>} className="mt-4">
-              <div className="space-y-4 text-lg leading-relaxed text-[var(--text)]">
-                {primary.verses.slice(3).map((verse) => (
-                  <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
-                ))}
-              </div>
-            </Collapsible>
-          )}
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href={buildStudyHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold)]/90 transition">
-              <BookOpen className="h-4 w-4" />{copy.openStudyDesk}
-            </Link>
-            <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
-              <Compass className="h-4 w-4" />{UI_COPY[appLocale].sidebar.navGraph}
-            </Link>
-            <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
-              {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
-            </Link>
+        ) : (
+          <div className="mt-8 rounded-2xl border border-[var(--hairline-strong)] bg-[var(--surface-2)] p-6 lg:p-8">
+            <div className="text-base font-semibold text-[var(--gold)]">
+              {appLocale === "ko" ? "본문 추천 보류" : "Passage recommendation paused"}
+            </div>
+            <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.whyTheseTexts}</p>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Tabbed content */}
