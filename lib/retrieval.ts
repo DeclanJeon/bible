@@ -559,7 +559,7 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   if (ruleBased) return ruleBased;
 
   const externalExpansion = options.expansionTerms?.length ? ` ${options.expansionTerms.join(" ")}` : "";
-  const expandedPrompt = expandQuery(`${normalizedPrompt}${externalExpansion}`);
+  const expandedPrompt = `${expandQuery(normalizedPrompt)}${externalExpansion}`;
   const promptTokens = tokenize(expandedPrompt);
   const promptTf = buildTermFrequency(promptTokens);
   const [allVerses, { corpora, idf }, clusterEmbeddings] = await Promise.all([loadVerses(appLocale), loadClusterCorpora(appLocale), loadClusterEmbeddings(appLocale)]);
