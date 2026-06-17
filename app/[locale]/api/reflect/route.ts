@@ -5,7 +5,7 @@ import { localizeStoryCluster, resolveAppLocale } from "@/lib/content";
 import { getPassageCrossReferences } from "@/lib/knowledge";
 import { generateReflectionWithHermes } from "@/lib/hermes";
 import { buildReflectionResponse } from "@/lib/reflection";
-import { getRelatedClusters } from "@/lib/app-data";
+import { getRelatedClustersFromReferences } from "@/lib/app-data";
 import { retrieveClusterForPrompt } from "@/lib/retrieval";
 import { assessPromptSafety } from "@/lib/safety";
 
@@ -65,26 +65,40 @@ export async function POST(
   const appLocale = requestedLocale;
   const retrieval = await retrieveClusterForPrompt(normalizedPrompt, appLocale);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
-  const primary = await getPassage(localizedCluster.primary, appLocale);
-  const graphSuggestions = await getPassageCrossReferences(localizedCluster.primary, 4, appLocale);
+  const primaryReference = retrieval.primaryReference;
+  const primary = await getPassage(primaryReference, appLocale);
+  const graphSuggestions = await getPassageCrossReferences(primaryReference, 4, appLocale);
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
     summary: suggestion.supportLine || suggestion.excerpt,
     reference: suggestion.target,
   }));
-  const supportingReferences = localizedCluster.supporting.length
-    ? localizedCluster.supporting
-    : graphSuggestions.map((suggestion) => suggestion.target);
+  const supportingReferences = retrieval.supportingReferences.length
+    ? retrieval.supportingReferences
+    : localizedCluster.supporting.length
+      ? localizedCluster.supporting
+      : graphSuggestions.map((suggestion) => suggestion.target);
   const cluster = {
     ...localizedCluster,
+    primary: primaryReference,
     supporting: supportingReferences,
     linkedTexts: localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
   };
   const supporting = await Promise.all(cluster.supporting.map((reference) => getPassage(reference, appLocale)));
-  const deterministic = await buildReflectionResponse(cluster, normalizedPrompt, appLocale);
-  const primaryBookMetadata = getBookMetadata(cluster.primary.code, appLocale);
-  const relatedClusters = getRelatedClusters(cluster.slug, 3).map((related) => {
+  const deterministic = await buildReflectionResponse(cluster, normalizedPrompt, appLocale, {
+    retrieval,
+    graphSuggestions,
+    primaryReference,
+    supportingReferences,
+  });
+  const primaryBookMetadata = getBookMetadata(primaryReference.code, appLocale);
+  const relatedCodes = [
+    primaryReference.code,
+    ...supportingReferences.map((reference) => reference.code),
+    ...graphSuggestions.map((suggestion) => suggestion.target.code),
+  ];
+  const relatedClusters = getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => {
     const localized = localizeStoryCluster(related, appLocale);
     return {
       slug: localized.slug,

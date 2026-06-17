@@ -377,6 +377,33 @@ export function getRelatedClusters(slug: string, limit = 3) {
     .map(({ cluster }) => cluster);
 }
 
+export function getRelatedClustersFromReferences(
+  currentSlug: string,
+  codes: string[],
+  limit = 3,
+) {
+  const seen = new Set<string>([currentSlug]);
+  const related: StoryCluster[] = [];
+
+  for (const code of codes) {
+    const slug = `book-${code.toLowerCase()}`;
+    if (seen.has(slug)) {
+      continue;
+    }
+    const cluster = getClusterBySlug(slug);
+    if (!cluster) {
+      continue;
+    }
+    seen.add(slug);
+    related.push(cluster);
+    if (related.length >= limit) {
+      return related;
+    }
+  }
+
+  return related.length ? related : getRelatedClusters(currentSlug, limit);
+}
+
 export function relationTypeLabel(type: LinkedReference["type"]) {
   const labels: Record<LinkedReference["type"], string> = {
     parallel: "Parallel story or pattern",

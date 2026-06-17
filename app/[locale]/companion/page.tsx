@@ -11,7 +11,7 @@ import { SafetyBanner } from "@/components/safety-banner";
 import { TabSection } from "@/components/tab-section";
 import { Collapsible } from "@/components/collapsible";
 import { getPassage } from "@/lib/bible";
-import { APP_SOURCES, getRelatedClusters } from "@/lib/app-data";
+import { APP_SOURCES, getRelatedClustersFromReferences } from "@/lib/app-data";
 import { UI_COPY, localizeSourceLinks, localizeStoryCluster, resolveAppLocale } from "@/lib/content";
 import { getBookMetadata } from "@/lib/book-metadata";
 import { getPassageCrossReferences } from "@/lib/knowledge";
@@ -58,26 +58,42 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const copy = UI_COPY[appLocale].companion;
   const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
-  const primary = await getPassage(localizedCluster.primary, appLocale);
-  const graphSuggestions = await getPassageCrossReferences(localizedCluster.primary, 4, appLocale);
+  const primaryReference = retrieval.primaryReference;
+  const primary = await getPassage(primaryReference, appLocale);
+  const graphSuggestions = await getPassageCrossReferences(primaryReference, 4, appLocale);
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
     summary: suggestion.supportLine || suggestion.excerpt,
     reference: suggestion.target,
   }));
-  const supportingReferences = localizedCluster.supporting.length
-    ? localizedCluster.supporting
-    : graphSuggestions.map((suggestion) => suggestion.target);
+  const supportingReferences = retrieval.supportingReferences.length
+    ? retrieval.supportingReferences
+    : localizedCluster.supporting.length
+      ? localizedCluster.supporting
+      : graphSuggestions.map((suggestion) => suggestion.target);
   const cluster = {
     ...localizedCluster,
+    primary: primaryReference,
     supporting: supportingReferences,
     linkedTexts: localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
   };
   const supporting = await Promise.all(cluster.supporting.map((reference) => getPassage(reference, appLocale)));
-  const deterministic = await buildReflectionResponse(cluster, userPrompt, appLocale);
-  const primaryBookMetadata = getBookMetadata(cluster.primary.code, appLocale);
-  const relatedClusters = getRelatedClusters(cluster.slug, 3).map((related) => localizeStoryCluster(related, appLocale));
+  const deterministic = await buildReflectionResponse(cluster, userPrompt, appLocale, {
+    retrieval,
+    graphSuggestions,
+    primaryReference,
+    supportingReferences,
+  });
+  const primaryBookMetadata = getBookMetadata(primaryReference.code, appLocale);
+  const relatedCodes = [
+    primaryReference.code,
+    ...supportingReferences.map((reference) => reference.code),
+    ...graphSuggestions.map((suggestion) => suggestion.target.code),
+  ];
+  const relatedClusters = getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) =>
+    localizeStoryCluster(related, appLocale),
+  );
   const sources = localizeSourceLinks(APP_SOURCES, appLocale);
 
   const hydratedResponse = {
@@ -117,7 +133,9 @@ export default async function CompanionPage({ params, searchParams }: Props) {
       <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
         <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm text-[var(--muted)] italic leading-relaxed sm:rounded-2xl sm:px-5 sm:py-4 sm:text-base">&ldquo;{userPrompt}&rdquo;</div>
         <h1 className="mt-3 text-xl font-bold text-[var(--ink)] tracking-tight leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">{cluster.title}</h1>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
+        <p className="mt-2 text-sm font-medium text-[var(--gold)] sm:text-base">{primary.reference}</p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
+        <p className="mt-3 rounded-lg border border-[var(--gold-border)] bg-[var(--gold-soft)] px-4 py-3 text-sm leading-relaxed text-[var(--ink)]">{hydratedResponse.relevanceSummary}</p>
         <div className="mt-3 sm:mt-5"><SafetyBanner safety={safety} /></div>
 
         {/* Primary Passage with Collapsible verses */}
@@ -144,7 +162,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
               <Compass className="h-4 w-4" />{UI_COPY[appLocale].sidebar.navGraph}
             </Link>
-            <Link href={buildPassageHref(cluster.primary, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+            <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
               {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
             </Link>
           </div>
