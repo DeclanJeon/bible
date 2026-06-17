@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -46,22 +45,33 @@ function getTranslationPaths(locale: BibleLocale) {
   };
 }
 
-export const loadBookMetadata = cache(async (locale: BibleLocale = "en"): Promise<Record<string, BookMeta>> => {
+const bookMetaCache = new Map<string, Record<string, BookMeta>>();
+const versesCache = new Map<string, BibleVerse[]>();
+
+export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Record<string, BookMeta>> {
+  const cached = bookMetaCache.get(locale);
+  if (cached) return cached;
+
   const { metadataPath } = getTranslationPaths(locale);
   const raw = await readFile(metadataPath, "utf8");
   const parsed = JSON.parse(raw) as {
     books: Array<{ code: string; name: string; testament: string; order: number; file: string }>;
   };
 
-  return Object.fromEntries(parsed.books.map((book) => [book.code, book]));
-});
+  const result = Object.fromEntries(parsed.books.map((book) => [book.code, book]));
+  bookMetaCache.set(locale, result);
+  return result;
+}
 
-export const loadVerses = cache(async (locale: BibleLocale = "en"): Promise<BibleVerse[]> => {
+export async function loadVerses(locale: BibleLocale = "en"): Promise<BibleVerse[]> {
+  const cached = versesCache.get(locale);
+  if (cached) return cached;
+
   const { vplPath } = getTranslationPaths(locale);
   const raw = await readFile(vplPath, "utf8");
   const lines = raw.split(/\r?\n/).filter(Boolean);
 
-  return lines.flatMap((line) => {
+  const result = lines.flatMap((line) => {
     const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/);
     if (!match) {
       return [];
@@ -70,14 +80,22 @@ export const loadVerses = cache(async (locale: BibleLocale = "en"): Promise<Bibl
     const [, code, chapter, verse, text] = match;
     return [{ code, chapter: Number(chapter), verse: Number(verse), text }];
   });
-});
+
+  versesCache.set(locale, result);
+  return result;
+}
 
 type BibleVerseIndex = {
   byBook: Map<string, Map<number, BibleVerse[]>>;
   chaptersByBook: Map<string, number[]>;
 };
 
-export const loadVerseIndex = cache(async (locale: BibleLocale = "en"): Promise<BibleVerseIndex> => {
+const verseIndexCache = new Map<string, BibleVerseIndex>();
+
+export async function loadVerseIndex(locale: BibleLocale = "en"): Promise<BibleVerseIndex> {
+  const cached = verseIndexCache.get(locale);
+  if (cached) return cached;
+
   const verses = await loadVerses(locale);
   const byBook = new Map<string, Map<number, BibleVerse[]>>();
   const chaptersByBook = new Map<string, number[]>();
@@ -101,8 +119,10 @@ export const loadVerseIndex = cache(async (locale: BibleLocale = "en"): Promise<
     chaptersByBook.set(code, [...chapters.keys()].sort((a, b) => a - b));
   }
 
-  return { byBook, chaptersByBook };
-});
+  const result = { byBook, chaptersByBook };
+  verseIndexCache.set(locale, result);
+  return result;
+}
 
 export function formatBibleReference(reference: BibleReference, bookName?: string) {
   const name = bookName ?? reference.code;
