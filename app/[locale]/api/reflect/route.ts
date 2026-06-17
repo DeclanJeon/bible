@@ -7,6 +7,7 @@ import { generateReflectionWithHermes } from "@/lib/hermes";
 import { buildReflectionResponse } from "@/lib/reflection";
 import { getRelatedClustersFromReferences } from "@/lib/app-data";
 import { isRetrievalReliable, retrieveClusterForPrompt } from "@/lib/retrieval";
+import { buildRagQueryPlan } from "@/lib/rag-query";
 import { assessPromptSafety } from "@/lib/safety";
 
 const MAX_PROMPT_LENGTH = 2000;
@@ -63,7 +64,12 @@ export async function POST(
     countryCode: request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry") ?? undefined,
   });
   const appLocale = requestedLocale;
-  const retrieval = await retrieveClusterForPrompt(normalizedPrompt, appLocale);
+  const ragQuery = await buildRagQueryPlan(normalizedPrompt, appLocale);
+  const retrieval = await retrieveClusterForPrompt(normalizedPrompt, appLocale, {
+    expansionTerms: ragQuery.expansionTerms,
+    expansionSummary: ragQuery.expansionSummary ?? undefined,
+    expansionProvider: ragQuery.expansionProvider,
+  });
   const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
@@ -113,52 +119,43 @@ export async function POST(
         };
       })
     : [];
-  let finalResponse;
-  if (appLocale === "ko") {
-    finalResponse = {
-      ...deterministic,
-      generationMode: "deterministic" as const,
-      generationModel: deterministic.generationModel,
-      generationNote: deterministic.generationNote,
-    };
-  } else {
-    const generation = await generateReflectionWithHermes(
-      {
-        prompt: normalizedPrompt,
-        safety,
-        retrieval,
-        cluster: {
-          slug: cluster.slug,
-          title: cluster.title,
-          themes: cluster.themes,
-          emotions: cluster.emotions,
-          pastoralPrompt: cluster.pastoralPrompt,
-          reflectionQuestions: cluster.reflectionQuestions,
-        },
-        primaryBookMetadata,
-        linkedTexts: cluster.linkedTexts,
-        context: cluster.context,
-        jesusLayer: cluster.jesusLayer,
-        paulLayer: cluster.paulLayer,
-        jewishReception: cluster.jewishReception,
-        graphSuggestions,
-        deterministicReflection: deterministic,
+  const generation = await generateReflectionWithHermes(
+    {
+      prompt: normalizedPrompt,
+      safety,
+      retrieval,
+      cluster: {
+        slug: cluster.slug,
+        title: cluster.title,
+        themes: cluster.themes,
+        emotions: cluster.emotions,
+        pastoralPrompt: cluster.pastoralPrompt,
+        reflectionQuestions: cluster.reflectionQuestions,
       },
-      deterministic,
-    );
+      primaryBookMetadata,
+      linkedTexts: cluster.linkedTexts,
+      context: cluster.context,
+      jesusLayer: cluster.jesusLayer,
+      paulLayer: cluster.paulLayer,
+      jewishReception: cluster.jewishReception,
+      graphSuggestions,
+      deterministicReflection: deterministic,
+    },
+    deterministic,
+  );
 
-    finalResponse = {
-      ...generation.response,
-      generationMode: generation.provider,
-      generationModel: generation.model,
-      generationNote: generation.note,
-    };
-  }
+  const finalResponse = {
+    ...generation.response,
+    generationMode: generation.provider,
+    generationModel: generation.model,
+    generationNote: generation.note,
+  };
 
   return NextResponse.json({
     prompt: normalizedPrompt,
     safety,
     retrieval,
+    ragQuery,
     cluster: {
       slug: cluster.slug,
       title: cluster.title,

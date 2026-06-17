@@ -17,6 +17,8 @@ import { getBookMetadata } from "@/lib/book-metadata";
 import { getPassageCrossReferences } from "@/lib/knowledge";
 import { buildBibleHref, buildCompanionHref, buildGraphHref, buildPassageHref, buildStudyHref } from "@/lib/navigation";
 import { buildReflectionResponse } from "@/lib/reflection";
+import { generateReflectionWithHermes } from "@/lib/hermes";
+import { buildRagQueryPlan } from "@/lib/rag-query";
 import { isRetrievalReliable, retrieveClusterForPrompt } from "@/lib/retrieval";
 import { assessPromptSafety } from "@/lib/safety";
 import { buildPageMetadata } from "@/lib/page-metadata";
@@ -56,7 +58,12 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     countryCode: headerList.get("x-vercel-ip-country") ?? headerList.get("cf-ipcountry") ?? undefined,
   });
   const copy = UI_COPY[appLocale].companion;
-  const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale);
+  const ragQuery = await buildRagQueryPlan(userPrompt, appLocale);
+  const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale, {
+    expansionTerms: ragQuery.expansionTerms,
+    expansionSummary: ragQuery.expansionSummary ?? undefined,
+    expansionProvider: ragQuery.expansionProvider,
+  });
   const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
@@ -99,11 +106,35 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     : [];
   const sources = localizeSourceLinks(APP_SOURCES, appLocale);
 
+  const generation = await generateReflectionWithHermes(
+    {
+      prompt: userPrompt,
+      safety,
+      retrieval,
+      cluster: {
+        slug: cluster.slug,
+        title: cluster.title,
+        themes: cluster.themes,
+        emotions: cluster.emotions,
+        pastoralPrompt: cluster.pastoralPrompt,
+        reflectionQuestions: cluster.reflectionQuestions,
+      },
+      primaryBookMetadata,
+      linkedTexts: cluster.linkedTexts,
+      context: cluster.context,
+      jesusLayer: cluster.jesusLayer,
+      paulLayer: cluster.paulLayer,
+      jewishReception: cluster.jewishReception,
+      graphSuggestions,
+      deterministicReflection: deterministic,
+    },
+    deterministic,
+  );
   const hydratedResponse = {
-    ...deterministic,
-    generationMode: "deterministic" as const,
-    generationModel: deterministic.generationModel,
-    generationNote: deterministic.generationNote,
+    ...generation.response,
+    generationMode: generation.provider,
+    generationModel: generation.model,
+    generationNote: generation.note,
   };
 
   const totalNotes = 4;

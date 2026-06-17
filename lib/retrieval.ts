@@ -13,6 +13,21 @@ export type RetrievalReason = {
 
 export type RetrievalConfidence = "high" | "medium" | "low";
 
+export type PassageCandidate = {
+  reference: BibleReference;
+  excerpt: string;
+  score: number;
+  matchedTerms: string[];
+  matchedConcepts: string[];
+};
+
+export type RetrievalOptions = {
+  expansionTerms?: string[];
+  expansionSummary?: string;
+  expansionProvider?: string;
+};
+
+
 export type RetrievalResult = {
   cluster: StoryCluster;
   score: number;
@@ -28,6 +43,9 @@ export type RetrievalResult = {
   primaryReference: BibleReference;
   primaryExcerpt: string;
   supportingReferences: BibleReference[];
+  passageCandidates: PassageCandidate[];
+  expansionSummary: string | null;
+  expansionProvider: string | null;
 };
 
 export function isRetrievalReliable(
@@ -329,19 +347,6 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["용서", "배신", "원수", "분노"],
   },
   {
-    match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i,
-    primaryReference: { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 },
-    supportingReferences: [
-      { code: "PSA", chapter: 139, startVerse: 13, endVerse: 14 },
-      { code: "JOH", chapter: 1, startVerse: 12, endVerse: 13 },
-      { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 },
-    ],
-    rationaleKo: "질문이 ‘나는 누구인가’라는 정체성과 존재 가치를 묻기 때문에, 사람이 하나님의 형상대로 창조되었다고 직접 말하는 창세기 1:26-27을 우선 본문으로 선택했습니다.",
-    rationaleEn: "Because the prompt asks about identity and worth, the primary passage is Genesis 1:26-27, which directly says humanity is made in God's image.",
-    passageKeywordsKo: ["하나님의 형상", "사람", "창조"],
-    semanticTermsKo: ["나는 누구", "정체성", "존재", "가치"],
-  },
-  {
     match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|무거운 짐|부담|weary|burden|burnout|exhausted|tired)/i,
     primaryReference: { code: "MAT", chapter: 11, startVerse: 28, endVerse: 30 },
     supportingReferences: [
@@ -446,7 +451,6 @@ async function loadClusterEmbeddings(locale?: string): Promise<EmbeddingsResult>
   return result;
 }
 
-type PassageCandidate = { reference: BibleReference; excerpt: string; score: number; matchedTerms: string[]; matchedConcepts: string[] };
 
 function formatPassageReference(reference: BibleReference) {
   const tail = reference.startVerse === reference.endVerse ? `${reference.chapter}:${reference.startVerse}` : `${reference.chapter}:${reference.startVerse}-${reference.endVerse}`;
@@ -465,29 +469,41 @@ function scoreVerse(verse: BibleVerse, promptTokens: string[], expandedPrompt: s
   return { score, matchedTerms, matchedConcepts };
 }
 
-function buildGlobalPassageCandidate(verses: BibleVerse[], promptTokens: string[], expandedPrompt: string): PassageCandidate | null {
-  if (!verses.length) return null;
+function buildGlobalPassageCandidates(
+  verses: BibleVerse[],
+  promptTokens: string[],
+  expandedPrompt: string,
+  limit = 8,
+): PassageCandidate[] {
+  if (!verses.length) return [];
   const scored = verses.map((verse, index) => ({ index, verse, ...scoreVerse(verse, promptTokens, expandedPrompt) }));
-  let best = scored[0];
-  for (const entry of scored) {
-    if (entry.score > best.score) best = entry;
+  const ordered = [...scored].filter((entry) => entry.score > 0).sort((a, b) => b.score - a.score);
+  const candidates: PassageCandidate[] = [];
+  const used = new Set<string>();
+
+  for (const best of ordered) {
+    if (candidates.length >= limit) break;
+    const verseKey = `${best.verse.code}-${best.verse.chapter}-${best.verse.verse}`;
+    if (used.has(verseKey)) continue;
+
+    let start = best.index;
+    let end = best.index;
+    while (start > 0 && scored[start - 1].verse.code === best.verse.code && scored[start - 1].verse.chapter === best.verse.chapter && scored[start - 1].score > 2 && scored[start - 1].verse.verse === scored[start].verse.verse - 1) start -= 1;
+    while (end < scored.length - 1 && scored[end + 1].verse.code === best.verse.code && scored[end + 1].verse.chapter === best.verse.chapter && scored[end + 1].score > 2 && scored[end + 1].verse.verse === scored[end].verse.verse + 1) end += 1;
+
+    const selected = scored.slice(start, end + 1);
+    for (const entry of selected) used.add(`${entry.verse.code}-${entry.verse.chapter}-${entry.verse.verse}`);
+    const selectedVerses = selected.map((entry) => entry.verse);
+    candidates.push({
+      reference: { code: best.verse.code, chapter: best.verse.chapter, startVerse: selectedVerses[0].verse, endVerse: selectedVerses[selectedVerses.length - 1].verse },
+      excerpt: selectedVerses.map((verse) => `${verse.verse}. ${verse.text}`).join(" "),
+      score: selected.reduce((sum, entry) => sum + entry.score, 0),
+      matchedTerms: [...new Set(selected.flatMap((entry) => entry.matchedTerms))],
+      matchedConcepts: [...new Set(selected.flatMap((entry) => entry.matchedConcepts))],
+    });
   }
-  if (!best || best.score <= 0) return null;
-  let start = best.index;
-  let end = best.index;
-  while (start > 0 && scored[start - 1].verse.code === best.verse.code && scored[start - 1].verse.chapter === best.verse.chapter && scored[start - 1].score > 0 && scored[start - 1].verse.verse === scored[start].verse.verse - 1) start -= 1;
-  while (end < scored.length - 1 && scored[end + 1].verse.code === best.verse.code && scored[end + 1].verse.chapter === best.verse.chapter && scored[end + 1].score > 0 && scored[end + 1].verse.verse === scored[end].verse.verse + 1) end += 1;
-  const selected = scored.slice(start, end + 1).map((entry) => entry.verse);
-  const totalScore = scored.slice(start, end + 1).reduce((sum, entry) => sum + entry.score, 0);
-  const matchedTerms = [...new Set(scored.slice(start, end + 1).flatMap((entry) => entry.matchedTerms))];
-  const matchedConcepts = [...new Set(scored.slice(start, end + 1).flatMap((entry) => entry.matchedConcepts))];
-  return {
-    reference: { code: best.verse.code, chapter: best.verse.chapter, startVerse: selected[0].verse, endVerse: selected[selected.length - 1].verse },
-    excerpt: selected.map((verse) => `${verse.verse}. ${verse.text}`).join(" "),
-    score: totalScore,
-    matchedTerms,
-    matchedConcepts,
-  };
+
+  return candidates;
 }
 
 function confidenceFor(score: number, passageScore: number, matchedConcepts: number): RetrievalConfidence {
@@ -496,7 +512,7 @@ function confidenceFor(score: number, passageScore: number, matchedConcepts: num
   return "low";
 }
 
-function buildRuleBasedRetrieval(prompt: string, locale?: string): RetrievalResult | null {
+function buildRuleBasedRetrieval(prompt: string, locale?: string, options: RetrievalOptions = {}): RetrievalResult | null {
   const appLocale = resolveAppLocale(locale);
   const matchedRule = DOCTRINAL_ROUTING_RULES.find((rule) => rule.match.test(prompt));
   if (!matchedRule) return null;
@@ -522,22 +538,35 @@ function buildRuleBasedRetrieval(prompt: string, locale?: string): RetrievalResu
     primaryReference: matchedRule.primaryReference,
     primaryExcerpt: "",
     supportingReferences: matchedRule.supportingReferences,
+    passageCandidates: [
+      {
+        reference: matchedRule.primaryReference,
+        excerpt: "",
+        score: 10,
+        matchedTerms: [...matchedRule.passageKeywordsKo],
+        matchedConcepts: [...matchedRule.semanticTermsKo],
+      },
+    ],
+    expansionSummary: options.expansionSummary ?? null,
+    expansionProvider: options.expansionProvider ?? null,
   };
 }
 
-export async function retrieveClusterForPrompt(prompt: string, locale?: string): Promise<RetrievalResult> {
+export async function retrieveClusterForPrompt(prompt: string, locale?: string, options: RetrievalOptions = {}): Promise<RetrievalResult> {
   const appLocale = resolveAppLocale(locale);
   const normalizedPrompt = prompt.trim() || (appLocale === "ko" ? "성경 본문을 문맥과 연결 본문으로 공부" : "study scripture with context and cross references");
-  const ruleBased = buildRuleBasedRetrieval(normalizedPrompt, appLocale);
+  const ruleBased = buildRuleBasedRetrieval(normalizedPrompt, appLocale, options);
   if (ruleBased) return ruleBased;
 
-  const expandedPrompt = expandQuery(normalizedPrompt);
+  const externalExpansion = options.expansionTerms?.length ? ` ${options.expansionTerms.join(" ")}` : "";
+  const expandedPrompt = expandQuery(`${normalizedPrompt}${externalExpansion}`);
   const promptTokens = tokenize(expandedPrompt);
   const promptTf = buildTermFrequency(promptTokens);
   const [allVerses, { corpora, idf }, clusterEmbeddings] = await Promise.all([loadVerses(appLocale), loadClusterCorpora(appLocale), loadClusterEmbeddings(appLocale)]);
   const promptEmbedding = clusterEmbeddings.vectors ? await createEmbedding(normalizedPrompt) : null;
   const embeddingEnabled = !!promptEmbedding && !!clusterEmbeddings.vectors && !!clusterEmbeddings.model;
-  const bestPassage = buildGlobalPassageCandidate(allVerses, promptTokens, expandedPrompt);
+  const passageCandidates = buildGlobalPassageCandidates(allVerses, promptTokens, expandedPrompt);
+  const bestPassage = passageCandidates[0] ?? null;
 
   const scored = corpora.map(({ cluster, corpus, tf }) => {
     const lowerPrompt = expandedPrompt.toLowerCase();
@@ -587,6 +616,9 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string):
       primaryReference: passageMatch?.reference ?? cluster.primary,
       primaryExcerpt: passageMatch?.excerpt ?? "",
       supportingReferences: [],
+      passageCandidates,
+      expansionSummary: options.expansionSummary ?? null,
+      expansionProvider: options.expansionProvider ?? null,
     } satisfies RetrievalResult;
   });
 
@@ -606,5 +638,8 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string):
     primaryReference: STORY_CLUSTERS[0].primary,
     primaryExcerpt: "",
     supportingReferences: [],
+    passageCandidates: [],
+    expansionSummary: options.expansionSummary ?? null,
+    expansionProvider: options.expansionProvider ?? null,
   };
 }
