@@ -10,6 +10,7 @@ module.exports = {
         NODE_ENV: "production",
         PORT: 3100,
         NODE_OPTIONS: "--max-old-space-size=2048",
+        ADMIN_DEBUG_TOKEN: process.env.ADMIN_DEBUG_TOKEN,
       },
       max_memory_restart: "1800M",
       listen_timeout: 10000,
