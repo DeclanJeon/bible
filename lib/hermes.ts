@@ -332,6 +332,14 @@ export async function generateReflectionWithHermes(
     return deterministicResult(deterministicReflection, describeMissingConfig(config));
   }
 
+  if (config.transport === "agent-oneshot" && contractArgs.retrieval.expansionProvider === "hermes-agent") {
+    return deterministicResult(
+      deterministicReflection,
+      "Hermes agent controlled RAG query planning for this request; deterministic explanation builder used to avoid a second agent call.",
+      "hermes-fallback",
+    );
+  }
+
   const user = JSON.stringify(contract);
 
   if (config.transport === "agent-oneshot") {
