@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Globe, ExternalLink } from "lucide-react";
+import { ArrowRight, BookOpen, Globe, ExternalLink, MessageSquareText } from "lucide-react";
 import { STORY_CLUSTERS, getTopicStarts } from "@/lib/app-data";
 import { UI_COPY, localizeStoryCluster, localizeTopicLabel } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/page-metadata";
-import { buildBibleHref, buildLanesHref } from "@/lib/navigation";
+import { buildBibleHref, buildLanesHref, buildReviewsHref } from "@/lib/navigation";
 import { QuickPromptForm } from "@/components/quick-prompt-form";
 
 type Props = {
@@ -103,7 +103,7 @@ export default async function HomePage({ params }: Props) {
       </div>
 
       {/* Browse CTAs */}
-      <section className="mx-auto grid w-full max-w-6xl gap-4 px-6 pb-12 lg:grid-cols-2">
+      <section className="mx-auto grid w-full max-w-6xl gap-4 px-6 pb-12 lg:grid-cols-3">
         <Link
           href={buildLanesHref({ locale })}
           className="glass rounded-[24px] p-6 flex items-center justify-between group hover:border-[var(--gold)]/30 transition"
@@ -128,6 +128,19 @@ export default async function HomePage({ params }: Props) {
               <p className="text-sm text-[var(--muted)] mt-1">
                 {locale === "ko" ? "66권 전체 본문을 책과 장별로 끊김 없이 읽습니다." : "Browse all 66 books by book and chapter."}
               </p>
+            </div>
+          </div>
+          <ArrowRight className="h-5 w-5 text-[var(--gold)] group-hover:translate-x-1 transition-transform" />
+        </Link>
+        <Link
+          href={buildReviewsHref(locale)}
+          className="glass rounded-[24px] p-6 flex items-center justify-between group hover:border-[var(--gold)]/30 transition"
+        >
+          <div className="flex items-center gap-4">
+            <MessageSquareText className="h-6 w-6 text-[var(--gold)]" />
+            <div>
+              <div className="text-lg font-semibold text-white">{UI_COPY[locale].reviews.title}</div>
+              <p className="text-sm text-[var(--muted)] mt-1">{UI_COPY[locale].reviews.body}</p>
             </div>
           </div>
           <ArrowRight className="h-5 w-5 text-[var(--gold)] group-hover:translate-x-1 transition-transform" />

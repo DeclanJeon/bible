@@ -35,7 +35,8 @@ Many Bible tools jump from a personal concern to a single isolated verse. Bible 
 3. read the chapter context;
 4. follow cross references;
 5. continue into related study lanes;
-6. read the full Bible by book and chapter when needed.
+6. read the full Bible by book and chapter when needed;
+7. leave anonymous feedback without creating an account.
 
 ## Product highlights
 
@@ -45,6 +46,7 @@ Many Bible tools jump from a personal concern to a single isolated verse. Bible 
 | Study desk | Primary passage, linked passages, author/place/audience notes, and source inventory. |
 | Graph view | A compact map of why passages are connected. |
 | Full Bible reader | All 66 books by book and chapter in Korean and English. |
+| Anonymous reviews | Public no-login feedback board with server-side validation and file persistence. |
 | Locale routing | Canonical `/ko/...` and `/en/...` paths for pages, APIs, sitemap, and metadata. |
 | Safer runtime | Public diagnostics return readiness only, not provider topology or secret previews. |
 
@@ -57,6 +59,7 @@ Many Bible tools jump from a personal concern to a single isolated verse. Bible 
 | `/ko/study/[slug]`, `/en/study/[slug]` | Guided study lane for a biblical theme. |
 | `/ko/graph/[slug]`, `/en/graph/[slug]` | Cross-reference relationship view. |
 | `/ko/bible`, `/en/bible` | Full Bible reader by book and chapter. |
+| `/ko/reviews`, `/en/reviews` | Anonymous review board. |
 | `/api/runtime` | Coarse readiness endpoint. |
 
 ## Architecture
@@ -65,11 +68,13 @@ Many Bible tools jump from a personal concern to a single isolated verse. Bible 
 Next.js App Router
 ├─ app/[locale]              Canonical Korean / English route tree
 ├─ app/[locale]/api          Localized public API routes
+├─ app/[locale]/reviews      Anonymous review board page
 ├─ components                Study desk, cards, tabs, navigation
 ├─ lib/bible.ts              Local Bible corpus loading and chapter index
 ├─ lib/retrieval.ts          Prompt-to-cluster retrieval
 ├─ lib/reflection.ts         Deterministic reflection response builder
-└─ data/knowledge            Cross-reference knowledge data
+├─ data/knowledge            Cross-reference knowledge data
+└─ .data/reviews.json        Production review storage, ignored by Git
 ```
 
 ## Tech stack
@@ -113,6 +118,7 @@ Current production target:
 | Process | `pm2` app named `bible` |
 | Port | `127.0.0.1:3100` |
 | nginx site | `/etc/nginx/sites-enabled/bible.ponslink.com` |
+| Review data | `/home/declan/bible/.data/reviews.json` |
 
 ## Data sources
 
@@ -126,6 +132,7 @@ Current production target:
 - Keep generated reflection behind POST flow.
 - Do not expose provider hostnames, model topology, config sources, or secret previews in public diagnostics.
 - Prefer canonical path locale routing over query-string locale routing.
+- Keep `.data/reviews.json` out of Git and out of destructive deploy syncs.
 
 ## License
 

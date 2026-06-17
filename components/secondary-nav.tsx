@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { BookOpen, Compass, Home, Sparkles } from "lucide-react";
+import { BookOpen, Compass, Home, MessageSquareText, Sparkles } from "lucide-react";
 import { UI_COPY, resolveAppLocale } from "@/lib/content";
-import { buildBibleHref, buildCompanionHref, buildGraphHref, buildLanesHref, buildStudyHref } from "@/lib/navigation";
+import { buildBibleHref, buildCompanionHref, buildGraphHref, buildLanesHref, buildReviewsHref, buildStudyHref } from "@/lib/navigation";
 
 
 export function SecondaryNav({
@@ -11,7 +11,7 @@ export function SecondaryNav({
   title,
 }: {
   locale?: string;
-  active: "companion" | "study" | "graph" | "lanes" | "bible";
+  active: "companion" | "study" | "graph" | "lanes" | "bible" | "reviews";
   slug?: string;
   title?: string;
 }) {
@@ -29,6 +29,7 @@ export function SecondaryNav({
       : []),
     { key: "lanes", href: buildLanesHref({ locale: appLocale }), label: sidebarCopy.navLanes, icon: BookOpen },
     { key: "bible", href: buildBibleHref({ locale: appLocale }), label: sidebarCopy.navBible, icon: BookOpen },
+    { key: "reviews", href: buildReviewsHref(appLocale), label: sidebarCopy.navReviews, icon: MessageSquareText },
   ];
 
   return (

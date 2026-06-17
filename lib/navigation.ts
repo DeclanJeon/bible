@@ -68,3 +68,7 @@ export function buildLanesHref(options: { topic?: SearchValue; q?: SearchValue; 
   appendIfPresent(params, "q", options.q);
   return withQuery(localizedPath(options.locale, "/lanes"), params);
 }
+
+export function buildReviewsHref(locale?: LocaleInput) {
+  return localizedPath(locale, "/reviews");
+}
