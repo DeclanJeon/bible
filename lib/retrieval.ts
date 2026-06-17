@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { createEmbedding, cosineSimilarity as cosineEmbeddingSimilarity, getEmbeddingProviderConfig } from "@/lib/embeddings";
 import { loadVerses } from "@/lib/bible";
 import { STORY_CLUSTERS, type StoryCluster } from "@/lib/app-data";
@@ -140,8 +139,18 @@ function cosineTfIdfSimilarity(
   return dot / (Math.sqrt(promptNorm) * Math.sqrt(corpusNorm));
 }
 
-const loadClusterCorpora = cache(async (locale?: string) => {
+type CorporaResult = {
+  corpora: Array<{ cluster: StoryCluster; corpus: string; tokens: string[]; tf: Map<string, number> }>;
+  idf: Map<string, number>;
+};
+
+const corporaCache = new Map<string, CorporaResult>();
+
+async function loadClusterCorpora(locale?: string): Promise<CorporaResult> {
   const appLocale = resolveAppLocale(locale);
+  const cached = corporaCache.get(appLocale);
+  if (cached) return cached;
+
   const verses = await loadVerses(appLocale);
   const corpora = await Promise.all(
     STORY_CLUSTERS.map(async (baseCluster) => {
@@ -181,11 +190,24 @@ const loadClusterCorpora = cache(async (locale?: string) => {
     idf.set(term, Math.log((1 + totalDocs) / (1 + df)) + 1);
   }
 
-  return { corpora, idf };
-});
+  const result = { corpora, idf };
+  corporaCache.set(appLocale, result);
+  return result;
+}
 
 
-const loadClusterEmbeddings = cache(async (locale?: string) => {
+type EmbeddingsResult = {
+  model: string | null;
+  vectors: Map<string, number[]> | null;
+};
+
+const embeddingsCache = new Map<string, EmbeddingsResult>();
+
+async function loadClusterEmbeddings(locale?: string): Promise<EmbeddingsResult> {
+  const appLocale = resolveAppLocale(locale);
+  const cached = embeddingsCache.get(appLocale);
+  if (cached) return cached;
+
   if (!ENABLE_RUNTIME_CLUSTER_EMBEDDINGS) {
     return { model: null, vectors: null as Map<string, number[]> | null };
   }
@@ -208,11 +230,13 @@ const loadClusterEmbeddings = cache(async (locale?: string) => {
     }
   }
 
-  return {
+  const result = {
     model: vectors.size ? config.model : null,
     vectors: vectors.size ? vectors : null,
   };
-});
+  embeddingsCache.set(appLocale, result);
+  return result;
+}
 
 
 export async function retrieveClusterForPrompt(prompt: string, locale?: string): Promise<RetrievalResult> {

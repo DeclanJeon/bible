@@ -268,6 +268,9 @@ export async function generateReflectionWithHermes(
   const user = JSON.stringify(contract);
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30_000);
+
     const response = await fetch(`${config.baseUrl.replace(/\/$/, "")}/chat/completions`, {
       method: "POST",
       headers: {
@@ -283,7 +286,10 @@ export async function generateReflectionWithHermes(
           { role: "user", content: user },
         ],
       }),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeout);
 
     if (!response.ok) {
       return deterministicResult(
