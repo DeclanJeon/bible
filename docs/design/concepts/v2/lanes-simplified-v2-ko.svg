@@ -1,0 +1,50 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg" x1="90" y1="60" x2="1510" y2="1150" gradientUnits="userSpaceOnUse"><stop stop-color="#12192C"/><stop offset="1" stop-color="#070B14"/></linearGradient></defs>
+<rect width="1600" height="1200" fill="url(#bg)"/>
+<rect x="36" y="30" width="1528" height="1140" rx="34" stroke="white" stroke-opacity="0.08"/>
+<rect x="72" y="60" width="1456" height="86" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="106" y="112" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">성경 하이퍼링크 컴패니언</text>
+<rect x="1204" y="84" width="136" height="40" rx="20" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="1272" y="109" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">새 묵상 시작</text>
+<rect x="1354" y="84" width="98" height="40" rx="20" fill="#E7C986"/><text x="1403" y="109" text-anchor="middle" fill="#111827" font-size="16" font-weight="800" font-family="Inter, Pretendard, sans-serif">공부 레인</text>
+
+<rect x="72" y="174" width="1456" height="246" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="220" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">LANES / V2</text>
+<text x="110" y="268" fill="white" font-size="42" font-weight="800" font-family="Inter, Pretendard, sans-serif">가이드된 성경 패턴 전체 둘러보기</text>
+<text x="110" y="312" fill="#C4CBD9" font-size="22" font-weight="500" font-family="Inter, Pretendard, sans-serif">여긴 기능 설명 페이지가 아니라, 지금 맞는 레인을 빨리 고르는 카탈로그여야 합니다.</text>
+<rect x="110" y="340" width="760" height="52" rx="26" fill="#F8FAFC"/><text x="144" y="373" fill="#616B81" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">고민, 주제, 감정으로 레인 검색</text>
+<rect x="888" y="340" width="136" height="52" rx="26" fill="#E7C986"/><text x="956" y="373" text-anchor="middle" fill="#111827" font-size="18" font-weight="800" font-family="Inter, Pretendard, sans-serif">레인 필터링</text>
+<rect x="110" y="402" width="120" height="36" rx="18" fill="#E7C986" fill-opacity="0.16" stroke="#E7C986" stroke-opacity="0.38"/><text x="170" y="425" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">모든 주제</text>
+<rect x="242" y="402" width="84" height="36" rx="18" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="284" y="425" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">기다림</text>
+<rect x="338" y="402" width="84" height="36" rx="18" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="380" y="425" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">회복</text>
+<rect x="434" y="402" width="84" height="36" rx="18" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="476" y="425" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">부르심</text>
+
+<rect x="72" y="454" width="1456" height="684" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="500" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">빠른 선택 카드</text>
+<rect x="110" y="528" width="430" height="244" rx="24" fill="#151D31" stroke="#E7C986" stroke-opacity="0.32"/>
+<text x="142" y="574" fill="white" font-size="30" font-weight="800" font-family="Inter, Pretendard, sans-serif">침묵 속의 기다림</text>
+<text x="142" y="614" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">기다림</text>
+<text x="142" y="658" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">오랜 기다림 속에서 지치고,
+응답 없는 침묵처럼 느껴질 때</text>
+<rect x="142" y="706" width="108" height="36" rx="18" fill="#E7C986"/><text x="196" y="729" text-anchor="middle" fill="#111827" font-size="15" font-weight="800" font-family="Inter, Pretendard, sans-serif">묵상 시작</text>
+<rect x="262" y="706" width="110" height="36" rx="18" fill="white" fill-opacity="0.08"/><text x="317" y="729" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">스터디</text>
+<rect x="384" y="706" width="98" height="36" rx="18" fill="white" fill-opacity="0.08"/><text x="433" y="729" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, Pretendard, sans-serif">그래프</text>
+
+<rect x="570" y="528" width="430" height="244" rx="24" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+<text x="602" y="574" fill="white" font-size="30" font-weight="800" font-family="Inter, Pretendard, sans-serif">실패 이후의 회복</text>
+<text x="602" y="614" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">회복</text>
+<text x="602" y="658" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">수치심과 죄책감으로
+다시 돌아가기 어려울 때</text>
+
+<rect x="1030" y="528" width="430" height="244" rx="24" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+<text x="1062" y="574" fill="white" font-size="30" font-weight="800" font-family="Inter, Pretendard, sans-serif">혼란 속의 지혜</text>
+<text x="1062" y="614" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">인도</text>
+<text x="1062" y="658" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">다음 결정을 위해
+분별과 방향이 필요할 때</text>
+
+<rect x="110" y="806" width="1350" height="272" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="144" y="850" fill="white" font-size="30" font-weight="700" font-family="Inter, Pretendard, sans-serif">카탈로그의 목적은 설명이 아니라 선택입니다.</text>
+<text x="144" y="894" fill="#B5BED3" font-size="20" font-weight="500" font-family="Inter, Pretendard, sans-serif">상단 검색 1개 + 주제 칩 + 카드 목록만 있으면 유저는 충분히 빠르게 고를 수 있습니다.</text>
+<text x="144" y="952" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">01 지금 닿는 정서 고르기</text>
+<text x="144" y="992" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">02 카드 한 장 열기</text>
+<text x="144" y="1032" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">03 묵상 / 스터디 / 그래프 중 하나로 바로 이동</text>
+</svg>

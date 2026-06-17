@@ -1,0 +1,21 @@
+{
+  "name": "성경 하이퍼링크 컴패니언",
+  "short_name": "성경 컴패니언",
+  "description": "근거 중심 성경 공부 컴패니언",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

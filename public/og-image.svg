@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0b1020"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="60" y="60" width="1080" height="510" rx="24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="100" y="200" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="url(#gold)">성경 하이퍼링크 컴패니언</text>
+  <text x="100" y="280" font-family="system-ui, sans-serif" font-size="32" fill="#cbd5e1">Bible Hyperlink Companion</text>
+  <text x="100" y="360" font-family="system-ui, sans-serif" font-size="24" fill="#94a3b8">삶의 고민을 성경 본문, 문맥, 교차참조,</text>
+  <text x="100" y="400" font-family="system-ui, sans-serif" font-size="24" fill="#94a3b8">시대와 장소의 층위로 연결해 주는 근거 중심 성경 공부</text>
+  <rect x="100" y="460" width="200" height="48" rx="24" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.4)" stroke-width="1"/>
+  <text x="200" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fbbf24">bible-guide.kr</text>
+</svg>

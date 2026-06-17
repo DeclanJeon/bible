@@ -1,0 +1,620 @@
+{
+  "translation": "World English Bible Classic",
+  "abbreviation": "WEB",
+  "language": "English",
+  "scope": "Protestant canon (66 books)",
+  "source": {
+    "site": "eBible.org",
+    "download_page": "https://ebible.org/bible/details.php?id=eng-web&all=1",
+    "archive_url": "https://ebible.org/Scriptures/eng-web_vpl.zip",
+    "archive_file": "eng-web_vpl.txt",
+    "retrieved_utc": "2026-06-16T00:56:58Z"
+  },
+  "rights": {
+    "status": "Public domain",
+    "note": "eBible.org states the World English Bible is in the public domain; the name \"World English Bible\" remains a trademark of eBible.org.",
+    "copyright_page": "https://ebible.org/eng-web-c/copyright.htm"
+  },
+  "reason_not_kjv": "KJV was preferred, but WEB was chosen because its publisher explicitly releases the text into the public domain, avoiding KJV jurisdiction-specific Crown-right caveats.",
+  "totals": {
+    "books": 66,
+    "chapters": 1189,
+    "verses": 31098
+  },
+  "books": [
+    {
+      "order": 1,
+      "code": "GEN",
+      "name": "Genesis",
+      "testament": "Old Testament",
+      "chapters": 50,
+      "verses": 1533,
+      "file": "world_english_bible/old_testament/01_Genesis.txt"
+    },
+    {
+      "order": 2,
+      "code": "EXO",
+      "name": "Exodus",
+      "testament": "Old Testament",
+      "chapters": 40,
+      "verses": 1213,
+      "file": "world_english_bible/old_testament/02_Exodus.txt"
+    },
+    {
+      "order": 3,
+      "code": "LEV",
+      "name": "Leviticus",
+      "testament": "Old Testament",
+      "chapters": 27,
+      "verses": 859,
+      "file": "world_english_bible/old_testament/03_Leviticus.txt"
+    },
+    {
+      "order": 4,
+      "code": "NUM",
+      "name": "Numbers",
+      "testament": "Old Testament",
+      "chapters": 36,
+      "verses": 1288,
+      "file": "world_english_bible/old_testament/04_Numbers.txt"
+    },
+    {
+      "order": 5,
+      "code": "DEU",
+      "name": "Deuteronomy",
+      "testament": "Old Testament",
+      "chapters": 34,
+      "verses": 959,
+      "file": "world_english_bible/old_testament/05_Deuteronomy.txt"
+    },
+    {
+      "order": 6,
+      "code": "JOS",
+      "name": "Joshua",
+      "testament": "Old Testament",
+      "chapters": 24,
+      "verses": 658,
+      "file": "world_english_bible/old_testament/06_Joshua.txt"
+    },
+    {
+      "order": 7,
+      "code": "JDG",
+      "name": "Judges",
+      "testament": "Old Testament",
+      "chapters": 21,
+      "verses": 618,
+      "file": "world_english_bible/old_testament/07_Judges.txt"
+    },
+    {
+      "order": 8,
+      "code": "RUT",
+      "name": "Ruth",
+      "testament": "Old Testament",
+      "chapters": 4,
+      "verses": 85,
+      "file": "world_english_bible/old_testament/08_Ruth.txt"
+    },
+    {
+      "order": 9,
+      "code": "1SA",
+      "name": "1 Samuel",
+      "testament": "Old Testament",
+      "chapters": 31,
+      "verses": 810,
+      "file": "world_english_bible/old_testament/09_1_Samuel.txt"
+    },
+    {
+      "order": 10,
+      "code": "2SA",
+      "name": "2 Samuel",
+      "testament": "Old Testament",
+      "chapters": 24,
+      "verses": 695,
+      "file": "world_english_bible/old_testament/10_2_Samuel.txt"
+    },
+    {
+      "order": 11,
+      "code": "1KI",
+      "name": "1 Kings",
+      "testament": "Old Testament",
+      "chapters": 22,
+      "verses": 816,
+      "file": "world_english_bible/old_testament/11_1_Kings.txt"
+    },
+    {
+      "order": 12,
+      "code": "2KI",
+      "name": "2 Kings",
+      "testament": "Old Testament",
+      "chapters": 25,
+      "verses": 719,
+      "file": "world_english_bible/old_testament/12_2_Kings.txt"
+    },
+    {
+      "order": 13,
+      "code": "1CH",
+      "name": "1 Chronicles",
+      "testament": "Old Testament",
+      "chapters": 29,
+      "verses": 942,
+      "file": "world_english_bible/old_testament/13_1_Chronicles.txt"
+    },
+    {
+      "order": 14,
+      "code": "2CH",
+      "name": "2 Chronicles",
+      "testament": "Old Testament",
+      "chapters": 36,
+      "verses": 822,
+      "file": "world_english_bible/old_testament/14_2_Chronicles.txt"
+    },
+    {
+      "order": 15,
+      "code": "EZR",
+      "name": "Ezra",
+      "testament": "Old Testament",
+      "chapters": 10,
+      "verses": 280,
+      "file": "world_english_bible/old_testament/15_Ezra.txt"
+    },
+    {
+      "order": 16,
+      "code": "NEH",
+      "name": "Nehemiah",
+      "testament": "Old Testament",
+      "chapters": 13,
+      "verses": 406,
+      "file": "world_english_bible/old_testament/16_Nehemiah.txt"
+    },
+    {
+      "order": 17,
+      "code": "EST",
+      "name": "Esther",
+      "testament": "Old Testament",
+      "chapters": 10,
+      "verses": 167,
+      "file": "world_english_bible/old_testament/17_Esther.txt"
+    },
+    {
+      "order": 18,
+      "code": "JOB",
+      "name": "Job",
+      "testament": "Old Testament",
+      "chapters": 42,
+      "verses": 1070,
+      "file": "world_english_bible/old_testament/18_Job.txt"
+    },
+    {
+      "order": 19,
+      "code": "PSA",
+      "name": "Psalms",
+      "testament": "Old Testament",
+      "chapters": 150,
+      "verses": 2461,
+      "file": "world_english_bible/old_testament/19_Psalms.txt"
+    },
+    {
+      "order": 20,
+      "code": "PRO",
+      "name": "Proverbs",
+      "testament": "Old Testament",
+      "chapters": 31,
+      "verses": 915,
+      "file": "world_english_bible/old_testament/20_Proverbs.txt"
+    },
+    {
+      "order": 21,
+      "code": "ECC",
+      "name": "Ecclesiastes",
+      "testament": "Old Testament",
+      "chapters": 12,
+      "verses": 222,
+      "file": "world_english_bible/old_testament/21_Ecclesiastes.txt"
+    },
+    {
+      "order": 22,
+      "code": "SOL",
+      "name": "Song of Solomon",
+      "testament": "Old Testament",
+      "chapters": 8,
+      "verses": 117,
+      "file": "world_english_bible/old_testament/22_Song_of_Solomon.txt"
+    },
+    {
+      "order": 23,
+      "code": "ISA",
+      "name": "Isaiah",
+      "testament": "Old Testament",
+      "chapters": 66,
+      "verses": 1292,
+      "file": "world_english_bible/old_testament/23_Isaiah.txt"
+    },
+    {
+      "order": 24,
+      "code": "JER",
+      "name": "Jeremiah",
+      "testament": "Old Testament",
+      "chapters": 52,
+      "verses": 1364,
+      "file": "world_english_bible/old_testament/24_Jeremiah.txt"
+    },
+    {
+      "order": 25,
+      "code": "LAM",
+      "name": "Lamentations",
+      "testament": "Old Testament",
+      "chapters": 5,
+      "verses": 154,
+      "file": "world_english_bible/old_testament/25_Lamentations.txt"
+    },
+    {
+      "order": 26,
+      "code": "EZE",
+      "name": "Ezekiel",
+      "testament": "Old Testament",
+      "chapters": 48,
+      "verses": 1273,
+      "file": "world_english_bible/old_testament/26_Ezekiel.txt"
+    },
+    {
+      "order": 27,
+      "code": "DAN",
+      "name": "Daniel",
+      "testament": "Old Testament",
+      "chapters": 12,
+      "verses": 357,
+      "file": "world_english_bible/old_testament/27_Daniel.txt"
+    },
+    {
+      "order": 28,
+      "code": "HOS",
+      "name": "Hosea",
+      "testament": "Old Testament",
+      "chapters": 14,
+      "verses": 197,
+      "file": "world_english_bible/old_testament/28_Hosea.txt"
+    },
+    {
+      "order": 29,
+      "code": "JOE",
+      "name": "Joel",
+      "testament": "Old Testament",
+      "chapters": 3,
+      "verses": 73,
+      "file": "world_english_bible/old_testament/29_Joel.txt"
+    },
+    {
+      "order": 30,
+      "code": "AMO",
+      "name": "Amos",
+      "testament": "Old Testament",
+      "chapters": 9,
+      "verses": 146,
+      "file": "world_english_bible/old_testament/30_Amos.txt"
+    },
+    {
+      "order": 31,
+      "code": "OBA",
+      "name": "Obadiah",
+      "testament": "Old Testament",
+      "chapters": 1,
+      "verses": 21,
+      "file": "world_english_bible/old_testament/31_Obadiah.txt"
+    },
+    {
+      "order": 32,
+      "code": "JON",
+      "name": "Jonah",
+      "testament": "Old Testament",
+      "chapters": 4,
+      "verses": 48,
+      "file": "world_english_bible/old_testament/32_Jonah.txt"
+    },
+    {
+      "order": 33,
+      "code": "MIC",
+      "name": "Micah",
+      "testament": "Old Testament",
+      "chapters": 7,
+      "verses": 105,
+      "file": "world_english_bible/old_testament/33_Micah.txt"
+    },
+    {
+      "order": 34,
+      "code": "NAH",
+      "name": "Nahum",
+      "testament": "Old Testament",
+      "chapters": 3,
+      "verses": 47,
+      "file": "world_english_bible/old_testament/34_Nahum.txt"
+    },
+    {
+      "order": 35,
+      "code": "HAB",
+      "name": "Habakkuk",
+      "testament": "Old Testament",
+      "chapters": 3,
+      "verses": 56,
+      "file": "world_english_bible/old_testament/35_Habakkuk.txt"
+    },
+    {
+      "order": 36,
+      "code": "ZEP",
+      "name": "Zephaniah",
+      "testament": "Old Testament",
+      "chapters": 3,
+      "verses": 53,
+      "file": "world_english_bible/old_testament/36_Zephaniah.txt"
+    },
+    {
+      "order": 37,
+      "code": "HAG",
+      "name": "Haggai",
+      "testament": "Old Testament",
+      "chapters": 2,
+      "verses": 38,
+      "file": "world_english_bible/old_testament/37_Haggai.txt"
+    },
+    {
+      "order": 38,
+      "code": "ZEC",
+      "name": "Zechariah",
+      "testament": "Old Testament",
+      "chapters": 14,
+      "verses": 211,
+      "file": "world_english_bible/old_testament/38_Zechariah.txt"
+    },
+    {
+      "order": 39,
+      "code": "MAL",
+      "name": "Malachi",
+      "testament": "Old Testament",
+      "chapters": 4,
+      "verses": 55,
+      "file": "world_english_bible/old_testament/39_Malachi.txt"
+    },
+    {
+      "order": 40,
+      "code": "MAT",
+      "name": "Matthew",
+      "testament": "New Testament",
+      "chapters": 28,
+      "verses": 1071,
+      "file": "world_english_bible/new_testament/40_Matthew.txt"
+    },
+    {
+      "order": 41,
+      "code": "MAR",
+      "name": "Mark",
+      "testament": "New Testament",
+      "chapters": 16,
+      "verses": 678,
+      "file": "world_english_bible/new_testament/41_Mark.txt"
+    },
+    {
+      "order": 42,
+      "code": "LUK",
+      "name": "Luke",
+      "testament": "New Testament",
+      "chapters": 24,
+      "verses": 1150,
+      "file": "world_english_bible/new_testament/42_Luke.txt"
+    },
+    {
+      "order": 43,
+      "code": "JOH",
+      "name": "John",
+      "testament": "New Testament",
+      "chapters": 21,
+      "verses": 879,
+      "file": "world_english_bible/new_testament/43_John.txt"
+    },
+    {
+      "order": 44,
+      "code": "ACT",
+      "name": "Acts",
+      "testament": "New Testament",
+      "chapters": 28,
+      "verses": 1004,
+      "file": "world_english_bible/new_testament/44_Acts.txt"
+    },
+    {
+      "order": 45,
+      "code": "ROM",
+      "name": "Romans",
+      "testament": "New Testament",
+      "chapters": 16,
+      "verses": 433,
+      "file": "world_english_bible/new_testament/45_Romans.txt"
+    },
+    {
+      "order": 46,
+      "code": "1CO",
+      "name": "1 Corinthians",
+      "testament": "New Testament",
+      "chapters": 16,
+      "verses": 437,
+      "file": "world_english_bible/new_testament/46_1_Corinthians.txt"
+    },
+    {
+      "order": 47,
+      "code": "2CO",
+      "name": "2 Corinthians",
+      "testament": "New Testament",
+      "chapters": 13,
+      "verses": 257,
+      "file": "world_english_bible/new_testament/47_2_Corinthians.txt"
+    },
+    {
+      "order": 48,
+      "code": "GAL",
+      "name": "Galatians",
+      "testament": "New Testament",
+      "chapters": 6,
+      "verses": 149,
+      "file": "world_english_bible/new_testament/48_Galatians.txt"
+    },
+    {
+      "order": 49,
+      "code": "EPH",
+      "name": "Ephesians",
+      "testament": "New Testament",
+      "chapters": 6,
+      "verses": 155,
+      "file": "world_english_bible/new_testament/49_Ephesians.txt"
+    },
+    {
+      "order": 50,
+      "code": "PHI",
+      "name": "Philippians",
+      "testament": "New Testament",
+      "chapters": 4,
+      "verses": 104,
+      "file": "world_english_bible/new_testament/50_Philippians.txt"
+    },
+    {
+      "order": 51,
+      "code": "COL",
+      "name": "Colossians",
+      "testament": "New Testament",
+      "chapters": 4,
+      "verses": 95,
+      "file": "world_english_bible/new_testament/51_Colossians.txt"
+    },
+    {
+      "order": 52,
+      "code": "1TH",
+      "name": "1 Thessalonians",
+      "testament": "New Testament",
+      "chapters": 5,
+      "verses": 89,
+      "file": "world_english_bible/new_testament/52_1_Thessalonians.txt"
+    },
+    {
+      "order": 53,
+      "code": "2TH",
+      "name": "2 Thessalonians",
+      "testament": "New Testament",
+      "chapters": 3,
+      "verses": 47,
+      "file": "world_english_bible/new_testament/53_2_Thessalonians.txt"
+    },
+    {
+      "order": 54,
+      "code": "1TI",
+      "name": "1 Timothy",
+      "testament": "New Testament",
+      "chapters": 6,
+      "verses": 113,
+      "file": "world_english_bible/new_testament/54_1_Timothy.txt"
+    },
+    {
+      "order": 55,
+      "code": "2TI",
+      "name": "2 Timothy",
+      "testament": "New Testament",
+      "chapters": 4,
+      "verses": 83,
+      "file": "world_english_bible/new_testament/55_2_Timothy.txt"
+    },
+    {
+      "order": 56,
+      "code": "TIT",
+      "name": "Titus",
+      "testament": "New Testament",
+      "chapters": 3,
+      "verses": 46,
+      "file": "world_english_bible/new_testament/56_Titus.txt"
+    },
+    {
+      "order": 57,
+      "code": "PHM",
+      "name": "Philemon",
+      "testament": "New Testament",
+      "chapters": 1,
+      "verses": 25,
+      "file": "world_english_bible/new_testament/57_Philemon.txt"
+    },
+    {
+      "order": 58,
+      "code": "HEB",
+      "name": "Hebrews",
+      "testament": "New Testament",
+      "chapters": 13,
+      "verses": 303,
+      "file": "world_english_bible/new_testament/58_Hebrews.txt"
+    },
+    {
+      "order": 59,
+      "code": "JAM",
+      "name": "James",
+      "testament": "New Testament",
+      "chapters": 5,
+      "verses": 108,
+      "file": "world_english_bible/new_testament/59_James.txt"
+    },
+    {
+      "order": 60,
+      "code": "1PE",
+      "name": "1 Peter",
+      "testament": "New Testament",
+      "chapters": 5,
+      "verses": 105,
+      "file": "world_english_bible/new_testament/60_1_Peter.txt"
+    },
+    {
+      "order": 61,
+      "code": "2PE",
+      "name": "2 Peter",
+      "testament": "New Testament",
+      "chapters": 3,
+      "verses": 61,
+      "file": "world_english_bible/new_testament/61_2_Peter.txt"
+    },
+    {
+      "order": 62,
+      "code": "1JO",
+      "name": "1 John",
+      "testament": "New Testament",
+      "chapters": 5,
+      "verses": 105,
+      "file": "world_english_bible/new_testament/62_1_John.txt"
+    },
+    {
+      "order": 63,
+      "code": "2JO",
+      "name": "2 John",
+      "testament": "New Testament",
+      "chapters": 1,
+      "verses": 13,
+      "file": "world_english_bible/new_testament/63_2_John.txt"
+    },
+    {
+      "order": 64,
+      "code": "3JO",
+      "name": "3 John",
+      "testament": "New Testament",
+      "chapters": 1,
+      "verses": 14,
+      "file": "world_english_bible/new_testament/64_3_John.txt"
+    },
+    {
+      "order": 65,
+      "code": "JUD",
+      "name": "Jude",
+      "testament": "New Testament",
+      "chapters": 1,
+      "verses": 25,
+      "file": "world_english_bible/new_testament/65_Jude.txt"
+    },
+    {
+      "order": 66,
+      "code": "REV",
+      "name": "Revelation",
+      "testament": "New Testament",
+      "chapters": 22,
+      "verses": 404,
+      "file": "world_english_bible/new_testament/66_Revelation.txt"
+    }
+  ]
+}

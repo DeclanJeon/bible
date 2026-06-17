@@ -1,0 +1,620 @@
+{
+  "translation": "Korean Bible",
+  "abbreviation": "KOR",
+  "language": "Korean",
+  "scope": "Protestant canon (66 books)",
+  "source": {
+    "site": "Open Bibles",
+    "download_page": "https://github.com/seven1m/open-bibles",
+    "archive_url": "https://raw.githubusercontent.com/seven1m/open-bibles/master/kor-korean.osis.xml",
+    "archive_file": "kor-korean.osis.xml",
+    "retrieved_utc": "2026-06-16T08:38:28Z",
+    "upstream_details": "Repository README lists kor-korean.osis.xml as Public Domain."
+  },
+  "rights": {
+    "status": "Public domain",
+    "note": "Open Bibles README lists the Korean Bible (kor-korean.osis.xml) as Public Domain.",
+    "copyright_page": "https://github.com/seven1m/open-bibles"
+  },
+  "totals": {
+    "books": 66,
+    "chapters": 1171,
+    "verses": 30625
+  },
+  "books": [
+    {
+      "order": 1,
+      "code": "GEN",
+      "name": "창세기",
+      "testament": "구약",
+      "chapters": 50,
+      "verses": 1520,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 2,
+      "code": "EXO",
+      "name": "출애굽기",
+      "testament": "구약",
+      "chapters": 40,
+      "verses": 1212,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 3,
+      "code": "LEV",
+      "name": "레위기",
+      "testament": "구약",
+      "chapters": 27,
+      "verses": 859,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 4,
+      "code": "NUM",
+      "name": "민수기",
+      "testament": "구약",
+      "chapters": 36,
+      "verses": 1287,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 5,
+      "code": "DEU",
+      "name": "신명기",
+      "testament": "구약",
+      "chapters": 34,
+      "verses": 962,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 6,
+      "code": "JOS",
+      "name": "여호수아",
+      "testament": "구약",
+      "chapters": 24,
+      "verses": 656,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 7,
+      "code": "JDG",
+      "name": "사사기",
+      "testament": "구약",
+      "chapters": 21,
+      "verses": 617,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 8,
+      "code": "RUT",
+      "name": "룻기",
+      "testament": "구약",
+      "chapters": 4,
+      "verses": 85,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 9,
+      "code": "1SA",
+      "name": "사무엘상",
+      "testament": "구약",
+      "chapters": 31,
+      "verses": 808,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 10,
+      "code": "2SA",
+      "name": "사무엘하",
+      "testament": "구약",
+      "chapters": 24,
+      "verses": 695,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 11,
+      "code": "1KI",
+      "name": "열왕기상",
+      "testament": "구약",
+      "chapters": 22,
+      "verses": 815,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 12,
+      "code": "2KI",
+      "name": "열왕기하",
+      "testament": "구약",
+      "chapters": 25,
+      "verses": 719,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 13,
+      "code": "1CH",
+      "name": "역대상",
+      "testament": "구약",
+      "chapters": 29,
+      "verses": 941,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 14,
+      "code": "2CH",
+      "name": "역대하",
+      "testament": "구약",
+      "chapters": 20,
+      "verses": 429,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 15,
+      "code": "EZR",
+      "name": "에스라",
+      "testament": "구약",
+      "chapters": 10,
+      "verses": 280,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 16,
+      "code": "NEH",
+      "name": "느헤미야",
+      "testament": "구약",
+      "chapters": 13,
+      "verses": 406,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 17,
+      "code": "EST",
+      "name": "에스더",
+      "testament": "구약",
+      "chapters": 10,
+      "verses": 164,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 18,
+      "code": "JOB",
+      "name": "욥기",
+      "testament": "구약",
+      "chapters": 41,
+      "verses": 1069,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 19,
+      "code": "PSA",
+      "name": "시편",
+      "testament": "구약",
+      "chapters": 150,
+      "verses": 2435,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 20,
+      "code": "PRO",
+      "name": "잠언",
+      "testament": "구약",
+      "chapters": 31,
+      "verses": 913,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 21,
+      "code": "ECC",
+      "name": "전도서",
+      "testament": "구약",
+      "chapters": 12,
+      "verses": 221,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 22,
+      "code": "SOL",
+      "name": "아가",
+      "testament": "구약",
+      "chapters": 8,
+      "verses": 117,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 23,
+      "code": "ISA",
+      "name": "이사야",
+      "testament": "구약",
+      "chapters": 66,
+      "verses": 1291,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 24,
+      "code": "JER",
+      "name": "예레미야",
+      "testament": "구약",
+      "chapters": 52,
+      "verses": 1361,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 25,
+      "code": "LAM",
+      "name": "예레미야애가",
+      "testament": "구약",
+      "chapters": 5,
+      "verses": 154,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 26,
+      "code": "EZE",
+      "name": "에스겔",
+      "testament": "구약",
+      "chapters": 48,
+      "verses": 1279,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 27,
+      "code": "DAN",
+      "name": "다니엘",
+      "testament": "구약",
+      "chapters": 12,
+      "verses": 357,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 28,
+      "code": "HOS",
+      "name": "호세아",
+      "testament": "구약",
+      "chapters": 14,
+      "verses": 197,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 29,
+      "code": "JOE",
+      "name": "요엘",
+      "testament": "구약",
+      "chapters": 3,
+      "verses": 73,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 30,
+      "code": "AMO",
+      "name": "아모스",
+      "testament": "구약",
+      "chapters": 9,
+      "verses": 146,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 31,
+      "code": "OBA",
+      "name": "오바댜",
+      "testament": "구약",
+      "chapters": 1,
+      "verses": 21,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 32,
+      "code": "JON",
+      "name": "요나",
+      "testament": "구약",
+      "chapters": 4,
+      "verses": 48,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 33,
+      "code": "MIC",
+      "name": "미가",
+      "testament": "구약",
+      "chapters": 7,
+      "verses": 105,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 34,
+      "code": "NAH",
+      "name": "나훔",
+      "testament": "구약",
+      "chapters": 3,
+      "verses": 47,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 35,
+      "code": "HAB",
+      "name": "하박국",
+      "testament": "구약",
+      "chapters": 3,
+      "verses": 56,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 36,
+      "code": "ZEP",
+      "name": "스바냐",
+      "testament": "구약",
+      "chapters": 3,
+      "verses": 53,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 37,
+      "code": "HAG",
+      "name": "학개",
+      "testament": "구약",
+      "chapters": 2,
+      "verses": 38,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 38,
+      "code": "ZEC",
+      "name": "스가랴",
+      "testament": "구약",
+      "chapters": 14,
+      "verses": 211,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 39,
+      "code": "MAL",
+      "name": "말라기",
+      "testament": "구약",
+      "chapters": 4,
+      "verses": 55,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 40,
+      "code": "MAT",
+      "name": "마태복음",
+      "testament": "신약",
+      "chapters": 28,
+      "verses": 1071,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 41,
+      "code": "MAR",
+      "name": "마가복음",
+      "testament": "신약",
+      "chapters": 16,
+      "verses": 678,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 42,
+      "code": "LUK",
+      "name": "누가복음",
+      "testament": "신약",
+      "chapters": 24,
+      "verses": 1151,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 43,
+      "code": "JOH",
+      "name": "요한복음",
+      "testament": "신약",
+      "chapters": 21,
+      "verses": 879,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 44,
+      "code": "ACT",
+      "name": "사도행전",
+      "testament": "신약",
+      "chapters": 28,
+      "verses": 1009,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 45,
+      "code": "ROM",
+      "name": "로마서",
+      "testament": "신약",
+      "chapters": 16,
+      "verses": 433,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 46,
+      "code": "1CO",
+      "name": "고린도전서",
+      "testament": "신약",
+      "chapters": 16,
+      "verses": 437,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 47,
+      "code": "2CO",
+      "name": "고린도후서",
+      "testament": "신약",
+      "chapters": 13,
+      "verses": 256,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 48,
+      "code": "GAL",
+      "name": "갈라디아서",
+      "testament": "신약",
+      "chapters": 6,
+      "verses": 149,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 49,
+      "code": "EPH",
+      "name": "에베소서",
+      "testament": "신약",
+      "chapters": 6,
+      "verses": 155,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 50,
+      "code": "PHI",
+      "name": "빌립보서",
+      "testament": "신약",
+      "chapters": 4,
+      "verses": 104,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 51,
+      "code": "COL",
+      "name": "골로새서",
+      "testament": "신약",
+      "chapters": 4,
+      "verses": 86,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 52,
+      "code": "1TH",
+      "name": "데살로니가전서",
+      "testament": "신약",
+      "chapters": 5,
+      "verses": 89,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 53,
+      "code": "2TH",
+      "name": "데살로니가후서",
+      "testament": "신약",
+      "chapters": 3,
+      "verses": 47,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 54,
+      "code": "1TI",
+      "name": "디모데전서",
+      "testament": "신약",
+      "chapters": 6,
+      "verses": 113,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 55,
+      "code": "2TI",
+      "name": "디모데후서",
+      "testament": "신약",
+      "chapters": 4,
+      "verses": 82,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 56,
+      "code": "TIT",
+      "name": "디도서",
+      "testament": "신약",
+      "chapters": 3,
+      "verses": 46,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 57,
+      "code": "PHM",
+      "name": "빌레몬서",
+      "testament": "신약",
+      "chapters": 1,
+      "verses": 25,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 58,
+      "code": "HEB",
+      "name": "히브리서",
+      "testament": "신약",
+      "chapters": 13,
+      "verses": 303,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 59,
+      "code": "JAM",
+      "name": "야고보서",
+      "testament": "신약",
+      "chapters": 5,
+      "verses": 108,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 60,
+      "code": "1PE",
+      "name": "베드로전서",
+      "testament": "신약",
+      "chapters": 4,
+      "verses": 80,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 61,
+      "code": "2PE",
+      "name": "베드로후서",
+      "testament": "신약",
+      "chapters": 3,
+      "verses": 61,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 62,
+      "code": "1JO",
+      "name": "요한일서",
+      "testament": "신약",
+      "chapters": 5,
+      "verses": 105,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 63,
+      "code": "2JO",
+      "name": "요한이서",
+      "testament": "신약",
+      "chapters": 1,
+      "verses": 13,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 64,
+      "code": "3JO",
+      "name": "요한삼서",
+      "testament": "신약",
+      "chapters": 1,
+      "verses": 14,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 65,
+      "code": "JUD",
+      "name": "유다서",
+      "testament": "신약",
+      "chapters": 1,
+      "verses": 25,
+      "file": "korean_bible/canon_66_vpl.txt"
+    },
+    {
+      "order": 66,
+      "code": "REV",
+      "name": "요한계시록",
+      "testament": "신약",
+      "chapters": 22,
+      "verses": 404,
+      "file": "korean_bible/canon_66_vpl.txt"
+    }
+  ]
+}

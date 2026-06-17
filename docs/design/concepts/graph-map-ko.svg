@@ -1,0 +1,69 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="80" x2="1460" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101627"/>
+      <stop offset="1" stop-color="#070B14"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect x="40" y="32" width="1520" height="1136" rx="36" stroke="white" stroke-opacity="0.08"/>
+  <text x="120" y="110" fill="white" font-size="26" font-weight="700" font-family="Inter, Pretendard, sans-serif">하이퍼링크 지도</text>
+  <text x="300" y="110" fill="#92A0BA" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">복잡한 네트워크보다, 지금 이 고민에서 어디로 이동하는지 보이게</text>
+
+  <rect x="70" y="160" width="280" height="960" rx="28" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.06"/>
+  <text x="104" y="214" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">읽는 경로</text>
+  <text x="104" y="264" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">1. 중심 본문</text>
+  <text x="104" y="304" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">시편 13편이 출발점</text>
+  <text x="104" y="366" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">2. 연결 이유</text>
+  <text x="104" y="406" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다림 / 신음 / 신뢰</text>
+  <text x="104" y="468" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">3. 다음 이동</text>
+  <text x="104" y="508" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">스터디에서 본문 전체 읽기</text>
+  <rect x="104" y="604" width="212" height="178" rx="24" fill="black" fill-opacity="0.18"/>
+  <text x="128" y="644" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">UX 원칙</text>
+  <text x="128" y="684" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">그래프도 읽혀야 한다</text>
+  <text x="128" y="724" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">노드 수보다
+이동 이유와
+우선순위가 먼저 보이게.</text>
+
+  <rect x="384" y="160" width="1146" height="960" rx="28" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.06"/>
+  <text x="432" y="214" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">GRAPH VIEW</text>
+  <text x="432" y="258" fill="white" font-size="38" font-weight="800" font-family="Inter, Pretendard, sans-serif">침묵 속의 기다림</text>
+  <text x="432" y="298" fill="#C1C9DA" font-size="21" font-weight="500" font-family="Inter, Pretendard, sans-serif">유저가 이해해야 하는 건 연결망의 미학이 아니라, 해석의 이동 경로입니다.</text>
+
+  <path d="M942 420C942 385.863 969.863 358 1004 358H1006C1040.14 358 1068 385.863 1068 420V422C1068 456.137 1040.14 484 1006 484H1004C969.863 484 942 456.137 942 422V420Z" fill="#E7C986" fill-opacity="0.2" stroke="#E7C986" stroke-opacity="0.52" stroke-width="2"/>
+  <text x="1005" y="414" text-anchor="middle" fill="#F4F6FA" font-size="18" font-weight="700" font-family="Inter, Pretendard, sans-serif">시편 13편</text>
+  <text x="1005" y="440" text-anchor="middle" fill="#F4F6FA" font-size="15" font-weight="500" font-family="Inter, Pretendard, sans-serif">탄식 속 기다림</text>
+
+  <path d="M1004 484V560" stroke="#E7C986" stroke-opacity="0.48" stroke-width="3" stroke-dasharray="8 8"/>
+  <path d="M880 520L760 610" stroke="white" stroke-opacity="0.24" stroke-width="2.5"/>
+  <path d="M1128 520L1248 610" stroke="white" stroke-opacity="0.24" stroke-width="2.5"/>
+  <path d="M900 390L770 300" stroke="white" stroke-opacity="0.24" stroke-width="2.5"/>
+
+  <rect x="664" y="236" width="196" height="104" rx="22" fill="#151D31" stroke="white" stroke-opacity="0.08"/>
+  <text x="690" y="274" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">하박국 2:1-4</text>
+  <text x="690" y="310" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다리는 믿음</text>
+
+  <rect x="610" y="620" width="234" height="118" rx="22" fill="#151D31" stroke="white" stroke-opacity="0.08"/>
+  <text x="636" y="660" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">로마서 8:22-28</text>
+  <text x="636" y="696" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">신음과 소망의 재해석</text>
+
+  <rect x="1168" y="620" width="236" height="118" rx="22" fill="#151D31" stroke="white" stroke-opacity="0.08"/>
+  <text x="1194" y="660" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">마태복음 6:25-34</text>
+  <text x="1194" y="696" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">염려에서 신뢰로</text>
+
+  <rect x="520" y="786" width="864" height="256" rx="28" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+  <text x="560" y="832" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">해석 경로 설명</text>
+  <rect x="560" y="860" width="240" height="130" rx="22" fill="black" fill-opacity="0.18"/>
+  <text x="586" y="900" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">출발점</text>
+  <text x="586" y="938" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">왜 시편 13편이
+지금의 감정에 맞는가</text>
+  <rect x="832" y="860" width="240" height="130" rx="22" fill="black" fill-opacity="0.18"/>
+  <text x="858" y="900" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">확장</text>
+  <text x="858" y="938" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">구약의 기다림이
+신약에서 어떻게 이어지는가</text>
+  <rect x="1104" y="860" width="240" height="130" rx="22" fill="#E7C986" fill-opacity="0.14" stroke="#E7C986" stroke-opacity="0.38"/>
+  <text x="1130" y="900" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">다음 행동</text>
+  <text x="1130" y="938" fill="#F1F5F9" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">스터디 데스크로 이동해
+본문을 길게 읽는다</text>
+  <text x="800" y="1150" text-anchor="middle" fill="#70809E" font-size="16" font-weight="500" font-family="Inter, Pretendard, sans-serif">개념: graph는 화려한 선보다 ‘왜 여기서 저기로 가는지’가 먼저 보여야 함</text>
+</svg>

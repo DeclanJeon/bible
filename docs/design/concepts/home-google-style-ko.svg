@@ -1,0 +1,95 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="180" y1="120" x2="1420" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12172A"/>
+      <stop offset="0.5" stop-color="#0C1020"/>
+      <stop offset="1" stop-color="#070A14"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="585" y1="385" x2="1015" y2="615" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7DCA2"/>
+      <stop offset="1" stop-color="#C79A41"/>
+    </linearGradient>
+    <filter id="shadow" x="460" y="460" width="680" height="140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="22"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.32 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <circle cx="290" cy="230" r="170" fill="#19203B" fill-opacity="0.5"/>
+  <circle cx="1325" cy="925" r="220" fill="#131A31" fill-opacity="0.75"/>
+  <circle cx="1230" cy="250" r="90" fill="#182038" fill-opacity="0.55"/>
+
+  <rect x="48" y="40" width="1504" height="1120" rx="38" stroke="white" stroke-opacity="0.08"/>
+
+  <g opacity="0.95">
+    <rect x="116" y="90" width="38" height="38" rx="12" fill="#F1C979" fill-opacity="0.18" stroke="#F1C979" stroke-opacity="0.45"/>
+    <path d="M128 111.5C128 108.462 130.462 106 133.5 106H136.5C139.538 106 142 108.462 142 111.5V118.5C142 121.538 139.538 124 136.5 124H133.5C130.462 124 128 121.538 128 118.5V111.5Z" fill="#F1C979"/>
+    <path d="M143.5 104L149.7 108.2V121.8L143.5 126V104Z" fill="#F1C979" fill-opacity="0.9"/>
+    <text x="172" y="116" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">성경 하이퍼링크 컴패니언</text>
+  </g>
+
+  <g opacity="0.88">
+    <rect x="1310" y="86" width="58" height="34" rx="17" fill="white" fill-opacity="0.06" stroke="white" stroke-opacity="0.08"/>
+    <text x="1329" y="108" fill="#F7DCA2" font-size="14" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">KO</text>
+    <rect x="1378" y="86" width="64" height="34" rx="17" fill="white" fill-opacity="0.02" stroke="white" stroke-opacity="0.08"/>
+    <text x="1400" y="108" fill="#A8B2CC" font-size="14" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">EN</text>
+  </g>
+
+  <text x="800" y="338" text-anchor="middle" fill="url(#gold)" font-size="74" font-weight="800" font-family="Inter, Pretendard, system-ui, sans-serif" letter-spacing="-1.8">성경 길찾기</text>
+  <text x="800" y="388" text-anchor="middle" fill="#D4D9E6" font-size="26" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">마음을 한 문장으로 적으면, 본문과 연결과 맥락으로 바로 안내합니다.</text>
+  <text x="800" y="428" text-anchor="middle" fill="#7E8AAA" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">첫 화면은 오직 하나의 행동만 남깁니다: 입력 → 시작</text>
+
+  <g filter="url(#shadow)">
+    <rect x="500" y="500" width="600" height="92" rx="46" fill="#F7F9FD"/>
+    <circle cx="560" cy="546" r="18" stroke="#8A94AF" stroke-width="3"/>
+    <path d="M573 559L587 573" stroke="#8A94AF" stroke-width="3" stroke-linecap="round"/>
+    <text x="602" y="553" fill="#5A637B" font-size="22" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">지금 드는 마음을 한 문장으로 적어보세요</text>
+    <rect x="998" y="512" width="90" height="68" rx="34" fill="#111827"/>
+    <path d="M1034 546H1053" stroke="#F7DCA2" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M1045 536L1055 546L1045 556" stroke="#F7DCA2" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="800" y="632" text-anchor="middle" fill="#98A2BD" font-size="16" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">Enter 키로 바로 시작 · 결과는 컴패니언 화면에서 본문/맥락/교차참조로 이어짐</text>
+
+  <g>
+    <rect x="566" y="680" width="152" height="42" rx="21" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.08"/>
+    <text x="642" y="706" text-anchor="middle" fill="#E6EAF2" font-size="17" font-weight="600" font-family="Inter, Pretendard, system-ui, sans-serif">기다림에 지쳤어요</text>
+
+    <rect x="732" y="680" width="166" height="42" rx="21" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.08"/>
+    <text x="815" y="706" text-anchor="middle" fill="#E6EAF2" font-size="17" font-weight="600" font-family="Inter, Pretendard, system-ui, sans-serif">다시 돌아가고 싶어요</text>
+
+    <rect x="912" y="680" width="144" height="42" rx="21" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.08"/>
+    <text x="984" y="706" text-anchor="middle" fill="#E6EAF2" font-size="17" font-weight="600" font-family="Inter, Pretendard, system-ui, sans-serif">무엇을 해야 할지</text>
+  </g>
+
+  <text x="800" y="768" text-anchor="middle" fill="#7E8AAA" font-size="15" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif" letter-spacing="1.4">추천 시작 문장</text>
+
+  <g opacity="0.97">
+    <rect x="360" y="824" width="250" height="162" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+    <text x="392" y="870" fill="#F7DCA2" font-size="15" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">01</text>
+    <text x="392" y="905" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">하나의 입력</text>
+    <text x="392" y="945" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">첫 화면에서 유저는</text>
+    <text x="392" y="973" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">무엇을 해야 할지 바로 압니다.</text>
+
+    <rect x="675" y="824" width="250" height="162" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+    <text x="707" y="870" fill="#F7DCA2" font-size="15" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">02</text>
+    <text x="707" y="905" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">즉시 진입</text>
+    <text x="707" y="945" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">입력 후 바로 /companion</text>
+    <text x="707" y="973" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">결과 화면으로 이동합니다.</text>
+
+    <rect x="990" y="824" width="250" height="162" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+    <text x="1022" y="870" fill="#F7DCA2" font-size="15" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">03</text>
+    <text x="1022" y="905" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, system-ui, sans-serif">근거 유지</text>
+    <text x="1022" y="945" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">홈은 단순하게,</text>
+    <text x="1022" y="973" fill="#ABB4CB" font-size="18" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">복잡한 해설은 다음 화면으로.</text>
+  </g>
+
+  <text x="800" y="1072" text-anchor="middle" fill="#65708F" font-size="16" font-weight="500" font-family="Inter, Pretendard, system-ui, sans-serif">Google-style concept: 검색창 중심 · 보조 메뉴 최소화 · 추천 문장은 보조 힌트로만 노출</text>
+</svg>

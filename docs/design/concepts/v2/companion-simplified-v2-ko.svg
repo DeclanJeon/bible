@@ -1,0 +1,60 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg" x1="100" y1="60" x2="1500" y2="1140" gradientUnits="userSpaceOnUse"><stop stop-color="#12182B"/><stop offset="1" stop-color="#070B15"/></linearGradient></defs>
+<rect width="1600" height="1200" fill="url(#bg)"/>
+<rect x="36" y="30" width="1528" height="1140" rx="34" stroke="white" stroke-opacity="0.08"/>
+<rect x="72" y="60" width="1456" height="86" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="106" y="112" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">성경 하이퍼링크 컴패니언</text>
+<rect x="936" y="84" width="136" height="40" rx="20" fill="#E7C986"/><text x="1004" y="109" text-anchor="middle" fill="#111827" font-size="16" font-weight="800" font-family="Inter, Pretendard, sans-serif">새 묵상 시작</text>
+<rect x="1086" y="84" width="128" height="40" rx="20" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="1150" y="109" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">스터디 데스크</text>
+<rect x="1228" y="84" width="124" height="40" rx="20" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="1290" y="109" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">하이퍼링크 그래프</text>
+<rect x="1366" y="84" width="98" height="40" rx="20" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/><text x="1415" y="109" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">공부 레인</text>
+
+<rect x="72" y="174" width="1456" height="250" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="220" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">COMPANION / V2</text>
+<text x="110" y="270" fill="white" font-size="42" font-weight="800" font-family="Inter, Pretendard, sans-serif">침묵 속의 기다림</text>
+<text x="110" y="314" fill="#C4CBD9" font-size="22" font-weight="500" font-family="Inter, Pretendard, sans-serif">대답을 길게 늘어놓기 전에, 지금의 고민과 맞는 본문과 이유를 먼저 붙잡습니다.</text>
+<rect x="110" y="346" width="720" height="50" rx="25" fill="#F8FAFC"/><text x="144" y="378" fill="#616B81" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다림에 지쳤어요. 계속 기도하지만 너무 조용하게 느껴져요.</text>
+<rect x="848" y="346" width="160" height="50" rx="25" fill="#E7C986"/><text x="928" y="378" text-anchor="middle" fill="#111827" font-size="18" font-weight="800" font-family="Inter, Pretendard, sans-serif">연결된 이야기 찾기</text>
+<rect x="1118" y="222" width="362" height="150" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="1148" y="262" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">핵심 원칙</text>
+<text x="1148" y="304" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">요약 → 근거 → 다음 행동</text>
+<text x="1148" y="344" fill="#B3BCD0" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">결과 화면은 전시장이 아니라
+읽는 흐름을 만드는 화면입니다.</text>
+
+<rect x="72" y="454" width="920" height="684" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="500" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">메인 흐름</text>
+<rect x="110" y="526" width="844" height="136" rx="24" fill="#151D31" stroke="#E7C986" stroke-opacity="0.32"/>
+<text x="140" y="566" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">한 문장 응답</text>
+<text x="140" y="614" fill="white" font-size="32" font-weight="700" font-family="Inter, Pretendard, sans-serif">지금의 기다림은 버려진 침묵이 아니라, 탄식 안에서도</text>
+<text x="140" y="652" fill="white" font-size="32" font-weight="700" font-family="Inter, Pretendard, sans-serif">계속 하나님께 말하게 하는 시간일 수 있습니다.</text>
+<rect x="110" y="692" width="410" height="188" rx="24" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="140" y="730" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">핵심 본문</text>
+<text x="140" y="772" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">시편 13:1-6</text>
+<text x="140" y="812" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">하나님을 떠나지 않고
+고통을 하나님 앞에 가져오는 탄식</text>
+<rect x="140" y="838" width="122" height="36" rx="18" fill="#E7C986"/><text x="201" y="861" text-anchor="middle" fill="#111827" font-size="15" font-weight="800" font-family="Inter, Pretendard, sans-serif">본문 읽기</text>
+<rect x="544" y="692" width="410" height="188" rx="24" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="574" y="730" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">연결 본문</text>
+<text x="574" y="772" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">하박국 2:1-4 · 로마서 8:22-28</text>
+<text x="574" y="812" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다림, 신음, 신뢰라는 동일한 긴장을
+다른 본문들이 어떻게 확장하는지 보여 줍니다.</text>
+<rect x="110" y="910" width="844" height="188" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="140" y="950" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">해설과 묵상 질문</text>
+<text x="140" y="992" fill="white" font-size="26" font-weight="700" font-family="Inter, Pretendard, sans-serif">왜 이 본문을 먼저 읽는가 · 개인적 연결 · 시대/장소/청중 · 예수님/바울</text>
+<text x="140" y="1034" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">모든 설명은 본문 다음으로 밀고, 질문은 맨 아래에 둬서 사고 흐름이 끊기지 않게 합니다.</text>
+
+<rect x="1020" y="454" width="508" height="684" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="1056" y="500" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">보조 컬럼</text>
+<rect x="1056" y="528" width="436" height="224" rx="24" fill="white" fill-opacity="0.03"/>
+<text x="1086" y="568" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">책 프로필</text>
+<text x="1086" y="612" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">시편 · 시가 · 예배 모음집
+전통적 저자 이해 / 시대 범위 / 장소 / 청중</text>
+<rect x="1056" y="776" width="436" height="186" rx="24" fill="white" fill-opacity="0.03"/>
+<text x="1086" y="816" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">비슷한 다른 레인</text>
+<text x="1086" y="860" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">슬픔과 상실
+혼란 속의 지혜
+두려움과 부르심</text>
+<rect x="1056" y="988" width="436" height="112" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="1086" y="1030" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">출처 목록</text>
+<text x="1086" y="1068" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">보조 정보는 오른쪽에만 고정해 읽기를 방해하지 않게.</text>
+</svg>

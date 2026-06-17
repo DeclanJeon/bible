@@ -1,0 +1,115 @@
+<svg width="1600" height="2400" viewBox="0 0 1600 2400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg" x1="100" y1="60" x2="1500" y2="2340" gradientUnits="userSpaceOnUse"><stop stop-color="#12182B"/><stop offset="1" stop-color="#070B15"/></linearGradient></defs>
+<rect width="1600" height="2400" fill="url(#bg)"/>
+<rect x="36" y="30" width="1528" height="2340" rx="34" stroke="white" stroke-opacity="0.08"/>
+
+<rect x="72" y="60" width="1456" height="80" rx="28" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="106" y="108" fill="white" font-size="22" font-weight="700" font-family="Inter, Pretendard, sans-serif">성경 하이퍼링크 컴패니언</text>
+<rect x="440" y="76" width="560" height="48" rx="24" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.08"/>
+<circle cx="470" cy="100" r="10" stroke="#7C869F" stroke-width="2"/>
+<path d="M477 107L486 116" stroke="#7C869F" stroke-width="2" stroke-linecap="round"/>
+<text x="496" y="107" fill="#616B81" font-size="16" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다림에 지쳤어요.</text>
+<rect x="1016" y="76" width="100" height="48" rx="24" fill="#E7C986"/><text x="1066" y="107" text-anchor="middle" fill="#111827" font-size="16" font-weight="800" font-family="Inter, Pretendard, sans-serif">검색</text>
+<rect x="1370" y="76" width="52" height="36" rx="18" fill="#E7C986"/><text x="1396" y="100" text-anchor="middle" fill="#111827" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">KO</text>
+<rect x="1434" y="76" width="52" height="36" rx="18" fill="white" fill-opacity="0.04" stroke="white" stroke-opacity="0.08"/><text x="1460" y="100" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">EN</text>
+
+<rect x="72" y="170" width="1456" height="440" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="216" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">RESULT HERO</text>
+<rect x="110" y="242" width="520" height="40" rx="20" fill="black" fill-opacity="0.18"/>
+<text x="130" y="268" fill="#B5BED3" font-size="15" font-weight="500" font-style="italic" font-family="Inter, Pretendard, sans-serif">"기다림에 지쳤어요. 계속 기도하지만 너무 조용하게 느껴져요."</text>
+
+<text x="110" y="332" fill="white" font-size="42" font-weight="800" font-family="Inter, Pretendard, sans-serif">침묵 속의 기다림</text>
+<text x="110" y="376" fill="#C4CBD9" font-size="22" font-weight="500" font-family="Inter, Pretendard, sans-serif">지금의 기다림은 버려진 침묵이 아니라, 탄식 안에서도 계속 하나님께</text>
+<text x="110" y="406" fill="#C4CBD9" font-size="22" font-weight="500" font-family="Inter, Pretendard, sans-serif">말하게 하는 시간일 수 있습니다.</text>
+
+<rect x="110" y="440" width="720" height="140" rx="24" fill="#151D31" stroke="#E7C986" stroke-opacity="0.32"/>
+<text x="142" y="478" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">핵심 본문</text>
+<text x="142" y="520" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">시편 13:1-6</text>
+<text x="142" y="556" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">1 여호와여, 어느 때까지니이까 나를 영영히 잊으시나이까</text>
+
+<rect x="858" y="440" width="140" height="48" rx="24" fill="#E7C986"/><text x="928" y="470" text-anchor="middle" fill="#111827" font-size="17" font-weight="800" font-family="Inter, Pretendard, sans-serif">본문 읽기</text>
+<rect x="1014" y="440" width="140" height="48" rx="24" fill="white" fill-opacity="0.06" stroke="white" stroke-opacity="0.08"/><text x="1084" y="470" text-anchor="middle" fill="white" font-size="17" font-weight="700" font-family="Inter, Pretendard, sans-serif">그래프 보기</text>
+
+<rect x="858" y="242" width="632" height="174" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="888" y="282" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">UX 원칙</text>
+<text x="888" y="322" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">"내가 이해됐나?" → 본문 → 행동</text>
+<text x="888" y="362" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">유저는 먼저 자기 말이 제대로 읽혔는지,</text>
+<text x="888" y="390" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">그다음 어떤 본문인지, 마지막으로 뭘 할지 확인합니다.</text>
+
+<rect x="72" y="640" width="1456" height="340" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="686" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">LINKED PASSAGES</text>
+<text x="110" y="730" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">연결 본문</text>
+<text x="110" y="766" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">이 본문과 같은 긴장을 공유하는 다른 본문들</text>
+
+<rect x="110" y="800" width="410" height="144" rx="24" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="142" y="840" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">하박국 2:1-4</text>
+<text x="142" y="880" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">약속과 성취 사이의 간격</text>
+<text x="142" y="916" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">기다림이 하나님의 침묵이 아님을 보여주는 본문</text>
+
+<rect x="544" y="800" width="410" height="144" rx="24" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="576" y="840" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">로마서 8:22-28</text>
+<text x="576" y="880" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">신음과 소망의 재해석</text>
+<text x="576" y="916" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">바울은 기다림을 구속의 미래 안에서 다시 읽습니다</text>
+
+<rect x="978" y="800" width="410" height="144" rx="24" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="1010" y="840" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">마태복음 6:25-34</text>
+<text x="1010" y="880" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">염려에서 신뢰로</text>
+<text x="1010" y="916" fill="#B5BED3" font-size="17" font-weight="500" font-family="Inter, Pretendard, sans-serif">예수님은 기다림을 아버지의 돌보심 아래 둡니다</text>
+
+<rect x="72" y="1010" width="716" height="260" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="1056" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">EXPLANATION</text>
+<text x="110" y="1098" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">왜 이 본문인가</text>
+<text x="110" y="1138" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">시편 13편은 하나님을 떠나지 않은 채</text>
+<text x="110" y="1168" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">고통을 하나님 앞에 가져오는 탄식을 보여 줍니다.</text>
+<text x="110" y="1208" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">이것은 믿음 없음이 아니라 기도의 형태입니다.</text>
+
+<rect x="812" y="1010" width="716" height="260" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="850" y="1056" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">PERSONAL</text>
+<text x="850" y="1098" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">개인적 연결</text>
+<text x="850" y="1138" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">당신의 기다림이 하나님의 침묵처럼 느껴질 때,</text>
+<text x="850" y="1168" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">이 시편은 그 감정을 하나님 앞에서 정직하게</text>
+<text x="850" y="1198" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">말하는 것이 잘못이 아니라고 가르칩니다.</text>
+
+<rect x="72" y="1300" width="716" height="220" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="1346" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">CONTEXT</text>
+<text x="110" y="1388" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">시대 / 장소 / 청중</text>
+<text x="110" y="1428" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">정확한 작성 시점은 불확실하지만,</text>
+<text x="110" y="1458" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">이 시편은 이스라엘 예배 전통 안의 왕의 탄식시로 읽히며,</text>
+<text x="110" y="1488" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">포로기 이후 공동체가 사용한 시편집 안에 보존되었습니다.</text>
+
+<rect x="812" y="1300" width="716" height="220" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="850" y="1346" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">JESUS / PAUL</text>
+<text x="850" y="1388" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">예수님 / 바울</text>
+<text x="850" y="1428" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">예수님은 기다림을 지워 버리시지 않고,</text>
+<text x="850" y="1458" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">아버지의 돌보심 아래 두라고 가르치십니다.</text>
+<text x="850" y="1488" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">바울은 성도들이 피조물과 함께 구속을 기다린다고 말합니다.</text>
+
+<rect x="72" y="1550" width="1456" height="200" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="1596" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">REFLECTION</text>
+<text x="110" y="1638" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">묵상 질문</text>
+<text x="110" y="1678" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">지금의 기다림은 믿음 없음이라기보다 어디에서 탄식처럼 들리나요?</text>
+<text x="110" y="1718" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">연결된 본문 가운데 어떤 말씀이 지금의 침묵보다 더 넓은 시야를 열어 주나요?</text>
+
+<rect x="72" y="1780" width="716" height="260" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="1826" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">RELATED LANES</text>
+<text x="110" y="1868" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">비슷한 다른 레인</text>
+<text x="110" y="1916" fill="white" font-size="20" font-weight="700" font-family="Inter, Pretendard, sans-serif">→ 슬픔과 상실</text>
+<text x="110" y="1960" fill="white" font-size="20" font-weight="700" font-family="Inter, Pretendard, sans-serif">→ 혼란 속의 지혜</text>
+<text x="110" y="2004" fill="white" font-size="20" font-weight="700" font-family="Inter, Pretendard, sans-serif">→ 두려움과 부르심</text>
+
+<rect x="812" y="1780" width="716" height="260" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="850" y="1826" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">BOOK PROFILE</text>
+<text x="850" y="1868" fill="white" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">시편</text>
+<text x="850" y="1908" fill="#E7C986" font-size="16" font-weight="700" font-family="Inter, Pretendard, sans-serif">시가 · 예배 모음집 · 탄식과 찬양</text>
+<text x="850" y="1948" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">전통적 저자 이해: 다윗과 연결되지만,</text>
+<text x="850" y="1978" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">시편집 전체는 여러 세대를 거쳐 모아진 모음집입니다.</text>
+<text x="850" y="2018" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">시대 범위: 포로기 이후까지 이어진 편집 결과</text>
+
+<rect x="72" y="2070" width="1456" height="80" rx="24" fill="black" fill-opacity="0.18"/>
+<text x="110" y="2118" fill="#70809E" font-size="16" font-weight="500" font-family="Inter, Pretendard, sans-serif">개념: 결과 화면은 "내 말이 읽혔나 → 본문 → 왜 → 다음 행동" 순서로 배치합니다.</text>
+
+<rect x="72" y="2178" width="1456" height="160" rx="30" fill="white" fill-opacity="0.035" stroke="white" stroke-opacity="0.08"/>
+<text x="110" y="2224" fill="#E7C986" font-size="14" font-weight="700" font-family="Inter, Pretendard, sans-serif">READING ORDER</text>
+<text x="110" y="2268" fill="white" font-size="28" font-weight="700" font-family="Inter, Pretendard, sans-serif">1. 내 말이 읽혔나  2. 어떤 본문  3. 왜 이 본문  4. 연결 본문  5. 묵상</text>
+<text x="110" y="2308" fill="#B5BED3" font-size="18" font-weight="500" font-family="Inter, Pretendard, sans-serif">각 섹션은 하나의 카드. 스크롤하면 자연스럽게 다음 단계로 넘어갑니다.</text>
+</svg>
