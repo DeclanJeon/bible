@@ -52,15 +52,21 @@ import sys
 root = sys.argv[1]
 if root and root not in sys.path:
     sys.path.insert(0, root)
+from urllib.parse import urlparse
 from hermes_cli.auth import resolve_codex_runtime_credentials, resolve_nous_runtime_credentials
 errors = []
 creds = None
 for name, resolver in (("nous", resolve_nous_runtime_credentials), ("openai-codex", resolve_codex_runtime_credentials)):
     try:
         candidate = resolver()
-        if candidate.get("api_key") and candidate.get("base_url"):
+        base_url = candidate.get("base_url", "")
+        parsed = urlparse(base_url)
+        is_chatgpt_codex_backend = parsed.netloc == "chatgpt.com" and parsed.path.rstrip("/") == "/backend-api/codex"
+        if candidate.get("api_key") and base_url and not is_chatgpt_codex_backend:
             creds = candidate
             break
+        if is_chatgpt_codex_backend:
+            errors.append(f"{name}:not-openai-compatible")
     except Exception as exc:
         errors.append(f"{name}:{type(exc).__name__}")
 if not creds:
