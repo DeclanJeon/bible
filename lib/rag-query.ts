@@ -101,7 +101,7 @@ export async function buildRagQueryPlan(prompt: string, locale?: string): Promis
 
   if (config.transport === "agent-oneshot") {
     try {
-      const content = await runHermesAgentOneshot(`${system}\n\nQuery request JSON:\n${user}`, 60_000);
+      const content = await runHermesAgentOneshot(`${system}\n\nQuery request JSON:\n${user}`, 45_000);
       const plan = parsePlan(content, "hermes-agent", config.model, "Hermes agent");
       if (plan) return plan;
       return { ...fallback, expansionProvider: "hermes-fallback", expansionModel: "hermes-fallback", expansionNote: "Hermes agent RAG query planner returned no usable search terms." };

@@ -332,40 +332,16 @@ export async function generateReflectionWithHermes(
     return deterministicResult(deterministicReflection, describeMissingConfig(config));
   }
 
-  if (config.transport === "agent-oneshot" && contractArgs.retrieval.expansionProvider === "hermes-agent") {
+  if (config.transport === "agent-oneshot") {
     return deterministicResult(
       deterministicReflection,
-      "Hermes agent controlled RAG query planning for this request; deterministic explanation builder used to avoid a second agent call.",
+      "Hermes agent is reserved for RAG query planning on synchronous web requests; deterministic explanation builder used to avoid proxy timeouts.",
       "hermes-fallback",
     );
   }
 
   const user = JSON.stringify(contract);
 
-  if (config.transport === "agent-oneshot") {
-    try {
-      const content = await runHermesAgentOneshot(
-        `${system}\n\nEvidence contract JSON:\n${user}`,
-        90_000,
-      );
-      const parsed = validateGeneratedShape(extractJson(content ?? ""));
-      if (!parsed) {
-        return deterministicResult(deterministicReflection, "Hermes agent returned invalid JSON; using deterministic fallback.", "hermes-fallback");
-      }
-      return {
-        provider: "hermes-agent",
-        model: config.model,
-        note: `Hermes agent generated the final explanation from the evidence-locked contract (${config.sources.model}).`,
-        response: {
-          ...deterministicReflection,
-          ...parsed,
-        },
-      };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Unknown Hermes agent error";
-      return deterministicResult(deterministicReflection, `Hermes agent threw an error (${message}); using deterministic fallback.`, "hermes-fallback");
-    }
-  }
 
   try {
     const controller = new AbortController();
