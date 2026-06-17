@@ -1,0 +1,194 @@
+[
+  {
+    "family": "alive-heaven",
+    "prompt": "살아있는 사람은 천국에 못가나?",
+    "expectedPrimaryRefs": ["1TH 4:15-17"],
+    "expectedSupportCodes": ["1CO", "JOH", "MAT"],
+    "expectedGraphCodes": ["REV", "MAT", "1CO", "1TH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "alive-heaven",
+    "prompt": "살아 남아 있는 사람은 하늘에 어떻게 가나?",
+    "expectedPrimaryRefs": ["1TH 4:15-17"],
+    "expectedSupportCodes": ["1CO", "JOH"],
+    "expectedGraphCodes": ["REV", "MAT", "1TH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "after-death-heaven",
+    "prompt": "죽으면 바로 천국에 가나?",
+    "expectedPrimaryRefs": ["LUK 23:43"],
+    "expectedSupportCodes": ["PHI", "2CO", "REV"],
+    "expectedGraphCodes": ["REV", "LUK", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "after-death-heaven",
+    "prompt": "죽은 직후 낙원에 바로 들어가나?",
+    "expectedPrimaryRefs": ["LUK 23:43"],
+    "expectedSupportCodes": ["PHI", "2CO"],
+    "expectedGraphCodes": ["REV", "LUK"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "resurrection-living",
+    "prompt": "부활 때 살아있는 사람은 어떻게 되나?",
+    "expectedPrimaryRefs": ["1CO 15:51-52"],
+    "expectedSupportCodes": ["1TH", "PHI"],
+    "expectedGraphCodes": ["MAT", "1TH", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "resurrection-living",
+    "prompt": "마지막 날에 살아 남은 사람은 변화되나?",
+    "expectedPrimaryRefs": ["1CO 15:51-52"],
+    "expectedSupportCodes": ["1TH", "PHI"],
+    "expectedGraphCodes": ["MAT", "1CO", "PHI"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life",
+    "prompt": "예수 믿으면 영원히 죽지 않나?",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["JOH", "1JO"],
+    "expectedGraphCodes": ["1TH", "JOH", "REV"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life",
+    "prompt": "예수 믿는 사람은 영생을 얻어서 죽지 않는 건가?",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["JOH", "1JO"],
+    "expectedGraphCodes": ["1TH", "JOH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "kingdom-entry",
+    "prompt": "구원받은 사람도 천국에 못 들어갈 수 있나?",
+    "expectedPrimaryRefs": ["MAT 7:21"],
+    "expectedSupportCodes": ["MAT", "REV", "HEB"],
+    "expectedGraphCodes": ["ROM", "REV", "MAT"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "kingdom-entry",
+    "prompt": "천국에 실제로 누가 들어가나?",
+    "expectedPrimaryRefs": ["MAT 7:21"],
+    "expectedSupportCodes": ["MAT", "REV"],
+    "expectedGraphCodes": ["ROM", "MAT", "REV"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "grief",
+    "prompt": "사랑하는 사람이 죽어서 너무 슬퍼",
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedSupportCodes": ["JOH", "PSA", "REV"],
+    "expectedGraphCodes": ["REV", "JOH", "1TH"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "grief",
+    "prompt": "가족을 잃고 너무 슬픈데 소망이 있을까",
+    "expectedPrimaryRefs": ["1TH 4:13-18"],
+    "expectedSupportCodes": ["JOH", "PSA"],
+    "expectedGraphCodes": ["REV", "JOH", "PSA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "silence",
+    "prompt": "기도해도 하나님이 침묵하시는 것 같아",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM", "PSA"],
+    "expectedGraphCodes": ["JOB", "PSA", "HAB"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "silence",
+    "prompt": "왜 하나님은 내 기도에 아무 응답이 없으실까",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM"],
+    "expectedGraphCodes": ["JOB", "PSA", "HAB"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "죄책감이 너무 커서 하나님께 못 가겠어",
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedSupportCodes": ["ROM", "PSA"],
+    "expectedGraphCodes": ["PSA", "ROM", "1JO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "forgiveness-assurance",
+    "prompt": "하나님이 정말 내 죄를 다 용서하셨나?",
+    "expectedPrimaryRefs": ["1JO 1:9"],
+    "expectedSupportCodes": ["ROM", "PSA"],
+    "expectedGraphCodes": ["PSA", "ROM", "1JO"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "미래가 두렵고 부르심이 맞는지 모르겠어",
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedSupportCodes": ["EXO", "ISA", "JDG"],
+    "expectedGraphCodes": ["GEN", "EXO", "ISA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "calling-fear",
+    "prompt": "하나님이 나를 부르시는 게 맞는지 두려워",
+    "expectedPrimaryRefs": ["JOS 1:9"],
+    "expectedSupportCodes": ["EXO", "ISA"],
+    "expectedGraphCodes": ["GEN", "EXO", "ISA"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "wisdom",
+    "prompt": "지혜롭게 결정하고 싶은데 너무 혼란스러워",
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedSupportCodes": ["PRO", "PSA", "COL"],
+    "expectedGraphCodes": ["PRO", "PSA", "JAM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "wisdom",
+    "prompt": "중요한 결정을 해야 해서 지혜가 필요해",
+    "expectedPrimaryRefs": ["JAM 1:5"],
+    "expectedSupportCodes": ["PRO", "PSA"],
+    "expectedGraphCodes": ["PRO", "PSA", "JAM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "나를 배신한 사람을 용서하기 너무 힘들어",
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedSupportCodes": ["EPH", "ROM", "COL"],
+    "expectedGraphCodes": ["LUK", "MAT", "ROM"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "betrayal-forgiveness",
+    "prompt": "배신한 친구를 용서하는 게 너무 어려워",
+    "expectedPrimaryRefs": ["MAT 18:21-22"],
+    "expectedSupportCodes": ["EPH", "ROM"],
+    "expectedGraphCodes": ["LUK", "MAT", "COL"],
+    "minConfidence": "high"
+  },
+  {
+    "family": "eternal-life-variant",
+    "prompt": "나는 죽어도 다시 살 수 있나?",
+    "expectedPrimaryRefs": ["JOH 11:25-26"],
+    "expectedSupportCodes": ["1CO", "1TH", "JOH"],
+    "expectedGraphCodes": ["1TH", "REV", "JOH"],
+    "minConfidence": "medium"
+  },
+  {
+    "family": "silence-variant",
+    "prompt": "하나님이 왜 이렇게 잠잠하신지 모르겠어",
+    "expectedPrimaryRefs": ["PSA 13:1-2"],
+    "expectedSupportCodes": ["HAB", "LAM"],
+    "expectedGraphCodes": ["JOB", "PSA"],
+    "minConfidence": "high"
+  }
+]
