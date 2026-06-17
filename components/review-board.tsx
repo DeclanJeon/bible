@@ -60,7 +60,7 @@ export function ReviewBoard({
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+    <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_320px] lg:grid-cols-[minmax(0,1fr)_360px]">
       <section className="space-y-4">
         {reviews.length ? (
           reviews.map((review) => (

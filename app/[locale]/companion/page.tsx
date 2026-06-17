@@ -91,34 +91,34 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const totalExplore = graphSuggestions.length + relatedClusters.length;
 
   return (
-    <main className="mx-auto min-h-screen max-w-5xl px-6 py-8 lg:px-8">
+    <main className="mx-auto min-h-screen max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       {/* Header */}
-      <header className="glass rounded-[28px] px-6 py-5">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href={`/${appLocale}`} className="text-base font-semibold text-white">{UI_COPY[appLocale].siteTitle}</Link>
-          <form action={`/${appLocale}/companion`} className="flex flex-1 items-center gap-3 lg:max-w-xl">
-            <div className="flex flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] px-5 py-3">
-              <Search className="h-5 w-5 shrink-0 text-[var(--muted)]" />
-              <input type="text" name="prompt" defaultValue={userPrompt} className="flex-1 min-w-0 border-0 bg-transparent text-base text-white outline-none placeholder:text-[var(--muted)]" />
-            </div>
-            <button type="submit" className="shrink-0 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">{UI_COPY[appLocale].prompt.submit}</button>
-          </form>
-          <div className="flex items-center gap-2">
-            <Link href={buildBibleHref({ locale: appLocale })} className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
+      <header className="glass rounded-[28px] px-4 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-center justify-between gap-3">
+          <Link href={`/${appLocale}`} className="shrink-0 text-sm font-semibold text-white sm:text-base">{UI_COPY[appLocale].siteTitle}</Link>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <Link href={buildBibleHref({ locale: appLocale })} className="hidden rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] sm:inline-block">
               {UI_COPY[appLocale].sidebar.navBible}
             </Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${appLocale === "ko" ? "bg-[var(--accent)] text-white" : "border border-white/15 text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"}`}>KO</Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${appLocale !== "ko" ? "bg-[var(--accent)] text-white" : "border border-white/15 text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"}`}>EN</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${appLocale === "ko" ? "bg-[var(--accent)] text-slate-950" : "border border-white/15 text-white/60 hover:border-[var(--gold)]/30 hover:text-white"}`}>KO</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${appLocale !== "ko" ? "bg-[var(--accent)] text-slate-950" : "border border-white/15 text-white/60 hover:border-[var(--gold)]/30 hover:text-white"}`}>EN</Link>
           </div>
         </div>
+        <form action={`/${appLocale}/companion`} className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
+          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 sm:px-5 sm:py-3">
+            <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
+            <input type="text" name="prompt" defaultValue={userPrompt} className="min-w-0 flex-1 border-0 bg-transparent text-sm text-white outline-none placeholder:text-[var(--muted)] sm:text-base" />
+          </div>
+          <button type="submit" className="shrink-0 rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-semibold text-slate-950 transition hover:bg-[var(--accent)]/90 sm:px-5 sm:py-3 sm:text-sm">{UI_COPY[appLocale].prompt.submit}</button>
+        </form>
       </header>
 
       {/* Hero Section — always visible */}
-      <section className="mt-8 glass rounded-[32px] p-8 lg:p-10">
-        <div className="rounded-[20px] border border-white/8 bg-white/[0.04] px-5 py-4 text-base text-[var(--muted)] italic leading-relaxed">&ldquo;{userPrompt}&rdquo;</div>
-        <h1 className="mt-6 text-4xl font-bold text-white lg:text-5xl leading-tight">{cluster.title}</h1>
-        <p className="mt-4 text-xl leading-relaxed text-[var(--muted)]">{hydratedResponse.concernSummary}</p>
-        <div className="mt-5"><SafetyBanner safety={safety} /></div>
+      <section className="mt-6 glass rounded-[20px] p-4 sm:rounded-[24px] sm:p-5 lg:rounded-[32px] lg:mt-8 lg:p-8 lg:p-10">
+        <div className="rounded-[14px] border border-white/8 bg-white/[0.04] px-3 py-2.5 text-sm text-[var(--muted)] italic leading-relaxed sm:rounded-[20px] sm:px-5 sm:py-4 sm:text-base">&ldquo;{userPrompt}&rdquo;</div>
+        <h1 className="mt-3 text-xl font-bold text-white leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">{cluster.title}</h1>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
+        <div className="mt-3 sm:mt-5"><SafetyBanner safety={safety} /></div>
 
         {/* Primary Passage with Collapsible verses */}
         <div className="mt-8 rounded-[28px] border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] p-6 lg:p-8">
@@ -163,7 +163,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               content: (
                 <div>
                   <p className="text-base text-[var(--muted)] leading-relaxed mb-6">{copy.primaryAndLinkedBody}</p>
-                  <div className="grid gap-5 lg:grid-cols-2">
+                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                     {supporting.map((passage, index) => (
                       <PassageCard
                         key={passage.reference}
@@ -183,7 +183,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               key: "explanation",
               label: copy.groundedResponse,
               content: (
-                <div className="grid gap-5 lg:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                   <div className="soft-glass rounded-[24px] p-6">
                     <div className="section-title text-sm">{copy.whyThisStoryFirst}</div>
                     <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.whyTheseTexts}</p>
@@ -209,13 +209,13 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               count: totalNotes,
               content: (
                 <div>
-                  <div className="grid gap-5 lg:grid-cols-2">
+                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                     <NoteCard note={cluster.context.author} eyebrow={copy.notes.author} locale={appLocale} />
                     <NoteCard note={cluster.context.date} eyebrow={copy.notes.date} locale={appLocale} />
                     <NoteCard note={cluster.context.place} eyebrow={copy.notes.place} locale={appLocale} />
                     <NoteCard note={cluster.jewishReception} eyebrow={copy.notes.reception} locale={appLocale} />
                   </div>
-                  <div className="mt-6 grid gap-5 lg:grid-cols-2">
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-5">
                     {primaryBookMetadata ? <BookProfileCard metadata={primaryBookMetadata} locale={appLocale} /> : null}
                     <div className="glass rounded-[24px] p-6">
                       <div className="section-title text-sm">{copy.sourceInventory}</div>

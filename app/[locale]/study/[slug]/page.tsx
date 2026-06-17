@@ -77,16 +77,17 @@ export default async function StudyPage({ params }: Props) {
   ];
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
+    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <SecondaryNav locale={locale} active="study" slug={cluster.slug} title={cluster.title} />
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
-        <div className="glass rounded-[32px] p-8 lg:p-10">
+        <div className="glass rounded-[24px] p-5 sm:rounded-[32px] sm:p-8 lg:p-10">
           <div className="section-title text-base">{copy.title}</div>
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="text-4xl font-bold text-white lg:text-5xl leading-tight">{cluster.title}</h1>
+              <h1 className="text-2xl font-bold text-white sm:text-4xl lg:text-5xl leading-tight">{cluster.title}</h1>
+              <p className="mt-3 text-base leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-xl">{cluster.pastoralPrompt}</p>
               <p className="mt-4 text-xl leading-relaxed text-[var(--muted)]">{cluster.pastoralPrompt}</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -102,7 +103,7 @@ export default async function StudyPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)] lg:items-start">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)] lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)] md:items-start">
           {/* Main content — tabbed */}
           <TabSection
             defaultKey="context"

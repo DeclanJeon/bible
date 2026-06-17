@@ -33,27 +33,27 @@ export function SecondaryNav({
   ];
 
   return (
-    <header className="glass rounded-[28px] px-5 py-4 lg:px-6 lg:sticky lg:top-0 z-30 lg:backdrop-blur-xl">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+    <header className="glass rounded-[20px] px-4 py-3 sm:rounded-[28px] sm:px-5 sm:py-4 lg:px-6 lg:sticky lg:top-0 z-30 lg:backdrop-blur-xl">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <div className="text-sm font-semibold text-white">{UI_COPY[appLocale].siteTitle}</div>
-          <div className="mt-1 text-sm text-[var(--muted)]">{title ?? UI_COPY[appLocale].siteSubtitle}</div>
+          <Link href={`/${appLocale}`} className="text-sm font-semibold text-white">{UI_COPY[appLocale].siteTitle}</Link>
+          <div className="mt-0.5 text-xs text-[var(--muted)] sm:text-sm">{title ?? UI_COPY[appLocale].siteSubtitle}</div>
         </div>
-        <nav className="flex flex-wrap gap-2">
+        <nav className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 scrollbar-thin lg:flex-wrap lg:gap-2 lg:overflow-visible lg:pb-0">
           {items.map(({ key, href, label, icon: Icon }) => {
             const isActive = key === active;
             return (
               <Link
                 key={key}
                 href={href}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition sm:px-4 sm:py-2 sm:text-sm ${
                   isActive
                     ? "bg-[var(--accent)] text-slate-950"
                     : "border border-white/10 bg-white/[0.03] text-white hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
                 }`}
               >
-                <Icon className="h-4 w-4" />
-                {label}
+                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">{label}</span>
               </Link>
             );
           })}

@@ -15,10 +15,10 @@ export function QuickPromptForm({
 
   return (
     <div>
-      <form action={`/${appLocale}/companion`} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-2 shadow-2xl shadow-black/15">
-        <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
-          <div className="flex min-w-0 flex-1 items-center gap-3 rounded-[22px] px-4 py-3">
-            <Search className="h-5 w-5 shrink-0 text-[var(--muted)]" />
+      <form action={`/${appLocale}/companion`} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-2 shadow-2xl shadow-black/15 sm:rounded-[28px]">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-[18px] px-3 py-3 sm:gap-3 sm:rounded-[22px] sm:px-4">
+            <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
             <input
               type="text"
               name="prompt"
@@ -29,7 +29,7 @@ export function QuickPromptForm({
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-2 rounded-[22px] bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[18px] bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110 sm:rounded-[22px]"
           >
             {copy.submit}
             <ArrowRight className="h-4 w-4" />

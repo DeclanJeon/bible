@@ -105,7 +105,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
                 <Link
                   key={item.code}
                   href={buildBibleHref({ book: item.code, chapter: 1, locale })}
-                  className={`rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
+                  className={`min-h-[44px] rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
                     selected
                       ? "bg-[var(--accent)] text-slate-950"
                       : "border border-white/10 bg-white/[0.03] text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
@@ -129,7 +129,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
           <Link
             key={chapterNumber}
             href={buildBibleHref({ book: reader.selectedBook.code, chapter: chapterNumber, locale })}
-            className={`min-w-11 rounded-full px-3 py-2 text-center text-sm font-semibold transition ${
+            className={`min-h-[44px] min-w-11 rounded-full px-3 py-2 text-center text-sm font-semibold transition ${
               selected
                 ? "bg-[var(--gold)] text-slate-950"
                 : "border border-white/10 bg-white/[0.03] text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
@@ -159,7 +159,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
+      <section className="mt-8 grid gap-8 md:grid-cols-[280px_minmax(0,1fr)] lg:grid-cols-[320px_minmax(0,1fr)] md:items-start">
         <aside className="glass scrollbar-thin rounded-[32px] p-5 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
           <details className="lg:hidden">
             <summary className="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-white">
@@ -207,7 +207,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
           </section>
 
           <article className="rounded-[36px] border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-6 lg:p-10">
-            <div className="mx-auto max-w-3xl space-y-5 text-xl leading-10 text-[var(--text)]">
+            <div className="mx-auto max-w-3xl space-y-4 text-base leading-8 text-[var(--text)] sm:text-lg sm:leading-9 lg:text-xl lg:leading-10">
               {reader.verses.map((verse) => (
                 <p key={`${verse.code}-${verse.chapter}-${verse.verse}`} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-3">
                   <Link

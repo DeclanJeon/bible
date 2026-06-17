@@ -47,12 +47,12 @@ export default async function LanesPage({ params, searchParams }: Props) {
   });
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
+    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <SecondaryNav locale={locale} active="lanes" title={copy.heading} />
 
       <section className="mt-8 space-y-8">
         {/* Compact search panel */}
-        <section className="glass rounded-[32px] p-6 lg:p-8">
+        <section className="glass rounded-[24px] p-4 sm:rounded-[32px] sm:p-6 lg:p-8">
           <form action={`/${locale}/lanes`} className="space-y-4">
             {activeTopic ? <input type="hidden" name="topic" value={activeTopic} /> : null}
             <div className="flex flex-col gap-3 lg:flex-row">
@@ -91,7 +91,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
             <Collapsible
               trigger={<span>{copy.howToUseLines?.length ? `How to use — ${copy.howToUseLines.length} tips` : "How to use"}</span>}
             >
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {copy.howToUseLines.map((line, index) => (
                   <div key={line} className="soft-glass rounded-[20px] p-4">
                     <div className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">0{index + 1}</div>
@@ -104,7 +104,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
         </section>
 
         {/* Results */}
-        <section className="glass rounded-[32px] p-8 lg:p-10">
+        <section className="glass rounded-[24px] p-5 sm:rounded-[32px] sm:p-8 lg:p-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="section-title text-base">
@@ -122,9 +122,9 @@ export default async function LanesPage({ params, searchParams }: Props) {
           </div>
 
           {localizedClusters.length ? (
-            <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
               {localizedClusters.map((cluster) => (
-                <div key={cluster.slug} className="soft-glass rounded-[24px] p-6">
+                <div key={cluster.slug} className="soft-glass rounded-[20px] p-4 sm:rounded-[24px] sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-xl font-semibold text-white">{cluster.title}</div>
