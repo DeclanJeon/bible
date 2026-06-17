@@ -133,6 +133,20 @@
     "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
   },
   {
+    "family": "identity",
+    "prompt": "나는 누구지?",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["GEN 1:26-27"],
+    "expectedExplanationTerms": ["정체성", "하나님의 형상", "창조"]
+  },
+  {
+    "family": "identity",
+    "prompt": "하나님 안에서 나는 누구인가",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["GEN 1:26-27"],
+    "expectedExplanationTerms": ["정체성", "하나님의 형상", "창조"]
+  },
+  {
     "family": "ambiguous-empty",
     "prompt": "그냥 아무 생각이 없어",
     "expectedReliable": false,

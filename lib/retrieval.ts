@@ -145,6 +145,7 @@ const QUERY_EXPANSIONS = [
   { match: /(지혜|인도|결정|혼란|길|wisdom|guidance|decision|confused|path)/i, terms: "지혜 길 가르치소서 명철 인도 wisdom path teach" },
   { match: /(용서|배신|원망|분노|forgive|betray|resent|anger|revenge)/i, terms: "용서 원수 선 악 긍휼 자비 갚지 mercy enemy forgive" },
   { match: /(천국|하늘나라|하늘|영생|낙원|부활|들림|강림|살아있는|살아 남|산 자|죽은 자|heaven|kingdom|eternal life|paradise|resurrection|alive|rapture)/i, terms: "천국 하늘 하늘나라 영생 낙원 부활 변화 강림 살아 남은 자 산 자 죽은 자 공중 주와 함께 올라간 자 들어가지 못 eternal life resurrection alive heaven kingdom paradise" },
+  { match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i, terms: "하나님의 형상 자녀 지으심 창조 사랑 택하심 그리스도 안에서 identity image of god child created beloved" },
 ] as const;
 
 type RoutingRule = {
@@ -326,6 +327,19 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     rationaleEn: "Because the prompt asks about the difficulty of forgiving betrayal, the primary passage is Matthew 18:21-22, where Jesus directly answers how often to forgive.",
     passageKeywordsKo: ["용서하여", "일흔 번씩 일곱 번"],
     semanticTermsKo: ["용서", "배신", "원수", "분노"],
+  },
+  {
+    match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i,
+    primaryReference: { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 },
+    supportingReferences: [
+      { code: "PSA", chapter: 139, startVerse: 13, endVerse: 14 },
+      { code: "JOH", chapter: 1, startVerse: 12, endVerse: 13 },
+      { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 },
+    ],
+    rationaleKo: "질문이 ‘나는 누구인가’라는 정체성과 존재 가치를 묻기 때문에, 사람이 하나님의 형상대로 창조되었다고 직접 말하는 창세기 1:26-27을 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt asks about identity and worth, the primary passage is Genesis 1:26-27, which directly says humanity is made in God's image.",
+    passageKeywordsKo: ["하나님의 형상", "사람", "창조"],
+    semanticTermsKo: ["나는 누구", "정체성", "존재", "가치"],
   },
   {
     match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|무거운 짐|부담|weary|burden|burnout|exhausted|tired)/i,
