@@ -53,19 +53,19 @@ export default async function GraphPage({ params }: Props) {
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
-        <div className="glass rounded-[32px] p-8 lg:p-10">
+        <div className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
           <div className="section-title text-base">{copy.title}</div>
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="text-4xl font-bold text-white lg:text-5xl leading-tight">{cluster.title}</h1>
-              <p className="mt-4 text-xl leading-relaxed text-[var(--muted)]">{copy.body}</p>
+              <h1 className="text-2xl font-bold text-[var(--ink)] tracking-tight sm:text-4xl lg:text-5xl leading-tight">{cluster.title}</h1>
+              <p className="mt-3 text-base leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-xl">{copy.body}</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+              <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                 <Sparkles className="h-4 w-4" />
                 {UI_COPY[locale].sidebar.navNewReflection}
               </Link>
-              <Link href={buildStudyHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+              <Link href={buildStudyHref(cluster.slug, locale)} className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                 <BookOpen className="h-4 w-4" />
                 {copy.openStudyDesk}
               </Link>

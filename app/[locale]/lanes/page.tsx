@@ -52,7 +52,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
 
       <section className="mt-8 space-y-8">
         {/* Compact search panel */}
-        <section className="glass rounded-[24px] p-4 sm:rounded-[32px] sm:p-6 lg:p-8">
+        <section className="glass rounded-xl p-4 sm:rounded-2xl sm:p-6 lg:p-8">
           <form action={`/${locale}/lanes`} className="space-y-4">
             {activeTopic ? <input type="hidden" name="topic" value={activeTopic} /> : null}
             <div className="flex flex-col gap-3 lg:flex-row">
@@ -61,16 +61,16 @@ export default async function LanesPage({ params, searchParams }: Props) {
                 name="q"
                 defaultValue={q}
                 placeholder={copy.searchPlaceholder}
-                className="min-w-0 flex-1 rounded-[24px] border border-white/15 bg-white/[0.06] px-5 py-3.5 text-base text-white outline-none placeholder:text-[var(--muted)] focus-within:border-[var(--focus-ring)] transition"
+                className="min-w-0 flex-1 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-5 py-3.5 text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus-within:border-[var(--focus-ring)] transition"
               />
-              <button type="submit" className="rounded-[24px] bg-[var(--accent)] px-5 py-3.5 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+              <button type="submit" className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3.5 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
                 {copy.filter}
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
               <Link
                 href={buildLanesHref({ locale })}
-                className={`chip text-sm ${activeTopic ? "text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]" : "border-[var(--gold)]/30 text-[var(--gold)]"}`}
+                className={`chip text-sm ${activeTopic ? "text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)]" : "border-[var(--gold)]/30 text-[var(--gold)]"}`}
               >
                 {copy.allTopics} · {clusters.length}
               </Link>
@@ -78,7 +78,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
                 <Link
                   key={entry.label}
                   href={buildLanesHref({ topic: entry.label, q: query ? q ?? "" : undefined, locale })}
-                  className={`chip text-sm ${activeTopic === entry.label ? "border-[var(--gold)]/30 text-[var(--gold)]" : "text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"}`}
+                  className={`chip text-sm ${activeTopic === entry.label ? "border-[var(--gold)]/30 text-[var(--gold)]" : "text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"}`}
                 >
                   {entry.displayLabel} · {entry.count}
                 </Link>
@@ -93,7 +93,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
             >
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {copy.howToUseLines.map((line, index) => (
-                  <div key={line} className="soft-glass rounded-[20px] p-4">
+                  <div key={line} className="soft-glass rounded-lg p-4">
                     <div className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">0{index + 1}</div>
                     <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{line}</p>
                   </div>
@@ -104,7 +104,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
         </section>
 
         {/* Results */}
-        <section className="glass rounded-[24px] p-5 sm:rounded-[32px] sm:p-8 lg:p-10">
+        <section className="glass rounded-xl p-5 sm:rounded-2xl sm:p-8 lg:p-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="section-title text-base">
@@ -124,10 +124,10 @@ export default async function LanesPage({ params, searchParams }: Props) {
           {localizedClusters.length ? (
             <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
               {localizedClusters.map((cluster) => (
-                <div key={cluster.slug} className="soft-glass rounded-[20px] p-4 sm:rounded-[24px] sm:p-6">
+                <div key={cluster.slug} className="soft-glass rounded-lg p-4 sm:rounded-xl sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-xl font-semibold text-white">{cluster.title}</div>
+                      <div className="text-xl font-semibold tracking-tight text-[var(--ink)]">{cluster.title}</div>
                       <div className="mt-2 text-sm text-[var(--gold)] font-medium">{cluster.topicLabel ?? copy.title}</div>
                     </div>
                     <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-[var(--gold)]" />
@@ -135,19 +135,19 @@ export default async function LanesPage({ params, searchParams }: Props) {
                   <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{cluster.pastoralPrompt}</p>
                   <div className="mt-5 flex flex-wrap gap-2 text-xs text-[var(--muted)]">
                     {cluster.themes.slice(0, 3).map((theme) => (
-                      <span key={theme} className="chip text-xs text-white">
+                      <span key={theme} className="chip text-xs text-[var(--ink)]">
                         {theme}
                       </span>
                     ))}
                   </div>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+                    <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
                       {copy.startReflection}
                     </Link>
-                    <Link href={buildStudyHref(cluster.slug, locale)} className="rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                    <Link href={buildStudyHref(cluster.slug, locale)} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                       {copy.openStudyDesk}
                     </Link>
-                    <Link href={buildGraphHref(cluster.slug, locale)} className="rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                    <Link href={buildGraphHref(cluster.slug, locale)} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                       {copy.viewGraph}
                     </Link>
                   </div>
@@ -155,14 +155,14 @@ export default async function LanesPage({ params, searchParams }: Props) {
               ))}
             </div>
           ) : (
-            <div className="mt-8 rounded-[24px] border border-white/10 bg-white/[0.04] p-6">
-              <div className="text-xl font-semibold text-white">{copy.noMatch}</div>
+            <div className="mt-8 rounded-xl border border-[var(--hairline)] bg-[var(--surface-1)] p-6">
+              <div className="text-xl font-semibold tracking-tight text-[var(--ink)]">{copy.noMatch}</div>
               <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{copy.noMatchBody}</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href={buildLanesHref({ locale })} className="rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+                <Link href={buildLanesHref({ locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
                   {copy.clearFilters}
                 </Link>
-                <Link href={buildCompanionHref({ locale })} className="rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                <Link href={buildCompanionHref({ locale })} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                   {copy.openCompanion}
                 </Link>
               </div>

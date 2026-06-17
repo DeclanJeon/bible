@@ -12,7 +12,7 @@ export function SafetyBanner({ safety }: { safety: SafetyAssessment }) {
   }
 
   return (
-    <div className={`rounded-[28px] border p-5 ${LEVEL_STYLES[safety.level]}`}>
+    <div className={`rounded-2xl border p-5 ${LEVEL_STYLES[safety.level]}`}>
       <div className="section-title text-current">{safety.title}</div>
       <p className="mt-3 text-sm leading-7 text-current/90">{safety.summary}</p>
       <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-current/85">
@@ -30,7 +30,7 @@ export function SafetyBanner({ safety }: { safety: SafetyAssessment }) {
         </div>
       ) : null}
       {safety.resources.length ? (
-        <div className="mt-5 rounded-[20px] border border-current/15 bg-black/10 p-4">
+        <div className="mt-5 rounded-xl border border-current/15 bg-black/10 p-4">
           <div className="text-xs uppercase tracking-[0.18em] text-current/70">{safety.resourcesTitle}</div>
           <div className="mt-3 space-y-3 text-sm leading-6 text-current/90">
             {safety.resources.map((resource) => (

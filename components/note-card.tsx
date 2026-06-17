@@ -18,10 +18,10 @@ export function NoteCard({
   locale?: string;
 }) {
   return (
-    <div className="rounded-[24px] border border-white/6 bg-white/[0.03] p-4">
+    <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4">
       {eyebrow ? <div className="section-title">{eyebrow}</div> : null}
       <div className="mt-2 flex items-center justify-between gap-4">
-        <div className="text-sm font-semibold text-white">{note.title}</div>
+        <div className="text-sm font-semibold tracking-tight text-[var(--ink)]">{note.title}</div>
         <span className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${CONFIDENCE_STYLES[note.confidence]}`}>
           {localizeConfidenceLabel(note.confidence, locale)}
         </span>

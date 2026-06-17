@@ -33,10 +33,10 @@ export function SecondaryNav({
   ];
 
   return (
-    <header className="glass rounded-[20px] px-4 py-3 sm:rounded-[28px] sm:px-5 sm:py-4 lg:px-6 lg:sticky lg:top-0 z-30 lg:backdrop-blur-xl">
+    <header className="glass rounded-xl px-4 py-3 sm:rounded-2xl sm:px-5 sm:py-4 lg:px-6 lg:sticky lg:top-0 z-30 lg:backdrop-blur-xl">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <Link href={`/${appLocale}`} className="text-sm font-semibold text-white">{UI_COPY[appLocale].siteTitle}</Link>
+          <Link href={`/${appLocale}`} className="text-sm font-semibold tracking-tight text-[var(--ink)]">{UI_COPY[appLocale].siteTitle}</Link>
           <div className="mt-0.5 text-xs text-[var(--muted)] sm:text-sm">{title ?? UI_COPY[appLocale].siteSubtitle}</div>
         </div>
         <nav className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 scrollbar-thin lg:flex-wrap lg:gap-2 lg:overflow-visible lg:pb-0">
@@ -46,10 +46,10 @@ export function SecondaryNav({
               <Link
                 key={key}
                 href={href}
-                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition sm:px-4 sm:py-2 sm:text-sm ${
+                className={`inline-flex shrink-0 min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:px-4 sm:py-2 sm:text-sm ${
                   isActive
-                    ? "bg-[var(--accent)] text-slate-950"
-                    : "border border-white/10 bg-white/[0.03] text-white hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
+                    ? "bg-[var(--gold)] text-[var(--canvas)]"
+                    : "border border-[var(--hairline)] bg-[var(--surface-2)] text-[var(--ink)] hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
                 }`}
               >
                 <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />

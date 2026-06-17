@@ -24,7 +24,7 @@ export const Collapsible = memo(function Collapsible({
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className="inline-flex items-center gap-1.5 cursor-pointer text-sm font-semibold text-[var(--muted)] hover:text-white transition"
+        className="inline-flex items-center gap-1.5 min-h-[44px] cursor-pointer text-sm font-semibold text-[var(--muted)] hover:text-[var(--ink)] transition"
       >
         {trigger}
         <ChevronDown

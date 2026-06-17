@@ -89,7 +89,7 @@ export const TabSection = memo(function TabSection({
               aria-selected={isActive}
               tabIndex={isActive ? 0 : -1}
               onClick={() => activate(tab.key)}
-              className={`whitespace-nowrap px-4 py-3 text-sm font-semibold border-b-2 transition ${
+              className={`whitespace-nowrap min-h-[44px] px-4 py-3 text-sm font-semibold border-b-2 transition ${
                 isActive
                   ? "text-[var(--text)] border-[var(--gold)] bg-[var(--tab-active-bg)]"
                   : "text-[var(--muted)] border-transparent hover:text-[var(--text)] hover:bg-[var(--tab-hover-bg)]"
@@ -105,7 +105,7 @@ export const TabSection = memo(function TabSection({
           );
         })}
       </div>
-      <div className="glass rounded-b-[32px] p-6 lg:p-8">
+      <div className="glass rounded-b-2xl p-6 lg:p-8">
         {tabs.map((tab) => {
           const isActive = tab.key === activeKey;
           const tabId = `${baseId}-${tab.key}-tab`;

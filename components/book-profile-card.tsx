@@ -12,15 +12,15 @@ export function BookProfileCard({ metadata, locale }: { metadata: BookMetadata; 
   const appLocale = resolveAppLocale(locale);
 
   return (
-    <div className="glass rounded-[32px] p-6 lg:p-8">
+    <div className="glass rounded-2xl p-6 lg:p-8">
       <div className="section-title">{UI_COPY[appLocale].bookProfile.title}</div>
-      <div className="mt-2 text-xl font-semibold text-white">{metadata.title}</div>
+      <div className="mt-2 text-xl font-semibold tracking-tight text-[var(--ink)]">{metadata.title}</div>
       <div className="mt-1 text-sm text-[var(--gold)]">{metadata.genre}</div>
       <div className="mt-5 space-y-4">
         {Object.values(metadata.notes).map((note) => (
-          <div key={note.title} className="soft-glass rounded-[24px] p-5">
+          <div key={note.title} className="soft-glass rounded-xl p-5">
             <div className="flex items-center gap-3">
-              <div className="text-sm font-semibold text-white">{note.title}</div>
+              <div className="text-sm font-semibold tracking-tight text-[var(--ink)]">{note.title}</div>
               <span className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${CONFIDENCE_STYLES[note.confidence]}`}>
                 {localizeConfidenceLabel(note.confidence, appLocale)}
               </span>

@@ -68,12 +68,12 @@ export default async function StudyPage({ params }: Props) {
   const sources = localizeSourceLinks(APP_SOURCES, locale);
 
   const noteItems = [
-    { key: "author", header: <span className="text-sm font-semibold text-white">{cluster.context.author.title}</span>, body: <NoteCard note={cluster.context.author} locale={locale} />, defaultOpen: true },
-    { key: "place", header: <span className="text-sm font-semibold text-white">{cluster.context.place.title}</span>, body: <NoteCard note={cluster.context.place} locale={locale} /> },
-    { key: "audience", header: <span className="text-sm font-semibold text-white">{cluster.context.audience.title}</span>, body: <NoteCard note={cluster.context.audience} locale={locale} /> },
-    { key: "jesus", header: <span className="text-sm font-semibold text-white">{cluster.jesusLayer.title}</span>, body: <NoteCard note={cluster.jesusLayer} locale={locale} /> },
-    { key: "paul", header: <span className="text-sm font-semibold text-white">{cluster.paulLayer.title}</span>, body: <NoteCard note={cluster.paulLayer} locale={locale} /> },
-    { key: "reception", header: <span className="text-sm font-semibold text-white">{cluster.jewishReception.title}</span>, body: <NoteCard note={cluster.jewishReception} locale={locale} /> },
+    { key: "author", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.context.author.title}</span>, body: <NoteCard note={cluster.context.author} locale={locale} />, defaultOpen: true },
+    { key: "place", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.context.place.title}</span>, body: <NoteCard note={cluster.context.place} locale={locale} /> },
+    { key: "audience", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.context.audience.title}</span>, body: <NoteCard note={cluster.context.audience} locale={locale} /> },
+    { key: "jesus", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.jesusLayer.title}</span>, body: <NoteCard note={cluster.jesusLayer} locale={locale} /> },
+    { key: "paul", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.paulLayer.title}</span>, body: <NoteCard note={cluster.paulLayer} locale={locale} /> },
+    { key: "reception", header: <span className="text-sm font-semibold tracking-tight text-[var(--ink)]">{cluster.jewishReception.title}</span>, body: <NoteCard note={cluster.jewishReception} locale={locale} /> },
   ];
 
   return (
@@ -82,20 +82,20 @@ export default async function StudyPage({ params }: Props) {
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
-        <div className="glass rounded-[24px] p-5 sm:rounded-[32px] sm:p-8 lg:p-10">
+        <div className="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8">
           <div className="section-title text-base">{copy.title}</div>
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="text-2xl font-bold text-white sm:text-4xl lg:text-5xl leading-tight">{cluster.title}</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-4xl lg:text-5xl leading-tight">{cluster.title}</h1>
               <p className="mt-3 text-base leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-xl">{cluster.pastoralPrompt}</p>
               <p className="mt-4 text-xl leading-relaxed text-[var(--muted)]">{cluster.pastoralPrompt}</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+              <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                 <Sparkles className="h-4 w-4" />
                 {UI_COPY[locale].sidebar.navNewReflection}
               </Link>
-              <Link href={buildGraphHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+              <Link href={buildGraphHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                 <Compass className="h-4 w-4" />
                 {UI_COPY[locale].sidebar.navGraph}
               </Link>
@@ -113,8 +113,8 @@ export default async function StudyPage({ params }: Props) {
                 label: copy.primaryInContext,
                 content: (
                   <div className="space-y-8">
-                    <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6 lg:p-8">
-                      <div className="text-xl font-semibold text-white">{primary.reference}</div>
+                    <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6 lg:p-8">
+                      <div className="text-xl font-semibold tracking-tight text-[var(--ink)]">{primary.reference}</div>
                       <div className="mt-5 space-y-4 text-lg leading-relaxed text-[var(--text)]">
                         {context.verses.map((verse) => (
                           <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}>
@@ -123,7 +123,7 @@ export default async function StudyPage({ params }: Props) {
                           </p>
                         ))}
                       </div>
-                      <Link href={buildPassageHref(cluster.primary, locale)} className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
+                      <Link href={buildPassageHref(cluster.primary, locale)} className="mt-6 inline-flex items-center gap-2 rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
                         {locale === "ko" ? "전체 본문 읽기" : "Read full passage"}
                         <ArrowRight className="h-4 w-4" />
                       </Link>
@@ -131,19 +131,19 @@ export default async function StudyPage({ params }: Props) {
                     <div>
                       <div className="section-title text-base mb-4">{copy.whatPassageDoing}</div>
                       <div className="grid gap-5 lg:grid-cols-2">
-                        <div className="soft-glass rounded-[24px] p-6">
+                        <div className="soft-glass rounded-xl p-5 sm:p-6">
                           <div className="section-title text-sm">{copy.meaningInsideCanon}</div>
                           <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{response.primaryStory}</p>
                         </div>
-                        <div className="soft-glass rounded-[24px] p-6">
+                        <div className="soft-glass rounded-xl p-5 sm:p-6">
                           <div className="section-title text-sm">{copy.originalAudience}</div>
                           <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{response.originalAudience}</p>
                         </div>
-                        <div className="soft-glass rounded-[24px] p-6">
+                        <div className="soft-glass rounded-xl p-5 sm:p-6">
                           <div className="section-title text-sm">{copy.dateLayer}</div>
                           <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{cluster.context.date.body}</p>
                         </div>
-                        <div className="soft-glass rounded-[24px] p-6">
+                        <div className="soft-glass rounded-xl p-5 sm:p-6">
                           <div className="section-title text-sm">{copy.howToRead}</div>
                           <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{copy.howToReadBody}</p>
                         </div>
@@ -183,7 +183,7 @@ export default async function StudyPage({ params }: Props) {
                   <div className="space-y-8">
                     <div className="space-y-4">
                       {cluster.reflectionQuestions.map((question) => (
-                        <div key={question} className="soft-glass rounded-[24px] p-5 text-base leading-relaxed text-[var(--muted)]">
+                        <div key={question} className="soft-glass rounded-xl p-5 text-base leading-relaxed text-[var(--muted)]">
                           {question}
                         </div>
                       ))}
@@ -197,11 +197,11 @@ export default async function StudyPage({ params }: Props) {
                             <Link
                               key={related.slug}
                               href={buildCompanionHref({ prompt: related.starterPrompt, locale })}
-                              className="soft-glass rounded-[24px] p-6 transition hover:border-[var(--gold)]/25"
+                              className="soft-glass rounded-xl p-5 sm:p-6 transition hover:border-[var(--gold)]/25"
                             >
                               <div className="flex items-start justify-between gap-4">
                                 <div>
-                                  <div className="text-base font-semibold text-white">{related.title}</div>
+                                  <div className="text-base font-semibold tracking-tight text-[var(--ink)]">{related.title}</div>
                                   <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">{related.pastoralPrompt}</p>
                                 </div>
                                 <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-[var(--gold)]" />
@@ -222,13 +222,13 @@ export default async function StudyPage({ params }: Props) {
             {primaryBookMetadata ? <BookProfileCard metadata={primaryBookMetadata} locale={locale} /> : null}
 
             {/* Teaching Notes — accordion */}
-            <div className="glass rounded-[32px] p-6 lg:p-8">
+            <div className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
               <div className="section-title text-base mb-2">{copy.teachingNotes}</div>
               <AccordionGroup items={noteItems} />
             </div>
 
             {/* Source Inventory — collapsible */}
-            <div className="glass rounded-[32px] p-4 lg:p-5">
+            <div className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
               <Collapsible trigger={<span className="text-base font-semibold">{copy.sourceInventory} ({sources.length})</span>}>
                 <SourceList sources={sources} compact locale={locale} />
               </Collapsible>

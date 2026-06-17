@@ -22,10 +22,10 @@ export function PassageCard({
 }) {
   const shouldShowTitle = !referenceLabel.toLocaleLowerCase().startsWith(title.toLocaleLowerCase());
   const content = (
-    <div className="soft-glass rounded-[28px] p-5 transition hover:border-[var(--gold)]/30 hover:bg-white/[0.05]">
+    <div className="soft-glass rounded-2xl p-5 transition hover:border-[var(--gold)]/30 hover:bg-[var(--surface-2)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          {shouldShowTitle ? <div className="text-sm font-semibold text-white">{title}</div> : null}
+          {shouldShowTitle ? <div className="text-sm font-semibold tracking-tight text-[var(--ink)]">{title}</div> : null}
           <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--gold)]">{referenceLabel}</div>
         </div>
         {meta ? <div className="text-right text-xs text-[var(--muted)]">{meta}</div> : null}

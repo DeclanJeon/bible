@@ -64,7 +64,7 @@ export function ReviewBoard({
       <section className="space-y-4">
         {reviews.length ? (
           reviews.map((review) => (
-            <article key={review.id} className="glass rounded-[28px] p-5 lg:p-6">
+            <article key={review.id} className="glass rounded-2xl p-5 lg:p-6">
               <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--muted)]">
                 <span className="font-semibold text-[var(--gold)]">{copy.anonymous}</span>
                 <time dateTime={review.createdAt}>{new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(new Date(review.createdAt))}</time>
@@ -73,13 +73,13 @@ export function ReviewBoard({
             </article>
           ))
         ) : (
-          <div className="glass rounded-[28px] p-6 text-base leading-8 text-[var(--muted)]">{copy.empty}</div>
+          <div className="glass rounded-2xl p-6 text-base leading-8 text-[var(--muted)]">{copy.empty}</div>
         )}
       </section>
 
-      <aside className="glass h-fit rounded-[32px] p-6 lg:sticky lg:top-28">
+      <aside className="glass h-fit rounded-2xl p-6 lg:sticky lg:top-28">
         <form onSubmit={submitReview} className="space-y-4">
-          <label htmlFor="review-body" className="block text-sm font-semibold text-white">
+          <label htmlFor="review-body" className="block text-sm font-semibold tracking-tight text-[var(--ink)]">
             {copy.formLabel}
           </label>
           <textarea
@@ -91,7 +91,7 @@ export function ReviewBoard({
             maxLength={1200}
             required
             rows={8}
-            className="w-full resize-none rounded-[24px] border border-white/15 bg-white/[0.06] px-4 py-3 text-base leading-7 text-white outline-none placeholder:text-[var(--muted)] focus:border-[var(--focus-ring)]"
+            className="w-full resize-none rounded-xl border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-4 py-3 text-base leading-7 text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus:border-[var(--focus-ring)]"
           />
           <label className="sr-only" htmlFor="review-website">Website</label>
           <input
@@ -104,11 +104,11 @@ export function ReviewBoard({
             aria-hidden="true"
           />
           <p className="text-sm leading-6 text-[var(--muted)]">{copy.helper}</p>
-          {message ? <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-[var(--muted)]">{message}</p> : null}
+          {message ? <p className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm text-[var(--muted)]">{message}</p> : null}
           <button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-[24px] bg-[var(--accent)] px-5 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full min-h-[44px] rounded-xl bg-[var(--gold)] px-5 py-3.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isPending ? copy.posting : copy.submit}
           </button>

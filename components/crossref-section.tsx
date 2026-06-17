@@ -23,7 +23,7 @@ export const CrossReferenceSection = memo(function CrossReferenceSection({
   const labelKeys: Array<keyof typeof copy.labels> = ["consensus-link", "vote-supported", "phrase-anchor"];
 
   return (
-    <div className="glass rounded-[32px] p-6 lg:p-8">
+    <div className="glass rounded-2xl p-6 lg:p-8">
       <div className="section-title">{copy.title}</div>
       <div className="mt-2 text-sm text-[var(--muted)]">{copy.body}</div>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
@@ -40,11 +40,11 @@ export const CrossReferenceSection = memo(function CrossReferenceSection({
         ))}
       </div>
       <Collapsible trigger={<span className="text-sm font-semibold">{copy.howLabelsWork}</span>} className="mt-4">
-        <div className="rounded-[24px] border border-white/6 bg-black/15 p-4 text-sm text-[var(--muted)]">
+        <div className="rounded-xl border border-[var(--hairline)] bg-black/15 p-4 text-sm text-[var(--muted)]">
           <div className="space-y-2">
             {labelKeys.map((key) => (
               <p key={key}>
-                <span className="text-white">{copy.labels[key]}</span>: {localizeCrossReferenceSupportSummary(key, appLocale)}
+                <span className="text-[var(--ink)]">{copy.labels[key]}</span>: {localizeCrossReferenceSupportSummary(key, appLocale)}
               </p>
             ))}
           </div>
