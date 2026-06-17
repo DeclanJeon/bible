@@ -52,12 +52,23 @@ import sys
 root = sys.argv[1]
 if root and root not in sys.path:
     sys.path.insert(0, root)
-from hermes_cli.auth import resolve_nous_runtime_credentials
-creds = resolve_nous_runtime_credentials()
+from hermes_cli.auth import resolve_codex_runtime_credentials, resolve_nous_runtime_credentials
+errors = []
+creds = None
+for name, resolver in (("nous", resolve_nous_runtime_credentials), ("openai-codex", resolve_codex_runtime_credentials)):
+    try:
+        candidate = resolver()
+        if candidate.get("api_key") and candidate.get("base_url"):
+            creds = candidate
+            break
+    except Exception as exc:
+        errors.append(f"{name}:{type(exc).__name__}")
+if not creds:
+    raise RuntimeError(";".join(errors) or "no hermes-agent runtime credentials")
 print(json.dumps({
     "apiKey": creds["api_key"],
     "baseUrl": creds["base_url"],
-    "source": f"hermes-agent:{creds.get('provider', 'nous')}:{creds.get('auth_path', creds.get('source', 'runtime'))}",
+    "source": f"hermes-agent:{creds.get('provider', 'runtime')}:{creds.get('auth_path', creds.get('source', 'runtime'))}",
 }))
 `.trim();
 
