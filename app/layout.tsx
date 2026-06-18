@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { OG_IMAGE_URL, siteDescription, siteTitle } from "@/lib/page-metadata";
+import { OG_IMAGE_URL, SITE_URL, siteDescription, siteTitle } from "@/lib/page-metadata";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bible-guide.kr"),
+  metadataBase: new URL(SITE_URL),
   title: siteTitle("ko"),
   description: siteDescription("ko"),
   robots: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteTitle("ko"),
     description: siteDescription("ko"),
-    url: "https://bible-guide.kr/ko",
+    url: `${SITE_URL}/ko`,
     siteName: siteTitle("ko"),
     type: "website",
     locale: "ko_KR",
@@ -67,13 +67,13 @@ export default async function RootLayout({
               "@type": "WebSite",
               name: "성경 하이퍼링크 컴패니언",
               alternateName: "Bible Hyperlink Companion",
-              url: "https://bible-guide.kr",
+              url: SITE_URL,
               description:
                 "삶의 고민을 성경 본문, 문맥, 교차참조, 시대와 장소의 층위로 연결해 주는 근거 중심 성경 공부 컴패니언입니다.",
               inLanguage: ["ko", "en"],
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://bible-guide.kr/ko/companion?prompt={search_term_string}",
+                target: `${SITE_URL}/ko/companion?prompt={search_term_string}`,
                 "query-input": "required name=search_term_string",
               },
             }),

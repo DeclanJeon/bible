@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { STORY_CLUSTERS } from "@/lib/app-data";
 import { serializeBibleReference, type BibleReference } from "@/lib/bible";
-
-const SITE_URL = "https://bible-guide.kr";
+import { SITE_URL } from "@/lib/page-metadata";
 
 function passageKey(reference: BibleReference) {
   return serializeBibleReference(reference);

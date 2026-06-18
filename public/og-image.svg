@@ -16,5 +16,5 @@
   <text x="100" y="360" font-family="system-ui, sans-serif" font-size="24" fill="#94a3b8">삶의 고민을 성경 본문, 문맥, 교차참조,</text>
   <text x="100" y="400" font-family="system-ui, sans-serif" font-size="24" fill="#94a3b8">시대와 장소의 층위로 연결해 주는 근거 중심 성경 공부</text>
   <rect x="100" y="460" width="200" height="48" rx="24" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.4)" stroke-width="1"/>
-  <text x="200" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fbbf24">bible-guide.kr</text>
+  <text x="200" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fbbf24">bible.ponslink.com</text>
 </svg>

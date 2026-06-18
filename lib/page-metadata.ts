@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { UI_COPY, type AppLocale } from "@/lib/content";
 
-export const SITE_URL = "https://bible-guide.kr";
+export const SITE_URL = "https://bible.ponslink.com";
 
 function normalizePath(path?: string) {
   if (!path) return "/";
