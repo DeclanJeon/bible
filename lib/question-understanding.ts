@@ -22,6 +22,17 @@ export type AnswerMode =
   | "clarify_with_starters"
   | "limited_answer";
 
+export type DoctrineDivergence = "shared_core" | "divergent" | "tradition_requested";
+
+export type TraditionKey =
+  | "catholic"
+  | "orthodox"
+  | "reformed"
+  | "lutheran"
+  | "baptist_evangelical"
+  | "wesleyan_arminian"
+  | "pentecostal_charismatic";
+
 export type QuestionUnderstanding = {
   original: string;
   normalized: string;
@@ -32,6 +43,9 @@ export type QuestionUnderstanding = {
   searchQueries: string[];
   answerMode: AnswerMode;
   confidence: "high" | "medium" | "low";
+  doctrineDivergence?: DoctrineDivergence;
+  doctrineTopic?: string;
+  requestedTradition?: TraditionKey;
 };
 
 type UnderstandingSeed = Omit<QuestionUnderstanding, "original" | "locale">;
@@ -156,7 +170,7 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
     en: /\b(who is jesus|jesus christ|who is christ|who is the messiah|messiah|son of god)\b/i,
     rule: {
       normalized: "예수님은 누구인가",
-      intent: "definition",
+      intent: "doctrine",
       answerMode: "survey_bundle",
       confidence: "high",
       concernAxes: ["truth", "hope", "belonging"],
@@ -316,6 +330,49 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
     },
   },
 ];
+
+const DIVERGENT_TOPICS: Record<string, { ko: RegExp; en: RegExp; topic: string }> = {
+  baptism: {
+    ko: /세례|침례|洗礼|침수|입교/,
+    en: /\b(baptism|baptize|baptist|infant baptism|believers baptism)\b/i,
+    topic: "baptism",
+  },
+  eucharist: {
+    ko: /성찬|성체|영성체|주의\s*만찬|성만찬/,
+    en: /\b(eucharist|lord'?s supper|communion|transubstantiation|real presence)\b/i,
+    topic: "eucharist",
+  },
+  salvation_security: {
+    ko: /구원.*잃|영생.*잃|구원.*확신|구원.*보장|영생.*보장/,
+    en: /\b(lose salvation|eternal security|once saved|perseverance of the saints|assurance of salvation)\b/i,
+    topic: "salvation_security",
+  },
+  predestination: {
+    ko: /예정|선택.*구원|하나님.*선택|예정설|선택설|자유의지/,
+    en: /\b(predestination|elected|election|free will|arminianism|calvinism|five points|tulip)\b/i,
+    topic: "predestination",
+  },
+  spiritual_gifts: {
+    ko: /방언|은사|성령.*세례|성령.*체험|치유.*은사|예언.*은사/,
+    en: /\b(speaking in tongues|spiritual gifts|baptism of the holy spirit|charismatic|cessationism|continuationism|prophecy|healing)\b/i,
+    topic: "spiritual_gifts",
+  },
+  eschatology: {
+    ko: /휴거|재림|종말|천년왕국|대환란|말세|묵시록/,
+    en: /\b(rapture|second coming|millennium|tribulation|end times|eschatology|revelation)\b/i,
+    topic: "eschatology",
+  },
+};
+
+const TRADITION_PATTERNS: Record<TraditionKey, { ko: RegExp; en: RegExp }> = {
+  catholic: { ko: /가톨릭|천주교|로마\s*가톨릭|로마\s*교회|교황/, en: /\b(catholic|roman catholic|papacy|pope)\b/i },
+  orthodox: { ko: /정교회|동방\s*정교회|그리스\s*정교회/, en: /\b(orthodox|eastern orthodox|greek orthodox|russian orthodox)\b/i },
+  reformed: { ko: /개혁주의|칼뱅주의|장로교|改革/, en: /\b(reformed|calvinist|calvinism|presbyterian)\b/i },
+  lutheran: { ko: /루터교|루터anism/, en: /\b(lutheran|lutheranism)\b/i },
+  baptist_evangelical: { ko: /침례교|복음주의|evangelical/, en: /\b(baptist|evangelical|southern baptist)\b/i },
+  wesleyan_arminian: { ko: /웨슬리안|아르미니우스주의|감리교|성결교/, en: /\b(wesleyan|arminian|methodist|holiness)\b/i },
+  pentecostal_charismatic: { ko: /오순절|은사주의|성결运动/, en: /\b(pentecostal|charismatic|assembly of god)\b/i },
+};
 
 function uniq(values: string[]) {
   return [...new Set(values.filter(Boolean))];
@@ -487,37 +544,91 @@ export function understandQuestion(input: string, requestedLocale?: string): Que
   const lowered = original.toLowerCase();
   const stripped = stripQuestionNoise(lowered);
 
+  let result!: QuestionUnderstanding;
+
   if (!original || NONSENSE_KO[stripped] || NONSENSE_EN[stripped]) {
-    return emptyOrNonsense(original, locale);
-  }
-
-  if (KO_SAFETY.test(original) || EN_SAFETY.test(original)) {
-    return safetyFirst(original, locale);
-  }
-
-  if (KO_EXTERNAL.test(original) || EN_EXTERNAL.test(original)) {
-    return limitedAnswer(original, locale);
-  }
-
-  for (const topic of TOPIC_RULES) {
-    if (topic.ko.test(original) || topic.en.test(original)) {
-      return seedFromRule(original, locale, topic.rule);
+    result = emptyOrNonsense(original, locale);
+  } else if (KO_SAFETY.test(original) || EN_SAFETY.test(original)) {
+    result = safetyFirst(original, locale);
+  } else if (KO_EXTERNAL.test(original) || EN_EXTERNAL.test(original)) {
+    result = limitedAnswer(original, locale);
+  } else {
+    let matched = false;
+    for (const topic of TOPIC_RULES) {
+      if (topic.ko.test(original) || topic.en.test(original)) {
+        result = seedFromRule(original, locale, topic.rule);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      if (KO_PASTORAL.test(original) || EN_PASTORAL.test(original)) {
+        result = pastoralCare(original, locale);
+      } else if (KO_ETHICS.test(original) || EN_ETHICS.test(original)) {
+        result = ethicsQuestion(original, locale);
+      } else if (KO_EVERYDAY.test(original) || EN_EVERYDAY.test(original)) {
+        result = everydayWisdom(original, locale);
+      } else {
+        result = fallback(original, locale);
+      }
     }
   }
 
-  if (KO_PASTORAL.test(original) || EN_PASTORAL.test(original)) {
-    return pastoralCare(original, locale);
+  // Reclassify non-doctrine intents when input matches doctrine-related patterns
+  if (result.intent !== "doctrine") {
+    for (const [, spec] of Object.entries(DIVERGENT_TOPICS)) {
+      const regex = locale === "ko" ? spec.ko : spec.en;
+      if (regex.test(original)) {
+        result = { ...result, intent: "doctrine", confidence: "medium", answerMode: "survey_bundle" };
+        break;
+      }
+    }
+  }
+  if (result.intent !== "doctrine") {
+    for (const [, pattern] of Object.entries(TRADITION_PATTERNS)) {
+      const regex = locale === "ko" ? pattern.ko : pattern.en;
+      if (regex.test(original)) {
+        result = { ...result, intent: "doctrine", confidence: "medium", answerMode: "survey_bundle" };
+        break;
+      }
+    }
   }
 
-  if (KO_ETHICS.test(original) || EN_ETHICS.test(original)) {
-    return ethicsQuestion(original, locale);
+  // Doctrine divergence classification
+  let doctrineDivergence: DoctrineDivergence | undefined;
+  let doctrineTopic: string | undefined;
+  let requestedTradition: TraditionKey | undefined;
+
+  if (result.intent === "doctrine") {
+    // Check for tradition request first
+    for (const [key, pattern] of Object.entries(TRADITION_PATTERNS)) {
+      const regex = result.locale === "ko" ? pattern.ko : pattern.en;
+      if (regex.test(original) || regex.test(result.normalized)) {
+        requestedTradition = key as TraditionKey;
+        doctrineDivergence = "tradition_requested";
+        break;
+      }
+    }
+
+    // If no tradition requested, check for divergent topics
+    if (!doctrineDivergence) {
+      for (const [, spec] of Object.entries(DIVERGENT_TOPICS)) {
+        const regex = result.locale === "ko" ? spec.ko : spec.en;
+        if (regex.test(original) || regex.test(result.normalized)) {
+          doctrineDivergence = "divergent";
+          doctrineTopic = spec.topic;
+          break;
+        }
+      }
+    }
+
+    // Default to shared_core for doctrine questions
+    if (!doctrineDivergence) {
+      doctrineDivergence = "shared_core";
+    }
   }
 
-  if (KO_EVERYDAY.test(original) || EN_EVERYDAY.test(original)) {
-    return everydayWisdom(original, locale);
-  }
-
-  return fallback(original, locale);
+  return { ...result, doctrineDivergence, doctrineTopic, requestedTradition };
 }
 
 export function isQuestionUnderstanding(value: unknown): value is QuestionUnderstanding {

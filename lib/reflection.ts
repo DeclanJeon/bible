@@ -2,6 +2,7 @@ import { getPassage, type BibleReference } from "@/lib/bible";
 import type { StoryCluster } from "@/lib/app-data";
 import { localizeRelationTypeLabel, resolveAppLocale } from "@/lib/content";
 import { isRetrievalReliable, type RetrievalResult } from "@/lib/retrieval";
+import type { DoctrinePresentation } from "@/lib/answer-bundle";
 import type { CrossReferenceSuggestion } from "@/lib/knowledge";
 
 export type EvidencePassage = {
@@ -25,6 +26,7 @@ export type ReflectionResponse = {
   generationMode: "deterministic" | "hermes" | "hermes-agent" | "hermes-fallback";
   generationModel: string;
   generationNote: string;
+  doctrinePresentation?: DoctrinePresentation;
 };
 
 function preview(text: string, max = 220) {
@@ -163,6 +165,7 @@ export async function buildReflectionResponse(
         generationMode: "deterministic",
         generationModel: "deterministic-answer-bundle-builder",
         generationNote: "질문 이해, passage index, reranker, answer bundle을 사용한 결정형 응답입니다.",
+        doctrinePresentation: answerBundle.doctrinePresentation,
       };
     }
 
@@ -187,6 +190,7 @@ export async function buildReflectionResponse(
       generationMode: "deterministic",
       generationModel: "deterministic-answer-bundle-builder",
       generationNote: "Deterministic response built from question understanding, passage index, reranking, and answer bundle evidence.",
+      doctrinePresentation: answerBundle.doctrinePresentation,
     };
   }
 

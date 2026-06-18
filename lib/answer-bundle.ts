@@ -2,6 +2,37 @@ import type { BibleReference } from "@/lib/bible";
 import { formatReference, retrieveHybridPassageCandidates, type HybridPassageCandidate } from "@/lib/hybrid-retrieval";
 import { rerankPassageCandidates } from "@/lib/passage-reranker";
 import { understandQuestion, type QuestionUnderstanding } from "@/lib/question-understanding";
+import type { TraditionKey } from "@/lib/question-understanding";
+
+
+export type DoctrineDisplayMode = "shared_core_only" | "shared_core_plus_views" | "tradition_requested";
+
+export type SharedCoreBlock = {
+  summary: string;
+  evidenceRefs: string[];
+  confidence: "high" | "medium" | "low";
+  limits?: string;
+};
+
+export type TraditionViewBlock = {
+  tradition: TraditionKey;
+  label: string;
+  summary: string;
+  emphasis: string;
+  evidenceRefs: string[];
+  doctrineSourceRefs: string[];
+  confidence: "high" | "medium" | "low";
+  limits?: string;
+};
+
+export type DoctrinePresentation = {
+  topic: string;
+  divergence: "low" | "medium" | "high";
+  mode: DoctrineDisplayMode;
+  sharedCore: SharedCoreBlock;
+  views: TraditionViewBlock[];
+  requestedTradition?: TraditionKey;
+};
 
 export type AnswerPolicy = QuestionUnderstanding["answerMode"];
 
@@ -22,6 +53,7 @@ export type AnswerBundle = {
     to: string;
     supportLabel: string;
   }>;
+  doctrinePresentation?: DoctrinePresentation;
 };
 
 const BUNDLE_ELIGIBLE_MODES: Record<QuestionUnderstanding["answerMode"], true | undefined> = {
@@ -95,6 +127,53 @@ function buildCrossReferenceSupport(candidates: HybridPassageCandidate[]): Answe
   }));
 }
 
+function buildTraditionViews(question: QuestionUnderstanding): TraditionViewBlock[] {
+  void question; // will be used when doctrine-source-index is integrated
+  return [];
+}
+
+function buildDoctrinePresentation(
+  question: QuestionUnderstanding,
+  candidates: HybridPassageCandidate[]
+): DoctrinePresentation | undefined {
+  if (question.intent !== "doctrine" || !question.doctrineDivergence) return undefined;
+
+  const mode: DoctrineDisplayMode =
+    question.doctrineDivergence === "tradition_requested"
+      ? "tradition_requested"
+      : question.doctrineDivergence === "divergent"
+        ? "shared_core_plus_views"
+        : "shared_core_only";
+
+  const primary = candidates[0];
+  if (!primary) return undefined;
+
+  const divergence: DoctrinePresentation["divergence"] =
+    mode === "shared_core_only" ? "low" : mode === "shared_core_plus_views" ? "medium" : "low";
+
+  const sharedCore: SharedCoreBlock = {
+    summary: question.locale === "ko"
+      ? "이 주제에 대해 성경이 직접 말하는 핵심 내용입니다."
+      : "This is the direct biblical core on this topic.",
+    evidenceRefs: candidates.slice(0, 3).map((c) => formatReference(c.unit.reference)),
+    confidence: "high",
+    limits: question.locale === "ko"
+      ? "이 내용은 성경 본문에 근거한 공통 핵심입니다. 교파별 해석 차이는 아래에서 확인하세요."
+      : "This is common biblical ground. Tradition-specific differences are shown below.",
+  };
+
+  const views: TraditionViewBlock[] = mode !== "shared_core_only" ? buildTraditionViews(question) : [];
+
+  return {
+    topic: question.doctrineTopic ?? question.normalized,
+    divergence,
+    mode,
+    sharedCore,
+    views,
+    requestedTradition: question.requestedTradition,
+  };
+}
+
 export async function buildAnswerBundle(prompt: string, locale?: string): Promise<AnswerBundle | null> {
   const question = understandQuestion(prompt, locale);
   if (!BUNDLE_ELIGIBLE_MODES[question.answerMode]) return null;
@@ -111,6 +190,7 @@ export async function buildAnswerBundle(prompt: string, locale?: string): Promis
   const supportLimit = question.answerMode === "survey_bundle" ? 5 : 4;
   const supporting = candidates.slice(1, supportLimit + 1);
   const bundleCandidates = [primary, ...supporting];
+  const doctrinePresentation = buildDoctrinePresentation(question, bundleCandidates);
 
   return {
     question,
@@ -120,6 +200,7 @@ export async function buildAnswerBundle(prompt: string, locale?: string): Promis
     answerPolicy: question.answerMode,
     relationMap: buildRelationMap(question, bundleCandidates),
     crossReferenceSupport: buildCrossReferenceSupport(bundleCandidates),
+    doctrinePresentation,
   };
 }
 

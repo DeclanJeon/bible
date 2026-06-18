@@ -1,0 +1,89 @@
+[
+  {
+    "id": "shared-core-jesus",
+    "type": "shared_core",
+    "prompt": "예수님이 누구야?",
+    "expectedDoctrineDivergence": "shared_core",
+    "expectedMode": "shared_core_only",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "shared-core-trinity",
+    "type": "shared_core",
+    "prompt": "삼위일체가 뭐야?",
+    "expectedDoctrineDivergence": "shared_core",
+    "expectedMode": "shared_core_only",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "shared-core-atonement",
+    "type": "shared_core",
+    "prompt": "속죄란 무엇인가?",
+    "expectedDoctrineDivergence": "shared_core",
+    "expectedMode": "shared_core_only",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "divergent-baptism",
+    "type": "divergent",
+    "prompt": "세례는 어떻게 받나?",
+    "expectedDoctrineDivergence": "divergent",
+    "expectedMode": "shared_core_plus_views",
+    "expectedDoctrineTopic": "baptism",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "divergent-eucharist",
+    "type": "divergent",
+    "prompt": "성찬은 뭐야?",
+    "expectedDoctrineDivergence": "divergent",
+    "expectedMode": "shared_core_plus_views",
+    "expectedDoctrineTopic": "eucharist",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "divergent-salvation-security",
+    "type": "divergent",
+    "prompt": "구원을 잃을 수 있어?",
+    "expectedDoctrineDivergence": "divergent",
+    "expectedMode": "shared_core_plus_views",
+    "expectedDoctrineTopic": "salvation_security",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "divergent-predestination",
+    "type": "divergent",
+    "prompt": "예정설이 뭐야?",
+    "expectedDoctrineDivergence": "divergent",
+    "expectedMode": "shared_core_plus_views",
+    "expectedDoctrineTopic": "predestination",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "divergent-spiritual-gifts",
+    "type": "divergent",
+    "prompt": "방언은 아직 해야 하나?",
+    "expectedDoctrineDivergence": "divergent",
+    "expectedMode": "shared_core_plus_views",
+    "expectedDoctrineTopic": "spiritual_gifts",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "tradition-requested-catholic-baptism",
+    "type": "tradition_requested",
+    "prompt": "가톨릭에서는 세례를 어떻게 봐?",
+    "expectedDoctrineDivergence": "tradition_requested",
+    "expectedMode": "tradition_requested",
+    "expectedRequestedTradition": "catholic",
+    "expectedViewCount": 0
+  },
+  {
+    "id": "tradition-requested-reformed-predestination",
+    "type": "tradition_requested",
+    "prompt": "개혁주의에서 예정은 어떻게 보나?",
+    "expectedDoctrineDivergence": "tradition_requested",
+    "expectedMode": "tradition_requested",
+    "expectedRequestedTradition": "reformed",
+    "expectedViewCount": 0
+  }
+]

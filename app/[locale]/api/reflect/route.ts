@@ -167,6 +167,7 @@ export async function POST(
     retrieval,
     ragQuery,
     answerBundle,
+    doctrinePresentation: answerBundle?.doctrinePresentation,
     questionUnderstanding,
     cluster: {
       slug: cluster.slug,

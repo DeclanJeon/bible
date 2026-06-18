@@ -233,6 +233,56 @@ export default async function CompanionPage({ params, searchParams }: Props) {
         )}
       </section>
 
+      {/* Doctrine Presentation Section */}
+      {answerBundle?.doctrinePresentation ? (
+        <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] px-4 py-2 text-sm font-semibold text-[var(--gold)]">
+            {appLocale === "ko" ? "교리적 배경" : "Doctrinal Context"}
+          </div>
+          <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 sm:px-5 sm:py-4">
+            <div className="text-sm font-semibold text-[var(--ink)]">
+              {appLocale === "ko" ? "공통 핵심" : "Shared Core"}
+            </div>
+            <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">
+              {answerBundle.doctrinePresentation.sharedCore.summary}
+            </p>
+            {answerBundle.doctrinePresentation.sharedCore.limits ? (
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] italic">
+                {answerBundle.doctrinePresentation.sharedCore.limits}
+              </p>
+            ) : null}
+          </div>
+          {answerBundle.doctrinePresentation.mode !== "shared_core_only" ? (
+            <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 sm:px-5 sm:py-4">
+              <div className="text-sm font-semibold text-[var(--ink)]">
+                {appLocale === "ko" ? "전통별 해석 차이" : "Tradition Differences"}
+              </div>
+              <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">
+                {appLocale === "ko"
+                  ? "이 주제는 기독교 전통마다 해석이 다를 수 있습니다. 아래에서 전통별 관점을 확인하세요."
+                  : "This topic may be interpreted differently across Christian traditions. Check tradition-specific views below."}
+              </p>
+              {answerBundle.doctrinePresentation.views.length > 0 ? (
+                <div className="mt-4 space-y-3">
+                  {answerBundle.doctrinePresentation.views.map((view) => (
+                    <div key={view.tradition} className="rounded-lg border border-[var(--hairline)] bg-[var(--surface-1)] px-4 py-3">
+                      <div className="text-sm font-semibold text-[var(--gold)]">{view.label}</div>
+                      <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{view.summary}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] italic">
+                  {appLocale === "ko"
+                    ? "전통별 상세 데이터는 아직 준비 중입니다."
+                    : "Tradition-specific detail data is not yet available."}
+                </p>
+              )}
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       {/* Tabbed content */}
       <div className="mt-8">
         <TabSection

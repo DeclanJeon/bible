@@ -632,3 +632,144 @@ Adopt an open-ended Bible QA architecture based on question understanding, Bible
 - Add offline index quality report.
 - Add production telemetry for answer mode, confidence, latency, and fallback rate.
 - Add periodic QA expansion from anonymized real prompt categories if privacy policy allows.
+
+
+## Doctrine diversity extension
+
+### Status
+- Design only. Not implemented in runtime as of 2026-06-18.
+- Purpose: extend the open-ended QA pipeline so doctrine prompts can distinguish shared Christian core claims from tradition-specific interpretations without hallucinating denominational positions.
+
+### Problem
+The current `AnswerBundle` model assumes one main bundle per prompt. That is appropriate for many questions, but not for doctrine topics where:
+- the shared biblical center is real,
+- later doctrinal formulation differs by tradition,
+- a single unqualified answer can overstate consensus or hide disagreement.
+
+### Decision
+Add a second-layer doctrine presentation contract on top of the existing answer bundle:
+1. `sharedCore` — evidence the app can state as broad Christian common ground.
+2. `traditionViews` — optional, only when local tradition-source evidence exists.
+3. `limits` — explicit note when the app is summarizing common ground only or when not all traditions are yet represented.
+
+### Scope split
+- **Shared-core doctrine**:
+  - Examples: “예수님이 누구야?”, “예수님은 하나님이야?”, “예수님이 왜 죽으셨어?”
+  - Expected result: shared core only, unless explicit tradition data is requested.
+- **Tradition-divergent doctrine**:
+  - Examples: baptism, Eucharist/Lord's Supper, salvation security, predestination/free will, spiritual gifts, church order, end-times sequencing.
+  - Expected result: shared core plus labeled tradition views.
+- **Tradition-requested doctrine**:
+  - Example: “가톨릭에서는 성찬을 어떻게 보나?”
+  - Expected result: requested tradition first, common core still visible, alternative traditions optionally collapsed below.
+
+### Required data model addition
+```ts
+type TraditionKey =
+  | "catholic"
+  | "orthodox"
+  | "reformed"
+  | "lutheran"
+  | "baptist_evangelical"
+  | "wesleyan_arminian"
+  | "pentecostal_charismatic";
+
+type DoctrinePresentation = {
+  topic: string;
+  divergence: "low" | "medium" | "high";
+  mode: "shared_core_only" | "shared_core_plus_views" | "tradition_requested";
+  sharedCore: {
+    summary: string;
+    evidenceRefs: BibleReference[];
+    confidence: "high" | "medium" | "low";
+    limits?: string;
+  };
+  views: Array<{
+    tradition: TraditionKey;
+    summary: string;
+    emphasis: string;
+    evidenceRefs: BibleReference[];
+    doctrineSourceRefs: string[];
+    confidence: "high" | "medium" | "low";
+    limits?: string;
+  }>;
+  requestedTradition?: TraditionKey;
+};
+```
+
+### Source policy
+- Bible passages alone may justify `sharedCore`.
+- Denominational or tradition-specific claims require an ingested local doctrine-source layer.
+- Valid doctrine-source categories:
+  - creed
+  - confession
+  - catechism
+  - conciliar / synodal definition
+  - official denominational teaching document
+- No tradition card is allowed without explicit `doctrineSourceRefs`.
+
+### Work orders
+#### Work order 9 — Add doctrine divergence classifier
+Owner: Retrieval engineer
+
+Files:
+- `lib/question-understanding.ts`
+- `qa/open-ended-bible-qa.json`
+
+Acceptance:
+- Doctrine prompts are classified as `shared_core`, `divergent`, or `tradition_requested`.
+- Explicit tradition names in prompt are extracted into a requested-tradition field.
+
+#### Work order 10 — Ingest tradition-source evidence
+Owner: Theology/data engineer
+
+Files:
+- `data/doctrine-sources/*.json` or `.sqlite`
+- `scripts/build-doctrine-source-index.*`
+- `lib/doctrine-source-index.ts`
+
+Acceptance:
+- Each supported tradition has explicit source records with provenance.
+- Each doctrine topic maps to both Bible evidence and tradition-source evidence.
+
+#### Work order 11 — Extend answer contract and UI
+Owner: Retrieval/frontend engineer
+
+Files:
+- `lib/answer-bundle.ts`
+- `lib/reflection.ts`
+- `app/[locale]/api/reflect/route.ts`
+- `app/[locale]/companion/page.tsx`
+
+Acceptance:
+- API exposes `doctrinePresentation` when relevant.
+- Companion shows shared core first.
+- Tradition cards are collapsed by default on mobile.
+
+#### Work order 12 — Add doctrine diversity QA
+Owner: Verifier
+
+Files:
+- `qa/open-ended-bible-qa.json`
+- `qa/doctrine-diversity-qa.json`
+- `scripts/run-open-ended-bible-qa.mjs`
+- `scripts/run-doctrine-diversity-qa.mjs`
+
+Acceptance:
+- Shared-core prompts do not show fake disagreement.
+- Divergent prompts show labeled tradition views when source data exists.
+- Requested-tradition prompts foreground the requested tradition.
+- No tradition card ships without source references.
+
+### Verification checklist
+- [ ] Shared-core doctrine prompt can return `shared_core_only`.
+- [ ] Divergent doctrine prompt can return `shared_core_plus_views`.
+- [ ] Requested-tradition prompt can return `tradition_requested`.
+- [ ] Shared core is visible before denomination-specific detail.
+- [ ] Every tradition card contains Bible refs and doctrine-source refs.
+- [ ] Missing tradition-source data falls back to explicit “common ground only” wording.
+- [ ] Mobile UI keeps tradition-detail collapsed by default.
+
+### Follow-up risk
+- This extension adds doctrinal trust risk if source provenance is weak.
+- Therefore implementation must not begin with generation-first UX; it must begin with source ingestion and explicit labeling.

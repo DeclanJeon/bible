@@ -1,0 +1,21 @@
+{
+  "version": "doctrine-sources-v1-2026-06-18",
+  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "traditions": [
+    "catholic",
+    "orthodox",
+    "reformed",
+    "lutheran",
+    "baptist_evangelical",
+    "wesleyan_arminian",
+    "pentecostal_charismatic"
+  ],
+  "topics": [
+    "baptism",
+    "eucharist",
+    "salvation_security",
+    "predestination",
+    "spiritual_gifts"
+  ],
+  "sourceCount": 35
+}

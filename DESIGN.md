@@ -27,6 +27,9 @@
   - `scripts/ingest_openbible_crossrefs.py`, `scripts/ingest_phrase_crossrefs.py` — current cross-reference data generation.
   - `qa/*.json`, `scripts/run-*.mjs` — current QA scope and gaps.
 
+  - `docs/open-ended-bible-qa-architecture.md` — current open-ended QA pipeline, answer-bundle contract, and verification gates.
+  - `lib/question-understanding.ts`, `lib/answer-bundle.ts`, `lib/hybrid-retrieval.ts`, `lib/passage-reranker.ts` — current question understanding, bundle assembly, and ranking behavior.
+
 ## Brand
 - Personality:
   - Warm, calm, source-first Bible study companion.
@@ -52,11 +55,14 @@
   - Separate summary guidance from complete data access.
   - Make the full cross-reference network navigable by book, canon section, direction, relation type, source, strength, and phrase anchor.
   - Interpret unpredictable free-form user concerns through an AI/query-planner middleware before retrieval, while keeping the Bible corpus and evidence contract as the source of truth for final passage selection.
+  - For doctrine prompts, distinguish common Christian core claims from tradition-sensitive interpretations instead of flattening everything into one undifferentiated doctrinal voice.
 - Non-goals:
   - Do not claim to know every possible theological relationship beyond the datasets and local metadata.
   - Do not force every cross-reference into the generated answer body.
   - Do not replace Bible reading with generated explanation.
   - Do not add external historical facts unless they are ingested into the local evidence layer with provenance.
+  - Do not flatten materially disputed doctrine into a fake universal consensus.
+  - Do not attribute a denominational view unless the app has explicit local sources for that tradition.
 - Success signals:
   - The full network endpoint returns all dataset-backed direct links for a passage without top-N truncation.
   - The companion page clearly states total available links and offers full exploration.
@@ -64,6 +70,7 @@
   - Each displayed link includes `why connected`, `source`, `direction`, `excerpt`, and `full passage` navigation.
   - QA includes exact-count recall checks for known anchors and no-truncation checks for the full endpoint.
   - Korean free-form concern QA covers at least 30 prompts across weariness, purpose, despair, safety, unrelated everyday input, and theological questions with ≥95% pass rate.
+  - Doctrine prompts with real interpretive divergence show a shared-core summary first, then clearly labeled tradition-specific views with cited limits and source provenance.
 
 ## Personas and jobs
 - Primary personas:
@@ -121,6 +128,12 @@
 
 - Principle 7: AI interprets the question; evidence selects the passage.
   - LLM/Hermes middleware may normalize intent and propose search terms, but it must not become the source of Bible citations. Retrieved local passages, curated priors, and evidence validation decide what is shown.
+- Principle 8: Consensus before divergence.
+  - For doctrine prompts, show the broad Christian common core before explaining where traditions separate.
+- Principle 9: Tradition labels require evidence.
+  - No Catholic / Orthodox / Reformed / Baptist / Pentecostal card may appear unless local evidence exists for that tradition's reading.
+- Principle 10: Difference should be visible, not noisy.
+  - Tradition-specific detail belongs in a secondary layer by default so the first answer remains readable.
 
 ## Visual language
 - Color:
@@ -252,6 +265,9 @@
   - Avoid “성경의 모든 가능한 관련 구절” unless the scope sentence immediately clarifies dataset coverage.
   - Prefer “이 연결은 … 때문에 제안됩니다” over “이 구절은 반드시 …를 뜻합니다”.
   - For despair or purpose prompts, acknowledge the safety/weight of the input before study framing; never answer existential distress with an empty “try another search” state unless retrieval truly fails after intent normalization.
+  - For doctrine prompts, use explicit framing such as “대체로 공통으로 붙드는 내용” and “전통에 따라 해석이 갈리는 부분”.
+  - Avoid “성경은 명백히 오직 …를 뜻한다” when multiple orthodox traditions materially disagree.
+  - If the app can only justify common ground, say so directly and do not improvise denominational nuance.
 
 ## Implementation constraints
 - Framework/styling system:
@@ -273,6 +289,9 @@
   - API coverage for reflect summary vs full graph endpoint.
   - UI coverage for empty, low-confidence, large-network, and filtered states.
   - Prompt-intent middleware coverage for at least 30 Korean free-form prompts, including morphology variants such as `지쳤어`, `살아야되는지`, `살 이유`, and `버텨야`.
+  - Tradition-aware doctrine mode requires a structured local doctrine-source layer; runtime model memory alone is forbidden as a source of denominational claims.
+  - The API and UI must support three doctrine states: `shared_core_only`, `shared_core_plus_views`, and `tradition_requested`.
+  - Tradition-difference UI should stay collapsed by default on mobile and expanded only on explicit user action or explicit tradition request.
 
 # Exhaustive Scripture Network Design
 
@@ -1023,6 +1042,116 @@ Target behavior:
 - Historical/background information is shown for primary and related books where available, with confidence labels.
 - Generated explanation stays evidence-locked and does not invent extra citations.
 - QA proves count preservation, incoming support, highlight/full separation, citation validation, visible confidence labels, safety preservation, and background-scope wording.
+
+## Doctrine diversity design
+
+### Problem
+The current companion architecture is optimized for a single evidence bundle per question. That works for many Bible and theology prompts, but it is not sufficient for doctrine questions where orthodox Christian traditions share some claims while diverging on interpretation, emphasis, sacramental meaning, or application.
+
+### Decision
+Treat doctrine answers as a two-layer response:
+1. `shared core` — what the app can say from broadly shared biblical evidence.
+2. `tradition views` — where major Christian traditions diverge, each labeled and source-backed.
+
+The app must never pretend that all doctrine questions have one universal downstream interpretation. It also must never invent denominational nuance when only shared biblical ground is available.
+
+### Doctrine prompt classes
+- **Shared-core doctrine**: broad questions where the common core is strong and divergence is secondary.
+  - Examples: “예수님이 누구야?”, “예수님은 하나님이야?”, “예수님이 왜 죽으셨어?”
+- **Tradition-divergent doctrine**: the biblical center is shared, but interpretation/application differs enough that one answer is misleading.
+  - Examples: baptism, Lord's Supper/Eucharist, salvation security, predestination/free will, spiritual gifts, church governance, end-times sequencing.
+- **Tradition-requested doctrine**: the user explicitly asks for one tradition's view.
+  - Examples: “개혁주의에서는 세례를 어떻게 봐?”, “What is the Catholic view of the Eucharist?”
+
+### Response contract
+```ts
+type TraditionKey =
+  | "catholic"
+  | "orthodox"
+  | "reformed"
+  | "lutheran"
+  | "baptist_evangelical"
+  | "wesleyan_arminian"
+  | "pentecostal_charismatic";
+
+type DoctrineDisplayMode =
+  | "shared_core_only"
+  | "shared_core_plus_views"
+  | "tradition_requested";
+
+type SharedCoreBlock = {
+  summary: string;
+  evidenceRefs: BibleReference[];
+  confidence: "high" | "medium" | "low";
+  limits?: string;
+};
+
+type TraditionViewBlock = {
+  tradition: TraditionKey;
+  label: string;
+  summary: string;
+  emphasis: string;
+  evidenceRefs: BibleReference[];
+  doctrineSourceRefs: string[];
+  confidence: "high" | "medium" | "low";
+  limits?: string;
+};
+
+type DoctrinePresentation = {
+  topic: string;
+  divergence: "low" | "medium" | "high";
+  mode: DoctrineDisplayMode;
+  sharedCore: SharedCoreBlock;
+  views: TraditionViewBlock[];
+  requestedTradition?: TraditionKey;
+};
+```
+
+### Source policy
+- Scripture passages may justify the `shared core`.
+- Tradition-specific claims require explicit local doctrine sources such as creeds, confessions, catechisms, conciliar definitions, or official denominational statements.
+- A tradition card without `doctrineSourceRefs` is invalid.
+- The app may summarize a tradition's emphasis; it may not adjudicate which tradition is correct unless the product explicitly changes its scope.
+
+### UX contract
+- Companion answer order for doctrine prompts:
+  1. Shared core summary
+  2. Primary passages
+  3. “Where traditions differ” section
+  4. Tradition cards
+  5. Why the difference exists
+  6. Limits / what this answer does not settle
+- Default behavior:
+  - `shared_core_only` when divergence is low or local tradition sources are absent.
+  - `shared_core_plus_views` when divergence is medium/high and sources exist.
+  - `tradition_requested` when the prompt explicitly names a tradition.
+- Mobile:
+  - Tradition cards collapsed under an accordion by default.
+- Desktop:
+  - Shared core left; tradition cards right or below, depending on density.
+
+### Initial rollout scope
+- First doctrine-diversity slice should cover only prompts with high user risk from false consensus:
+  - baptism
+  - Lord's Supper / Eucharist
+  - salvation security
+  - predestination / free will
+  - Spirit baptism / tongues / gifts
+- Prompts like Christ's deity or the Trinity may remain `shared_core_only` until local tradition-source ingestion exists, because the common core is usually strong enough for a first answer.
+
+### QA gates
+- A shared-core doctrine prompt must not show fake disagreement cards.
+- A divergent doctrine prompt must not collapse into one unqualified answer when local tradition sources exist.
+- A tradition-requested prompt must foreground the requested tradition without hiding the common core.
+- Every tradition card must expose both Bible references and doctrine-source references.
+- If local tradition data is missing, the UI must say that the app is summarizing common ground only.
+
+### Work order outline
+- Add doctrine-topic classifier and divergence score to question understanding.
+- Ingest local doctrine-source corpus by tradition.
+- Extend answer bundle / reflection contract with `DoctrinePresentation`.
+- Add doctrine-difference UI section on companion and API payload.
+- Add QA fixtures for shared-core, divergent, and tradition-requested doctrine prompts.
 
 ## Open questions
 - [ ] Should “full network” include 2-hop expansion as an optional mode, or only 1-hop direct links? Owner: product. Impact: network size and interpretive noise.
