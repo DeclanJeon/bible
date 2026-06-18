@@ -1,0 +1,22 @@
+[
+  {"id":"identity-self","prompt":"나는 누구이며 내 존재의 근거는 어디에 있는가?","expectedPrimaryRefs":["GEN 1:26-27","PSA 139:13-14","EPH 2:10","JOH 1:12-13"],"expectedTerms":["존재","하나님","형상","창조","자녀"]},
+  {"id":"meaning-suffering","prompt":"고통이 있다면 삶에는 어떤 의미가 있는가?","expectedPrimaryRefs":["ROM 5:3-5","2CO 4:16-18","JAM 1:2-4","1PE 1:6-7"],"expectedTerms":["고통","환난","인내","소망","의미"]},
+  {"id":"freewill-sovereignty","prompt":"하나님의 뜻과 인간의 자유의지는 어떻게 함께 있을 수 있나?","expectedPrimaryRefs":["PHI 2:12-13","PRO 16:9","JOS 24:15","ROM 9:20-21"],"expectedTerms":["뜻","자유","선택","순종","하나님"]},
+  {"id":"evil-good-god","prompt":"선하신 하나님이 계신데 왜 악과 불의가 존재하는가?","expectedPrimaryRefs":["GEN 50:20","ROM 8:28","PSA 73:16-17","HAB 1:2-4"],"expectedTerms":["악","불의","선","공의","하나님"]},
+  {"id":"death-finitude","prompt":"죽음 앞에서 인간의 삶은 왜 허무하지 않은가?","expectedPrimaryRefs":["ROM 6:22-23","1CO 15:54-58","JOH 11:25-26","ECC 12:13-14"],"expectedTerms":["죽음","허무","부활","영생","생명"]},
+  {"id":"truth-relativism","prompt":"모든 진리가 상대적이라면 성경의 진리는 무엇을 의미하나?","expectedPrimaryRefs":["JOH 14:6","JOH 17:17","2TI 3:16-17","PSA 119:160"],"expectedTerms":["진리","말씀","성경","의미"]},
+  {"id":"love-duty","prompt":"사랑은 감정인가 의무인가?","expectedPrimaryRefs":["1CO 13:4-7","1JO 4:7-12","JOH 14:15","ROM 13:8-10"],"expectedTerms":["사랑","계명","순종","행함","마음"]},
+  {"id":"justice-mercy","prompt":"정의와 자비가 충돌할 때 무엇이 더 우선인가?","expectedPrimaryRefs":["MIC 6:8","JAM 2:13","PSA 85:10","MAT 23:23"],"expectedTerms":["정의","자비","공의","긍휼","우선"]},
+  {"id":"anxiety-control","prompt":"내가 통제할 수 없는 미래를 어떻게 받아들여야 하나?","expectedPrimaryRefs":["MAT 6:25-34","PHI 4:6-7","PRO 3:5-6","1PE 5:7"],"expectedTerms":["미래","염려","맡기","믿음","받아"]},
+  {"id":"authenticity-mask","prompt":"사람들 앞에서 가면을 쓰고 사는 나는 진짜 나인가?","expectedPrimaryRefs":["MAT 23:27-28","1SA 16:7","PSA 139:23-24","EPH 4:22-25"],"expectedTerms":["가면","진짜","마음","외식","진실"]},
+  {"id":"desire-good","prompt":"내 욕망은 악한 것인가 아니면 좋은 것을 향한 왜곡된 갈망인가?","expectedPrimaryRefs":["JAM 1:14-15","GAL 5:16-24","PSA 37:4","ROM 7:18-25"],"expectedTerms":["욕망","욕심","갈망","선","악"]},
+  {"id":"forgiveness-identity","prompt":"용서하지 못하는 나는 여전히 선한 사람일 수 있는가?","expectedPrimaryRefs":["MAT 6:14-15","EPH 4:32","LEV 19:18","COL 3:13"],"expectedTerms":["용서","선","사랑","긍휼","원수"]},
+  {"id":"loneliness-being","prompt":"아무도 나를 이해하지 못할 때 나는 혼자인가?","expectedPrimaryRefs":["DEU 31:6","PSA 139:1-12","ISA 43:1-2","HEB 13:5"],"expectedTerms":["혼자","함께","버리지","이해","하나님"]},
+  {"id":"work-worth","prompt":"내 성과가 없으면 내 가치는 사라지는가?","expectedPrimaryRefs":["EPH 2:8-10","2TI 1:9","GEN 1:26-27","MAT 6:26"],"expectedTerms":["성과","가치","은혜","행위","창조"]},
+  {"id":"doubt-faith","prompt":"의심이 있다면 믿음은 진짜가 아닌가?","expectedPrimaryRefs":["MAR 9:24","JAM 1:5-6","JOH 20:27-29","HEB 11:1"],"expectedTerms":["의심","믿음","도움","구하","확신"]},
+  {"id":"happiness-joy","prompt":"행복과 기쁨은 같은 것인가?","expectedPrimaryRefs":["PHI 4:4","JOH 15:11","PSA 16:11","1TH 5:16-18"],"expectedTerms":["행복","기쁨","즐거움","주","마음"]},
+  {"id":"time-eternity","prompt":"시간 속에 사는 인간이 영원을 어떻게 이해할 수 있나?","expectedPrimaryRefs":["ECC 3:11","PSA 90:1-4","2PE 3:8","REV 1:8"],"expectedTerms":["시간","영원","인간","이해","하나님"]},
+  {"id":"power-humility","prompt":"힘을 가진 사람은 왜 겸손해야 하는가?","expectedPrimaryRefs":["PHI 2:3-8","MAR 10:42-45","JAM 4:6","1PE 5:5-6"],"expectedTerms":["힘","겸손","권세","섬김","낮추"]},
+  {"id":"memory-regret","prompt":"과거의 후회가 나를 규정하는가?","expectedPrimaryRefs":["PHI 3:13-14","2CO 5:17","ROM 3:23-24","ISA 43:18-19"],"expectedTerms":["과거","후회","새","용서","규정"]},
+  {"id":"beauty-transcendence","prompt":"아름다움을 느낄 때 왜 초월적인 것을 갈망하게 되는가?","expectedPrimaryRefs":["PSA 19:1-4","ROM 1:20","ECC 3:11","PSA 27:4"],"expectedTerms":["아름","초월","영광","창조","영원"]}
+]

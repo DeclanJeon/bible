@@ -11,6 +11,7 @@
     "benchmark:en": "node scripts/run-korean-prompt-benchmark.mjs --fixture qa/english-prompt-benchmark.json --locale en",
     "benchmark": "npm run benchmark:ko && npm run benchmark:en",
     "qa:concerns": "node scripts/run-korean-concern-qa.mjs --fixture qa/korean-concern-qa.json --locale ko",
+    "qa:philosophy": "node scripts/run-philosophical-prompt-qa.mjs --fixture qa/philosophical-prompt-qa.json --locale ko",
     "deploy:ponslink": "bash scripts/deploy-ponslink.sh",
     "ingest:crossrefs": "python3 scripts/ingest_openbible_crossrefs.py",
     "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py"

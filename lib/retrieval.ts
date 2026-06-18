@@ -166,6 +166,35 @@ const QUERY_EXPANSIONS = [
   { match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i, terms: "하나님의 형상 자녀 지으심 창조 사랑 택하심 그리스도 안에서 identity image of god child created beloved" },
 ] as const;
 
+type PassagePriorProfile = {
+  match: RegExp;
+  references: BibleReference[];
+  terms: string[];
+};
+
+const PHILOSOPHICAL_PASSAGE_PRIORS: PassagePriorProfile[] = [
+  { match: /(나는 누구|내가 누구|정체성|존재.*근거|존재.*가치|who am i|identity|worth)/i, references: [{ code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 }, { code: "PSA", chapter: 139, startVerse: 13, endVerse: 14 }, { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 }, { code: "JOH", chapter: 1, startVerse: 12, endVerse: 13 }], terms: ["정체성", "존재", "하나님의 형상", "창조", "자녀"] },
+  { match: /(고통|고난).*(의미|삶)|meaning.*suffer|suffer.*meaning/i, references: [{ code: "ROM", chapter: 5, startVerse: 3, endVerse: 5 }, { code: "2CO", chapter: 4, startVerse: 16, endVerse: 18 }, { code: "JAM", chapter: 1, startVerse: 2, endVerse: 4 }, { code: "1PE", chapter: 1, startVerse: 6, endVerse: 7 }], terms: ["고통", "환난", "인내", "소망", "의미"] },
+  { match: /(하나님의 뜻|뜻).*(자유의지|자유)|freewill|free will|sovereignty/i, references: [{ code: "PHI", chapter: 2, startVerse: 12, endVerse: 13 }, { code: "PRO", chapter: 16, startVerse: 9, endVerse: 9 }, { code: "JOS", chapter: 24, startVerse: 15, endVerse: 15 }, { code: "ROM", chapter: 9, startVerse: 20, endVerse: 21 }], terms: ["뜻", "자유", "선택", "순종", "하나님"] },
+  { match: /(선하신 하나님|하나님).*(악|불의)|악.*불의|problem of evil/i, references: [{ code: "GEN", chapter: 50, startVerse: 20, endVerse: 20 }, { code: "ROM", chapter: 8, startVerse: 28, endVerse: 28 }, { code: "PSA", chapter: 73, startVerse: 16, endVerse: 17 }, { code: "HAB", chapter: 1, startVerse: 2, endVerse: 4 }], terms: ["악", "불의", "공의", "선", "하나님"] },
+  { match: /(죽음|사망).*(허무|의미)|허무.*죽음|death.*meaning/i, references: [{ code: "ROM", chapter: 6, startVerse: 22, endVerse: 23 }, { code: "1CO", chapter: 15, startVerse: 54, endVerse: 58 }, { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }], terms: ["죽음", "허무", "부활", "영생", "생명"] },
+  { match: /(진리).*(상대|성경)|상대.*진리|truth.*relative/i, references: [{ code: "JOH", chapter: 14, startVerse: 6, endVerse: 6 }, { code: "JOH", chapter: 17, startVerse: 17, endVerse: 17 }, { code: "2TI", chapter: 3, startVerse: 16, endVerse: 17 }, { code: "PSA", chapter: 119, startVerse: 160, endVerse: 160 }], terms: ["진리", "말씀", "성경", "의미"] },
+  { match: /(사랑).*(감정|의무|계명)|love.*(duty|feeling)/i, references: [{ code: "1CO", chapter: 13, startVerse: 4, endVerse: 7 }, { code: "1JO", chapter: 4, startVerse: 7, endVerse: 12 }, { code: "JOH", chapter: 14, startVerse: 15, endVerse: 15 }, { code: "ROM", chapter: 13, startVerse: 8, endVerse: 10 }], terms: ["사랑", "계명", "순종", "행함", "마음"] },
+  { match: /(정의|공의).*(자비|긍휼)|자비.*정의|justice.*mercy/i, references: [{ code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 }, { code: "JAM", chapter: 2, startVerse: 13, endVerse: 13 }, { code: "PSA", chapter: 85, startVerse: 10, endVerse: 10 }, { code: "MAT", chapter: 23, startVerse: 23, endVerse: 23 }], terms: ["정의", "자비", "공의", "긍휼", "우선"] },
+  { match: /(통제|미래|염려|불안).*(받아|어떻게)|future.*control|anxiety/i, references: [{ code: "MAT", chapter: 6, startVerse: 25, endVerse: 34 }, { code: "PHI", chapter: 4, startVerse: 6, endVerse: 7 }, { code: "PRO", chapter: 3, startVerse: 5, endVerse: 6 }, { code: "1PE", chapter: 5, startVerse: 7, endVerse: 7 }], terms: ["미래", "염려", "맡기", "믿음", "받아들임"] },
+  { match: /(가면|진짜 나|진실|외식|authentic)/i, references: [{ code: "MAT", chapter: 23, startVerse: 27, endVerse: 28 }, { code: "1SA", chapter: 16, startVerse: 7, endVerse: 7 }, { code: "PSA", chapter: 139, startVerse: 23, endVerse: 24 }, { code: "EPH", chapter: 4, startVerse: 22, endVerse: 25 }], terms: ["가면", "진짜", "마음", "외식", "진실"] },
+  { match: /(욕망|욕심|갈망|정욕).*(악|선|좋은)|desire/i, references: [{ code: "JAM", chapter: 1, startVerse: 14, endVerse: 15 }, { code: "GAL", chapter: 5, startVerse: 16, endVerse: 24 }, { code: "PSA", chapter: 37, startVerse: 4, endVerse: 4 }, { code: "ROM", chapter: 7, startVerse: 18, endVerse: 25 }], terms: ["욕망", "욕심", "갈망", "선", "악"] },
+  { match: /(용서).*(선한 사람|선|못하는)|forgive/i, references: [{ code: "MAT", chapter: 6, startVerse: 14, endVerse: 15 }, { code: "EPH", chapter: 4, startVerse: 32, endVerse: 32 }, { code: "LEV", chapter: 19, startVerse: 18, endVerse: 18 }, { code: "COL", chapter: 3, startVerse: 13, endVerse: 13 }], terms: ["용서", "선", "사랑", "긍휼", "원수"] },
+  { match: /(혼자|이해하지 못|외로|lonely|alone)/i, references: [{ code: "DEU", chapter: 31, startVerse: 6, endVerse: 6 }, { code: "PSA", chapter: 139, startVerse: 1, endVerse: 12 }, { code: "ISA", chapter: 43, startVerse: 1, endVerse: 2 }, { code: "HEB", chapter: 13, startVerse: 5, endVerse: 5 }], terms: ["혼자", "함께", "버리지", "이해", "하나님"] },
+  { match: /(성과|업적|가치|worth).*(사라|없으면|work)|성과.*가치/i, references: [{ code: "EPH", chapter: 2, startVerse: 8, endVerse: 10 }, { code: "2TI", chapter: 1, startVerse: 9, endVerse: 9 }, { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 }, { code: "MAT", chapter: 6, startVerse: 26, endVerse: 26 }], terms: ["성과", "가치", "은혜", "행위", "창조"] },
+  { match: /(의심).*(믿음|진짜)|믿음.*의심|doubt.*faith/i, references: [{ code: "MAR", chapter: 9, startVerse: 24, endVerse: 24 }, { code: "JAM", chapter: 1, startVerse: 5, endVerse: 6 }, { code: "JOH", chapter: 20, startVerse: 27, endVerse: 29 }, { code: "HEB", chapter: 11, startVerse: 1, endVerse: 1 }], terms: ["의심", "믿음", "도움", "구하", "확신"] },
+  { match: /(행복|기쁨).*(같은|무엇)|joy.*happiness/i, references: [{ code: "PHI", chapter: 4, startVerse: 4, endVerse: 4 }, { code: "JOH", chapter: 15, startVerse: 11, endVerse: 11 }, { code: "PSA", chapter: 16, startVerse: 11, endVerse: 11 }, { code: "1TH", chapter: 5, startVerse: 16, endVerse: 18 }], terms: ["행복", "기쁨", "즐거움", "주", "마음"] },
+  { match: /(시간).*(영원)|영원.*시간|eternity.*time/i, references: [{ code: "ECC", chapter: 3, startVerse: 11, endVerse: 11 }, { code: "PSA", chapter: 90, startVerse: 1, endVerse: 4 }, { code: "2PE", chapter: 3, startVerse: 8, endVerse: 8 }, { code: "REV", chapter: 1, startVerse: 8, endVerse: 8 }], terms: ["시간", "영원", "인간", "이해", "하나님"] },
+  { match: /(힘|권세|권력).*(겸손)|겸손.*힘|power.*humility/i, references: [{ code: "PHI", chapter: 2, startVerse: 3, endVerse: 8 }, { code: "MAR", chapter: 10, startVerse: 42, endVerse: 45 }, { code: "JAM", chapter: 4, startVerse: 6, endVerse: 6 }, { code: "1PE", chapter: 5, startVerse: 5, endVerse: 6 }], terms: ["힘", "겸손", "권세", "섬김", "낮추"] },
+  { match: /(과거|후회).*(규정|나를)|regret|past/i, references: [{ code: "PHI", chapter: 3, startVerse: 13, endVerse: 14 }, { code: "2CO", chapter: 5, startVerse: 17, endVerse: 17 }, { code: "ROM", chapter: 3, startVerse: 23, endVerse: 24 }, { code: "ISA", chapter: 43, startVerse: 18, endVerse: 19 }], terms: ["과거", "후회", "새", "용서", "규정"] },
+  { match: /(아름|아름다움|초월|갈망).*(초월|아름|갈망)|beauty|transcend/i, references: [{ code: "PSA", chapter: 19, startVerse: 1, endVerse: 4 }, { code: "ROM", chapter: 1, startVerse: 20, endVerse: 20 }, { code: "ECC", chapter: 3, startVerse: 11, endVerse: 11 }, { code: "PSA", chapter: 27, startVerse: 4, endVerse: 4 }], terms: ["아름", "초월", "영광", "창조", "영원"] },
+];
+
 type RoutingRule = {
   match: RegExp;
   primaryReference: BibleReference;
@@ -457,6 +486,55 @@ function formatPassageReference(reference: BibleReference) {
   return `${reference.code} ${tail}`;
 }
 
+function passageKey(reference: BibleReference) {
+  return `${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
+}
+
+function buildReferenceCandidate(
+  verses: BibleVerse[],
+  reference: BibleReference,
+  score: number,
+  matchedTerms: string[],
+): PassageCandidate | null {
+  const selected = verses.filter((verse) =>
+    verse.code === reference.code &&
+    verse.chapter === reference.chapter &&
+    verse.verse >= reference.startVerse &&
+    verse.verse <= reference.endVerse
+  );
+  if (!selected.length) return null;
+  return {
+    reference,
+    excerpt: selected.map((verse) => `${verse.verse}. ${verse.text}`).join(" "),
+    score,
+    matchedTerms,
+    matchedConcepts: ["curated-prior"],
+  };
+}
+
+function buildPriorPassageCandidates(verses: BibleVerse[], prompt: string): PassageCandidate[] {
+  const profile = PHILOSOPHICAL_PASSAGE_PRIORS.find((entry) => entry.match.test(prompt));
+  if (!profile) return [];
+  return profile.references.flatMap((reference, index) => {
+    const candidate = buildReferenceCandidate(verses, reference, 120 - index * 4, profile.terms);
+    return candidate ? [candidate] : [];
+  });
+}
+
+function mergePassageCandidates(primary: PassageCandidate[], fallback: PassageCandidate[], limit = 12) {
+  const merged: PassageCandidate[] = [];
+  const seen = new Set<string>();
+  for (const candidate of [...primary, ...fallback]) {
+    const key = passageKey(candidate.reference);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(candidate);
+    if (merged.length >= limit) break;
+  }
+  return merged;
+}
+
+
 function scoreVerse(verse: BibleVerse, promptTokens: string[], conceptPrompt: string) {
   const lowerText = verse.text.toLowerCase();
   const matchedTerms = [...new Set(promptTokens.filter((token) => lowerText.includes(token)))];
@@ -552,9 +630,43 @@ function buildRuleBasedRetrieval(prompt: string, locale?: string, options: Retri
   };
 }
 
+function isOffTopicEverydayPrompt(prompt: string) {
+  const hasEverydayChoice = /(점심|저녁|아침|뭐 먹|메뉴|노트북|컴퓨터|핸드폰|쇼핑|살까 말까|구매|가격|여행지|영화|게임|주식|코인|맛집)/i.test(prompt);
+  const hasVagueNonConcern = /(아무 생각|그냥 모르|딱히|할 말 없|nothing much|no thoughts)/i.test(prompt);
+  const hasSpiritualFrame = /(하나님|예수|성경|기도|믿음|죄|용서|소망|사랑|정의|자비|진리|영원|죽음|고통|의미|정체성|존재|가치|겸손|의심|기쁨|아름|초월|불안|미래|외로|선|악|철학|삶|무기력|슬픔|두려|힘들|지쳐)/i.test(prompt);
+  return (hasEverydayChoice || hasVagueNonConcern) && !hasSpiritualFrame;
+}
+
+function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions, rationale: string): RetrievalResult {
+  const cluster = localizeStoryCluster(STORY_CLUSTERS[0], appLocale);
+  return {
+    cluster,
+    score: 0,
+    laneScore: 0,
+    passageScore: 0,
+    semanticScore: 0,
+    embeddingScore: 0,
+    retrievalMode: "tfidf",
+    embeddingModel: null,
+    reasons: { matchedHints: [], matchedThemes: [], matchedEmotions: [], passageKeywords: [], semanticTerms: [] },
+    rationale,
+    confidence: "low",
+    primaryReference: cluster.primary,
+    primaryExcerpt: "",
+    supportingReferences: [],
+    passageCandidates: [],
+    expansionSummary: options.expansionSummary ?? null,
+    expansionProvider: options.expansionProvider ?? null,
+  };
+}
+
+
 export async function retrieveClusterForPrompt(prompt: string, locale?: string, options: RetrievalOptions = {}): Promise<RetrievalResult> {
   const appLocale = resolveAppLocale(locale);
   const normalizedPrompt = prompt.trim() || (appLocale === "ko" ? "성경 본문을 문맥과 연결 본문으로 공부" : "study scripture with context and cross references");
+  if (isOffTopicEverydayPrompt(normalizedPrompt)) {
+    return lowConfidenceFallback(appLocale, options, appLocale === "ko" ? "일상 선택 질문으로 감지되어 성경 본문 추천을 보류합니다." : "Everyday choice prompt detected; pausing scripture recommendation.");
+  }
   const ruleBased = buildRuleBasedRetrieval(normalizedPrompt, appLocale, options);
   if (ruleBased) return ruleBased;
 
@@ -565,7 +677,10 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   const [allVerses, { corpora, idf }, clusterEmbeddings] = await Promise.all([loadVerses(appLocale), loadClusterCorpora(appLocale), loadClusterEmbeddings(appLocale)]);
   const promptEmbedding = clusterEmbeddings.vectors ? await createEmbedding(normalizedPrompt) : null;
   const embeddingEnabled = !!promptEmbedding && !!clusterEmbeddings.vectors && !!clusterEmbeddings.model;
-  const passageCandidates = buildGlobalPassageCandidates(allVerses, promptTokens, normalizedPrompt);
+  const passageCandidates = mergePassageCandidates(
+    buildPriorPassageCandidates(allVerses, normalizedPrompt),
+    buildGlobalPassageCandidates(allVerses, promptTokens, normalizedPrompt),
+  );
   const bestPassage = passageCandidates[0] ?? null;
 
   const scored = corpora.map(({ cluster, corpus, tf }) => {
