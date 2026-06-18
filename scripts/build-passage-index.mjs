@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_DIR = path.join(ROOT, "data", "passage-index");
-const VERSION = "seed-2026-06-18";
-const GENERATED_AT = "2026-06-18T00:00:00.000Z";
+const VERSION = "seed-2026-06-18-jesus";
+const GENERATED_AT = "2026-06-18T18:30:00.000Z";
 
 const SEED_PASSAGES = [
   {
@@ -142,6 +142,57 @@ const SEED_PASSAGES = [
     questionsAnswered: ["What matters most?", "사람은 어떻게 살아야 하는가?", "What does love require?"],
     entities: ["Jesus", "God", "neighbor", "Law", "Prophets"],
     keywords: ["love", "heart", "soul", "mind", "neighbor", "사랑", "마음", "목숨", "뜻", "이웃"],
+    canonicalWeight: 1,
+  },
+  {
+    code: "JOH",
+    chapter: 1,
+    startVerse: 1,
+    endVerse: 14,
+    summary: {
+      en: "Jesus is the eternal Word who is with God, is God, and becomes flesh to reveal divine glory and grace.",
+      ko: "예수님은 하나님과 함께 계시며 하나님이신 영원한 말씀이시고, 육신이 되어 하나님의 영광과 은혜를 드러내신다.",
+    },
+    themes: ["Jesus", "Word", "incarnation", "God", "glory"],
+    doctrines: ["Christology", "incarnation", "deity of Christ", "revelation"],
+    humanConcerns: ["truth", "hope", "belonging", "salvation"],
+    questionsAnswered: ["Who is Jesus?", "예수님은 누구인가?", "How does God reveal himself in Jesus?"],
+    entities: ["Jesus", "Word", "God", "John"],
+    keywords: ["Word", "became flesh", "glory", "grace", "truth", "말씀", "육신", "영광", "은혜", "진리", "예수"],
+    canonicalWeight: 1,
+  },
+  {
+    code: "COL",
+    chapter: 1,
+    startVerse: 15,
+    endVerse: 20,
+    summary: {
+      en: "Jesus is the image of the invisible God, supreme over creation, and the one through whom all things hold together and peace is made.",
+      ko: "예수님은 보이지 않는 하나님의 형상이시며, 만물보다 먼저 계시고 만물을 붙드시며 화평을 이루시는 분이시다.",
+    },
+    themes: ["Jesus", "creation", "reconciliation", "God", "supremacy of Christ"],
+    doctrines: ["Christology", "deity of Christ", "creation", "reconciliation"],
+    humanConcerns: ["meaning", "hope", "belonging", "peace"],
+    questionsAnswered: ["Who is Jesus?", "예수님은 누구인가?", "Why does Jesus matter for all creation?"],
+    entities: ["Son", "God", "creation", "church"],
+    keywords: ["image", "invisible God", "firstborn", "all things", "reconcile", "형상", "보이지 않는 하나님", "만물", "화평", "예수"],
+    canonicalWeight: 1,
+  },
+  {
+    code: "HEB",
+    chapter: 1,
+    startVerse: 1,
+    endVerse: 3,
+    summary: {
+      en: "The Son is the radiance of God's glory and exact imprint of his nature, sustaining all things and making purification for sins.",
+      ko: "아들은 하나님의 영광의 광채요 본체의 형상이시며, 만물을 붙드시고 죄를 깨끗하게 하시는 분이시다.",
+    },
+    themes: ["Jesus", "Son of God", "glory", "revelation", "atonement"],
+    doctrines: ["Christology", "Son of God", "revelation", "atonement"],
+    humanConcerns: ["hope", "forgiveness", "trust", "worship"],
+    questionsAnswered: ["Who is Jesus?", "예수님은 누구인가?", "How does the Son reveal God?"],
+    entities: ["Son", "God", "angels"],
+    keywords: ["Son", "glory", "exact imprint", "sustains", "purification", "아들", "영광", "본체", "만물", "죄", "예수"],
     canonicalWeight: 1,
   },
   {

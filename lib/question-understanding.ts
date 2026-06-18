@@ -109,6 +109,20 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
     },
   },
   {
+    key: "jesus",
+    ko: /예수님|예수\s*그리스도|예수는|예수는\s*누구|그리스도는|메시아|메시야/,
+    en: /\b(who is jesus|jesus christ|who is christ|who is the messiah|messiah|son of god)\b/i,
+    rule: {
+      normalized: "예수님은 누구인가",
+      intent: "definition",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["truth", "hope", "belonging"],
+      theologicalAxes: ["Jesus", "Christology", "Son of God", "incarnation", "salvation", "revelation of God"],
+      searchQueries: ["예수님은 누구인가", "말씀이 육신이 되심", "보이지 아니하시는 하나님의 형상", "하나님의 영광의 광채", "길과 진리와 생명", "Jesus Christ Son of God"],
+    },
+  },
+  {
     key: "god",
     ko: /하나님|하느님|신은|신이|여호와/,
     en: /\b(god|who is god|what is god|lord|yahweh)\b/i,

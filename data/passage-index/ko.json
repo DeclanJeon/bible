@@ -1,6 +1,6 @@
 {
-  "version": "seed-2026-06-18",
-  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "version": "seed-2026-06-18-jesus",
+  "generatedAt": "2026-06-18T18:30:00.000Z",
   "locale": "ko",
   "source": {
     "translation": "korean_bible",
@@ -242,6 +242,91 @@
         "ACT 1:16",
         "ACT 20:20",
         "ACT 20:27"
+      ]
+    },
+    {
+      "id": "ko:COL-1-15-20",
+      "reference": {
+        "code": "COL",
+        "chapter": 1,
+        "startVerse": 15,
+        "endVerse": 20
+      },
+      "displayReference": "골로새서 1:15-20",
+      "locale": "ko",
+      "text": "15. 그는 보이지 아니하시는 하나님의 형상이요 모든 창조물보다 먼저 나신 자니 16. 만물이 그에게 창조되되 하늘과 땅에서 보이는 것들과 보이지 않는 것들과 혹은 보좌들이나 주관들이나 정사들이나 권세들이나 만물이 다 그로 말미암고 그를 위하여 창조되었고 17. 또한 그가 만물보다 먼저 계시고 만물이 그 안에 함께 섰느니라 18. 그는 몸인 교회의 머리라 그가 근본이요 죽은 자들 가운데서 먼저 나신 자니 이는 친히 만물의 으뜸이 되려 하심이요 19. 아버지께서는 모든 충만으로 예수 안에 거하게 하시고 20. 그의 십자가의 피로 화평을 이루사 만물 곧 땅에 있는 것들이나 하늘에 있는 것들을 그로 말미암아 자기와 화목케 되기를 기뻐하심이라",
+      "normalizedText": "15 그는 보이지 아니하시는 하나님의 형상이요 모든 창조물보다 먼저 나신 자니 16 만물이 그에게 창조되되 하늘과 땅에서 보이는 것들과 보이지 않는 것들과 혹은 보좌들이나 주관들이나 정사들이나 권세들이나 만물이 다 그로 말미암고 그를 위하여 창조되었고 17 또한 그가 만물보다 먼저 계시고 만물이 그 안에 함께 섰느니라 18 그는 몸인 교회의 머리라 그가 근본이요 죽은 자들 가운데서 먼저 나신 자니 이는 친히 만물의 으뜸이 되려 하심이요 19 아버지께서는 모든 충만으로 예수 안에 거하게 하시고 20 그의 십자가의 피로 화평을 이루사 만물 곧 땅에 있는 것들이나 하늘에 있는 것들을 그로 말미암아 자기와 화목케 되기를 기뻐하심이라",
+      "summary": "예수님은 보이지 않는 하나님의 형상이시며, 만물보다 먼저 계시고 만물을 붙드시며 화평을 이루시는 분이시다.",
+      "themes": [
+        "Jesus",
+        "creation",
+        "reconciliation",
+        "God",
+        "supremacy of Christ"
+      ],
+      "doctrines": [
+        "Christology",
+        "deity of Christ",
+        "creation",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "meaning",
+        "hope",
+        "belonging",
+        "peace"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "Why does Jesus matter for all creation?"
+      ],
+      "entities": [
+        "Son",
+        "God",
+        "creation",
+        "church"
+      ],
+      "keywords": [
+        "image",
+        "invisible God",
+        "firstborn",
+        "all things",
+        "reconcile",
+        "형상",
+        "보이지 않는 하나님",
+        "만물",
+        "화평",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "belonging",
+        "creation",
+        "deity of Christ",
+        "hope",
+        "meaning",
+        "peace",
+        "reconciliation",
+        "supremacy of Christ"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 129,
+      "crossReferences": [
+        "1CH 29:11",
+        "1CO 11:3",
+        "1CO 15:20-23",
+        "1CO 15:25",
+        "1CO 8:6",
+        "1JO 1:1",
+        "1JO 4:9-10",
+        "1PE 3:22",
+        "1SA 2:8",
+        "1TI 1:17",
+        "1TI 6:16",
+        "2CO 4:4"
       ]
     },
     {
@@ -631,6 +716,90 @@
       ]
     },
     {
+      "id": "ko:HEB-1-1-3",
+      "reference": {
+        "code": "HEB",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 3
+      },
+      "displayReference": "히브리서 1:1-3",
+      "locale": "ko",
+      "text": "1. 옛적에 선지자들로 여러 부분과 여러 모양으로 우리 조상들에게 말씀하신 하나님이 2. 이 모든 날 마지막에 아들로 우리에게 말씀하셨으니 이 아들을 만유의 후사로 세우시고 또 저로 말미암아 모든 세계를 지으셨느니라 3. 이는 하나님의 영광의 광채시요 그 본체의 형상이시라 그의 능력의 말씀으로 만물을 붙드시며 죄를 정결케 하는 일을 하시고 높은 곳에 계신 위엄의 우편에 앉으셨느니라",
+      "normalizedText": "1 옛적에 선지자들로 여러 부분과 여러 모양으로 우리 조상들에게 말씀하신 하나님이 2 이 모든 날 마지막에 아들로 우리에게 말씀하셨으니 이 아들을 만유의 후사로 세우시고 또 저로 말미암아 모든 세계를 지으셨느니라 3 이는 하나님의 영광의 광채시요 그 본체의 형상이시라 그의 능력의 말씀으로 만물을 붙드시며 죄를 정결케 하는 일을 하시고 높은 곳에 계신 위엄의 우편에 앉으셨느니라",
+      "summary": "아들은 하나님의 영광의 광채요 본체의 형상이시며, 만물을 붙드시고 죄를 깨끗하게 하시는 분이시다.",
+      "themes": [
+        "Jesus",
+        "Son of God",
+        "glory",
+        "revelation",
+        "atonement"
+      ],
+      "doctrines": [
+        "Christology",
+        "Son of God",
+        "revelation",
+        "atonement"
+      ],
+      "humanConcerns": [
+        "hope",
+        "forgiveness",
+        "trust",
+        "worship"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "How does the Son reveal God?"
+      ],
+      "entities": [
+        "Son",
+        "God",
+        "angels"
+      ],
+      "keywords": [
+        "Son",
+        "glory",
+        "exact imprint",
+        "sustains",
+        "purification",
+        "아들",
+        "영광",
+        "본체",
+        "만물",
+        "죄",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "Jesus",
+        "Son of God",
+        "atonement",
+        "forgiveness",
+        "glory",
+        "hope",
+        "revelation",
+        "trust",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 120,
+      "crossReferences": [
+        "1CH 29:11",
+        "1CO 15:25-27",
+        "1CO 8:6",
+        "1JO 1:7",
+        "1JO 3:5",
+        "1PE 1:10-12",
+        "1PE 1:20",
+        "1PE 1:21",
+        "1PE 3:22",
+        "2CO 4:4",
+        "2CO 4:6-7",
+        "2PE 1:16"
+      ]
+    },
+    {
       "id": "ko:HEB-11-1-3",
       "reference": {
         "code": "HEB",
@@ -776,6 +945,93 @@
         "EXO 36:1-4",
         "ISA 55:6-7",
         "JAM 1:17"
+      ]
+    },
+    {
+      "id": "ko:JOH-1-1-14",
+      "reference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 14
+      },
+      "displayReference": "요한복음 1:1-14",
+      "locale": "ko",
+      "text": "1. 태초에 말씀이 계시니라 이 말씀이 하나님과 함께 계셨으니 이 말씀은 곧 하나님이시니라 2. 그가 태초에 하나님과 함께 계셨고 3. 만물이 그로 말미암아 지은 바 되었으니 지은 것이 하나도 그가 없이는 된 것이 없느니라 4. 그 안에 생명이 있었으니 이 생명은 사람들의 빛이라 5. 빛이 어두움에 비취되 어두움이 깨닫지 못하더라 6. 하나님께로서 보내심을 받은 사람이 났으니 이름은 요한이라 7. 저가 증거하러 왔으니 곧 빛에 대하여 증거하고 모든 사람으로 자기를 인하여 믿게하려 함이라 8. 그는 이 빛이 아니요 이 빛에 대하여 증거하러 온 자라 9. 참 빛 곧 세상에 와서 각 사람에게 비취는 빛이 있었나니 10. 그가 세상에 계셨으며 세상은 그로 말미암아 지은 바 되었으되 세상이 그를 알지 못하였고 11. 자기 땅에 오매 자기 백성이 영접지 아니하였으나 12. 영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니 13. 이는 혈통으로나 육정으로나 사람의 뜻으로 나지 아니하고 오직 하나님께로서 난 자들이니라 14. 말씀이 육신이 되어 우리 가운데 거하시매 우리가 그 영광을 보니 아버지의 독생자의 영광이요 은혜와 진리가 충만하더라",
+      "normalizedText": "1 태초에 말씀이 계시니라 이 말씀이 하나님과 함께 계셨으니 이 말씀은 곧 하나님이시니라 2 그가 태초에 하나님과 함께 계셨고 3 만물이 그로 말미암아 지은 바 되었으니 지은 것이 하나도 그가 없이는 된 것이 없느니라 4 그 안에 생명이 있었으니 이 생명은 사람들의 빛이라 5 빛이 어두움에 비취되 어두움이 깨닫지 못하더라 6 하나님께로서 보내심을 받은 사람이 났으니 이름은 요한이라 7 저가 증거하러 왔으니 곧 빛에 대하여 증거하고 모든 사람으로 자기를 인하여 믿게하려 함이라 8 그는 이 빛이 아니요 이 빛에 대하여 증거하러 온 자라 9 참 빛 곧 세상에 와서 각 사람에게 비취는 빛이 있었나니 10 그가 세상에 계셨으며 세상은 그로 말미암아 지은 바 되었으되 세상이 그를 알지 못하였고 11 자기 땅에 오매 자기 백성이 영접지 아니하였으나 12 영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니 13 이는 혈통으로나 육정으로나 사람의 뜻으로 나지 아니하고 오직 하나님께로서 난 자들이니라 14 말씀이 육신이 되어 우리 가운데 거하시매 우리가 그 영광을 보니 아버지의 독생자의 영광이요 은혜와 진리가 충만하더라",
+      "summary": "예수님은 하나님과 함께 계시며 하나님이신 영원한 말씀이시고, 육신이 되어 하나님의 영광과 은혜를 드러내신다.",
+      "themes": [
+        "Jesus",
+        "Word",
+        "incarnation",
+        "God",
+        "glory"
+      ],
+      "doctrines": [
+        "Christology",
+        "incarnation",
+        "deity of Christ",
+        "revelation"
+      ],
+      "humanConcerns": [
+        "truth",
+        "hope",
+        "belonging",
+        "salvation"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "How does God reveal himself in Jesus?"
+      ],
+      "entities": [
+        "Jesus",
+        "Word",
+        "God",
+        "John"
+      ],
+      "keywords": [
+        "Word",
+        "became flesh",
+        "glory",
+        "grace",
+        "truth",
+        "말씀",
+        "육신",
+        "영광",
+        "은혜",
+        "진리",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "Word",
+        "belonging",
+        "deity of Christ",
+        "glory",
+        "hope",
+        "incarnation",
+        "revelation",
+        "salvation",
+        "truth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 261,
+      "crossReferences": [
+        "1CO 15:45",
+        "1CO 15:47",
+        "1CO 1:21",
+        "1CO 2:14",
+        "1CO 2:8",
+        "1CO 3:6",
+        "1CO 8:6",
+        "1JO 1:1-2",
+        "1JO 1:2",
+        "1JO 1:5-7",
+        "1JO 1:8",
+        "1JO 2:28-29"
       ]
     },
     {
@@ -1417,8 +1673,8 @@
     }
   ],
   "stats": {
-    "unitCount": 18,
-    "seedReferenceCount": 18,
-    "crossReferenceDegreeTotal": 1140
+    "unitCount": 21,
+    "seedReferenceCount": 21,
+    "crossReferenceDegreeTotal": 1650
   }
 }

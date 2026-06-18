@@ -28,6 +28,20 @@
     "maxLatencyMs": 4000
   },
   {
+    "id": "definition-jesus-colloquial",
+    "family": "definitional",
+    "prompt": "예수님이 누구야?",
+    "expectedPolicy": "survey_bundle",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JOH 1:1-14", "COL 1:15-20", "HEB 1:1-3", "JOH 14:6", "JOH 3:16-17"],
+    "minSupportingCount": 2,
+    "expectedSafetyLevel": "none",
+    "expectedEvidenceTerms": ["예수", "그리스도", "아들", "말씀", "하나님", "구원"],
+    "minEvidenceTermHits": 2,
+    "forbiddenPhrases": ["더 구체적인 연결이 필요", "낮은 신뢰도", "확정하지", "본문 단어가 충분하지 않습니다"],
+    "maxLatencyMs": 4000
+  },
+  {
     "id": "existential-purpose-colloquial",
     "family": "existential",
     "prompt": "사람은 왜 사는거지?",

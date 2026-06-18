@@ -1,6 +1,6 @@
 {
-  "version": "seed-2026-06-18",
-  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "version": "seed-2026-06-18-jesus",
+  "generatedAt": "2026-06-18T18:30:00.000Z",
   "locale": "en",
   "source": {
     "translation": "world_english_bible",
@@ -242,6 +242,91 @@
         "ACT 1:16",
         "ACT 20:20",
         "ACT 20:27"
+      ]
+    },
+    {
+      "id": "en:COL-1-15-20",
+      "reference": {
+        "code": "COL",
+        "chapter": 1,
+        "startVerse": 15,
+        "endVerse": 20
+      },
+      "displayReference": "Colossians 1:15-20",
+      "locale": "en",
+      "text": "15. He is the image of the invisible God, the firstborn of all creation. 16. For by him all things were created in the heavens and on the earth, visible things and invisible things, whether thrones or dominions or principalities or powers. All things have been created through him and for him. 17. He is before all things, and in him all things are held together. 18. He is the head of the body, the assembly, who is the beginning, the firstborn from the dead, that in all things he might have the preeminence. 19. For all the fullness was pleased to dwell in him, 20. and through him to reconcile all things to himself by him, whether things on the earth or things in the heavens, having made peace through the blood of his cross.",
+      "normalizedText": "15 he is the image of the invisible god the firstborn of all creation 16 for by him all things were created in the heavens and on the earth visible things and invisible things whether thrones or dominions or principalities or powers all things have been created through him and for him 17 he is before all things and in him all things are held together 18 he is the head of the body the assembly who is the beginning the firstborn from the dead that in all things he might have the preeminence 19 for all the fullness was pleased to dwell in him 20 and through him to reconcile all things to himself by him whether things on the earth or things in the heavens having made peace through the blood of his cross",
+      "summary": "Jesus is the image of the invisible God, supreme over creation, and the one through whom all things hold together and peace is made.",
+      "themes": [
+        "Jesus",
+        "creation",
+        "reconciliation",
+        "God",
+        "supremacy of Christ"
+      ],
+      "doctrines": [
+        "Christology",
+        "deity of Christ",
+        "creation",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "meaning",
+        "hope",
+        "belonging",
+        "peace"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "Why does Jesus matter for all creation?"
+      ],
+      "entities": [
+        "Son",
+        "God",
+        "creation",
+        "church"
+      ],
+      "keywords": [
+        "image",
+        "invisible God",
+        "firstborn",
+        "all things",
+        "reconcile",
+        "형상",
+        "보이지 않는 하나님",
+        "만물",
+        "화평",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "belonging",
+        "creation",
+        "deity of Christ",
+        "hope",
+        "meaning",
+        "peace",
+        "reconciliation",
+        "supremacy of Christ"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 129,
+      "crossReferences": [
+        "1CH 29:11",
+        "1CO 11:3",
+        "1CO 15:20-23",
+        "1CO 15:25",
+        "1CO 8:6",
+        "1JO 1:1",
+        "1JO 4:9-10",
+        "1PE 3:22",
+        "1SA 2:8",
+        "1TI 1:17",
+        "1TI 6:16",
+        "2CO 4:4"
       ]
     },
     {
@@ -631,6 +716,90 @@
       ]
     },
     {
+      "id": "en:HEB-1-1-3",
+      "reference": {
+        "code": "HEB",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 3
+      },
+      "displayReference": "Hebrews 1:1-3",
+      "locale": "en",
+      "text": "1. God, having in the past spoken to the fathers through the prophets at many times and in various ways, 2. has at the end of these days spoken to us by his Son, whom he appointed heir of all things, through whom also he made the worlds. 3. His Son is the radiance of his glory, the very image of his substance, and upholding all things by the word of his power, who, when he had by himself purified us of our sins, sat down on the right hand of the Majesty on high,",
+      "normalizedText": "1 god having in the past spoken to the fathers through the prophets at many times and in various ways 2 has at the end of these days spoken to us by his son whom he appointed heir of all things through whom also he made the worlds 3 his son is the radiance of his glory the very image of his substance and upholding all things by the word of his power who when he had by himself purified us of our sins sat down on the right hand of the majesty on high",
+      "summary": "The Son is the radiance of God's glory and exact imprint of his nature, sustaining all things and making purification for sins.",
+      "themes": [
+        "Jesus",
+        "Son of God",
+        "glory",
+        "revelation",
+        "atonement"
+      ],
+      "doctrines": [
+        "Christology",
+        "Son of God",
+        "revelation",
+        "atonement"
+      ],
+      "humanConcerns": [
+        "hope",
+        "forgiveness",
+        "trust",
+        "worship"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "How does the Son reveal God?"
+      ],
+      "entities": [
+        "Son",
+        "God",
+        "angels"
+      ],
+      "keywords": [
+        "Son",
+        "glory",
+        "exact imprint",
+        "sustains",
+        "purification",
+        "아들",
+        "영광",
+        "본체",
+        "만물",
+        "죄",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "Jesus",
+        "Son of God",
+        "atonement",
+        "forgiveness",
+        "glory",
+        "hope",
+        "revelation",
+        "trust",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 120,
+      "crossReferences": [
+        "1CH 29:11",
+        "1CO 15:25-27",
+        "1CO 8:6",
+        "1JO 1:7",
+        "1JO 3:5",
+        "1PE 1:10-12",
+        "1PE 1:20",
+        "1PE 1:21",
+        "1PE 3:22",
+        "2CO 4:4",
+        "2CO 4:6-7",
+        "2PE 1:16"
+      ]
+    },
+    {
       "id": "en:HEB-11-1-3",
       "reference": {
         "code": "HEB",
@@ -776,6 +945,93 @@
         "EXO 36:1-4",
         "ISA 55:6-7",
         "JAM 1:17"
+      ]
+    },
+    {
+      "id": "en:JOH-1-1-14",
+      "reference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 14
+      },
+      "displayReference": "John 1:1-14",
+      "locale": "en",
+      "text": "1. In the beginning was the Word, and the Word was with God, and the Word was God. 2. The same was in the beginning with God. 3. All things were made through him. Without him, nothing was made that has been made. 4. In him was life, and the life was the light of men. 5. The light shines in the darkness, and the darkness hasn’t overcome it. 6. There came a man sent from God, whose name was John. 7. The same came as a witness, that he might testify about the light, that all might believe through him. 8. He was not the light, but was sent that he might testify about the light. 9. The true light that enlightens everyone was coming into the world. 10. He was in the world, and the world was made through him, and the world didn’t recognize him. 11. He came to his own, and those who were his own didn’t receive him. 12. But as many as received him, to them he gave the right to become God’s children, to those who believe in his name: 13. who were born, not of blood, nor of the will of the flesh, nor of the will of man, but of God. 14. The Word became flesh and lived among us. We saw his glory, such glory as of the only born Son of the Father, full of grace and truth.",
+      "normalizedText": "1 in the beginning was the word and the word was with god and the word was god 2 the same was in the beginning with god 3 all things were made through him without him nothing was made that has been made 4 in him was life and the life was the light of men 5 the light shines in the darkness and the darkness hasn't overcome it 6 there came a man sent from god whose name was john 7 the same came as a witness that he might testify about the light that all might believe through him 8 he was not the light but was sent that he might testify about the light 9 the true light that enlightens everyone was coming into the world 10 he was in the world and the world was made through him and the world didn't recognize him 11 he came to his own and those who were his own didn't receive him 12 but as many as received him to them he gave the right to become god's children to those who believe in his name 13 who were born not of blood nor of the will of the flesh nor of the will of man but of god 14 the word became flesh and lived among us we saw his glory such glory as of the only born son of the father full of grace and truth",
+      "summary": "Jesus is the eternal Word who is with God, is God, and becomes flesh to reveal divine glory and grace.",
+      "themes": [
+        "Jesus",
+        "Word",
+        "incarnation",
+        "God",
+        "glory"
+      ],
+      "doctrines": [
+        "Christology",
+        "incarnation",
+        "deity of Christ",
+        "revelation"
+      ],
+      "humanConcerns": [
+        "truth",
+        "hope",
+        "belonging",
+        "salvation"
+      ],
+      "questionsAnswered": [
+        "Who is Jesus?",
+        "예수님은 누구인가?",
+        "How does God reveal himself in Jesus?"
+      ],
+      "entities": [
+        "Jesus",
+        "Word",
+        "God",
+        "John"
+      ],
+      "keywords": [
+        "Word",
+        "became flesh",
+        "glory",
+        "grace",
+        "truth",
+        "말씀",
+        "육신",
+        "영광",
+        "은혜",
+        "진리",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "Word",
+        "belonging",
+        "deity of Christ",
+        "glory",
+        "hope",
+        "incarnation",
+        "revelation",
+        "salvation",
+        "truth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 261,
+      "crossReferences": [
+        "1CO 15:45",
+        "1CO 15:47",
+        "1CO 1:21",
+        "1CO 2:14",
+        "1CO 2:8",
+        "1CO 3:6",
+        "1CO 8:6",
+        "1JO 1:1-2",
+        "1JO 1:2",
+        "1JO 1:5-7",
+        "1JO 1:8",
+        "1JO 2:28-29"
       ]
     },
     {
@@ -1417,8 +1673,8 @@
     }
   ],
   "stats": {
-    "unitCount": 18,
-    "seedReferenceCount": 18,
-    "crossReferenceDegreeTotal": 1140
+    "unitCount": 21,
+    "seedReferenceCount": 21,
+    "crossReferenceDegreeTotal": 1650
   }
 }
