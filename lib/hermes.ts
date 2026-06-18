@@ -243,6 +243,107 @@ function validateGeneratedShape(value: unknown): GeneratedShape | null {
   return candidate as unknown as GeneratedShape;
 }
 
+function addAllowedReference(allowed: Set<string>, reference: { code: string; chapter: number; startVerse: number; endVerse: number }) {
+  for (let verse = reference.startVerse; verse <= reference.endVerse; verse += 1) {
+    allowed.add(`${reference.code} ${reference.chapter}:${verse}`);
+  }
+}
+
+function buildAllowedReferenceSet(contract: HermesEvidenceContract) {
+  const allowed = new Set<string>();
+  addAllowedReference(allowed, contract.retrieval.primaryReference);
+  for (const reference of contract.retrieval.supportingReferences) addAllowedReference(allowed, reference);
+  for (const candidate of contract.retrieval.passageCandidates) addAllowedReference(allowed, candidate.reference);
+  for (const linked of contract.linkedTexts) addAllowedReference(allowed, linked.reference);
+  for (const suggestion of contract.graphSuggestions) addAllowedReference(allowed, suggestion.target);
+  for (const edge of contract.crossReferenceHighlights ?? []) {
+    addAllowedReference(allowed, edge.from);
+    addAllowedReference(allowed, edge.to);
+  }
+  return allowed;
+}
+
+function extractReferenceKeys(text: string) {
+  const matches = text.matchAll(/\b([1-3]?[A-Z]{2,3})\s+(\d+):(\d+)(?:-(\d+))?\b/g);
+  const refs: string[] = [];
+  for (const match of matches) {
+    const [, code, chapterRaw, startRaw, endRaw] = match;
+    const chapter = Number(chapterRaw);
+    const start = Number(startRaw);
+    const end = endRaw ? Number(endRaw) : start;
+    for (let verse = start; verse <= end; verse += 1) refs.push(`${code} ${chapter}:${verse}`);
+  }
+  return refs;
+}
+
+function hasUnsupportedReference(candidate: GeneratedShape, contract: HermesEvidenceContract) {
+  const allowed = buildAllowedReferenceSet(contract);
+  return Object.entries(candidate).some(([key, value]) => {
+    if (key === "reflectionQuestions") {
+      return (value as string[]).some((question) => extractReferenceKeys(question).some((reference) => !allowed.has(reference)));
+    }
+    return extractReferenceKeys(value as string).some((reference) => !allowed.has(reference));
+  });
+}
+
+function generatedStrings(candidate: GeneratedShape): string[] {
+  return [
+    candidate.concernSummary,
+    candidate.whyTheseTexts,
+    candidate.primaryStory,
+    candidate.datePlaceAudience,
+    candidate.originalAudience,
+    candidate.linkedScriptures,
+    candidate.jesusAndPaul,
+    candidate.personalConnection,
+    ...candidate.reflectionQuestions,
+  ];
+}
+
+function hasUnsupportedEvidenceId(candidate: GeneratedShape, contract: HermesEvidenceContract) {
+  const allowed = new Set(contract.allowedEvidenceIds ?? []);
+  if (!allowed.size) return false;
+  const text = generatedStrings(candidate).join("\n");
+  const ids = text.match(/(?:primary|crossref:v1:[A-Za-z0-9:_>.-]+)/g) ?? [];
+  return ids.some((id) => !allowed.has(id));
+}
+
+function hasUnsupportedQuote(candidate: GeneratedShape, contract: HermesEvidenceContract) {
+  const evidenceText = JSON.stringify(contract);
+  const quotes = generatedStrings(candidate)
+    .join("\n")
+    .matchAll(/[\"“”']([^\"“”']{24,})[\"“”']/g);
+  for (const quote of quotes) {
+    if (!evidenceText.includes(quote[1])) return true;
+  }
+  return false;
+}
+
+function hasUnsupportedBackgroundClaim(candidate: GeneratedShape, contract: HermesEvidenceContract) {
+  const evidenceText = JSON.stringify(contract).toLowerCase();
+  const generatedText = generatedStrings(candidate).join("\n").toLowerCase();
+  const sourceBoundTerms = [
+    "archaeology",
+    "archaeological",
+    "josephus",
+    "talmud",
+    "qumran",
+    "dead sea",
+    "greek",
+    "hebrew",
+    "manuscript",
+    "고고학",
+    "요세푸스",
+    "탈무드",
+    "쿰란",
+    "사해",
+    "헬라어",
+    "히브리어",
+    "사본",
+  ];
+  return sourceBoundTerms.some((term) => generatedText.includes(term) && !evidenceText.includes(term));
+}
+
 function extractJson(text: string) {
   const fenced = text.match(/```json\s*([\s\S]*?)```/i);
   const candidate = fenced?.[1] ?? text;
@@ -385,6 +486,38 @@ export async function generateReflectionWithHermes(
       return deterministicResult(
         deterministicReflection,
         "Hermes returned invalid JSON; using deterministic fallback.",
+        "hermes-fallback",
+      );
+    }
+
+    if (hasUnsupportedReference(parsed, contractArgs)) {
+      return deterministicResult(
+        deterministicReflection,
+        "Hermes cited a scripture reference outside the evidence contract; using deterministic fallback.",
+        "hermes-fallback",
+      );
+    }
+
+    if (hasUnsupportedEvidenceId(parsed, contractArgs)) {
+      return deterministicResult(
+        deterministicReflection,
+        "Hermes cited an evidence ID outside the allowed evidence set; using deterministic fallback.",
+        "hermes-fallback",
+      );
+    }
+
+    if (hasUnsupportedQuote(parsed, contractArgs)) {
+      return deterministicResult(
+        deterministicReflection,
+        "Hermes quoted text not present in the evidence contract; using deterministic fallback.",
+        "hermes-fallback",
+      );
+    }
+
+    if (hasUnsupportedBackgroundClaim(parsed, contractArgs)) {
+      return deterministicResult(
+        deterministicReflection,
+        "Hermes made a source-bound background claim absent from the evidence contract; using deterministic fallback.",
         "hermes-fallback",
       );
     }

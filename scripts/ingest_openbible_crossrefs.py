@@ -104,10 +104,10 @@ def parse_single(token: str) -> tuple[str, int, int]:
     return code, int(chapter), int(verse)
 
 
-def parse_reference(raw: str) -> NormalizedRef:
+def parse_reference(raw: str) -> tuple[NormalizedRef, bool]:
     if "-" not in raw:
         code, chapter, verse = parse_single(raw)
-        return NormalizedRef(code=code, chapter=chapter, startVerse=verse, endVerse=verse)
+        return NormalizedRef(code=code, chapter=chapter, startVerse=verse, endVerse=verse), False
 
     start_raw, end_raw = raw.split("-", 1)
     start_code, start_chapter, start_verse = parse_single(start_raw)
@@ -115,9 +115,9 @@ def parse_reference(raw: str) -> NormalizedRef:
 
     if start_code != end_code or start_chapter != end_chapter:
         # Keep the start anchor only when a range spans further than our current UI can render cleanly.
-        return NormalizedRef(code=start_code, chapter=start_chapter, startVerse=start_verse, endVerse=start_verse)
+        return NormalizedRef(code=start_code, chapter=start_chapter, startVerse=start_verse, endVerse=start_verse), True
 
-    return NormalizedRef(code=start_code, chapter=start_chapter, startVerse=start_verse, endVerse=end_verse)
+    return NormalizedRef(code=start_code, chapter=start_chapter, startVerse=start_verse, endVerse=end_verse), False
 
 
 def label(reference: NormalizedRef) -> str:
@@ -140,6 +140,7 @@ def main() -> None:
     skipped = 0
     total_edges = 0
 
+    collapsed_ranges = 0
     for line in rows[1:]:
         if not line.strip():
             continue
@@ -151,8 +152,8 @@ def main() -> None:
         from_raw, to_raw, votes_raw = parts[:3]
 
         try:
-            from_ref = parse_reference(from_raw)
-            to_ref = parse_reference(to_raw)
+            from_ref, from_collapsed = parse_reference(from_raw)
+            to_ref, to_collapsed = parse_reference(to_raw)
             votes = int(votes_raw)
         except Exception:
             skipped += 1
@@ -161,12 +162,20 @@ def main() -> None:
         if votes <= 0:
             continue
 
+        if from_collapsed:
+            collapsed_ranges += 1
+        if to_collapsed:
+            collapsed_ranges += 1
+
         grouped[label(from_ref)].append(
             {
                 "to": asdict(to_ref),
                 "toLabel": label(to_ref),
                 "votes": votes,
                 "source": "OpenBible Cross References",
+                "rawFrom": from_raw,
+                "rawTo": to_raw,
+                "normalizationLoss": from_collapsed or to_collapsed,
             }
         )
         total_edges += 1
@@ -190,6 +199,9 @@ def main() -> None:
                     "anchors": len(normalized),
                     "edges": total_edges,
                     "skipped": skipped,
+                    "skippedSourceRows": skipped,
+                    "unsupportedRanges": 0,
+                    "collapsedRanges": collapsed_ranges,
                 },
                 "byVerse": normalized,
             },

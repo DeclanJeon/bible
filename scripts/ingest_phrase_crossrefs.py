@@ -153,6 +153,7 @@ def main() -> None:
                             "to": asdict(target),
                             "toLabel": label(target),
                             "source": "Bible Cross References KJV",
+                            "rawTarget": token.strip(),
                         }
                     )
                     edges += 1
@@ -174,6 +175,9 @@ def main() -> None:
                     "anchors": len(grouped),
                     "edges": edges,
                     "skipped": skipped,
+                    "skippedSourceRows": skipped,
+                    "unsupportedRanges": 0,
+                    "collapsedRanges": 0,
                 },
                 "byVerse": grouped,
             },

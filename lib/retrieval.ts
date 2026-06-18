@@ -651,7 +651,7 @@ function buildRuleBasedRetrieval(prompt: string, locale?: string, options: Retri
 }
 
 function isOffTopicEverydayPrompt(prompt: string) {
-  const hasEverydayChoice = /(점심|저녁|아침|뭐 먹|메뉴|노트북|컴퓨터|핸드폰|쇼핑|살까 말까|구매|가격|여행지|영화|게임|주식|코인|맛집)/i.test(prompt);
+  const hasEverydayChoice = /(점심|저녁|아침|뭐 먹|메뉴|노트북|컴퓨터|핸드폰|쇼핑|살까 말까|구매|가격|여행지|영화|게임|주식|코인|맛집|coffee|tea|buy|purchase|lunch|dinner|breakfast|menu|movie|game|stock|crypto|restaurant)/i.test(prompt);
   const hasVagueNonConcern = /(아무 생각|그냥 모르|딱히|할 말 없|nothing much|no thoughts)/i.test(prompt);
   const hasSpiritualFrame = /(하나님|예수|성경|기도|믿음|죄|용서|소망|사랑|정의|자비|진리|영원|죽음|고통|의미|정체성|존재|가치|겸손|의심|기쁨|아름|초월|불안|미래|외로|선|악|철학|삶|무기력|슬픔|두려|힘들|지쳐)/i.test(prompt);
   return (hasEverydayChoice || hasVagueNonConcern) && !hasSpiritualFrame;

@@ -1,6 +1,7 @@
 import type { StoryCluster } from "@/lib/app-data";
 import type { BookMetadata } from "@/lib/book-metadata";
 import type { CrossReferenceSuggestion } from "@/lib/knowledge";
+import type { CrossReferenceEdge, CrossReferenceNetworkSummary } from "@/lib/crossref-graph";
 import type { RetrievalResult } from "@/lib/retrieval";
 import type { ReflectionResponse } from "@/lib/reflection";
 import type { SafetyAssessment } from "@/lib/safety";
@@ -17,6 +18,10 @@ export type HermesEvidenceContract = {
   paulLayer: StoryCluster["paulLayer"];
   jewishReception: StoryCluster["jewishReception"];
   graphSuggestions: CrossReferenceSuggestion[];
+  crossReferenceSummary?: CrossReferenceNetworkSummary | null;
+  crossReferenceHighlights?: CrossReferenceEdge[];
+  crossReferenceNetworkUrl?: string | null;
+  allowedEvidenceIds?: string[];
   deterministicReflection: ReflectionResponse;
 };
 
@@ -31,10 +36,11 @@ export function buildHermesPolicy(): HermesGenerationPolicy {
   return {
     mode: "evidence-locked",
     allowedClaims: [
-      "Summarize only from provided passages, metadata notes, graph suggestions, and safety assessment.",
+      "Summarize only from provided passages, metadata notes, cross-reference graph evidence, and safety assessment.",
       "Use tentative language for disputed authorship, date, and place claims.",
       "Identify Jesus, Paul, and Jewish reception as distinct interpretive layers.",
       "Point back to the cited evidence whenever making a personal connection.",
+      "When cross-reference network evidence is present, mention the full-network count and link only from the provided contract fields.",
       "If safety level is caution or crisis, keep supportive guidance secondary to immediate human help and safety.",
     ],
     forbiddenClaims: [

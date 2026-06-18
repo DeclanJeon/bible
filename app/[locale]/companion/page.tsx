@@ -6,15 +6,17 @@ import { PassageCard } from "@/components/passage-card";
 import { NoteCard } from "@/components/note-card";
 import { SourceList } from "@/components/source-list";
 import { CrossReferenceSection } from "@/components/crossref-section";
+import { FullNetworkCta } from "@/components/full-network-cta";
 import { BookProfileCard } from "@/components/book-profile-card";
 import { SafetyBanner } from "@/components/safety-banner";
 import { TabSection } from "@/components/tab-section";
 import { Collapsible } from "@/components/collapsible";
-import { getPassage } from "@/lib/bible";
+import { getPassage, serializeBibleReference } from "@/lib/bible";
 import { APP_SOURCES, getRelatedClustersFromReferences } from "@/lib/app-data";
 import { UI_COPY, localizeSourceLinks, localizeStoryCluster, resolveAppLocale } from "@/lib/content";
 import { getBookMetadata } from "@/lib/book-metadata";
 import { getPassageCrossReferences } from "@/lib/knowledge";
+import { getCrossReferenceNetwork } from "@/lib/crossref-graph";
 import { buildBibleHref, buildCompanionHref, buildGraphHref, buildPassageHref, buildStudyHref } from "@/lib/navigation";
 import { buildReflectionResponse } from "@/lib/reflection";
 import { generateReflectionWithHermes } from "@/lib/hermes";
@@ -69,6 +71,15 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const primaryReference = retrieval.primaryReference;
   const primary = await getPassage(primaryReference, appLocale);
   const graphSuggestions = hasReliablePrimary ? await getPassageCrossReferences(primaryReference, 4, appLocale) : [];
+  const crossReferenceNetwork = hasReliablePrimary
+    ? await getCrossReferenceNetwork(primaryReference, {
+        locale: appLocale,
+        highlightLimit: 4,
+        includeExcerpts: "preview",
+        includeBackground: true,
+        summaryOnly: true,
+      })
+    : null;
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
@@ -105,6 +116,10 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     ? getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => localizeStoryCluster(related, appLocale))
     : [];
   const sources = localizeSourceLinks(APP_SOURCES, appLocale);
+  const crossReferenceNetworkUrl = crossReferenceNetwork ? `/${appLocale}/crossrefs/${serializeBibleReference(primaryReference)}` : null;
+  const allowedEvidenceIds = crossReferenceNetwork
+    ? ["primary", ...crossReferenceNetwork.highlights.map((edge) => edge.id)]
+    : ["primary"];
 
   const generation = await generateReflectionWithHermes(
     {
@@ -126,6 +141,10 @@ export default async function CompanionPage({ params, searchParams }: Props) {
       paulLayer: cluster.paulLayer,
       jewishReception: cluster.jewishReception,
       graphSuggestions,
+      crossReferenceSummary: crossReferenceNetwork?.summary ?? null,
+      crossReferenceHighlights: crossReferenceNetwork?.highlights ?? [],
+      crossReferenceNetworkUrl,
+      allowedEvidenceIds,
       deterministicReflection: deterministic,
     },
     deterministic,
@@ -203,6 +222,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
                 {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
               </Link>
+              <FullNetworkCta reference={primaryReference} locale={appLocale} totalEdges={crossReferenceNetwork?.summary.totalEdges} />
             </div>
           </div>
         ) : (
@@ -308,6 +328,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               content: (
                 <div className="space-y-8">
                   <CrossReferenceSection suggestions={graphSuggestions} locale={appLocale} />
+                  {hasReliablePrimary ? <FullNetworkCta reference={primaryReference} locale={appLocale} totalEdges={crossReferenceNetwork?.summary.totalEdges} /> : null}
                   {relatedClusters.length ? (
                     <div>
                       <div className="section-title text-base">{copy.relatedLanes}</div>

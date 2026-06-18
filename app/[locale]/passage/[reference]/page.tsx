@@ -6,10 +6,12 @@ import { getChapterContext, getPassage, parseBibleReferenceSlug, type BibleRefer
 import { STORY_CLUSTERS } from "@/lib/app-data";
 import { localizeStoryCluster, UI_COPY } from "@/lib/content";
 import { getPassageCrossReferences } from "@/lib/knowledge";
+import { getCrossReferenceNetwork } from "@/lib/crossref-graph";
 import { buildBibleHref, buildCompanionHref, buildGraphHref, buildLanesHref, buildStudyHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
 import { CrossReferenceSection } from "@/components/crossref-section";
+import { FullNetworkCta } from "@/components/full-network-cta";
 
 const COPY = {
   en: {
@@ -45,6 +47,8 @@ const COPY = {
 type Props = {
   params: Promise<{ locale: string; reference: string }>;
 };
+
+const MAX_REFERENCE_SPAN = 80;
 
 function overlaps(left: BibleReference, right: BibleReference) {
   return (
@@ -94,11 +98,15 @@ export default async function PassagePage({ params }: Props) {
   if (!reference) {
     notFound();
   }
+  if (reference.endVerse - reference.startVerse + 1 > MAX_REFERENCE_SPAN) {
+    notFound();
+  }
 
-  const [passage, context, crossReferences] = await Promise.all([
+  const [passage, context, crossReferences, crossReferenceNetwork] = await Promise.all([
     getPassage(reference, locale),
     getChapterContext(reference, 4, locale),
     getPassageCrossReferences(reference, 4, locale),
+    getCrossReferenceNetwork(reference, { locale, highlightLimit: 4, includeExcerpts: "preview", includeBackground: true, summaryOnly: true }),
   ]);
 
   if (!passage.verses.length) {
@@ -192,7 +200,32 @@ export default async function PassagePage({ params }: Props) {
         </aside>
       </section>
 
-      <div className="mt-8">
+      <div className="mt-8 space-y-4">
+        <div className="glass rounded-2xl p-6 lg:p-8">
+          <div className="section-title">{locale === "ko" ? "전체 관련 성구 요약" : "Full related Scripture summary"}</div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="soft-glass rounded-2xl p-4">
+              <div className="text-2xl font-bold text-[var(--ink)]">{crossReferenceNetwork.summary.totalEdges}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">{locale === "ko" ? "전체 직접 연결" : "direct links"}</div>
+            </div>
+            <div className="soft-glass rounded-2xl p-4">
+              <div className="text-2xl font-bold text-[var(--ink)]">{crossReferenceNetwork.summary.outgoingCount}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">{locale === "ko" ? "나가는 참조" : "outgoing"}</div>
+            </div>
+            <div className="soft-glass rounded-2xl p-4">
+              <div className="text-2xl font-bold text-[var(--ink)]">{crossReferenceNetwork.summary.incomingCount}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">{locale === "ko" ? "들어오는 참조" : "incoming"}</div>
+            </div>
+            <div className="soft-glass rounded-2xl p-4">
+              <div className="text-2xl font-bold text-[var(--ink)]">{crossReferenceNetwork.summary.mutualCount}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">{locale === "ko" ? "상호 링크" : "mutual"}</div>
+            </div>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{crossReferenceNetwork.summary.scopeLabel} {crossReferenceNetwork.summary.coverageNote}</p>
+          <div className="mt-5">
+            <FullNetworkCta reference={reference} locale={locale} totalEdges={crossReferenceNetwork.summary.totalEdges} />
+          </div>
+        </div>
         <CrossReferenceSection suggestions={crossReferences} locale={locale} />
       </div>
     </main>

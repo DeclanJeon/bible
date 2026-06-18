@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { CrossReferenceSection } from "@/components/crossref-section";
+import { FullNetworkCta } from "@/components/full-network-cta";
 import { SecondaryNav } from "@/components/secondary-nav";
 import { TabSection } from "@/components/tab-section";
 import { Collapsible } from "@/components/collapsible";
@@ -108,7 +109,10 @@ export default async function GraphPage({ params }: Props) {
                 label: "Cross References",
                 count: graphSuggestions.length,
                 content: (
-                  <CrossReferenceSection suggestions={graphSuggestions} locale={locale} />
+                  <div className="space-y-4">
+                    <CrossReferenceSection suggestions={graphSuggestions} locale={locale} />
+                    <FullNetworkCta reference={cluster.primary} locale={locale} />
+                  </div>
                 ),
               },
               {
