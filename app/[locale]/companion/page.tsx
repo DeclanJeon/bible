@@ -161,16 +161,16 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             <Link href={buildBibleHref({ locale: appLocale })} className="hidden rounded-lg border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] sm:inline-block">
               {UI_COPY[appLocale].sidebar.navBible}
             </Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${appLocale === "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>KO</Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${appLocale !== "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>EN</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[36px] flex items-center ${appLocale === "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>KO</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[36px] flex items-center ${appLocale !== "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>EN</Link>
           </div>
         </div>
         <form action={`/${appLocale}/companion`} className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
-          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-4 py-2.5 sm:px-5 sm:py-3">
+          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-3 py-2.5 sm:px-5 sm:py-3">
             <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
-            <input type="text" name="prompt" defaultValue={userPrompt} required minLength={2} className="min-w-0 flex-1 border-0 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:text-base" />
+            <input type="text" name="prompt" defaultValue={userPrompt} required minLength={2} className="w-full min-w-0 flex-1 border-0 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:text-base" />
           </div>
-          <button type="submit" className="shrink-0 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-xs font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90 sm:px-5 sm:py-3 sm:text-sm">{UI_COPY[appLocale].prompt.submit}</button>
+          <button type="submit" className="shrink-0 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-xs font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90 min-h-[44px] sm:px-5 sm:py-3 sm:text-sm">{UI_COPY[appLocale].prompt.submit}</button>
         </form>
       </header>
 
@@ -210,14 +210,14 @@ export default async function CompanionPage({ params, searchParams }: Props) {
                 </div>
               </Collapsible>
             )}
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href={buildStudyHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold)]/90 transition">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href={buildStudyHref(cluster.slug, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold)]/90 transition min-h-[44px]">
                 <BookOpen className="h-4 w-4" />{copy.openStudyDesk}
               </Link>
-              <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+              <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition min-h-[44px]">
                 <Compass className="h-4 w-4" />{UI_COPY[appLocale].sidebar.navGraph}
               </Link>
-              <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+              <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition min-h-[44px]">
                 {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
               </Link>
               <FullNetworkCta reference={primaryReference} locale={appLocale} />

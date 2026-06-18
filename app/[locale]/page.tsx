@@ -34,23 +34,23 @@ export default async function HomePage({ params }: Props) {
   return (
     <main className="flex min-h-dvh flex-col">
       {/* Language toggle */}
-      <div className="fixed right-3 top-3 z-50 flex items-center gap-1 sm:right-5 sm:top-5">
+      <div className="fixed right-3 top-3 z-50 flex items-center gap-1.5 sm:right-5 sm:top-5">
         <Link
           href="/ko"
-          className={`inline-flex h-8 items-center rounded-md px-2.5 text-xs font-medium transition ${
+          className={`inline-flex h-9 min-w-[40px] items-center justify-center rounded-md px-2.5 text-xs font-semibold transition ${
             locale === "ko"
               ? "bg-[var(--gold)] text-[var(--canvas)]"
-              : "text-[var(--ink-subtle)] hover:text-[var(--ink)]"
+              : "border border-[var(--hairline-strong)] text-[var(--ink-subtle)] hover:text-[var(--ink)]"
           }`}
         >
           KO
         </Link>
         <Link
           href="/en"
-          className={`inline-flex h-8 items-center rounded-md px-2.5 text-xs font-medium transition ${
+          className={`inline-flex h-9 min-w-[40px] items-center justify-center rounded-md px-2.5 text-xs font-semibold transition ${
             locale !== "ko"
               ? "bg-[var(--gold)] text-[var(--canvas)]"
-              : "text-[var(--ink-subtle)] hover:text-[var(--ink)]"
+              : "border border-[var(--hairline-strong)] text-[var(--ink-subtle)] hover:text-[var(--ink)]"
           }`}
         >
           EN

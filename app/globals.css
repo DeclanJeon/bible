@@ -120,7 +120,7 @@ textarea {
   align-items: center;
   border-radius: 999px;
   padding: 6px 14px;
-  min-height: 36px;
+  min-height: 44px;
   background: var(--surface-2);
   border: 1px solid var(--hairline);
   color: var(--muted);
