@@ -17,7 +17,7 @@ export function QuickPromptForm({
     <div>
       <form action={`/${appLocale}/companion`} className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-2 shadow-2xl shadow-black/15 sm:rounded-2xl">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg px-3 py-3 sm:gap-3 sm:px-4">
+          <div className="flex flex-1 items-center gap-2 rounded-lg px-3 py-3 sm:gap-3 sm:px-4">
             <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
             <input
               type="text"
@@ -25,7 +25,7 @@ export function QuickPromptForm({
               defaultValue={defaultValue}
               required
               minLength={2}
-              className="min-w-0 flex-1 border-0 bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+              className="w-full min-w-0 flex-1 border-0 bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
               placeholder={copy.placeholder}
             />
           </div>
