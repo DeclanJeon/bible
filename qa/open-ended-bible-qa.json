@@ -42,6 +42,48 @@
     "maxLatencyMs": 4000
   },
   {
+    "id": "doctrine-atonement-colloquial",
+    "family": "doctrine",
+    "prompt": "예수님이 왜 죽으셨어?",
+    "expectedPolicy": "survey_bundle",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["1PE 3:18", "MAR 10:45", "ISA 53:4-6"],
+    "minSupportingCount": 2,
+    "expectedSafetyLevel": "none",
+    "expectedEvidenceTerms": ["예수", "죄", "대속", "화목", "하나님", "십자가"],
+    "minEvidenceTermHits": 2,
+    "forbiddenPhrases": ["더 구체적인 연결이 필요", "낮은 신뢰도", "확정하지", "본문 단어가 충분하지 않습니다"],
+    "maxLatencyMs": 4000
+  },
+  {
+    "id": "doctrine-deity-colloquial",
+    "family": "doctrine",
+    "prompt": "예수님은 하나님이야?",
+    "expectedPolicy": "survey_bundle",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["JOH 20:28", "JOH 1:1-14", "HEB 1:1-3", "COL 1:15-20"],
+    "minSupportingCount": 2,
+    "expectedSafetyLevel": "none",
+    "expectedEvidenceTerms": ["예수", "하나님", "아들", "말씀", "주", "영광"],
+    "minEvidenceTermHits": 2,
+    "forbiddenPhrases": ["더 구체적인 연결이 필요", "낮은 신뢰도", "확정하지", "본문 단어가 충분하지 않습니다"],
+    "maxLatencyMs": 4000
+  },
+  {
+    "id": "doctrine-trinity-colloquial",
+    "family": "doctrine",
+    "prompt": "삼위일체가 뭐야?",
+    "expectedPolicy": "survey_bundle",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 28:19", "JOH 14:16-17", "MAT 3:16-17"],
+    "minSupportingCount": 2,
+    "expectedSafetyLevel": "none",
+    "expectedEvidenceTerms": ["성부", "성자", "성령", "하나님", "이름", "보혜사"],
+    "minEvidenceTermHits": 2,
+    "forbiddenPhrases": ["더 구체적인 연결이 필요", "낮은 신뢰도", "확정하지", "본문 단어가 충분하지 않습니다"],
+    "maxLatencyMs": 4000
+  },
+  {
     "id": "existential-purpose-colloquial",
     "family": "existential",
     "prompt": "사람은 왜 사는거지?",

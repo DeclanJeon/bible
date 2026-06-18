@@ -1,6 +1,6 @@
 {
-  "version": "seed-2026-06-18-jesus",
-  "generatedAt": "2026-06-18T18:30:00.000Z",
+  "version": "seed-2026-06-18-doctrine",
+  "generatedAt": "2026-06-18T21:15:00.000Z",
   "locale": "en",
   "source": {
     "translation": "world_english_bible",
@@ -162,6 +162,86 @@
         "1JO 3:10-23",
         "1JO 3:16",
         "1JO 3:16-17"
+      ]
+    },
+    {
+      "id": "en:1PE-3-18-18",
+      "reference": {
+        "code": "1PE",
+        "chapter": 3,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "displayReference": "1 Peter 3:18",
+      "locale": "en",
+      "text": "18. Because Christ also suffered for sins once, the righteous for the unrighteous, that he might bring you to God, being put to death in the flesh, but made alive in the Spirit,",
+      "normalizedText": "18 because christ also suffered for sins once the righteous for the unrighteous that he might bring you to god being put to death in the flesh but made alive in the spirit",
+      "summary": "Christ suffered once for sins, the righteous for the unrighteous, to bring us to God.",
+      "themes": [
+        "atonement",
+        "Christ",
+        "suffering",
+        "reconciliation",
+        "God"
+      ],
+      "doctrines": [
+        "atonement",
+        "substitution",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "hope",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "How are we brought to God?"
+      ],
+      "entities": [
+        "Christ",
+        "God",
+        "righteous",
+        "unrighteous"
+      ],
+      "keywords": [
+        "sins",
+        "righteous",
+        "unrighteous",
+        "bring us to God",
+        "죄",
+        "의인",
+        "불의한 자",
+        "하나님께로",
+        "예수"
+      ],
+      "axes": [
+        "Christ",
+        "God",
+        "atonement",
+        "belonging",
+        "guilt",
+        "hope",
+        "reconciliation",
+        "substitution",
+        "suffering"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 26,
+      "crossReferences": [
+        "1JO 1:9",
+        "1PE 2:21-24",
+        "1PE 4:1",
+        "1PE 4:6",
+        "2CO 13:4",
+        "2CO 1:24",
+        "2CO 5:21",
+        "ACT 22:14",
+        "ACT 3:14",
+        "COL 1:21-22",
+        "EPH 2:16-18",
+        "GAL 1:4"
       ]
     },
     {
@@ -875,6 +955,89 @@
       ]
     },
     {
+      "id": "en:ISA-53-4-6",
+      "reference": {
+        "code": "ISA",
+        "chapter": 53,
+        "startVerse": 4,
+        "endVerse": 6
+      },
+      "displayReference": "Isaiah 53:4-6",
+      "locale": "en",
+      "text": "4. Surely he has borne our sickness and carried our suffering; yet we considered him plagued, struck by God, and afflicted. 5. But he was pierced for our transgressions. He was crushed for our iniquities. The punishment that brought our peace was on him; and by his wounds we are healed. 6. All we like sheep have gone astray. Everyone has turned to his own way; and Yahweh has laid on him the iniquity of us all.",
+      "normalizedText": "4 surely he has borne our sickness and carried our suffering yet we considered him plagued struck by god and afflicted 5 but he was pierced for our transgressions he was crushed for our iniquities the punishment that brought our peace was on him and by his wounds we are healed 6 all we like sheep have gone astray everyone has turned to his own way and yahweh has laid on him the iniquity of us all",
+      "summary": "The servant bears our griefs and sins, and by his wounds many are healed and brought peace.",
+      "themes": [
+        "atonement",
+        "suffering servant",
+        "sin",
+        "peace",
+        "healing"
+      ],
+      "doctrines": [
+        "atonement",
+        "substitution",
+        "prophecy",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "shame",
+        "peace",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "How does the cross deal with sin?"
+      ],
+      "entities": [
+        "servant",
+        "LORD",
+        "many"
+      ],
+      "keywords": [
+        "pierced",
+        "iniquities",
+        "peace",
+        "healed",
+        "찔림",
+        "죄악",
+        "평화",
+        "나음",
+        "십자가"
+      ],
+      "axes": [
+        "atonement",
+        "guilt",
+        "healing",
+        "hope",
+        "peace",
+        "prophecy",
+        "reconciliation",
+        "shame",
+        "sin",
+        "substitution",
+        "suffering servant"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 42,
+      "crossReferences": [
+        "1CO 15:3",
+        "1JO 2:2",
+        "1PE 2:24",
+        "1PE 2:24-25",
+        "1PE 2:25",
+        "1PE 3:18",
+        "2CO 5:21",
+        "DAN 9:24",
+        "EPH 5:2",
+        "EZE 3:18",
+        "GAL 3:13",
+        "GEN 3:15"
+      ]
+    },
+    {
       "id": "en:JAM-1-5-5",
       "reference": {
         "code": "JAM",
@@ -1035,6 +1198,89 @@
       ]
     },
     {
+      "id": "en:JOH-14-16-17",
+      "reference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "John 14:16-17",
+      "locale": "en",
+      "text": "16. I will pray to the Father, and he will give you another Counselor, that he may be with you forever: 17. the Spirit of truth, whom the world can’t receive, for it doesn’t see him and doesn’t know him. You know him, for he lives with you and will be in you.",
+      "normalizedText": "16 i will pray to the father and he will give you another counselor that he may be with you forever 17 the spirit of truth whom the world can't receive for it doesn't see him and doesn't know him you know him for he lives with you and will be in you",
+      "summary": "Jesus says he will ask the Father, and the Father will give another Helper, the Spirit of truth, to remain with believers.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "presence of God"
+      ],
+      "doctrines": [
+        "Trinity",
+        "Holy Spirit",
+        "revelation",
+        "presence of God"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "comfort",
+        "truth",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How do Father, Son, and Spirit work together?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father",
+        "Holy Spirit",
+        "disciples"
+      ],
+      "keywords": [
+        "Father",
+        "Helper",
+        "Spirit of truth",
+        "abide",
+        "아버지",
+        "보혜사",
+        "진리의 성령",
+        "함께",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "belonging",
+        "comfort",
+        "hope",
+        "presence of God",
+        "revelation",
+        "truth"
+      ],
+      "canonicalWeight": 0.97,
+      "crossReferenceDegree": 56,
+      "crossReferences": [
+        "1CO 14:15",
+        "1CO 2:14",
+        "1CO 3:16",
+        "1CO 6:19",
+        "1JO 2:1",
+        "1JO 2:27",
+        "1JO 3:24",
+        "1JO 4:12-13",
+        "1JO 4:4",
+        "1JO 4:6",
+        "1JO 5:7",
+        "2CO 13:5"
+      ]
+    },
+    {
       "id": "en:JOH-14-6-6",
       "reference": {
         "code": "JOH",
@@ -1109,6 +1355,84 @@
         "1PE 3:18",
         "2CO 1:19-20",
         "2JO 1:9"
+      ]
+    },
+    {
+      "id": "en:JOH-20-28-28",
+      "reference": {
+        "code": "JOH",
+        "chapter": 20,
+        "startVerse": 28,
+        "endVerse": 28
+      },
+      "displayReference": "John 20:28",
+      "locale": "en",
+      "text": "28. Thomas answered him, “My Lord and my God!”",
+      "normalizedText": "28 thomas answered him my lord and my god",
+      "summary": "Thomas addresses the risen Jesus as 'My Lord and my God.'",
+      "themes": [
+        "Jesus",
+        "deity of Christ",
+        "resurrection",
+        "worship",
+        "faith"
+      ],
+      "doctrines": [
+        "deity of Christ",
+        "resurrection",
+        "faith"
+      ],
+      "humanConcerns": [
+        "doubt",
+        "truth",
+        "worship",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Is Jesus God?",
+        "예수님은 하나님이신가?",
+        "How does Scripture speak of Jesus' deity?"
+      ],
+      "entities": [
+        "Thomas",
+        "Jesus",
+        "God"
+      ],
+      "keywords": [
+        "my Lord and my God",
+        "Thomas",
+        "risen Jesus",
+        "나의 주",
+        "나의 하나님",
+        "도마",
+        "부활",
+        "예수"
+      ],
+      "axes": [
+        "Jesus",
+        "deity of Christ",
+        "doubt",
+        "faith",
+        "hope",
+        "resurrection",
+        "truth",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 20,
+      "crossReferences": [
+        "1TI 3:16",
+        "ACT 7:59-60",
+        "ISA 25:9",
+        "ISA 40:9-11",
+        "ISA 7:14",
+        "ISA 9:6",
+        "JER 23:5-6",
+        "JOH 1:1",
+        "JOH 20:16",
+        "JOH 20:31",
+        "JOH 5:23",
+        "JOH 9:35-38"
       ]
     },
     {
@@ -1194,6 +1518,86 @@
         "GEN 22:12",
         "ISA 45:21-23",
         "ISA 49:6-7"
+      ]
+    },
+    {
+      "id": "en:MAR-10-45-45",
+      "reference": {
+        "code": "MAR",
+        "chapter": 10,
+        "startVerse": 45,
+        "endVerse": 45
+      },
+      "displayReference": "Mark 10:45",
+      "locale": "en",
+      "text": "45. For the Son of Man also came not to be served but to serve, and to give his life as a ransom for many.”",
+      "normalizedText": "45 for the son of man also came not to be served but to serve and to give his life as a ransom for many",
+      "summary": "Jesus says the Son of Man came to serve and to give his life as a ransom for many.",
+      "themes": [
+        "Jesus",
+        "cross",
+        "service",
+        "ransom",
+        "salvation"
+      ],
+      "doctrines": [
+        "atonement",
+        "discipleship",
+        "Christology"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "service",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "What did Jesus say about his death?"
+      ],
+      "entities": [
+        "Jesus",
+        "Son of Man",
+        "many"
+      ],
+      "keywords": [
+        "ransom",
+        "life",
+        "many",
+        "serve",
+        "대속물",
+        "목숨",
+        "섬기다",
+        "십자가",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "Jesus",
+        "atonement",
+        "cross",
+        "discipleship",
+        "guilt",
+        "hope",
+        "ransom",
+        "salvation",
+        "service"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 15,
+      "crossReferences": [
+        "1PE 1:19",
+        "1TI 3:4-6",
+        "2CO 5:21",
+        "2CO 8:9",
+        "DAN 9:24",
+        "DAN 9:26",
+        "GAL 3:13",
+        "HEB 5:8",
+        "ISA 53:10-12",
+        "JOH 10:15",
+        "JOH 13:14",
+        "LUK 22:26-27"
       ]
     },
     {
@@ -1355,6 +1759,169 @@
         "HEB 10:16-17",
         "JAM 2:8",
         "JOH 1:17"
+      ]
+    },
+    {
+      "id": "en:MAT-28-19-19",
+      "reference": {
+        "code": "MAT",
+        "chapter": 28,
+        "startVerse": 19,
+        "endVerse": 19
+      },
+      "displayReference": "Matthew 28:19",
+      "locale": "en",
+      "text": "19. Go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit,",
+      "normalizedText": "19 go and make disciples of all nations baptizing them in the name of the father and of the son and of the holy spirit",
+      "summary": "Jesus commands baptism in the singular name of the Father, the Son, and the Holy Spirit.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "mission"
+      ],
+      "doctrines": [
+        "Trinity",
+        "baptism",
+        "mission"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "identity",
+        "worship"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How does Jesus name Father, Son, and Spirit together?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "disciples"
+      ],
+      "keywords": [
+        "name",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "이름",
+        "아버지",
+        "아들",
+        "성령",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "baptism",
+        "belonging",
+        "identity",
+        "mission",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 37,
+      "crossReferences": [
+        "1CO 12:4-6",
+        "1CO 15:29",
+        "1CO 1:13-16",
+        "1JO 5:7",
+        "1PE 3:21",
+        "2CO 13:14",
+        "ACT 10:47-48",
+        "ACT 13:46-47",
+        "ACT 14:21",
+        "ACT 16:15-33",
+        "ACT 19:3-5",
+        "ACT 1:8"
+      ]
+    },
+    {
+      "id": "en:MAT-3-16-17",
+      "reference": {
+        "code": "MAT",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "Matthew 3:16-17",
+      "locale": "en",
+      "text": "16. Jesus, when he was baptized, went up directly from the water: and behold, the heavens were opened to him. He saw the Spirit of God descending as a dove, and coming on him. 17. Behold, a voice out of the heavens said, “This is my beloved Son, with whom I am well pleased.”",
+      "normalizedText": "16 jesus when he was baptized went up directly from the water and behold the heavens were opened to him he saw the spirit of god descending as a dove and coming on him 17 behold a voice out of the heavens said this is my beloved son with whom i am well pleased",
+      "summary": "At Jesus' baptism the Son is baptized, the Spirit descends like a dove, and the Father speaks from heaven.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "baptism"
+      ],
+      "doctrines": [
+        "Trinity",
+        "revelation",
+        "baptism of Jesus"
+      ],
+      "humanConcerns": [
+        "truth",
+        "worship",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How are Father, Son, and Spirit seen together?"
+      ],
+      "entities": [
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "Jesus",
+        "John the Baptist"
+      ],
+      "keywords": [
+        "baptism",
+        "Spirit",
+        "dove",
+        "beloved Son",
+        "세례",
+        "성령",
+        "비둘기",
+        "사랑하는 아들",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "baptism",
+        "baptism of Jesus",
+        "belonging",
+        "revelation",
+        "truth",
+        "worship"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 25,
+      "crossReferences": [
+        "2PE 1:17",
+        "ACT 7:56",
+        "COL 1:13",
+        "COL 1:18-19",
+        "EPH 1:6",
+        "EZE 1:1",
+        "ISA 11:2",
+        "ISA 42:1",
+        "ISA 42:21",
+        "ISA 59:21",
+        "ISA 61:1",
+        "JOH 12:28-30"
       ]
     },
     {
@@ -1673,8 +2240,8 @@
     }
   ],
   "stats": {
-    "unitCount": 21,
-    "seedReferenceCount": 21,
-    "crossReferenceDegreeTotal": 1650
+    "unitCount": 28,
+    "seedReferenceCount": 28,
+    "crossReferenceDegreeTotal": 1871
   }
 }

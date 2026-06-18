@@ -15,7 +15,7 @@ const CANONICAL_SECTION_RANK_BY_BOOK: Record<string, number> = {
   GEN: 1, EXO: 1, LEV: 1, NUM: 1, DEU: 1,
   PSA: 2, PRO: 2, ECC: 2, JOB: 2, SNG: 2,
   ISA: 3, JER: 3, LAM: 3, EZK: 3, DAN: 3, HOS: 3, JOL: 3, AMO: 3, OBA: 3, JON: 3, MIC: 3, NAM: 3, HAB: 3, ZEP: 3, HAG: 3, ZEC: 3, MAL: 3,
-  MAT: 4, MRK: 4, LUK: 4, JOH: 4,
+  MAT: 4, MAR: 4, LUK: 4, JOH: 4,
   ROM: 5, "1CO": 5, "2CO": 5, GAL: 5, EPH: 5, PHI: 5, COL: 5, "1TH": 5, "2TH": 5, "1TI": 5, "2TI": 5, TIT: 5, PHM: 5, HEB: 5, JAM: 5, "1PE": 5, "2PE": 5, "1JO": 5, "2JO": 5, "3JO": 5, JUD: 5,
   REV: 6,
 };

@@ -1,6 +1,6 @@
 {
-  "version": "seed-2026-06-18-jesus",
-  "generatedAt": "2026-06-18T18:30:00.000Z",
+  "version": "seed-2026-06-18-doctrine",
+  "generatedAt": "2026-06-18T21:15:00.000Z",
   "locale": "ko",
   "source": {
     "translation": "korean_bible",
@@ -162,6 +162,86 @@
         "1JO 3:10-23",
         "1JO 3:16",
         "1JO 3:16-17"
+      ]
+    },
+    {
+      "id": "ko:1PE-3-18-18",
+      "reference": {
+        "code": "1PE",
+        "chapter": 3,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "displayReference": "베드로전서 3:18",
+      "locale": "ko",
+      "text": "18. 그리스도께서도 한 번 죄를 위하여 죽으사 의인으로서 불의한 자를 대신하셨으니 이는 우리를 하나님 앞으로 인도하려 하심이라 육체로는 죽임을 당하시고 영으로는 살리심을 받으셨으니",
+      "normalizedText": "18 그리스도께서도 한 번 죄를 위하여 죽으사 의인으로서 불의한 자를 대신하셨으니 이는 우리를 하나님 앞으로 인도하려 하심이라 육체로는 죽임을 당하시고 영으로는 살리심을 받으셨으니",
+      "summary": "그리스도께서는 죄를 위하여 단번에 죽으사 의인으로서 불의한 자를 대신하여 우리를 하나님께로 인도하셨다.",
+      "themes": [
+        "atonement",
+        "Christ",
+        "suffering",
+        "reconciliation",
+        "God"
+      ],
+      "doctrines": [
+        "atonement",
+        "substitution",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "hope",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "How are we brought to God?"
+      ],
+      "entities": [
+        "Christ",
+        "God",
+        "righteous",
+        "unrighteous"
+      ],
+      "keywords": [
+        "sins",
+        "righteous",
+        "unrighteous",
+        "bring us to God",
+        "죄",
+        "의인",
+        "불의한 자",
+        "하나님께로",
+        "예수"
+      ],
+      "axes": [
+        "Christ",
+        "God",
+        "atonement",
+        "belonging",
+        "guilt",
+        "hope",
+        "reconciliation",
+        "substitution",
+        "suffering"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 26,
+      "crossReferences": [
+        "1JO 1:9",
+        "1PE 2:21-24",
+        "1PE 4:1",
+        "1PE 4:6",
+        "2CO 13:4",
+        "2CO 1:24",
+        "2CO 5:21",
+        "ACT 22:14",
+        "ACT 3:14",
+        "COL 1:21-22",
+        "EPH 2:16-18",
+        "GAL 1:4"
       ]
     },
     {
@@ -875,6 +955,89 @@
       ]
     },
     {
+      "id": "ko:ISA-53-4-6",
+      "reference": {
+        "code": "ISA",
+        "chapter": 53,
+        "startVerse": 4,
+        "endVerse": 6
+      },
+      "displayReference": "이사야 53:4-6",
+      "locale": "ko",
+      "text": "4. 그는 실로 우리의 질고를 지고 우리의 슬픔을 당하였거늘 우리는 생각하기를 그는 징벌을 받아서 하나님에게 맞으며 고난을 당한다 하였노라 5. 그가 찔림은 우리의 허물을 인함이요 그가 상함은 우리의 죄악을 인함이라 그가 징계를 받음으로 우리가 평화를 누리고 그가 채찍에 맞음으로 우리가 나음을 입었도다 6. 우리는 다 양 같아서 그릇 행하며 각기 제 길로 갔거늘 여호와께서는 우리 무리의 죄악을 그에게 담당시키셨도다",
+      "normalizedText": "4 그는 실로 우리의 질고를 지고 우리의 슬픔을 당하였거늘 우리는 생각하기를 그는 징벌을 받아서 하나님에게 맞으며 고난을 당한다 하였노라 5 그가 찔림은 우리의 허물을 인함이요 그가 상함은 우리의 죄악을 인함이라 그가 징계를 받음으로 우리가 평화를 누리고 그가 채찍에 맞음으로 우리가 나음을 입었도다 6 우리는 다 양 같아서 그릇 행하며 각기 제 길로 갔거늘 여호와께서는 우리 무리의 죄악을 그에게 담당시키셨도다",
+      "summary": "고난받는 종은 우리의 슬픔과 죄악을 담당하며, 그의 상함으로 우리가 평화와 나음을 얻는다.",
+      "themes": [
+        "atonement",
+        "suffering servant",
+        "sin",
+        "peace",
+        "healing"
+      ],
+      "doctrines": [
+        "atonement",
+        "substitution",
+        "prophecy",
+        "reconciliation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "shame",
+        "peace",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "How does the cross deal with sin?"
+      ],
+      "entities": [
+        "servant",
+        "LORD",
+        "many"
+      ],
+      "keywords": [
+        "pierced",
+        "iniquities",
+        "peace",
+        "healed",
+        "찔림",
+        "죄악",
+        "평화",
+        "나음",
+        "십자가"
+      ],
+      "axes": [
+        "atonement",
+        "guilt",
+        "healing",
+        "hope",
+        "peace",
+        "prophecy",
+        "reconciliation",
+        "shame",
+        "sin",
+        "substitution",
+        "suffering servant"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 42,
+      "crossReferences": [
+        "1CO 15:3",
+        "1JO 2:2",
+        "1PE 2:24",
+        "1PE 2:24-25",
+        "1PE 2:25",
+        "1PE 3:18",
+        "2CO 5:21",
+        "DAN 9:24",
+        "EPH 5:2",
+        "EZE 3:18",
+        "GAL 3:13",
+        "GEN 3:15"
+      ]
+    },
+    {
       "id": "ko:JAM-1-5-5",
       "reference": {
         "code": "JAM",
@@ -1035,6 +1198,89 @@
       ]
     },
     {
+      "id": "ko:JOH-14-16-17",
+      "reference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "요한복음 14:16-17",
+      "locale": "ko",
+      "text": "16. 내가 아버지께 구하겠으니 그가 또 다른 보혜사를 너희에게 주사 영원토록 너희와 함께 있게 하시리니 17. 저는 진리의 영이라 세상은 능히 저를 받지 못하나니 이는 저를 보지도 못하고 알지도 못함이라 그러나 너희는 저를 아나니 저는 너희와 함께 거하심이요 또 너희 속에 계시겠음이라",
+      "normalizedText": "16 내가 아버지께 구하겠으니 그가 또 다른 보혜사를 너희에게 주사 영원토록 너희와 함께 있게 하시리니 17 저는 진리의 영이라 세상은 능히 저를 받지 못하나니 이는 저를 보지도 못하고 알지도 못함이라 그러나 너희는 저를 아나니 저는 너희와 함께 거하심이요 또 너희 속에 계시겠음이라",
+      "summary": "예수님은 아버지께 구하겠다고 하시고, 아버지는 다른 보혜사 곧 진리의 성령을 보내어 성도와 함께 있게 하신다.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "presence of God"
+      ],
+      "doctrines": [
+        "Trinity",
+        "Holy Spirit",
+        "revelation",
+        "presence of God"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "comfort",
+        "truth",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How do Father, Son, and Spirit work together?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father",
+        "Holy Spirit",
+        "disciples"
+      ],
+      "keywords": [
+        "Father",
+        "Helper",
+        "Spirit of truth",
+        "abide",
+        "아버지",
+        "보혜사",
+        "진리의 성령",
+        "함께",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "belonging",
+        "comfort",
+        "hope",
+        "presence of God",
+        "revelation",
+        "truth"
+      ],
+      "canonicalWeight": 0.97,
+      "crossReferenceDegree": 56,
+      "crossReferences": [
+        "1CO 14:15",
+        "1CO 2:14",
+        "1CO 3:16",
+        "1CO 6:19",
+        "1JO 2:1",
+        "1JO 2:27",
+        "1JO 3:24",
+        "1JO 4:12-13",
+        "1JO 4:4",
+        "1JO 4:6",
+        "1JO 5:7",
+        "2CO 13:5"
+      ]
+    },
+    {
       "id": "ko:JOH-14-6-6",
       "reference": {
         "code": "JOH",
@@ -1109,6 +1355,84 @@
         "1PE 3:18",
         "2CO 1:19-20",
         "2JO 1:9"
+      ]
+    },
+    {
+      "id": "ko:JOH-20-28-28",
+      "reference": {
+        "code": "JOH",
+        "chapter": 20,
+        "startVerse": 28,
+        "endVerse": 28
+      },
+      "displayReference": "요한복음 20:28",
+      "locale": "ko",
+      "text": "28. 도마가 대답하여 가로되 `나의 주시며 ! 나의 하나님이시니이다 !'",
+      "normalizedText": "28 도마가 대답하여 가로되 나의 주시며 나의 하나님이시니이다 '",
+      "summary": "도마는 부활하신 예수님께 ‘나의 주시며 나의 하나님이시니이다’라고 고백한다.",
+      "themes": [
+        "Jesus",
+        "deity of Christ",
+        "resurrection",
+        "worship",
+        "faith"
+      ],
+      "doctrines": [
+        "deity of Christ",
+        "resurrection",
+        "faith"
+      ],
+      "humanConcerns": [
+        "doubt",
+        "truth",
+        "worship",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Is Jesus God?",
+        "예수님은 하나님이신가?",
+        "How does Scripture speak of Jesus' deity?"
+      ],
+      "entities": [
+        "Thomas",
+        "Jesus",
+        "God"
+      ],
+      "keywords": [
+        "my Lord and my God",
+        "Thomas",
+        "risen Jesus",
+        "나의 주",
+        "나의 하나님",
+        "도마",
+        "부활",
+        "예수"
+      ],
+      "axes": [
+        "Jesus",
+        "deity of Christ",
+        "doubt",
+        "faith",
+        "hope",
+        "resurrection",
+        "truth",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 20,
+      "crossReferences": [
+        "1TI 3:16",
+        "ACT 7:59-60",
+        "ISA 25:9",
+        "ISA 40:9-11",
+        "ISA 7:14",
+        "ISA 9:6",
+        "JER 23:5-6",
+        "JOH 1:1",
+        "JOH 20:16",
+        "JOH 20:31",
+        "JOH 5:23",
+        "JOH 9:35-38"
       ]
     },
     {
@@ -1194,6 +1518,86 @@
         "GEN 22:12",
         "ISA 45:21-23",
         "ISA 49:6-7"
+      ]
+    },
+    {
+      "id": "ko:MAR-10-45-45",
+      "reference": {
+        "code": "MAR",
+        "chapter": 10,
+        "startVerse": 45,
+        "endVerse": 45
+      },
+      "displayReference": "마가복음 10:45",
+      "locale": "ko",
+      "text": "45. 인자의 온 것은 섬김을 받으려 함이 아니라 도리어 섬기려 하고 자기 목숨을 많은 사람의 대속물로 주려 함이니라'",
+      "normalizedText": "45 인자의 온 것은 섬김을 받으려 함이 아니라 도리어 섬기려 하고 자기 목숨을 많은 사람의 대속물로 주려 함이니라'",
+      "summary": "예수님은 인자가 섬기러 왔고 많은 사람을 위한 대속물로 자기 목숨을 주려 왔다고 말씀하신다.",
+      "themes": [
+        "Jesus",
+        "cross",
+        "service",
+        "ransom",
+        "salvation"
+      ],
+      "doctrines": [
+        "atonement",
+        "discipleship",
+        "Christology"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "service",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "Why did Jesus die?",
+        "예수님은 왜 죽으셨는가?",
+        "What did Jesus say about his death?"
+      ],
+      "entities": [
+        "Jesus",
+        "Son of Man",
+        "many"
+      ],
+      "keywords": [
+        "ransom",
+        "life",
+        "many",
+        "serve",
+        "대속물",
+        "목숨",
+        "섬기다",
+        "십자가",
+        "예수"
+      ],
+      "axes": [
+        "Christology",
+        "Jesus",
+        "atonement",
+        "cross",
+        "discipleship",
+        "guilt",
+        "hope",
+        "ransom",
+        "salvation",
+        "service"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 15,
+      "crossReferences": [
+        "1PE 1:19",
+        "1TI 3:4-6",
+        "2CO 5:21",
+        "2CO 8:9",
+        "DAN 9:24",
+        "DAN 9:26",
+        "GAL 3:13",
+        "HEB 5:8",
+        "ISA 53:10-12",
+        "JOH 10:15",
+        "JOH 13:14",
+        "LUK 22:26-27"
       ]
     },
     {
@@ -1355,6 +1759,169 @@
         "HEB 10:16-17",
         "JAM 2:8",
         "JOH 1:17"
+      ]
+    },
+    {
+      "id": "ko:MAT-28-19-19",
+      "reference": {
+        "code": "MAT",
+        "chapter": 28,
+        "startVerse": 19,
+        "endVerse": 19
+      },
+      "displayReference": "마태복음 28:19",
+      "locale": "ko",
+      "text": "19. 그러므로 너희는 가서 모든 족속으로 제자를 삼아 아버지와 아들과 성령의 이름으로 세례를 주고",
+      "normalizedText": "19 그러므로 너희는 가서 모든 족속으로 제자를 삼아 아버지와 아들과 성령의 이름으로 세례를 주고",
+      "summary": "예수님은 아버지와 아들과 성령의 이름으로 세례를 베풀라고 명하신다.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "mission"
+      ],
+      "doctrines": [
+        "Trinity",
+        "baptism",
+        "mission"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "identity",
+        "worship"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How does Jesus name Father, Son, and Spirit together?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "disciples"
+      ],
+      "keywords": [
+        "name",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "이름",
+        "아버지",
+        "아들",
+        "성령",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "baptism",
+        "belonging",
+        "identity",
+        "mission",
+        "worship"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 37,
+      "crossReferences": [
+        "1CO 12:4-6",
+        "1CO 15:29",
+        "1CO 1:13-16",
+        "1JO 5:7",
+        "1PE 3:21",
+        "2CO 13:14",
+        "ACT 10:47-48",
+        "ACT 13:46-47",
+        "ACT 14:21",
+        "ACT 16:15-33",
+        "ACT 19:3-5",
+        "ACT 1:8"
+      ]
+    },
+    {
+      "id": "ko:MAT-3-16-17",
+      "reference": {
+        "code": "MAT",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "마태복음 3:16-17",
+      "locale": "ko",
+      "text": "16. 예수께서 세례를 받으시고 곧 물에서 올라오실새 하늘이 열리고 하나님의 성령이 비둘기같이 내려 자기 위에 임하심을 보시더니 17. 하늘로서 소리가 있어 말씀하시되 `이는 내 사랑하는 아들이요 내 기뻐하는 자라' 하시니라",
+      "normalizedText": "16 예수께서 세례를 받으시고 곧 물에서 올라오실새 하늘이 열리고 하나님의 성령이 비둘기같이 내려 자기 위에 임하심을 보시더니 17 하늘로서 소리가 있어 말씀하시되 이는 내 사랑하는 아들이요 내 기뻐하는 자라' 하시니라",
+      "summary": "예수님의 세례 장면에서 아들은 물에서 올라오시고, 성령은 비둘기같이 임하시며, 아버지는 하늘에서 말씀하신다.",
+      "themes": [
+        "Trinity",
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "baptism"
+      ],
+      "doctrines": [
+        "Trinity",
+        "revelation",
+        "baptism of Jesus"
+      ],
+      "humanConcerns": [
+        "truth",
+        "worship",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "What is the Trinity?",
+        "삼위일체는 무엇인가?",
+        "How are Father, Son, and Spirit seen together?"
+      ],
+      "entities": [
+        "Father",
+        "Son",
+        "Holy Spirit",
+        "Jesus",
+        "John the Baptist"
+      ],
+      "keywords": [
+        "baptism",
+        "Spirit",
+        "dove",
+        "beloved Son",
+        "세례",
+        "성령",
+        "비둘기",
+        "사랑하는 아들",
+        "삼위일체"
+      ],
+      "axes": [
+        "Father",
+        "Holy Spirit",
+        "Son",
+        "Trinity",
+        "baptism",
+        "baptism of Jesus",
+        "belonging",
+        "revelation",
+        "truth",
+        "worship"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 25,
+      "crossReferences": [
+        "2PE 1:17",
+        "ACT 7:56",
+        "COL 1:13",
+        "COL 1:18-19",
+        "EPH 1:6",
+        "EZE 1:1",
+        "ISA 11:2",
+        "ISA 42:1",
+        "ISA 42:21",
+        "ISA 59:21",
+        "ISA 61:1",
+        "JOH 12:28-30"
       ]
     },
     {
@@ -1673,8 +2240,8 @@
     }
   ],
   "stats": {
-    "unitCount": 21,
-    "seedReferenceCount": 21,
-    "crossReferenceDegreeTotal": 1650
+    "unitCount": 28,
+    "seedReferenceCount": 28,
+    "crossReferenceDegreeTotal": 1871
   }
 }

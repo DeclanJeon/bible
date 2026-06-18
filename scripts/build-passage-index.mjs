@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_DIR = path.join(ROOT, "data", "passage-index");
-const VERSION = "seed-2026-06-18-jesus";
-const GENERATED_AT = "2026-06-18T18:30:00.000Z";
+const VERSION = "seed-2026-06-18-doctrine";
+const GENERATED_AT = "2026-06-18T21:15:00.000Z";
 
 const SEED_PASSAGES = [
   {
@@ -111,6 +111,57 @@ const SEED_PASSAGES = [
     canonicalWeight: 1,
   },
   {
+    code: "ISA",
+    chapter: 53,
+    startVerse: 4,
+    endVerse: 6,
+    summary: {
+      en: "The servant bears our griefs and sins, and by his wounds many are healed and brought peace.",
+      ko: "고난받는 종은 우리의 슬픔과 죄악을 담당하며, 그의 상함으로 우리가 평화와 나음을 얻는다.",
+    },
+    themes: ["atonement", "suffering servant", "sin", "peace", "healing"],
+    doctrines: ["atonement", "substitution", "prophecy", "reconciliation"],
+    humanConcerns: ["guilt", "shame", "peace", "hope"],
+    questionsAnswered: ["Why did Jesus die?", "예수님은 왜 죽으셨는가?", "How does the cross deal with sin?"],
+    entities: ["servant", "LORD", "many"],
+    keywords: ["pierced", "iniquities", "peace", "healed", "찔림", "죄악", "평화", "나음", "십자가"],
+    canonicalWeight: 0.98,
+  },
+  {
+    code: "MAR",
+    chapter: 10,
+    startVerse: 45,
+    endVerse: 45,
+    summary: {
+      en: "Jesus says the Son of Man came to serve and to give his life as a ransom for many.",
+      ko: "예수님은 인자가 섬기러 왔고 많은 사람을 위한 대속물로 자기 목숨을 주려 왔다고 말씀하신다.",
+    },
+    themes: ["Jesus", "cross", "service", "ransom", "salvation"],
+    doctrines: ["atonement", "discipleship", "Christology"],
+    humanConcerns: ["guilt", "service", "hope"],
+    questionsAnswered: ["Why did Jesus die?", "예수님은 왜 죽으셨는가?", "What did Jesus say about his death?"],
+    entities: ["Jesus", "Son of Man", "many"],
+    keywords: ["ransom", "life", "many", "serve", "대속물", "목숨", "섬기다", "십자가", "예수"],
+    canonicalWeight: 1,
+  },
+  {
+    code: "1PE",
+    chapter: 3,
+    startVerse: 18,
+    endVerse: 18,
+    summary: {
+      en: "Christ suffered once for sins, the righteous for the unrighteous, to bring us to God.",
+      ko: "그리스도께서는 죄를 위하여 단번에 죽으사 의인으로서 불의한 자를 대신하여 우리를 하나님께로 인도하셨다.",
+    },
+    themes: ["atonement", "Christ", "suffering", "reconciliation", "God"],
+    doctrines: ["atonement", "substitution", "reconciliation"],
+    humanConcerns: ["guilt", "hope", "belonging"],
+    questionsAnswered: ["Why did Jesus die?", "예수님은 왜 죽으셨는가?", "How are we brought to God?"],
+    entities: ["Christ", "God", "righteous", "unrighteous"],
+    keywords: ["sins", "righteous", "unrighteous", "bring us to God", "죄", "의인", "불의한 자", "하나님께로", "예수"],
+    canonicalWeight: 1,
+  },
+  {
     code: "MAT",
     chapter: 11,
     startVerse: 28,
@@ -126,6 +177,23 @@ const SEED_PASSAGES = [
     entities: ["Jesus"],
     keywords: ["weary", "burdened", "rest", "gentle", "수고", "무거운 짐", "쉼", "온유"],
     canonicalWeight: 0.98,
+  },
+  {
+    code: "JOH",
+    chapter: 20,
+    startVerse: 28,
+    endVerse: 28,
+    summary: {
+      en: "Thomas addresses the risen Jesus as 'My Lord and my God.'",
+      ko: "도마는 부활하신 예수님께 ‘나의 주시며 나의 하나님이시니이다’라고 고백한다.",
+    },
+    themes: ["Jesus", "deity of Christ", "resurrection", "worship", "faith"],
+    doctrines: ["deity of Christ", "resurrection", "faith"],
+    humanConcerns: ["doubt", "truth", "worship", "hope"],
+    questionsAnswered: ["Is Jesus God?", "예수님은 하나님이신가?", "How does Scripture speak of Jesus' deity?"],
+    entities: ["Thomas", "Jesus", "God"],
+    keywords: ["my Lord and my God", "Thomas", "risen Jesus", "나의 주", "나의 하나님", "도마", "부활", "예수"],
+    canonicalWeight: 1,
   },
   {
     code: "MAT",
@@ -177,6 +245,57 @@ const SEED_PASSAGES = [
     entities: ["Son", "God", "creation", "church"],
     keywords: ["image", "invisible God", "firstborn", "all things", "reconcile", "형상", "보이지 않는 하나님", "만물", "화평", "예수"],
     canonicalWeight: 1,
+  },
+  {
+    code: "MAT",
+    chapter: 3,
+    startVerse: 16,
+    endVerse: 17,
+    summary: {
+      en: "At Jesus' baptism the Son is baptized, the Spirit descends like a dove, and the Father speaks from heaven.",
+      ko: "예수님의 세례 장면에서 아들은 물에서 올라오시고, 성령은 비둘기같이 임하시며, 아버지는 하늘에서 말씀하신다.",
+    },
+    themes: ["Trinity", "Father", "Son", "Holy Spirit", "baptism"],
+    doctrines: ["Trinity", "revelation", "baptism of Jesus"],
+    humanConcerns: ["truth", "worship", "belonging"],
+    questionsAnswered: ["What is the Trinity?", "삼위일체는 무엇인가?", "How are Father, Son, and Spirit seen together?"],
+    entities: ["Father", "Son", "Holy Spirit", "Jesus", "John the Baptist"],
+    keywords: ["baptism", "Spirit", "dove", "beloved Son", "세례", "성령", "비둘기", "사랑하는 아들", "삼위일체"],
+    canonicalWeight: 0.98,
+  },
+  {
+    code: "MAT",
+    chapter: 28,
+    startVerse: 19,
+    endVerse: 19,
+    summary: {
+      en: "Jesus commands baptism in the singular name of the Father, the Son, and the Holy Spirit.",
+      ko: "예수님은 아버지와 아들과 성령의 이름으로 세례를 베풀라고 명하신다.",
+    },
+    themes: ["Trinity", "Father", "Son", "Holy Spirit", "mission"],
+    doctrines: ["Trinity", "baptism", "mission"],
+    humanConcerns: ["belonging", "identity", "worship"],
+    questionsAnswered: ["What is the Trinity?", "삼위일체는 무엇인가?", "How does Jesus name Father, Son, and Spirit together?"],
+    entities: ["Jesus", "Father", "Son", "Holy Spirit", "disciples"],
+    keywords: ["name", "Father", "Son", "Holy Spirit", "이름", "아버지", "아들", "성령", "삼위일체"],
+    canonicalWeight: 1,
+  },
+  {
+    code: "JOH",
+    chapter: 14,
+    startVerse: 16,
+    endVerse: 17,
+    summary: {
+      en: "Jesus says he will ask the Father, and the Father will give another Helper, the Spirit of truth, to remain with believers.",
+      ko: "예수님은 아버지께 구하겠다고 하시고, 아버지는 다른 보혜사 곧 진리의 성령을 보내어 성도와 함께 있게 하신다.",
+    },
+    themes: ["Trinity", "Father", "Son", "Holy Spirit", "presence of God"],
+    doctrines: ["Trinity", "Holy Spirit", "revelation", "presence of God"],
+    humanConcerns: ["belonging", "comfort", "truth", "hope"],
+    questionsAnswered: ["What is the Trinity?", "삼위일체는 무엇인가?", "How do Father, Son, and Spirit work together?"],
+    entities: ["Jesus", "Father", "Holy Spirit", "disciples"],
+    keywords: ["Father", "Helper", "Spirit of truth", "abide", "아버지", "보혜사", "진리의 성령", "함께", "삼위일체"],
+    canonicalWeight: 0.97,
   },
   {
     code: "HEB",
