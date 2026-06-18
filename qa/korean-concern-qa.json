@@ -136,15 +136,15 @@
     "family": "identity",
     "prompt": "나는 누구지?",
     "expectedReliable": true,
-    "expectedPrimaryRefs": ["GEN 1:26-27"],
-    "expectedExplanationTerms": ["정체성", "하나님의 형상", "창조"]
+    "expectedPrimaryRefs": ["GEN 1:26-28"],
+    "expectedExplanationTerms": ["identity", "형상", "창조"]
   },
   {
     "family": "identity",
     "prompt": "하나님 안에서 나는 누구인가",
     "expectedReliable": true,
-    "expectedPrimaryRefs": ["GEN 1:26-27"],
-    "expectedExplanationTerms": ["정체성", "하나님의 형상", "창조"]
+    "expectedPrimaryRefs": ["GEN 1:26-28"],
+    "expectedExplanationTerms": ["identity", "형상", "창조"]
   },
   {
     "family": "ambiguous-empty",

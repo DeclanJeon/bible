@@ -70,6 +70,8 @@ export async function POST(
     expansionSummary: ragQuery.expansionSummary ?? undefined,
     expansionProvider: ragQuery.expansionProvider,
   });
+  const answerBundle = retrieval.answerBundle ?? null;
+  const questionUnderstanding = retrieval.question ?? answerBundle?.question ?? null;
   const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
@@ -120,7 +122,7 @@ export async function POST(
       })
     : [];
   const crossReferenceNetworkUrl = hasReliablePrimary ? `/${appLocale}/crossrefs/${serializeBibleReference(primaryReference)}` : null;
-  const allowedEvidenceIds = ["primary"];
+  const allowedEvidenceIds = ["primary", ...supportingReferences.map((_, index) => `supporting-${index}`)];
   const generation = await generateReflectionWithHermes(
     {
       prompt: normalizedPrompt,
@@ -155,6 +157,8 @@ export async function POST(
     generationMode: generation.provider,
     generationModel: generation.model,
     generationNote: generation.note,
+    answerPolicy: questionUnderstanding?.answerMode,
+    questionUnderstanding,
   };
 
   return NextResponse.json({
@@ -162,6 +166,8 @@ export async function POST(
     safety,
     retrieval,
     ragQuery,
+    answerBundle,
+    questionUnderstanding,
     cluster: {
       slug: cluster.slug,
       title: cluster.title,

@@ -128,6 +128,68 @@ export async function buildReflectionResponse(
     };
   }
 
+  const answerBundle = retrieval?.answerBundle;
+  if (answerBundle) {
+    const relationLines = answerBundle.relationMap.map((relation) => `${relation.reference}: ${relation.answers} ${relation.userConnection}`);
+    const supportLine = relationLines.slice(1).join(" ");
+    if (appLocale === "ko") {
+      const policyLabel = answerBundle.answerPolicy === "wisdom_principle"
+        ? "성경이 구체적 선택을 대신 결정하지는 않지만, 판단을 세우는 지혜 원칙으로 답합니다"
+        : answerBundle.answerPolicy === "safety_first"
+          ? "안전을 먼저 확인한 뒤, 가까이 계시는 하나님과 소망의 본문으로 답합니다"
+          : answerBundle.answerPolicy === "pastoral_care"
+            ? "고민을 목회적 돌봄 질문으로 이해하고, 위로와 방향을 주는 본문 묶음으로 답합니다"
+            : "넓은 질문이므로 한 구절만 단정하지 않고 성경 본문 묶음으로 답합니다";
+      return {
+        concernSummary: `질문 “${prompt}”을(를) “${answerBundle.question.normalized}”로 이해했습니다. ${policyLabel}.`,
+        relevanceSummary: scoreLine ? `${scoreLine}. ${answerBundle.primary.reason}` : answerBundle.primary.reason,
+        whyTheseTexts: `${primaryEvidence.reference}를 중심 본문으로 두고, ${supportLine || "보조 본문 없이 중심 본문만"}을 함께 읽도록 묶었습니다. 이 묶음은 질문 축(${[...answerBundle.question.concernAxes, ...answerBundle.question.theologicalAxes].join(", ") || "본문 근거"})을 따라 선택되었습니다.`,
+        primaryStory: `중심 본문은 ${primaryEvidence.reference}입니다. 핵심 구절은 “${primaryEvidence.excerpt}”입니다. 이 본문은 질문에 대한 출발점을 주고, 보조 본문들은 같은 질문을 다른 정경 위치에서 보강합니다.`,
+        datePlaceAudience: `${primaryEvidence.title}의 책 배경도 확인해야 합니다. ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
+        originalAudience: `${cluster.context.audience.body} 오늘의 적용은 이 원래 문맥을 지나서 조심스럽게 이어져야 합니다.`,
+        linkedScriptures: supportLine || (linkedLine ? `${linkedLine}.` : "이 답변은 현재 선택된 중심 본문을 우선 evidence로 사용합니다."),
+        jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
+        personalConnection: answerBundle.answerPolicy === "wisdom_principle"
+          ? "이 본문들은 결정을 대신 내려 주지 않습니다. 대신 하나님 앞에서 지혜를 구하고, 신뢰할 조언과 책임 있는 판단을 세우도록 돕습니다."
+          : answerBundle.answerPolicy === "safety_first"
+            ? "지금 질문은 안전이 먼저입니다. 본문은 혼자 견디라는 압박이 아니라, 가까운 사람과 전문 도움을 함께 붙들면서 하나님이 버리지 않으신다는 소망을 확인하도록 돕습니다."
+            : "이 본문 묶음은 질문을 성경의 언어로 다시 붙들게 합니다. 바로 단정하기보다 중심 본문과 보조 본문을 함께 읽으며, 질문이 무엇을 묻고 무엇을 아직 남겨 두는지 구분하도록 돕습니다.",
+        reflectionQuestions: [
+          `이 질문은 ${answerBundle.question.answerMode} 응답 모드로 분류되었습니다. 이 분류가 내 질문을 잘 설명하나요?`,
+          `${primaryEvidence.reference}는 내 질문에 대해 무엇을 직접 말하나요?`,
+          answerBundle.supporting[0] ? `${answerBundle.relationMap[1]?.reference ?? "보조 본문"}은 중심 본문을 어떻게 보강하나요?` : "이 중심 본문 하나로 충분한가요, 아니면 연결 본문을 더 읽어야 하나요?",
+        ],
+        evidence,
+        generationMode: "deterministic",
+        generationModel: "deterministic-answer-bundle-builder",
+        generationNote: "질문 이해, passage index, reranker, answer bundle을 사용한 결정형 응답입니다.",
+      };
+    }
+
+    return {
+      concernSummary: `The prompt “${prompt}” was understood as “${answerBundle.question.normalized}” and answered with a Bible evidence bundle.`,
+      relevanceSummary: scoreLine ? `${scoreLine}. ${answerBundle.primary.reason}` : answerBundle.primary.reason,
+      whyTheseTexts: `${primaryEvidence.reference} is the primary passage. ${supportLine || "No supporting passage was needed."}`,
+      primaryStory: `The primary passage is ${primaryEvidence.reference}: “${primaryEvidence.excerpt}”.`,
+      datePlaceAudience: `Book context still matters: ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
+      originalAudience: `${cluster.context.audience.body} Application should move through that context before reaching the user.`,
+      linkedScriptures: supportLine || (linkedLine ? `${linkedLine}.` : "The answer uses the selected evidence bundle."),
+      jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
+      personalConnection: answerBundle.answerPolicy === "wisdom_principle"
+        ? "These texts give wisdom principles; they do not decide the concrete choice for the user."
+        : "The bundle connects the user's question to passages that directly answer or support the same concern.",
+      reflectionQuestions: [
+        `Does the ${answerBundle.question.answerMode} response mode describe the question well?`,
+        `What does ${primaryEvidence.reference} answer directly?`,
+        answerBundle.supporting[0] ? `How does ${answerBundle.relationMap[1]?.reference ?? "the supporting passage"} support the primary text?` : "Is one primary passage enough, or should the linked texts be expanded?",
+      ],
+      evidence,
+      generationMode: "deterministic",
+      generationModel: "deterministic-answer-bundle-builder",
+      generationNote: "Deterministic response built from question understanding, passage index, reranking, and answer bundle evidence.",
+    };
+  }
+
   if (appLocale === "ko") {
     return {
       concernSummary: `입력한 질문 “${prompt}”에 대해 우선 ${primaryEvidence.reference}를 중심 본문으로 붙들었습니다. 이 답변은 책 소개를 먼저 말하기보다, 질문과 실제로 겹치는 본문 언어를 먼저 앞세우도록 바꿨습니다.`,

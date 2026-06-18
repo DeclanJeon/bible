@@ -1,0 +1,1424 @@
+{
+  "version": "seed-2026-06-18",
+  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "locale": "ko",
+  "source": {
+    "translation": "korean_bible",
+    "corpus": "korean_bible/canon_66_vpl.txt",
+    "metadata": "korean_bible/metadata.json"
+  },
+  "units": [
+    {
+      "id": "ko:1CO-13-4-7",
+      "reference": {
+        "code": "1CO",
+        "chapter": 13,
+        "startVerse": 4,
+        "endVerse": 7
+      },
+      "displayReference": "고린도전서 13:4-7",
+      "locale": "ko",
+      "text": "4. 사랑은 오래 참고, 사랑은 온유하며, 투기하는 자가 되지 아니하며, 사랑은 자랑하지 아니하며, 교만하지 아니하며 5. 무례히 행치 아니하며, 자기의 유익을 구치 아니하며, 성내지 아니하며, 악한 것을 생각지 아니하며 6. 불의를 기뻐하지 아니하며, 진리와 함께 기뻐하고 7. 모든 것을 참으며, 모든 것을 믿으며, 모든 것을 바라며, 모든 것을 견디느니라 !",
+      "normalizedText": "4 사랑은 오래 참고 사랑은 온유하며 투기하는 자가 되지 아니하며 사랑은 자랑하지 아니하며 교만하지 아니하며 5 무례히 행치 아니하며 자기의 유익을 구치 아니하며 성내지 아니하며 악한 것을 생각지 아니하며 6 불의를 기뻐하지 아니하며 진리와 함께 기뻐하고 7 모든 것을 참으며 모든 것을 믿으며 모든 것을 바라며 모든 것을 견디느니라",
+      "summary": "사랑은 감정만이 아니라 오래 참고 진리와 함께 기뻐하며 견디는 행동으로 묘사된다.",
+      "themes": [
+        "love",
+        "truth",
+        "patience",
+        "ethics",
+        "relationship"
+      ],
+      "doctrines": [
+        "love",
+        "Christian ethics"
+      ],
+      "humanConcerns": [
+        "relationships",
+        "anger",
+        "forgiveness"
+      ],
+      "questionsAnswered": [
+        "What is love?",
+        "사랑은 무엇인가?",
+        "How should I treat another person?"
+      ],
+      "entities": [
+        "love",
+        "truth"
+      ],
+      "keywords": [
+        "love",
+        "patient",
+        "kind",
+        "truth",
+        "endures",
+        "사랑",
+        "오래 참고",
+        "진리",
+        "견디느니라"
+      ],
+      "axes": [
+        "Christian ethics",
+        "anger",
+        "ethics",
+        "forgiveness",
+        "love",
+        "patience",
+        "relationship",
+        "relationships",
+        "truth"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 133,
+      "crossReferences": [
+        "1CO 10:24",
+        "1CO 10:33",
+        "1CO 11:18",
+        "1CO 11:21-22",
+        "1CO 12:25",
+        "1CO 13:4",
+        "1CO 14:33-40",
+        "1CO 3:3",
+        "1CO 4:18",
+        "1CO 4:6",
+        "1CO 5:2",
+        "1CO 7:36"
+      ]
+    },
+    {
+      "id": "ko:1JO-4-7-12",
+      "reference": {
+        "code": "1JO",
+        "chapter": 4,
+        "startVerse": 7,
+        "endVerse": 12
+      },
+      "displayReference": "요한일서 4:7-12",
+      "locale": "ko",
+      "text": "7. 사랑하는 자들아 ! 우리가 서로 사랑하자 사랑은 하나님께 속한 것이니 사랑하는 자마다 하나님께로 나서 하나님을 알고 8. 사랑하지 아니하는 자는 하나님을 알지 못하나니 이는 하나님은 사랑이심이라 9. 하나님의 사랑이 우리에게 이렇게 나타난 바 되었으니 하나님이 자기의 독생자를 세상에 보내심은 저로 말미암아 우리를 살리려 하심이니라 10. 사랑은 여기 있으니 우리가 하나님을 사랑한 것이 아니요 오직 하나님이 우리를 사랑하사 우리 죄를 위하여 화목제로 그 아들을 보내셨음이니라 11. 사랑하는 자들아 ! 하나님이 이같이 우리를 사랑하셨은즉 우리도 서로 사랑하는 것이 마땅하도다 12. 어느 때나 하나님을 본 사람이 없으되 만일 우리가 서로 사랑하면 하나님이 우리 안에 거하시고 그의 사랑이 우리 안에 온전히 이루느니라",
+      "normalizedText": "7 사랑하는 자들아 우리가 서로 사랑하자 사랑은 하나님께 속한 것이니 사랑하는 자마다 하나님께로 나서 하나님을 알고 8 사랑하지 아니하는 자는 하나님을 알지 못하나니 이는 하나님은 사랑이심이라 9 하나님의 사랑이 우리에게 이렇게 나타난 바 되었으니 하나님이 자기의 독생자를 세상에 보내심은 저로 말미암아 우리를 살리려 하심이니라 10 사랑은 여기 있으니 우리가 하나님을 사랑한 것이 아니요 오직 하나님이 우리를 사랑하사 우리 죄를 위하여 화목제로 그 아들을 보내셨음이니라 11 사랑하는 자들아 하나님이 이같이 우리를 사랑하셨은즉 우리도 서로 사랑하는 것이 마땅하도다 12 어느 때나 하나님을 본 사람이 없으되 만일 우리가 서로 사랑하면 하나님이 우리 안에 거하시고 그의 사랑이 우리 안에 온전히 이루느니라",
+      "summary": "하나님은 사랑이시며 그 사랑은 아들을 보내심과 서로 사랑하는 삶에서 드러난다.",
+      "themes": [
+        "love",
+        "God",
+        "Jesus",
+        "community",
+        "atonement"
+      ],
+      "doctrines": [
+        "God is love",
+        "incarnation",
+        "atonement",
+        "love"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "relationships",
+        "worth"
+      ],
+      "questionsAnswered": [
+        "What is God like?",
+        "사랑은 무엇인가?",
+        "How is God's love shown?"
+      ],
+      "entities": [
+        "God",
+        "Son"
+      ],
+      "keywords": [
+        "God is love",
+        "love one another",
+        "Son",
+        "atoning sacrifice",
+        "사랑",
+        "하나님은 사랑",
+        "아들",
+        "화목"
+      ],
+      "axes": [
+        "God",
+        "God is love",
+        "Jesus",
+        "atonement",
+        "belonging",
+        "community",
+        "incarnation",
+        "love",
+        "relationships",
+        "worth"
+      ],
+      "canonicalWeight": 0.96,
+      "crossReferenceDegree": 89,
+      "crossReferences": [
+        "1CO 13:13",
+        "1JO 1:5",
+        "1JO 2:10",
+        "1JO 2:2",
+        "1JO 2:29",
+        "1JO 2:4",
+        "1JO 2:5",
+        "1JO 2:9",
+        "1JO 3:1",
+        "1JO 3:10-23",
+        "1JO 3:16",
+        "1JO 3:16-17"
+      ]
+    },
+    {
+      "id": "ko:2TI-3-16-17",
+      "reference": {
+        "code": "2TI",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "디모데후서 3:16-17",
+      "locale": "ko",
+      "text": "16. 모든 성경은 하나님의 감동으로 된 것으로 교훈과 책망과 바르게 함과 의로 교육하기에 유익하니 17. 이는 하나님의 사람으로 온전케 하며 모든 선한 일을 행하기에 온전케 하려 함이니라",
+      "normalizedText": "16 모든 성경은 하나님의 감동으로 된 것으로 교훈과 책망과 바르게 함과 의로 교육하기에 유익하니 17 이는 하나님의 사람으로 온전케 하며 모든 선한 일을 행하기에 온전케 하려 함이니라",
+      "summary": "성경은 하나님의 감동으로 주어져 사람을 온전하게 하며 선한 일을 준비시킨다.",
+      "themes": [
+        "scripture",
+        "revelation",
+        "formation",
+        "teaching",
+        "truth"
+      ],
+      "doctrines": [
+        "inspiration",
+        "scripture",
+        "discipleship"
+      ],
+      "humanConcerns": [
+        "learning",
+        "correction",
+        "formation"
+      ],
+      "questionsAnswered": [
+        "What is Scripture for?",
+        "성경은 무엇인가?",
+        "How does the Bible form a person?"
+      ],
+      "entities": [
+        "God",
+        "Scripture",
+        "person of God"
+      ],
+      "keywords": [
+        "Bible",
+        "Scripture",
+        "inspired",
+        "teaching",
+        "correction",
+        "training",
+        "성경",
+        "말씀",
+        "교훈",
+        "책망"
+      ],
+      "axes": [
+        "correction",
+        "discipleship",
+        "formation",
+        "inspiration",
+        "learning",
+        "revelation",
+        "scripture",
+        "teaching",
+        "truth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 51,
+      "crossReferences": [
+        "1CO 12:7",
+        "1TI 6:11",
+        "2CO 9:8",
+        "2PE 1:19-21",
+        "2SA 23:2",
+        "2TI 2:21",
+        "2TI 2:25",
+        "2TI 4:2",
+        "ACT 18:25",
+        "ACT 1:16",
+        "ACT 20:20",
+        "ACT 20:27"
+      ]
+    },
+    {
+      "id": "ko:EPH-2-8-10",
+      "reference": {
+        "code": "EPH",
+        "chapter": 2,
+        "startVerse": 8,
+        "endVerse": 10
+      },
+      "displayReference": "에베소서 2:8-10",
+      "locale": "ko",
+      "text": "8. 너희가 그 은혜를 인하여 믿음으로 말미암아 구원을 얻었나니 이것이 너희에게서 난 것이 아니요 하나님의 선물이라 9. 행위에서 난 것이 아니니 이는 누구든지 자랑치 못하게 함이니라 10. 우리는 그의 만드신 바라 그리스도 예수 안에서 선한 일을 위하여 지으심을 받은 자니 이 일은 하나님이 전에 예비하사 우리로 그 가운데서 행하게 하려 하심이니라",
+      "normalizedText": "8 너희가 그 은혜를 인하여 믿음으로 말미암아 구원을 얻었나니 이것이 너희에게서 난 것이 아니요 하나님의 선물이라 9 행위에서 난 것이 아니니 이는 누구든지 자랑치 못하게 함이니라 10 우리는 그의 만드신 바라 그리스도 예수 안에서 선한 일을 위하여 지으심을 받은 자니 이 일은 하나님이 전에 예비하사 우리로 그 가운데서 행하게 하려 하심이니라",
+      "summary": "구원은 은혜로 믿음을 통해 받으며, 하나님의 백성은 선한 일을 위해 그리스도 안에서 지음받았다.",
+      "themes": [
+        "faith",
+        "grace",
+        "salvation",
+        "purpose",
+        "good works"
+      ],
+      "doctrines": [
+        "salvation by grace",
+        "faith",
+        "union with Christ",
+        "vocation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "worth",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "What is faith?",
+        "구원은 무엇인가?",
+        "사람은 왜 사는가?"
+      ],
+      "entities": [
+        "God",
+        "Christ Jesus"
+      ],
+      "keywords": [
+        "grace",
+        "faith",
+        "saved",
+        "works",
+        "workmanship",
+        "은혜",
+        "믿음",
+        "구원",
+        "선한 일"
+      ],
+      "axes": [
+        "faith",
+        "good works",
+        "grace",
+        "guilt",
+        "purpose",
+        "salvation",
+        "salvation by grace",
+        "union with Christ",
+        "vocation",
+        "worth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 98,
+      "crossReferences": [
+        "1CO 1:29-31",
+        "1CO 3:9",
+        "1JO 1:7",
+        "1JO 2:6",
+        "1JO 5:10-12",
+        "1PE 1:5",
+        "1PE 2:12",
+        "1TI 2:10",
+        "1TI 5:10",
+        "1TI 5:25",
+        "1TI 6:18",
+        "2CO 5:17"
+      ]
+    },
+    {
+      "id": "ko:EPH-4-31-32",
+      "reference": {
+        "code": "EPH",
+        "chapter": 4,
+        "startVerse": 31,
+        "endVerse": 32
+      },
+      "displayReference": "에베소서 4:31-32",
+      "locale": "ko",
+      "text": "31. 너희는 모든 악독과, 노함과, 분냄과, 떠드는 것과, 훼방하는 것을 모든 악의와 함께 버리고 32. 서로 인자하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라",
+      "normalizedText": "31 너희는 모든 악독과 노함과 분냄과 떠드는 것과 훼방하는 것을 모든 악의와 함께 버리고 32 서로 인자하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라",
+      "summary": "성도는 악한 감정을 버리고 그리스도 안에서 받은 용서처럼 서로 용서한다.",
+      "themes": [
+        "forgiveness",
+        "mercy",
+        "relationships",
+        "anger",
+        "kindness"
+      ],
+      "doctrines": [
+        "forgiveness",
+        "union with Christ",
+        "sanctification"
+      ],
+      "humanConcerns": [
+        "hurt",
+        "anger",
+        "relationships"
+      ],
+      "questionsAnswered": [
+        "Should I forgive?",
+        "용서해야 하는가?",
+        "How does God's forgiveness shape mine?"
+      ],
+      "entities": [
+        "God",
+        "Christ"
+      ],
+      "keywords": [
+        "forgive",
+        "kind",
+        "tenderhearted",
+        "bitterness",
+        "용서",
+        "친절",
+        "불쌍히",
+        "악독"
+      ],
+      "axes": [
+        "anger",
+        "forgiveness",
+        "hurt",
+        "kindness",
+        "mercy",
+        "relationships",
+        "sanctification",
+        "union with Christ"
+      ],
+      "canonicalWeight": 0.92,
+      "crossReferenceDegree": 88,
+      "crossReferences": [
+        "1CO 13:4",
+        "1CO 14:20",
+        "1CO 5:8",
+        "1JO 1:9",
+        "1JO 2:12",
+        "1JO 3:12",
+        "1JO 3:15",
+        "1PE 2:1",
+        "1PE 3:8-9",
+        "1TI 3:11",
+        "1TI 3:3",
+        "1TI 5:13"
+      ]
+    },
+    {
+      "id": "ko:EXO-3-14-15",
+      "reference": {
+        "code": "EXO",
+        "chapter": 3,
+        "startVerse": 14,
+        "endVerse": 15
+      },
+      "displayReference": "출애굽기 3:14-15",
+      "locale": "ko",
+      "text": "14. 하나님이 모세에게 이르시되 나는 스스로 있는 자니라 ! 또 이르시되 너는 이스라엘 자손에게 이같이 이르기를 스스로 있는 자가 나를 너희에게 보내셨다 하라 15. 하나님이 또 모세에게 이르시되 너는 이스라엘 자손에게 이같이 이르기를 나를 너희에게 보내신 이는 너희 조상의 하나님 곧 아브라함의 하나님, 이삭의 하나님, 야곱의 하나님 여호와라 하라 이는 나의 영원한 이름이요 대대로 기억할 나의 표호니라 !",
+      "normalizedText": "14 하나님이 모세에게 이르시되 나는 스스로 있는 자니라 또 이르시되 너는 이스라엘 자손에게 이같이 이르기를 스스로 있는 자가 나를 너희에게 보내셨다 하라 15 하나님이 또 모세에게 이르시되 너는 이스라엘 자손에게 이같이 이르기를 나를 너희에게 보내신 이는 너희 조상의 하나님 곧 아브라함의 하나님 이삭의 하나님 야곱의 하나님 여호와라 하라 이는 나의 영원한 이름이요 대대로 기억할 나의 표호니라",
+      "summary": "하나님은 스스로 있는 분으로 자신을 알리시며 언약의 하나님으로 자신을 밝히신다.",
+      "themes": [
+        "God",
+        "name",
+        "self-existence",
+        "covenant",
+        "revelation"
+      ],
+      "doctrines": [
+        "theology proper",
+        "divine aseity",
+        "covenant"
+      ],
+      "humanConcerns": [
+        "identity",
+        "trust"
+      ],
+      "questionsAnswered": [
+        "Who is God?",
+        "하나님은 누구인가?",
+        "What does God reveal about himself?"
+      ],
+      "entities": [
+        "God",
+        "Moses",
+        "Abraham",
+        "Isaac",
+        "Jacob"
+      ],
+      "keywords": [
+        "I AM",
+        "Yahweh",
+        "LORD",
+        "God",
+        "name",
+        "스스로",
+        "여호와",
+        "하나님"
+      ],
+      "axes": [
+        "God",
+        "covenant",
+        "divine aseity",
+        "identity",
+        "name",
+        "revelation",
+        "self-existence",
+        "theology proper",
+        "trust"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 35,
+      "crossReferences": [
+        "2CH 28:9",
+        "2CO 1:20",
+        "ACT 7:32",
+        "DEU 1:11",
+        "DEU 1:35",
+        "DEU 4:1",
+        "EXO 3:6",
+        "EXO 4:5",
+        "EXO 6:3",
+        "GEN 17:7-8",
+        "HEB 13:8",
+        "HOS 12:5"
+      ]
+    },
+    {
+      "id": "ko:GEN-1-1-1",
+      "reference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "displayReference": "창세기 1:1",
+      "locale": "ko",
+      "text": "1. 태초에 하나님이 천지를 창조하시니라 !",
+      "normalizedText": "1 태초에 하나님이 천지를 창조하시니라",
+      "summary": "성경은 하나님이 하늘과 땅을 창조하신 분이라고 시작한다.",
+      "themes": [
+        "creation",
+        "God",
+        "origin",
+        "world"
+      ],
+      "doctrines": [
+        "creation",
+        "God as creator"
+      ],
+      "humanConcerns": [
+        "origin",
+        "meaning"
+      ],
+      "questionsAnswered": [
+        "Who made the world?",
+        "하나님은 어떤 분인가?",
+        "Where does the Bible begin?"
+      ],
+      "entities": [
+        "God",
+        "heavens",
+        "earth"
+      ],
+      "keywords": [
+        "created",
+        "beginning",
+        "heavens",
+        "earth",
+        "창조",
+        "태초",
+        "하늘",
+        "땅"
+      ],
+      "axes": [
+        "God",
+        "God as creator",
+        "creation",
+        "meaning",
+        "origin",
+        "world"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 61,
+      "crossReferences": [
+        "1CH 16:26",
+        "1CO 8:6",
+        "1JO 1:1",
+        "2PE 3:5",
+        "ACT 14:15",
+        "ACT 17:24",
+        "ACT 4:24",
+        "COL 1:16-17",
+        "ECC 12:1",
+        "EPH 3:9",
+        "EXO 20:11",
+        "HEB 11:3"
+      ]
+    },
+    {
+      "id": "ko:GEN-1-26-28",
+      "reference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 26,
+        "endVerse": 28
+      },
+      "displayReference": "창세기 1:26-28",
+      "locale": "ko",
+      "text": "26. 하나님이 가라사대 우리의 형상을 따라 우리의 모양대로 우리가 사람을 만들고 그로 바다의 고기와, 공중의 새와, 육축과, 온 땅과, 땅에 기는 모든 것을 다스리게 하자 하시고 27. 하나님이 자기 형상 곧 하나님의 형상대로 사람을 창조하시되 남자와 여자를 창조하시고 28. 하나님이 그들에게 복을 주시며 그들에게 이르시되 생육하고 번성하여 땅에 충만하라, 땅을 정복하라, 바다의 고기와 공중의 새와 땅에 움직이는 모든 생물을 다스리라 하시니라",
+      "normalizedText": "26 하나님이 가라사대 우리의 형상을 따라 우리의 모양대로 우리가 사람을 만들고 그로 바다의 고기와 공중의 새와 육축과 온 땅과 땅에 기는 모든 것을 다스리게 하자 하시고 27 하나님이 자기 형상 곧 하나님의 형상대로 사람을 창조하시되 남자와 여자를 창조하시고 28 하나님이 그들에게 복을 주시며 그들에게 이르시되 생육하고 번성하여 땅에 충만하라 땅을 정복하라 바다의 고기와 공중의 새와 땅에 움직이는 모든 생물을 다스리라 하시니라",
+      "summary": "사람은 하나님의 형상으로 지음받고 창조 세계 안에서 맡겨진 소명을 받는다.",
+      "themes": [
+        "humanity",
+        "image of God",
+        "purpose",
+        "creation",
+        "vocation"
+      ],
+      "doctrines": [
+        "imago Dei",
+        "creation",
+        "human vocation"
+      ],
+      "humanConcerns": [
+        "identity",
+        "worth",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "Why do humans matter?",
+        "사람은 왜 사는가?",
+        "What is humanity's calling?"
+      ],
+      "entities": [
+        "God",
+        "man",
+        "woman",
+        "creation"
+      ],
+      "keywords": [
+        "image",
+        "likeness",
+        "dominion",
+        "fruitful",
+        "형상",
+        "사람",
+        "생육",
+        "다스리라"
+      ],
+      "axes": [
+        "creation",
+        "human vocation",
+        "humanity",
+        "identity",
+        "image of God",
+        "imago Dei",
+        "purpose",
+        "vocation",
+        "worth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 64,
+      "crossReferences": [
+        "1CH 26:5",
+        "1CH 4:10",
+        "1CO 11:7",
+        "1CO 11:7-9",
+        "1JO 5:7",
+        "1TI 4:3",
+        "2CO 3:18",
+        "2CO 4:4",
+        "ACT 17:26",
+        "ACT 17:28-29",
+        "COL 1:15",
+        "COL 1:26"
+      ]
+    },
+    {
+      "id": "ko:HEB-11-1-3",
+      "reference": {
+        "code": "HEB",
+        "chapter": 11,
+        "startVerse": 1,
+        "endVerse": 3
+      },
+      "displayReference": "히브리서 11:1-3",
+      "locale": "ko",
+      "text": "1. 믿음은 바라는 것들의 실상이요 보지 못하는 것들의 증거니 2. 선진들이 이로써 증거를 얻었으니라 3. 믿음으로 모든 세계가 하나님의 말씀으로 지어진 줄을 우리가 아나니 보이는 것은 나타난 것으로 말미암아 된 것이 아니니라",
+      "normalizedText": "1 믿음은 바라는 것들의 실상이요 보지 못하는 것들의 증거니 2 선진들이 이로써 증거를 얻었으니라 3 믿음으로 모든 세계가 하나님의 말씀으로 지어진 줄을 우리가 아나니 보이는 것은 나타난 것으로 말미암아 된 것이 아니니라",
+      "summary": "믿음은 바라는 것들의 실상이며 보이지 않는 것들의 증거로, 하나님의 말씀을 신뢰한다.",
+      "themes": [
+        "faith",
+        "hope",
+        "unseen",
+        "creation",
+        "trust"
+      ],
+      "doctrines": [
+        "faith",
+        "revelation",
+        "creation"
+      ],
+      "humanConcerns": [
+        "doubt",
+        "hope",
+        "trust"
+      ],
+      "questionsAnswered": [
+        "What is faith?",
+        "믿음은 무엇인가?",
+        "How does faith relate to the unseen?"
+      ],
+      "entities": [
+        "God",
+        "worlds"
+      ],
+      "keywords": [
+        "faith",
+        "assurance",
+        "conviction",
+        "unseen",
+        "믿음",
+        "실상",
+        "증거",
+        "보이지"
+      ],
+      "axes": [
+        "creation",
+        "doubt",
+        "faith",
+        "hope",
+        "revelation",
+        "trust",
+        "unseen"
+      ],
+      "canonicalWeight": 0.95,
+      "crossReferenceDegree": 38,
+      "crossReferences": [
+        "1CO 13:13",
+        "1PE 1:7-8",
+        "2CO 11:17",
+        "2CO 4:18",
+        "2CO 5:17",
+        "2CO 5:7",
+        "2CO 9:4",
+        "2PE 1:1",
+        "2PE 3:5",
+        "ACT 14:15",
+        "ACT 17:24",
+        "ACT 20:21"
+      ]
+    },
+    {
+      "id": "ko:JAM-1-5-5",
+      "reference": {
+        "code": "JAM",
+        "chapter": 1,
+        "startVerse": 5,
+        "endVerse": 5
+      },
+      "displayReference": "야고보서 1:5",
+      "locale": "ko",
+      "text": "5. 너희 중에 누구든지 지혜가 부족하거든 모든 사람에게 후히 주시고 꾸짖지 아니하시는 하나님께 구하라 그리하면 주시리라",
+      "normalizedText": "5 너희 중에 누구든지 지혜가 부족하거든 모든 사람에게 후히 주시고 꾸짖지 아니하시는 하나님께 구하라 그리하면 주시리라",
+      "summary": "지혜가 부족하면 후히 주시는 하나님께 구하라고 권한다.",
+      "themes": [
+        "wisdom",
+        "prayer",
+        "choice",
+        "God's generosity"
+      ],
+      "doctrines": [
+        "wisdom",
+        "prayer",
+        "God's generosity"
+      ],
+      "humanConcerns": [
+        "decision",
+        "uncertainty",
+        "need"
+      ],
+      "questionsAnswered": [
+        "What should I do when I lack wisdom?",
+        "결정 앞에서 어떻게 기도해야 하는가?",
+        "Does God give wisdom?"
+      ],
+      "entities": [
+        "God"
+      ],
+      "keywords": [
+        "wisdom",
+        "ask",
+        "God",
+        "generously",
+        "지혜",
+        "구하라",
+        "하나님",
+        "후히"
+      ],
+      "axes": [
+        "God's generosity",
+        "choice",
+        "decision",
+        "need",
+        "prayer",
+        "uncertainty",
+        "wisdom"
+      ],
+      "canonicalWeight": 0.88,
+      "crossReferenceDegree": 29,
+      "crossReferences": [
+        "1CH 22:12",
+        "1JO 3:22",
+        "1JO 5:14-15",
+        "1KI 3:7-12",
+        "2CH 1:10",
+        "2CO 2:16",
+        "DAN 2:18-22",
+        "EXO 31:3",
+        "EXO 31:6",
+        "EXO 36:1-4",
+        "ISA 55:6-7",
+        "JAM 1:17"
+      ]
+    },
+    {
+      "id": "ko:JOH-14-6-6",
+      "reference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "displayReference": "요한복음 14:6",
+      "locale": "ko",
+      "text": "6. 예수께서 가라사대 `내가 곧 길이요 ! 진리요 ! 생명이니 ! 나로 말미암지 않고는 아버지께로 올 자가 없느니라",
+      "normalizedText": "6 예수께서 가라사대 내가 곧 길이요 진리요 생명이니 나로 말미암지 않고는 아버지께로 올 자가 없느니라",
+      "summary": "예수님은 자신을 길과 진리와 생명이며 아버지께 가는 길이라고 말씀하신다.",
+      "themes": [
+        "truth",
+        "Jesus",
+        "life",
+        "way",
+        "God"
+      ],
+      "doctrines": [
+        "Christology",
+        "salvation",
+        "truth"
+      ],
+      "humanConcerns": [
+        "truth",
+        "direction",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "What is truth?",
+        "예수님은 누구인가?",
+        "How does one come to the Father?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father"
+      ],
+      "keywords": [
+        "way",
+        "truth",
+        "life",
+        "Father",
+        "길",
+        "진리",
+        "생명",
+        "아버지"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "direction",
+        "hope",
+        "life",
+        "salvation",
+        "truth",
+        "way"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 56,
+      "crossReferences": [
+        "1CO 15:45",
+        "1JO 1:1-2",
+        "1JO 1:8",
+        "1JO 2:23",
+        "1JO 5:11-12",
+        "1JO 5:20",
+        "1JO 5:6",
+        "1PE 1:21",
+        "1PE 2:4",
+        "1PE 3:18",
+        "2CO 1:19-20",
+        "2JO 1:9"
+      ]
+    },
+    {
+      "id": "ko:JOH-3-16-17",
+      "reference": {
+        "code": "JOH",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "요한복음 3:16-17",
+      "locale": "ko",
+      "text": "16. 하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라 17. 하나님이 그 아들을 세상에 보내신 것은 세상을 심판하려 하심이 아니요 저로 말미암아 세상이 구원을 받게 하려 하심이라",
+      "normalizedText": "16 하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라 17 하나님이 그 아들을 세상에 보내신 것은 세상을 심판하려 하심이 아니요 저로 말미암아 세상이 구원을 받게 하려 하심이라",
+      "summary": "하나님은 세상을 사랑하셔서 아들을 주셨고, 믿는 자에게 영생과 구원을 주신다.",
+      "themes": [
+        "salvation",
+        "love",
+        "Jesus",
+        "faith",
+        "eternal life"
+      ],
+      "doctrines": [
+        "salvation",
+        "incarnation",
+        "faith",
+        "God's love"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "hope",
+        "death",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "What is salvation?",
+        "구원은 무엇인가?",
+        "How is God's love shown?",
+        "What is eternal life?"
+      ],
+      "entities": [
+        "God",
+        "Son",
+        "world"
+      ],
+      "keywords": [
+        "God so loved",
+        "only Son",
+        "believes",
+        "eternal life",
+        "saved",
+        "하나님",
+        "독생자",
+        "믿는",
+        "영생",
+        "구원"
+      ],
+      "axes": [
+        "God's love",
+        "Jesus",
+        "belonging",
+        "death",
+        "eternal life",
+        "faith",
+        "guilt",
+        "hope",
+        "incarnation",
+        "love",
+        "salvation"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 51,
+      "crossReferences": [
+        "1JO 2:2",
+        "1JO 4:14",
+        "1JO 4:19",
+        "1JO 4:9-10",
+        "1TI 1:15-16",
+        "1TI 2:5-6",
+        "2CO 5:19-21",
+        "2TH 2:16",
+        "EPH 2:4",
+        "GEN 22:12",
+        "ISA 45:21-23",
+        "ISA 49:6-7"
+      ]
+    },
+    {
+      "id": "ko:MAT-11-28-30",
+      "reference": {
+        "code": "MAT",
+        "chapter": 11,
+        "startVerse": 28,
+        "endVerse": 30
+      },
+      "displayReference": "마태복음 11:28-30",
+      "locale": "ko",
+      "text": "28. 수고하고 무거운 짐진 자들아 ! 다 내게로 오라 내가 너희를 쉬게 하리라 29. 나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라 그러면 너희 마음이 쉼을 얻으리니 30. 이는 내 멍에는 쉽고 내 짐은 가벼움이라 하시니라",
+      "normalizedText": "28 수고하고 무거운 짐진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라 29 나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라 그러면 너희 마음이 쉼을 얻으리니 30 이는 내 멍에는 쉽고 내 짐은 가벼움이라 하시니라",
+      "summary": "예수님은 수고하고 무거운 짐 진 사람들을 쉬게 하시겠다고 부르신다.",
+      "themes": [
+        "rest",
+        "Jesus",
+        "weariness",
+        "pastoral care",
+        "gentleness"
+      ],
+      "doctrines": [
+        "Christ's invitation",
+        "discipleship",
+        "comfort"
+      ],
+      "humanConcerns": [
+        "weariness",
+        "burden",
+        "anxiety",
+        "despair"
+      ],
+      "questionsAnswered": [
+        "Where can the weary find rest?",
+        "힘들 때 성경은 무엇을 말하는가?",
+        "What does Jesus offer the burdened?"
+      ],
+      "entities": [
+        "Jesus"
+      ],
+      "keywords": [
+        "weary",
+        "burdened",
+        "rest",
+        "gentle",
+        "수고",
+        "무거운 짐",
+        "쉼",
+        "온유"
+      ],
+      "axes": [
+        "Christ's invitation",
+        "Jesus",
+        "anxiety",
+        "burden",
+        "comfort",
+        "despair",
+        "discipleship",
+        "gentleness",
+        "pastoral care",
+        "rest",
+        "weariness"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 77,
+      "crossReferences": [
+        "1CO 9:21",
+        "1JO 2:6",
+        "1JO 5:3",
+        "1PE 2:21-23",
+        "1TH 4:2",
+        "2CO 10:1",
+        "2CO 10:5",
+        "2CO 12:9-10",
+        "2CO 1:4-5",
+        "2CO 4:17",
+        "2TH 1:7",
+        "2TH 1:8"
+      ]
+    },
+    {
+      "id": "ko:MAT-22-37-40",
+      "reference": {
+        "code": "MAT",
+        "chapter": 22,
+        "startVerse": 37,
+        "endVerse": 40
+      },
+      "displayReference": "마태복음 22:37-40",
+      "locale": "ko",
+      "text": "37. 예수께서 가라사대 네 마음을 다하고 목숨을 다하고 뜻을 다하여 주 너의 하나님을 사랑하라 하셨으니 38. 이것이 크고 첫째 되는 계명이요 39. 둘째는 그와 같으니 네 이웃을 네 몸과 같이 사랑하라 하셨으니 40. 이 두 계명이 온 율법과 선지자의 강령이니라",
+      "normalizedText": "37 예수께서 가라사대 네 마음을 다하고 목숨을 다하고 뜻을 다하여 주 너의 하나님을 사랑하라 하셨으니 38 이것이 크고 첫째 되는 계명이요 39 둘째는 그와 같으니 네 이웃을 네 몸과 같이 사랑하라 하셨으니 40 이 두 계명이 온 율법과 선지자의 강령이니라",
+      "summary": "예수님은 율법과 선지자의 핵심을 하나님 사랑과 이웃 사랑으로 요약하신다.",
+      "themes": [
+        "love",
+        "God",
+        "neighbor",
+        "ethics",
+        "commandment"
+      ],
+      "doctrines": [
+        "great commandment",
+        "love",
+        "law"
+      ],
+      "humanConcerns": [
+        "relationships",
+        "ethics",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "What matters most?",
+        "사람은 어떻게 살아야 하는가?",
+        "What does love require?"
+      ],
+      "entities": [
+        "Jesus",
+        "God",
+        "neighbor",
+        "Law",
+        "Prophets"
+      ],
+      "keywords": [
+        "love",
+        "heart",
+        "soul",
+        "mind",
+        "neighbor",
+        "사랑",
+        "마음",
+        "목숨",
+        "뜻",
+        "이웃"
+      ],
+      "axes": [
+        "God",
+        "commandment",
+        "ethics",
+        "great commandment",
+        "law",
+        "love",
+        "neighbor",
+        "purpose",
+        "relationships"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 26,
+      "crossReferences": [
+        "1JO 4:19-21",
+        "1JO 4:7-11",
+        "1JO 5:2-5",
+        "1TI 1:5",
+        "DEU 10:12",
+        "DEU 30:6",
+        "DEU 6:5",
+        "GAL 5:14",
+        "GAL 6:10",
+        "HEB 10:16-17",
+        "JAM 2:8",
+        "JOH 1:17"
+      ]
+    },
+    {
+      "id": "ko:MAT-6-9-13",
+      "reference": {
+        "code": "MAT",
+        "chapter": 6,
+        "startVerse": 9,
+        "endVerse": 13
+      },
+      "displayReference": "마태복음 6:9-13",
+      "locale": "ko",
+      "text": "9. 그러므로 너희는 이렇게 기도하라 하늘에 계신 우리 아버지여 ! 이름이 거룩히 여김을 받으시오며 10. 나라이 임하옵시며 뜻이 하늘에서 이룬 것같이 땅에서도 이루어지이다 11. 오늘날 우리에게 일용할 양식을 주옵시고 12. 우리가 우리에게 죄 지은 자를 사하여 준 것 같이 우리 죄를 사하여 주옵시고 13. 우리를 시험에 들게 하지 마옵시고 다만 악에서 구하옵소서 (나라와 권세와 영광이 아버지께 영원히 있사옵나이다 아멘)",
+      "normalizedText": "9 그러므로 너희는 이렇게 기도하라 하늘에 계신 우리 아버지여 이름이 거룩히 여김을 받으시오며 10 나라이 임하옵시며 뜻이 하늘에서 이룬 것같이 땅에서도 이루어지이다 11 오늘날 우리에게 일용할 양식을 주옵시고 12 우리가 우리에게 죄 지은 자를 사하여 준 것 같이 우리 죄를 사하여 주옵시고 13 우리를 시험에 들게 하지 마옵시고 다만 악에서 구하옵소서 나라와 권세와 영광이 아버지께 영원히 있사옵나이다 아멘",
+      "summary": "예수님은 하나님 아버지께 나라와 일용할 양식과 용서와 보호를 구하라고 기도를 가르치신다.",
+      "themes": [
+        "prayer",
+        "Father",
+        "kingdom",
+        "forgiveness",
+        "dependence"
+      ],
+      "doctrines": [
+        "prayer",
+        "kingdom of God",
+        "forgiveness"
+      ],
+      "humanConcerns": [
+        "need",
+        "guilt",
+        "guidance",
+        "temptation"
+      ],
+      "questionsAnswered": [
+        "Why pray?",
+        "기도는 왜 하는가?",
+        "What should prayer include?"
+      ],
+      "entities": [
+        "Father",
+        "kingdom"
+      ],
+      "keywords": [
+        "pray",
+        "Father",
+        "kingdom",
+        "daily bread",
+        "forgive",
+        "기도",
+        "아버지",
+        "나라",
+        "일용할 양식",
+        "용서"
+      ],
+      "axes": [
+        "Father",
+        "dependence",
+        "forgiveness",
+        "guidance",
+        "guilt",
+        "kingdom",
+        "kingdom of God",
+        "need",
+        "prayer",
+        "temptation"
+      ],
+      "canonicalWeight": 0.95,
+      "crossReferenceDegree": 175,
+      "crossReferences": [
+        "1CH 16:36",
+        "1CH 17:24",
+        "1CH 29:11",
+        "1CH 4:10",
+        "1CO 10:13",
+        "1CO 14:16",
+        "1JO 1:7-9",
+        "1JO 3:8",
+        "1JO 5:18-19",
+        "1KI 1:36",
+        "1KI 8:30",
+        "1KI 8:34"
+      ]
+    },
+    {
+      "id": "ko:PRO-3-5-6",
+      "reference": {
+        "code": "PRO",
+        "chapter": 3,
+        "startVerse": 5,
+        "endVerse": 6
+      },
+      "displayReference": "잠언 3:5-6",
+      "locale": "ko",
+      "text": "5. 너는 마음을 다하여 여호와를 의뢰하고 네 명철을 의지하지 말라 6. 너는 범사에 그를 인정하라 ! 그리하면 네 길을 지도하시리라",
+      "normalizedText": "5 너는 마음을 다하여 여호와를 의뢰하고 네 명철을 의지하지 말라 6 너는 범사에 그를 인정하라 그리하면 네 길을 지도하시리라",
+      "summary": "지혜는 자기 명철만 의지하지 말고 범사에 여호와를 인정하며 길을 맡기라고 말한다.",
+      "themes": [
+        "wisdom",
+        "choice",
+        "trust",
+        "guidance",
+        "everyday life"
+      ],
+      "doctrines": [
+        "wisdom",
+        "providence",
+        "trust"
+      ],
+      "humanConcerns": [
+        "decision",
+        "uncertainty",
+        "work",
+        "future"
+      ],
+      "questionsAnswered": [
+        "How should I make a decision?",
+        "회사 그만둘까?",
+        "What wisdom guides everyday choices?"
+      ],
+      "entities": [
+        "LORD"
+      ],
+      "keywords": [
+        "trust",
+        "understanding",
+        "paths",
+        "direct",
+        "지혜",
+        "명철",
+        "길",
+        "인정",
+        "의뢰"
+      ],
+      "axes": [
+        "choice",
+        "decision",
+        "everyday life",
+        "future",
+        "guidance",
+        "providence",
+        "trust",
+        "uncertainty",
+        "wisdom",
+        "work"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 43,
+      "crossReferences": [
+        "1CH 28:9",
+        "1CO 10:31",
+        "1CO 3:18-20",
+        "1CO 8:1-2",
+        "1SA 30:8",
+        "1SA 4:11-12",
+        "2CO 8:16",
+        "COL 3:17",
+        "COL 3:23",
+        "EPH 1:12",
+        "EZR 7:27",
+        "EZR 8:22-23"
+      ]
+    },
+    {
+      "id": "ko:PSA-34-18-18",
+      "reference": {
+        "code": "PSA",
+        "chapter": 34,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "displayReference": "시편 34:18",
+      "locale": "ko",
+      "text": "18. 여호와는 마음이 상한 자에게 가까이 하시고 중심에 통회하는 자를 구원하시는도다",
+      "normalizedText": "18 여호와는 마음이 상한 자에게 가까이 하시고 중심에 통회하는 자를 구원하시는도다",
+      "summary": "여호와는 마음이 상한 자에게 가까이하시고 충심으로 통회하는 자를 구원하신다.",
+      "themes": [
+        "suffering",
+        "comfort",
+        "God's nearness",
+        "despair",
+        "help"
+      ],
+      "doctrines": [
+        "divine compassion",
+        "deliverance"
+      ],
+      "humanConcerns": [
+        "despair",
+        "grief",
+        "shame",
+        "safety"
+      ],
+      "questionsAnswered": [
+        "Is God near when I am broken?",
+        "절망할 때 하나님은 가까이 계신가?",
+        "What comfort is there in suffering?"
+      ],
+      "entities": [
+        "LORD"
+      ],
+      "keywords": [
+        "brokenhearted",
+        "crushed",
+        "spirit",
+        "near",
+        "상한 마음",
+        "통회",
+        "가까이",
+        "구원"
+      ],
+      "axes": [
+        "God's nearness",
+        "comfort",
+        "deliverance",
+        "despair",
+        "divine compassion",
+        "grief",
+        "help",
+        "safety",
+        "shame",
+        "suffering"
+      ],
+      "canonicalWeight": 0.94,
+      "crossReferenceDegree": 14,
+      "crossReferences": [
+        "2KI 22:19",
+        "EZE 36:26",
+        "EZE 36:31",
+        "ISA 55:6",
+        "ISA 57:15",
+        "ISA 61:1",
+        "ISA 66:2",
+        "LUK 4:18",
+        "PSA 119:151",
+        "PSA 145:18",
+        "PSA 147:3",
+        "PSA 51:17"
+      ]
+    },
+    {
+      "id": "ko:ROM-15-4-4",
+      "reference": {
+        "code": "ROM",
+        "chapter": 15,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "displayReference": "로마서 15:4",
+      "locale": "ko",
+      "text": "4. 무엇이든지 전에 기록한 바는 우리의 교훈을 위하여 기록된 것이니 우리로 하여금 인내로 또는 성경의 안위로 소망을 가지게 함이니라",
+      "normalizedText": "4 무엇이든지 전에 기록한 바는 우리의 교훈을 위하여 기록된 것이니 우리로 하여금 인내로 또는 성경의 안위로 소망을 가지게 함이니라",
+      "summary": "성경은 인내와 위로로 소망을 갖게 하려고 기록되었다.",
+      "themes": [
+        "scripture",
+        "hope",
+        "endurance",
+        "encouragement",
+        "learning"
+      ],
+      "doctrines": [
+        "scripture",
+        "hope",
+        "perseverance"
+      ],
+      "humanConcerns": [
+        "discouragement",
+        "suffering",
+        "learning"
+      ],
+      "questionsAnswered": [
+        "How does Scripture give hope?",
+        "성경은 왜 기록되었는가?",
+        "Where does hope come from?"
+      ],
+      "entities": [
+        "Scriptures"
+      ],
+      "keywords": [
+        "written",
+        "instruction",
+        "endurance",
+        "encouragement",
+        "hope",
+        "기록",
+        "교훈",
+        "인내",
+        "위로",
+        "소망"
+      ],
+      "axes": [
+        "discouragement",
+        "encouragement",
+        "endurance",
+        "hope",
+        "learning",
+        "perseverance",
+        "scripture",
+        "suffering"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 12,
+      "crossReferences": [
+        "1CO 10:11",
+        "1CO 9:9-10",
+        "1PE 1:13",
+        "2PE 1:20-21",
+        "2TI 3:16-17",
+        "HEB 10:35-36",
+        "JAM 5:7-11",
+        "PSA 119:81-83",
+        "ROM 12:12",
+        "ROM 4:23-24",
+        "ROM 5:3-5",
+        "ROM 8:24-25"
+      ]
+    }
+  ],
+  "stats": {
+    "unitCount": 18,
+    "seedReferenceCount": 18,
+    "crossReferenceDegreeTotal": 1140
+  }
+}

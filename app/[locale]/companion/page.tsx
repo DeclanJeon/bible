@@ -65,6 +65,8 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     expansionSummary: ragQuery.expansionSummary ?? undefined,
     expansionProvider: ragQuery.expansionProvider,
   });
+  const answerBundle = retrieval.answerBundle ?? null;
+  const questionUnderstanding = retrieval.question ?? answerBundle?.question ?? null;
   const hasReliablePrimary = isRetrievalReliable(retrieval);
   const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
   const primaryReference = retrieval.primaryReference;
@@ -107,7 +109,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     : [];
   const sources = localizeSourceLinks(APP_SOURCES, appLocale);
   const crossReferenceNetworkUrl = hasReliablePrimary ? buildCrossReferenceNetworkHref(primaryReference, appLocale) : null;
-  const allowedEvidenceIds = ["primary"];
+  const allowedEvidenceIds = ["primary", ...supportingReferences.map((_, index) => `supporting-${index}`)];
 
   const generation = await generateReflectionWithHermes(
     {
@@ -142,6 +144,8 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     generationMode: generation.provider,
     generationModel: generation.model,
     generationNote: generation.note,
+    answerPolicy: questionUnderstanding?.answerMode,
+    questionUnderstanding,
   };
 
   const totalNotes = 4;
@@ -174,13 +178,19 @@ export default async function CompanionPage({ params, searchParams }: Props) {
       <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
         <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm text-[var(--muted)] italic leading-relaxed sm:rounded-2xl sm:px-5 sm:py-4 sm:text-base">&ldquo;{userPrompt}&rdquo;</div>
         <h1 className="mt-3 text-xl font-bold text-[var(--ink)] tracking-tight leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">
-          {hasReliablePrimary ? cluster.title : appLocale === "ko" ? "더 구체적인 연결이 필요합니다" : "A more specific connection is needed"}
+          {hasReliablePrimary ? (answerBundle ? (appLocale === "ko" ? "성경 본문 묶음으로 답합니다" : "Answering with a Bible evidence bundle") : cluster.title) : appLocale === "ko" ? "더 구체적인 연결이 필요합니다" : "A more specific connection is needed"}
         </h1>
         <p className="mt-2 text-sm font-medium text-[var(--gold)]">
           {hasReliablePrimary ? primary.reference : appLocale === "ko" ? "낮은 신뢰도 검색" : "Low-confidence retrieval"}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
         <p className="mt-3 rounded-lg border border-[var(--gold-border)] bg-[var(--gold-soft)] px-4 py-3 text-sm leading-relaxed text-[var(--ink)]">{hydratedResponse.relevanceSummary}</p>
+        {questionUnderstanding ? (
+          <div className="mt-3 rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
+            <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 이해" : "Question understood"}:</span>{" "}
+            {questionUnderstanding.normalized} · {questionUnderstanding.answerMode}
+          </div>
+        ) : null}
         <div className="mt-3 sm:mt-5"><SafetyBanner safety={safety} /></div>
 
         {hasReliablePrimary ? (

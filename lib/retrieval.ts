@@ -2,6 +2,8 @@ import { loadVerses, type BibleReference, type BibleVerse } from "@/lib/bible";
 import { createEmbedding, cosineSimilarity as cosineEmbeddingSimilarity, getEmbeddingProviderConfig } from "@/lib/embeddings";
 import { STORY_CLUSTERS, type StoryCluster } from "@/lib/app-data";
 import { localizeStoryCluster, resolveAppLocale } from "@/lib/content";
+import { answerBundleReferences, buildAnswerBundle, type AnswerBundle } from "@/lib/answer-bundle";
+import { understandQuestion, type QuestionUnderstanding } from "@/lib/question-understanding";
 
 export type RetrievalReason = {
   matchedHints: string[];
@@ -46,6 +48,8 @@ export type RetrievalResult = {
   passageCandidates: PassageCandidate[];
   expansionSummary: string | null;
   expansionProvider: string | null;
+  question?: AnswerBundle["question"];
+  answerBundle?: AnswerBundle;
 };
 
 export function isRetrievalReliable(
@@ -700,7 +704,7 @@ function isOffTopicEverydayPrompt(prompt: string) {
   return (hasEverydayChoice || hasVagueNonConcern) && !hasSpiritualFrame;
 }
 
-function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions, rationale: string): RetrievalResult {
+function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions, rationale: string, question?: QuestionUnderstanding): RetrievalResult {
   const cluster = localizeStoryCluster(STORY_CLUSTERS[0], appLocale);
   return {
     cluster,
@@ -720,6 +724,50 @@ function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, o
     passageCandidates: [],
     expansionSummary: options.expansionSummary ?? null,
     expansionProvider: options.expansionProvider ?? null,
+    question,
+  };
+}
+
+function buildAnswerBundleRetrieval(bundle: AnswerBundle, appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions): RetrievalResult {
+  const primaryReference = bundle.primary.unit.reference;
+  const cluster = localizeStoryCluster(STORY_CLUSTERS.find((entry) => entry.primary.code === primaryReference.code) ?? STORY_CLUSTERS[0], appLocale);
+  const references = answerBundleReferences(bundle);
+  const supportingReferences = references.slice(1);
+  const passageKeywords = [...new Set([bundle.primary, ...bundle.supporting].flatMap((candidate) => candidate.matchedQueries))].slice(0, 8);
+  const semanticTerms = [...new Set([bundle.primary, ...bundle.supporting].flatMap((candidate) => candidate.matchedAxes))].slice(0, 8);
+
+  return {
+    cluster,
+    score: bundle.primary.finalScore,
+    laneScore: bundle.primary.axisScore * 20,
+    passageScore: bundle.primary.finalScore,
+    semanticScore: Math.max(bundle.primary.semanticScore, bundle.primary.axisScore),
+    embeddingScore: 0,
+    retrievalMode: "tfidf",
+    embeddingModel: null,
+    reasons: {
+      matchedHints: [],
+      matchedThemes: [],
+      matchedEmotions: [],
+      passageKeywords,
+      semanticTerms,
+    },
+    rationale: bundle.relationMap.map((relation) => `${relation.reference}: ${relation.userConnection}`).join(" · "),
+    confidence: bundle.confidence,
+    primaryReference,
+    primaryExcerpt: bundle.primary.unit.text,
+    supportingReferences,
+    passageCandidates: [bundle.primary, ...bundle.supporting].map((candidate) => ({
+      reference: candidate.unit.reference,
+      excerpt: candidate.unit.text,
+      score: candidate.finalScore,
+      matchedTerms: candidate.matchedQueries,
+      matchedConcepts: candidate.matchedAxes,
+    })),
+    expansionSummary: options.expansionSummary ?? null,
+    expansionProvider: options.expansionProvider ?? null,
+    question: bundle.question,
+    answerBundle: bundle,
   };
 }
 
@@ -727,11 +775,17 @@ function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, o
 export async function retrieveClusterForPrompt(prompt: string, locale?: string, options: RetrievalOptions = {}): Promise<RetrievalResult> {
   const appLocale = resolveAppLocale(locale);
   const normalizedPrompt = prompt.trim() || (appLocale === "ko" ? "성경 본문을 문맥과 연결 본문으로 공부" : "study scripture with context and cross references");
+  const question = understandQuestion(normalizedPrompt, appLocale);
+  if (question.intent === "external_fact" || (question.answerMode === "clarify_with_starters" && question.confidence === "high")) {
+    return lowConfidenceFallback(appLocale, options, appLocale === "ko" ? "성경 본문으로 직접 단정할 수 없는 입력으로 감지되어 응답 정책만 반환합니다." : "Prompt detected as not directly answerable from a Bible passage; returning response policy only.", question);
+  }
   if (isOffTopicEverydayPrompt(normalizedPrompt)) {
-    return lowConfidenceFallback(appLocale, options, appLocale === "ko" ? "일상 선택 질문으로 감지되어 성경 본문 추천을 보류합니다." : "Everyday choice prompt detected; pausing scripture recommendation.");
+    return lowConfidenceFallback(appLocale, options, appLocale === "ko" ? "일상 선택 질문으로 감지되어 성경 본문 추천을 보류합니다." : "Everyday choice prompt detected; pausing scripture recommendation.", question);
   }
   const ruleBased = buildRuleBasedRetrieval(normalizedPrompt, appLocale, options);
-  if (ruleBased) return ruleBased;
+  if (ruleBased) return { ...ruleBased, question };
+  const answerBundle = await buildAnswerBundle(normalizedPrompt, appLocale);
+  if (answerBundle) return buildAnswerBundleRetrieval(answerBundle, appLocale, options);
 
   const externalExpansion = options.expansionTerms?.length ? ` ${options.expansionTerms.join(" ")}` : "";
   const expandedPrompt = `${expandQuery(normalizedPrompt)}${externalExpansion}`;
@@ -745,6 +799,7 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
     buildGlobalPassageCandidates(allVerses, promptTokens, normalizedPrompt),
   );
   const bestPassage = passageCandidates[0] ?? null;
+  const supportingReferences = passageCandidates.slice(1, 5).map((candidate) => candidate.reference);
 
   const scored = corpora.map(({ cluster, corpus, tf }) => {
     const lowerPrompt = expandedPrompt.toLowerCase();
@@ -793,10 +848,11 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
       confidence,
       primaryReference: passageMatch?.reference ?? cluster.primary,
       primaryExcerpt: passageMatch?.excerpt ?? "",
-      supportingReferences: [],
+      supportingReferences,
       passageCandidates,
       expansionSummary: options.expansionSummary ?? null,
       expansionProvider: options.expansionProvider ?? null,
+      question,
     } satisfies RetrievalResult;
   });
 
@@ -819,5 +875,6 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
     passageCandidates: [],
     expansionSummary: options.expansionSummary ?? null,
     expansionProvider: options.expansionProvider ?? null,
+    question,
   };
 }

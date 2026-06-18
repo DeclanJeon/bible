@@ -52,7 +52,7 @@ function scoreCase(testCase, json, elapsed) {
 
   const checks = [
     { name: 'http', ok: elapsed < 120 },
-    { name: 'hermes-agent-rag', ok: rag.expansionProvider === 'hermes-agent' },
+    { name: 'query-plan', ok: ['deterministic', 'hermes-agent', 'hermes'].includes(rag.expansionProvider) },
     { name: 'reliable', ok: retrieval.confidence !== 'low' && Number(retrieval.passageScore || 0) >= 5 },
     { name: 'expected-primary', ok: overlapsExpected(actualPrimary, testCase.expectedPrimaryRefs || []) },
     { name: 'explanation-terms', ok: hits.length >= 2 && response.whyTheseTexts && response.relevanceSummary },

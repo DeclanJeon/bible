@@ -1,0 +1,1424 @@
+{
+  "version": "seed-2026-06-18",
+  "generatedAt": "2026-06-18T00:00:00.000Z",
+  "locale": "en",
+  "source": {
+    "translation": "world_english_bible",
+    "corpus": "world_english_bible/canon_66_vpl.txt",
+    "metadata": "world_english_bible/metadata.json"
+  },
+  "units": [
+    {
+      "id": "en:1CO-13-4-7",
+      "reference": {
+        "code": "1CO",
+        "chapter": 13,
+        "startVerse": 4,
+        "endVerse": 7
+      },
+      "displayReference": "1 Corinthians 13:4-7",
+      "locale": "en",
+      "text": "4. Love is patient and is kind. Love doesn’t envy. Love doesn’t brag, is not proud, 5. doesn’t behave itself inappropriately, doesn’t seek its own way, is not provoked, takes no account of evil; 6. doesn’t rejoice in unrighteousness, but rejoices with the truth; 7. bears all things, believes all things, hopes all things, and endures all things.",
+      "normalizedText": "4 love is patient and is kind love doesn't envy love doesn't brag is not proud 5 doesn't behave itself inappropriately doesn't seek its own way is not provoked takes no account of evil 6 doesn't rejoice in unrighteousness but rejoices with the truth 7 bears all things believes all things hopes all things and endures all things",
+      "summary": "Love is described through patient, truthful, enduring action rather than mere sentiment.",
+      "themes": [
+        "love",
+        "truth",
+        "patience",
+        "ethics",
+        "relationship"
+      ],
+      "doctrines": [
+        "love",
+        "Christian ethics"
+      ],
+      "humanConcerns": [
+        "relationships",
+        "anger",
+        "forgiveness"
+      ],
+      "questionsAnswered": [
+        "What is love?",
+        "사랑은 무엇인가?",
+        "How should I treat another person?"
+      ],
+      "entities": [
+        "love",
+        "truth"
+      ],
+      "keywords": [
+        "love",
+        "patient",
+        "kind",
+        "truth",
+        "endures",
+        "사랑",
+        "오래 참고",
+        "진리",
+        "견디느니라"
+      ],
+      "axes": [
+        "Christian ethics",
+        "anger",
+        "ethics",
+        "forgiveness",
+        "love",
+        "patience",
+        "relationship",
+        "relationships",
+        "truth"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 133,
+      "crossReferences": [
+        "1CO 10:24",
+        "1CO 10:33",
+        "1CO 11:18",
+        "1CO 11:21-22",
+        "1CO 12:25",
+        "1CO 13:4",
+        "1CO 14:33-40",
+        "1CO 3:3",
+        "1CO 4:18",
+        "1CO 4:6",
+        "1CO 5:2",
+        "1CO 7:36"
+      ]
+    },
+    {
+      "id": "en:1JO-4-7-12",
+      "reference": {
+        "code": "1JO",
+        "chapter": 4,
+        "startVerse": 7,
+        "endVerse": 12
+      },
+      "displayReference": "1 John 4:7-12",
+      "locale": "en",
+      "text": "7. Beloved, let’s love one another, for love is of God; and everyone who loves has been born of God and knows God. 8. He who doesn’t love doesn’t know God, for God is love. 9. By this God’s love was revealed in us, that God has sent his only born Son into the world that we might live through him. 10. In this is love, not that we loved God, but that he loved us, and sent his Son as the atoning sacrifice for our sins. 11. Beloved, if God loved us in this way, we also ought to love one another. 12. No one has seen God at any time. If we love one another, God remains in us, and his love has been perfected in us.",
+      "normalizedText": "7 beloved let's love one another for love is of god and everyone who loves has been born of god and knows god 8 he who doesn't love doesn't know god for god is love 9 by this god's love was revealed in us that god has sent his only born son into the world that we might live through him 10 in this is love not that we loved god but that he loved us and sent his son as the atoning sacrifice for our sins 11 beloved if god loved us in this way we also ought to love one another 12 no one has seen god at any time if we love one another god remains in us and his love has been perfected in us",
+      "summary": "God is love, shown in sending his Son, and God's love is made visible as believers love one another.",
+      "themes": [
+        "love",
+        "God",
+        "Jesus",
+        "community",
+        "atonement"
+      ],
+      "doctrines": [
+        "God is love",
+        "incarnation",
+        "atonement",
+        "love"
+      ],
+      "humanConcerns": [
+        "belonging",
+        "relationships",
+        "worth"
+      ],
+      "questionsAnswered": [
+        "What is God like?",
+        "사랑은 무엇인가?",
+        "How is God's love shown?"
+      ],
+      "entities": [
+        "God",
+        "Son"
+      ],
+      "keywords": [
+        "God is love",
+        "love one another",
+        "Son",
+        "atoning sacrifice",
+        "사랑",
+        "하나님은 사랑",
+        "아들",
+        "화목"
+      ],
+      "axes": [
+        "God",
+        "God is love",
+        "Jesus",
+        "atonement",
+        "belonging",
+        "community",
+        "incarnation",
+        "love",
+        "relationships",
+        "worth"
+      ],
+      "canonicalWeight": 0.96,
+      "crossReferenceDegree": 89,
+      "crossReferences": [
+        "1CO 13:13",
+        "1JO 1:5",
+        "1JO 2:10",
+        "1JO 2:2",
+        "1JO 2:29",
+        "1JO 2:4",
+        "1JO 2:5",
+        "1JO 2:9",
+        "1JO 3:1",
+        "1JO 3:10-23",
+        "1JO 3:16",
+        "1JO 3:16-17"
+      ]
+    },
+    {
+      "id": "en:2TI-3-16-17",
+      "reference": {
+        "code": "2TI",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "2 Timothy 3:16-17",
+      "locale": "en",
+      "text": "16. Every Scripture is God-breathed and profitable for teaching, for reproof, for correction, and for instruction in righteousness, 17. that each person who belongs to God may be complete, thoroughly equipped for every good work.",
+      "normalizedText": "16 every scripture is god-breathed and profitable for teaching for reproof for correction and for instruction in righteousness 17 that each person who belongs to god may be complete thoroughly equipped for every good work",
+      "summary": "Scripture is God-breathed and forms people for every good work.",
+      "themes": [
+        "scripture",
+        "revelation",
+        "formation",
+        "teaching",
+        "truth"
+      ],
+      "doctrines": [
+        "inspiration",
+        "scripture",
+        "discipleship"
+      ],
+      "humanConcerns": [
+        "learning",
+        "correction",
+        "formation"
+      ],
+      "questionsAnswered": [
+        "What is Scripture for?",
+        "성경은 무엇인가?",
+        "How does the Bible form a person?"
+      ],
+      "entities": [
+        "God",
+        "Scripture",
+        "person of God"
+      ],
+      "keywords": [
+        "Bible",
+        "Scripture",
+        "inspired",
+        "teaching",
+        "correction",
+        "training",
+        "성경",
+        "말씀",
+        "교훈",
+        "책망"
+      ],
+      "axes": [
+        "correction",
+        "discipleship",
+        "formation",
+        "inspiration",
+        "learning",
+        "revelation",
+        "scripture",
+        "teaching",
+        "truth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 51,
+      "crossReferences": [
+        "1CO 12:7",
+        "1TI 6:11",
+        "2CO 9:8",
+        "2PE 1:19-21",
+        "2SA 23:2",
+        "2TI 2:21",
+        "2TI 2:25",
+        "2TI 4:2",
+        "ACT 18:25",
+        "ACT 1:16",
+        "ACT 20:20",
+        "ACT 20:27"
+      ]
+    },
+    {
+      "id": "en:EPH-2-8-10",
+      "reference": {
+        "code": "EPH",
+        "chapter": 2,
+        "startVerse": 8,
+        "endVerse": 10
+      },
+      "displayReference": "Ephesians 2:8-10",
+      "locale": "en",
+      "text": "8. for by grace you have been saved through faith, and that not of yourselves; it is the gift of God, 9. not of works, that no one would boast. 10. For we are his workmanship, created in Christ Jesus for good works, which God prepared before that we would walk in them.",
+      "normalizedText": "8 for by grace you have been saved through faith and that not of yourselves it is the gift of god 9 not of works that no one would boast 10 for we are his workmanship created in christ jesus for good works which god prepared before that we would walk in them",
+      "summary": "Salvation is by grace through faith, and God's people are created in Christ for good works.",
+      "themes": [
+        "faith",
+        "grace",
+        "salvation",
+        "purpose",
+        "good works"
+      ],
+      "doctrines": [
+        "salvation by grace",
+        "faith",
+        "union with Christ",
+        "vocation"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "worth",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "What is faith?",
+        "구원은 무엇인가?",
+        "사람은 왜 사는가?"
+      ],
+      "entities": [
+        "God",
+        "Christ Jesus"
+      ],
+      "keywords": [
+        "grace",
+        "faith",
+        "saved",
+        "works",
+        "workmanship",
+        "은혜",
+        "믿음",
+        "구원",
+        "선한 일"
+      ],
+      "axes": [
+        "faith",
+        "good works",
+        "grace",
+        "guilt",
+        "purpose",
+        "salvation",
+        "salvation by grace",
+        "union with Christ",
+        "vocation",
+        "worth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 98,
+      "crossReferences": [
+        "1CO 1:29-31",
+        "1CO 3:9",
+        "1JO 1:7",
+        "1JO 2:6",
+        "1JO 5:10-12",
+        "1PE 1:5",
+        "1PE 2:12",
+        "1TI 2:10",
+        "1TI 5:10",
+        "1TI 5:25",
+        "1TI 6:18",
+        "2CO 5:17"
+      ]
+    },
+    {
+      "id": "en:EPH-4-31-32",
+      "reference": {
+        "code": "EPH",
+        "chapter": 4,
+        "startVerse": 31,
+        "endVerse": 32
+      },
+      "displayReference": "Ephesians 4:31-32",
+      "locale": "en",
+      "text": "31. Let all bitterness, wrath, anger, outcry, and slander be put away from you, with all malice. 32. And be kind to one another, tender hearted, forgiving each other, just as God also in Christ forgave you.",
+      "normalizedText": "31 let all bitterness wrath anger outcry and slander be put away from you with all malice 32 and be kind to one another tender hearted forgiving each other just as god also in christ forgave you",
+      "summary": "Bitterness and malice are put away as believers forgive one another as God forgave them in Christ.",
+      "themes": [
+        "forgiveness",
+        "mercy",
+        "relationships",
+        "anger",
+        "kindness"
+      ],
+      "doctrines": [
+        "forgiveness",
+        "union with Christ",
+        "sanctification"
+      ],
+      "humanConcerns": [
+        "hurt",
+        "anger",
+        "relationships"
+      ],
+      "questionsAnswered": [
+        "Should I forgive?",
+        "용서해야 하는가?",
+        "How does God's forgiveness shape mine?"
+      ],
+      "entities": [
+        "God",
+        "Christ"
+      ],
+      "keywords": [
+        "forgive",
+        "kind",
+        "tenderhearted",
+        "bitterness",
+        "용서",
+        "친절",
+        "불쌍히",
+        "악독"
+      ],
+      "axes": [
+        "anger",
+        "forgiveness",
+        "hurt",
+        "kindness",
+        "mercy",
+        "relationships",
+        "sanctification",
+        "union with Christ"
+      ],
+      "canonicalWeight": 0.92,
+      "crossReferenceDegree": 88,
+      "crossReferences": [
+        "1CO 13:4",
+        "1CO 14:20",
+        "1CO 5:8",
+        "1JO 1:9",
+        "1JO 2:12",
+        "1JO 3:12",
+        "1JO 3:15",
+        "1PE 2:1",
+        "1PE 3:8-9",
+        "1TI 3:11",
+        "1TI 3:3",
+        "1TI 5:13"
+      ]
+    },
+    {
+      "id": "en:EXO-3-14-15",
+      "reference": {
+        "code": "EXO",
+        "chapter": 3,
+        "startVerse": 14,
+        "endVerse": 15
+      },
+      "displayReference": "Exodus 3:14-15",
+      "locale": "en",
+      "text": "14. God said to Moses, “I AM WHO I AM,” and he said, “You shall tell the children of Israel this: ‘I AM has sent me to you.’” 15. God said moreover to Moses, “You shall tell the children of Israel this, ‘Yahweh, the God of your fathers, the God of Abraham, the God of Isaac, and the God of Jacob, has sent me to you.’ This is my name forever, and this is my memorial to all generations.",
+      "normalizedText": "14 god said to moses i am who i am and he said you shall tell the children of israel this 'i am has sent me to you ' 15 god said moreover to moses you shall tell the children of israel this 'yahweh the god of your fathers the god of abraham the god of isaac and the god of jacob has sent me to you ' this is my name forever and this is my memorial to all generations",
+      "summary": "God names himself as I AM and identifies himself with the covenant God of Abraham, Isaac, and Jacob.",
+      "themes": [
+        "God",
+        "name",
+        "self-existence",
+        "covenant",
+        "revelation"
+      ],
+      "doctrines": [
+        "theology proper",
+        "divine aseity",
+        "covenant"
+      ],
+      "humanConcerns": [
+        "identity",
+        "trust"
+      ],
+      "questionsAnswered": [
+        "Who is God?",
+        "하나님은 누구인가?",
+        "What does God reveal about himself?"
+      ],
+      "entities": [
+        "God",
+        "Moses",
+        "Abraham",
+        "Isaac",
+        "Jacob"
+      ],
+      "keywords": [
+        "I AM",
+        "Yahweh",
+        "LORD",
+        "God",
+        "name",
+        "스스로",
+        "여호와",
+        "하나님"
+      ],
+      "axes": [
+        "God",
+        "covenant",
+        "divine aseity",
+        "identity",
+        "name",
+        "revelation",
+        "self-existence",
+        "theology proper",
+        "trust"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 35,
+      "crossReferences": [
+        "2CH 28:9",
+        "2CO 1:20",
+        "ACT 7:32",
+        "DEU 1:11",
+        "DEU 1:35",
+        "DEU 4:1",
+        "EXO 3:6",
+        "EXO 4:5",
+        "EXO 6:3",
+        "GEN 17:7-8",
+        "HEB 13:8",
+        "HOS 12:5"
+      ]
+    },
+    {
+      "id": "en:GEN-1-1-1",
+      "reference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "displayReference": "Genesis 1:1",
+      "locale": "en",
+      "text": "1. In the beginning, God created the heavens and the earth.",
+      "normalizedText": "1 in the beginning god created the heavens and the earth",
+      "summary": "The Bible opens by naming God as creator of the heavens and the earth.",
+      "themes": [
+        "creation",
+        "God",
+        "origin",
+        "world"
+      ],
+      "doctrines": [
+        "creation",
+        "God as creator"
+      ],
+      "humanConcerns": [
+        "origin",
+        "meaning"
+      ],
+      "questionsAnswered": [
+        "Who made the world?",
+        "하나님은 어떤 분인가?",
+        "Where does the Bible begin?"
+      ],
+      "entities": [
+        "God",
+        "heavens",
+        "earth"
+      ],
+      "keywords": [
+        "created",
+        "beginning",
+        "heavens",
+        "earth",
+        "창조",
+        "태초",
+        "하늘",
+        "땅"
+      ],
+      "axes": [
+        "God",
+        "God as creator",
+        "creation",
+        "meaning",
+        "origin",
+        "world"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 61,
+      "crossReferences": [
+        "1CH 16:26",
+        "1CO 8:6",
+        "1JO 1:1",
+        "2PE 3:5",
+        "ACT 14:15",
+        "ACT 17:24",
+        "ACT 4:24",
+        "COL 1:16-17",
+        "ECC 12:1",
+        "EPH 3:9",
+        "EXO 20:11",
+        "HEB 11:3"
+      ]
+    },
+    {
+      "id": "en:GEN-1-26-28",
+      "reference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 26,
+        "endVerse": 28
+      },
+      "displayReference": "Genesis 1:26-28",
+      "locale": "en",
+      "text": "26. God said, “Let’s make man in our image, after our likeness. Let them have dominion over the fish of the sea, and over the birds of the sky, and over the livestock, and over all the earth, and over every creeping thing that creeps on the earth.” 27. God created man in his own image. In God’s image he created him; male and female he created them. 28. God blessed them. God said to them, “Be fruitful, multiply, fill the earth, and subdue it. Have dominion over the fish of the sea, over the birds of the sky, and over every living thing that moves on the earth.”",
+      "normalizedText": "26 god said let's make man in our image after our likeness let them have dominion over the fish of the sea and over the birds of the sky and over the livestock and over all the earth and over every creeping thing that creeps on the earth 27 god created man in his own image in god's image he created him male and female he created them 28 god blessed them god said to them be fruitful multiply fill the earth and subdue it have dominion over the fish of the sea over the birds of the sky and over every living thing that moves on the earth",
+      "summary": "Humanity is made in God's image and given a vocation within creation.",
+      "themes": [
+        "humanity",
+        "image of God",
+        "purpose",
+        "creation",
+        "vocation"
+      ],
+      "doctrines": [
+        "imago Dei",
+        "creation",
+        "human vocation"
+      ],
+      "humanConcerns": [
+        "identity",
+        "worth",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "Why do humans matter?",
+        "사람은 왜 사는가?",
+        "What is humanity's calling?"
+      ],
+      "entities": [
+        "God",
+        "man",
+        "woman",
+        "creation"
+      ],
+      "keywords": [
+        "image",
+        "likeness",
+        "dominion",
+        "fruitful",
+        "형상",
+        "사람",
+        "생육",
+        "다스리라"
+      ],
+      "axes": [
+        "creation",
+        "human vocation",
+        "humanity",
+        "identity",
+        "image of God",
+        "imago Dei",
+        "purpose",
+        "vocation",
+        "worth"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 64,
+      "crossReferences": [
+        "1CH 26:5",
+        "1CH 4:10",
+        "1CO 11:7",
+        "1CO 11:7-9",
+        "1JO 5:7",
+        "1TI 4:3",
+        "2CO 3:18",
+        "2CO 4:4",
+        "ACT 17:26",
+        "ACT 17:28-29",
+        "COL 1:15",
+        "COL 1:26"
+      ]
+    },
+    {
+      "id": "en:HEB-11-1-3",
+      "reference": {
+        "code": "HEB",
+        "chapter": 11,
+        "startVerse": 1,
+        "endVerse": 3
+      },
+      "displayReference": "Hebrews 11:1-3",
+      "locale": "en",
+      "text": "1. Now faith is assurance of things hoped for, proof of things not seen. 2. For by this, the elders obtained approval. 3. By faith we understand that the universe has been framed by the word of God, so that what is seen has not been made out of things which are visible.",
+      "normalizedText": "1 now faith is assurance of things hoped for proof of things not seen 2 for by this the elders obtained approval 3 by faith we understand that the universe has been framed by the word of god so that what is seen has not been made out of things which are visible",
+      "summary": "Faith is assurance and conviction that receives God's unseen word and creation's origin.",
+      "themes": [
+        "faith",
+        "hope",
+        "unseen",
+        "creation",
+        "trust"
+      ],
+      "doctrines": [
+        "faith",
+        "revelation",
+        "creation"
+      ],
+      "humanConcerns": [
+        "doubt",
+        "hope",
+        "trust"
+      ],
+      "questionsAnswered": [
+        "What is faith?",
+        "믿음은 무엇인가?",
+        "How does faith relate to the unseen?"
+      ],
+      "entities": [
+        "God",
+        "worlds"
+      ],
+      "keywords": [
+        "faith",
+        "assurance",
+        "conviction",
+        "unseen",
+        "믿음",
+        "실상",
+        "증거",
+        "보이지"
+      ],
+      "axes": [
+        "creation",
+        "doubt",
+        "faith",
+        "hope",
+        "revelation",
+        "trust",
+        "unseen"
+      ],
+      "canonicalWeight": 0.95,
+      "crossReferenceDegree": 38,
+      "crossReferences": [
+        "1CO 13:13",
+        "1PE 1:7-8",
+        "2CO 11:17",
+        "2CO 4:18",
+        "2CO 5:17",
+        "2CO 5:7",
+        "2CO 9:4",
+        "2PE 1:1",
+        "2PE 3:5",
+        "ACT 14:15",
+        "ACT 17:24",
+        "ACT 20:21"
+      ]
+    },
+    {
+      "id": "en:JAM-1-5-5",
+      "reference": {
+        "code": "JAM",
+        "chapter": 1,
+        "startVerse": 5,
+        "endVerse": 5
+      },
+      "displayReference": "James 1:5",
+      "locale": "en",
+      "text": "5. But if any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him.",
+      "normalizedText": "5 but if any of you lacks wisdom let him ask of god who gives to all liberally and without reproach and it will be given to him",
+      "summary": "Anyone lacking wisdom may ask God, who gives generously.",
+      "themes": [
+        "wisdom",
+        "prayer",
+        "choice",
+        "God's generosity"
+      ],
+      "doctrines": [
+        "wisdom",
+        "prayer",
+        "God's generosity"
+      ],
+      "humanConcerns": [
+        "decision",
+        "uncertainty",
+        "need"
+      ],
+      "questionsAnswered": [
+        "What should I do when I lack wisdom?",
+        "결정 앞에서 어떻게 기도해야 하는가?",
+        "Does God give wisdom?"
+      ],
+      "entities": [
+        "God"
+      ],
+      "keywords": [
+        "wisdom",
+        "ask",
+        "God",
+        "generously",
+        "지혜",
+        "구하라",
+        "하나님",
+        "후히"
+      ],
+      "axes": [
+        "God's generosity",
+        "choice",
+        "decision",
+        "need",
+        "prayer",
+        "uncertainty",
+        "wisdom"
+      ],
+      "canonicalWeight": 0.88,
+      "crossReferenceDegree": 29,
+      "crossReferences": [
+        "1CH 22:12",
+        "1JO 3:22",
+        "1JO 5:14-15",
+        "1KI 3:7-12",
+        "2CH 1:10",
+        "2CO 2:16",
+        "DAN 2:18-22",
+        "EXO 31:3",
+        "EXO 31:6",
+        "EXO 36:1-4",
+        "ISA 55:6-7",
+        "JAM 1:17"
+      ]
+    },
+    {
+      "id": "en:JOH-14-6-6",
+      "reference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "displayReference": "John 14:6",
+      "locale": "en",
+      "text": "6. Jesus said to him, “I am the way, the truth, and the life. No one comes to the Father, except through me.",
+      "normalizedText": "6 jesus said to him i am the way the truth and the life no one comes to the father except through me",
+      "summary": "Jesus identifies himself as the way, the truth, and the life, and the way to the Father.",
+      "themes": [
+        "truth",
+        "Jesus",
+        "life",
+        "way",
+        "God"
+      ],
+      "doctrines": [
+        "Christology",
+        "salvation",
+        "truth"
+      ],
+      "humanConcerns": [
+        "truth",
+        "direction",
+        "hope"
+      ],
+      "questionsAnswered": [
+        "What is truth?",
+        "예수님은 누구인가?",
+        "How does one come to the Father?"
+      ],
+      "entities": [
+        "Jesus",
+        "Father"
+      ],
+      "keywords": [
+        "way",
+        "truth",
+        "life",
+        "Father",
+        "길",
+        "진리",
+        "생명",
+        "아버지"
+      ],
+      "axes": [
+        "Christology",
+        "God",
+        "Jesus",
+        "direction",
+        "hope",
+        "life",
+        "salvation",
+        "truth",
+        "way"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 56,
+      "crossReferences": [
+        "1CO 15:45",
+        "1JO 1:1-2",
+        "1JO 1:8",
+        "1JO 2:23",
+        "1JO 5:11-12",
+        "1JO 5:20",
+        "1JO 5:6",
+        "1PE 1:21",
+        "1PE 2:4",
+        "1PE 3:18",
+        "2CO 1:19-20",
+        "2JO 1:9"
+      ]
+    },
+    {
+      "id": "en:JOH-3-16-17",
+      "reference": {
+        "code": "JOH",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "displayReference": "John 3:16-17",
+      "locale": "en",
+      "text": "16. For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life. 17. For God didn’t send his Son into the world to judge the world, but that the world should be saved through him.",
+      "normalizedText": "16 for god so loved the world that he gave his only born son that whoever believes in him should not perish but have eternal life 17 for god didn't send his son into the world to judge the world but that the world should be saved through him",
+      "summary": "God's love is shown in giving his Son so believers may have eternal life and the world may be saved through him.",
+      "themes": [
+        "salvation",
+        "love",
+        "Jesus",
+        "faith",
+        "eternal life"
+      ],
+      "doctrines": [
+        "salvation",
+        "incarnation",
+        "faith",
+        "God's love"
+      ],
+      "humanConcerns": [
+        "guilt",
+        "hope",
+        "death",
+        "belonging"
+      ],
+      "questionsAnswered": [
+        "What is salvation?",
+        "구원은 무엇인가?",
+        "How is God's love shown?",
+        "What is eternal life?"
+      ],
+      "entities": [
+        "God",
+        "Son",
+        "world"
+      ],
+      "keywords": [
+        "God so loved",
+        "only Son",
+        "believes",
+        "eternal life",
+        "saved",
+        "하나님",
+        "독생자",
+        "믿는",
+        "영생",
+        "구원"
+      ],
+      "axes": [
+        "God's love",
+        "Jesus",
+        "belonging",
+        "death",
+        "eternal life",
+        "faith",
+        "guilt",
+        "hope",
+        "incarnation",
+        "love",
+        "salvation"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 51,
+      "crossReferences": [
+        "1JO 2:2",
+        "1JO 4:14",
+        "1JO 4:19",
+        "1JO 4:9-10",
+        "1TI 1:15-16",
+        "1TI 2:5-6",
+        "2CO 5:19-21",
+        "2TH 2:16",
+        "EPH 2:4",
+        "GEN 22:12",
+        "ISA 45:21-23",
+        "ISA 49:6-7"
+      ]
+    },
+    {
+      "id": "en:MAT-11-28-30",
+      "reference": {
+        "code": "MAT",
+        "chapter": 11,
+        "startVerse": 28,
+        "endVerse": 30
+      },
+      "displayReference": "Matthew 11:28-30",
+      "locale": "en",
+      "text": "28. “Come to me, all you who labor and are heavily burdened, and I will give you rest. 29. Take my yoke upon you and learn from me, for I am gentle and humble in heart; and you will find rest for your souls. 30. For my yoke is easy, and my burden is light.”",
+      "normalizedText": "28 come to me all you who labor and are heavily burdened and i will give you rest 29 take my yoke upon you and learn from me for i am gentle and humble in heart and you will find rest for your souls 30 for my yoke is easy and my burden is light",
+      "summary": "Jesus invites the weary and burdened to come to him for rest under his gentle yoke.",
+      "themes": [
+        "rest",
+        "Jesus",
+        "weariness",
+        "pastoral care",
+        "gentleness"
+      ],
+      "doctrines": [
+        "Christ's invitation",
+        "discipleship",
+        "comfort"
+      ],
+      "humanConcerns": [
+        "weariness",
+        "burden",
+        "anxiety",
+        "despair"
+      ],
+      "questionsAnswered": [
+        "Where can the weary find rest?",
+        "힘들 때 성경은 무엇을 말하는가?",
+        "What does Jesus offer the burdened?"
+      ],
+      "entities": [
+        "Jesus"
+      ],
+      "keywords": [
+        "weary",
+        "burdened",
+        "rest",
+        "gentle",
+        "수고",
+        "무거운 짐",
+        "쉼",
+        "온유"
+      ],
+      "axes": [
+        "Christ's invitation",
+        "Jesus",
+        "anxiety",
+        "burden",
+        "comfort",
+        "despair",
+        "discipleship",
+        "gentleness",
+        "pastoral care",
+        "rest",
+        "weariness"
+      ],
+      "canonicalWeight": 0.98,
+      "crossReferenceDegree": 77,
+      "crossReferences": [
+        "1CO 9:21",
+        "1JO 2:6",
+        "1JO 5:3",
+        "1PE 2:21-23",
+        "1TH 4:2",
+        "2CO 10:1",
+        "2CO 10:5",
+        "2CO 12:9-10",
+        "2CO 1:4-5",
+        "2CO 4:17",
+        "2TH 1:7",
+        "2TH 1:8"
+      ]
+    },
+    {
+      "id": "en:MAT-22-37-40",
+      "reference": {
+        "code": "MAT",
+        "chapter": 22,
+        "startVerse": 37,
+        "endVerse": 40
+      },
+      "displayReference": "Matthew 22:37-40",
+      "locale": "en",
+      "text": "37. Jesus said to him, “‘You shall love the Lord your God with all your heart, with all your soul, and with all your mind.’ 38. This is the first and great commandment. 39. A second likewise is this, ‘You shall love your neighbor as yourself.’ 40. The whole law and the prophets depend on these two commandments.”",
+      "normalizedText": "37 jesus said to him 'you shall love the lord your god with all your heart with all your soul and with all your mind ' 38 this is the first and great commandment 39 a second likewise is this 'you shall love your neighbor as yourself ' 40 the whole law and the prophets depend on these two commandments",
+      "summary": "Jesus summarizes the Law and Prophets as love for God and love for neighbor.",
+      "themes": [
+        "love",
+        "God",
+        "neighbor",
+        "ethics",
+        "commandment"
+      ],
+      "doctrines": [
+        "great commandment",
+        "love",
+        "law"
+      ],
+      "humanConcerns": [
+        "relationships",
+        "ethics",
+        "purpose"
+      ],
+      "questionsAnswered": [
+        "What matters most?",
+        "사람은 어떻게 살아야 하는가?",
+        "What does love require?"
+      ],
+      "entities": [
+        "Jesus",
+        "God",
+        "neighbor",
+        "Law",
+        "Prophets"
+      ],
+      "keywords": [
+        "love",
+        "heart",
+        "soul",
+        "mind",
+        "neighbor",
+        "사랑",
+        "마음",
+        "목숨",
+        "뜻",
+        "이웃"
+      ],
+      "axes": [
+        "God",
+        "commandment",
+        "ethics",
+        "great commandment",
+        "law",
+        "love",
+        "neighbor",
+        "purpose",
+        "relationships"
+      ],
+      "canonicalWeight": 1,
+      "crossReferenceDegree": 26,
+      "crossReferences": [
+        "1JO 4:19-21",
+        "1JO 4:7-11",
+        "1JO 5:2-5",
+        "1TI 1:5",
+        "DEU 10:12",
+        "DEU 30:6",
+        "DEU 6:5",
+        "GAL 5:14",
+        "GAL 6:10",
+        "HEB 10:16-17",
+        "JAM 2:8",
+        "JOH 1:17"
+      ]
+    },
+    {
+      "id": "en:MAT-6-9-13",
+      "reference": {
+        "code": "MAT",
+        "chapter": 6,
+        "startVerse": 9,
+        "endVerse": 13
+      },
+      "displayReference": "Matthew 6:9-13",
+      "locale": "en",
+      "text": "9. Pray like this: “‘Our Father in heaven, may your name be kept holy. 10. Let your Kingdom come. Let your will be done on earth as it is in heaven. 11. Give us today our daily bread. 12. Forgive us our debts, as we also forgive our debtors. 13. Bring us not into temptation, but deliver us from the evil one. For yours is the Kingdom, the power, and the glory forever. Amen.’",
+      "normalizedText": "9 pray like this 'our father in heaven may your name be kept holy 10 let your kingdom come let your will be done on earth as it is in heaven 11 give us today our daily bread 12 forgive us our debts as we also forgive our debtors 13 bring us not into temptation but deliver us from the evil one for yours is the kingdom the power and the glory forever amen '",
+      "summary": "Jesus teaches prayer as address to the Father for God's kingdom, daily provision, forgiveness, and deliverance.",
+      "themes": [
+        "prayer",
+        "Father",
+        "kingdom",
+        "forgiveness",
+        "dependence"
+      ],
+      "doctrines": [
+        "prayer",
+        "kingdom of God",
+        "forgiveness"
+      ],
+      "humanConcerns": [
+        "need",
+        "guilt",
+        "guidance",
+        "temptation"
+      ],
+      "questionsAnswered": [
+        "Why pray?",
+        "기도는 왜 하는가?",
+        "What should prayer include?"
+      ],
+      "entities": [
+        "Father",
+        "kingdom"
+      ],
+      "keywords": [
+        "pray",
+        "Father",
+        "kingdom",
+        "daily bread",
+        "forgive",
+        "기도",
+        "아버지",
+        "나라",
+        "일용할 양식",
+        "용서"
+      ],
+      "axes": [
+        "Father",
+        "dependence",
+        "forgiveness",
+        "guidance",
+        "guilt",
+        "kingdom",
+        "kingdom of God",
+        "need",
+        "prayer",
+        "temptation"
+      ],
+      "canonicalWeight": 0.95,
+      "crossReferenceDegree": 175,
+      "crossReferences": [
+        "1CH 16:36",
+        "1CH 17:24",
+        "1CH 29:11",
+        "1CH 4:10",
+        "1CO 10:13",
+        "1CO 14:16",
+        "1JO 1:7-9",
+        "1JO 3:8",
+        "1JO 5:18-19",
+        "1KI 1:36",
+        "1KI 8:30",
+        "1KI 8:34"
+      ]
+    },
+    {
+      "id": "en:PRO-3-5-6",
+      "reference": {
+        "code": "PRO",
+        "chapter": 3,
+        "startVerse": 5,
+        "endVerse": 6
+      },
+      "displayReference": "Proverbs 3:5-6",
+      "locale": "en",
+      "text": "5. Trust in Yahweh with all your heart, and don’t lean on your own understanding. 6. In all your ways acknowledge him, and he will make your paths straight.",
+      "normalizedText": "5 trust in yahweh with all your heart and don't lean on your own understanding 6 in all your ways acknowledge him and he will make your paths straight",
+      "summary": "Wisdom calls people to trust the LORD rather than their own understanding and to acknowledge him in their paths.",
+      "themes": [
+        "wisdom",
+        "choice",
+        "trust",
+        "guidance",
+        "everyday life"
+      ],
+      "doctrines": [
+        "wisdom",
+        "providence",
+        "trust"
+      ],
+      "humanConcerns": [
+        "decision",
+        "uncertainty",
+        "work",
+        "future"
+      ],
+      "questionsAnswered": [
+        "How should I make a decision?",
+        "회사 그만둘까?",
+        "What wisdom guides everyday choices?"
+      ],
+      "entities": [
+        "LORD"
+      ],
+      "keywords": [
+        "trust",
+        "understanding",
+        "paths",
+        "direct",
+        "지혜",
+        "명철",
+        "길",
+        "인정",
+        "의뢰"
+      ],
+      "axes": [
+        "choice",
+        "decision",
+        "everyday life",
+        "future",
+        "guidance",
+        "providence",
+        "trust",
+        "uncertainty",
+        "wisdom",
+        "work"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 43,
+      "crossReferences": [
+        "1CH 28:9",
+        "1CO 10:31",
+        "1CO 3:18-20",
+        "1CO 8:1-2",
+        "1SA 30:8",
+        "1SA 4:11-12",
+        "2CO 8:16",
+        "COL 3:17",
+        "COL 3:23",
+        "EPH 1:12",
+        "EZR 7:27",
+        "EZR 8:22-23"
+      ]
+    },
+    {
+      "id": "en:PSA-34-18-18",
+      "reference": {
+        "code": "PSA",
+        "chapter": 34,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "displayReference": "Psalms 34:18",
+      "locale": "en",
+      "text": "18. Yahweh is near to those who have a broken heart, and saves those who have a crushed spirit.",
+      "normalizedText": "18 yahweh is near to those who have a broken heart and saves those who have a crushed spirit",
+      "summary": "The LORD is near to the brokenhearted and saves the crushed in spirit.",
+      "themes": [
+        "suffering",
+        "comfort",
+        "God's nearness",
+        "despair",
+        "help"
+      ],
+      "doctrines": [
+        "divine compassion",
+        "deliverance"
+      ],
+      "humanConcerns": [
+        "despair",
+        "grief",
+        "shame",
+        "safety"
+      ],
+      "questionsAnswered": [
+        "Is God near when I am broken?",
+        "절망할 때 하나님은 가까이 계신가?",
+        "What comfort is there in suffering?"
+      ],
+      "entities": [
+        "LORD"
+      ],
+      "keywords": [
+        "brokenhearted",
+        "crushed",
+        "spirit",
+        "near",
+        "상한 마음",
+        "통회",
+        "가까이",
+        "구원"
+      ],
+      "axes": [
+        "God's nearness",
+        "comfort",
+        "deliverance",
+        "despair",
+        "divine compassion",
+        "grief",
+        "help",
+        "safety",
+        "shame",
+        "suffering"
+      ],
+      "canonicalWeight": 0.94,
+      "crossReferenceDegree": 14,
+      "crossReferences": [
+        "2KI 22:19",
+        "EZE 36:26",
+        "EZE 36:31",
+        "ISA 55:6",
+        "ISA 57:15",
+        "ISA 61:1",
+        "ISA 66:2",
+        "LUK 4:18",
+        "PSA 119:151",
+        "PSA 145:18",
+        "PSA 147:3",
+        "PSA 51:17"
+      ]
+    },
+    {
+      "id": "en:ROM-15-4-4",
+      "reference": {
+        "code": "ROM",
+        "chapter": 15,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "displayReference": "Romans 15:4",
+      "locale": "en",
+      "text": "4. For whatever things were written before were written for our learning, that through perseverance and through encouragement of the Scriptures we might have hope.",
+      "normalizedText": "4 for whatever things were written before were written for our learning that through perseverance and through encouragement of the scriptures we might have hope",
+      "summary": "Scripture was written for instruction so that endurance and encouragement would give hope.",
+      "themes": [
+        "scripture",
+        "hope",
+        "endurance",
+        "encouragement",
+        "learning"
+      ],
+      "doctrines": [
+        "scripture",
+        "hope",
+        "perseverance"
+      ],
+      "humanConcerns": [
+        "discouragement",
+        "suffering",
+        "learning"
+      ],
+      "questionsAnswered": [
+        "How does Scripture give hope?",
+        "성경은 왜 기록되었는가?",
+        "Where does hope come from?"
+      ],
+      "entities": [
+        "Scriptures"
+      ],
+      "keywords": [
+        "written",
+        "instruction",
+        "endurance",
+        "encouragement",
+        "hope",
+        "기록",
+        "교훈",
+        "인내",
+        "위로",
+        "소망"
+      ],
+      "axes": [
+        "discouragement",
+        "encouragement",
+        "endurance",
+        "hope",
+        "learning",
+        "perseverance",
+        "scripture",
+        "suffering"
+      ],
+      "canonicalWeight": 0.9,
+      "crossReferenceDegree": 12,
+      "crossReferences": [
+        "1CO 10:11",
+        "1CO 9:9-10",
+        "1PE 1:13",
+        "2PE 1:20-21",
+        "2TI 3:16-17",
+        "HEB 10:35-36",
+        "JAM 5:7-11",
+        "PSA 119:81-83",
+        "ROM 12:12",
+        "ROM 4:23-24",
+        "ROM 5:3-5",
+        "ROM 8:24-25"
+      ]
+    }
+  ],
+  "stats": {
+    "unitCount": 18,
+    "seedReferenceCount": 18,
+    "crossReferenceDegreeTotal": 1140
+  }
+}
