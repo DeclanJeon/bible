@@ -126,7 +126,7 @@ export default async function PassagePage({ params }: Props) {
             {copy.back}
           </Link>
           <div className="flex items-center gap-3">
-            <Link href={buildBibleHref({ book: passage.book?.code, chapter: reference.chapter, locale })} className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
+            <Link href={buildBibleHref({ book: passage.book?.code, chapter: reference.chapter, locale })} className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] min-h-[44px] flex items-center">
               {UI_COPY[locale].sidebar.navBible}
             </Link>
             <div className="text-sm font-semibold text-white">{UI_COPY[locale].siteTitle}</div>
@@ -182,16 +182,16 @@ export default async function PassagePage({ params }: Props) {
               <div className="text-base font-semibold text-white">{cluster.title}</div>
               <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{cluster.pastoralPrompt}</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link href={buildStudyHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[var(--accent)]/90">
-                  <BookOpen className="h-3.5 w-3.5" />
+                <Link href={buildStudyHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[var(--accent)]/90 min-h-[44px]">
+                  <BookOpen className="h-4 w-4" />
                   {copy.openStudy}
                 </Link>
-                <Link href={buildGraphHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
-                  <Compass className="h-3.5 w-3.5" />
+                <Link href={buildGraphHref(cluster.slug, locale)} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] min-h-[44px]">
+                  <Compass className="h-4 w-4" />
                   {copy.openGraph}
                 </Link>
-                <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
-                  <Sparkles className="h-3.5 w-3.5" />
+                <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] min-h-[44px]">
+                  <Sparkles className="h-4 w-4" />
                   {copy.startReflection}
                 </Link>
               </div>

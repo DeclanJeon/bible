@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { BookOpen, Compass, Home, MessageSquareText, Sparkles } from "lucide-react";
+import { BookOpen, Compass, Home, Layers, MessageSquareText, Sparkles } from "lucide-react";
 import { UI_COPY, resolveAppLocale } from "@/lib/content";
-import { buildBibleHref, buildCompanionHref, buildGraphHref, buildLanesHref, buildReviewsHref, buildStudyHref } from "@/lib/navigation";
+import { buildCompanionHref, buildGraphHref, buildLanesHref, buildReviewsHref, buildStudyHref } from "@/lib/navigation";
 
 
 export function SecondaryNav({
@@ -27,8 +27,7 @@ export function SecondaryNav({
           { key: "graph", href: buildGraphHref(slug, appLocale), label: sidebarCopy.navGraph, icon: Compass },
         ]
       : []),
-    { key: "lanes", href: buildLanesHref({ locale: appLocale }), label: sidebarCopy.navLanes, icon: BookOpen },
-    { key: "bible", href: buildBibleHref({ locale: appLocale }), label: sidebarCopy.navBible, icon: BookOpen },
+    { key: "lanes", href: buildLanesHref({ locale: appLocale }), label: sidebarCopy.navLanes, icon: Layers },
     { key: "reviews", href: buildReviewsHref(appLocale), label: sidebarCopy.navReviews, icon: MessageSquareText },
   ];
 
@@ -52,8 +51,8 @@ export function SecondaryNav({
                     : "border border-[var(--hairline)] bg-[var(--surface-2)] text-[var(--ink)] hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
                 }`}
               >
-                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">{label}</span>
+                <Icon className="h-4 w-4 shrink-0" />
+                <span>{label}</span>
               </Link>
             );
           })}

@@ -161,13 +161,13 @@ export default async function BiblePage({ params, searchParams }: Props) {
 
       <section className="mt-8 grid gap-8 md:grid-cols-[280px_minmax(0,1fr)] lg:grid-cols-[320px_minmax(0,1fr)] md:items-start">
         <aside className="glass scrollbar-thin rounded-2xl p-5 sm:p-6 lg:p-8 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-          <details className="lg:hidden">
+          <details className="md:hidden">
             <summary className="cursor-pointer rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)]">
               {copy.books} · {reader.selectedBook.name}
             </summary>
             <div className="mt-5">{renderBookGroups("grid grid-cols-2 gap-2 sm:grid-cols-3")}</div>
           </details>
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <div className="section-title text-base">{copy.books}</div>
             <div className="mt-5">{renderBookGroups("grid grid-cols-2 gap-2")}</div>
           </div>
@@ -196,13 +196,13 @@ export default async function BiblePage({ params, searchParams }: Props) {
                 <BookOpen className="h-4 w-4 text-[var(--gold)]" />
                 {copy.chapters}
               </div>
-              <details className="lg:hidden">
+              <details className="md:hidden">
                 <summary className="cursor-pointer rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)]">
                   {copy.chapters} · {reader.selectedChapter}{copy.chapter}
                 </summary>
                 <div className="mt-4">{renderChapterLinks("flex flex-wrap gap-2")}</div>
               </details>
-              {renderChapterLinks("hidden flex-wrap gap-2 lg:flex")}
+              {renderChapterLinks("hidden flex-wrap gap-2 md:flex")}
             </div>
           </section>
 
@@ -215,7 +215,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
                       { code: verse.code, chapter: verse.chapter, startVerse: verse.verse, endVerse: verse.verse },
                       locale,
                     )}
-                    className="pt-1 text-base font-bold leading-8 text-[var(--gold)] transition hover:text-[var(--ink)]"
+                    className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-lg text-base font-bold leading-8 text-[var(--gold)] transition hover:bg-[var(--gold)]/10 hover:text-[var(--ink)]"
                     aria-label={`${copy.verseLink}: ${reader.selectedBook.name} ${verse.chapter}:${verse.verse}`}
                   >
                     {verse.verse}
@@ -240,13 +240,11 @@ export default async function BiblePage({ params, searchParams }: Props) {
                   {previousBook.name} {reader.previous.chapter}{copy.chapter}
                 </span>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : null}
             {reader.next && nextBook ? (
               <Link
                 href={buildBibleHref({ book: reader.next.code, chapter: reader.next.chapter, locale })}
-                className="glass rounded-2xl p-5 text-right transition hover:border-[var(--gold)]/30"
+                className={`glass rounded-2xl p-5 text-right transition hover:border-[var(--gold)]/30 ${!reader.previous || !previousBook ? "sm:col-span-2" : ""}`}
               >
                 <span className="inline-flex items-center justify-end gap-2 text-sm font-semibold text-[var(--muted)]">
                   {copy.next}

@@ -158,11 +158,11 @@ export default async function CompanionPage({ params, searchParams }: Props) {
         <div className="flex items-center justify-between gap-3">
           <Link href={`/${appLocale}`} className="shrink-0 text-sm font-semibold text-[var(--ink)] sm:text-base">{UI_COPY[appLocale].siteTitle}</Link>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <Link href={buildBibleHref({ locale: appLocale })} className="hidden rounded-lg border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] sm:inline-block">
+            <Link href={buildBibleHref({ locale: appLocale })} className="rounded-lg border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] min-h-[36px] flex items-center">
               {UI_COPY[appLocale].sidebar.navBible}
             </Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[36px] flex items-center ${appLocale === "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>KO</Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[36px] flex items-center ${appLocale !== "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>EN</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[44px] min-w-[44px] items-center justify-center flex ${appLocale === "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>KO</Link>
+            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[44px] min-w-[44px] items-center justify-center flex ${appLocale !== "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>EN</Link>
           </div>
         </div>
         <form action={`/${appLocale}/companion`} className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
