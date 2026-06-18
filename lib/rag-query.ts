@@ -159,7 +159,7 @@ export async function buildRagQueryPlan(prompt: string, locale?: string): Promis
   const appLocale = resolveAppLocale(locale);
   const fallback = deterministicQueryPlan(prompt, appLocale);
 
-  if (process.env.NEXT_PHASE === "phase-production-build" || process.env.HERMES_RAG_QUERY === "0") {
+  if (process.env.NEXT_PHASE === "phase-production-build" || process.env.HERMES_RAG_QUERY !== "1") {
     return fallback;
   }
 
