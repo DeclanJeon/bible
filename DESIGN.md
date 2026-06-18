@@ -16,6 +16,7 @@
   - `docs/bible-hyperlink-companion-design.md` — product direction, interaction model, graph intent, source policy.
   - `docs/hermes-evidence-locked-contract.md` — evidence-locked explanation contract.
   - `reports/rag-qa-improvement-report.md` — current RAG flow, QA results, known limits.
+  - `app/[locale]/api/reflect` live probe for “삶이 지쳤어 내가 왜 살아야되는지 모르겠어” — current low-confidence failure mode for unpredictable Korean concern input.
   - `lib/knowledge.ts` — current top-N cross-reference aggregation.
   - `lib/retrieval.ts` — prompt-to-primary-passage retrieval.
   - `lib/reflection.ts` — deterministic explanation fields.
@@ -50,6 +51,7 @@
   - Keep explanation evidence-locked: prose explains the provided passages and metadata, never invents new citations or background.
   - Separate summary guidance from complete data access.
   - Make the full cross-reference network navigable by book, canon section, direction, relation type, source, strength, and phrase anchor.
+  - Interpret unpredictable free-form user concerns through an AI/query-planner middleware before retrieval, while keeping the Bible corpus and evidence contract as the source of truth for final passage selection.
 - Non-goals:
   - Do not claim to know every possible theological relationship beyond the datasets and local metadata.
   - Do not force every cross-reference into the generated answer body.
@@ -61,6 +63,7 @@
   - The full cross-reference page can show every link while remaining readable through grouping/filtering.
   - Each displayed link includes `why connected`, `source`, `direction`, `excerpt`, and `full passage` navigation.
   - QA includes exact-count recall checks for known anchors and no-truncation checks for the full endpoint.
+  - Korean free-form concern QA covers at least 30 prompts across weariness, purpose, despair, safety, unrelated everyday input, and theological questions with ≥95% pass rate.
 
 ## Personas and jobs
 - Primary personas:
@@ -116,6 +119,9 @@
   - Generated explanation sees highlights and summaries; the full list remains deterministic data.
   - “All” means all links in ingested sources for the selected passage, plus both directions after reverse indexing. The UI must disclose source coverage.
 
+- Principle 7: AI interprets the question; evidence selects the passage.
+  - LLM/Hermes middleware may normalize intent and propose search terms, but it must not become the source of Bible citations. Retrieved local passages, curated priors, and evidence validation decide what is shown.
+
 ## Visual language
 - Color:
   - Canvas: `#0a0a0f`.
@@ -169,12 +175,13 @@
   - `CrossReferenceFilters`: direction, book, canon section, relation type, source, phrase anchor.
   - `CrossReferenceEmptyState`: explicit message when source datasets have no links for a reference.
   - `FullNetworkCta`: reusable CTA from companion, graph, study, and passage pages.
+  - `BrandedLoadingPage`: logo-led route loading page for prompt/response waits and generic route transitions.
 - Variants and states:
   - Highlight mode: 4–8 strongest links.
   - Full mode: no edge truncation; paginated/virtualized only as a rendering strategy, never as data loss.
   - Dense mode: desktop table/list.
   - Card mode: mobile stacked cards.
-  - Low-confidence mode: no expansion from weak primary passage; ask user to refine prompt or open direct passage lookup.
+  - Low-confidence mode: no expansion from weak primary passage; first try AI/deterministic query normalization for concern intent, then pause expansion if the normalized query still lacks a reliable passage.
 - Token/component ownership:
   - Use existing CSS variables and Tailwind patterns.
   - Do not introduce a new design-system dependency.
@@ -212,7 +219,8 @@
 
 ## Interaction states
 - Loading:
-  - Summary skeleton plus “loading cross-reference network” copy.
+  - Prompt-to-companion waits use a separate logo-led loading page with calm progress copy.
+  - Keep motion minimal and respect reduced-motion preferences.
   - Do not show partial counts as final.
 - Empty:
   - State whether there are no links in the ingested datasets for this passage, or whether retrieval confidence is too low to expand.
@@ -243,6 +251,7 @@
   - Always disclose source basis: “수집된 OpenBible 및 Bible Cross References 데이터셋 기준”.
   - Avoid “성경의 모든 가능한 관련 구절” unless the scope sentence immediately clarifies dataset coverage.
   - Prefer “이 연결은 … 때문에 제안됩니다” over “이 구절은 반드시 …를 뜻합니다”.
+  - For despair or purpose prompts, acknowledge the safety/weight of the input before study framing; never answer existential distress with an empty “try another search” state unless retrieval truly fails after intent normalization.
 
 ## Implementation constraints
 - Framework/styling system:
@@ -263,6 +272,7 @@
   - Unit coverage for graph normalization, incoming/outgoing/mutual classification, no-truncation full output, and source provenance.
   - API coverage for reflect summary vs full graph endpoint.
   - UI coverage for empty, low-confidence, large-network, and filtered states.
+  - Prompt-intent middleware coverage for at least 30 Korean free-form prompts, including morphology variants such as `지쳤어`, `살아야되는지`, `살 이유`, and `버텨야`.
 
 # Exhaustive Scripture Network Design
 

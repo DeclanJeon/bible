@@ -23,6 +23,8 @@ export function QuickPromptForm({
               type="text"
               name="prompt"
               defaultValue={defaultValue}
+              required
+              minLength={2}
               className="min-w-0 flex-1 border-0 bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
               placeholder={copy.placeholder}
             />

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { siteDescription, siteTitle } from "@/lib/page-metadata";
+import { OG_IMAGE_URL, siteDescription, siteTitle } from "@/lib/page-metadata";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,6 +11,28 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    title: siteTitle("ko"),
+    description: siteDescription("ko"),
+    url: "https://bible-guide.kr/ko",
+    siteName: siteTitle("ko"),
+    type: "website",
+    locale: "ko_KR",
+    images: [
+      {
+        url: OG_IMAGE_URL,
+        width: 1200,
+        height: 630,
+        alt: siteTitle("ko"),
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle("ko"),
+    description: siteDescription("ko"),
+    images: [OG_IMAGE_URL],
   },
   icons: {
     icon: "/favicon.svg",

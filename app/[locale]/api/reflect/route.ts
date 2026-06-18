@@ -3,7 +3,6 @@ import { getPassage, serializeBibleReference } from "@/lib/bible";
 import { getBookMetadata } from "@/lib/book-metadata";
 import { localizeStoryCluster, resolveAppLocale } from "@/lib/content";
 import { getPassageCrossReferences } from "@/lib/knowledge";
-import { getCrossReferenceNetwork } from "@/lib/crossref-graph";
 import { generateReflectionWithHermes } from "@/lib/hermes";
 import { buildReflectionResponse } from "@/lib/reflection";
 import { getRelatedClustersFromReferences } from "@/lib/app-data";
@@ -76,15 +75,6 @@ export async function POST(
   const primaryReference = retrieval.primaryReference;
   const primary = await getPassage(primaryReference, appLocale);
   const graphSuggestions = hasReliablePrimary ? await getPassageCrossReferences(primaryReference, 4, appLocale) : [];
-  const crossReferenceNetwork = hasReliablePrimary
-    ? await getCrossReferenceNetwork(primaryReference, {
-        locale: appLocale,
-        highlightLimit: 4,
-        includeExcerpts: "preview",
-        includeBackground: true,
-        summaryOnly: true,
-      })
-    : null;
   const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
     label: suggestion.displayReference,
     type: "theme" as const,
@@ -129,10 +119,8 @@ export async function POST(
         };
       })
     : [];
-  const crossReferenceNetworkUrl = crossReferenceNetwork ? `/${appLocale}/crossrefs/${serializeBibleReference(primaryReference)}` : null;
-  const allowedEvidenceIds = crossReferenceNetwork
-    ? ["primary", ...crossReferenceNetwork.highlights.map((edge) => edge.id)]
-    : ["primary"];
+  const crossReferenceNetworkUrl = hasReliablePrimary ? `/${appLocale}/crossrefs/${serializeBibleReference(primaryReference)}` : null;
+  const allowedEvidenceIds = ["primary"];
   const generation = await generateReflectionWithHermes(
     {
       prompt: normalizedPrompt,
@@ -153,8 +141,8 @@ export async function POST(
       paulLayer: cluster.paulLayer,
       jewishReception: cluster.jewishReception,
       graphSuggestions,
-      crossReferenceSummary: crossReferenceNetwork?.summary ?? null,
-      crossReferenceHighlights: crossReferenceNetwork?.highlights ?? [],
+      crossReferenceSummary: null,
+      crossReferenceHighlights: [],
       crossReferenceNetworkUrl,
       allowedEvidenceIds,
       deterministicReflection: deterministic,
@@ -188,8 +176,8 @@ export async function POST(
     context: cluster.context,
     linkedTexts: cluster.linkedTexts,
     graphSuggestions,
-    crossReferenceSummary: crossReferenceNetwork?.summary ?? null,
-    crossReferenceHighlights: crossReferenceNetwork?.highlights ?? [],
+    crossReferenceSummary: null,
+    crossReferenceHighlights: [],
     crossReferenceNetworkUrl,
     jesusLayer: cluster.jesusLayer,
     paulLayer: cluster.paulLayer,

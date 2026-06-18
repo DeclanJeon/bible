@@ -42,17 +42,107 @@ function extractJson(text: string): RagQueryShape | null {
   }
 }
 
+type DeterministicIntentProfile = {
+  match: RegExp;
+  ko: { summary: string; terms: string[] };
+  en: { summary: string; terms: string[] };
+};
+
+const DETERMINISTIC_INTENT_PROFILES: DeterministicIntentProfile[] = [
+  {
+    match: /((삶|사는|살아야|살\s?이유|왜\s?살).*(지치|지쳤|지쳐|지친|무기력|힘들|피곤))|((지치|지쳤|지쳐|지친|무기력|힘들|피곤).*(삶|살아야|살\s?이유|왜\s?살|모르겠))|(weary|tired|exhausted).*(reason to live|why live|purpose)/i,
+    ko: {
+      summary: "지침과 삶의 이유를 함께 묻는 절망/목적 질문",
+      terms: ["수고", "무거운 짐", "쉬게 하리라", "피곤", "능력", "낙망", "소망", "인자", "지으심", "선한 일", "하나님의 형상", "생명"],
+    },
+    en: {
+      summary: "weariness with purpose and reason-to-live concern",
+      terms: ["weary", "burden", "rest", "faint", "strength", "hope", "steadfast love", "created", "workmanship", "image of God", "life"],
+    },
+  },
+  {
+    match: /(희망이\s?없|아무\s?희망|버티기\s?힘들|더는\s?못\s?버티|왜\s?버텨야|버텨야\s?하는지|왜\s?견뎌야|견뎌야\s?하는지|살\s?이유가\s?없|소망.*없|hopeless|no reason to live|can't go on|cant go on)/i,
+    ko: {
+      summary: "소망을 잃은 절망 질문",
+      terms: ["소망", "낙망", "인자", "긍휼", "새롭다", "기다림", "생명", "부활", "평안"],
+    },
+    en: {
+      summary: "despair and hope question",
+      terms: ["hope", "despair", "steadfast love", "mercies", "wait", "life", "resurrection", "peace"],
+    },
+  },
+  {
+    match: /(왜\s?살아야|살아야\s?(하는|되는|될)?지|살\s?이유|사는\s?이유|삶.*(목적|의미)|무엇을 위해 살아|존재.*이유|reason to live|why.*live|purpose.*life|meaning.*life)/i,
+    ko: {
+      summary: "삶의 목적과 존재 이유 질문",
+      terms: ["지으심", "선한 일", "하나님의 형상", "창조", "자녀", "생명", "소망", "영원", "목적"],
+    },
+    en: {
+      summary: "life purpose and reason-to-live question",
+      terms: ["created", "workmanship", "good works", "image of God", "child of God", "life", "hope", "purpose"],
+    },
+  },
+  {
+    match: /(힘들|지치|지쳤|지쳐|지친|피곤|번아웃|무기력|수고|부담|weary|burden|burnout|exhausted|tired)/i,
+    ko: {
+      summary: "지침과 무거운 부담 질문",
+      terms: ["수고", "무거운 짐", "쉬게 하리라", "피곤", "능력", "위로", "부담", "견디게"],
+    },
+    en: {
+      summary: "weariness and burden question",
+      terms: ["weary", "burden", "rest", "faint", "strength", "comfort", "endurance"],
+    },
+  },
+  {
+    match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i,
+    ko: {
+      summary: "정체성과 존재 가치 질문",
+      terms: ["하나님의 형상", "형상", "사람", "창조", "자녀", "지으심", "그리스도", "선한 일"],
+    },
+    en: {
+      summary: "identity and personal worth question",
+      terms: ["image of God", "created", "child of God", "workmanship", "identity", "beloved"],
+    },
+  },
+  {
+    match: /(혼자|외로|이해하지 못|버려진|lonely|alone|abandoned)/i,
+    ko: {
+      summary: "외로움과 버려짐 질문",
+      terms: ["혼자", "함께", "버리지", "이해", "감찰", "두려워 말라"],
+    },
+    en: {
+      summary: "loneliness and abandonment question",
+      terms: ["alone", "with you", "never leave", "known", "fear not"],
+    },
+  },
+  {
+    match: /(불안|염려|통제|미래|두려|anxiety|worry|future|control|afraid)/i,
+    ko: {
+      summary: "불안과 미래 통제 질문",
+      terms: ["염려", "평안", "맡기", "믿음", "미래", "인도", "두려워 말라"],
+    },
+    en: {
+      summary: "anxiety and future-control question",
+      terms: ["anxiety", "peace", "cast cares", "trust", "future", "guide", "fear not"],
+    },
+  },
+];
+
 function deterministicQueryPlan(prompt: string, appLocale: AppLocale): RagQueryPlan {
-  const identity = /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i.test(prompt);
-  if (identity) {
+  const localeKey = appLocale === "ko" ? "ko" : "en";
+  const matches = DETERMINISTIC_INTENT_PROFILES.filter((profile) => profile.match.test(prompt));
+
+  if (matches.length) {
+    const localeProfiles = matches.map((profile) => profile[localeKey]);
+    const expansionTerms = cleanTerms(localeProfiles.flatMap((profile) => profile.terms));
+    const expansionSummary = localeProfiles.map((profile) => profile.summary).filter((summary, index, summaries) => summaries.indexOf(summary) === index).join(" + ");
+
     return {
-      expansionTerms: appLocale === "ko"
-        ? ["하나님의 형상", "형상", "사람", "창조", "자녀", "지으심", "그리스도", "선한 일"]
-        : ["image of God", "created", "child of God", "workmanship", "identity", "beloved"],
-      expansionSummary: appLocale === "ko" ? "정체성과 존재 가치 질문" : "identity and personal worth question",
+      expansionTerms,
+      expansionSummary,
       expansionProvider: "deterministic",
       expansionModel: "deterministic-rag-query-planner",
-      expansionNote: "Deterministic identity fallback query expansion.",
+      expansionNote: `Deterministic intent middleware matched ${matches.length} profile${matches.length === 1 ? "" : "s"}.`,
     };
   }
 

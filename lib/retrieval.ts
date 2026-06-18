@@ -155,7 +155,7 @@ function tokenize(input: string) {
 const ENABLE_RUNTIME_CLUSTER_EMBEDDINGS = process.env.ENABLE_RUNTIME_CLUSTER_EMBEDDINGS === "1";
 
 const QUERY_EXPANSIONS = [
-  { match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|부담|weary|burden|burnout|exhausted|tired)/i, terms: "수고 무거운 짐 부담 쉬게 하리라 위로 환난 견디게 피곤 능력 weary burden rest comfort" },
+  { match: /(힘들|지쳤|지쳐|지친|지침|피곤|번아웃|무기력|수고|부담|weary|burden|burnout|exhausted|tired)/i, terms: "수고 무거운 짐 부담 쉬게 하리라 위로 환난 견디게 피곤 능력 weary burden rest comfort" },
   { match: /(기다|침묵|조용|응답|delay|wait|silence|unheard)/i, terms: "어느 때까지 잠잠 구원 도우소서 영혼 낙망 소망 wait hope silence help" },
   { match: /(회복|실패|수치|죄책|죄|restore|failure|shame|guilt|repent)/i, terms: "죄악 사하소서 깨끗 정한 마음 회개 긍휼 restore mercy repentance" },
   { match: /(두려|부르심|책임|감당|calling|afraid|fear|responsibility)/i, terms: "두려워 말라 강하고 담대 함께 보내리라 courage presence" },
@@ -164,6 +164,7 @@ const QUERY_EXPANSIONS = [
   { match: /(용서|배신|원망|분노|forgive|betray|resent|anger|revenge)/i, terms: "용서 원수 선 악 긍휼 자비 갚지 mercy enemy forgive" },
   { match: /(천국|하늘나라|하늘|영생|낙원|부활|들림|강림|살아있는|살아 남|산 자|죽은 자|heaven|kingdom|eternal life|paradise|resurrection|alive|rapture)/i, terms: "천국 하늘 하늘나라 영생 낙원 부활 변화 강림 살아 남은 자 산 자 죽은 자 공중 주와 함께 올라간 자 들어가지 못 eternal life resurrection alive heaven kingdom paradise" },
   { match: /(나는 누구|내가 누구|정체성|존재|가치|나는 뭘까|who am i|identity|worth|purpose)/i, terms: "하나님의 형상 자녀 지으심 창조 사랑 택하심 그리스도 안에서 identity image of god child created beloved" },
+  { match: /(왜\s?살아야|살아야\s?(하는|되는|될)?지|살\s?이유|사는\s?이유|삶.*(목적|의미)|무엇을 위해 살아|버텨야|견뎌야|희망이\s?없|소망.*없|reason to live|why.*live|purpose.*life|meaning.*life)/i, terms: "지으심 선한 일 하나님의 형상 창조 자녀 생명 소망 낙망 인자 긍휼 목적 created workmanship hope life purpose" },
 ] as const;
 
 type PassagePriorProfile = {
@@ -173,7 +174,7 @@ type PassagePriorProfile = {
 };
 
 const PHILOSOPHICAL_PASSAGE_PRIORS: PassagePriorProfile[] = [
-  { match: /(왜 태어|무엇을 위해 살아|삶의 목적|purpose.*born|why.*born)/i, references: [{ code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 }, { code: "PSA", chapter: 139, startVerse: 13, endVerse: 16 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }, { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 }], terms: ["태어남", "목적", "살아야", "지으심", "하나님"] },
+  { match: /(왜 태어|무엇을 위해 살아|왜\s?살아야|살아야\s?(하는|되는|될)?지|살\s?이유|사는\s?이유|삶의 목적|삶.*의미|존재.*이유|purpose.*born|why.*born|reason to live|why.*live|purpose.*life|meaning.*life)/i, references: [{ code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 }, { code: "PSA", chapter: 139, startVerse: 13, endVerse: 16 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }, { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 }], terms: ["목적", "살아야", "지으심", "형상", "소망", "하나님"] },
   { match: /(양심|conscience)/i, references: [{ code: "ROM", chapter: 2, startVerse: 14, endVerse: 15 }, { code: "HEB", chapter: 10, startVerse: 22, endVerse: 22 }, { code: "1TI", chapter: 1, startVerse: 5, endVerse: 5 }, { code: "PRO", chapter: 20, startVerse: 27, endVerse: 27 }], terms: ["양심", "마음", "율법", "선", "하나님"] },
   { match: /(불공평|불공정|선하게 사는|선하게 살|unfair)/i, references: [{ code: "PSA", chapter: 73, startVerse: 16, endVerse: 17 }, { code: "GAL", chapter: 6, startVerse: 9, endVerse: 9 }, { code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 }, { code: "ROM", chapter: 12, startVerse: 21, endVerse: 21 }], terms: ["불공평", "선", "의미", "공의", "낙심"] },
   { match: /(이뤘는데도|원하던.*이뤘|마음이 비어|공허|empty.*success)/i, references: [{ code: "ECC", chapter: 2, startVerse: 10, endVerse: 11 }, { code: "MAR", chapter: 8, startVerse: 36, endVerse: 36 }, { code: "JOH", chapter: 6, startVerse: 35, endVerse: 35 }, { code: "PSA", chapter: 16, startVerse: 11, endVerse: 11 }], terms: ["성취", "마음", "공허", "헛됨", "생명"] },
@@ -396,7 +397,49 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["용서", "배신", "원수", "분노"],
   },
   {
-    match: /(힘들|지쳐|지침|피곤|번아웃|무기력|수고|무거운 짐|부담|weary|burden|burnout|exhausted|tired)/i,
+    match: /((삶|사는|살아야|살\s?이유|왜\s?살).*(지치|지쳤|지쳐|지친|무기력|힘들|피곤))|((지치|지쳤|지쳐|지친|무기력|힘들|피곤).*(삶|살아야|살\s?이유|왜\s?살|모르겠))|(weary|tired|exhausted).*(reason to live|why live|purpose)/i,
+    primaryReference: { code: "MAT", chapter: 11, startVerse: 28, endVerse: 30 },
+    supportingReferences: [
+      { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 },
+      { code: "PSA", chapter: 139, startVerse: 13, endVerse: 16 },
+      { code: "LAM", chapter: 3, startVerse: 21, endVerse: 24 },
+      { code: "PSA", chapter: 42, startVerse: 5, endVerse: 5 },
+    ],
+    rationaleKo: "입력이 지침과 ‘왜 살아야 하는지’라는 존재·목적 질문을 함께 말하기 때문에, 먼저 지친 사람을 쉬게 하겠다고 초대하는 마태복음 11:28-30을 중심 본문으로 두고 목적과 소망 본문을 함께 붙였습니다.",
+    rationaleEn: "Because the prompt joins weariness with a reason-to-live or purpose question, the primary passage is Matthew 11:28-30, with supporting passages for purpose and hope.",
+    passageKeywordsKo: ["지침", "수고", "무거운 짐", "쉬게", "살아야"],
+    semanticTermsKo: ["지쳤", "삶", "목적", "소망", "존재"],
+  },
+  {
+    match: /(희망이\s?없|아무\s?희망|버티기\s?힘들|더는\s?못\s?버티|왜\s?버텨야|버텨야\s?하는지|왜\s?견뎌야|견뎌야\s?하는지|살\s?이유가\s?없|소망.*없|hopeless|no reason to live|can't go on|cant go on)/i,
+    primaryReference: { code: "LAM", chapter: 3, startVerse: 21, endVerse: 24 },
+    supportingReferences: [
+      { code: "ROM", chapter: 15, startVerse: 13, endVerse: 13 },
+      { code: "PSA", chapter: 42, startVerse: 5, endVerse: 5 },
+      { code: "1PE", chapter: 1, startVerse: 3, endVerse: 3 },
+      { code: "MAT", chapter: 11, startVerse: 28, endVerse: 30 },
+    ],
+    rationaleKo: "입력이 희망을 잃은 절망을 말하기 때문에, ‘오히려 소망이 있사옴은 ... 주의 긍휼이 무궁하심’으로 소망의 근거를 말하는 예레미야애가 3:21-24를 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt names despair or loss of hope, the primary passage is Lamentations 3:21-24, which explicitly grounds hope in God's mercies.",
+    passageKeywordsKo: ["소망", "긍휼", "인자", "새로우니"],
+    semanticTermsKo: ["희망", "소망", "절망", "버티기"],
+  },
+  {
+    match: /(왜\s?살아야|살아야\s?(하는|되는|될)?지|살\s?이유|사는\s?이유|삶.*(목적|의미)|무엇을 위해 살아|존재.*이유|reason to live|why.*live|purpose.*life|meaning.*life)/i,
+    primaryReference: { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 },
+    supportingReferences: [
+      { code: "PSA", chapter: 139, startVerse: 13, endVerse: 16 },
+      { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 },
+      { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 },
+      { code: "JOH", chapter: 1, startVerse: 12, endVerse: 13 },
+    ],
+    rationaleKo: "입력이 삶의 목적이나 살아야 할 이유를 묻고 있어서, ‘선한 일을 위하여 지으심을 받은 자’라고 말하는 에베소서 2:10을 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt asks about purpose or a reason to live, the primary passage is Ephesians 2:10, which speaks of being created for good works.",
+    passageKeywordsKo: ["지으심", "선한 일", "살아야", "목적"],
+    semanticTermsKo: ["삶", "목적", "존재", "이유"],
+  },
+  {
+    match: /(힘들|지치|지쳤|지쳐|지친|지침|피곤|번아웃|무기력|수고|무거운 짐|부담|weary|burden|burnout|exhausted|tired)/i,
     primaryReference: { code: "MAT", chapter: 11, startVerse: 28, endVerse: 30 },
     supportingReferences: [
       { code: "ISA", chapter: 40, startVerse: 29, endVerse: 31 },

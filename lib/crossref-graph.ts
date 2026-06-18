@@ -704,6 +704,79 @@ function buildSummary(
   };
 }
 
+function linkedReferenceForAggregate(aggregate: EdgeAggregate): ReferenceSpan {
+  return aggregate.direction === "incoming" ? aggregate.from : aggregate.to;
+}
+
+function buildSummaryFromAggregates(
+  reference: ReferenceSpan,
+  aggregates: EdgeAggregate[],
+  mutualPairKeys: Set<string>,
+  books: Record<string, BookMeta>,
+  locale: AppLocale,
+  dataQuality: CrossReferenceDataQuality,
+): CrossReferenceNetworkSummary {
+  const bookCounts = new Map<string, { count: number; maxScore: number }>();
+  const sectionCounts = new Map<string, number>();
+  const sourceCounts = new Map<CrossReferenceSource, number>();
+  let outgoingCount = 0;
+  let incomingCount = 0;
+  let consensusCount = 0;
+  let voteSupportedCount = 0;
+  let phraseAnchorCount = 0;
+
+  for (const aggregate of aggregates) {
+    if (aggregate.direction === "outgoing") outgoingCount += 1;
+    else incomingCount += 1;
+
+    const linked = linkedReferenceForAggregate(aggregate);
+    const score = edgeScore(aggregate, mutualPairKeys.has(unorderedPairKey(aggregate.from, aggregate.to)));
+    const existing = bookCounts.get(linked.code) ?? { count: 0, maxScore: 0 };
+    existing.count += 1;
+    existing.maxScore = Math.max(existing.maxScore, score);
+    bookCounts.set(linked.code, existing);
+    const section = canonSectionFor(linked.code);
+    sectionCounts.set(section, (sectionCounts.get(section) ?? 0) + 1);
+
+    for (const evidence of aggregate.evidenceBySource.values()) {
+      sourceCounts.set(evidence.source, (sourceCounts.get(evidence.source) ?? 0) + 1);
+    }
+
+    const hasVotes = aggregate.totalVotes > 0;
+    const hasPhrases = aggregate.anchorPhrases.size > 0;
+    if (hasVotes && hasPhrases) consensusCount += 1;
+    if (hasVotes) voteSupportedCount += 1;
+    if (hasPhrases) phraseAnchorCount += 1;
+  }
+
+  const booksTouched = [...bookCounts.entries()]
+    .map(([code, value]) => ({ code, name: books[code]?.name ?? code, count: value.count }))
+    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name));
+
+  return {
+    reference,
+    totalEdges: outgoingCount + incomingCount,
+    outgoingCount,
+    incomingCount,
+    mutualCount: mutualPairKeys.size,
+    consensusCount,
+    voteSupportedCount,
+    phraseAnchorCount,
+    booksTouched,
+    canonSectionsTouched: [...sectionCounts.entries()]
+      .map(([section, count]) => ({ section, count }))
+      .sort((left, right) => right.count - left.count || left.section.localeCompare(right.section)),
+    strongestSources: [...sourceCounts.entries()]
+      .map(([source, count]) => ({ source, count }))
+      .sort((left, right) => right.count - left.count || left.source.localeCompare(right.source)),
+    strongestBooks: [...bookCounts.entries()]
+      .map(([code, value]) => ({ code, name: books[code]?.name ?? code, count: value.count, maxScore: value.maxScore }))
+      .sort((left, right) => right.maxScore - left.maxScore || right.count - left.count || left.name.localeCompare(right.name)),
+    scopeLabel: locale === "ko" ? "수집된 상호참조 데이터셋 기준 전체 직접 연결" : "All direct links available in the ingested cross-reference datasets.",
+    coverageNote: coverageNote(locale, dataQuality),
+  };
+}
+
 function buildReceptionLayers(code: string, locale: AppLocale, surroundingContext: PassagePayload | null = null): CrossReferenceReceptionLayers {
   const metadata = getBookMetadata(code, locale) ?? null;
   return {
@@ -808,13 +881,6 @@ export async function getCrossReferenceNetwork(
       mutualPairKeys.add(unorderedPairKey(aggregate.from, aggregate.to));
     }
   }
-  const hydrated = await Promise.all(
-    aggregates.map((aggregate) => edgeFromAggregate(aggregate, locale, includeExcerpts, mutualEdgeKeys)),
-  );
-  const outgoing = hydrated.filter((edge) => edge.direction === "outgoing").sort(sortEdges);
-  const incoming = hydrated.filter((edge) => edge.direction === "incoming").sort(sortEdges);
-  const allEdges = [...outgoing, ...incoming].sort(sortEdges);
-  const mutual = outgoing.filter((edge) => mutualEdgeKeys.has(directedEdgeKey(edge.from, edge.to))).map(copyAsMutual).sort(sortEdges);
   const dataQuality = {
     ...index.dataQuality,
     missingSources: [...index.dataQuality.missingSources],
@@ -822,9 +888,49 @@ export async function getCrossReferenceNetwork(
     normalizationLoss: [...index.dataQuality.normalizationLoss],
     notes: [...index.dataQuality.notes],
   };
+  const primaryPayload = passagePayload(primary, reference, locale);
+
+  if (options.summaryOnly) {
+    const summary = buildSummaryFromAggregates(reference, aggregates, mutualPairKeys, books, locale, dataQuality);
+    const highlightAggregates = [...aggregates]
+      .sort((left, right) => edgeScore(right, mutualEdgeKeys.has(directedEdgeKey(right.from, right.to))) - edgeScore(left, mutualEdgeKeys.has(directedEdgeKey(left.from, left.to))))
+      .slice(0, highlightLimit);
+    const highlights = (await Promise.all(highlightAggregates.map((aggregate) => edgeFromAggregate(aggregate, locale, includeExcerpts, mutualEdgeKeys)))).sort(sortEdges);
+
+    return {
+      primary: primaryPayload,
+      summary,
+      highlights,
+      all: {
+        outgoing: [],
+        incoming: [],
+        mutual: [],
+      },
+      grouped: {
+        byBook: [],
+        byCanonSection: [],
+        byRelation: [],
+        bySource: [],
+      },
+      background: includeBackground ? buildBackground(reference, summary, locale, primaryPayload) : { primaryBook: buildReceptionLayers(reference.code, locale, primaryPayload), relatedBooks: [], coverageNote: summary.coverageNote },
+      dataQuality,
+      sources: [...index.sources],
+      version: {
+        generatedAt: NETWORK_VERSION_GENERATED_AT,
+        sourceVersions: [...index.sourceVersions],
+      },
+    };
+  }
+
+  const hydrated = await Promise.all(
+    aggregates.map((aggregate) => edgeFromAggregate(aggregate, locale, includeExcerpts, mutualEdgeKeys)),
+  );
+  const outgoing = hydrated.filter((edge) => edge.direction === "outgoing").sort(sortEdges);
+  const incoming = hydrated.filter((edge) => edge.direction === "incoming").sort(sortEdges);
+  const allEdges = [...outgoing, ...incoming].sort(sortEdges);
+  const mutual = outgoing.filter((edge) => mutualEdgeKeys.has(directedEdgeKey(edge.from, edge.to))).map(copyAsMutual).sort(sortEdges);
   const summary = buildSummary(reference, allEdges, outgoing, incoming, mutualPairKeys, books, locale, dataQuality);
 
-  const primaryPayload = passagePayload(primary, reference, locale);
   return {
     primary: primaryPayload,
     summary,
@@ -835,10 +941,10 @@ export async function getCrossReferenceNetwork(
       mutual,
     },
     grouped: {
-      byBook: options.summaryOnly ? [] : groupByBook(allEdges, books, locale),
-      byCanonSection: options.summaryOnly ? [] : groupByCanonSection(allEdges),
-      byRelation: options.summaryOnly ? [] : groupByRelation(allEdges),
-      bySource: options.summaryOnly ? [] : groupBySource(allEdges),
+      byBook: groupByBook(allEdges, books, locale),
+      byCanonSection: groupByCanonSection(allEdges),
+      byRelation: groupByRelation(allEdges),
+      bySource: groupBySource(allEdges),
     },
     background: includeBackground ? buildBackground(reference, summary, locale, primaryPayload) : { primaryBook: buildReceptionLayers(reference.code, locale, primaryPayload), relatedBooks: [], coverageNote: summary.coverageNote },
     dataQuality,

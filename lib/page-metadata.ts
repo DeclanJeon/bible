@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { UI_COPY, type AppLocale } from "@/lib/content";
 
-const SITE_URL = "https://bible-guide.kr";
+export const SITE_URL = "https://bible-guide.kr";
 
 function normalizePath(path?: string) {
   if (!path) return "/";
@@ -16,6 +16,8 @@ function localizedPath(path: string, locale: AppLocale) {
 function absoluteUrl(path: string) {
   return new URL(path, SITE_URL).toString();
 }
+
+export const OG_IMAGE_URL = absoluteUrl("/og-image.png");
 
 export function buildPageMetadata(locale: AppLocale, title: string, description: string, path?: string): Metadata {
   const siteName = UI_COPY[locale].siteTitle;
@@ -44,7 +46,7 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
       locale: locale === "ko" ? "ko_KR" : "en_US",
       images: [
         {
-          url: "/og-image.png",
+          url: OG_IMAGE_URL,
           width: 1200,
           height: 630,
           alt: siteName,
@@ -55,7 +57,7 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: ["/og-image.png"],
+      images: [OG_IMAGE_URL],
     },
   };
 }
