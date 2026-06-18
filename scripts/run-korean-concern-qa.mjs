@@ -42,7 +42,7 @@ for (const testCase of cases) {
     body: JSON.stringify({ prompt: testCase.prompt }),
   });
 
-  possible += 4;
+  possible += testCase.expectedSafetyLevel ? 5 : 4;
 
   if (!response.ok) {
     failures.push({ family: testCase.family, prompt: testCase.prompt, reason: `HTTP ${response.status}` });
@@ -66,8 +66,11 @@ for (const testCase of cases) {
     ? (json.graphSuggestions || []).length > 0 || (retrieval.supportingReferences || []).length > 0
     : (json.graphSuggestions || []).length === 0 && (json.supporting || []).length === 0 && (json.relatedClusters || []).length === 0;
   const explanationOk = includesAny(responseText, testCase.expectedExplanationTerms || []);
+  const safetyOk = testCase.expectedSafetyLevel
+    ? json.safety?.level === testCase.expectedSafetyLevel
+    : true;
 
-  const caseScore = [reliableOk, primaryOk, expansionOk, explanationOk].filter(Boolean).length;
+  const caseScore = [reliableOk, primaryOk, expansionOk, explanationOk, ...(testCase.expectedSafetyLevel ? [safetyOk] : [])].filter(Boolean).length;
   earned += caseScore;
 
   rows.push({
@@ -78,10 +81,11 @@ for (const testCase of cases) {
     passageScore: retrieval.passageScore,
     reliable: actualReliable,
     caseScore,
-    possible: 4,
+    safety: json.safety?.level,
+    possible: testCase.expectedSafetyLevel ? 5 : 4,
   });
 
-  if (caseScore < 4) {
+  if (caseScore < (testCase.expectedSafetyLevel ? 5 : 4)) {
     failures.push({
       family: testCase.family,
       prompt: testCase.prompt,
@@ -89,6 +93,8 @@ for (const testCase of cases) {
       primaryOk,
       expansionOk,
       explanationOk,
+      safetyOk,
+      actualSafety: json.safety?.level,
       actualPrimary,
       actualReliable,
       confidence: retrieval.confidence,

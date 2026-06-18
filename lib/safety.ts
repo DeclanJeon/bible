@@ -178,7 +178,7 @@ const CRISIS_PATTERNS: Array<[SafetyFlag, RegExp]> = [
 const CAUTION_PATTERNS: Array<[SafetyFlag, RegExp]> = [
   [
     "despair",
-    /\b(hopeless|worthless|numb|empty|cant go on|can't go on|no reason to live)\b|희망이\s?없|버티기\s?힘들|더는\s?못\s?버티|살\s?이유가\s?없|sin esperanza|no valgo nada|vacío|vacia|no puedo seguir|no hay razón para vivir/i,
+    /\b(hopeless|worthless|numb|empty|cant go on|can't go on|no reason to live)\b|희망이\s?없|아무\s?희망|버티기\s?힘들|더는\s?못\s?버티|살\s?이유가\s?없|살\s?이유.*모르|왜\s?살아야|살아야\s?(하는|되는|될)?지\s?모르|버텨야\s?하는지|견뎌야\s?하는지|삶이\s?지쳤|사는\s?의미\s?없|sin esperanza|no valgo nada|vacío|vacia|no puedo seguir|no hay razón para vivir/i,
   ],
   [
     "abuse",
@@ -186,7 +186,7 @@ const CAUTION_PATTERNS: Array<[SafetyFlag, RegExp]> = [
   ],
   [
     "mental distress",
-    /\b(panic attack|anxiety attack|depressed|depression|breakdown|spiraling)\b|공황|불안\s?발작|우울|무너지는\s?것\s?같|너무\s?힘들|ataque de pánico|ataque de panico|ansiedad|depresión|depresion|derrumbe|me estoy hundiendo/i,
+    /\b(panic attack|anxiety attack|depressed|depression|breakdown|spiraling)\b|공황|불안\s?발작|우울|무너지는\s?것\s?같|너무\s?힘들|삶.*무기력|지치고\s?무기력|ataque de pánico|ataque de panico|ansiedad|depresión|depresion|derrumbe|me estoy hundiendo/i,
   ],
   [
     "scrupulosity",

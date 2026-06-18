@@ -152,5 +152,104 @@
     "expectedReliable": false,
     "expectedPrimaryRefs": [],
     "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
+  },
+  {
+    "family": "existential-weariness",
+    "prompt": "삶이 지쳤어 내가 왜 살아야되는지 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["지침", "살아야", "쉬게"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "existential-weariness",
+    "prompt": "삶이 지쳐 내가 왜 살아야 되는지 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["지침", "살아야", "목적"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "existential-weariness",
+    "prompt": "너무 지쳤고 살 이유를 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["지침", "살아야", "소망"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "despair-hope",
+    "prompt": "왜 버텨야 하는지 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["LAM 3:21-24"],
+    "expectedExplanationTerms": ["소망", "절망", "버티기"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "life-purpose",
+    "prompt": "삶의 의미를 모르겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["EPH 2:10"],
+    "expectedExplanationTerms": ["목적", "지으심", "선한 일"]
+  },
+  {
+    "family": "life-purpose",
+    "prompt": "내 존재 이유가 궁금해",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["EPH 2:10"],
+    "expectedExplanationTerms": ["목적", "지으심", "존재"]
+  },
+  {
+    "family": "despair-hope",
+    "prompt": "살 이유가 없어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["LAM 3:21-24"],
+    "expectedExplanationTerms": ["소망", "긍휼", "인자"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "despair-hope",
+    "prompt": "아무 희망이 없어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["LAM 3:21-24"],
+    "expectedExplanationTerms": ["희망", "소망", "긍휼"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "despair-hope",
+    "prompt": "더는 못 버티겠어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["LAM 3:21-24"],
+    "expectedExplanationTerms": ["소망", "절망", "버티기"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "weariness",
+    "prompt": "삶이 무기력하고 지쳤어",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["지침", "무거운", "쉬게"],
+    "expectedSafetyLevel": "caution"
+  },
+  {
+    "family": "weariness",
+    "prompt": "하루하루 피곤하고 버겁다",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["MAT 11:28-30"],
+    "expectedExplanationTerms": ["피곤", "수고", "쉬게"]
+  },
+  {
+    "family": "loneliness",
+    "prompt": "외롭고 아무도 나를 이해하지 못하는 것 같아",
+    "expectedReliable": true,
+    "expectedPrimaryRefs": ["DEU 31:6"],
+    "expectedExplanationTerms": ["혼자", "함께", "이해"]
+  },
+  {
+    "family": "unrelated",
+    "prompt": "새 운동화를 살까 말까",
+    "expectedReliable": false,
+    "expectedPrimaryRefs": [],
+    "expectedExplanationTerms": ["확정하지", "낮은 신뢰도", "보류"]
   }
 ]
