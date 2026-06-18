@@ -1,0 +1,22 @@
+[
+  {"id":"purpose-born","prompt":"나는 왜 태어났고 무엇을 위해 살아야 하나?","expectedPrimaryRefs":["EPH 2:10","PSA 139:13-16","ECC 12:13-14","GEN 1:26-27"],"expectedTerms":["태어","목적","살아","지으심","하나님"]},
+  {"id":"moral-conscience","prompt":"양심이라는 감각은 어디에서 오는가?","expectedPrimaryRefs":["ROM 2:14-15","HEB 10:22","1TI 1:5","PRO 20:27"],"expectedTerms":["양심","마음","율법","선","하나님"]},
+  {"id":"unfair-world","prompt":"세상이 이렇게 불공평한데 선하게 사는 게 무슨 의미가 있나?","expectedPrimaryRefs":["PSA 73:16-17","GAL 6:9","MIC 6:8","ROM 12:21"],"expectedTerms":["불공평","선","의미","공의","낙심"]},
+  {"id":"success-emptiness","prompt":"원하던 걸 이뤘는데도 마음이 비어 있는 이유는 뭘까?","expectedPrimaryRefs":["ECC 2:10-11","MAR 8:36","JOH 6:35","PSA 16:11"],"expectedTerms":["이뤘","마음","비어","헛됨","생명"]},
+  {"id":"anger-injustice","prompt":"부당한 일을 당했을 때 분노는 정당한가?","expectedPrimaryRefs":["EPH 4:26-27","JAM 1:19-20","ROM 12:19-21","PSA 4:4"],"expectedTerms":["분노","부당","의","악","원수"]},
+  {"id":"technology-self","prompt":"기계와 AI가 많은 일을 대신하면 인간다움은 어디에 남는가?","expectedPrimaryRefs":["GEN 1:26-28","PSA 8:3-8","EPH 2:10","ECC 3:11"],"expectedTerms":["인간","형상","일","창조","지으심"]},
+  {"id":"choice-regret","prompt":"내 선택 하나가 인생 전체를 망칠 수 있다는 두려움이 있어","expectedPrimaryRefs":["PRO 3:5-6","ROM 8:28","PHI 3:13-14","JAM 1:5"],"expectedTerms":["선택","두려움","길","인도","회복"]},
+  {"id":"hidden-heart","prompt":"아무도 모르는 내 속마음까지 나를 판단하나?","expectedPrimaryRefs":["1SA 16:7","HEB 4:12-13","PSA 139:23-24","JER 17:10"],"expectedTerms":["속마음","마음","판단","감찰","하나님"]},
+  {"id":"body-soul","prompt":"나는 몸인가 영혼인가 아니면 둘 다인가?","expectedPrimaryRefs":["GEN 2:7","1CO 6:19-20","1TH 5:23","MAT 10:28"],"expectedTerms":["몸","영혼","생기","성전","하나님"]},
+  {"id":"despair-hope","prompt":"희망을 가져야 할 이유를 도저히 찾지 못하겠어","expectedPrimaryRefs":["ROM 15:13","LAM 3:21-24","PSA 42:5","1PE 1:3"],"expectedTerms":["희망","소망","이유","인자","하나님"]},
+  {"id":"community-individual","prompt":"나는 나 혼자 완전할 수 있나 아니면 공동체가 필요한가?","expectedPrimaryRefs":["1CO 12:12-27","GEN 2:18","HEB 10:24-25","ECC 4:9-12"],"expectedTerms":["혼자","공동체","몸","서로","필요"]},
+  {"id":"pride-achievement","prompt":"내가 해낸 일을 자랑하는 건 왜 위험한가?","expectedPrimaryRefs":["1CO 4:7","JAM 4:6","DEU 8:17-18","PRO 16:18"],"expectedTerms":["자랑","교만","은혜","위험","하나님"]},
+  {"id":"silence-meaning","prompt":"침묵 속에서도 의미를 발견할 수 있을까?","expectedPrimaryRefs":["PSA 46:10","LAM 3:26","HAB 2:20","PSA 62:1"],"expectedTerms":["침묵","의미","잠잠","기다","하나님"]},
+  {"id":"forgiveness-self","prompt":"내가 나 자신을 용서하지 못하면 어떻게 살아야 하나?","expectedPrimaryRefs":["1JO 1:9","ROM 8:1","2CO 5:17","PSA 103:10-12"],"expectedTerms":["용서","자신","정죄","새","죄"]},
+  {"id":"env-creation","prompt":"자연을 파괴하면서도 인간이 특별하다고 말할 수 있나?","expectedPrimaryRefs":["GEN 1:26-28","PSA 24:1","ROM 8:19-22","REV 11:18"],"expectedTerms":["자연","창조","인간","다스리","땅"]},
+  {"id":"knowledge-limits","prompt":"인간 이성은 어디까지 믿을 수 있고 어디서 멈춰야 하나?","expectedPrimaryRefs":["PRO 3:5-7","1CO 13:12","ROM 11:33-36","JAM 1:5"],"expectedTerms":["이성","지혜","믿을","명철","하나님"]},
+  {"id":"freedom-slavery","prompt":"내가 하고 싶은 대로 사는 것이 정말 자유인가?","expectedPrimaryRefs":["JOH 8:31-36","GAL 5:13","ROM 6:16-18","1PE 2:16"],"expectedTerms":["자유","하고 싶은","종","진리","사랑"]},
+  {"id":"sacrifice-self","prompt":"남을 위해 나를 희생하는 삶은 어리석은가?","expectedPrimaryRefs":["JOH 15:13","PHI 2:3-8","MAR 10:45","1JO 3:16"],"expectedTerms":["희생","남","사랑","섬김","생명"]},
+  {"id":"name-known","prompt":"세상에서 이름 없이 사라져도 내 삶은 기억되는가?","expectedPrimaryRefs":["ISA 49:15-16","LUK 12:6-7","HEB 6:10","MAL 3:16"],"expectedTerms":["이름","기억","사라져","알다","하나님"]},
+  {"id":"absurd-prayer","prompt":"우주가 너무 큰데 내 작은 기도가 무슨 의미가 있나?","expectedPrimaryRefs":["PSA 8:3-4","MAT 6:6-8","LUK 12:6-7","PHI 4:6-7"],"expectedTerms":["우주","작은","기도","의미","돌보"]}
+]
