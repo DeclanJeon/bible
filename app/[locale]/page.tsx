@@ -59,7 +59,7 @@ export default async function HomePage({ params }: Props) {
 
       {/* Centered content */}
       <div className="flex flex-1 flex-col items-center justify-center px-5 pb-20 sm:px-8">
-        <div className="w-full max-w-lg">
+        <div className="w-full max-w-2xl">
           {/* Title */}
           <h1 className="text-center text-[2rem] font-bold leading-tight tracking-tight sm:text-5xl">
             <span className="gradient-text">{copy.heroTitle}</span>
