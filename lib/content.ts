@@ -58,8 +58,7 @@ export const UI_COPY = {
       ],
     },
     prompt: {
-      placeholder:
-        "Tell the app what you are carrying. It will answer with passages, context, linked texts, and how the story connects to you.",
+      placeholder: "Write what you are carrying.",
       guidedStart: "Try a guided start",
       chips: ["Stories, not proof-texts", "Citations required", "Date/place shown when known"],
       submit: "Find the connected story",
@@ -290,8 +289,7 @@ export const UI_COPY = {
       ],
     },
     prompt: {
-      placeholder:
-        "지금 마음에 지고 있는 것을 적어 주세요. 앱은 관련 본문, 문맥, 연결 본문, 그리고 그 이야기가 왜 지금의 고민과 맞닿는지로 답합니다.",
+      placeholder: "지금 마음에 지고 있는 것을 적어 주세요.",
       guidedStart: "가이드 시작 문장",
       chips: ["구절 끼워 맞추기 금지", "출처 필수", "알 수 있는 범위의 시대·장소 표시"],
       submit: "연결된 이야기를 찾기",
