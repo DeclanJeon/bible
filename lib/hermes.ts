@@ -420,6 +420,13 @@ export async function generateReflectionWithHermes(
   contractArgs: HermesEvidenceContract,
   deterministicReflection: ReflectionResponse,
 ): Promise<ReflectionGenerationResult> {
+  if (process.env.HERMES_REFLECTION !== "1") {
+    return deterministicResult(
+      deterministicReflection,
+      "Hermes reflection generation is disabled for synchronous web requests; deterministic explanation builder used.",
+    );
+  }
+
   const config = await resolveHermesProviderConfig();
   const contract = buildHermesContract(contractArgs);
   const system = [
