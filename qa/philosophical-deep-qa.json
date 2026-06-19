@@ -1,0 +1,7952 @@
+[
+  {
+    "id": "god-exist-01",
+    "prompt": "하나님은 정말 존재하는가?",
+    "expectedPrimaryRefs": [
+      "ACT 4:1-22",
+      "ROM 2:1-29",
+      "EZE 33:11",
+      "PHI 2:1-30"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "존재",
+      "믿음"
+    ]
+  },
+  {
+    "id": "god-exist-02",
+    "prompt": "하나님이 계시다면 왜 보이지 않는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:15",
+      "2CO 10:1-18",
+      "1PE 3:1-22",
+      "JOH 7:25-52"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "보이",
+      "영"
+    ]
+  },
+  {
+    "id": "god-exist-03",
+    "prompt": "하나님의 존재를 증명할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "JOH 20:1-18",
+      "ISA 53:1-12",
+      "HEB 8:1-13",
+      "MAR 12:28-34"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "증명",
+      "창조"
+    ]
+  },
+  {
+    "id": "god-exist-04",
+    "prompt": "왜 어떤 사람들은 하나님을 믿지 않는가?",
+    "expectedPrimaryRefs": [
+      "ISA 41:10",
+      "MAT 19:1-12",
+      "PSA 34:18",
+      "MAR 8:11-12"
+    ],
+    "expectedTerms": [
+      "믿지",
+      "마음",
+      "어둠"
+    ]
+  },
+  {
+    "id": "god-exist-05",
+    "prompt": "하나님은 왜 자신을 숨기시는가?",
+    "expectedPrimaryRefs": [
+      "MAR 9:33-37",
+      "MAR 10:13-16",
+      "ACT 9:20-31",
+      "MAT 6:25-34"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "숨기",
+      "찾"
+    ]
+  },
+  {
+    "id": "god-exist-06",
+    "prompt": "과학이 하나님을 대신할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "MAR 2:13-17",
+      "MAT 16:24-26",
+      "ROM 4:1-25",
+      "REV 3:1-22"
+    ],
+    "expectedTerms": [
+      "과학",
+      "창조",
+      "지혜"
+    ]
+  },
+  {
+    "id": "god-exist-07",
+    "prompt": "세상에 악이 있다면 하나님은 존재하지 않는가?",
+    "expectedPrimaryRefs": [
+      "1TH 2:1-20",
+      "1PE 2:1-25",
+      "PRO 10:9",
+      "GEN 3:19"
+    ],
+    "expectedTerms": [
+      "악",
+      "고난",
+      "존재"
+    ]
+  },
+  {
+    "id": "god-exist-08",
+    "prompt": "하나님은 우주 그 자체인가?",
+    "expectedPrimaryRefs": [
+      "PRO 29:25",
+      "REV 5:1-14",
+      "LUK 15:8-10",
+      "LUK 18:1-8"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "우주",
+      "하늘"
+    ]
+  },
+  {
+    "id": "god-exist-09",
+    "prompt": "하나님은 인류가 만든 개념에 불과한가?",
+    "expectedPrimaryRefs": [
+      "JOH 15:1-17",
+      "MAT 1:18-23",
+      "PSA 46:10",
+      "HEB 11:1-40"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "개념",
+      "마음"
+    ]
+  },
+  {
+    "id": "god-exist-10",
+    "prompt": "다른 종교의 신과 기독교의 하나님은 같은가?",
+    "expectedPrimaryRefs": [
+      "PSA 23:1-6",
+      "PSA 122:1",
+      "1CO 4:1-21",
+      "MAT 19:23-26"
+    ],
+    "expectedTerms": [
+      "여호와",
+      "独一",
+      "참되"
+    ]
+  },
+  {
+    "id": "god-exist-11",
+    "prompt": "하나님이 존재한다면 왜 세상은 불공평한가?",
+    "expectedPrimaryRefs": [
+      "ACT 3:1-26",
+      "MAT 26:36-46",
+      "ACT 24:1-27",
+      "JOH 8:31-59"
+    ],
+    "expectedTerms": [
+      "불공평",
+      "악인",
+      "형통"
+    ]
+  },
+  {
+    "id": "god-exist-12",
+    "prompt": "무신론자가 올바른 결론에 도달할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "AMO 5:21-24",
+      "ACT 22:1-30",
+      "HEB 5:1-14",
+      "PSA 85:10"
+    ],
+    "expectedTerms": [
+      "무신론",
+      "어리석",
+      "하늘"
+    ]
+  },
+  {
+    "id": "god-exist-13",
+    "prompt": "하나님의 존재를 느끼지 못하는 이유는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "1CO 10:1-33",
+      "ZEP 3:17",
+      "2CO 8:1-24",
+      "ROM 15:1-33"
+    ],
+    "expectedTerms": [
+      "느끼",
+      "죄",
+      "가리"
+    ]
+  },
+  {
+    "id": "god-exist-14",
+    "prompt": "하나님은 처음부터 존재했는가?",
+    "expectedPrimaryRefs": [
+      "EPH 1:1-23",
+      "ISA 58:6-8",
+      "COL 4:1-18",
+      "MAT 14:22-33"
+    ],
+    "expectedTerms": [
+      "처음",
+      "영원",
+      "태초"
+    ]
+  },
+  {
+    "id": "god-exist-15",
+    "prompt": "자연의 아름다움이 하나님의 존재를 증명하는가?",
+    "expectedPrimaryRefs": [
+      "LUK 15:1-7",
+      "JOS 1:9",
+      "JOH 19:17-30",
+      "ISA 66:1-2"
+    ],
+    "expectedTerms": [
+      "자연",
+      "아름",
+      "영광"
+    ]
+  },
+  {
+    "id": "god-exist-16",
+    "prompt": "하나님을 믿는 것과 믿지 않는 것의 차이는?",
+    "expectedPrimaryRefs": [
+      "ISA 43:7",
+      "REV 9:1-21",
+      "ISA 45:21-22",
+      "HEB 7:1-28"
+    ],
+    "expectedTerms": [
+      "믿음",
+      "영생",
+      "심판"
+    ]
+  },
+  {
+    "id": "god-exist-17",
+    "prompt": "하나님은 왜 인간에게 자신을 드러내시는가?",
+    "expectedPrimaryRefs": [
+      "REV 7:1-17",
+      "ACT 7:1-60",
+      "ISA 40:28-31",
+      "MAT 7:21-27"
+    ],
+    "expectedTerms": [
+      "알",
+      "영생",
+      "계시"
+    ]
+  },
+  {
+    "id": "god-exist-18",
+    "prompt": "세상의 모든 종교가 같은 하나님을 가리키는가?",
+    "expectedPrimaryRefs": [
+      "ACT 8:26-40",
+      "2CO 11:1-33",
+      "ACT 25:1-27",
+      "1TI 5:1-25"
+    ],
+    "expectedTerms": [
+      "유일",
+      "예수",
+      "구원"
+    ]
+  },
+  {
+    "id": "god-exist-19",
+    "prompt": "하나님의 존재가 없다면 삶에 의미가 있는가?",
+    "expectedPrimaryRefs": [
+      "PSA 90:1-12",
+      "AMO 3:6",
+      "LUK 9:51-62",
+      "ROM 16:1-27"
+    ],
+    "expectedTerms": [
+      "헛되",
+      "의미",
+      "경외"
+    ]
+  },
+  {
+    "id": "god-exist-20",
+    "prompt": "하나님은 왜 특별한 사람에게만 자신을 나타내시는가?",
+    "expectedPrimaryRefs": [
+      "ACT 5:12-42",
+      "LUK 16:19-31",
+      "MAR 1:14-15",
+      "MAL 4:2"
+    ],
+    "expectedTerms": [
+      "아기",
+      "겸손",
+      "은혜"
+    ]
+  },
+  {
+    "id": "god-nature-01",
+    "prompt": "하나님은 어떤 분인가?",
+    "expectedPrimaryRefs": [
+      "ISA 45:15",
+      "ECC 12:1",
+      "LUK 17:1-10",
+      "GEN 2:18"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "자비",
+      "사랑"
+    ]
+  },
+  {
+    "id": "god-nature-02",
+    "prompt": "하나님은 정말 사랑이신가?",
+    "expectedPrimaryRefs": [
+      "ECC 1:2",
+      "MAT 28:16-20",
+      "JOH 21:15-25",
+      "MAT 25:1-13"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "독생자",
+      "영원"
+    ]
+  },
+  {
+    "id": "god-nature-03",
+    "prompt": "하나님은 전능하신가?",
+    "expectedPrimaryRefs": [
+      "1TI 3:1-16",
+      "LUK 20:20-26",
+      "MAR 15:42-47",
+      "ISA 44:24"
+    ],
+    "expectedTerms": [
+      "전능",
+      "능력",
+      "불가능"
+    ]
+  },
+  {
+    "id": "god-nature-04",
+    "prompt": "하나님은 모든 것을 아시는가?",
+    "expectedPrimaryRefs": [
+      "JOH 3:1-21",
+      "ACT 21:1-40",
+      "LUK 13:1-9",
+      "MAT 13:31-32"
+    ],
+    "expectedTerms": [
+      "아시",
+      "알",
+      "지식"
+    ]
+  },
+  {
+    "id": "god-nature-05",
+    "prompt": "하나님은 어디에나 계시는가?",
+    "expectedPrimaryRefs": [
+      "JER 23:23-24",
+      "ISA 65:17",
+      "LUK 24:1-12",
+      "1CO 1:1-31"
+    ],
+    "expectedTerms": [
+      "어디",
+      "하늘",
+      "함께"
+    ]
+  },
+  {
+    "id": "god-nature-06",
+    "prompt": "하나님은 변하시는가 변하지 않으시는가?",
+    "expectedPrimaryRefs": [
+      "LUK 21:5-38",
+      "JUD 1:1-25",
+      "ACT 11:1-18",
+      "LUK 10:25-37"
+    ],
+    "expectedTerms": [
+      "변하",
+      "그림자",
+      "영원"
+    ]
+  },
+  {
+    "id": "god-nature-07",
+    "prompt": "하나님의 공의와 사랑은 어떻게 조화되는가?",
+    "expectedPrimaryRefs": [
+      "MAT 17:1-8",
+      "JOH 1:29-34",
+      "GEN 15:6",
+      "GEN 3:1-6"
+    ],
+    "expectedTerms": [
+      "공의",
+      "사랑",
+      "십자가"
+    ]
+  },
+  {
+    "id": "god-nature-08",
+    "prompt": "하나님은 왜 질투하시는 하나님이라고 불리는가?",
+    "expectedPrimaryRefs": [
+      "LUK 24:50-53",
+      "1CO 5:1-13",
+      "JOH 9:1-41",
+      "ZEC 9:9"
+    ],
+    "expectedTerms": [
+      "질투",
+      "열심",
+      "우상"
+    ]
+  },
+  {
+    "id": "god-nature-09",
+    "prompt": "하나님의 거룩함이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "REV 6:1-17",
+      "1TH 1:1-10",
+      "GAL 1:1-24",
+      "LUK 9:18-27"
+    ],
+    "expectedTerms": [
+      "거룩",
+      "영광",
+      "부정"
+    ]
+  },
+  {
+    "id": "god-nature-10",
+    "prompt": "하나님은 왜 오래 참으시는가?",
+    "expectedPrimaryRefs": [
+      "JOH 11:45-57",
+      "ACT 2:43-47",
+      "JOH 4:1-42",
+      "MAT 10:28-31"
+    ],
+    "expectedTerms": [
+      "오래",
+      "참으",
+      "회개"
+    ]
+  },
+  {
+    "id": "god-nature-11",
+    "prompt": "하나님은 왜 심판하시는가?",
+    "expectedPrimaryRefs": [
+      "2TH 3:1-18",
+      "MAL 2:16",
+      "JOH 8:12-30",
+      "ROM 9:1-33"
+    ],
+    "expectedTerms": [
+      "심판",
+      "공의",
+      "진노"
+    ]
+  },
+  {
+    "id": "god-nature-12",
+    "prompt": "하나님의 지혜는 인간의 지혜와 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "REV 11:1-19",
+      "GEN 50:20",
+      "JOH 10:1-21",
+      "JOH 13:1-30"
+    ],
+    "expectedTerms": [
+      "지혜",
+      "높",
+      "미련"
+    ]
+  },
+  {
+    "id": "god-nature-13",
+    "prompt": "하나님은 영이시라는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "LUK 6:20-26",
+      "LUK 22:39-53",
+      "1KI 19:11-12",
+      "MAT 6:5-15"
+    ],
+    "expectedTerms": [
+      "영",
+      "예배",
+      "진리"
+    ]
+  },
+  {
+    "id": "god-nature-14",
+    "prompt": "하나님의 인내는 한계가 있는가?",
+    "expectedPrimaryRefs": [
+      "2CO 5:1-21",
+      "ISA 1:17",
+      "LUK 23:26-43",
+      "GAL 2:1-21"
+    ],
+    "expectedTerms": [
+      "인내",
+      "한계",
+      "홍수"
+    ]
+  },
+  {
+    "id": "god-nature-15",
+    "prompt": "하나님은 왜 인간을 사랑하시는가?",
+    "expectedPrimaryRefs": [
+      "ECC 5:10",
+      "ISA 48:16",
+      "PRO 14:23",
+      "MAR 8:34-38"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "택하",
+      "긍휼"
+    ]
+  },
+  {
+    "id": "god-nature-16",
+    "prompt": "하나님의 신실하심이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "REV 15:1-8",
+      "MAT 6:19-24",
+      "JOH 14:1-14",
+      "HOS 6:6"
+    ],
+    "expectedTerms": [
+      "신실",
+      "새롭",
+      "약속"
+    ]
+  },
+  {
+    "id": "god-nature-17",
+    "prompt": "하나님은 무한하신가?",
+    "expectedPrimaryRefs": [
+      "LUK 8:4-15",
+      "LUK 11:1-13",
+      "MAT 5:17-20",
+      "LUK 4:16-21"
+    ],
+    "expectedTerms": [
+      "무한",
+      "측량",
+      "이해"
+    ]
+  },
+  {
+    "id": "god-nature-18",
+    "prompt": "하나님의 이름은 무엇이며 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "MAT 11:25-30",
+      "MAT 6:1-4",
+      "GEN 1:27",
+      "LEV 19:18"
+    ],
+    "expectedTerms": [
+      "이름",
+      "여호와",
+      "영광"
+    ]
+  },
+  {
+    "id": "god-nature-19",
+    "prompt": "하나님은 왜 영광을 받으시기를 원하시는가?",
+    "expectedPrimaryRefs": [
+      "JOH 4:43-54",
+      "2CO 4:1-18",
+      "SON 8:6-7",
+      "1CO 8:1-13"
+    ],
+    "expectedTerms": [
+      "영광",
+      "지으",
+      "존귀"
+    ]
+  },
+  {
+    "id": "god-nature-20",
+    "prompt": "하나님의 은혜란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "JOH 20:19-23",
+      "MAR 11:15-18",
+      "JOH 1:35-51",
+      "MAT 10:1-4"
+    ],
+    "expectedTerms": [
+      "은혜",
+      "믿음",
+      "구원"
+    ]
+  },
+  {
+    "id": "god-nature-21",
+    "prompt": "하나님의 진노란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "JAM 4:1-17",
+      "PRO 22:6",
+      "LUK 1:26-38",
+      "MIC 5:2"
+    ],
+    "expectedTerms": [
+      "진노",
+      "불의",
+      "심판"
+    ]
+  },
+  {
+    "id": "god-nature-22",
+    "prompt": "하나님은 왜 세상을 창조하셨는가?",
+    "expectedPrimaryRefs": [
+      "MAL 3:6",
+      "EPH 6:1-24",
+      "EPH 4:1-32",
+      "MAT 23:1-36"
+    ],
+    "expectedTerms": [
+      "창조",
+      "영광",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "god-nature-23",
+    "prompt": "하나님은 왜 인간에게 자유의지를 주셨는가?",
+    "expectedPrimaryRefs": [
+      "MAT 7:7-8",
+      "LUK 24:13-35",
+      "MAT 21:12-13",
+      "ACT 15:36-41"
+    ],
+    "expectedTerms": [
+      "선택",
+      "자유",
+      "생명"
+    ]
+  },
+  {
+    "id": "god-nature-24",
+    "prompt": "하나님은 왜 기도를 들으시는가?",
+    "expectedPrimaryRefs": [
+      "LUK 8:22-25",
+      "MAL 3:10",
+      "LUK 22:63-71",
+      "ISA 63:9-10"
+    ],
+    "expectedTerms": [
+      "기도",
+      "부르",
+      "응답"
+    ]
+  },
+  {
+    "id": "god-nature-25",
+    "prompt": "하나님은 왜 침묵하시는 것처럼 느껴지는가?",
+    "expectedPrimaryRefs": [
+      "REV 18:1-24",
+      "JAM 5:1-20",
+      "MAT 22:15-22",
+      "ACT 1:1-11"
+    ],
+    "expectedTerms": [
+      "침묵",
+      "부르짖",
+      "기다리"
+    ]
+  },
+  {
+    "id": "jesus-id-01",
+    "prompt": "예수님은 누구인가?",
+    "expectedPrimaryRefs": [
+      "EXO 34:6-7",
+      "JAM 3:1-18",
+      "DEU 30:19",
+      "JOE 2:25-26"
+    ],
+    "expectedTerms": [
+      "그리스도",
+      "말씀",
+      "하나님"
+    ]
+  },
+  {
+    "id": "jesus-id-02",
+    "prompt": "예수님은 하나님이신가?",
+    "expectedPrimaryRefs": [
+      "HEB 1:1-14",
+      "JOH 12:1-11",
+      "HEB 10:1-39",
+      "ACT 12:1-25"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "말씀",
+      "보좌"
+    ]
+  },
+  {
+    "id": "jesus-id-03",
+    "prompt": "예수님은 왜 인간의 몸으로 오셨는가?",
+    "expectedPrimaryRefs": [
+      "JOH 13:31-38",
+      "MAT 4:1-11",
+      "LUK 8:1-3",
+      "MAR 1:9-11"
+    ],
+    "expectedTerms": [
+      "육신",
+      "고난",
+      "죄"
+    ]
+  },
+  {
+    "id": "jesus-id-04",
+    "prompt": "예수님은 왜 동정녀에게서 태어났는가?",
+    "expectedPrimaryRefs": [
+      "2CO 2:1-17",
+      "3JO 1:1-15",
+      "LUK 6:12-16",
+      "1JO 5:1-21"
+    ],
+    "expectedTerms": [
+      "동정녀",
+      "성령",
+      "예언"
+    ]
+  },
+  {
+    "id": "jesus-id-05",
+    "prompt": "예수님은 위대한 스승에 불과한가?",
+    "expectedPrimaryRefs": [
+      "MAT 26:14-16",
+      "2TI 2:1-26",
+      "EXO 3:14-15",
+      "LUK 12:22-34"
+    ],
+    "expectedTerms": [
+      "길",
+      "진리",
+      "권세"
+    ]
+  },
+  {
+    "id": "jesus-id-06",
+    "prompt": "예수님은 왜 요단강에서 세례를 받으셨는가?",
+    "expectedPrimaryRefs": [
+      "ECC 12:13-14",
+      "LUK 11:37-54",
+      "PSA 37:4",
+      "MAR 15:21-41"
+    ],
+    "expectedTerms": [
+      "세례",
+      "성령",
+      "어린양"
+    ]
+  },
+  {
+    "id": "jesus-id-07",
+    "prompt": "예수님은 왜 40일 금식을 하셨는가?",
+    "expectedPrimaryRefs": [
+      "HEB 13:1-25",
+      "TIT 3:1-15",
+      "LUK 20:41-44",
+      "MAR 10:17-27"
+    ],
+    "expectedTerms": [
+      "금식",
+      "시험",
+      "말씀"
+    ]
+  },
+  {
+    "id": "jesus-id-08",
+    "prompt": "예수님은 왜 죄인들과 함께 식사하셨는가?",
+    "expectedPrimaryRefs": [
+      "MAT 26:1-5",
+      "MAT 20:25-28",
+      "ACT 8:1-25",
+      "ROM 13:1-14"
+    ],
+    "expectedTerms": [
+      "죄인",
+      "부르",
+      "회개"
+    ]
+  },
+  {
+    "id": "jesus-id-09",
+    "prompt": "예수님의 기적은 정말 일어났는가?",
+    "expectedPrimaryRefs": [
+      "2TH 2:1-17",
+      "LUK 2:41-52",
+      "MAR 1:16-20",
+      "1PE 1:1-25"
+    ],
+    "expectedTerms": [
+      "기적",
+      "표적",
+      "증거"
+    ]
+  },
+  {
+    "id": "jesus-id-10",
+    "prompt": "예수님은 왜 비유로 말씀하셨는가?",
+    "expectedPrimaryRefs": [
+      "ISA 57:15",
+      "HEB 12:1-29",
+      "JOH 6:60-71",
+      "MAR 16:1-8"
+    ],
+    "expectedTerms": [
+      "비유",
+      "깨닫",
+      "비밀"
+    ]
+  },
+  {
+    "id": "jesus-id-11",
+    "prompt": "예수님은 왜 제자들을 12명으로 택하셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:21-22",
+      "JOH 5:1-18",
+      "MAR 14:1-9",
+      "1TH 3:1-13"
+    ],
+    "expectedTerms": [
+      "열둘",
+      "택하",
+      "사도"
+    ]
+  },
+  {
+    "id": "jesus-id-12",
+    "prompt": "예수님은 왜 산상수훈을 가르치셨는가?",
+    "expectedPrimaryRefs": [
+      "ACT 19:1-41",
+      "2CO 13:1-14",
+      "REV 16:1-21",
+      "PSA 51:1-17"
+    ],
+    "expectedTerms": [
+      "복",
+      "천국",
+      "의"
+    ]
+  },
+  {
+    "id": "jesus-id-13",
+    "prompt": "예수님은 왜 바리새인들을 꾸짖으셨는가?",
+    "expectedPrimaryRefs": [
+      "PRO 11:1",
+      "MAR 12:13-17",
+      "MAT 27:1-10",
+      "1TI 1:1-20"
+    ],
+    "expectedTerms": [
+      "외식",
+      "율법",
+      "전통"
+    ]
+  },
+  {
+    "id": "jesus-id-14",
+    "prompt": "예수님은 왜 성전을 정화하셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 23:13-25",
+      "REV 2:1-29",
+      "2CO 7:1-16",
+      "2CO 1:1-24"
+    ],
+    "expectedTerms": [
+      "성전",
+      "장사",
+      "기도"
+    ]
+  },
+  {
+    "id": "jesus-id-15",
+    "prompt": "예수님은 왜 여자들과 함께 다니셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:1-14",
+      "REV 21:1-27",
+      "HAG 2:9",
+      "ROM 3:1-31"
+    ],
+    "expectedTerms": [
+      "여자",
+      "존중",
+      "용서"
+    ]
+  },
+  {
+    "id": "jesus-id-16",
+    "prompt": "예수님은 왜 어린이를 축복하셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 17:20-37",
+      "JOH 21:1-14",
+      "JER 31:3",
+      "DEU 6:4-5"
+    ],
+    "expectedTerms": [
+      "어린이",
+      "천국",
+      "축복"
+    ]
+  },
+  {
+    "id": "jesus-id-17",
+    "prompt": "예수님은 왜 가난한 자를 특별히 돌보셨는가?",
+    "expectedPrimaryRefs": [
+      "TIT 1:1-16",
+      "REV 10:1-11",
+      "HEB 3:1-19",
+      "EZE 18:23"
+    ],
+    "expectedTerms": [
+      "가난",
+      "전파",
+      "돌보"
+    ]
+  },
+  {
+    "id": "jesus-id-18",
+    "prompt": "예수님은 왜 겟세마네에서 기도하셨는가?",
+    "expectedPrimaryRefs": [
+      "ROM 11:1-36",
+      "ACT 23:1-35",
+      "JOH 17:1-26",
+      "2TI 3:1-17"
+    ],
+    "expectedTerms": [
+      "기도",
+      "고통",
+      "뜻"
+    ]
+  },
+  {
+    "id": "jesus-id-19",
+    "prompt": "예수님은 왜 베드로를 부인하신 후 다시 사용하셨는가?",
+    "expectedPrimaryRefs": [
+      "REV 22:1-21",
+      "1CO 9:1-27",
+      "LUK 18:9-14",
+      "1TI 4:1-16"
+    ],
+    "expectedTerms": [
+      "부인",
+      "회개",
+      "용서"
+    ]
+  },
+  {
+    "id": "jesus-id-20",
+    "prompt": "예수님은 왜 세리 마태를 제자로 부르셨는가?",
+    "expectedPrimaryRefs": [
+      "HOS 3:1",
+      "PSA 139:1-24",
+      "LUK 24:36-49",
+      "MAR 6:30-44"
+    ],
+    "expectedTerms": [
+      "세리",
+      "부르",
+      "죄인"
+    ]
+  },
+  {
+    "id": "jesus-id-21",
+    "prompt": "예수님은 왜 나사로를 살리셨는가?",
+    "expectedPrimaryRefs": [
+      "PSA 1:1-3",
+      "PSA 115:1",
+      "REV 8:1-13",
+      "ACT 13:13-52"
+    ],
+    "expectedTerms": [
+      "살리",
+      "부활",
+      "영광"
+    ]
+  },
+  {
+    "id": "jesus-id-22",
+    "prompt": "예수님은 왜 변형산에서 영광을 보이셨는가?",
+    "expectedPrimaryRefs": [
+      "MAR 9:2-8",
+      "JOH 6:25-59",
+      "EPH 5:1-33",
+      "MAR 13:1-37"
+    ],
+    "expectedTerms": [
+      "변형",
+      "영광",
+      "모세"
+    ]
+  },
+  {
+    "id": "jesus-id-23",
+    "prompt": "예수님은 왜 승천하셨는가?",
+    "expectedPrimaryRefs": [
+      "JAM 1:1-27",
+      "PSA 103:8-13",
+      "ISA 55:1-2",
+      "MAR 8:27-30"
+    ],
+    "expectedTerms": [
+      "승천",
+      "하늘",
+      "약속"
+    ]
+  },
+  {
+    "id": "jesus-id-24",
+    "prompt": "예수님은 왜 다시 오신다고 약속하셨는가?",
+    "expectedPrimaryRefs": [
+      "2PE 2:1-22",
+      "DAN 6:10",
+      "LUK 6:27-36",
+      "PRO 27:5-6"
+    ],
+    "expectedTerms": [
+      "재림",
+      "약속",
+      "구름"
+    ]
+  },
+  {
+    "id": "jesus-id-25",
+    "prompt": "예수님은 지금 어디에 계시는가?",
+    "expectedPrimaryRefs": [
+      "JER 10:10-12",
+      "JOH 11:1-44",
+      "COL 2:1-23",
+      "EZE 36:25-27"
+    ],
+    "expectedTerms": [
+      "하늘",
+      "보좌",
+      "중보"
+    ]
+  },
+  {
+    "id": "cross-01",
+    "prompt": "예수님은 왜 십자가에 못 박히셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 15:11-32",
+      "ROM 8:1-39",
+      "MAT 16:13-20",
+      "1CO 12:1-31"
+    ],
+    "expectedTerms": [
+      "십자가",
+      "죄",
+      "대속"
+    ]
+  },
+  {
+    "id": "cross-02",
+    "prompt": "예수님의 죽음이 왜 필요한가?",
+    "expectedPrimaryRefs": [
+      "PSA 16:11",
+      "ACT 1:12-26",
+      "REV 12:1-17",
+      "REV 14:1-20"
+    ],
+    "expectedTerms": [
+      "피",
+      "속죄",
+      "죽음"
+    ]
+  },
+  {
+    "id": "cross-03",
+    "prompt": "예수님은 정말 부활하셨는가?",
+    "expectedPrimaryRefs": [
+      "1JO 3:1-24",
+      "1JO 2:1-29",
+      "1JO 1:1-10",
+      "ACT 11:19-30"
+    ],
+    "expectedTerms": [
+      "부활",
+      "증거",
+      "확신"
+    ]
+  },
+  {
+    "id": "cross-04",
+    "prompt": "부활이 없다면 기독교는 헛것인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:1-3",
+      "MAT 18:15-20",
+      "ACT 16:1-15",
+      "JER 32:17"
+    ],
+    "expectedTerms": [
+      "부활",
+      "헛것",
+      "믿음"
+    ]
+  },
+  {
+    "id": "cross-05",
+    "prompt": "예수님의 십자가는 어떻게 구원을 이루는가?",
+    "expectedPrimaryRefs": [
+      "1CO 16:1-24",
+      "PRO 12:22",
+      "LUK 1:46-55",
+      "LUK 16:1-13"
+    ],
+    "expectedTerms": [
+      "피",
+      "화해",
+      "구원"
+    ]
+  },
+  {
+    "id": "cross-06",
+    "prompt": "대속이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "MAR 15:1-20",
+      "1CO 2:1-16",
+      "ROM 1:1-32",
+      "MAT 7:15-20"
+    ],
+    "expectedTerms": [
+      "대속",
+      "몸값",
+      "속량"
+    ]
+  },
+  {
+    "id": "cross-07",
+    "prompt": "예수님은 왜 자기 백성에게 버림받으셨는가?",
+    "expectedPrimaryRefs": [
+      "ISA 61:1-3",
+      "JOH 19:1-16",
+      "1CO 3:1-23",
+      "ACT 17:1-15"
+    ],
+    "expectedTerms": [
+      "버림",
+      "미움",
+      "고난"
+    ]
+  },
+  {
+    "id": "cross-08",
+    "prompt": "예수님은 왜 죽기 전에 다 이루었다고 말씀하셨는가?",
+    "expectedPrimaryRefs": [
+      "ACT 13:1-12",
+      "2TH 1:1-12",
+      "ISA 30:21",
+      "REV 20:1-15"
+    ],
+    "expectedTerms": [
+      "다 이루",
+      "속죄",
+      "완성"
+    ]
+  },
+  {
+    "id": "cross-09",
+    "prompt": "예수님의 부활은 역사적 사실인가?",
+    "expectedPrimaryRefs": [
+      "LUK 7:36-50",
+      "PRO 19:21",
+      "PRO 17:17",
+      "LUK 19:1-10"
+    ],
+    "expectedTerms": [
+      "역사",
+      "증거",
+      "목격"
+    ]
+  },
+  {
+    "id": "cross-10",
+    "prompt": "부활이 우리에게 주는 의미는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "1TI 2:1-15",
+      "LUK 9:28-36",
+      "PSA 73:1-28",
+      "1TH 4:1-18"
+    ],
+    "expectedTerms": [
+      "부활",
+      "소망",
+      "영생"
+    ]
+  },
+  {
+    "id": "cross-11",
+    "prompt": "예수님은 왜 사흘 만에 부활하셨는가?",
+    "expectedPrimaryRefs": [
+      "1CO 6:1-20",
+      "DAN 3:16-18",
+      "JOB 38:4-7",
+      "DAN 2:21"
+    ],
+    "expectedTerms": [
+      "사흘",
+      "요나",
+      "예언"
+    ]
+  },
+  {
+    "id": "cross-12",
+    "prompt": "십자가는 하나님의 사랑을 어떻게 보여주는가?",
+    "expectedPrimaryRefs": [
+      "MAT 7:1-5",
+      "ACT 28:1-31",
+      "ACT 6:8-15",
+      "GEN 6:5-7"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "죽으",
+      "증거"
+    ]
+  },
+  {
+    "id": "cross-13",
+    "prompt": "예수님의 고난은 왜 기록되었는가?",
+    "expectedPrimaryRefs": [
+      "REV 19:1-21",
+      "MAT 12:31-32",
+      "JOH 6:1-15",
+      "GEN 1:1"
+    ],
+    "expectedTerms": [
+      "고난",
+      "예언",
+      "성취"
+    ]
+  },
+  {
+    "id": "cross-14",
+    "prompt": "예수님의 부활은 왜 40일 동안 나타나셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 18:18-30",
+      "LUK 20:1-8",
+      "ISA 14:12-15",
+      "MAT 26:57-68"
+    ],
+    "expectedTerms": [
+      "40일",
+      "나타나",
+      "확신"
+    ]
+  },
+  {
+    "id": "cross-15",
+    "prompt": "무덤이 비어 있다는 것은 무엇을 의미하는가?",
+    "expectedPrimaryRefs": [
+      "ACT 20:1-38",
+      "ISA 59:1-2",
+      "GAL 3:1-29",
+      "ACT 2:14-42"
+    ],
+    "expectedTerms": [
+      "무덤",
+      "비어",
+      "부활"
+    ]
+  },
+  {
+    "id": "cross-16",
+    "prompt": "예수님의 보혈이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "2CO 6:1-18",
+      "MAT 5:38-48",
+      "JOH 12:12-19",
+      "PSA 127:1"
+    ],
+    "expectedTerms": [
+      "피",
+      "씻",
+      "속죄"
+    ]
+  },
+  {
+    "id": "cross-17",
+    "prompt": "왜 예수님만이 우리의 죄를 대속할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "LUK 14:1-24",
+      "ISA 45:5-6",
+      "LUK 12:13-21",
+      "ROM 6:1-23"
+    ],
+    "expectedTerms": [
+      "무죄",
+      "대속",
+      "어린양"
+    ]
+  },
+  {
+    "id": "cross-18",
+    "prompt": "십자가의 도란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:26",
+      "1JO 4:1-21",
+      "ISA 7:14",
+      "MAR 14:22-25"
+    ],
+    "expectedTerms": [
+      "십자가",
+      "미련",
+      "능력"
+    ]
+  },
+  {
+    "id": "cross-19",
+    "prompt": "예수님은 왜 죽으신 후 음부에 내려가셨는가?",
+    "expectedPrimaryRefs": [
+      "TIT 2:1-15",
+      "PRO 1:7",
+      "1PE 5:1-14",
+      "JOH 16:1-15"
+    ],
+    "expectedTerms": [
+      "음부",
+      "전파",
+      "승리"
+    ]
+  },
+  {
+    "id": "cross-20",
+    "prompt": "예수님의 승리가 왜 우리에게도 적용되는가?",
+    "expectedPrimaryRefs": [
+      "EPH 2:1-22",
+      "HEB 4:1-16",
+      "GAL 6:1-18",
+      "PRO 3:5-6"
+    ],
+    "expectedTerms": [
+      "승리",
+      "이기",
+      "믿음"
+    ]
+  },
+  {
+    "id": "spirit-01",
+    "prompt": "성령님은 누구인가?",
+    "expectedPrimaryRefs": [
+      "ACT 17:16-34",
+      "GEN 2:24",
+      "LUK 22:24-38",
+      "HOS 4:6"
+    ],
+    "expectedTerms": [
+      "성령",
+      "보내",
+      "진리"
+    ]
+  },
+  {
+    "id": "spirit-02",
+    "prompt": "성령님은 어떻게 역사하시는가?",
+    "expectedPrimaryRefs": [
+      "LUK 18:15-17",
+      "LUK 5:27-32",
+      "ACT 16:16-40",
+      "MAT 28:1-10"
+    ],
+    "expectedTerms": [
+      "성령",
+      "능력",
+      "은사"
+    ]
+  },
+  {
+    "id": "spirit-03",
+    "prompt": "성령의 열매란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "MAR 1:1-8",
+      "REV 13:1-18",
+      "JOH 5:19-47",
+      "2PE 1:1-21"
+    ],
+    "expectedTerms": [
+      "열매",
+      "사랑",
+      "화평"
+    ]
+  },
+  {
+    "id": "spirit-04",
+    "prompt": "성령의 은사는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "ACT 4:23-31",
+      "2PE 3:1-18",
+      "2TI 4:1-22",
+      "ISA 5:20"
+    ],
+    "expectedTerms": [
+      "은사",
+      "방언",
+      "예언"
+    ]
+  },
+  {
+    "id": "spirit-05",
+    "prompt": "성령충만이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "PSA 150:1-6",
+      "1SA 16:7",
+      "PSA 95:6",
+      "LUK 10:38-42"
+    ],
+    "expectedTerms": [
+      "충만",
+      "담대",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "spirit-06",
+    "prompt": "성령은 왜 위로자라고 불리는가?",
+    "expectedPrimaryRefs": [
+      "LUK 14:25-33",
+      "ECC 3:1-8",
+      "2CO 3:1-18",
+      "1TI 6:1-21"
+    ],
+    "expectedTerms": [
+      "위로",
+      "가르치",
+      "기억"
+    ]
+  },
+  {
+    "id": "spirit-07",
+    "prompt": "성령은 어떻게 우리를 변화시키시는가?",
+    "expectedPrimaryRefs": [
+      "MAR 4:26-32",
+      "JOH 2:1-12",
+      "MAR 12:38-40",
+      "JOH 2:13-25"
+    ],
+    "expectedTerms": [
+      "변화",
+      "새롭",
+      "마음"
+    ]
+  },
+  {
+    "id": "spirit-08",
+    "prompt": "성령을 소멸하지 말라는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "ACT 27:1-44",
+      "MIC 6:6-8",
+      "LUK 19:45-48",
+      "LUK 23:1-12"
+    ],
+    "expectedTerms": [
+      "소멸",
+      "근심",
+      "성령"
+    ]
+  },
+  {
+    "id": "spirit-09",
+    "prompt": "방언은 성령의 증거인가?",
+    "expectedPrimaryRefs": [
+      "ACT 26:1-32",
+      "DAN 12:2",
+      "ECC 3:11",
+      "HEB 9:1-28"
+    ],
+    "expectedTerms": [
+      "방언",
+      "언어",
+      "은사"
+    ]
+  },
+  {
+    "id": "spirit-10",
+    "prompt": "성령은 왜 비둘기처럼 나타나셨는가?",
+    "expectedPrimaryRefs": [
+      "ECC 7:2",
+      "LUK 3:1-6",
+      "JOH 16:16-33",
+      "MAR 3:13-19"
+    ],
+    "expectedTerms": [
+      "비둘기",
+      "세례",
+      "임하"
+    ]
+  },
+  {
+    "id": "spirit-11",
+    "prompt": "성령은 어떻게 우리에게 말씀하시는가?",
+    "expectedPrimaryRefs": [
+      "LUK 12:1-12",
+      "JOH 19:31-42",
+      "1CO 7:1-40",
+      "1CO 11:1-34"
+    ],
+    "expectedTerms": [
+      "말씀",
+      "인도",
+      "성령"
+    ]
+  },
+  {
+    "id": "spirit-12",
+    "prompt": "성령을 받는다는 것은 무엇을 의미하는가?",
+    "expectedPrimaryRefs": [
+      "ACT 15:1-35",
+      "LUK 23:44-56",
+      "JER 9:23-24",
+      "PSA 14:1"
+    ],
+    "expectedTerms": [
+      "받",
+      "세례",
+      "약속"
+    ]
+  },
+  {
+    "id": "spirit-13",
+    "prompt": "성령과 육신의 싸움은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "HAB 3:17-19",
+      "MAR 6:1-6",
+      "MAT 9:9-13",
+      "EXO 20:1-17"
+    ],
+    "expectedTerms": [
+      "육신",
+      "성령",
+      "욕심"
+    ]
+  },
+  {
+    "id": "spirit-14",
+    "prompt": "성령은 왜 예수님을 증거하시는가?",
+    "expectedPrimaryRefs": [
+      "LAM 3:22-24",
+      "JOB 19:25",
+      "ROM 14:1-23",
+      "ROM 10:1-21"
+    ],
+    "expectedTerms": [
+      "증거",
+      "보내",
+      "예수"
+    ]
+  },
+  {
+    "id": "spirit-15",
+    "prompt": "성령은 어떻게 우리를 진리로 인도하시는가?",
+    "expectedPrimaryRefs": [
+      "MAT 13:1-23",
+      "ACT 5:1-11",
+      "REV 1:1-20",
+      "LUK 22:54-62"
+    ],
+    "expectedTerms": [
+      "진리",
+      "인도",
+      "가르치"
+    ]
+  },
+  {
+    "id": "trinity-01",
+    "prompt": "삼위일체란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "ACT 6:1-7",
+      "JOH 15:18-27",
+      "NAH 1:2-3",
+      "COL 3:1-25"
+    ],
+    "expectedTerms": [
+      "삼위",
+      "아버지",
+      "성령"
+    ]
+  },
+  {
+    "id": "trinity-02",
+    "prompt": "하나님이 한 분인데 세 분이라는 것은 모순이 아닌가?",
+    "expectedPrimaryRefs": [
+      "LUK 4:1-13",
+      "2TI 1:1-18",
+      "DAN 9:3",
+      "HEB 6:1-20"
+    ],
+    "expectedTerms": [
+      "하나",
+      "셋",
+      "하나님"
+    ]
+  },
+  {
+    "id": "trinity-03",
+    "prompt": "성부와 성자와 성령은 어떤 관계인가?",
+    "expectedPrimaryRefs": [
+      "LUK 19:11-27",
+      "ISA 43:1-4",
+      "PHI 4:1-23",
+      "JOH 8:1-11"
+    ],
+    "expectedTerms": [
+      "보내",
+      "아버지",
+      "성령"
+    ]
+  },
+  {
+    "id": "trinity-04",
+    "prompt": "삼위일체라는 단어가 성경에 없는 이유는?",
+    "expectedPrimaryRefs": [
+      "PSA 22:1-18",
+      "JOH 18:1-27",
+      "ACT 4:32-37",
+      "REV 4:1-11"
+    ],
+    "expectedTerms": [
+      "기록",
+      "계시",
+      "성경"
+    ]
+  },
+  {
+    "id": "trinity-05",
+    "prompt": "예수님은 아버지와 동등하신가?",
+    "expectedPrimaryRefs": [
+      "HAB 2:3-4",
+      "ACT 2:1-13",
+      "JER 1:5",
+      "MAT 22:34-40"
+    ],
+    "expectedTerms": [
+      "동등",
+      "하나",
+      "본체"
+    ]
+  },
+  {
+    "id": "trinity-06",
+    "prompt": "성령님은 하나님이신가?",
+    "expectedPrimaryRefs": [
+      "MAT 26:26-30",
+      "ISA 26:3",
+      "MAT 25:31-46",
+      "2CO 12:1-21"
+    ],
+    "expectedTerms": [
+      "성령",
+      "하나님",
+      "성전"
+    ]
+  },
+  {
+    "id": "trinity-07",
+    "prompt": "구약에서도 삼위일체를 찾을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "JOH 14:15-31",
+      "LUK 2:1-20",
+      "1PE 4:1-19",
+      "JAM 2:1-26"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "영",
+      "우리"
+    ]
+  },
+  {
+    "id": "trinity-08",
+    "prompt": "왜 예수님은 아버지께 기도하셨는가?",
+    "expectedPrimaryRefs": [
+      "PSA 119:105",
+      "PHI 3:1-21",
+      "EZE 28:12-17",
+      "EPH 3:1-21"
+    ],
+    "expectedTerms": [
+      "기도",
+      "아버지",
+      "뜻"
+    ]
+  },
+  {
+    "id": "trinity-09",
+    "prompt": "삼위일체의 신비를 인간이 이해할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "PHM 1:1-25",
+      "MAT 3:13-17",
+      "ROM 12:1-21",
+      "JER 33:3"
+    ],
+    "expectedTerms": [
+      "신비",
+      "이해",
+      "측량"
+    ]
+  },
+  {
+    "id": "trinity-10",
+    "prompt": "삼위일체는 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "JOH 20:24-31",
+      "RUT 1:16-17",
+      "PSA 19:1-4",
+      "ACT 10:1-48"
+    ],
+    "expectedTerms": [
+      "하나님",
+      "은혜",
+      "연합"
+    ]
+  },
+  {
+    "id": "creation-01",
+    "prompt": "세상은 어떻게 시작되었는가?",
+    "expectedPrimaryRefs": [
+      "ISA 55:8-9",
+      "JOH 1:1-14",
+      "MAT 25:14-30",
+      "PHI 1:1-30"
+    ],
+    "expectedTerms": [
+      "태초",
+      "창조",
+      "말씀"
+    ]
+  },
+  {
+    "id": "creation-02",
+    "prompt": "진화론과 창조론은 공존할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "1TH 5:1-28",
+      "JOH 10:22-42",
+      "JOH 12:20-50",
+      "2CO 9:1-15"
+    ],
+    "expectedTerms": [
+      "진화",
+      "창조",
+      "설계"
+    ]
+  },
+  {
+    "id": "creation-03",
+    "prompt": "하나님은 왜 6일에 걸쳐 창조하셨는가?",
+    "expectedPrimaryRefs": [
+      "MAT 5:1-12",
+      "LUK 22:7-23",
+      "PSA 42:1-2",
+      "MAT 27:27-56"
+    ],
+    "expectedTerms": [
+      "엿새",
+      "안식",
+      "질서"
+    ]
+  },
+  {
+    "id": "creation-04",
+    "prompt": "인간은 하나님의 형상대로 지어졌다는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "HEB 2:1-18",
+      "PRO 16:9",
+      "LUK 19:28-44",
+      "LUK 3:21-22"
+    ],
+    "expectedTerms": [
+      "형상",
+      "존귀",
+      "인간"
+    ]
+  },
+  {
+    "id": "creation-05",
+    "prompt": "왜 하나님은 하와를 아담의 갈비뼈로 만드셨는가?",
+    "expectedPrimaryRefs": [
+      "ACT 18:1-28",
+      "JOS 24:15",
+      "1CO 14:1-40",
+      "HAB 1:2-3"
+    ],
+    "expectedTerms": [
+      "돕는",
+      "뼈",
+      "여자"
+    ]
+  },
+  {
+    "id": "creation-06",
+    "prompt": "에덴동산은 어디에 있었는가?",
+    "expectedPrimaryRefs": [
+      "JOH 7:1-24",
+      "MAT 19:13-14",
+      "GAL 5:1-26",
+      "MAT 24:1-51"
+    ],
+    "expectedTerms": [
+      "에덴",
+      "동산",
+      "강"
+    ]
+  },
+  {
+    "id": "creation-07",
+    "prompt": "왜 하나님은 선악과를 두셨는가?",
+    "expectedPrimaryRefs": [
+      "PSA 110:1",
+      "MAT 27:62-66",
+      "PSA 100:1-5",
+      "PSA 119:160"
+    ],
+    "expectedTerms": [
+      "선악",
+      "선택",
+      "복종"
+    ]
+  },
+  {
+    "id": "creation-08",
+    "prompt": "하나님의 창조 목적은 무엇이었는가?",
+    "expectedPrimaryRefs": [
+      "MAT 18:1-5",
+      "ROM 7:1-25",
+      "JER 17:9",
+      "ISA 6:1-5"
+    ],
+    "expectedTerms": [
+      "영광",
+      "기쁨",
+      "경외"
+    ]
+  },
+  {
+    "id": "creation-09",
+    "prompt": "세상의 악은 어디서 시작되었는가?",
+    "expectedPrimaryRefs": [
+      "2JO 1:1-13",
+      "MAT 18:21-35",
+      "MAR 11:22-25",
+      "ACT 9:1-19"
+    ],
+    "expectedTerms": [
+      "뱀",
+      "마귀",
+      "교만"
+    ]
+  },
+  {
+    "id": "creation-10",
+    "prompt": "대홍수는 정말 일어났는가?",
+    "expectedPrimaryRefs": [
+      "ISA 9:6",
+      "1CO 13:1-13",
+      "ROM 5:1-21",
+      "GEN 2:7"
+    ],
+    "expectedTerms": [
+      "홍수",
+      "방주",
+      "노아"
+    ]
+  },
+  {
+    "id": "creation-11",
+    "prompt": "하나님은 왜 바벨탑을 무너뜨리셨는가?",
+    "expectedPrimaryRefs": [
+      "COL 1:1-29",
+      "1CO 15:1-58",
+      "REV 17:1-18",
+      "JOH 3:22-36"
+    ],
+    "expectedTerms": [
+      "교만",
+      "탑",
+      "언어"
+    ]
+  },
+  {
+    "id": "creation-12",
+    "prompt": "왜 하나님은 동물을 만드셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 1:1-4",
+      "JER 29:11-13",
+      "MAR 10:35-45",
+      "LUK 21:1-4"
+    ],
+    "expectedTerms": [
+      "동물",
+      "만들",
+      "생명"
+    ]
+  },
+  {
+    "id": "creation-13",
+    "prompt": "하나님의 창조는 지금도 계속되는가?",
+    "expectedPrimaryRefs": [
+      "ACT 9:32-43",
+      "JOH 18:28-40",
+      "ACT 14:1-28",
+      "MAR 4:1-20"
+    ],
+    "expectedTerms": [
+      "일하",
+      "유지",
+      "새롭"
+    ]
+  },
+  {
+    "id": "creation-14",
+    "prompt": "천사들은 언제 창조되었는가?",
+    "expectedPrimaryRefs": [
+      "JOB 1:1-22",
+      "LUK 5:1-11",
+      "MAR 14:32-42",
+      "ISA 49:13-16"
+    ],
+    "expectedTerms": [
+      "천사",
+      "만들",
+      "하늘"
+    ]
+  },
+  {
+    "id": "creation-15",
+    "prompt": "사탄은 누구이며 어디서 왔는가?",
+    "expectedPrimaryRefs": [
+      "JOB 42:1-6",
+      "PSA 8:3-6",
+      "GAL 4:1-31",
+      "ISA 43:10-12"
+    ],
+    "expectedTerms": [
+      "사탄",
+      "마귀",
+      "교만"
+    ]
+  },
+  {
+    "id": "creation-16",
+    "prompt": "하나님은 왜 안식하셨는가?",
+    "expectedPrimaryRefs": [
+      "ISA 64:6",
+      "MAL 1:2-3",
+      "MAR 16:9-20",
+      "LUK 10:1-24"
+    ],
+    "expectedTerms": [
+      "안식",
+      "쉬",
+      "완성"
+    ]
+  },
+  {
+    "id": "creation-17",
+    "prompt": "왜 하나님은 사람에게 이름을 짓게 하셨는가?",
+    "expectedPrimaryRefs": [
+      "LUK 22:1-6",
+      "2SA 12:1-14",
+      "JER 31:31-34",
+      "GEN 1:2"
+    ],
+    "expectedTerms": [
+      "이름",
+      "다스리",
+      "권세"
+    ]
+  },
+  {
+    "id": "creation-18",
+    "prompt": "하나님의 창조가 왜 보시기에 좋았더라라고 기록되었는가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:3",
+      "GEN 1:4",
+      "GEN 1:5",
+      "GEN 1:6"
+    ],
+    "expectedTerms": [
+      "좋",
+      "완전",
+      "아름"
+    ]
+  },
+  {
+    "id": "creation-19",
+    "prompt": "하나님은 왜 빛과 어둠을 나누셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:7",
+      "GEN 1:8",
+      "GEN 1:9",
+      "GEN 1:10"
+    ],
+    "expectedTerms": [
+      "빛",
+      "어둠",
+      "나누"
+    ]
+  },
+  {
+    "id": "creation-20",
+    "prompt": "하늘나라는 어떤 곳인가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:11",
+      "GEN 1:12",
+      "GEN 1:13",
+      "GEN 1:14"
+    ],
+    "expectedTerms": [
+      "하늘",
+      "눈물",
+      "약속"
+    ]
+  },
+  {
+    "id": "human-01",
+    "prompt": "나는 누구이며 왜 존재하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:15",
+      "GEN 1:16",
+      "GEN 1:17",
+      "GEN 1:18"
+    ],
+    "expectedTerms": [
+      "존재",
+      "창조",
+      "목적"
+    ]
+  },
+  {
+    "id": "human-02",
+    "prompt": "인간은 왜 태어났는가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:19",
+      "GEN 1:20",
+      "GEN 1:21",
+      "GEN 1:22"
+    ],
+    "expectedTerms": [
+      "태어나",
+      "경외",
+      "영광"
+    ]
+  },
+  {
+    "id": "human-03",
+    "prompt": "인간의 삶에는 의미가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 1:23",
+      "GEN 1:24",
+      "GEN 1:25",
+      "GEN 2:1"
+    ],
+    "expectedTerms": [
+      "의미",
+      "영원",
+      "계획"
+    ]
+  },
+  {
+    "id": "human-04",
+    "prompt": "인간은 영혼과 육체로 이루어져 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:2",
+      "GEN 2:3",
+      "GEN 2:4",
+      "GEN 2:5"
+    ],
+    "expectedTerms": [
+      "영혼",
+      "육체",
+      "생기"
+    ]
+  },
+  {
+    "id": "human-05",
+    "prompt": "인간은 왜 죽는가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:6",
+      "GEN 2:8",
+      "GEN 2:9",
+      "GEN 2:10"
+    ],
+    "expectedTerms": [
+      "죄",
+      "죽음",
+      "흙"
+    ]
+  },
+  {
+    "id": "human-06",
+    "prompt": "인간은 동물과 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:11",
+      "GEN 2:12",
+      "GEN 2:13",
+      "GEN 2:14"
+    ],
+    "expectedTerms": [
+      "형상",
+      "영",
+      "존귀"
+    ]
+  },
+  {
+    "id": "human-07",
+    "prompt": "인간은 왜 고독을 느끼는가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:15",
+      "GEN 2:16",
+      "GEN 2:17",
+      "GEN 2:19"
+    ],
+    "expectedTerms": [
+      "외롭",
+      "돕는",
+      "함께"
+    ]
+  },
+  {
+    "id": "human-08",
+    "prompt": "인간의 양심은 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:20",
+      "GEN 2:21",
+      "GEN 2:22",
+      "GEN 2:23"
+    ],
+    "expectedTerms": [
+      "양심",
+      "마음",
+      "판단"
+    ]
+  },
+  {
+    "id": "human-09",
+    "prompt": "인간은 왜 행복을 추구하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 2:25",
+      "GEN 3:1",
+      "GEN 3:2",
+      "GEN 3:3"
+    ],
+    "expectedTerms": [
+      "행복",
+      "소원",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "human-10",
+    "prompt": "인간은 왜 불안을 느끼는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:4",
+      "GEN 3:5",
+      "GEN 3:6",
+      "GEN 3:7"
+    ],
+    "expectedTerms": [
+      "불안",
+      "염려",
+      "평안"
+    ]
+  },
+  {
+    "id": "human-11",
+    "prompt": "인간은 왜 완벽해지려고 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:8",
+      "GEN 3:9",
+      "GEN 3:10",
+      "GEN 3:11"
+    ],
+    "expectedTerms": [
+      "완전",
+      "좇",
+      "부족"
+    ]
+  },
+  {
+    "id": "human-12",
+    "prompt": "인간은 왜 인정받고 싶어하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:12",
+      "GEN 3:13",
+      "GEN 3:14",
+      "GEN 3:16"
+    ],
+    "expectedTerms": [
+      "인정",
+      "영광",
+      "사람"
+    ]
+  },
+  {
+    "id": "human-13",
+    "prompt": "인간은 왜 권력을 추구하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:17",
+      "GEN 3:18",
+      "GEN 3:20",
+      "GEN 3:21"
+    ],
+    "expectedTerms": [
+      "권력",
+      "교만",
+      "섬김"
+    ]
+  },
+  {
+    "id": "human-14",
+    "prompt": "인간은 왜 과거를 후회하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 3:22",
+      "GEN 3:23",
+      "GEN 3:24",
+      "GEN 3:25"
+    ],
+    "expectedTerms": [
+      "후회",
+      "과거",
+      "새롭"
+    ]
+  },
+  {
+    "id": "human-15",
+    "prompt": "인간은 왜 미래를 걱정하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:1",
+      "GEN 4:2",
+      "GEN 4:3",
+      "GEN 4:4"
+    ],
+    "expectedTerms": [
+      "걱정",
+      "미래",
+      "인도"
+    ]
+  },
+  {
+    "id": "human-16",
+    "prompt": "인간은 왜 사랑을 원하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:5",
+      "GEN 4:6",
+      "GEN 4:7",
+      "GEN 4:8"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "외로",
+      "갈망"
+    ]
+  },
+  {
+    "id": "human-17",
+    "prompt": "인간은 왜 죽음 이후를 궁금해하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:9",
+      "GEN 4:10",
+      "GEN 4:11",
+      "GEN 4:12"
+    ],
+    "expectedTerms": [
+      "영원",
+      "부활",
+      "심판"
+    ]
+  },
+  {
+    "id": "human-18",
+    "prompt": "인간은 왜 고통받는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:13",
+      "GEN 4:14",
+      "GEN 4:15",
+      "GEN 4:16"
+    ],
+    "expectedTerms": [
+      "고통",
+      "세상",
+      "인내"
+    ]
+  },
+  {
+    "id": "human-19",
+    "prompt": "인간은 왜 자유를 원하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:17",
+      "GEN 4:18",
+      "GEN 4:19",
+      "GEN 4:20"
+    ],
+    "expectedTerms": [
+      "자유",
+      "해방",
+      "진리"
+    ]
+  },
+  {
+    "id": "human-20",
+    "prompt": "인간은 왜 정의를 추구하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:21",
+      "GEN 4:22",
+      "GEN 4:23",
+      "GEN 4:24"
+    ],
+    "expectedTerms": [
+      "정의",
+      "공의",
+      "겸손"
+    ]
+  },
+  {
+    "id": "human-21",
+    "prompt": "인간은 왜 아름다움을 추구하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 4:25",
+      "GEN 5:1",
+      "GEN 5:2",
+      "GEN 5:3"
+    ],
+    "expectedTerms": [
+      "아름",
+      "영광",
+      "사모"
+    ]
+  },
+  {
+    "id": "human-22",
+    "prompt": "인간은 왜 의미 있는 삶을 원하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:4",
+      "GEN 5:5",
+      "GEN 5:6",
+      "GEN 5:7"
+    ],
+    "expectedTerms": [
+      "의미",
+      "목적",
+      "계획"
+    ]
+  },
+  {
+    "id": "human-23",
+    "prompt": "인간은 왜 상처받기 쉬운가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:8",
+      "GEN 5:9",
+      "GEN 5:10",
+      "GEN 5:11"
+    ],
+    "expectedTerms": [
+      "상처",
+      "통하",
+      "낫"
+    ]
+  },
+  {
+    "id": "human-24",
+    "prompt": "인간은 왜 죄를 짓는가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:12",
+      "GEN 5:13",
+      "GEN 5:14",
+      "GEN 5:15"
+    ],
+    "expectedTerms": [
+      "죄",
+      "마음",
+      "욕심"
+    ]
+  },
+  {
+    "id": "human-25",
+    "prompt": "인간은 왜 하나님을 찾는가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:16",
+      "GEN 5:17",
+      "GEN 5:18",
+      "GEN 5:19"
+    ],
+    "expectedTerms": [
+      "찾",
+      "목마르",
+      "갈망"
+    ]
+  },
+  {
+    "id": "sin-01",
+    "prompt": "죄란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:20",
+      "GEN 5:21",
+      "GEN 5:22",
+      "GEN 5:23"
+    ],
+    "expectedTerms": [
+      "죄",
+      "법",
+      "미치"
+    ]
+  },
+  {
+    "id": "sin-02",
+    "prompt": "원죄란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 5:24",
+      "GEN 5:25",
+      "GEN 6:1",
+      "GEN 6:2"
+    ],
+    "expectedTerms": [
+      "원죄",
+      "아담",
+      "타락"
+    ]
+  },
+  {
+    "id": "sin-03",
+    "prompt": "왜 선악과를 먹은 것이 죄인가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:3",
+      "GEN 6:4",
+      "GEN 6:5",
+      "GEN 6:6"
+    ],
+    "expectedTerms": [
+      "불순종",
+      "뱀",
+      "금지"
+    ]
+  },
+  {
+    "id": "sin-04",
+    "prompt": "모든 사람이 죄인인가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:7",
+      "GEN 6:8",
+      "GEN 6:9",
+      "GEN 6:10"
+    ],
+    "expectedTerms": [
+      "죄인",
+      "의인",
+      "다"
+    ]
+  },
+  {
+    "id": "sin-05",
+    "prompt": "죄의 결과는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:11",
+      "GEN 6:12",
+      "GEN 6:13",
+      "GEN 6:14"
+    ],
+    "expectedTerms": [
+      "죽음",
+      "삯",
+      "멸망"
+    ]
+  },
+  {
+    "id": "sin-06",
+    "prompt": "왜 하나님은 죄를 미워하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:15",
+      "GEN 6:16",
+      "GEN 6:17",
+      "GEN 6:18"
+    ],
+    "expectedTerms": [
+      "미워",
+      "공의",
+      "거룩"
+    ]
+  },
+  {
+    "id": "sin-07",
+    "prompt": "회개란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:19",
+      "GEN 6:20",
+      "GEN 6:21",
+      "GEN 6:22"
+    ],
+    "expectedTerms": [
+      "회개",
+      "돌이키",
+      "용서"
+    ]
+  },
+  {
+    "id": "sin-08",
+    "prompt": "하나님은 모든 죄를 용서하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 6:23",
+      "GEN 6:24",
+      "GEN 6:25",
+      "GEN 7:1"
+    ],
+    "expectedTerms": [
+      "용서",
+      "씻",
+      "범죄"
+    ]
+  },
+  {
+    "id": "sin-09",
+    "prompt": "성령을 거역하는 죄란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:2",
+      "GEN 7:3",
+      "GEN 7:4",
+      "GEN 7:5"
+    ],
+    "expectedTerms": [
+      "성령",
+      "거역",
+      "용서"
+    ]
+  },
+  {
+    "id": "sin-10",
+    "prompt": "왜 같은 죄를 반복하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:6",
+      "GEN 7:7",
+      "GEN 7:8",
+      "GEN 7:9"
+    ],
+    "expectedTerms": [
+      "반복",
+      "원하",
+      "갈등"
+    ]
+  },
+  {
+    "id": "sin-11",
+    "prompt": "죄의 유혹을 이기는 방법은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:10",
+      "GEN 7:11",
+      "GEN 7:12",
+      "GEN 7:13"
+    ],
+    "expectedTerms": [
+      "유혹",
+      "이기",
+      "기도"
+    ]
+  },
+  {
+    "id": "sin-12",
+    "prompt": "하나님 앞에서 모든 죄가 같은가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:14",
+      "GEN 7:15",
+      "GEN 7:16",
+      "GEN 7:17"
+    ],
+    "expectedTerms": [
+      "무겁",
+      "심판",
+      "큰"
+    ]
+  },
+  {
+    "id": "sin-13",
+    "prompt": "타인의 죄를 판단해도 되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:18",
+      "GEN 7:19",
+      "GEN 7:20",
+      "GEN 7:21"
+    ],
+    "expectedTerms": [
+      "판단",
+      "비판",
+      "정죄"
+    ]
+  },
+  {
+    "id": "sin-14",
+    "prompt": "죄책감은 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 7:22",
+      "GEN 7:23",
+      "GEN 7:24",
+      "GEN 7:25"
+    ],
+    "expectedTerms": [
+      "죄책",
+      "두려",
+      "부끄"
+    ]
+  },
+  {
+    "id": "sin-15",
+    "prompt": "세상의 악은 왜 줄어들지 않는가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:1",
+      "GEN 8:2",
+      "GEN 8:3",
+      "GEN 8:4"
+    ],
+    "expectedTerms": [
+      "악",
+      "말세",
+      "사랑"
+    ]
+  },
+  {
+    "id": "sin-16",
+    "prompt": "하나님은 왜 아담과 하와를 즉시 벌하지 않으셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:5",
+      "GEN 8:6",
+      "GEN 8:7",
+      "GEN 8:8"
+    ],
+    "expectedTerms": [
+      "약속",
+      "구원",
+      "인내"
+    ]
+  },
+  {
+    "id": "sin-17",
+    "prompt": "죄인이 하나님께 나아갈 수 있는 이유는?",
+    "expectedPrimaryRefs": [
+      "GEN 8:9",
+      "GEN 8:10",
+      "GEN 8:11",
+      "GEN 8:12"
+    ],
+    "expectedTerms": [
+      "나아가",
+      "용기",
+      "죄인"
+    ]
+  },
+  {
+    "id": "sin-18",
+    "prompt": "용서받은 후에도 죄의 결과가 남는가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:13",
+      "GEN 8:14",
+      "GEN 8:15",
+      "GEN 8:16"
+    ],
+    "expectedTerms": [
+      "용서",
+      "결과",
+      "거두"
+    ]
+  },
+  {
+    "id": "sin-19",
+    "prompt": "무지한 죄도 죄인가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:17",
+      "GEN 8:18",
+      "GEN 8:19",
+      "GEN 8:20"
+    ],
+    "expectedTerms": [
+      "무지",
+      "모르",
+      "책임"
+    ]
+  },
+  {
+    "id": "sin-20",
+    "prompt": "죄의 삯은 죽음인데 왜 예수님은 죽으실 수 있었는가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:21",
+      "GEN 8:22",
+      "GEN 8:23",
+      "GEN 8:24"
+    ],
+    "expectedTerms": [
+      "무죄",
+      "대신",
+      "어린양"
+    ]
+  },
+  {
+    "id": "salvation-01",
+    "prompt": "구원이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 8:25",
+      "GEN 9:1",
+      "GEN 9:2",
+      "GEN 9:3"
+    ],
+    "expectedTerms": [
+      "구원",
+      "은혜",
+      "믿음"
+    ]
+  },
+  {
+    "id": "salvation-02",
+    "prompt": "왜 인간에게 구원이 필요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:4",
+      "GEN 9:5",
+      "GEN 9:6",
+      "GEN 9:7"
+    ],
+    "expectedTerms": [
+      "죄",
+      "죽음",
+      "필요"
+    ]
+  },
+  {
+    "id": "salvation-03",
+    "prompt": "믿음만으로 구원받는다는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:8",
+      "GEN 9:9",
+      "GEN 9:10",
+      "GEN 9:11"
+    ],
+    "expectedTerms": [
+      "믿음",
+      "행위",
+      "의롭"
+    ]
+  },
+  {
+    "id": "salvation-04",
+    "prompt": "구원을 잃을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:12",
+      "GEN 9:13",
+      "GEN 9:14",
+      "GEN 9:15"
+    ],
+    "expectedTerms": [
+      "영생",
+      "빼앗",
+      "확신"
+    ]
+  },
+  {
+    "id": "salvation-05",
+    "prompt": "예수님을 믿지 않는 사람도 구원받을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:16",
+      "GEN 9:17",
+      "GEN 9:18",
+      "GEN 9:19"
+    ],
+    "expectedTerms": [
+      "유일",
+      "길",
+      "믿"
+    ]
+  },
+  {
+    "id": "salvation-06",
+    "prompt": "은혜란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:20",
+      "GEN 9:21",
+      "GEN 9:22",
+      "GEN 9:23"
+    ],
+    "expectedTerms": [
+      "은혜",
+      "공로",
+      "선물"
+    ]
+  },
+  {
+    "id": "salvation-07",
+    "prompt": "구원은 어떻게 받는가?",
+    "expectedPrimaryRefs": [
+      "GEN 9:24",
+      "GEN 9:25",
+      "GEN 10:1",
+      "GEN 10:2"
+    ],
+    "expectedTerms": [
+      "믿",
+      "고백",
+      "회개"
+    ]
+  },
+  {
+    "id": "salvation-08",
+    "prompt": "왜 믿음으로만 구원받고 행위로는 안 되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:3",
+      "GEN 10:4",
+      "GEN 10:5",
+      "GEN 10:6"
+    ],
+    "expectedTerms": [
+      "자랑",
+      "율법",
+      "은혜"
+    ]
+  },
+  {
+    "id": "salvation-09",
+    "prompt": "구원받은 후에는 어떻게 살아야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:7",
+      "GEN 10:8",
+      "GEN 10:9",
+      "GEN 10:10"
+    ],
+    "expectedTerms": [
+      "행하",
+      "변화",
+      "거룩"
+    ]
+  },
+  {
+    "id": "salvation-10",
+    "prompt": "칭의와 성화의 차이는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:11",
+      "GEN 10:12",
+      "GEN 10:13",
+      "GEN 10:14"
+    ],
+    "expectedTerms": [
+      "칭의",
+      "성화",
+      "의롭"
+    ]
+  },
+  {
+    "id": "salvation-11",
+    "prompt": "왜 예수님만이 유일한 구원자인가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:15",
+      "GEN 10:16",
+      "GEN 10:17",
+      "GEN 10:18"
+    ],
+    "expectedTerms": [
+      "유일",
+      "중보",
+      "구원"
+    ]
+  },
+  {
+    "id": "salvation-12",
+    "prompt": "하나님의 은혜와 인간의 책임은 어떻게 함께 가는가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:19",
+      "GEN 10:20",
+      "GEN 10:21",
+      "GEN 10:22"
+    ],
+    "expectedTerms": [
+      "은혜",
+      "책임",
+      "자라"
+    ]
+  },
+  {
+    "id": "salvation-13",
+    "prompt": "구원의 확신은 어떻게 가지는가?",
+    "expectedPrimaryRefs": [
+      "GEN 10:23",
+      "GEN 10:24",
+      "GEN 10:25",
+      "GEN 11:1"
+    ],
+    "expectedTerms": [
+      "확신",
+      "증거",
+      "인치"
+    ]
+  },
+  {
+    "id": "salvation-14",
+    "prompt": "지옥은 실제인가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:2",
+      "GEN 11:3",
+      "GEN 11:4",
+      "GEN 11:5"
+    ],
+    "expectedTerms": [
+      "지옥",
+      "영벌",
+      "심판"
+    ]
+  },
+  {
+    "id": "salvation-15",
+    "prompt": "왜 하나님은 지옥을 만드셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:6",
+      "GEN 11:7",
+      "GEN 11:8",
+      "GEN 11:9"
+    ],
+    "expectedTerms": [
+      "마귀",
+      "사탄",
+      "심판"
+    ]
+  },
+  {
+    "id": "salvation-16",
+    "prompt": "죽은 후에도 구원의 기회가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:10",
+      "GEN 11:11",
+      "GEN 11:12",
+      "GEN 11:13"
+    ],
+    "expectedTerms": [
+      "한번",
+      "죽음",
+      "기회"
+    ]
+  },
+  {
+    "id": "salvation-17",
+    "prompt": "유아가 죽으면 어떻게 되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:14",
+      "GEN 11:15",
+      "GEN 11:16",
+      "GEN 11:17"
+    ],
+    "expectedTerms": [
+      "어린",
+      "천국",
+      "하나님"
+    ]
+  },
+  {
+    "id": "salvation-18",
+    "prompt": "선하게 살면 믿음이 없어도 구원받는가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:18",
+      "GEN 11:19",
+      "GEN 11:20",
+      "GEN 11:21"
+    ],
+    "expectedTerms": [
+      "선",
+      "의",
+      "은혜"
+    ]
+  },
+  {
+    "id": "salvation-19",
+    "prompt": "속죄란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 11:22",
+      "GEN 11:23",
+      "GEN 11:24",
+      "GEN 11:25"
+    ],
+    "expectedTerms": [
+      "속죄",
+      "피",
+      "대속"
+    ]
+  },
+  {
+    "id": "salvation-20",
+    "prompt": "값없이 주시는 은혜를 어떻게 이해해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:1",
+      "GEN 12:2",
+      "GEN 12:3",
+      "GEN 12:4"
+    ],
+    "expectedTerms": [
+      "값없이",
+      "선물",
+      "은혜"
+    ]
+  },
+  {
+    "id": "salvation-21",
+    "prompt": "하나님의 공의와 은혜는 어떻게 조화되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:5",
+      "GEN 12:6",
+      "GEN 12:7",
+      "GEN 12:8"
+    ],
+    "expectedTerms": [
+      "공의",
+      "은혜",
+      "십자가"
+    ]
+  },
+  {
+    "id": "salvation-22",
+    "prompt": "중생이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:9",
+      "GEN 12:10",
+      "GEN 12:11",
+      "GEN 12:12"
+    ],
+    "expectedTerms": [
+      "거듭나",
+      "새롭",
+      "성령"
+    ]
+  },
+  {
+    "id": "salvation-23",
+    "prompt": "양자가 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:13",
+      "GEN 12:14",
+      "GEN 12:15",
+      "GEN 12:16"
+    ],
+    "expectedTerms": [
+      "양자",
+      "자녀",
+      "상속"
+    ]
+  },
+  {
+    "id": "salvation-24",
+    "prompt": "속량이 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:17",
+      "GEN 12:18",
+      "GEN 12:19",
+      "GEN 12:20"
+    ],
+    "expectedTerms": [
+      "속량",
+      "피",
+      "해방"
+    ]
+  },
+  {
+    "id": "salvation-25",
+    "prompt": "구원의 서정은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:21",
+      "GEN 12:22",
+      "GEN 12:23",
+      "GEN 12:24"
+    ],
+    "expectedTerms": [
+      "미리",
+      "부르",
+      "의롭"
+    ]
+  },
+  {
+    "id": "faith-01",
+    "prompt": "믿음이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 12:25",
+      "GEN 13:1",
+      "GEN 13:2",
+      "GEN 13:3"
+    ],
+    "expectedTerms": [
+      "믿음",
+      "바라",
+      "확신"
+    ]
+  },
+  {
+    "id": "faith-02",
+    "prompt": "의심이 있으면 믿음이 없는 것인가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:4",
+      "GEN 13:5",
+      "GEN 13:6",
+      "GEN 13:7"
+    ],
+    "expectedTerms": [
+      "의심",
+      "믿음",
+      "구하"
+    ]
+  },
+  {
+    "id": "faith-03",
+    "prompt": "믿음은 어떻게 성장하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:8",
+      "GEN 13:9",
+      "GEN 13:10",
+      "GEN 13:11"
+    ],
+    "expectedTerms": [
+      "말씀",
+      "듣",
+      "자라"
+    ]
+  },
+  {
+    "id": "faith-04",
+    "prompt": "믿음과 확신의 차이는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:12",
+      "GEN 13:13",
+      "GEN 13:14",
+      "GEN 13:15"
+    ],
+    "expectedTerms": [
+      "확신",
+      "믿음",
+      "알"
+    ]
+  },
+  {
+    "id": "faith-05",
+    "prompt": "믿음이 왜 하나님을 기쁘시게 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:16",
+      "GEN 13:17",
+      "GEN 13:18",
+      "GEN 13:19"
+    ],
+    "expectedTerms": [
+      "기쁘",
+      "믿음",
+      "의인"
+    ]
+  },
+  {
+    "id": "faith-06",
+    "prompt": "눈에 보이지 않는 하나님을 어떻게 믿는가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:20",
+      "GEN 13:21",
+      "GEN 13:22",
+      "GEN 13:23"
+    ],
+    "expectedTerms": [
+      "보지",
+      "믿음",
+      "보이"
+    ]
+  },
+  {
+    "id": "faith-07",
+    "prompt": "신앙은 과학과 충돌하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 13:24",
+      "GEN 13:25",
+      "GEN 14:1",
+      "GEN 14:2"
+    ],
+    "expectedTerms": [
+      "과학",
+      "지혜",
+      "창조"
+    ]
+  },
+  {
+    "id": "faith-08",
+    "prompt": "신앙생활은 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:3",
+      "GEN 14:4",
+      "GEN 14:5",
+      "GEN 14:6"
+    ],
+    "expectedTerms": [
+      "겸손",
+      "사랑",
+      "변화"
+    ]
+  },
+  {
+    "id": "faith-09",
+    "prompt": "믿음이 약해질 때 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:7",
+      "GEN 14:8",
+      "GEN 14:9",
+      "GEN 14:10"
+    ],
+    "expectedTerms": [
+      "말씀",
+      "소망",
+      "인내"
+    ]
+  },
+  {
+    "id": "faith-10",
+    "prompt": "왜 믿는 사람도 고난을 겪는가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:11",
+      "GEN 14:12",
+      "GEN 14:13",
+      "GEN 14:14"
+    ],
+    "expectedTerms": [
+      "고난",
+      "세상",
+      "영광"
+    ]
+  },
+  {
+    "id": "faith-11",
+    "prompt": "믿음은 선택인가 은혜인가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:15",
+      "GEN 14:16",
+      "GEN 14:17",
+      "GEN 14:18"
+    ],
+    "expectedTerms": [
+      "믿음",
+      "은혜",
+      "선택"
+    ]
+  },
+  {
+    "id": "faith-12",
+    "prompt": "기독교가 유일한 진리라고 주장하는 것은 독선이 아닌가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:19",
+      "GEN 14:20",
+      "GEN 14:21",
+      "GEN 14:22"
+    ],
+    "expectedTerms": [
+      "진리",
+      "유일",
+      "독선"
+    ]
+  },
+  {
+    "id": "faith-13",
+    "prompt": "신앙은 개인적인 것인가 집단적인 것인가?",
+    "expectedPrimaryRefs": [
+      "GEN 14:23",
+      "GEN 14:24",
+      "GEN 14:25",
+      "GEN 15:1"
+    ],
+    "expectedTerms": [
+      "공동체",
+      "모이",
+      "교제"
+    ]
+  },
+  {
+    "id": "faith-14",
+    "prompt": "신앙의 연약한 사람을 어떻게 대해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:2",
+      "GEN 15:3",
+      "GEN 15:4",
+      "GEN 15:5"
+    ],
+    "expectedTerms": [
+      "연약",
+      "받아",
+      "돌아보"
+    ]
+  },
+  {
+    "id": "faith-15",
+    "prompt": "하나님을 사랑한다는 것은 구체적으로 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:7",
+      "GEN 15:8",
+      "GEN 15:9",
+      "GEN 15:10"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "계명",
+      "순종"
+    ]
+  },
+  {
+    "id": "faith-16",
+    "prompt": "신앙은 어떻게 전수하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:11",
+      "GEN 15:12",
+      "GEN 15:13",
+      "GEN 15:14"
+    ],
+    "expectedTerms": [
+      "가르치",
+      "자녀",
+      "전하"
+    ]
+  },
+  {
+    "id": "faith-17",
+    "prompt": "예수님을 믿는다는 것은 무엇을 의미하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:15",
+      "GEN 15:16",
+      "GEN 15:17",
+      "GEN 15:18"
+    ],
+    "expectedTerms": [
+      "영접",
+      "고백",
+      "살"
+    ]
+  },
+  {
+    "id": "faith-18",
+    "prompt": "은사를 받지 못한 사람은 어떻게 신앙생활을 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:19",
+      "GEN 15:20",
+      "GEN 15:21",
+      "GEN 15:22"
+    ],
+    "expectedTerms": [
+      "은사",
+      "각각",
+      "충성"
+    ]
+  },
+  {
+    "id": "faith-19",
+    "prompt": "하나님의 음성을 어떻게 듣는가?",
+    "expectedPrimaryRefs": [
+      "GEN 15:23",
+      "GEN 15:24",
+      "GEN 15:25",
+      "GEN 16:1"
+    ],
+    "expectedTerms": [
+      "음성",
+      "듣",
+      "양"
+    ]
+  },
+  {
+    "id": "faith-20",
+    "prompt": "하나님의 뜻은 어떻게 알 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:2",
+      "GEN 16:3",
+      "GEN 16:4",
+      "GEN 16:5"
+    ],
+    "expectedTerms": [
+      "뜻",
+      "변화",
+      "인도"
+    ]
+  },
+  {
+    "id": "faith-21",
+    "prompt": "영적 성장은 어떻게 측정하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:6",
+      "GEN 16:7",
+      "GEN 16:8",
+      "GEN 16:9"
+    ],
+    "expectedTerms": [
+      "열매",
+      "자라",
+      "덕"
+    ]
+  },
+  {
+    "id": "faith-22",
+    "prompt": "왜 기독교에는 교파가 많은가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:10",
+      "GEN 16:11",
+      "GEN 16:12",
+      "GEN 16:13"
+    ],
+    "expectedTerms": [
+      "분열",
+      "하나",
+      "다양"
+    ]
+  },
+  {
+    "id": "faith-23",
+    "prompt": "신앙의 위기는 성장에 필요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:14",
+      "GEN 16:15",
+      "GEN 16:16",
+      "GEN 16:17"
+    ],
+    "expectedTerms": [
+      "시험",
+      "인내",
+      "성장"
+    ]
+  },
+  {
+    "id": "faith-24",
+    "prompt": "매일 큐티와 기도를 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:18",
+      "GEN 16:19",
+      "GEN 16:20",
+      "GEN 16:21"
+    ],
+    "expectedTerms": [
+      "말씀",
+      "묵상",
+      "기도"
+    ]
+  },
+  {
+    "id": "faith-25",
+    "prompt": "신앙이 지식보다 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 16:22",
+      "GEN 16:23",
+      "GEN 16:24",
+      "GEN 16:25"
+    ],
+    "expectedTerms": [
+      "지식",
+      "사랑",
+      "교만"
+    ]
+  },
+  {
+    "id": "prayer-01",
+    "prompt": "기도란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:1",
+      "GEN 17:2",
+      "GEN 17:3",
+      "GEN 17:4"
+    ],
+    "expectedTerms": [
+      "기도",
+      "간구",
+      "감사"
+    ]
+  },
+  {
+    "id": "prayer-02",
+    "prompt": "하나님은 왜 모든 기도에 응답하지 않는가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:5",
+      "GEN 17:6",
+      "GEN 17:7",
+      "GEN 17:8"
+    ],
+    "expectedTerms": [
+      "응답",
+      "죄",
+      "뜻"
+    ]
+  },
+  {
+    "id": "prayer-03",
+    "prompt": "기도의 응답이 지연될 때 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:9",
+      "GEN 17:10",
+      "GEN 17:11",
+      "GEN 17:12"
+    ],
+    "expectedTerms": [
+      "기다리",
+      "인내",
+      "소망"
+    ]
+  },
+  {
+    "id": "prayer-04",
+    "prompt": "기도는 과학적으로 효과가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:13",
+      "GEN 17:14",
+      "GEN 17:15",
+      "GEN 17:16"
+    ],
+    "expectedTerms": [
+      "효과",
+      "능력",
+      "평안"
+    ]
+  },
+  {
+    "id": "prayer-05",
+    "prompt": "방언기도는 모든 사람이 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:17",
+      "GEN 17:18",
+      "GEN 17:19",
+      "GEN 17:20"
+    ],
+    "expectedTerms": [
+      "방언",
+      "통역",
+      "은사"
+    ]
+  },
+  {
+    "id": "prayer-06",
+    "prompt": "예배란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:21",
+      "GEN 17:22",
+      "GEN 17:23",
+      "GEN 17:24"
+    ],
+    "expectedTerms": [
+      "예배",
+      "영",
+      "진리"
+    ]
+  },
+  {
+    "id": "prayer-07",
+    "prompt": "왜 교회에 가서 예배해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 17:25",
+      "GEN 18:1",
+      "GEN 18:2",
+      "GEN 18:3"
+    ],
+    "expectedTerms": [
+      "모이",
+      "격려",
+      "교제"
+    ]
+  },
+  {
+    "id": "prayer-08",
+    "prompt": "찬양은 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:4",
+      "GEN 18:5",
+      "GEN 18:6",
+      "GEN 18:7"
+    ],
+    "expectedTerms": [
+      "찬양",
+      "악기",
+      "감사"
+    ]
+  },
+  {
+    "id": "prayer-09",
+    "prompt": "기도할 때 올바른 자세는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:8",
+      "GEN 18:9",
+      "GEN 18:10",
+      "GEN 18:11"
+    ],
+    "expectedTerms": [
+      "자세",
+      "마음",
+      "믿음"
+    ]
+  },
+  {
+    "id": "prayer-10",
+    "prompt": "합심기도는 왜 특별한가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:12",
+      "GEN 18:13",
+      "GEN 18:14",
+      "GEN 18:15"
+    ],
+    "expectedTerms": [
+      "합심",
+      "함께",
+      "능력"
+    ]
+  },
+  {
+    "id": "prayer-11",
+    "prompt": "중보기도란 무엇이며 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:16",
+      "GEN 18:17",
+      "GEN 18:18",
+      "GEN 18:19"
+    ],
+    "expectedTerms": [
+      "중보",
+      "대신",
+      "간구"
+    ]
+  },
+  {
+    "id": "prayer-12",
+    "prompt": "예수님의 이름으로 기도한다는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:20",
+      "GEN 18:21",
+      "GEN 18:22",
+      "GEN 18:23"
+    ],
+    "expectedTerms": [
+      "이름",
+      "아버지",
+      "구하"
+    ]
+  },
+  {
+    "id": "prayer-13",
+    "prompt": "기도 응답을 받지 못하는 이유는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 18:24",
+      "GEN 18:25",
+      "GEN 19:1",
+      "GEN 19:2"
+    ],
+    "expectedTerms": [
+      "구하",
+      "정욕",
+      "마음"
+    ]
+  },
+  {
+    "id": "prayer-14",
+    "prompt": "하나님께 불평해도 되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:3",
+      "GEN 19:4",
+      "GEN 19:5",
+      "GEN 19:6"
+    ],
+    "expectedTerms": [
+      "불평",
+      "부르짖",
+      "기다리"
+    ]
+  },
+  {
+    "id": "prayer-15",
+    "prompt": "새벽기도는 왜 특별한가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:7",
+      "GEN 19:8",
+      "GEN 19:9",
+      "GEN 19:10"
+    ],
+    "expectedTerms": [
+      "새벽",
+      "일찍",
+      "기도"
+    ]
+  },
+  {
+    "id": "prayer-16",
+    "prompt": "금식기도는 왜 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:11",
+      "GEN 19:12",
+      "GEN 19:13",
+      "GEN 19:14"
+    ],
+    "expectedTerms": [
+      "금식",
+      "겸손",
+      "간절"
+    ]
+  },
+  {
+    "id": "prayer-17",
+    "prompt": "성만찬은 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:15",
+      "GEN 19:16",
+      "GEN 19:17",
+      "GEN 19:18"
+    ],
+    "expectedTerms": [
+      "성만찬",
+      "기억",
+      "언약"
+    ]
+  },
+  {
+    "id": "prayer-18",
+    "prompt": "세례는 왜 받는가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:19",
+      "GEN 19:20",
+      "GEN 19:21",
+      "GEN 19:22"
+    ],
+    "expectedTerms": [
+      "세례",
+      "회개",
+      "장사"
+    ]
+  },
+  {
+    "id": "prayer-19",
+    "prompt": "예배는 왜 일요일에 드리는가?",
+    "expectedPrimaryRefs": [
+      "GEN 19:23",
+      "GEN 19:24",
+      "GEN 19:25",
+      "GEN 20:1"
+    ],
+    "expectedTerms": [
+      "주일",
+      "부활",
+      "모이"
+    ]
+  },
+  {
+    "id": "prayer-20",
+    "prompt": "하나님은 어떤 예배를 원하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 20:2",
+      "GEN 20:3",
+      "GEN 20:4",
+      "GEN 20:5"
+    ],
+    "expectedTerms": [
+      "영",
+      "진리",
+      "겸손"
+    ]
+  },
+  {
+    "id": "prayer-21",
+    "prompt": "기도 중에 하나님의 음성을 어떻게 분별하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 20:6",
+      "GEN 20:7",
+      "GEN 20:8",
+      "GEN 20:9"
+    ],
+    "expectedTerms": [
+      "분별",
+      "음성",
+      "말씀"
+    ]
+  },
+  {
+    "id": "prayer-22",
+    "prompt": "하나님의 임재를 어떻게 경험하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 20:10",
+      "GEN 20:11",
+      "GEN 20:12",
+      "GEN 20:13"
+    ],
+    "expectedTerms": [
+      "임재",
+      "경험",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "prayer-23",
+    "prompt": "공적 예배와 개인 예배의 차이는?",
+    "expectedPrimaryRefs": [
+      "GEN 20:14",
+      "GEN 20:15",
+      "GEN 20:16",
+      "GEN 20:17"
+    ],
+    "expectedTerms": [
+      "공적",
+      "개인",
+      "모이"
+    ]
+  },
+  {
+    "id": "prayer-24",
+    "prompt": "감사기도는 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 20:18",
+      "GEN 20:19",
+      "GEN 20:20",
+      "GEN 20:21"
+    ],
+    "expectedTerms": [
+      "감사",
+      "기도",
+      "범사"
+    ]
+  },
+  {
+    "id": "prayer-25",
+    "prompt": "예배에서 음악은 어떤 역할을 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 20:22",
+      "GEN 20:23",
+      "GEN 20:24",
+      "GEN 20:25"
+    ],
+    "expectedTerms": [
+      "음악",
+      "찬양",
+      "악기"
+    ]
+  },
+  {
+    "id": "love-01",
+    "prompt": "사랑이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:1",
+      "GEN 21:2",
+      "GEN 21:3",
+      "GEN 21:4"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "오래",
+      "참으"
+    ]
+  },
+  {
+    "id": "love-02",
+    "prompt": "하나님의 사랑은 어떤 사랑인가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:5",
+      "GEN 21:6",
+      "GEN 21:7",
+      "GEN 21:8"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "영원",
+      "끝"
+    ]
+  },
+  {
+    "id": "love-03",
+    "prompt": "원수를 사랑하라는 말은 가능한가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:9",
+      "GEN 21:10",
+      "GEN 21:11",
+      "GEN 21:12"
+    ],
+    "expectedTerms": [
+      "원수",
+      "사랑",
+      "선대"
+    ]
+  },
+  {
+    "id": "love-04",
+    "prompt": "사랑과 정의는 충돌하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:13",
+      "GEN 21:14",
+      "GEN 21:15",
+      "GEN 21:16"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "정의",
+      "십자가"
+    ]
+  },
+  {
+    "id": "love-05",
+    "prompt": "사랑은 감정인가 의지인가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:17",
+      "GEN 21:18",
+      "GEN 21:19",
+      "GEN 21:20"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "의지",
+      "선택"
+    ]
+  },
+  {
+    "id": "love-06",
+    "prompt": "하나님을 사랑하는 것과 이웃을 사랑하는 것은 같은가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:21",
+      "GEN 21:22",
+      "GEN 21:23",
+      "GEN 21:24"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "이웃",
+      "계명"
+    ]
+  },
+  {
+    "id": "love-07",
+    "prompt": "믿음 소망 사랑 중에 왜 사랑이 가장 큰가?",
+    "expectedPrimaryRefs": [
+      "GEN 21:25",
+      "GEN 22:1",
+      "GEN 22:2",
+      "GEN 22:3"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "믿음",
+      "소망"
+    ]
+  },
+  {
+    "id": "love-08",
+    "prompt": "자기 사랑과 이기심은 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:4",
+      "GEN 22:5",
+      "GEN 22:6",
+      "GEN 22:7"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "이기",
+      "남"
+    ]
+  },
+  {
+    "id": "love-09",
+    "prompt": "하나님은 왜 사랑의 하나님이라고 불리는가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:8",
+      "GEN 22:9",
+      "GEN 22:10",
+      "GEN 22:11"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "하나님",
+      "본질"
+    ]
+  },
+  {
+    "id": "love-10",
+    "prompt": "부부의 사랑은 하나님과 어떤 관계가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:12",
+      "GEN 22:13",
+      "GEN 22:14",
+      "GEN 22:15"
+    ],
+    "expectedTerms": [
+      "부부",
+      "사랑",
+      "헌신"
+    ]
+  },
+  {
+    "id": "love-11",
+    "prompt": "부모의 사랑과 하나님의 사랑은 어떻게 비교되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:16",
+      "GEN 22:17",
+      "GEN 22:18",
+      "GEN 22:19"
+    ],
+    "expectedTerms": [
+      "부모",
+      "사랑",
+      "용서"
+    ]
+  },
+  {
+    "id": "love-12",
+    "prompt": "사랑하면 모든 것을 용서해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:20",
+      "GEN 22:21",
+      "GEN 22:22",
+      "GEN 22:23"
+    ],
+    "expectedTerms": [
+      "용서",
+      "사랑",
+      "참"
+    ]
+  },
+  {
+    "id": "love-13",
+    "prompt": "하나님의 사랑은 조건적인가 무조건적인가?",
+    "expectedPrimaryRefs": [
+      "GEN 22:24",
+      "GEN 22:25",
+      "GEN 23:1",
+      "GEN 23:2"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "조건",
+      "긍휼"
+    ]
+  },
+  {
+    "id": "love-14",
+    "prompt": "사랑에 빠지는 것과 사랑하는 것은 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:3",
+      "GEN 23:4",
+      "GEN 23:5",
+      "GEN 23:6"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "감정",
+      "결단"
+    ]
+  },
+  {
+    "id": "love-15",
+    "prompt": "형제자매 간의 사랑은 왜 어려운가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:7",
+      "GEN 23:8",
+      "GEN 23:9",
+      "GEN 23:10"
+    ],
+    "expectedTerms": [
+      "형제",
+      "사랑",
+      "행하"
+    ]
+  },
+  {
+    "id": "love-16",
+    "prompt": "사랑은 왜 두려움을 내쫓는가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:11",
+      "GEN 23:12",
+      "GEN 23:13",
+      "GEN 23:14"
+    ],
+    "expectedTerms": [
+      "두려움",
+      "사랑",
+      "온전"
+    ]
+  },
+  {
+    "id": "love-17",
+    "prompt": "이웃을 내 몸같이 사랑한다는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:15",
+      "GEN 23:16",
+      "GEN 23:17",
+      "GEN 23:18"
+    ],
+    "expectedTerms": [
+      "이웃",
+      "사랑",
+      "선한"
+    ]
+  },
+  {
+    "id": "love-18",
+    "prompt": "하나님의 사랑을 어떻게 체험하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:19",
+      "GEN 23:20",
+      "GEN 23:21",
+      "GEN 23:22"
+    ],
+    "expectedTerms": [
+      "체험",
+      "부으",
+      "알"
+    ]
+  },
+  {
+    "id": "love-19",
+    "prompt": "예수님의 사랑은 일반 사랑과 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 23:23",
+      "GEN 23:24",
+      "GEN 23:25",
+      "GEN 24:1"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "목숨",
+      "대속"
+    ]
+  },
+  {
+    "id": "love-20",
+    "prompt": "사랑 없는 믿음은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:2",
+      "GEN 24:3",
+      "GEN 24:4",
+      "GEN 24:5"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "믿음",
+      "열매"
+    ]
+  },
+  {
+    "id": "meaning-01",
+    "prompt": "인생의 의미는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:6",
+      "GEN 24:7",
+      "GEN 24:8",
+      "GEN 24:9"
+    ],
+    "expectedTerms": [
+      "의미",
+      "경외",
+      "계획"
+    ]
+  },
+  {
+    "id": "meaning-02",
+    "prompt": "왜 사는가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:10",
+      "GEN 24:11",
+      "GEN 24:12",
+      "GEN 24:13"
+    ],
+    "expectedTerms": [
+      "살",
+      "죽으",
+      "생명"
+    ]
+  },
+  {
+    "id": "meaning-03",
+    "prompt": "나의 인생 목적은 어떻게 찾는가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:14",
+      "GEN 24:15",
+      "GEN 24:16",
+      "GEN 24:17"
+    ],
+    "expectedTerms": [
+      "목적",
+      "선한",
+      "인도"
+    ]
+  },
+  {
+    "id": "meaning-04",
+    "prompt": "성공이 인생의 목표가 되어야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:18",
+      "GEN 24:19",
+      "GEN 24:20",
+      "GEN 24:21"
+    ],
+    "expectedTerms": [
+      "성공",
+      "재물",
+      "헛되"
+    ]
+  },
+  {
+    "id": "meaning-05",
+    "prompt": "돈이 행복을 주는가?",
+    "expectedPrimaryRefs": [
+      "GEN 24:22",
+      "GEN 24:23",
+      "GEN 24:24",
+      "GEN 24:25"
+    ],
+    "expectedTerms": [
+      "돈",
+      "행복",
+      "근심"
+    ]
+  },
+  {
+    "id": "meaning-06",
+    "prompt": "고통에도 의미가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:1",
+      "GEN 25:2",
+      "GEN 25:3",
+      "GEN 25:4"
+    ],
+    "expectedTerms": [
+      "고통",
+      "인내",
+      "소망"
+    ]
+  },
+  {
+    "id": "meaning-07",
+    "prompt": "하나님 없이도 삶의 의미를 찾을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:5",
+      "GEN 25:6",
+      "GEN 25:7",
+      "GEN 25:8"
+    ],
+    "expectedTerms": [
+      "헛되",
+      "미련",
+      "하나님"
+    ]
+  },
+  {
+    "id": "meaning-08",
+    "prompt": "행복이 인생의 궁극적 목적인가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:9",
+      "GEN 25:10",
+      "GEN 25:11",
+      "GEN 25:12"
+    ],
+    "expectedTerms": [
+      "행복",
+      "기쁨",
+      "복"
+    ]
+  },
+  {
+    "id": "meaning-09",
+    "prompt": "왜 나는 특별하지 않은 것 같은가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:13",
+      "GEN 25:14",
+      "GEN 25:15",
+      "GEN 25:16"
+    ],
+    "expectedTerms": [
+      "특별",
+      "존귀",
+      "택하"
+    ]
+  },
+  {
+    "id": "meaning-10",
+    "prompt": "내 삶에 하나님의 계획이 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:17",
+      "GEN 25:18",
+      "GEN 25:19",
+      "GEN 25:20"
+    ],
+    "expectedTerms": [
+      "계획",
+      "예정",
+      "인도"
+    ]
+  },
+  {
+    "id": "meaning-11",
+    "prompt": "왜 우리는 실패를 경험하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:21",
+      "GEN 25:22",
+      "GEN 25:23",
+      "GEN 25:24"
+    ],
+    "expectedTerms": [
+      "실패",
+      "넘어지",
+      "일으키"
+    ]
+  },
+  {
+    "id": "meaning-12",
+    "prompt": "죽음 이후에는 무엇이 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 25:25",
+      "GEN 26:1",
+      "GEN 26:2",
+      "GEN 26:3"
+    ],
+    "expectedTerms": [
+      "죽음",
+      "판단",
+      "부활"
+    ]
+  },
+  {
+    "id": "meaning-13",
+    "prompt": "영원을 사모하는 마음은 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:4",
+      "GEN 26:5",
+      "GEN 26:6",
+      "GEN 26:7"
+    ],
+    "expectedTerms": [
+      "영원",
+      "사모",
+      "하늘"
+    ]
+  },
+  {
+    "id": "meaning-14",
+    "prompt": "나는 왜 이 시대에 태어났는가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:8",
+      "GEN 26:9",
+      "GEN 26:10",
+      "GEN 26:11"
+    ],
+    "expectedTerms": [
+      "시대",
+      "때",
+      "목적"
+    ]
+  },
+  {
+    "id": "meaning-15",
+    "prompt": "가장 가치 있는 삶은 어떤 삶인가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:12",
+      "GEN 26:13",
+      "GEN 26:14",
+      "GEN 26:15"
+    ],
+    "expectedTerms": [
+      "가치",
+      "목숨",
+      "영생"
+    ]
+  },
+  {
+    "id": "meaning-16",
+    "prompt": "왜 삶은 공허하게 느껴지는가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:16",
+      "GEN 26:17",
+      "GEN 26:18",
+      "GEN 26:19"
+    ],
+    "expectedTerms": [
+      "공허",
+      "헛되",
+      "갈망"
+    ]
+  },
+  {
+    "id": "meaning-17",
+    "prompt": "왜 우리는 관계를 통해 의미를 찾는가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:20",
+      "GEN 26:21",
+      "GEN 26:22",
+      "GEN 26:23"
+    ],
+    "expectedTerms": [
+      "관계",
+      "교제",
+      "사랑"
+    ]
+  },
+  {
+    "id": "meaning-18",
+    "prompt": "어떻게 하면 후회 없는 삶을 살 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 26:24",
+      "GEN 26:25",
+      "GEN 27:1",
+      "GEN 27:2"
+    ],
+    "expectedTerms": [
+      "지혜",
+      "시간",
+      "후회"
+    ]
+  },
+  {
+    "id": "meaning-19",
+    "prompt": "하나님의 나라를 위해 산다는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:3",
+      "GEN 27:4",
+      "GEN 27:5",
+      "GEN 27:6"
+    ],
+    "expectedTerms": [
+      "나라",
+      "의",
+      "전파"
+    ]
+  },
+  {
+    "id": "meaning-20",
+    "prompt": "죽음이 인생에 의미를 더하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:7",
+      "GEN 27:8",
+      "GEN 27:9",
+      "GEN 27:10"
+    ],
+    "expectedTerms": [
+      "죽음",
+      "지혜",
+      "본향"
+    ]
+  },
+  {
+    "id": "death-01",
+    "prompt": "죽음 후에는 무엇이 기다리는가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:11",
+      "GEN 27:12",
+      "GEN 27:13",
+      "GEN 27:14"
+    ],
+    "expectedTerms": [
+      "죽음",
+      "심판",
+      "하나님"
+    ]
+  },
+  {
+    "id": "death-02",
+    "prompt": "영생이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:15",
+      "GEN 27:16",
+      "GEN 27:17",
+      "GEN 27:18"
+    ],
+    "expectedTerms": [
+      "영생",
+      "알",
+      "생명"
+    ]
+  },
+  {
+    "id": "death-03",
+    "prompt": "천국은 어떤 곳인가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:19",
+      "GEN 27:20",
+      "GEN 27:21",
+      "GEN 27:22"
+    ],
+    "expectedTerms": [
+      "천국",
+      "눈물",
+      "새"
+    ]
+  },
+  {
+    "id": "death-04",
+    "prompt": "부활은 어떻게 일어나는가?",
+    "expectedPrimaryRefs": [
+      "GEN 27:23",
+      "GEN 27:24",
+      "GEN 27:25",
+      "GEN 28:1"
+    ],
+    "expectedTerms": [
+      "부활",
+      "씨",
+      "영광"
+    ]
+  },
+  {
+    "id": "death-05",
+    "prompt": "죽음을 두려워하지 않는 방법은?",
+    "expectedPrimaryRefs": [
+      "GEN 28:2",
+      "GEN 28:3",
+      "GEN 28:4",
+      "GEN 28:5"
+    ],
+    "expectedTerms": [
+      "두려움",
+      "죽음",
+      "승리"
+    ]
+  },
+  {
+    "id": "death-06",
+    "prompt": "죽은 사람은 어디에 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 28:6",
+      "GEN 28:7",
+      "GEN 28:8",
+      "GEN 28:9"
+    ],
+    "expectedTerms": [
+      "낙원",
+      "천국",
+      "음부"
+    ]
+  },
+  {
+    "id": "death-07",
+    "prompt": "왜 모든 사람은 한번 죽는가?",
+    "expectedPrimaryRefs": [
+      "GEN 28:10",
+      "GEN 28:11",
+      "GEN 28:12",
+      "GEN 28:13"
+    ],
+    "expectedTerms": [
+      "죄",
+      "한번",
+      "판단"
+    ]
+  },
+  {
+    "id": "death-08",
+    "prompt": "영혼불멸은 성경적인가?",
+    "expectedPrimaryRefs": [
+      "GEN 28:14",
+      "GEN 28:15",
+      "GEN 28:16",
+      "GEN 28:17"
+    ],
+    "expectedTerms": [
+      "영혼",
+      "멸하",
+      "영원"
+    ]
+  },
+  {
+    "id": "death-09",
+    "prompt": "자살은 용서받을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 28:18",
+      "GEN 28:19",
+      "GEN 28:20",
+      "GEN 28:21"
+    ],
+    "expectedTerms": [
+      "용서",
+      "사랑",
+      "영생"
+    ]
+  },
+  {
+    "id": "death-10",
+    "prompt": "사랑하는 사람의 죽음은 왜 고통스러운가?",
+    "expectedPrimaryRefs": [
+      "GEN 28:22",
+      "GEN 28:23",
+      "GEN 28:24",
+      "GEN 28:25"
+    ],
+    "expectedTerms": [
+      "죽음",
+      "슬퍼",
+      "눈물"
+    ]
+  },
+  {
+    "id": "death-11",
+    "prompt": "하늘나라에서 우리는 무엇을 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:1",
+      "GEN 29:2",
+      "GEN 29:3",
+      "GEN 29:4"
+    ],
+    "expectedTerms": [
+      "섬기",
+      "다스리",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "death-12",
+    "prompt": "환생은 가능한가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:5",
+      "GEN 29:6",
+      "GEN 29:7",
+      "GEN 29:8"
+    ],
+    "expectedTerms": [
+      "한번",
+      "죽음",
+      "거듭나"
+    ]
+  },
+  {
+    "id": "death-13",
+    "prompt": "죽은 사람을 위해 기도해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:9",
+      "GEN 29:10",
+      "GEN 29:11",
+      "GEN 29:12"
+    ],
+    "expectedTerms": [
+      "죽은",
+      "한번",
+      "기억"
+    ]
+  },
+  {
+    "id": "death-14",
+    "prompt": "최후의 심판은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:13",
+      "GEN 29:14",
+      "GEN 29:15",
+      "GEN 29:16"
+    ],
+    "expectedTerms": [
+      "심판",
+      "보좌",
+      "책"
+    ]
+  },
+  {
+    "id": "death-15",
+    "prompt": "왜 예수님은 죽음을 이기셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:17",
+      "GEN 29:18",
+      "GEN 29:19",
+      "GEN 29:20"
+    ],
+    "expectedTerms": [
+      "이기",
+      "승리",
+      "사망"
+    ]
+  },
+  {
+    "id": "death-16",
+    "prompt": "영생을 얻는 방법은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:21",
+      "GEN 29:22",
+      "GEN 29:23",
+      "GEN 29:24"
+    ],
+    "expectedTerms": [
+      "영생",
+      "믿",
+      "생명"
+    ]
+  },
+  {
+    "id": "death-17",
+    "prompt": "임종 순간에 무엇을 기대할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 29:25",
+      "GEN 30:1",
+      "GEN 30:2",
+      "GEN 30:3"
+    ],
+    "expectedTerms": [
+      "임종",
+      "영혼",
+      "안식"
+    ]
+  },
+  {
+    "id": "death-18",
+    "prompt": "죽음은 적인가 친구인가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:4",
+      "GEN 30:5",
+      "GEN 30:6",
+      "GEN 30:7"
+    ],
+    "expectedTerms": [
+      "사망",
+      "마지막",
+      "이기"
+    ]
+  },
+  {
+    "id": "death-19",
+    "prompt": "왜 하나님은 죽음을 허락하셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:8",
+      "GEN 30:9",
+      "GEN 30:10",
+      "GEN 30:11"
+    ],
+    "expectedTerms": [
+      "죄",
+      "때",
+      "돌아가"
+    ]
+  },
+  {
+    "id": "death-20",
+    "prompt": "하늘나라에서 서로 알아볼 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:12",
+      "GEN 30:13",
+      "GEN 30:14",
+      "GEN 30:15"
+    ],
+    "expectedTerms": [
+      "알",
+      "만나",
+      "하늘"
+    ]
+  },
+  {
+    "id": "suffering-01",
+    "prompt": "왜 세상에 고통이 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:16",
+      "GEN 30:17",
+      "GEN 30:18",
+      "GEN 30:19"
+    ],
+    "expectedTerms": [
+      "고통",
+      "죄",
+      "세상"
+    ]
+  },
+  {
+    "id": "suffering-02",
+    "prompt": "왜 착한 사람이 고통받는가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:20",
+      "GEN 30:21",
+      "GEN 30:22",
+      "GEN 30:23"
+    ],
+    "expectedTerms": [
+      "욥",
+      "악인",
+      "고난"
+    ]
+  },
+  {
+    "id": "suffering-03",
+    "prompt": "고난은 하나님의 벌인가?",
+    "expectedPrimaryRefs": [
+      "GEN 30:24",
+      "GEN 30:25",
+      "GEN 31:1",
+      "GEN 31:2"
+    ],
+    "expectedTerms": [
+      "벌",
+      "고난",
+      "정죄"
+    ]
+  },
+  {
+    "id": "suffering-04",
+    "prompt": "하나님이 전능하시다면 왜 악을 없애지 않는가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:3",
+      "GEN 31:4",
+      "GEN 31:5",
+      "GEN 31:6"
+    ],
+    "expectedTerms": [
+      "인내",
+      "악",
+      "심판"
+    ]
+  },
+  {
+    "id": "suffering-05",
+    "prompt": "욥기는 고난에 대해 무엇을 가르치는가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:7",
+      "GEN 31:8",
+      "GEN 31:9",
+      "GEN 31:10"
+    ],
+    "expectedTerms": [
+      "욥",
+      "고난",
+      "인내"
+    ]
+  },
+  {
+    "id": "suffering-06",
+    "prompt": "고통 속에서도 하나님을 신뢰할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:11",
+      "GEN 31:12",
+      "GEN 31:13",
+      "GEN 31:14"
+    ],
+    "expectedTerms": [
+      "신뢰",
+      " мощн사",
+      "믿음"
+    ]
+  },
+  {
+    "id": "suffering-07",
+    "prompt": "자연재해는 하나님의 심판인가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:15",
+      "GEN 31:16",
+      "GEN 31:17",
+      "GEN 31:18"
+    ],
+    "expectedTerms": [
+      "재해",
+      "심판",
+      "회개"
+    ]
+  },
+  {
+    "id": "suffering-08",
+    "prompt": "전쟁과 폭력은 왜 존재하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:19",
+      "GEN 31:20",
+      "GEN 31:21",
+      "GEN 31:22"
+    ],
+    "expectedTerms": [
+      "전쟁",
+      "정욕",
+      "분쟁"
+    ]
+  },
+  {
+    "id": "suffering-09",
+    "prompt": "가난은 하나님의 저주인가?",
+    "expectedPrimaryRefs": [
+      "GEN 31:23",
+      "GEN 31:24",
+      "GEN 31:25",
+      "GEN 32:1"
+    ],
+    "expectedTerms": [
+      "가난",
+      "부요",
+      "복"
+    ]
+  },
+  {
+    "id": "suffering-10",
+    "prompt": "질병은 믿음이 약해서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 32:2",
+      "GEN 32:3",
+      "GEN 32:4",
+      "GEN 32:5"
+    ],
+    "expectedTerms": [
+      "질병",
+      "믿음",
+      "가시"
+    ]
+  },
+  {
+    "id": "suffering-11",
+    "prompt": "하나님은 왜 기적을 행하지 않는 것처럼 보이는가?",
+    "expectedPrimaryRefs": [
+      "GEN 32:6",
+      "GEN 32:7",
+      "GEN 32:8",
+      "GEN 32:9"
+    ],
+    "expectedTerms": [
+      "기적",
+      "표적",
+      "말씀"
+    ]
+  },
+  {
+    "id": "suffering-12",
+    "prompt": "고난은 어떻게 성숙으로 이끄는가?",
+    "expectedPrimaryRefs": [
+      "GEN 32:10",
+      "GEN 32:11",
+      "GEN 32:12",
+      "GEN 32:13"
+    ],
+    "expectedTerms": [
+      "인내",
+      "연단",
+      "성숙"
+    ]
+  },
+  {
+    "id": "suffering-13",
+    "prompt": "하나님이 고난을 허락하시는 이유는?",
+    "expectedPrimaryRefs": [
+      "GEN 32:14",
+      "GEN 32:15",
+      "GEN 32:16",
+      "GEN 32:17"
+    ],
+    "expectedTerms": [
+      "선",
+      "위로",
+      "영광"
+    ]
+  },
+  {
+    "id": "suffering-14",
+    "prompt": "자살은 왜 성경에서 금지하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 32:18",
+      "GEN 32:19",
+      "GEN 32:20",
+      "GEN 32:21"
+    ],
+    "expectedTerms": [
+      "생命",
+      "성전",
+      "맡기"
+    ]
+  },
+  {
+    "id": "suffering-15",
+    "prompt": "고난받는 사람을 어떻게 도와야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 32:22",
+      "GEN 32:23",
+      "GEN 32:24",
+      "GEN 32:25"
+    ],
+    "expectedTerms": [
+      "위로",
+      "함께",
+      "도와"
+    ]
+  },
+  {
+    "id": "suffering-16",
+    "prompt": "십자가는 고난의 문제에 어떤 답을 주는가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:1",
+      "GEN 33:2",
+      "GEN 33:3",
+      "GEN 33:4"
+    ],
+    "expectedTerms": [
+      "십자가",
+      "고난",
+      "영광"
+    ]
+  },
+  {
+    "id": "suffering-17",
+    "prompt": "왜 하나님은 무고한 자의 고통을 허락하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:5",
+      "GEN 33:6",
+      "GEN 33:7",
+      "GEN 33:8"
+    ],
+    "expectedTerms": [
+      "무고",
+      "욥",
+      "뜻"
+    ]
+  },
+  {
+    "id": "suffering-18",
+    "prompt": "사탄은 고난의 원인인가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:9",
+      "GEN 33:10",
+      "GEN 33:11",
+      "GEN 33:12"
+    ],
+    "expectedTerms": [
+      "사탄",
+      "시험",
+      "허락"
+    ]
+  },
+  {
+    "id": "suffering-19",
+    "prompt": "고난 중에 하나님은 어디에 계시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:13",
+      "GEN 33:14",
+      "GEN 33:15",
+      "GEN 33:16"
+    ],
+    "expectedTerms": [
+      "가까이",
+      "함께",
+      "불"
+    ]
+  },
+  {
+    "id": "suffering-20",
+    "prompt": "고난 후에는 반드시 회복이 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:17",
+      "GEN 33:18",
+      "GEN 33:19",
+      "GEN 33:20"
+    ],
+    "expectedTerms": [
+      "회복",
+      "돌이키",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "will-01",
+    "prompt": "인간에게 자유의지가 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:21",
+      "GEN 33:22",
+      "GEN 33:23",
+      "GEN 33:24"
+    ],
+    "expectedTerms": [
+      "선택",
+      "자유",
+      "생명"
+    ]
+  },
+  {
+    "id": "will-02",
+    "prompt": "예정설은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 33:25",
+      "GEN 34:1",
+      "GEN 34:2",
+      "GEN 34:3"
+    ],
+    "expectedTerms": [
+      "예정",
+      "미리",
+      "택하"
+    ]
+  },
+  {
+    "id": "will-03",
+    "prompt": "하나님의 주권과 인간의 자유의지는 어떻게 공존하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 34:4",
+      "GEN 34:5",
+      "GEN 34:6",
+      "GEN 34:7"
+    ],
+    "expectedTerms": [
+      "주권",
+      "자유",
+      "예정"
+    ]
+  },
+  {
+    "id": "will-04",
+    "prompt": "하나님은 모든 사람의 구원을 원하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 34:8",
+      "GEN 34:9",
+      "GEN 34:10",
+      "GEN 34:11"
+    ],
+    "expectedTerms": [
+      "원하",
+      "구원",
+      "회개"
+    ]
+  },
+  {
+    "id": "will-05",
+    "prompt": "왜 어떤 사람은 믿고 어떤 사람은 믿지 않는가?",
+    "expectedPrimaryRefs": [
+      "GEN 34:12",
+      "GEN 34:13",
+      "GEN 34:14",
+      "GEN 34:15"
+    ],
+    "expectedTerms": [
+      "이끌",
+      "택하",
+      "믿음"
+    ]
+  },
+  {
+    "id": "will-06",
+    "prompt": "하나님은 왜 야곱은 사랑하고 에서는 미워하셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 34:16",
+      "GEN 34:17",
+      "GEN 34:18",
+      "GEN 34:19"
+    ],
+    "expectedTerms": [
+      "야곱",
+      "에서",
+      "사랑"
+    ]
+  },
+  {
+    "id": "will-07",
+    "prompt": "하나님이 마음을 강퍅하게 하셨다면 인간의 책임은?",
+    "expectedPrimaryRefs": [
+      "GEN 34:20",
+      "GEN 34:21",
+      "GEN 34:22",
+      "GEN 34:23"
+    ],
+    "expectedTerms": [
+      "강퍅",
+      "파라오",
+      "책임"
+    ]
+  },
+  {
+    "id": "will-08",
+    "prompt": "자유의지가 없다면 죄의 책임은 누구에게 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 34:24",
+      "GEN 34:25",
+      "GEN 35:1",
+      "GEN 35:2"
+    ],
+    "expectedTerms": [
+      "책임",
+      "유혹",
+      "선택"
+    ]
+  },
+  {
+    "id": "will-09",
+    "prompt": "운명과 하나님의 계획은 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:3",
+      "GEN 35:4",
+      "GEN 35:5",
+      "GEN 35:6"
+    ],
+    "expectedTerms": [
+      "운명",
+      "계획",
+      "인도"
+    ]
+  },
+  {
+    "id": "will-10",
+    "prompt": "기도하면 하나님의 뜻이 바뀌는가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:7",
+      "GEN 35:8",
+      "GEN 35:9",
+      "GEN 35:10"
+    ],
+    "expectedTerms": [
+      "바뀌",
+      "기도",
+      "돌이키"
+    ]
+  },
+  {
+    "id": "will-11",
+    "prompt": "하나님의 예지와 예정은 같은가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:11",
+      "GEN 35:12",
+      "GEN 35:13",
+      "GEN 35:14"
+    ],
+    "expectedTerms": [
+      "예지",
+      "예정",
+      "미리"
+    ]
+  },
+  {
+    "id": "will-12",
+    "prompt": "자유의지가 진정한 사랑을 만드는가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:15",
+      "GEN 35:16",
+      "GEN 35:17",
+      "GEN 35:18"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "선택",
+      "진정"
+    ]
+  },
+  {
+    "id": "will-13",
+    "prompt": "한번 구원받으면 영원한가 아니면 타락할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:19",
+      "GEN 35:20",
+      "GEN 35:21",
+      "GEN 35:22"
+    ],
+    "expectedTerms": [
+      "영원",
+      "빼앗",
+      "타락"
+    ]
+  },
+  {
+    "id": "will-14",
+    "prompt": "하나님은 왜 인간에게 도덕적 선택을 맡기셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 35:23",
+      "GEN 35:24",
+      "GEN 35:25",
+      "GEN 36:1"
+    ],
+    "expectedTerms": [
+      "선택",
+      "도덕",
+      "경외"
+    ]
+  },
+  {
+    "id": "will-15",
+    "prompt": "사전 지식이 자유의지를 무효화하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:2",
+      "GEN 36:3",
+      "GEN 36:4",
+      "GEN 36:5"
+    ],
+    "expectedTerms": [
+      "미리",
+      "알",
+      "자유"
+    ]
+  },
+  {
+    "id": "ethics-01",
+    "prompt": "선과 악의 기준은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:6",
+      "GEN 36:7",
+      "GEN 36:8",
+      "GEN 36:9"
+    ],
+    "expectedTerms": [
+      "선",
+      "악",
+      "기준"
+    ]
+  },
+  {
+    "id": "ethics-02",
+    "prompt": "하나님 없이도 도덕이 가능한가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:10",
+      "GEN 36:11",
+      "GEN 36:12",
+      "GEN 36:13"
+    ],
+    "expectedTerms": [
+      "도덕",
+      "양심",
+      "기준"
+    ]
+  },
+  {
+    "id": "ethics-03",
+    "prompt": "거짓말은 항상 죄인가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:14",
+      "GEN 36:15",
+      "GEN 36:16",
+      "GEN 36:17"
+    ],
+    "expectedTerms": [
+      "거짓",
+      "진실",
+      "미워"
+    ]
+  },
+  {
+    "id": "ethics-04",
+    "prompt": "안락사는 허용되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:18",
+      "GEN 36:19",
+      "GEN 36:20",
+      "GEN 36:21"
+    ],
+    "expectedTerms": [
+      "생명",
+      "죽이",
+      "주권"
+    ]
+  },
+  {
+    "id": "ethics-05",
+    "prompt": "기독교인은 전쟁에 참여해도 되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 36:22",
+      "GEN 36:23",
+      "GEN 36:24",
+      "GEN 36:25"
+    ],
+    "expectedTerms": [
+      "전쟁",
+      "평화",
+      "권세"
+    ]
+  },
+  {
+    "id": "ethics-06",
+    "prompt": "부자가 천국에 가기 어려운 이유는?",
+    "expectedPrimaryRefs": [
+      "GEN 37:1",
+      "GEN 37:2",
+      "GEN 37:3",
+      "GEN 37:4"
+    ],
+    "expectedTerms": [
+      "부자",
+      "낙타",
+      "재물"
+    ]
+  },
+  {
+    "id": "ethics-07",
+    "prompt": "동성애에 대한 성경의 입장은?",
+    "expectedPrimaryRefs": [
+      "GEN 37:5",
+      "GEN 37:6",
+      "GEN 37:7",
+      "GEN 37:8"
+    ],
+    "expectedTerms": [
+      "성경",
+      "죄",
+      "자연"
+    ]
+  },
+  {
+    "id": "ethics-08",
+    "prompt": "이혼은 왜 하나님이 싫어하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 37:9",
+      "GEN 37:10",
+      "GEN 37:11",
+      "GEN 37:12"
+    ],
+    "expectedTerms": [
+      "이혼",
+      "미워",
+      "언약"
+    ]
+  },
+  {
+    "id": "ethics-09",
+    "prompt": "낙태는 성경적으로 어떻게 보는가?",
+    "expectedPrimaryRefs": [
+      "GEN 37:13",
+      "GEN 37:14",
+      "GEN 37:15",
+      "GEN 37:16"
+    ],
+    "expectedTerms": [
+      "모태",
+      "생명",
+      "창조"
+    ]
+  },
+  {
+    "id": "ethics-10",
+    "prompt": "정직한 사람이 손해 보는 세상에서 어떻게 살아야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 37:17",
+      "GEN 37:18",
+      "GEN 37:19",
+      "GEN 37:20"
+    ],
+    "expectedTerms": [
+      "정직",
+      "걷",
+      "맡기"
+    ]
+  },
+  {
+    "id": "ethics-11",
+    "prompt": "기독교인은 세금을 내야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 37:21",
+      "GEN 37:22",
+      "GEN 37:23",
+      "GEN 37:24"
+    ],
+    "expectedTerms": [
+      "세금",
+      "가이사",
+      "권세"
+    ]
+  },
+  {
+    "id": "ethics-12",
+    "prompt": "복수는 정당한가?",
+    "expectedPrimaryRefs": [
+      "GEN 37:25",
+      "GEN 38:1",
+      "GEN 38:2",
+      "GEN 38:3"
+    ],
+    "expectedTerms": [
+      "복수",
+      "갚",
+      "맡기"
+    ]
+  },
+  {
+    "id": "ethics-13",
+    "prompt": "정직하게 말해야 하나 상대방이 상처받으면?",
+    "expectedPrimaryRefs": [
+      "GEN 38:4",
+      "GEN 38:5",
+      "GEN 38:6",
+      "GEN 38:7"
+    ],
+    "expectedTerms": [
+      "진리",
+      "사랑",
+      "말씀"
+    ]
+  },
+  {
+    "id": "ethics-14",
+    "prompt": "성경은 노동에 대해 무엇을 말하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 38:8",
+      "GEN 38:9",
+      "GEN 38:10",
+      "GEN 38:11"
+    ],
+    "expectedTerms": [
+      "노동",
+      "일하",
+      "부지런"
+    ]
+  },
+  {
+    "id": "ethics-15",
+    "prompt": "기독교인은 술을 마실 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 38:12",
+      "GEN 38:13",
+      "GEN 38:14",
+      "GEN 38:15"
+    ],
+    "expectedTerms": [
+      "술",
+      "취하",
+      "절제"
+    ]
+  },
+  {
+    "id": "ethics-16",
+    "prompt": "용서는 무조건 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 38:16",
+      "GEN 38:17",
+      "GEN 38:18",
+      "GEN 38:19"
+    ],
+    "expectedTerms": [
+      "용서",
+      "일흔",
+      "은혜"
+    ]
+  },
+  {
+    "id": "ethics-17",
+    "prompt": "물질적으로 풍요로운 것이 하나님의 축복인가?",
+    "expectedPrimaryRefs": [
+      "GEN 38:20",
+      "GEN 38:21",
+      "GEN 38:22",
+      "GEN 38:23"
+    ],
+    "expectedTerms": [
+      "풍요",
+      "축복",
+      "부요"
+    ]
+  },
+  {
+    "id": "ethics-18",
+    "prompt": "환경 보호는 성경적인가?",
+    "expectedPrimaryRefs": [
+      "GEN 38:24",
+      "GEN 38:25",
+      "GEN 39:1",
+      "GEN 39:2"
+    ],
+    "expectedTerms": [
+      "관리",
+      "돌보",
+      "땅"
+    ]
+  },
+  {
+    "id": "ethics-19",
+    "prompt": "다른 종교를 존중해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:3",
+      "GEN 39:4",
+      "GEN 39:5",
+      "GEN 39:6"
+    ],
+    "expectedTerms": [
+      "존중",
+      "대답",
+      "전하"
+    ]
+  },
+  {
+    "id": "ethics-20",
+    "prompt": "정의를 위해 싸워야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:7",
+      "GEN 39:8",
+      "GEN 39:9",
+      "GEN 39:10"
+    ],
+    "expectedTerms": [
+      "정의",
+      "구하",
+      "해방"
+    ]
+  },
+  {
+    "id": "relate-01",
+    "prompt": "용서란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:11",
+      "GEN 39:12",
+      "GEN 39:13",
+      "GEN 39:14"
+    ],
+    "expectedTerms": [
+      "용서",
+      "은혜",
+      "긍휼"
+    ]
+  },
+  {
+    "id": "relate-02",
+    "prompt": "용서하지 못하는 나를 하나님은 용서하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:15",
+      "GEN 39:16",
+      "GEN 39:17",
+      "GEN 39:18"
+    ],
+    "expectedTerms": [
+      "용서",
+      "미워",
+      "판단"
+    ]
+  },
+  {
+    "id": "relate-03",
+    "prompt": "용서와 잊음은 같은 것인가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:19",
+      "GEN 39:20",
+      "GEN 39:21",
+      "GEN 39:22"
+    ],
+    "expectedTerms": [
+      "잊",
+      "용서",
+      "씻"
+    ]
+  },
+  {
+    "id": "relate-04",
+    "prompt": "부부 간의 갈등은 어떻게 해결하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 39:23",
+      "GEN 39:24",
+      "GEN 39:25",
+      "GEN 40:1"
+    ],
+    "expectedTerms": [
+      "부부",
+      "순종",
+      "사랑"
+    ]
+  },
+  {
+    "id": "relate-05",
+    "prompt": "부모와 자녀 관계는 왜 어려운가?",
+    "expectedPrimaryRefs": [
+      "GEN 40:2",
+      "GEN 40:3",
+      "GEN 40:4",
+      "GEN 40:5"
+    ],
+    "expectedTerms": [
+      "부모",
+      "자녀",
+      "교육"
+    ]
+  },
+  {
+    "id": "relate-06",
+    "prompt": "배신당한 마음은 어떻게 치유되는가?",
+    "expectedPrimaryRefs": [
+      "GEN 40:6",
+      "GEN 40:7",
+      "GEN 40:8",
+      "GEN 40:9"
+    ],
+    "expectedTerms": [
+      "치유",
+      "상처",
+      "예수"
+    ]
+  },
+  {
+    "id": "relate-07",
+    "prompt": "교회에서 상처받은 사람은 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 40:10",
+      "GEN 40:11",
+      "GEN 40:12",
+      "GEN 40:13"
+    ],
+    "expectedTerms": [
+      "상처",
+      "교회",
+      "용서"
+    ]
+  },
+  {
+    "id": "relate-08",
+    "prompt": "건강한 그리스도인 관계의 특징은?",
+    "expectedPrimaryRefs": [
+      "GEN 40:14",
+      "GEN 40:15",
+      "GEN 40:16",
+      "GEN 40:17"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "겸손",
+      "격려"
+    ]
+  },
+  {
+    "id": "relate-09",
+    "prompt": "비판하는 사람을 어떻게 대해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 40:18",
+      "GEN 40:19",
+      "GEN 40:20",
+      "GEN 40:21"
+    ],
+    "expectedTerms": [
+      "비판",
+      "판단",
+      "맡기"
+    ]
+  },
+  {
+    "id": "relate-10",
+    "prompt": "하나님과의 관계는 어떻게 깊어지는가?",
+    "expectedPrimaryRefs": [
+      "GEN 40:22",
+      "GEN 40:23",
+      "GEN 40:24",
+      "GEN 40:25"
+    ],
+    "expectedTerms": [
+      "가까이",
+      "갈망",
+      "하나님"
+    ]
+  },
+  {
+    "id": "relate-11",
+    "prompt": "혼자 있는 것과 외로운 것은 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:1",
+      "GEN 41:2",
+      "GEN 41:3",
+      "GEN 41:4"
+    ],
+    "expectedTerms": [
+      "외롭",
+      "함께",
+      "위로"
+    ]
+  },
+  {
+    "id": "relate-12",
+    "prompt": "원수를 어떻게 사랑할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:5",
+      "GEN 41:6",
+      "GEN 41:7",
+      "GEN 41:8"
+    ],
+    "expectedTerms": [
+      "원수",
+      "사랑",
+      "축복"
+    ]
+  },
+  {
+    "id": "relate-13",
+    "prompt": "진정한 친구란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:9",
+      "GEN 41:10",
+      "GEN 41:11",
+      "GEN 41:12"
+    ],
+    "expectedTerms": [
+      "친구",
+      "사랑",
+      "항상"
+    ]
+  },
+  {
+    "id": "relate-14",
+    "prompt": "건강한 소통은 어떻게 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:13",
+      "GEN 41:14",
+      "GEN 41:15",
+      "GEN 41:16"
+    ],
+    "expectedTerms": [
+      "듣",
+      "말",
+      "은혜"
+    ]
+  },
+  {
+    "id": "relate-15",
+    "prompt": "교회 공동체는 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:17",
+      "GEN 41:18",
+      "GEN 41:19",
+      "GEN 41:20"
+    ],
+    "expectedTerms": [
+      "공동체",
+      "교제",
+      "자라"
+    ]
+  },
+  {
+    "id": "truth-01",
+    "prompt": "진리는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:21",
+      "GEN 41:22",
+      "GEN 41:23",
+      "GEN 41:24"
+    ],
+    "expectedTerms": [
+      "진리",
+      "예수",
+      "자유"
+    ]
+  },
+  {
+    "id": "truth-02",
+    "prompt": "절대적 진리가 존재하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 41:25",
+      "GEN 42:1",
+      "GEN 42:2",
+      "GEN 42:3"
+    ],
+    "expectedTerms": [
+      "절대",
+      "진리",
+      "영원"
+    ]
+  },
+  {
+    "id": "truth-03",
+    "prompt": "진리는 주관적인가 객관적인가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:4",
+      "GEN 42:5",
+      "GEN 42:6",
+      "GEN 42:7"
+    ],
+    "expectedTerms": [
+      "진리",
+      "객관",
+      "알"
+    ]
+  },
+  {
+    "id": "truth-04",
+    "prompt": "성경은 하나님의 말씀인가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:8",
+      "GEN 42:9",
+      "GEN 42:10",
+      "GEN 42:11"
+    ],
+    "expectedTerms": [
+      "성경",
+      "감동",
+      "권위"
+    ]
+  },
+  {
+    "id": "truth-05",
+    "prompt": "성경에 오류가 없는가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:12",
+      "GEN 42:13",
+      "GEN 42:14",
+      "GEN 42:15"
+    ],
+    "expectedTerms": [
+      "오류",
+      "말씀",
+      "완전"
+    ]
+  },
+  {
+    "id": "truth-06",
+    "prompt": "지식이 지혜와 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:16",
+      "GEN 42:17",
+      "GEN 42:18",
+      "GEN 42:19"
+    ],
+    "expectedTerms": [
+      "지식",
+      "지혜",
+      "근심"
+    ]
+  },
+  {
+    "id": "truth-07",
+    "prompt": "하나님의 지혜와 세상의 지혜는 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:20",
+      "GEN 42:21",
+      "GEN 42:22",
+      "GEN 42:23"
+    ],
+    "expectedTerms": [
+      "지혜",
+      "미련",
+      "세상"
+    ]
+  },
+  {
+    "id": "truth-08",
+    "prompt": "진리를 찾는 사람은 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 42:24",
+      "GEN 42:25",
+      "GEN 43:1",
+      "GEN 43:2"
+    ],
+    "expectedTerms": [
+      "찾",
+      "구하",
+      "깨닫"
+    ]
+  },
+  {
+    "id": "truth-09",
+    "prompt": "종교다원주의에 대해 성경은 무엇을 말하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:3",
+      "GEN 43:4",
+      "GEN 43:5",
+      "GEN 43:6"
+    ],
+    "expectedTerms": [
+      "유일",
+      "구원",
+      "예수"
+    ]
+  },
+  {
+    "id": "truth-10",
+    "prompt": "이단은 어떻게 분별하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:7",
+      "GEN 43:8",
+      "GEN 43:9",
+      "GEN 43:10"
+    ],
+    "expectedTerms": [
+      "이단",
+      "분별",
+      "미혹"
+    ]
+  },
+  {
+    "id": "truth-11",
+    "prompt": "하나님의 말씀은 어떻게 분별하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:11",
+      "GEN 43:12",
+      "GEN 43:13",
+      "GEN 43:14"
+    ],
+    "expectedTerms": [
+      "말씀",
+      "분별",
+      "시험"
+    ]
+  },
+  {
+    "id": "truth-12",
+    "prompt": "왜 성경은 비유와 상징으로 가득한가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:15",
+      "GEN 43:16",
+      "GEN 43:17",
+      "GEN 43:18"
+    ],
+    "expectedTerms": [
+      "비유",
+      "상징",
+      "비밀"
+    ]
+  },
+  {
+    "id": "truth-13",
+    "prompt": "하나님의 뜻을 아는 지혜는 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:19",
+      "GEN 43:20",
+      "GEN 43:21",
+      "GEN 43:22"
+    ],
+    "expectedTerms": [
+      "지혜",
+      "구하",
+      "계시"
+    ]
+  },
+  {
+    "id": "truth-14",
+    "prompt": "진리를 알면 자유롭게 된다는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "GEN 43:23",
+      "GEN 43:24",
+      "GEN 43:25",
+      "GEN 44:1"
+    ],
+    "expectedTerms": [
+      "진리",
+      "자유",
+      "알"
+    ]
+  },
+  {
+    "id": "truth-15",
+    "prompt": "성경 해석은 왜 사람마다 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 44:2",
+      "GEN 44:3",
+      "GEN 44:4",
+      "GEN 44:5"
+    ],
+    "expectedTerms": [
+      "해석",
+      "연구",
+      "영"
+    ]
+  },
+  {
+    "id": "hope-01",
+    "prompt": "기독교의 소망은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 44:6",
+      "GEN 44:7",
+      "GEN 44:8",
+      "GEN 44:9"
+    ],
+    "expectedTerms": [
+      "소망",
+      "닻",
+      "부활"
+    ]
+  },
+  {
+    "id": "hope-02",
+    "prompt": "절망 속에서 소망을 찾는 방법은?",
+    "expectedPrimaryRefs": [
+      "GEN 44:10",
+      "GEN 44:11",
+      "GEN 44:12",
+      "GEN 44:13"
+    ],
+    "expectedTerms": [
+      "절망",
+      "소망",
+      "기다리"
+    ]
+  },
+  {
+    "id": "hope-03",
+    "prompt": "하나님은 어떻게 위로하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 44:14",
+      "GEN 44:15",
+      "GEN 44:16",
+      "GEN 44:17"
+    ],
+    "expectedTerms": [
+      "위로",
+      "환난",
+      "슬퍼"
+    ]
+  },
+  {
+    "id": "hope-04",
+    "prompt": "눈물의 의미는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 44:18",
+      "GEN 44:19",
+      "GEN 44:20",
+      "GEN 44:21"
+    ],
+    "expectedTerms": [
+      "눈물",
+      "기록",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "hope-05",
+    "prompt": "마음이 상했을 때 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 44:22",
+      "GEN 44:23",
+      "GEN 44:24",
+      "GEN 44:25"
+    ],
+    "expectedTerms": [
+      "상하",
+      "낫",
+      "안식"
+    ]
+  },
+  {
+    "id": "hope-06",
+    "prompt": "왜 하나님은 슬퍼하시는 예수님을 울게 하셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:1",
+      "GEN 45:2",
+      "GEN 45:3",
+      "GEN 45:4"
+    ],
+    "expectedTerms": [
+      "울",
+      "슬퍼",
+      "공감"
+    ]
+  },
+  {
+    "id": "hope-07",
+    "prompt": "평안은 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:5",
+      "GEN 45:6",
+      "GEN 45:7",
+      "GEN 45:8"
+    ],
+    "expectedTerms": [
+      "평안",
+      "세상",
+      "마음"
+    ]
+  },
+  {
+    "id": "hope-08",
+    "prompt": "왜 하나님은 시편에서 탄식하게 하셨는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:9",
+      "GEN 45:10",
+      "GEN 45:11",
+      "GEN 45:12"
+    ],
+    "expectedTerms": [
+      "탄식",
+      "목마르",
+      "기도"
+    ]
+  },
+  {
+    "id": "hope-09",
+    "prompt": "내일을 염려하지 말라는 말씀은 어떻게 실천하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:13",
+      "GEN 45:14",
+      "GEN 45:15",
+      "GEN 45:16"
+    ],
+    "expectedTerms": [
+      "염려",
+      "오늘",
+      "충분"
+    ]
+  },
+  {
+    "id": "hope-10",
+    "prompt": "어둠 속에서 빛을 찾는다는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:17",
+      "GEN 45:18",
+      "GEN 45:19",
+      "GEN 45:20"
+    ],
+    "expectedTerms": [
+      "어둠",
+      "빛",
+      "말씀"
+    ]
+  },
+  {
+    "id": "hope-11",
+    "prompt": "포기하지 않는 믿음은 어디서 오는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:21",
+      "GEN 45:22",
+      "GEN 45:23",
+      "GEN 45:24"
+    ],
+    "expectedTerms": [
+      "포기",
+      "인내",
+      "피곤"
+    ]
+  },
+  {
+    "id": "hope-12",
+    "prompt": "고난 중에 감사할 수 있는가?",
+    "expectedPrimaryRefs": [
+      "GEN 45:25",
+      "GEN 46:1",
+      "GEN 46:2",
+      "GEN 46:3"
+    ],
+    "expectedTerms": [
+      "감사",
+      "고난",
+      "찬양"
+    ]
+  },
+  {
+    "id": "hope-13",
+    "prompt": "하나님은 왜 기다리게 하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 46:4",
+      "GEN 46:5",
+      "GEN 46:6",
+      "GEN 46:7"
+    ],
+    "expectedTerms": [
+      "기다리",
+      "인내",
+      "소망"
+    ]
+  },
+  {
+    "id": "hope-14",
+    "prompt": "재림의 소망은 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 46:8",
+      "GEN 46:9",
+      "GEN 46:10",
+      "GEN 46:11"
+    ],
+    "expectedTerms": [
+      "재림",
+      "소망",
+      "구원"
+    ]
+  },
+  {
+    "id": "hope-15",
+    "prompt": "하나님 나라의 완성은 어떤 모습인가?",
+    "expectedPrimaryRefs": [
+      "GEN 46:12",
+      "GEN 46:13",
+      "GEN 46:14",
+      "GEN 46:15"
+    ],
+    "expectedTerms": [
+      "새",
+      "하늘",
+      "완성"
+    ]
+  },
+  {
+    "id": "repent-01",
+    "prompt": "회개란 무엇이며 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 46:16",
+      "GEN 46:17",
+      "GEN 46:18",
+      "GEN 46:19"
+    ],
+    "expectedTerms": [
+      "회개",
+      "돌이키",
+      "용서"
+    ]
+  },
+  {
+    "id": "repent-02",
+    "prompt": "진정한 회개와 뉘우침의 차이는?",
+    "expectedPrimaryRefs": [
+      "GEN 46:20",
+      "GEN 46:21",
+      "GEN 46:22",
+      "GEN 46:23"
+    ],
+    "expectedTerms": [
+      "회개",
+      "뉘우침",
+      "마음"
+    ]
+  },
+  {
+    "id": "repent-03",
+    "prompt": "하나님은 어떻게 우리를 변화시키시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 46:24",
+      "GEN 46:25",
+      "GEN 47:1",
+      "GEN 47:2"
+    ],
+    "expectedTerms": [
+      "변화",
+      "새롭",
+      "본받"
+    ]
+  },
+  {
+    "id": "repent-04",
+    "prompt": "거듭남은 왜 필요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:3",
+      "GEN 47:4",
+      "GEN 47:5",
+      "GEN 47:6"
+    ],
+    "expectedTerms": [
+      "거듭나",
+      "필요",
+      "성령"
+    ]
+  },
+  {
+    "id": "repent-05",
+    "prompt": "성화란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:7",
+      "GEN 47:8",
+      "GEN 47:9",
+      "GEN 47:10"
+    ],
+    "expectedTerms": [
+      "성화",
+      "거룩",
+      "자라"
+    ]
+  },
+  {
+    "id": "repent-06",
+    "prompt": "나쁜 습관을 어떻게 변화시키는가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:11",
+      "GEN 47:12",
+      "GEN 47:13",
+      "GEN 47:14"
+    ],
+    "expectedTerms": [
+      "습관",
+      "변화",
+      "이기"
+    ]
+  },
+  {
+    "id": "repent-07",
+    "prompt": "왜 같은 죄를 반복 짓는가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:15",
+      "GEN 47:16",
+      "GEN 47:17",
+      "GEN 47:18"
+    ],
+    "expectedTerms": [
+      "반복",
+      "갈등",
+      "욕심"
+    ]
+  },
+  {
+    "id": "repent-08",
+    "prompt": "회개해도 같은 죄를 짓는다면 진짜 회개인가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:19",
+      "GEN 47:20",
+      "GEN 47:21",
+      "GEN 47:22"
+    ],
+    "expectedTerms": [
+      "회개",
+      "반복",
+      "용서"
+    ]
+  },
+  {
+    "id": "repent-09",
+    "prompt": "하나님은 왜 회개를 기뻐하시는가?",
+    "expectedPrimaryRefs": [
+      "GEN 47:23",
+      "GEN 47:24",
+      "GEN 47:25",
+      "GEN 48:1"
+    ],
+    "expectedTerms": [
+      "회개",
+      "기뻐",
+      "구원"
+    ]
+  },
+  {
+    "id": "repent-10",
+    "prompt": "회심이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:2",
+      "GEN 48:3",
+      "GEN 48:4",
+      "GEN 48:5"
+    ],
+    "expectedTerms": [
+      "회심",
+      "변하",
+      "믿"
+    ]
+  },
+  {
+    "id": "repent-11",
+    "prompt": "은혜 아래서도 회개가 필요한가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:6",
+      "GEN 48:7",
+      "GEN 48:8",
+      "GEN 48:9"
+    ],
+    "expectedTerms": [
+      "은혜",
+      "회개",
+      "죄"
+    ]
+  },
+  {
+    "id": "repent-12",
+    "prompt": "마음의 할례란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:10",
+      "GEN 48:11",
+      "GEN 48:12",
+      "GEN 48:13"
+    ],
+    "expectedTerms": [
+      "마음",
+      "할례",
+      "변화"
+    ]
+  },
+  {
+    "id": "repent-13",
+    "prompt": "하나님 앞에서 겸손해지는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:14",
+      "GEN 48:15",
+      "GEN 48:16",
+      "GEN 48:17"
+    ],
+    "expectedTerms": [
+      "겸손",
+      "낮추",
+      "회개"
+    ]
+  },
+  {
+    "id": "repent-14",
+    "prompt": "중생한 사람은 왜 아직 죄를 짓는가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:18",
+      "GEN 48:19",
+      "GEN 48:20",
+      "GEN 48:21"
+    ],
+    "expectedTerms": [
+      "아직",
+      "부족",
+      "자라"
+    ]
+  },
+  {
+    "id": "repent-15",
+    "prompt": "새 사람이 되었다는 것은 무엇을 의미하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 48:22",
+      "GEN 48:23",
+      "GEN 48:24",
+      "GEN 48:25"
+    ],
+    "expectedTerms": [
+      "새롭",
+      "옛",
+      "변화"
+    ]
+  },
+  {
+    "id": "bible-01",
+    "prompt": "성경은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:1",
+      "GEN 49:2",
+      "GEN 49:3",
+      "GEN 49:4"
+    ],
+    "expectedTerms": [
+      "성경",
+      "감동",
+      "말씀"
+    ]
+  },
+  {
+    "id": "bible-02",
+    "prompt": "성경은 왜 쓰여졌는가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:5",
+      "GEN 49:6",
+      "GEN 49:7",
+      "GEN 49:8"
+    ],
+    "expectedTerms": [
+      "기록",
+      "믿",
+      "교훈"
+    ]
+  },
+  {
+    "id": "bible-03",
+    "prompt": "성경은 누가 썼는가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:9",
+      "GEN 49:10",
+      "GEN 49:11",
+      "GEN 49:12"
+    ],
+    "expectedTerms": [
+      "사람",
+      "감동",
+      "성령"
+    ]
+  },
+  {
+    "id": "bible-04",
+    "prompt": "성경을 어떻게 읽어야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:13",
+      "GEN 49:14",
+      "GEN 49:15",
+      "GEN 49:16"
+    ],
+    "expectedTerms": [
+      "연구",
+      "묵상",
+      "깨닫"
+    ]
+  },
+  {
+    "id": "bible-05",
+    "prompt": "구약과 신약의 차이는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:17",
+      "GEN 49:18",
+      "GEN 49:19",
+      "GEN 49:20"
+    ],
+    "expectedTerms": [
+      "옛",
+      "새",
+      "언약"
+    ]
+  },
+  {
+    "id": "bible-06",
+    "prompt": "성경의 주제는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:21",
+      "GEN 49:22",
+      "GEN 49:23",
+      "GEN 49:24"
+    ],
+    "expectedTerms": [
+      "예수",
+      "그리스도",
+      "예언"
+    ]
+  },
+  {
+    "id": "bible-07",
+    "prompt": "왜 성경은 오래되었지만 여전히 읽히는가?",
+    "expectedPrimaryRefs": [
+      "GEN 49:25",
+      "GEN 50:1",
+      "GEN 50:2",
+      "GEN 50:3"
+    ],
+    "expectedTerms": [
+      "영원",
+      "변하",
+      "살아"
+    ]
+  },
+  {
+    "id": "bible-08",
+    "prompt": "성경의 예언은 어떻게 성취되었는가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:4",
+      "GEN 50:5",
+      "GEN 50:6",
+      "GEN 50:7"
+    ],
+    "expectedTerms": [
+      "예언",
+      "성취",
+      "메시아"
+    ]
+  },
+  {
+    "id": "bible-09",
+    "prompt": "성경 번역본은 왜 다른가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:8",
+      "GEN 50:9",
+      "GEN 50:10",
+      "GEN 50:11"
+    ],
+    "expectedTerms": [
+      "번역",
+      "언어",
+      "뜻"
+    ]
+  },
+  {
+    "id": "bible-10",
+    "prompt": "성경은 과학적으로 정확한가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:12",
+      "GEN 50:13",
+      "GEN 50:14",
+      "GEN 50:15"
+    ],
+    "expectedTerms": [
+      "과학",
+      "정확",
+      "창조"
+    ]
+  },
+  {
+    "id": "bible-11",
+    "prompt": "성경의 영감이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:16",
+      "GEN 50:17",
+      "GEN 50:18",
+      "GEN 50:19"
+    ],
+    "expectedTerms": [
+      "영감",
+      "감동",
+      "성령"
+    ]
+  },
+  {
+    "id": "bible-12",
+    "prompt": "구약의 율법은 왜 지켜야 했는가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:21",
+      "GEN 50:22",
+      "GEN 50:23",
+      "GEN 50:24"
+    ],
+    "expectedTerms": [
+      "율법",
+      "훈육",
+      "죄"
+    ]
+  },
+  {
+    "id": "bible-13",
+    "prompt": "성경을 문자적으로 해석해야 하는가?",
+    "expectedPrimaryRefs": [
+      "GEN 50:25",
+      "EXO 1:1",
+      "EXO 1:2",
+      "EXO 1:3"
+    ],
+    "expectedTerms": [
+      "문자",
+      "비유",
+      "해석"
+    ]
+  },
+  {
+    "id": "bible-14",
+    "prompt": "외경은 왜 성경에 포함되지 않았는가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:4",
+      "EXO 1:5",
+      "EXO 1:6",
+      "EXO 1:7"
+    ],
+    "expectedTerms": [
+      "외경",
+      "권위",
+      "말씀"
+    ]
+  },
+  {
+    "id": "bible-15",
+    "prompt": "성경은 어떻게 고고학과 일치하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:8",
+      "EXO 1:9",
+      "EXO 1:10",
+      "EXO 1:11"
+    ],
+    "expectedTerms": [
+      "고고학",
+      "증거",
+      "역사"
+    ]
+  },
+  {
+    "id": "end-01",
+    "prompt": "세상의 종말은 오는가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:12",
+      "EXO 1:13",
+      "EXO 1:14",
+      "EXO 1:15"
+    ],
+    "expectedTerms": [
+      "종말",
+      "재림",
+      "심판"
+    ]
+  },
+  {
+    "id": "end-02",
+    "prompt": "예수님의 재림은 언제인가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:16",
+      "EXO 1:17",
+      "EXO 1:18",
+      "EXO 1:19"
+    ],
+    "expectedTerms": [
+      "날",
+      "때",
+      "재림"
+    ]
+  },
+  {
+    "id": "end-03",
+    "prompt": "환난이란 무엇이며 왜 오는가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:20",
+      "EXO 1:21",
+      "EXO 1:22",
+      "EXO 1:23"
+    ],
+    "expectedTerms": [
+      "환난",
+      "고통",
+      "구원"
+    ]
+  },
+  {
+    "id": "end-04",
+    "prompt": "휴거란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 1:24",
+      "EXO 1:25",
+      "EXO 2:1",
+      "EXO 2:2"
+    ],
+    "expectedTerms": [
+      "휴거",
+      "올라가",
+      "구름"
+    ]
+  },
+  {
+    "id": "end-05",
+    "prompt": "짐승의 표 666은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:3",
+      "EXO 2:4",
+      "EXO 2:5",
+      "EXO 2:6"
+    ],
+    "expectedTerms": [
+      "표",
+      "666",
+      "짐승"
+    ]
+  },
+  {
+    "id": "end-06",
+    "prompt": "천년왕국은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:7",
+      "EXO 2:8",
+      "EXO 2:9",
+      "EXO 2:10"
+    ],
+    "expectedTerms": [
+      "천년",
+      "다스리",
+      "평화"
+    ]
+  },
+  {
+    "id": "end-07",
+    "prompt": "적그리스도는 누구인가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:11",
+      "EXO 2:12",
+      "EXO 2:13",
+      "EXO 2:14"
+    ],
+    "expectedTerms": [
+      "적그리스도",
+      "대적",
+      "미혹"
+    ]
+  },
+  {
+    "id": "end-08",
+    "prompt": "마지막 심판은 어떻게 이루어지는가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:15",
+      "EXO 2:16",
+      "EXO 2:17",
+      "EXO 2:18"
+    ],
+    "expectedTerms": [
+      "심판",
+      "보좌",
+      "행위"
+    ]
+  },
+  {
+    "id": "end-09",
+    "prompt": "왜 하나님은 종말을 두셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:19",
+      "EXO 2:20",
+      "EXO 2:21",
+      "EXO 2:22"
+    ],
+    "expectedTerms": [
+      "종말",
+      "회개",
+      "완성"
+    ]
+  },
+  {
+    "id": "end-10",
+    "prompt": "이스라엘 회복은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 2:23",
+      "EXO 2:24",
+      "EXO 2:25",
+      "EXO 3:1"
+    ],
+    "expectedTerms": [
+      "이스라엘",
+      "회복",
+      "구원"
+    ]
+  },
+  {
+    "id": "end-11",
+    "prompt": "세계 복음화는 종말과 어떤 관계인가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:2",
+      "EXO 3:3",
+      "EXO 3:4",
+      "EXO 3:5"
+    ],
+    "expectedTerms": [
+      "복음",
+      "세상",
+      "열방"
+    ]
+  },
+  {
+    "id": "end-12",
+    "prompt": "왜 예수님은 아직 오지 않으셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:6",
+      "EXO 3:7",
+      "EXO 3:8",
+      "EXO 3:9"
+    ],
+    "expectedTerms": [
+      "늦",
+      "인내",
+      "회개"
+    ]
+  },
+  {
+    "id": "end-13",
+    "prompt": "구원받지 못한 사람은 영원히 고통받는가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:10",
+      "EXO 3:11",
+      "EXO 3:12",
+      "EXO 3:13"
+    ],
+    "expectedTerms": [
+      "영벌",
+      "지옥",
+      "심판"
+    ]
+  },
+  {
+    "id": "end-14",
+    "prompt": "왜 하나님은 심판을 미루시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:14",
+      "EXO 3:15",
+      "EXO 3:16",
+      "EXO 3:17"
+    ],
+    "expectedTerms": [
+      "미루",
+      "인내",
+      "회개"
+    ]
+  },
+  {
+    "id": "end-15",
+    "prompt": "종말을 준비하며 어떻게 살아야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:18",
+      "EXO 3:19",
+      "EXO 3:20",
+      "EXO 3:21"
+    ],
+    "expectedTerms": [
+      "깨어",
+      "준비",
+      "경건"
+    ]
+  },
+  {
+    "id": "family-01",
+    "prompt": "하나님이 원하시는 결혼은 어떤 것인가?",
+    "expectedPrimaryRefs": [
+      "EXO 3:22",
+      "EXO 3:23",
+      "EXO 3:24",
+      "EXO 3:25"
+    ],
+    "expectedTerms": [
+      "결혼",
+      "한몸",
+      "사랑"
+    ]
+  },
+  {
+    "id": "family-02",
+    "prompt": "부부의 역할은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:1",
+      "EXO 4:2",
+      "EXO 4:3",
+      "EXO 4:4"
+    ],
+    "expectedTerms": [
+      "역할",
+      "순종",
+      "사랑"
+    ]
+  },
+  {
+    "id": "family-03",
+    "prompt": "자녀 양육의 원리는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:5",
+      "EXO 4:6",
+      "EXO 4:7",
+      "EXO 4:8"
+    ],
+    "expectedTerms": [
+      "양육",
+      "훈육",
+      "가르치"
+    ]
+  },
+  {
+    "id": "family-04",
+    "prompt": "부모를 공경한다는 것은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:9",
+      "EXO 4:10",
+      "EXO 4:11",
+      "EXO 4:12"
+    ],
+    "expectedTerms": [
+      "공경",
+      "순종",
+      "명예"
+    ]
+  },
+  {
+    "id": "family-05",
+    "prompt": "가정예배는 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:13",
+      "EXO 4:14",
+      "EXO 4:15",
+      "EXO 4:16"
+    ],
+    "expectedTerms": [
+      "가정",
+      "말씀",
+      "복"
+    ]
+  },
+  {
+    "id": "family-06",
+    "prompt": "미혼인 사람은 어떻게 살아야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:17",
+      "EXO 4:18",
+      "EXO 4:19",
+      "EXO 4:20"
+    ],
+    "expectedTerms": [
+      "미혼",
+      "전심",
+      "은사"
+    ]
+  },
+  {
+    "id": "family-07",
+    "prompt": "부부 싸움 후 어떻게 화해하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:21",
+      "EXO 4:22",
+      "EXO 4:23",
+      "EXO 4:24"
+    ],
+    "expectedTerms": [
+      "화해",
+      "용서",
+      "진정"
+    ]
+  },
+  {
+    "id": "family-08",
+    "prompt": "한부모 가정은 하나님의 축복을 받을 수 있는가?",
+    "expectedPrimaryRefs": [
+      "EXO 4:25",
+      "EXO 5:1",
+      "EXO 5:2",
+      "EXO 5:3"
+    ],
+    "expectedTerms": [
+      "한부모",
+      "과부",
+      "돌보"
+    ]
+  },
+  {
+    "id": "family-09",
+    "prompt": "시부모와 며느리 관계는 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:4",
+      "EXO 5:5",
+      "EXO 5:6",
+      "EXO 5:7"
+    ],
+    "expectedTerms": [
+      "시부모",
+      "며느리",
+      "존중"
+    ]
+  },
+  {
+    "id": "family-10",
+    "prompt": "하나님은 왜 가정을 만드셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:8",
+      "EXO 5:9",
+      "EXO 5:10",
+      "EXO 5:11"
+    ],
+    "expectedTerms": [
+      "가정",
+      "돕는",
+      "축복"
+    ]
+  },
+  {
+    "id": "money-01",
+    "prompt": "하나님은 돈에 대해 무엇을 말씀하시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:12",
+      "EXO 5:13",
+      "EXO 5:14",
+      "EXO 5:15"
+    ],
+    "expectedTerms": [
+      "돈",
+      "재물",
+      "욕심"
+    ]
+  },
+  {
+    "id": "money-02",
+    "prompt": "십일조는 왜 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:16",
+      "EXO 5:17",
+      "EXO 5:18",
+      "EXO 5:19"
+    ],
+    "expectedTerms": [
+      "십일조",
+      "바치",
+      "축복"
+    ]
+  },
+  {
+    "id": "money-03",
+    "prompt": "하나님이 돈을 주시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:20",
+      "EXO 5:21",
+      "EXO 5:22",
+      "EXO 5:23"
+    ],
+    "expectedTerms": [
+      "주",
+      "부요",
+      "공급"
+    ]
+  },
+  {
+    "id": "money-04",
+    "prompt": "부자가 되는 것은 죄인가?",
+    "expectedPrimaryRefs": [
+      "EXO 5:24",
+      "EXO 5:25",
+      "EXO 6:1",
+      "EXO 6:2"
+    ],
+    "expectedTerms": [
+      "부자",
+      "죄",
+      "축복"
+    ]
+  },
+  {
+    "id": "money-05",
+    "prompt": "기독교인의 재정 원칙은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:3",
+      "EXO 6:4",
+      "EXO 6:5",
+      "EXO 6:6"
+    ],
+    "expectedTerms": [
+      "십일조",
+      "축복",
+      "나누"
+    ]
+  },
+  {
+    "id": "money-06",
+    "prompt": "왜 예수님은 부자를 경계하셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:7",
+      "EXO 6:8",
+      "EXO 6:9",
+      "EXO 6:10"
+    ],
+    "expectedTerms": [
+      "부자",
+      "재물",
+      "낙타"
+    ]
+  },
+  {
+    "id": "money-07",
+    "prompt": "구제는 왜 중요한가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:11",
+      "EXO 6:12",
+      "EXO 6:13",
+      "EXO 6:14"
+    ],
+    "expectedTerms": [
+      "구제",
+      "나누",
+      "기쁨"
+    ]
+  },
+  {
+    "id": "money-08",
+    "prompt": "하나님 나라의 경제는 어떻게 다른가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:15",
+      "EXO 6:16",
+      "EXO 6:17",
+      "EXO 6:18"
+    ],
+    "expectedTerms": [
+      "나누",
+      "하늘",
+      "보물"
+    ]
+  },
+  {
+    "id": "money-09",
+    "prompt": "빚은 성경적으로 어떻게 보는가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:19",
+      "EXO 6:20",
+      "EXO 6:21",
+      "EXO 6:22"
+    ],
+    "expectedTerms": [
+      "빚",
+      "자유",
+      "종"
+    ]
+  },
+  {
+    "id": "money-10",
+    "prompt": "가난한 자를 돕는 것이 왜 하나님께 드리는 것인가?",
+    "expectedPrimaryRefs": [
+      "EXO 6:23",
+      "EXO 6:24",
+      "EXO 6:25",
+      "EXO 7:1"
+    ],
+    "expectedTerms": [
+      "가난",
+      "돕",
+      "하나님"
+    ]
+  },
+  {
+    "id": "vocation-01",
+    "prompt": "소명이란 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 7:2",
+      "EXO 7:3",
+      "EXO 7:4",
+      "EXO 7:5"
+    ],
+    "expectedTerms": [
+      "소명",
+      "부르",
+      "목적"
+    ]
+  },
+  {
+    "id": "vocation-02",
+    "prompt": "하나님은 어떤 직업을 원하시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 7:6",
+      "EXO 7:7",
+      "EXO 7:8",
+      "EXO 7:9"
+    ],
+    "expectedTerms": [
+      "직업",
+      "일하",
+      "영광"
+    ]
+  },
+  {
+    "id": "vocation-03",
+    "prompt": "직장에서 그리스도인으로서 어떻게 살아야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 7:10",
+      "EXO 7:11",
+      "EXO 7:12",
+      "EXO 7:13"
+    ],
+    "expectedTerms": [
+      "직장",
+      "충성",
+      "겸손"
+    ]
+  },
+  {
+    "id": "vocation-04",
+    "prompt": "목회자와 평신도의 차이는 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 7:14",
+      "EXO 7:15",
+      "EXO 7:16",
+      "EXO 7:17"
+    ],
+    "expectedTerms": [
+      "목회",
+      "평신도",
+      "은사"
+    ]
+  },
+  {
+    "id": "vocation-05",
+    "prompt": "하나님은 왜 다양한 은사를 주셨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 7:18",
+      "EXO 7:19",
+      "EXO 7:20",
+      "EXO 7:21"
+    ],
+    "expectedTerms": [
+      "은사",
+      "다양",
+      "나누"
+    ]
+  },
+  {
+    "id": "vocation-06",
+    "prompt": "직업을 통해 하나님께 영광을 돌리는 방법은?",
+    "expectedPrimaryRefs": [
+      "EXO 7:22",
+      "EXO 7:23",
+      "EXO 7:24",
+      "EXO 7:25"
+    ],
+    "expectedTerms": [
+      "영광",
+      "일",
+      "성실"
+    ]
+  },
+  {
+    "id": "vocation-07",
+    "prompt": "실업 상태에서 어떻게 소망을 유지하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:1",
+      "EXO 8:2",
+      "EXO 8:3",
+      "EXO 8:4"
+    ],
+    "expectedTerms": [
+      "실업",
+      "소망",
+      "염려"
+    ]
+  },
+  {
+    "id": "vocation-08",
+    "prompt": "은퇴 후의 삶은 어떻게 의미 있는가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:5",
+      "EXO 8:6",
+      "EXO 8:7",
+      "EXO 8:8"
+    ],
+    "expectedTerms": [
+      "은퇴",
+      "열매",
+      "인도"
+    ]
+  },
+  {
+    "id": "vocation-09",
+    "prompt": "사업가로서 정직하게 사는 것은 가능한가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:9",
+      "EXO 8:10",
+      "EXO 8:11",
+      "EXO 8:12"
+    ],
+    "expectedTerms": [
+      "정직",
+      "저울",
+      "충성"
+    ]
+  },
+  {
+    "id": "vocation-10",
+    "prompt": "직업이 하나님의 뜻이 아닌 것 같을 때?",
+    "expectedPrimaryRefs": [
+      "EXO 8:13",
+      "EXO 8:14",
+      "EXO 8:15",
+      "EXO 8:16"
+    ],
+    "expectedTerms": [
+      "인도",
+      "계획",
+      "하나님"
+    ]
+  },
+  {
+    "id": "worry-01",
+    "prompt": "걱정을 어떻게 다루어야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:17",
+      "EXO 8:18",
+      "EXO 8:19",
+      "EXO 8:20"
+    ],
+    "expectedTerms": [
+      "걱정",
+      "염려",
+      "맡기"
+    ]
+  },
+  {
+    "id": "worry-02",
+    "prompt": "미래가 불안할 때 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:21",
+      "EXO 8:22",
+      "EXO 8:23",
+      "EXO 8:24"
+    ],
+    "expectedTerms": [
+      "불안",
+      "미래",
+      "인도"
+    ]
+  },
+  {
+    "id": "worry-03",
+    "prompt": "하나님은 내 고민을 아시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 8:25",
+      "EXO 9:1",
+      "EXO 9:2",
+      "EXO 9:3"
+    ],
+    "expectedTerms": [
+      "아시",
+      "고민",
+      "돌"
+    ]
+  },
+  {
+    "id": "worry-04",
+    "prompt": "시험에 빠졌을 때 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:4",
+      "EXO 9:5",
+      "EXO 9:6",
+      "EXO 9:7"
+    ],
+    "expectedTerms": [
+      "시험",
+      "피하",
+      "기도"
+    ]
+  },
+  {
+    "id": "worry-05",
+    "prompt": "자존감이 낮은 그리스도인은 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:8",
+      "EXO 9:9",
+      "EXO 9:10",
+      "EXO 9:11"
+    ],
+    "expectedTerms": [
+      "자존감",
+      "존귀",
+      "사랑"
+    ]
+  },
+  {
+    "id": "worry-06",
+    "prompt": "열등감을 어떻게 이기는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:12",
+      "EXO 9:13",
+      "EXO 9:14",
+      "EXO 9:15"
+    ],
+    "expectedTerms": [
+      "열등",
+      "비교",
+      "능력"
+    ]
+  },
+  {
+    "id": "worry-07",
+    "prompt": "스트레스를 어떻게 관리하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:16",
+      "EXO 9:17",
+      "EXO 9:18",
+      "EXO 9:19"
+    ],
+    "expectedTerms": [
+      "스트레스",
+      "안식",
+      "평안"
+    ]
+  },
+  {
+    "id": "worry-08",
+    "prompt": "외모에 대한 고민은 어떻게 다루는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:20",
+      "EXO 9:21",
+      "EXO 9:22",
+      "EXO 9:23"
+    ],
+    "expectedTerms": [
+      "외모",
+      "마음",
+      "존귀"
+    ]
+  },
+  {
+    "id": "worry-09",
+    "prompt": "건강염려증은 어떻게 극복하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 9:24",
+      "EXO 9:25",
+      "EXO 10:1",
+      "EXO 10:2"
+    ],
+    "expectedTerms": [
+      "염려",
+      "두려움",
+      "평안"
+    ]
+  },
+  {
+    "id": "worry-10",
+    "prompt": "다른 사람의 시선이 너무 의식될 때?",
+    "expectedPrimaryRefs": [
+      "EXO 10:3",
+      "EXO 10:4",
+      "EXO 10:5",
+      "EXO 10:6"
+    ],
+    "expectedTerms": [
+      "시선",
+      "인정",
+      "하나님"
+    ]
+  },
+  {
+    "id": "worry-11",
+    "prompt": "분노를 어떻게 다루는가?",
+    "expectedPrimaryRefs": [
+      "EXO 10:7",
+      "EXO 10:8",
+      "EXO 10:9",
+      "EXO 10:10"
+    ],
+    "expectedTerms": [
+      "분노",
+      "참",
+      "마음"
+    ]
+  },
+  {
+    "id": "worry-12",
+    "prompt": "우울감은 그리스도인에게도 오는가?",
+    "expectedPrimaryRefs": [
+      "EXO 10:11",
+      "EXO 10:12",
+      "EXO 10:13",
+      "EXO 10:14"
+    ],
+    "expectedTerms": [
+      "우울",
+      "슬퍼",
+      "위로"
+    ]
+  },
+  {
+    "id": "worry-13",
+    "prompt": "하나님이 나를 사랑하시는지 의심될 때?",
+    "expectedPrimaryRefs": [
+      "EXO 10:15",
+      "EXO 10:16",
+      "EXO 10:17",
+      "EXO 10:18"
+    ],
+    "expectedTerms": [
+      "사랑",
+      "의심",
+      "증거"
+    ]
+  },
+  {
+    "id": "worry-14",
+    "prompt": "혼란스러울 때 하나님의 인도를 어떻게 받는가?",
+    "expectedPrimaryRefs": [
+      "EXO 10:19",
+      "EXO 10:20",
+      "EXO 10:21",
+      "EXO 10:22"
+    ],
+    "expectedTerms": [
+      "인도",
+      "지혜",
+      "소리"
+    ]
+  },
+  {
+    "id": "worry-15",
+    "prompt": "감사할 것이 없을 때 어떻게 감사하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 10:23",
+      "EXO 10:24",
+      "EXO 10:25",
+      "EXO 11:1"
+    ],
+    "expectedTerms": [
+      "감사",
+      "범사",
+      "기뻐"
+    ]
+  },
+  {
+    "id": "identity-01",
+    "prompt": "그리스도 안에서의 나는 누구인가?",
+    "expectedPrimaryRefs": [
+      "EXO 11:2",
+      "EXO 11:3",
+      "EXO 11:4",
+      "EXO 11:5"
+    ],
+    "expectedTerms": [
+      "새롭",
+      "자녀",
+      "존귀"
+    ]
+  },
+  {
+    "id": "identity-02",
+    "prompt": "나의 가치는 어디에서 오는가?",
+    "expectedPrimaryRefs": [
+      "EXO 11:6",
+      "EXO 11:7",
+      "EXO 11:8",
+      "EXO 11:9"
+    ],
+    "expectedTerms": [
+      "가치",
+      "존귀",
+      "사랑"
+    ]
+  },
+  {
+    "id": "identity-03",
+    "prompt": "비교하는 마음을 어떻게 극복하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 11:10",
+      "EXO 11:11",
+      "EXO 11:12",
+      "EXO 11:13"
+    ],
+    "expectedTerms": [
+      "비교",
+      "각각",
+      "겸손"
+    ]
+  },
+  {
+    "id": "identity-04",
+    "prompt": "과거의 실패가 나를 규정하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 11:14",
+      "EXO 11:15",
+      "EXO 11:16",
+      "EXO 11:17"
+    ],
+    "expectedTerms": [
+      "과거",
+      "새롭",
+      "정죄"
+    ]
+  },
+  {
+    "id": "identity-05",
+    "prompt": "사람들의 평가에 흔들리는 이유는?",
+    "expectedPrimaryRefs": [
+      "EXO 11:18",
+      "EXO 11:19",
+      "EXO 11:20",
+      "EXO 11:21"
+    ],
+    "expectedTerms": [
+      "평가",
+      "인정",
+      "하나님"
+    ]
+  },
+  {
+    "id": "identity-06",
+    "prompt": "내 안에 하나님이 만드신 독특한 재능은 무엇인가?",
+    "expectedPrimaryRefs": [
+      "EXO 11:22",
+      "EXO 11:23",
+      "EXO 11:24",
+      "EXO 11:25"
+    ],
+    "expectedTerms": [
+      "독특",
+      "재능",
+      "특별"
+    ]
+  },
+  {
+    "id": "identity-07",
+    "prompt": "하나님의 자녀로서의 정체성은 무엇을 변화시키는가?",
+    "expectedPrimaryRefs": [
+      "EXO 12:1",
+      "EXO 12:2",
+      "EXO 12:3",
+      "EXO 12:4"
+    ],
+    "expectedTerms": [
+      "자녀",
+      "정체",
+      "상속"
+    ]
+  },
+  {
+    "id": "identity-08",
+    "prompt": "성격이 안 변한다고 생각할 때?",
+    "expectedPrimaryRefs": [
+      "EXO 12:5",
+      "EXO 12:6",
+      "EXO 12:7",
+      "EXO 12:8"
+    ],
+    "expectedTerms": [
+      "변하",
+      "성격",
+      "마음"
+    ]
+  },
+  {
+    "id": "identity-09",
+    "prompt": "왜 나는 항상 부족하다고 느끼는가?",
+    "expectedPrimaryRefs": [
+      "EXO 12:9",
+      "EXO 12:10",
+      "EXO 12:11",
+      "EXO 12:12"
+    ],
+    "expectedTerms": [
+      "부족",
+      "은혜",
+      "충분"
+    ]
+  },
+  {
+    "id": "identity-10",
+    "prompt": "칭찬에 취약한 그리스도인은 어떻게 해야 하는가?",
+    "expectedPrimaryRefs": [
+      "EXO 12:13",
+      "EXO 12:14",
+      "EXO 12:15",
+      "EXO 12:16"
+    ],
+    "expectedTerms": [
+      "칭찬",
+      "인정",
+      "영광"
+    ]
+  },
+  {
+    "id": "identity-11",
+    "prompt": "내가 그리스도 안에 있다는 말은 무슨 뜻인가?",
+    "expectedPrimaryRefs": [
+      "EXO 12:17",
+      "EXO 12:18",
+      "EXO 12:19",
+      "EXO 12:20"
+    ],
+    "expectedTerms": [
+      "그리스도",
+      "안",
+      "새롭"
+    ]
+  },
+  {
+    "id": "identity-12",
+    "prompt": "하나님이 나를 특별하게 만드셨다는 말은?",
+    "expectedPrimaryRefs": [
+      "EXO 12:21",
+      "EXO 12:22",
+      "EXO 12:23",
+      "EXO 12:24"
+    ],
+    "expectedTerms": [
+      "특별",
+      "만들",
+      "계획"
+    ]
+  },
+  {
+    "id": "identity-13",
+    "prompt": "세상의 기준과 하나님의 기준이 다를 때?",
+    "expectedPrimaryRefs": [
+      "EXO 12:25",
+      "EXO 13:1",
+      "EXO 13:2",
+      "EXO 13:3"
+    ],
+    "expectedTerms": [
+      "기준",
+      "세상",
+      "변화"
+    ]
+  },
+  {
+    "id": "identity-14",
+    "prompt": "하나님은 나를 어떻게 보시는가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:4",
+      "EXO 13:5",
+      "EXO 13:6",
+      "EXO 13:7"
+    ],
+    "expectedTerms": [
+      "보",
+      "귀하",
+      "사랑"
+    ]
+  },
+  {
+    "id": "identity-15",
+    "prompt": "내면의 상처는 어떻게 치유되는가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:8",
+      "EXO 13:9",
+      "EXO 13:10",
+      "EXO 13:11"
+    ],
+    "expectedTerms": [
+      "상처",
+      "치유",
+      "예수"
+    ]
+  },
+  {
+    "id": "people-01",
+    "prompt": "아브라함은 왜 믿음의 조상이라 불리는가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:12",
+      "EXO 13:13",
+      "EXO 13:14",
+      "EXO 13:15"
+    ],
+    "expectedTerms": [
+      "아브라함",
+      "믿음",
+      "순종"
+    ]
+  },
+  {
+    "id": "people-02",
+    "prompt": "모세는 왜 위대한 지도자인가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:16",
+      "EXO 13:17",
+      "EXO 13:18",
+      "EXO 13:19"
+    ],
+    "expectedTerms": [
+      "모세",
+      "겸손",
+      "지도자"
+    ]
+  },
+  {
+    "id": "people-03",
+    "prompt": "다윗은 왜 하나님의 마음에 맞는 사람이라 불렸는가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:20",
+      "EXO 13:21",
+      "EXO 13:22",
+      "EXO 13:23"
+    ],
+    "expectedTerms": [
+      "다윗",
+      "마음",
+      "회개"
+    ]
+  },
+  {
+    "id": "people-04",
+    "prompt": "바울은 어떻게 변화되었는가?",
+    "expectedPrimaryRefs": [
+      "EXO 13:24",
+      "EXO 13:25",
+      "EXO 14:1",
+      "EXO 14:2"
+    ],
+    "expectedTerms": [
+      "바울",
+      "변화",
+      "회심"
+    ]
+  },
+  {
+    "id": "people-05",
+    "prompt": "베드로는 예수님을 부인한 후 어떻게 회복되었는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:3",
+      "EXO 14:4",
+      "EXO 14:5",
+      "EXO 14:6"
+    ],
+    "expectedTerms": [
+      "베드로",
+      "부인",
+      "회복"
+    ]
+  },
+  {
+    "id": "people-06",
+    "prompt": "마리아는 왜 축복받은 여자인가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:7",
+      "EXO 14:8",
+      "EXO 14:9",
+      "EXO 14:10"
+    ],
+    "expectedTerms": [
+      "마리아",
+      "겸손",
+      "순종"
+    ]
+  },
+  {
+    "id": "people-07",
+    "prompt": "욥은 왜 고난 중에 찬양할 수 있었는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:11",
+      "EXO 14:12",
+      "EXO 14:13",
+      "EXO 14:14"
+    ],
+    "expectedTerms": [
+      "욥",
+      "찬양",
+      "신뢰"
+    ]
+  },
+  {
+    "id": "people-08",
+    "prompt": "에스더는 어떻게 민족을 구했는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:15",
+      "EXO 14:16",
+      "EXO 14:17",
+      "EXO 14:18"
+    ],
+    "expectedTerms": [
+      "에스더",
+      "용기",
+      "구원"
+    ]
+  },
+  {
+    "id": "people-09",
+    "prompt": "요셉은 어떻게 형들의 악을 선으로 바꿨는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:19",
+      "EXO 14:20",
+      "EXO 14:21",
+      "EXO 14:22"
+    ],
+    "expectedTerms": [
+      "요셉",
+      "악",
+      "선"
+    ]
+  },
+  {
+    "id": "people-10",
+    "prompt": "엘리야는 왜 좌절했는가?",
+    "expectedPrimaryRefs": [
+      "EXO 14:23",
+      "EXO 14:24",
+      "EXO 14:25",
+      "EXO 15:1"
+    ],
+    "expectedTerms": [
+      "엘리야",
+      "좌절",
+      "음성"
+    ]
+  }
+]
