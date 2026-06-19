@@ -109,6 +109,76 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
     },
   },
   {
+    key: "creation-origin",
+    ko: /세상.*시작|세상.*어떻게|만물.*시작|태초|창조.*질문|왜.*만들|어떻게.*생기|우주.*시작|인간.*만들/,
+    en: /\b(how did the world begin|creation|how was the universe created|origin of the world|how did everything start)\b/i,
+    rule: {
+      normalized: "세상은 어떻게 시작되었는가",
+      intent: "doctrine",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["origin", "creation", "truth"],
+      theologicalAxes: ["creation", "Genesis", "God the Creator", "beginning", "word of God"],
+      searchQueries: ["태초에 하나님이", "창조", "태초", "말씀", "만물", "creation beginning Genesis word"],
+    },
+  },
+  {
+    key: "pharisee-hypocrisy",
+    ko: /바리새인.*꾸짖|바리새인.*비판|외식|위선.*바리새|율법.*바리새|바리새인.*왜/,
+    en: /\b(pharisee|hypocrisy|hypocrite|jesus criticized pharisees|why did jesus rebuke)\b/i,
+    rule: {
+      normalized: "예수님은 왜 바리새인들을 꾸짖으셨는가",
+      intent: "doctrine",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["진리", "진정성", "순종"],
+      theologicalAxes: ["외식", "율법", "전통", "마음", "참된 예배"],
+      searchQueries: ["바리새인", "외식", "율법", "전통", "마음", "pharisee hypocrisy law tradition heart"],
+    },
+  },
+  {
+    key: "heaven-activities",
+    ko: /하늘나라.*무엇.*하|천국.*무엇.*하|천국.*하는\s*일|하늘.*做什么|천국.*생활|영원.*세계.*무엇/,
+    en: /\b(what will we do in heaven|heaven activities|what happens in heaven|life in heaven|eternal life activities)\b/i,
+    rule: {
+      normalized: "하늘나라에서 우리는 무엇을 하는가",
+      intent: "meaning",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["소망", "미래", "목적"],
+      theologicalAxes: ["천국", "예배", "섬김", "기쁨", "영생", "그리스도와 함께 다스림"],
+      searchQueries: ["하늘나라", "섬기", "다스리", "기쁨", "영생", "천국", "heaven worship service joy reign"],
+    },
+  },
+  {
+    key: "faith-individual-collective",
+    ko: /신앙.*개인|신앙.*집단|믿음.*개인|믿음.*공동체|개인.*신앙|집단.*신앙|혼자.*믿|함께.*믿/,
+    en: /\b(individual faith|collective faith|personal faith|communal faith|faith alone|faith together)\b/i,
+    rule: {
+      normalized: "신앙은 개인적인 것인가 집단적인 것인가",
+      intent: "doctrine",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["공동체", "개인", "교제"],
+      theologicalAxes: ["교회", "공동체", "교제", "그리스도의 몸", "모임"],
+      searchQueries: ["공동체", "모이", "교제", "교회", "그리스도의 몸", "community fellowship church gathering"],
+    },
+  },
+  {
+    key: "identity-in-christ",
+    ko: /그리스도\s*안.*나|그리스도\s*안.*누구|예수\s*안.*나|예수\s*안.*누구|주\s*안.*나|주\s*안.*identity/,
+    en: /\b(who am i in christ|identity in christ|who i am in jesus|in christ i am)\b/i,
+    rule: {
+      normalized: "그리스도 안에서의 나는 누구인가",
+      intent: "meaning",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["정체성", "가치", "소속"],
+      theologicalAxes: ["새로운 피조물", "하나님의 자녀", "존귀", "택하심", "사랑받는 자"],
+      searchQueries: ["새롭", "자녀", "존귀", "택하심", "사랑", "그리스도 안에서", "new creation children precious chosen"],
+    },
+  },
+  {
     key: "identity",
     ko: /나는\s*누구|내가\s*누구|정체성|하나님\s*안에서\s*나는|그리스도\s*안에서\s*나는/,
     en: /\b(who am i|identity|who am i in god|who am i in christ)\b/i,
@@ -651,7 +721,6 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
       searchQueries: ["성경 인물", "믿음", "순종", "겸손", "biblical figure faith obedience"],
     },
   },
-
 ];
 
 const DIVERGENT_TOPICS: Record<string, { ko: RegExp; en: RegExp; topic: string }> = {
