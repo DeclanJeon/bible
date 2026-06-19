@@ -2,7 +2,7 @@ import { getPassage, type BibleReference } from "@/lib/bible";
 import type { StoryCluster } from "@/lib/app-data";
 import { localizeRelationTypeLabel, resolveAppLocale } from "@/lib/content";
 import { isRetrievalReliable, type RetrievalResult } from "@/lib/retrieval";
-import type { DoctrinePresentation } from "@/lib/answer-bundle";
+import type { DoctrinePresentation, PassageExplanation } from "@/lib/answer-bundle";
 import type { CrossReferenceSuggestion } from "@/lib/knowledge";
 
 export type EvidencePassage = {
@@ -27,6 +27,11 @@ export type ReflectionResponse = {
   generationModel: string;
   generationNote: string;
   doctrinePresentation?: DoctrinePresentation;
+  passageExplanations?: PassageExplanation[];
+  passageBackground?: PassageExplanation["background"];
+  passageClaim?: PassageExplanation["passageClaim"];
+  userConnection?: PassageExplanation["userConnection"];
+  applicationBoundary?: PassageExplanation["applicationBoundary"];
 };
 
 function preview(text: string, max = 220) {
@@ -86,10 +91,10 @@ export async function buildReflectionResponse(
     if (appLocale === "ko") {
       const weakTerms = directMatchedTerms ? `현재 잡힌 단어는 ${directMatchedTerms} 정도입니다.` : "현재 직접 잡힌 본문 단어가 충분하지 않습니다.";
       return {
-        concernSummary: `입력한 질문 “${prompt}”에 정확히 연결되는 중심 본문을 아직 확정하지 않았습니다. 자동 후보가 있더라도 최종 추천 본문처럼 단정하지 않습니다.`,
+        concernSummary: `입력한 질문 “${prompt}”에 정확히 연결되는 중심 본문을 아직 충분히 확인하지 못했습니다. 자동 후보가 있더라도 최종 추천 본문처럼 사용하지 않습니다.`,
         relevanceSummary: scoreLine ? `${scoreLine}. ${rationale || "직접 겹치는 본문 근거가 부족합니다."}` : "직접 겹치는 본문 근거가 부족합니다.",
-        whyTheseTexts: `${weakTerms} 그래서 ${primaryEvidence.reference}는 확정된 답이 아니라 검토 후보입니다. 사용자 입력의 핵심 표현과 본문 문장이 더 분명히 만나는 경우에만 핵심 본문으로 승격해야 합니다.`,
-        primaryStory: `검토 후보는 ${primaryEvidence.reference}입니다. 본문 일부는 “${primaryEvidence.excerpt}”입니다. 다만 이 후보가 질문을 직접 다룬다고 단정하지 말고, 더 구체적인 고민 표현으로 다시 검색하는 편이 안전합니다.`,
+        whyTheseTexts: `${weakTerms} 그래서 ${primaryEvidence.reference}는 검토 후보입니다. 사용자 입력의 핵심 표현과 본문 문장이 더 분명히 만나는 경우에만 핵심 본문으로 올려야 합니다.`,
+        primaryStory: `검토 후보는 ${primaryEvidence.reference}입니다. 본문 일부는 “${primaryEvidence.excerpt}”입니다. 다만 이 후보가 질문을 직접 다룬다고 보지 말고, 더 구체적인 고민 표현으로 다시 검색하는 편이 안전합니다.`,
         datePlaceAudience: `${primaryEvidence.title}의 책 배경은 보조 정보입니다. ${cluster.context.date.body} ${cluster.context.place.body}`,
         originalAudience: `${cluster.context.audience.body} 현재 단계에서는 원청중 설명보다 먼저, 이 본문이 정말 사용자의 질문과 같은 문제를 말하는지 확인해야 합니다.`,
         linkedScriptures: "중심 본문 신뢰도가 낮기 때문에 상호참조 확장은 보류합니다. 잘못 고른 본문에서 연결 본문을 넓히면 관련 없는 성구가 더 많이 따라올 수 있습니다.",
@@ -103,7 +108,7 @@ export async function buildReflectionResponse(
         evidence,
         generationMode: "deterministic",
         generationModel: "deterministic-reflection-builder",
-        generationNote: "낮은 신뢰도 검색을 핵심 본문으로 단정하지 않는 결정형 응답입니다.",
+        generationNote: "낮은 신뢰도 검색을 핵심 본문으로 올리지 않는 결정형 응답입니다.",
       };
     }
 
@@ -134,6 +139,21 @@ export async function buildReflectionResponse(
   if (answerBundle) {
     const relationLines = answerBundle.relationMap.map((relation) => `${relation.reference}: ${relation.answers} ${relation.userConnection}`);
     const supportLine = relationLines.slice(1).join(" ");
+    const primaryExplanation = answerBundle.passageExplanations[0];
+    const plannedKeywords = [
+      ...answerBundle.question.searchQueries,
+      ...answerBundle.question.concernAxes,
+      ...answerBundle.question.theologicalAxes,
+    ].filter((value, index, values) => value && values.indexOf(value) === index).slice(0, 18).join(", ");
+    const structuredResponse = primaryExplanation
+      ? {
+          passageExplanations: answerBundle.passageExplanations,
+          passageBackground: primaryExplanation.background,
+          passageClaim: primaryExplanation.passageClaim,
+          userConnection: primaryExplanation.userConnection,
+          applicationBoundary: primaryExplanation.applicationBoundary,
+        }
+      : {};
     if (appLocale === "ko") {
       const policyLabel = answerBundle.answerPolicy === "wisdom_principle"
         ? "성경이 구체적 선택을 대신 결정하지는 않지만, 판단을 세우는 지혜 원칙으로 답합니다"
@@ -141,21 +161,29 @@ export async function buildReflectionResponse(
           ? "안전을 먼저 확인한 뒤, 가까이 계시는 하나님과 소망의 본문으로 답합니다"
           : answerBundle.answerPolicy === "pastoral_care"
             ? "고민을 목회적 돌봄 질문으로 이해하고, 위로와 방향을 주는 본문 묶음으로 답합니다"
-            : "넓은 질문이므로 한 구절만 단정하지 않고 성경 본문 묶음으로 답합니다";
+            : "넓은 질문이므로 한 구절만 앞세우지 않고 성경 본문 묶음으로 답합니다";
       return {
         concernSummary: `질문 “${prompt}”을(를) “${answerBundle.question.normalized}”로 이해했습니다. ${policyLabel}.`,
         relevanceSummary: scoreLine ? `${scoreLine}. ${answerBundle.primary.reason}` : answerBundle.primary.reason,
-        whyTheseTexts: `${primaryEvidence.reference}를 중심 본문으로 두고, ${supportLine || "보조 본문 없이 중심 본문만"}을 함께 읽도록 묶었습니다. 이 묶음은 질문 축(${[...answerBundle.question.concernAxes, ...answerBundle.question.theologicalAxes].join(", ") || "본문 근거"})을 따라 선택되었습니다.`,
-        primaryStory: `중심 본문은 ${primaryEvidence.reference}입니다. 핵심 구절은 “${primaryEvidence.excerpt}”입니다. 이 본문은 질문에 대한 출발점을 주고, 보조 본문들은 같은 질문을 다른 정경 위치에서 보강합니다.`,
-        datePlaceAudience: `${primaryEvidence.title}의 책 배경도 확인해야 합니다. ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
-        originalAudience: `${cluster.context.audience.body} 오늘의 적용은 이 원래 문맥을 지나서 조심스럽게 이어져야 합니다.`,
+        whyTheseTexts: `${primaryEvidence.reference}를 중심 본문으로 두고, ${supportLine || "보조 본문 없이 중심 본문만"}을 함께 읽도록 묶었습니다. 이 묶음은 질문 축(${[...answerBundle.question.concernAxes, ...answerBundle.question.theologicalAxes].join(", ") || "본문 근거"})과 해석 키워드(${plannedKeywords || "없음"})를 따라 선택되었습니다.`,
+        primaryStory: primaryExplanation
+          ? `중심 본문은 ${primaryEvidence.reference}입니다. 핵심 구절은 “${primaryEvidence.excerpt}”입니다. ${primaryExplanation.passageClaim.summary} 이 본문은 ${primaryExplanation.background.book.genre} 장르 안에서 읽어야 합니다.`
+          : `중심 본문은 ${primaryEvidence.reference}입니다. 핵심 구절은 “${primaryEvidence.excerpt}”입니다. 이 본문은 질문에 대한 출발점을 주고, 보조 본문들은 같은 질문을 다른 정경 위치에서 보강합니다.`,
+        datePlaceAudience: primaryExplanation
+          ? `${primaryExplanation.background.book.title}의 배경입니다. ${primaryExplanation.background.book.date.body} ${primaryExplanation.background.book.place.body} ${primaryExplanation.background.book.authorship.body}`
+          : `${primaryEvidence.title}의 책 배경도 확인해야 합니다. ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
+        originalAudience: primaryExplanation
+          ? `${primaryExplanation.background.book.audience.body} 적용은 이 원래 청중과 문학적 문맥을 지나서 이어져야 합니다.`
+          : `${cluster.context.audience.body} 오늘의 적용은 이 원래 문맥을 지나서 조심스럽게 이어져야 합니다.`,
         linkedScriptures: supportLine || (linkedLine ? `${linkedLine}.` : "이 답변은 현재 선택된 중심 본문을 우선 evidence로 사용합니다."),
         jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
-        personalConnection: answerBundle.answerPolicy === "wisdom_principle"
-          ? "이 본문들은 결정을 대신 내려 주지 않습니다. 대신 하나님 앞에서 지혜를 구하고, 신뢰할 조언과 책임 있는 판단을 세우도록 돕습니다."
-          : answerBundle.answerPolicy === "safety_first"
-            ? "지금 질문은 안전이 먼저입니다. 본문은 혼자 견디라는 압박이 아니라, 가까운 사람과 전문 도움을 함께 붙들면서 하나님이 버리지 않으신다는 소망을 확인하도록 돕습니다."
-            : "이 본문 묶음은 질문을 성경의 언어로 다시 붙들게 합니다. 바로 단정하기보다 중심 본문과 보조 본문을 함께 읽으며, 질문이 무엇을 묻고 무엇을 아직 남겨 두는지 구분하도록 돕습니다.",
+        personalConnection: primaryExplanation
+          ? `${primaryExplanation.userConnection.promptFragment} 지점에서 사용자 질문과 본문이 만납니다. ${primaryExplanation.userConnection.connectionReason} 다만 ${primaryExplanation.applicationBoundary.doesNotSettle.join(" ")}`
+          : answerBundle.answerPolicy === "wisdom_principle"
+            ? "이 본문들은 결정을 대신 내려 주지 않습니다. 대신 하나님 앞에서 지혜를 구하고, 신뢰할 조언과 책임 있는 판단을 세우도록 돕습니다."
+            : answerBundle.answerPolicy === "safety_first"
+              ? "지금 질문은 안전이 먼저입니다. 본문은 혼자 견디라는 압박이 아니라, 가까운 사람과 전문 도움을 함께 붙들면서 하나님이 버리지 않으신다는 소망을 확인하도록 돕습니다."
+              : "이 본문 묶음은 질문을 성경의 언어로 다시 붙들게 합니다. 바로 단정하기보다 중심 본문과 보조 본문을 함께 읽으며, 질문이 무엇을 묻고 무엇을 아직 남겨 두는지 구분하도록 돕습니다.",
         reflectionQuestions: [
           `이 질문은 ${answerBundle.question.answerMode} 응답 모드로 분류되었습니다. 이 분류가 내 질문을 잘 설명하나요?`,
           `${primaryEvidence.reference}는 내 질문에 대해 무엇을 직접 말하나요?`,
@@ -166,21 +194,30 @@ export async function buildReflectionResponse(
         generationModel: "deterministic-answer-bundle-builder",
         generationNote: "질문 이해, passage index, reranker, answer bundle을 사용한 결정형 응답입니다.",
         doctrinePresentation: answerBundle.doctrinePresentation,
+        ...structuredResponse,
       };
     }
 
     return {
       concernSummary: `The prompt “${prompt}” was understood as “${answerBundle.question.normalized}” and answered with a Bible evidence bundle.`,
       relevanceSummary: scoreLine ? `${scoreLine}. ${answerBundle.primary.reason}` : answerBundle.primary.reason,
-      whyTheseTexts: `${primaryEvidence.reference} is the primary passage. ${supportLine || "No supporting passage was needed."}`,
-      primaryStory: `The primary passage is ${primaryEvidence.reference}: “${primaryEvidence.excerpt}”.`,
-      datePlaceAudience: `Book context still matters: ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
-      originalAudience: `${cluster.context.audience.body} Application should move through that context before reaching the user.`,
+      whyTheseTexts: `${primaryEvidence.reference} is the primary passage. ${supportLine || "No supporting passage was needed."} Planned interpretation keywords: ${plannedKeywords || "none"}.`,
+      primaryStory: primaryExplanation
+        ? `The primary passage is ${primaryEvidence.reference}: “${primaryEvidence.excerpt}”. ${primaryExplanation.passageClaim.summary} Read it as ${primaryExplanation.background.book.genre}.`
+        : `The primary passage is ${primaryEvidence.reference}: “${primaryEvidence.excerpt}”.`,
+      datePlaceAudience: primaryExplanation
+        ? `Book context: ${primaryExplanation.background.book.date.body} ${primaryExplanation.background.book.place.body} ${primaryExplanation.background.book.authorship.body}`
+        : `Book context still matters: ${cluster.context.date.body} ${cluster.context.place.body} ${cluster.context.author.body}`,
+      originalAudience: primaryExplanation
+        ? `${primaryExplanation.background.book.audience.body} Application should move through that first audience and literary context before reaching the user.`
+        : `${cluster.context.audience.body} Application should move through that context before reaching the user.`,
       linkedScriptures: supportLine || (linkedLine ? `${linkedLine}.` : "The answer uses the selected evidence bundle."),
       jesusAndPaul: `${cluster.jesusLayer.body} ${cluster.paulLayer.body}`,
-      personalConnection: answerBundle.answerPolicy === "wisdom_principle"
-        ? "These texts give wisdom principles; they do not decide the concrete choice for the user."
-        : "The bundle connects the user's question to passages that directly answer or support the same concern.",
+      personalConnection: primaryExplanation
+        ? `The user's concern meets the passage at “${primaryExplanation.userConnection.promptFragment}.” ${primaryExplanation.userConnection.connectionReason} Boundary: ${primaryExplanation.applicationBoundary.doesNotSettle.join(" ")}`
+        : answerBundle.answerPolicy === "wisdom_principle"
+          ? "These texts give wisdom principles; they do not decide the concrete choice for the user."
+          : "The bundle connects the user's question to passages that directly answer or support the same concern.",
       reflectionQuestions: [
         `Does the ${answerBundle.question.answerMode} response mode describe the question well?`,
         `What does ${primaryEvidence.reference} answer directly?`,
@@ -191,6 +228,7 @@ export async function buildReflectionResponse(
       generationModel: "deterministic-answer-bundle-builder",
       generationNote: "Deterministic response built from question understanding, passage index, reranking, and answer bundle evidence.",
       doctrinePresentation: answerBundle.doctrinePresentation,
+      ...structuredResponse,
     };
   }
 

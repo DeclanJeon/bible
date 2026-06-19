@@ -61,9 +61,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const copy = UI_COPY[appLocale].companion;
   const ragQuery = await buildRagQueryPlan(userPrompt, appLocale);
   const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale, {
-    expansionTerms: ragQuery.expansionTerms,
-    expansionSummary: ragQuery.expansionSummary ?? undefined,
-    expansionProvider: ragQuery.expansionProvider,
+    queryPlan: ragQuery,
   });
   const answerBundle = retrieval.answerBundle ?? null;
   const questionUnderstanding = retrieval.question ?? answerBundle?.question ?? null;
@@ -139,8 +137,16 @@ export default async function CompanionPage({ params, searchParams }: Props) {
     },
     deterministic,
   );
+  const structuredReflection = {
+    passageExplanations: deterministic.passageExplanations,
+    passageBackground: deterministic.passageBackground,
+    passageClaim: deterministic.passageClaim,
+    userConnection: deterministic.userConnection,
+    applicationBoundary: deterministic.applicationBoundary,
+  };
   const hydratedResponse = {
     ...generation.response,
+    ...structuredReflection,
     generationMode: generation.provider,
     generationModel: generation.model,
     generationNote: generation.note,

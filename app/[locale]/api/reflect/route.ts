@@ -66,9 +66,7 @@ export async function POST(
   const appLocale = requestedLocale;
   const ragQuery = await buildRagQueryPlan(normalizedPrompt, appLocale);
   const retrieval = await retrieveClusterForPrompt(normalizedPrompt, appLocale, {
-    expansionTerms: ragQuery.expansionTerms,
-    expansionSummary: ragQuery.expansionSummary ?? undefined,
-    expansionProvider: ragQuery.expansionProvider,
+    queryPlan: ragQuery,
   });
   const answerBundle = retrieval.answerBundle ?? null;
   const questionUnderstanding = retrieval.question ?? answerBundle?.question ?? null;
@@ -152,8 +150,16 @@ export async function POST(
     deterministic,
   );
 
+  const structuredReflection = {
+    passageExplanations: deterministic.passageExplanations,
+    passageBackground: deterministic.passageBackground,
+    passageClaim: deterministic.passageClaim,
+    userConnection: deterministic.userConnection,
+    applicationBoundary: deterministic.applicationBoundary,
+  };
   const finalResponse = {
     ...generation.response,
+    ...structuredReflection,
     generationMode: generation.provider,
     generationModel: generation.model,
     generationNote: generation.note,

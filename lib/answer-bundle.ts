@@ -1,9 +1,9 @@
 import type { BibleReference } from "@/lib/bible";
+import { buildPassageBackgroundPack, type PassageBackgroundPack } from "@/lib/background-pack";
 import { formatReference, retrieveHybridPassageCandidates, type HybridPassageCandidate } from "@/lib/hybrid-retrieval";
 import { rerankPassageCandidates } from "@/lib/passage-reranker";
-import { understandQuestion, type QuestionUnderstanding } from "@/lib/question-understanding";
-import type { TraditionKey } from "@/lib/question-understanding";
-
+import { understandQuestion, type QuestionUnderstanding, type TraditionKey } from "@/lib/question-understanding";
+import type { RetrievalQueryPlan } from "@/lib/rag-query";
 
 export type DoctrineDisplayMode = "shared_core_only" | "shared_core_plus_views" | "tradition_requested";
 
@@ -36,6 +36,37 @@ export type DoctrinePresentation = {
 
 export type AnswerPolicy = QuestionUnderstanding["answerMode"];
 
+export type AnswerBundleOptions = {
+  queryPlan?: RetrievalQueryPlan;
+  expansionTerms?: string[];
+  expansionSummary?: string;
+  expansionProvider?: string;
+};
+
+export type PassageExplanation = {
+  reference: BibleReference;
+  displayReference: string;
+  role: "primary" | "supporting" | "background";
+  directness: "direct" | "supporting" | "background" | "weak";
+  background: PassageBackgroundPack;
+  passageClaim: {
+    summary: string;
+    keyLines: string[];
+    answers: string;
+  };
+  userConnection: {
+    promptFragment: string;
+    matchedTerms: string[];
+    matchedAxes: string[];
+    connectionReason: string;
+  };
+  applicationBoundary: {
+    helpsWith: string[];
+    doesNotSettle: string[];
+    caution?: string;
+  };
+};
+
 export type AnswerBundle = {
   question: QuestionUnderstanding;
   primary: HybridPassageCandidate;
@@ -47,7 +78,9 @@ export type AnswerBundle = {
     answers: string;
     userConnection: string;
     limits?: string;
+    explanation: PassageExplanation;
   }>;
+  passageExplanations: PassageExplanation[];
   crossReferenceSupport: Array<{
     from: string;
     to: string;
@@ -82,19 +115,6 @@ function relationAnswer(question: QuestionUnderstanding, candidate: HybridPassag
   return candidate.directness === "direct" ? "Directly addresses the question's central concern." : "Supports the question within a wider biblical context.";
 }
 
-function relationConnection(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
-  if (candidate.matchedAxes.length) {
-    return question.locale === "ko"
-      ? `질문의 축(${candidate.matchedAxes.join(", ")})과 연결됩니다.`
-      : `Connects to the question axes: ${candidate.matchedAxes.join(", ")}.`;
-  }
-  if (candidate.matchedQueries.length) {
-    return question.locale === "ko"
-      ? `검색 표현(${candidate.matchedQueries.slice(0, 4).join(", ")})과 본문 색인이 만났습니다.`
-      : `Matches indexed terms: ${candidate.matchedQueries.slice(0, 4).join(", ")}.`;
-  }
-  return question.locale === "ko" ? "질문과 간접적으로 연결되는 배경 본문입니다." : "Provides background for the question.";
-}
 
 function relationLimit(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
   if (question.answerMode === "wisdom_principle") {
@@ -108,13 +128,98 @@ function relationLimit(question: QuestionUnderstanding, candidate: HybridPassage
   return undefined;
 }
 
+function unique(values: string[]) {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
+function promptFragment(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
+  const matched = candidate.matchedQueries[0] ?? candidate.matchedAxes[0];
+  if (matched) return matched;
+  return question.normalized || question.searchQueries[0] || (question.locale === "ko" ? "사용자 질문의 중심 고민" : "the user's central concern");
+}
+
+function passageKeyLines(candidate: HybridPassageCandidate) {
+  const text = candidate.unit.text.replace(/\s+/g, " ").trim();
+  if (!text) return [];
+  const firstSentence = text.split(/(?<=[.!?。！？])\s+/u)[0] ?? text;
+  return [firstSentence.slice(0, 220)];
+}
+
+function passageAnswers(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
+  if (candidate.unit.questionsAnswered?.length) return candidate.unit.questionsAnswered.slice(0, 2).join("; ");
+  if (candidate.directness === "direct") return relationAnswer(question, candidate);
+  return question.locale === "ko"
+    ? "질문에 직접 결론을 주기보다 중심 본문을 보강하거나 배경을 제공합니다."
+    : "It supports or backgrounds the primary answer rather than settling the question by itself.";
+}
+
+function connectionReason(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
+  const terms = candidate.matchedQueries.slice(0, 4);
+  const axes = candidate.matchedAxes.slice(0, 4);
+  if (question.locale === "ko") {
+    if (terms.length && axes.length) return `사용자의 표현(${terms.join(", ")})과 본문 주제축(${axes.join(", ")})이 함께 맞물립니다.`;
+    if (terms.length) return `사용자의 표현(${terms.join(", ")})이 본문 색인의 언어와 직접 만납니다.`;
+    if (axes.length) return `질문의 개념축(${axes.join(", ")})이 본문의 신학/삶의 축과 만납니다.`;
+    return "직접 단어 겹침은 약하지만, 보조 배경 본문으로 질문을 더 넓은 성경 문맥에 둡니다.";
+  }
+  if (terms.length && axes.length) return `The user's wording (${terms.join(", ")}) and the passage axes (${axes.join(", ")}) meet together.`;
+  if (terms.length) return `The user's wording (${terms.join(", ")}) directly matches indexed passage language.`;
+  if (axes.length) return `The question axes (${axes.join(", ")}) meet the passage's theological or human-concern axes.`;
+  return "Direct wording overlap is weak, so this passage should be treated as background context.";
+}
+
+function applicationBoundary(question: QuestionUnderstanding, candidate: HybridPassageCandidate): PassageExplanation["applicationBoundary"] {
+  const helpsWith = unique([
+    ...candidate.matchedAxes,
+    ...question.concernAxes,
+    question.locale === "ko" ? "성경적 관점 형성" : "forming a biblical perspective",
+  ]).slice(0, 5);
+  const doesNotSettle = question.answerMode === "wisdom_principle"
+    ? [question.locale === "ko" ? "구체적 선택을 대신 결정하지 않습니다." : "It does not decide the concrete choice for the user."]
+    : candidate.directness === "background" || candidate.directness === "weak"
+      ? [question.locale === "ko" ? "중심 결론을 단독으로 세우기에는 보조 본문에 가깝습니다." : "It does not establish the central conclusion by itself."]
+      : [question.locale === "ko" ? "모든 개인 상황의 세부 결론을 자동으로 대신 내려 주지는 않습니다." : "It does not automatically decide every detail of the user's situation."];
+
+  return {
+    helpsWith,
+    doesNotSettle,
+    caution: relationLimit(question, candidate),
+  };
+}
+
+function buildPassageExplanation(question: QuestionUnderstanding, candidate: HybridPassageCandidate, role: PassageExplanation["role"]): PassageExplanation {
+  return {
+    reference: candidate.unit.reference,
+    displayReference: formatReference(candidate.unit.reference),
+    role,
+    directness: candidate.directness,
+    background: buildPassageBackgroundPack(candidate, question.locale),
+    passageClaim: {
+      summary: relationAnswer(question, candidate),
+      keyLines: passageKeyLines(candidate),
+      answers: passageAnswers(question, candidate),
+    },
+    userConnection: {
+      promptFragment: promptFragment(question, candidate),
+      matchedTerms: candidate.matchedQueries.slice(0, 8),
+      matchedAxes: candidate.matchedAxes.slice(0, 8),
+      connectionReason: connectionReason(question, candidate),
+    },
+    applicationBoundary: applicationBoundary(question, candidate),
+  };
+}
+
 function buildRelationMap(question: QuestionUnderstanding, candidates: HybridPassageCandidate[]): AnswerBundle["relationMap"] {
-  return candidates.map((candidate) => ({
-    reference: formatReference(candidate.unit.reference),
-    answers: relationAnswer(question, candidate),
-    userConnection: relationConnection(question, candidate),
-    limits: relationLimit(question, candidate),
-  }));
+  return candidates.map((candidate, index) => {
+    const explanation = buildPassageExplanation(question, candidate, index === 0 ? "primary" : candidate.directness === "background" || candidate.directness === "weak" ? "background" : "supporting");
+    return {
+      reference: explanation.displayReference,
+      answers: explanation.passageClaim.answers,
+      userConnection: explanation.userConnection.connectionReason,
+      limits: explanation.applicationBoundary.caution,
+      explanation,
+    };
+  });
 }
 
 function buildCrossReferenceSupport(candidates: HybridPassageCandidate[]): AnswerBundle["crossReferenceSupport"] {
@@ -128,7 +233,7 @@ function buildCrossReferenceSupport(candidates: HybridPassageCandidate[]): Answe
 }
 
 function buildTraditionViews(question: QuestionUnderstanding): TraditionViewBlock[] {
-  void question; // will be used when doctrine-source-index is integrated
+  void question;
   return [];
 }
 
@@ -174,8 +279,43 @@ function buildDoctrinePresentation(
   };
 }
 
-export async function buildAnswerBundle(prompt: string, locale?: string): Promise<AnswerBundle | null> {
-  const question = understandQuestion(prompt, locale);
+function enrichQuestionWithExpansion(
+  question: QuestionUnderstanding,
+  options: AnswerBundleOptions,
+): QuestionUnderstanding {
+  if (options.queryPlan) return options.queryPlan.question;
+
+  const expansionTerms = unique(options.expansionTerms ?? []);
+  const expansionSummary = options.expansionSummary?.trim();
+  if (!expansionTerms.length && !expansionSummary) return question;
+
+  const searchQueries = unique([
+    ...question.searchQueries,
+    ...(expansionSummary ? [expansionSummary] : []),
+    ...expansionTerms,
+  ]);
+  const hasGenericFallbackAxes =
+    question.intent === "biblical_context" &&
+    question.theologicalAxes.length === 2 &&
+    question.theologicalAxes.includes("Bible") &&
+    question.theologicalAxes.includes("discernment");
+  const confidence =
+    question.confidence === "low" &&
+    question.answerMode === "direct_bible_answer" &&
+    expansionTerms.length >= 2
+      ? "medium"
+      : question.confidence;
+
+  return {
+    ...question,
+    theologicalAxes: hasGenericFallbackAxes && expansionTerms.length ? [] : question.theologicalAxes,
+    searchQueries,
+    confidence,
+  };
+}
+
+export async function buildAnswerBundle(prompt: string, locale?: string, options: AnswerBundleOptions = {}): Promise<AnswerBundle | null> {
+  const question = enrichQuestionWithExpansion(understandQuestion(prompt, locale), options);
   if (!BUNDLE_ELIGIBLE_MODES[question.answerMode]) return null;
 
   const rawCandidates = await retrieveHybridPassageCandidates(question).catch((error: unknown) => {
@@ -191,6 +331,7 @@ export async function buildAnswerBundle(prompt: string, locale?: string): Promis
   const supporting = candidates.slice(1, supportLimit + 1);
   const bundleCandidates = [primary, ...supporting];
   const doctrinePresentation = buildDoctrinePresentation(question, bundleCandidates);
+  const relationMap = buildRelationMap(question, bundleCandidates);
 
   return {
     question,
@@ -198,7 +339,8 @@ export async function buildAnswerBundle(prompt: string, locale?: string): Promis
     supporting,
     confidence,
     answerPolicy: question.answerMode,
-    relationMap: buildRelationMap(question, bundleCandidates),
+    relationMap,
+    passageExplanations: relationMap.map((relation) => relation.explanation),
     crossReferenceSupport: buildCrossReferenceSupport(bundleCandidates),
     doctrinePresentation,
   };

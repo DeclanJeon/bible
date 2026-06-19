@@ -135,7 +135,8 @@ export async function retrieveHybridPassageCandidates(question: QuestionUndersta
     const canonicalWeight = indexedUnit.canonicalWeight ?? 1;
     const crossReferenceScore = Math.min(crossReferenceDegree / 12, 1);
     const canonicalCoverageScore = Math.max(0, Math.min(canonicalWeight, 1));
-    const finalScore = lexical.score * 34 + semantic.score * 22 + axis.score * 30 + crossReferenceScore * 6 + canonicalCoverageScore * 8;
+    const matchScore = lexical.score * 34 + semantic.score * 22 + axis.score * 30;
+    const finalScore = matchScore > 0 ? matchScore + crossReferenceScore * 6 + canonicalCoverageScore * 8 : 0;
     const base = {
       unit,
       lexicalScore: lexical.score,
