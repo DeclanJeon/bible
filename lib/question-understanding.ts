@@ -923,9 +923,9 @@ function fallback(original: string, locale: AppLocale): QuestionUnderstanding {
     locale,
     intent: isQuestion ? "biblical_context" : "empty_or_nonsense",
     concernAxes: [],
-    theologicalAxes: isQuestion ? ["Bible", "discernment"] : [],
+    theologicalAxes: [],
     searchQueries: isQuestion ? [normalized] : locale === "ko" ? ["성경 질문", "삶의 고민"] : ["Bible question", "life concern"],
-    answerMode: isQuestion ? "direct_bible_answer" : "clarify_with_starters",
+    answerMode: isQuestion ? "survey_bundle" : "clarify_with_starters",
     confidence: isQuestion ? "low" : "medium",
   };
 }

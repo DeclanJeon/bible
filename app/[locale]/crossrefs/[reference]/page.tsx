@@ -6,7 +6,7 @@ import { CrossReferenceNetworkReader, type CrossReferenceDirectionFilter, type C
 import { buildCrossReferenceNetworkHref } from "@/components/full-network-cta";
 import { getPassage, parseBibleReferenceSlug } from "@/lib/bible";
 import { getCrossReferenceNetwork } from "@/lib/crossref-graph";
-import { buildPassageHref } from "@/lib/navigation";
+import { buildBibleReferenceHref } from "@/lib/navigation";
 import { UI_COPY } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
@@ -90,6 +90,16 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
     notFound();
   }
 
+
+  const passage = await getPassage(reference, locale);
+  const expectedVerseCount = reference.endVerse - reference.startVerse + 1;
+  const exactCoverage =
+    passage.verses.length === expectedVerseCount &&
+    passage.verses[0]?.verse === reference.startVerse &&
+    passage.verses.at(-1)?.verse === reference.endVerse;
+  if (!exactCoverage) {
+    notFound();
+  }
   const [network, query] = await Promise.all([
     getCrossReferenceNetwork(reference, {
       locale,
@@ -113,7 +123,7 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
     <main className="mx-auto min-h-screen max-w-7xl px-6 py-8 lg:px-8">
       <header className="glass rounded-[28px] px-6 py-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href={network.primary.href || buildPassageHref(network.summary.reference, locale)} className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[var(--muted)] transition hover:text-white">
+          <Link href={buildBibleReferenceHref(network.summary.reference, { locale, from: "crossref" })} className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[var(--muted)] transition hover:text-white">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {copy.back}
           </Link>

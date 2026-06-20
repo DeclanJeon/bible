@@ -1,0 +1,1795 @@
+{
+  "version": 1,
+  "sourceNote": {
+    "path": "data/hanja/import/related-links.md",
+    "importedAt": "2026-06-20T09:21:55Z",
+    "linkCount": 94
+  },
+  "sources": [
+    {
+      "id": "hanja-src-londontimes-1900",
+      "title": "1900년전 허신의 설문해자(說文解字)가 창세기를 기록한 책이라고?",
+      "url": "https://www.londontimes.tv/204",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 9
+    },
+    {
+      "id": "hanja-src-londontimes-222",
+      "title": "천지창조 한 일(一)",
+      "url": "https://www.londontimes.tv/222",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 10
+    },
+    {
+      "id": "hanja-src-londontimes-231",
+      "title": "二: 地之數也",
+      "url": "https://www.londontimes.tv/231",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 11
+    },
+    {
+      "id": "hanja-src-londontimes-245",
+      "title": "으뜸 원(元)",
+      "url": "https://www.londontimes.tv/245",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 12
+    },
+    {
+      "id": "hanja-src-londontimes-261",
+      "title": "박재성 선생 특강 (통합)",
+      "url": "https://www.londontimes.tv/261",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 13
+    },
+    {
+      "id": "hanja-src-londontimes-270",
+      "title": "큰 대(大)",
+      "url": "https://www.londontimes.tv/270",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 14
+    },
+    {
+      "id": "hanja-src-londontimes-277",
+      "title": "장부야 종대일(丈夫也 從大一)",
+      "url": "https://www.londontimes.tv/277",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 15
+    },
+    {
+      "id": "hanja-src-londontimes-283",
+      "title": "보일 시(示)",
+      "url": "https://www.londontimes.tv/283",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 16
+    },
+    {
+      "id": "hanja-src-londontimes-289",
+      "title": "신(神)",
+      "url": "https://www.londontimes.tv/289",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "신",
+        "god-spirit"
+      ],
+      "notes": null,
+      "importLine": 17
+    },
+    {
+      "id": "hanja-src-londontimes-301",
+      "title": "복(福)",
+      "url": "https://www.londontimes.tv/301",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "복",
+        "blessing"
+      ],
+      "notes": null,
+      "importLine": 18
+    },
+    {
+      "id": "hanja-src-londontimes-313",
+      "title": "있을 재(在)",
+      "url": "https://www.londontimes.tv/313",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 19
+    },
+    {
+      "id": "hanja-src-londontimes-319",
+      "title": "완전할 완(完)",
+      "url": "https://www.londontimes.tv/319",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 20
+    },
+    {
+      "id": "hanja-src-londontimes-329",
+      "title": "옷 의(衣)와 처음 초(初)",
+      "url": "https://www.londontimes.tv/329",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 21
+    },
+    {
+      "id": "hanja-src-londontimes-338",
+      "title": "갓옷 구(裘)",
+      "url": "https://www.londontimes.tv/338",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 22
+    },
+    {
+      "id": "hanja-src-londontimes-367",
+      "title": "옷 벗을 라(裸)와 금할 금(禁)",
+      "url": "https://www.londontimes.tv/367",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 23
+    },
+    {
+      "id": "hanja-src-londontimes-hanja",
+      "title": "성경이 만든 漢字 전체 목록",
+      "url": "https://www.londontimes.tv/sub.html?section=sc20",
+      "kind": "reference",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 24
+    },
+    {
+      "id": "hanja-src-londontimes-3-2",
+      "title": "한자(漢字)의 기원은 단군왕검 때 만든 문자 (3-2부)",
+      "url": "https://www.londontimes.tv/974",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "런던타임즈",
+      "section": "성경이 만든 한자 시리즈 (런던타임즈)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 25
+    },
+    {
+      "id": "hanja-src-creation-kr-1",
+      "title": "창세기와 한자 (1) —",
+      "url": "https://creation.kr/archaeology/?bmode=view&idx=1288712",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 35
+    },
+    {
+      "id": "hanja-src-creation-kr-2",
+      "title": "창세기와 한자 (2) —",
+      "url": "https://creation.kr/archaeology/?bmode=view&idx=1288713",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 36
+    },
+    {
+      "id": "hanja-src-creation-kr-3",
+      "title": "창세기와 한자 (3) —",
+      "url": "https://creation.kr/archaeology/?bmode=view&idx=1288714",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 37
+    },
+    {
+      "id": "hanja-src-creation-kr-archaeology",
+      "title": "한자에 숨겨져 있는 창세기 —",
+      "url": "https://creation.kr/archaeology/?bmode=view&idx=1288703",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 38
+    },
+    {
+      "id": "hanja-src-creation-kr-topic502",
+      "title": "성경의 고고학적 증거들 - 한자 —",
+      "url": "https://creation.kr/Topic502/?bmode=view&idx=6822832",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 39
+    },
+    {
+      "id": "hanja-src-creation-kr-3000-3d",
+      "title": "3000년 전 가장 초기의 중국 갑골문자 3D 모델: 한자와 창세기의 관련성 —",
+      "url": "https://creation.kr/Genesis/?bmode=view&idx=1289142",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 40
+    },
+    {
+      "id": "hanja-src-creation-kr-5",
+      "title": "창조주: 언어학, 창세기, 그리고 진화론 제5부 —",
+      "url": "https://creation.kr/archaeology/?bmode=view&idx=1288705",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "한국창조과학회",
+      "section": "한국창조과학회 (creation.kr) - 창세기와 한자",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 41
+    },
+    {
+      "id": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "title": "Answers in Genesis — The Lamb of God Hidden in Chinese Characters",
+      "url": "https://answersingenesis.org/jesus/the-lamb-of-god-hidden-in-chinese-characters/",
+      "kind": "article",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Answers in Genesis",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "신",
+        "god-spirit"
+      ],
+      "notes": null,
+      "importLine": 48
+    },
+    {
+      "id": "hanja-src-answers-in-genesis-do-chinese-characters-support-genesis",
+      "title": "Answers in Genesis — Do Chinese Characters Support Genesis?",
+      "url": "https://answersingenesis.org/bible-history/do-chinese-characters-support-genesis/",
+      "kind": "article",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Answers in Genesis",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 51
+    },
+    {
+      "id": "hanja-src-answers-in-genesis-chinese-characters-and-genesis",
+      "title": "Answers in Genesis — Chinese Characters and Genesis",
+      "url": "https://answersingenesis.org/genesis/chinese-characters-and-genesis/",
+      "kind": "article",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Answers in Genesis",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 54
+    },
+    {
+      "id": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "title": "Institute for Creation Research — Genesis in Chinese Pictographs",
+      "url": "https://www.icr.org/article/genesis-chinese-pictographs/",
+      "kind": "article",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Institute for Creation Research",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 57
+    },
+    {
+      "id": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "title": "Creation.com — Chinese Characters and Genesis (PDF 논문)",
+      "url": "https://creation.com/images/pdfs/tj/j13_1/j13_1_81-91.pdf",
+      "kind": "paper",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Creation.com",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 60
+    },
+    {
+      "id": "hanja-src-sino-platonic-papers-sino-platonic-papers",
+      "title": "Sino-Platonic Papers — 학술 비평 논문 (반대 관점)",
+      "url": "https://sino-platonic.org/complete/spp107_chinese_book_reviews.pdf",
+      "kind": "paper",
+      "language": "en",
+      "stance": "critical",
+      "catalogRole": "curated",
+      "publisher": "Sino-Platonic Papers",
+      "section": "영문 사이트 - Chinese Characters & Bible",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "critical-review"
+      ],
+      "notes": null,
+      "importLine": 63
+    },
+    {
+      "id": "hanja-src-shinmoongo-net-1900",
+      "title": "신문고 — 1900년전 허신의 설문해자가 창세기를 기록한 책이라고?",
+      "url": "https://www.shinmoongo.net/3612",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 70
+    },
+    {
+      "id": "hanja-src-pluskorea-net-10",
+      "title": "플러스코리아 — 성경이 만든 한자 (박재성, 제10강 복福)",
+      "url": "https://www.pluskorea.net/10911",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 73
+    },
+    {
+      "id": "hanja-src-cjob-co-kr-116",
+      "title": "기독정보넷 (cjob.co.kr) — [제116강] 성경과 한자(漢字)와의 연관된 뜻과 의미",
+      "url": "https://www.cjob.co.kr/bbs/board.php?bo_table=tv&wr_id=4589",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 76
+    },
+    {
+      "id": "hanja-src-bonhd-net-bonhd-net",
+      "title": "본뉴스 (bonhd.net) — 갑골문자에서 신학적 의미를 도출한 송태정 박사",
+      "url": "https://www.bonhd.net/news/articleView.html?idxno=16673",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 79
+    },
+    {
+      "id": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "title": "동탄명성교회 — 한자에 담김 창세기의 발견",
+      "url": "https://dongtanms.kr/faith_resources/220605",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 82
+    },
+    {
+      "id": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "title": "FG뉴스 (fgnews.kr) — 귀신이 아니라 천지만물을 이끌어내어 창조하신 분 - 하나님 신(神)",
+      "url": "https://www.fgnews.kr/news/articleView.html?idxno=1116",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "신",
+        "god-spirit"
+      ],
+      "notes": null,
+      "importLine": 85
+    },
+    {
+      "id": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "title": "FG뉴스 (fgnews.kr) — 의로움을 주시는 메시아 - 의로울 의(義)",
+      "url": "http://www.fgnews.kr/news/articleView.html?idxno=1114",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "의",
+        "righteousness"
+      ],
+      "notes": null,
+      "importLine": 88
+    },
+    {
+      "id": "hanja-src-chicagokoreatimes-com-53610",
+      "title": "시카고코리아타임즈 — 한자 속에 숨어있는 성경이야기 - 옳을 의(義)",
+      "url": "https://chicagokoreatimes.com/한자속에-숨어있는-성경이야기-옳을-의義/오피니언/53610/",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "의",
+        "righteousness"
+      ],
+      "notes": null,
+      "importLine": 91
+    },
+    {
+      "id": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "title": "교회닷컴 (churchr.or.kr) — 성경한자 공부를 소개합니다",
+      "url": "http://www.churchr.or.kr/news/articleView.html?idxno=4482",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 94
+    },
+    {
+      "id": "hanja-src-christiantoday-co-kr-news-255831",
+      "title": "크리스천투데이 — 한자-성경 관련 기사",
+      "url": "https://www.christiantoday.co.kr/news/255831",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 97
+    },
+    {
+      "id": "hanja-src-christiandaily-co-kr-news-136894",
+      "title": "크리스찬데일리 — 칭의(稱義)와 정의(正義)",
+      "url": "https://www.christiandaily.co.kr/news/136894",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 100
+    },
+    {
+      "id": "hanja-src-newspower-co-kr-newspower",
+      "title": "Newspower — 성경-한자 관련 기사",
+      "url": "http://www.newspower.co.kr/4523",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 103
+    },
+    {
+      "id": "hanja-src-crs-news-com-crs-news",
+      "title": "CRS News — 성경-한자 관련 기사",
+      "url": "http://www.crs-news.com/5314",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 106
+    },
+    {
+      "id": "hanja-src-daehanilbo-com-article-php",
+      "title": "대한일보 — 노아와 한자 관련 기사",
+      "url": "http://www.daehanilbo.com/article.php?aid=1752131010139256041",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 109
+    },
+    {
+      "id": "hanja-src-kehcnews-co-kr-kehc-news",
+      "title": "KEHC News — 한자-성경 관련 기사",
+      "url": "http://www.kehcnews.co.kr/news/articleView.html?idxno=419",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 112
+    },
+    {
+      "id": "hanja-src-subkorea-com-1",
+      "title": "SubKorea — 설문해자-창세기 기사 (1)",
+      "url": "http://www.subkorea.com/xe/?document_srl=172196",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 115
+    },
+    {
+      "id": "hanja-src-subkorea-com-2",
+      "title": "SubKorea — 설문해자-창세기 기사 (2)",
+      "url": "http://www.subkorea.com/xe/?document_srl=172015",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": null,
+      "importLine": 118
+    },
+    {
+      "id": "hanja-src-cdntv-co-kr-cdntv",
+      "title": "CDNTV — 한자-성경 관련 방송",
+      "url": "http://www.cdntv.co.kr/bbs/board.php?bo_table=12&wr_id=627",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 121
+    },
+    {
+      "id": "hanja-src-dstv-kr-dstv",
+      "title": "DSTV — 한자-성경 관련 방송",
+      "url": "https://www.dstv.kr/bbs/board.php?bo_table=31&wr_id=18",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 124
+    },
+    {
+      "id": "hanja-src-ubf-kr-ubf-korea",
+      "title": "UBF Korea — 한자-성경 관련 자료",
+      "url": "https://www.ubf.kr/main/sub.html?Mode=view&boardID=www65&num=1781",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 127
+    },
+    {
+      "id": "hanja-src-christianreview-com-au-australian-christian-review",
+      "title": "Australian Christian Review — 구원이란 무엇인가?",
+      "url": "http://www.christianreview.com.au/7374",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "국내 기독교 사이트 & 뉴스",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 130
+    },
+    {
+      "id": "hanja-src-youtube-42-8-views",
+      "title": "한자와 창세기 (서울에스라교회) — 42.8만 views",
+      "url": "https://www.youtube.com/watch?v=LgAv6SZiaJ0",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 140
+    },
+    {
+      "id": "hanja-src-youtube-15-7-views",
+      "title": "창세기 1장 1절의 비밀 — 15.7만 views",
+      "url": "https://www.youtube.com/watch?v=TvixCvQCZVE",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 142
+    },
+    {
+      "id": "hanja-src-youtube-4-3-views",
+      "title": "한자와 창세기 (김명현 공식채널) — 4.3만 views",
+      "url": "https://www.youtube.com/watch?v=zD6dwXjSQVc",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 144
+    },
+    {
+      "id": "hanja-src-youtube-3-1-views",
+      "title": "성경과학아카데미 6강 한자와 창세기 (153쉴터) — 3.1만 views",
+      "url": "https://www.youtube.com/watch?v=ipom8Y7Zx3w",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 146
+    },
+    {
+      "id": "hanja-src-youtube-1-1",
+      "title": "창세기 1:1의 비밀 (뉴웨이브 처치)",
+      "url": "https://www.youtube.com/watch?v=XgZlr13XEMQ",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 148
+    },
+    {
+      "id": "hanja-src-youtube-fah5nro1as8",
+      "title": "한자와 창세기 (뉴웨이브 처치)",
+      "url": "https://www.youtube.com/watch?v=fah5nrO1AS8",
+      "kind": "video",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 150
+    },
+    {
+      "id": "hanja-src-youtube-01",
+      "title": "한자와 창세기(01): 한자 속 사탄마귀와 인간의 타락",
+      "url": "https://www.youtube.com/@동탄명성교회",
+      "kind": "channel",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 한국어 강사/채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 한국어 강사/채널",
+      "importLine": 157
+    },
+    {
+      "id": "hanja-src-youtube-20",
+      "title": "놀라운 성경과 한자의 비밀 — 한자 개별 분석 20+편",
+      "url": "https://www.youtube.com/@놀라운성경과한자의비밀",
+      "kind": "channel",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "전용 채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "전용 채널",
+      "importLine": 164
+    },
+    {
+      "id": "hanja-src-youtube-in-15",
+      "title": "성경해자TV — 예수님 in 한자 분석 15+편",
+      "url": "https://www.youtube.com/@성경해자TV",
+      "kind": "channel",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "전용 채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "jesus",
+        "video"
+      ],
+      "notes": "전용 채널",
+      "importLine": 166
+    },
+    {
+      "id": "hanja-src-youtube-channel",
+      "title": "성경한자사관학교",
+      "url": "https://www.youtube.com/@성경한자사관학교",
+      "kind": "channel",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "전용 채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "전용 채널",
+      "importLine": 168
+    },
+    {
+      "id": "hanja-src-youtube-153",
+      "title": "153쉴터 — 성경과학아카데미 (김명현 박사)",
+      "url": "https://www.youtube.com/@153쉴터",
+      "kind": "channel",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "전용 채널",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "전용 채널",
+      "importLine": 170
+    },
+    {
+      "id": "hanja-src-youtube-god-in-ancient-china-188-views",
+      "title": "Scott Sacker — God in Ancient China (188만 views)",
+      "url": "https://www.youtube.com/watch?v=DA-AkJzpKmg",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "신",
+        "god-spirit",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 174
+    },
+    {
+      "id": "hanja-src-youtube-ancient-chinese-records-shows-jesus-is-god-136-views",
+      "title": "Ancient Chinese Records Shows Jesus is God (136만 views)",
+      "url": "https://www.youtube.com/watch?v=-p1MBhTwJ-o",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "jesus",
+        "신",
+        "god-spirit",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 176
+    },
+    {
+      "id": "hanja-src-youtube-god-of-the-bible-in-ancient-china-37-views",
+      "title": "John Young — God Of The Bible In Ancient China (37만 views)",
+      "url": "https://www.youtube.com/watch?v=VS-sKQwB-fc",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "신",
+        "god-spirit",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 178
+    },
+    {
+      "id": "hanja-src-youtube-genesis-code-hidden-within-the-ancient-chinese-language-22-views",
+      "title": "Genesis Code Hidden Within The Ancient Chinese Language (22만 views)",
+      "url": "https://www.youtube.com/watch?v=YjGUC9GNqfE",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 180
+    },
+    {
+      "id": "hanja-src-youtube-the-gospel-message-in-chinese-characters-19-views",
+      "title": "The Gospel Message in Chinese Characters (19만 views)",
+      "url": "https://www.youtube.com/watch?v=Y15tiLBUw-I",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "jesus",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 182
+    },
+    {
+      "id": "hanja-src-youtube-bible-proof-chinese-characters-tells-gospel-12-views",
+      "title": "Bible PROOF! Chinese Characters Tells Gospel (12만 views)",
+      "url": "https://www.youtube.com/watch?v=auK4AeCLLc8",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "jesus",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 184
+    },
+    {
+      "id": "hanja-src-youtube-christian-symbols-hidden-in-ancient-chinese-characters-9-7-views",
+      "title": "Christian symbols hidden in ancient Chinese characters (9.7만 views)",
+      "url": "https://www.youtube.com/watch?v=fg94w9KELc8",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 186
+    },
+    {
+      "id": "hanja-src-youtube-hidden-codes-in-chinese-characters-by-steven-liu-6-5-views",
+      "title": "Hidden Codes in Chinese Characters by Steven Liu (6.5만 views)",
+      "url": "https://www.youtube.com/watch?v=PtiN-tET6rE",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 188
+    },
+    {
+      "id": "hanja-src-youtube-nelson-walters-4-9-views",
+      "title": "Chinese Characters and the Bible — Nelson Walters (4.9만 views)",
+      "url": "https://www.youtube.com/watch?v=BvNwrADLjq8",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 190
+    },
+    {
+      "id": "hanja-src-youtube-story-behind-chinese-character",
+      "title": "Righteousness (義) — Story behind Chinese character",
+      "url": "https://www.youtube.com/watch?v=pMvC-8grqcc",
+      "kind": "video",
+      "language": "en",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "YouTube",
+      "section": "YouTube — 한자 속 성경 증거 영상",
+      "subsection": "주요 영문 영상",
+      "topicTags": [
+        "hanja",
+        "bible",
+        "의",
+        "righteousness",
+        "video"
+      ],
+      "notes": "주요 영문 영상",
+      "importLine": 192
+    },
+    {
+      "id": "hanja-src-keepbible-keepbible",
+      "title": "킵바이블 (KeepBible) — 한자-성경 연구 자료",
+      "url": "https://www.keepbible.com/Study5/View/3PU",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "KeepBible",
+      "section": "성경공부 & 자료 사이트",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 199
+    },
+    {
+      "id": "hanja-src-bible-science-bible-science",
+      "title": "Bible Science — 한자-성경 관련 연구자 정보",
+      "url": "https://www.biblescience.org/staff",
+      "kind": "reference",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "Bible Science",
+      "section": "성경공부 & 자료 사이트",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 204
+    },
+    {
+      "id": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "title": "Finger of Thomas — 흙으로 사람을 지었다는 성경",
+      "url": "https://www.fingerofthomas.org/%ED%9D%99%EC%9C%BC%EB%A1%9C-%EC%82%AC%EB%9E%8C%EC%9D%84-%EC%A7%80%EC%97%88%EB%8B%A4%EB%8A%94-%EC%84%B1%EA%B2%BD/",
+      "kind": "article",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "성경공부 & 자료 사이트",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 207
+    },
+    {
+      "id": "hanja-src-wordsquare-wordsquare",
+      "title": "단어사각형 (WordSquare) — 성경-한자 사전",
+      "url": "https://www.wordsquare.org/bible-forest/dictionary/%EC%A7%84%EC%8B%A4",
+      "kind": "reference",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": "WordSquare",
+      "section": "성경공부 & 자료 사이트",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible"
+      ],
+      "notes": null,
+      "importLine": 210
+    },
+    {
+      "id": "hanja-src-honey55-com-1372-document",
+      "title": "꿀벌책방",
+      "url": "https://honey55.com/?page_id=1372&mod=document&uid=3948",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 217
+    },
+    {
+      "id": "hanja-src-product-kyobobook-co-kr-detail-s000001588283",
+      "title": "교보문고",
+      "url": "https://product.kyobobook.co.kr/detail/S000001588283",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 218
+    },
+    {
+      "id": "hanja-src-yes24-com-24",
+      "title": "예스24",
+      "url": "https://www.yes24.com/product/goods/126357049",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 219
+    },
+    {
+      "id": "hanja-src-kbookstore-com-k-bookstore",
+      "title": "K-Bookstore",
+      "url": "https://kbookstore.com/product/9788994664323/",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 220
+    },
+    {
+      "id": "hanja-src-bookoa-co-kr-bookoa",
+      "title": "Bookoa",
+      "url": "https://www.bookoa.co.kr/book/detail/5e3ed1ed03694f3d79af2016",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 221
+    },
+    {
+      "id": "hanja-src-ypbooks-co-kr-yp-books",
+      "title": "YP Books",
+      "url": "https://www.ypbooks.co.kr/books/202308231323724373",
+      "kind": "book",
+      "language": "ko",
+      "stance": "supportive",
+      "catalogRole": "curated",
+      "publisher": null,
+      "section": "도서 정보",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis"
+      ],
+      "notes": "「설문해자에 나타난 창세기」 — 임번삼 저 (ISBN: 9788994664323)",
+      "importLine": 222
+    },
+    {
+      "id": "hanja-src-riss-search-search-do",
+      "title": "한자+창세기",
+      "url": "https://www.riss.kr/search/Search.do?queryText=%ED%95%9C%EC%9E%90+%EC%B0%BD%EC%84%B8%EA%B8%B0",
+      "kind": "search",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "RISS",
+      "section": "학술 자료 검색 (직접 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "lead"
+      ],
+      "notes": "RISS (한국학술정보) — JavaScript 기반, 직접 브라우저 열어서 검색",
+      "importLine": 229
+    },
+    {
+      "id": "hanja-src-riss-search-search-do-2",
+      "title": "한자+성경",
+      "url": "https://www.riss.kr/search/Search.do?queryText=%ED%95%9C%EC%9E%90+%EC%84%B1%EA%B2%BD",
+      "kind": "search",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "RISS",
+      "section": "학술 자료 검색 (직접 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "RISS (한국학술정보) — JavaScript 기반, 직접 브라우저 열어서 검색",
+      "importLine": 230
+    },
+    {
+      "id": "hanja-src-riss-search-search-do-3",
+      "title": "설문해자+창세기",
+      "url": "https://www.riss.kr/search/Search.do?queryText=%EC%84%A4%EB%AC%B8%ED%95%B4%EC%9E%90+%EC%B0%BD%EC%84%B8%EA%B8%B0",
+      "kind": "search",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "RISS",
+      "section": "학술 자료 검색 (직접 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "lead"
+      ],
+      "notes": "RISS (한국학술정보) — JavaScript 기반, 직접 브라우저 열어서 검색",
+      "importLine": 231
+    },
+    {
+      "id": "hanja-src-riss-search-search-do-4",
+      "title": "갑골문자+성경",
+      "url": "https://www.riss.kr/search/Search.do?queryText=%EA%B0%91%EA%B3%A8%EB%AC%B8%EC%9E%90+%EC%84%B1%EA%B2%BD",
+      "kind": "search",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "RISS",
+      "section": "학술 자료 검색 (직접 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "RISS (한국학술정보) — JavaScript 기반, 직접 브라우저 열어서 검색",
+      "importLine": 232
+    },
+    {
+      "id": "hanja-src-baidu-s",
+      "title": "汉字圣经",
+      "url": "https://www.baidu.com/s?wd=%E6%B1%89%E5%AD%97%E5%9C%A3%E7%BB%8F",
+      "kind": "search",
+      "language": "zh",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Baidu",
+      "section": "중국어 자료 (Baidu 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "한자가 성경을 증거한다는 주제에 대한 중국어 자료. 브라우저로 직접 접속 필요",
+      "importLine": 239
+    },
+    {
+      "id": "hanja-src-baidu-s-2",
+      "title": "汉字创造论",
+      "url": "https://www.baidu.com/s?wd=%E6%B1%89%E5%AD%97%E5%88%9B%E9%80%A0%E8%AE%BA",
+      "kind": "search",
+      "language": "zh",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Baidu",
+      "section": "중국어 자료 (Baidu 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "한자가 성경을 증거한다는 주제에 대한 중국어 자료. 브라우저로 직접 접속 필요",
+      "importLine": 240
+    },
+    {
+      "id": "hanja-src-baidu-s-3",
+      "title": "汉字创世纪",
+      "url": "https://www.baidu.com/s?wd=%E6%B1%89%E5%AD%97%E5%88%9B%E4%B8%96%E7%BA%AA",
+      "kind": "search",
+      "language": "zh",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Baidu",
+      "section": "중국어 자료 (Baidu 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "한자가 성경을 증거한다는 주제에 대한 중국어 자료. 브라우저로 직접 접속 필요",
+      "importLine": 241
+    },
+    {
+      "id": "hanja-src-baidu-s-4",
+      "title": "说文解字圣经",
+      "url": "https://www.baidu.com/s?wd=%E8%AF%B4%E6%96%87%E8%A7%A3%E5%AD%97%E5%9C%A3%E7%BB%8F",
+      "kind": "search",
+      "language": "zh",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Baidu",
+      "section": "중국어 자료 (Baidu 검색 필요)",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": "한자가 성경을 증거한다는 주제에 대한 중국어 자료. 브라우저로 직접 접속 필요",
+      "importLine": 242
+    },
+    {
+      "id": "hanja-src-naver-blog-green1352",
+      "title": "green1352 — 한자 창세기 증명, 禁, 八자 분석 등 다수",
+      "url": "https://blog.naver.com/green1352",
+      "kind": "blog",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Naver Blog",
+      "section": "Naver 블로그 — 주요 블로거",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "lead"
+      ],
+      "notes": null,
+      "importLine": 250
+    },
+    {
+      "id": "hanja-src-naver-blog-panzer90",
+      "title": "panzer90 — 한문성경 원문 시리즈",
+      "url": "https://blog.naver.com/panzer90",
+      "kind": "blog",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Naver Blog",
+      "section": "Naver 블로그 — 주요 블로거",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": null,
+      "importLine": 252
+    },
+    {
+      "id": "hanja-src-naver-blog-p10253639",
+      "title": "p10253639 — 한자 창세기 증명",
+      "url": "https://blog.naver.com/p10253639",
+      "kind": "blog",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Naver Blog",
+      "section": "Naver 블로그 — 주요 블로거",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "genesis",
+        "lead"
+      ],
+      "notes": null,
+      "importLine": 254
+    },
+    {
+      "id": "hanja-src-naver-blog-12hoya7",
+      "title": "12hoya7 — 義(의) 자 분석 다수",
+      "url": "https://blog.naver.com/12hoya7",
+      "kind": "blog",
+      "language": "ko",
+      "stance": "unclear",
+      "catalogRole": "lead",
+      "publisher": "Naver Blog",
+      "section": "Naver 블로그 — 주요 블로거",
+      "subsection": null,
+      "topicTags": [
+        "hanja",
+        "bible",
+        "lead"
+      ],
+      "notes": null,
+      "importLine": 256
+    }
+  ]
+}

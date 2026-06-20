@@ -36,26 +36,34 @@ function overlapsExpected(actual, expected) {
   });
 }
 
+function textParts(value, parts = []) {
+  if (value == null) return parts;
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    parts.push(String(value));
+    return parts;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) textParts(item, parts);
+    return parts;
+  }
+  if (typeof value === 'object') {
+    for (const item of Object.values(value)) textParts(item, parts);
+  }
+  return parts;
+}
+
 function scoreCase(testCase, json, elapsed) {
-  const retrieval = json.retrieval || {};
-  const response = json.response || {};
   const rag = json.ragQuery || {};
-  const actualPrimary = toRef(retrieval.primaryReference);
-  const text = [
-    retrieval.rationale,
-    response.concernSummary,
-    response.relevanceSummary,
-    response.whyTheseTexts,
-    response.personalConnection,
-  ].filter(Boolean).join('\n');
+  const actualPrimary = toRef(json.primary?.reference);
+  const text = textParts({ explanation: json.explanation, background: json.background, clarifyPrompt: json.clarifyPrompt }).join('\n');
   const hits = (testCase.expectedTerms || []).filter((term) => text.includes(term));
 
   const checks = [
     { name: 'http', ok: elapsed < 120 },
     { name: 'query-plan', ok: ['deterministic', 'hermes-agent', 'hermes'].includes(rag.expansionProvider) },
-    { name: 'reliable', ok: retrieval.confidence !== 'low' && Number(retrieval.passageScore || 0) >= 5 },
-    { name: 'expected-primary', ok: overlapsExpected(actualPrimary, testCase.expectedPrimaryRefs || []) },
-    { name: 'explanation-terms', ok: hits.length >= 2 && response.whyTheseTexts && response.relevanceSummary },
+    { name: 'reliable', ok: ['direct', 'safety_first'].includes(json.state) && json.confidence !== 'low' && Number(json.meta?.passageScore || 0) >= 5 },
+    { name: 'expected-primary', ok: json.primary !== null && overlapsExpected(actualPrimary, testCase.expectedPrimaryRefs || []) },
+    { name: 'explanation-terms', ok: hits.length >= 2 && !!json.explanation },
   ];
   return { actualPrimary, hits, checks, score: checks.filter((check) => check.ok).length };
 }
@@ -86,15 +94,17 @@ for (const [index, testCase] of cases.entries()) {
       elapsed: Number(elapsed.toFixed(1)),
       score: scored.score,
       max: 5,
+      baseUrl,
       primary: scored.actualPrimary,
       expectedPrimaryRefs: testCase.expectedPrimaryRefs,
-      confidence: json.retrieval?.confidence,
-      passageScore: json.retrieval?.passageScore,
+      confidence: json.confidence,
+      state: json.state,
+      passageScore: json.meta?.passageScore,
       ragProvider: json.ragQuery?.expansionProvider,
       ragModel: json.ragQuery?.expansionModel,
       hits: scored.hits,
       failedChecks: scored.checks.filter((check) => !check.ok).map((check) => check.name),
-      rationale: String(json.retrieval?.rationale || '').slice(0, 240),
+      primaryReason: String(json.primary?.reason || '').slice(0, 240),
     });
     console.log(JSON.stringify(results.at(-1), null, 0));
   } catch (error) {
@@ -107,6 +117,7 @@ for (const [index, testCase] of cases.entries()) {
 const earned = results.reduce((sum, result) => sum + result.score, 0);
 const possible = results.reduce((sum, result) => sum + result.max, 0);
 const summary = {
+  baseUrl,
   total: results.length,
   earned,
   possible,

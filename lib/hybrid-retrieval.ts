@@ -1,5 +1,6 @@
 import type { BibleReference } from "@/lib/bible";
 import { loadBiblePassageIndex, type BiblePassageUnit } from "@/lib/bible-passage-index";
+import { findCandidatePassageUnits } from "@/lib/passage-index-db";
 import type { QuestionUnderstanding } from "@/lib/question-understanding";
 
 export type HybridPassageCandidate = {
@@ -17,16 +18,16 @@ export type HybridPassageCandidate = {
 };
 
 type IndexedUnit = BiblePassageUnit & {
-  id?: string;
+  canonicalWeight?: number;
+  crossReferenceDegree?: number;
+  crossReferences?: string[];
+  axisValues?: string[];
+  searchCorpus?: string;
   normalizedText?: string;
   doctrines?: string[];
   humanConcerns?: string[];
   questionsAnswered?: string[];
   entities?: string[];
-  canonicalWeight?: number;
-  crossReferenceDegree?: number;
-  axes?: string[];
-  crossReferences?: string[];
 };
 
 const ENGLISH_STOP_WORDS: Record<string, true> = {
@@ -52,10 +53,10 @@ function unique(values: string[]) {
   return [...new Set(values.filter(Boolean))];
 }
 
-function fieldValues(unit: IndexedUnit) {
+function fallbackAxisValues(unit: IndexedUnit) {
   return unique([
+    ...(unit.axisValues ?? []),
     ...(unit.themes ?? []),
-    ...(unit.keywords ?? []),
     ...(unit.doctrines ?? []),
     ...(unit.humanConcerns ?? []),
     ...(unit.questionsAnswered ?? []),
@@ -65,7 +66,15 @@ function fieldValues(unit: IndexedUnit) {
 }
 
 function unitCorpus(unit: IndexedUnit) {
-  return [unit.text, unit.normalizedText, unit.summary, ...fieldValues(unit)].filter(Boolean).join(" ").toLowerCase();
+  if (unit.searchCorpus) return unit.searchCorpus.toLowerCase();
+  return [unit.text ?? unit.excerpt ?? "", unit.normalizedText, unit.summary, ...fallbackAxisValues(unit), ...(unit.keywords ?? [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function semanticCorpus(unit: IndexedUnit) {
+  return [unit.summary, ...fallbackAxisValues(unit), ...(unit.keywords ?? [])].filter(Boolean).join(" ").toLowerCase();
 }
 
 function scoreTermCoverage(terms: string[], corpus: string) {
@@ -85,10 +94,10 @@ function scoreAxisCoverage(question: QuestionUnderstanding, values: string[]) {
   return { score: matched.length / Math.max(axes.length, 1), matched: unique(matched) };
 }
 
-function directnessFor(score: number, axisScore: number, lexicalScore: number): HybridPassageCandidate["directness"] {
-  if (score >= 76 || axisScore >= 0.5) return "direct";
-  if (score >= 48 || lexicalScore >= 0.25) return "supporting";
-  if (score >= 25) return "background";
+function directnessFor(score: number, axisScore: number, lexicalScore: number, semanticScore: number): HybridPassageCandidate["directness"] {
+  if (score >= 68 || axisScore >= 0.5 || (lexicalScore >= 0.3 && semanticScore >= 0.2)) return "direct";
+  if (score >= 42 || lexicalScore >= 0.2 || semanticScore >= 0.2) return "supporting";
+  if (score >= 22) return "background";
   return "weak";
 }
 
@@ -114,40 +123,49 @@ export function formatReference(reference: BibleReference) {
 }
 
 export async function retrieveHybridPassageCandidates(question: QuestionUnderstanding, limit = 12): Promise<HybridPassageCandidate[]> {
-  if (question.answerMode === "clarify_with_starters" || question.confidence === "low") return [];
+  if (question.answerMode === "clarify_with_starters" || question.answerMode === "limited_answer") return [];
 
-  const { units } = await loadBiblePassageIndex(question.locale);
-  const queryTerms = unique([
-    ...tokenize(question.normalized),
-    ...question.searchQueries.flatMap(tokenize),
+  const normalizedTerms = tokenize(question.normalized);
+  const searchQueryTerms = unique(question.searchQueries.flatMap(tokenize));
+  const axisTerms = unique([
     ...question.concernAxes.flatMap(tokenize),
     ...question.theologicalAxes.flatMap(tokenize),
   ]);
+  const queryTerms = unique([...normalizedTerms, ...searchQueryTerms, ...axisTerms]);
+  const semanticTerms = searchQueryTerms.length ? searchQueryTerms : normalizedTerms;
+  const candidatePool =
+    (await findCandidatePassageUnits({
+      locale: question.locale,
+      terms: queryTerms,
+      limit: Math.max(limit * 10, 80),
+    })) ?? (await loadBiblePassageIndex(question.locale)).units;
 
-  const scored = units.map((unit) => {
+  const scored = candidatePool.map((unit) => {
     const indexedUnit = unit as IndexedUnit;
     const corpus = unitCorpus(indexedUnit);
-    const values = fieldValues(indexedUnit);
+    const values = fallbackAxisValues(indexedUnit);
+    const promptLexical = scoreTermCoverage(normalizedTerms, corpus);
     const lexical = scoreTermCoverage(queryTerms, corpus);
     const axis = scoreAxisCoverage(question, values);
-    const semantic = scoreTermCoverage(question.searchQueries.flatMap(tokenize), [indexedUnit.summary, ...values].filter(Boolean).join(" ").toLowerCase());
+    const semantic = scoreTermCoverage(semanticTerms, semanticCorpus(indexedUnit));
     const crossReferenceDegree = indexedUnit.crossReferenceDegree ?? indexedUnit.crossReferences?.length ?? 0;
     const canonicalWeight = indexedUnit.canonicalWeight ?? 1;
     const crossReferenceScore = Math.min(crossReferenceDegree / 12, 1);
     const canonicalCoverageScore = Math.max(0, Math.min(canonicalWeight, 1));
-    const matchScore = lexical.score * 34 + semantic.score * 22 + axis.score * 30;
-    const finalScore = matchScore > 0 ? matchScore + crossReferenceScore * 6 + canonicalCoverageScore * 8 : 0;
+    const evidenceMatched = promptLexical.matched.length + lexical.matched.length + semantic.matched.length + axis.matched.length > 0;
+    const matchScore = promptLexical.score * 18 + lexical.score * 28 + semantic.score * 24 + axis.score * 26;
+    const finalScore = evidenceMatched ? matchScore + crossReferenceScore * 6 + canonicalCoverageScore * 8 : 0;
     const base = {
       unit,
-      lexicalScore: lexical.score,
+      lexicalScore: Math.max(promptLexical.score, lexical.score),
       semanticScore: semantic.score,
       axisScore: axis.score,
       crossReferenceScore,
       canonicalCoverageScore,
       finalScore,
-      directness: directnessFor(finalScore, axis.score, lexical.score),
+      directness: directnessFor(finalScore, axis.score, Math.max(promptLexical.score, lexical.score), semantic.score),
       matchedAxes: axis.matched,
-      matchedQueries: unique([...lexical.matched, ...semantic.matched]),
+      matchedQueries: unique([...promptLexical.matched, ...lexical.matched, ...semantic.matched]),
     } satisfies Omit<HybridPassageCandidate, "reason">;
 
     return { ...base, reason: reasonFor(question, base) };

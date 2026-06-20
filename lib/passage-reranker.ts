@@ -2,13 +2,13 @@ import type { QuestionUnderstanding } from "@/lib/question-understanding";
 import type { HybridPassageCandidate } from "@/lib/hybrid-retrieval";
 
 const MODE_DIRECTNESS_BOOST: Record<QuestionUnderstanding["answerMode"], Partial<Record<HybridPassageCandidate["directness"], number>>> = {
-  direct_bible_answer: { direct: 10, supporting: 4 },
-  survey_bundle: { direct: 6, supporting: 7, background: 2 },
-  wisdom_principle: { supporting: 8, background: 5, direct: -8 },
-  pastoral_care: { direct: 7, supporting: 6 },
-  safety_first: { direct: 8, supporting: 6 },
+  direct_bible_answer: { direct: 12, supporting: 3, background: -6, weak: -20 },
+  survey_bundle: { direct: 10, supporting: 6, background: 0, weak: -18 },
+  wisdom_principle: { supporting: 9, background: 4, direct: -6, weak: -18 },
+  pastoral_care: { direct: 8, supporting: 6, background: 1, weak: -16 },
+  safety_first: { direct: 9, supporting: 7, background: 2, weak: -16 },
   clarify_with_starters: { weak: 0 },
-  limited_answer: { supporting: 3, background: 3 },
+  limited_answer: { supporting: 2, background: -4, weak: -12 },
 };
 
 const CANONICAL_SECTION_RANK_BY_BOOK: Record<string, number> = {

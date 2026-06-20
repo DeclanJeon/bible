@@ -15,8 +15,11 @@
     "qa:crossrefs": "node scripts/run-crossref-network-qa.mjs",
     "qa:open-ended": "node scripts/run-open-ended-bible-qa.mjs --fixture qa/open-ended-bible-qa.json --locale ko",
     "qa:doctrine": "node scripts/run-doctrine-diversity-qa.mjs --fixture qa/doctrine-diversity-qa.json --locale ko",
-    "ingest:crossrefs": "python3 scripts/ingest_openbible_crossrefs.py",
-    "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py"
+    "ingest:crossrefs": "python3 scripts/ingest_openbible_crossrefs.py && node scripts/build-crossref-sqlite.mjs",
+    "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py && node scripts/build-crossref-sqlite.mjs",
+    "build:crossref-db": "node scripts/build-crossref-sqlite.mjs",
+    "build:bible-db": "node scripts/build-bible-sqlite.mjs",
+    "build:passage-index-db": "node scripts/build-passage-index-sqlite.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.18.0",

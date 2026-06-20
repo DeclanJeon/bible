@@ -14,11 +14,12 @@ const fixturePath = path.join(process.cwd(), fixtureRel);
 const baseUrl = process.env.BENCHMARK_BASE_URL || 'http://127.0.0.1:3000';
 
 function toRef(ref) {
+  if (!ref) return null;
   return `${ref.code} ${ref.chapter}:${ref.startVerse}${ref.endVerse === ref.startVerse ? '' : `-${ref.endVerse}`}`;
 }
 
 function codeOf(reference) {
-  return reference.split(' ')[0];
+  return typeof reference === 'string' ? reference.split(' ')[0] : null;
 }
 
 const raw = await readFile(fixturePath, 'utf8');
@@ -38,25 +39,26 @@ for (const testCase of cases) {
     continue;
   }
   const json = await response.json();
-  const actualPrimary = toRef(json.retrieval.primaryReference);
-  const actualConfidence = json.retrieval.confidence;
-  const supportCodes = (json.retrieval.supportingReferences || []).map((ref) => ref.code);
-  const graphCodes = (json.graphSuggestions || []).map((item) => item.target.code);
+  const actualPrimary = toRef(json.primary?.reference);
+  const actualConfidence = json.confidence;
+  const relatedCodes = (Array.isArray(json.relatedPassages) ? json.relatedPassages : [])
+    .map((item) => item?.reference?.code)
+    .filter(Boolean);
 
   const primaryOk = testCase.expectedPrimaryRefs.includes(actualPrimary);
   const confidenceOk = confidenceRank[actualConfidence] >= confidenceRank[testCase.minConfidence];
-  const supportOk = testCase.expectedSupportCodes.every((code) => supportCodes.includes(code) || codeOf(json.primary.reference) === code || graphCodes.includes(code));
-  const graphOk = testCase.expectedGraphCodes.some((code) => graphCodes.includes(code));
+  const supportOk = testCase.expectedSupportCodes.every((code) => relatedCodes.includes(code) || codeOf(actualPrimary) === code);
+  const graphOk = testCase.expectedGraphCodes.some((code) => relatedCodes.includes(code));
 
   rows.push({
     family: testCase.family,
     prompt: testCase.prompt,
     locale: targetLocale,
+    state: json.state,
     primary: actualPrimary,
     confidence: actualConfidence,
-    score: json.retrieval.score,
-    supportCodes,
-    graphCodes: graphCodes.slice(0, 4),
+    score: json.primary?.score ?? json.meta?.retrievalScore,
+    relatedCodes: relatedCodes.slice(0, 6),
   });
 
   if (!primaryOk || !confidenceOk || !supportOk || !graphOk) {
@@ -70,9 +72,9 @@ for (const testCase of cases) {
       graphOk,
       actualPrimary,
       actualConfidence,
-      supportCodes,
-      graphCodes,
-      rationale: json.retrieval.rationale,
+      state: json.state,
+      relatedCodes,
+      primaryReason: json.primary?.reason,
     });
   }
 }

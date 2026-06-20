@@ -4,7 +4,7 @@ import type { BookMetadata } from "@/lib/book-metadata";
 import type { BibleReference } from "@/lib/bible";
 import type { SourceLink } from "@/lib/app-data";
 import { SourceList } from "@/components/source-list";
-import { buildPassageHref } from "@/lib/navigation";
+import { buildBibleReferenceHref } from "@/lib/navigation";
 import { localizeConfidenceLabel } from "@/lib/content";
 
 export type CrossReferenceDirectionFilter = "all" | "outgoing" | "incoming" | "mutual";
@@ -283,9 +283,8 @@ function formatReference(reference: ReferenceSpan) {
   return `${reference.code} ${reference.chapter}:${verse}`;
 }
 
-function edgePassageHref(edge: CrossReferenceNetworkEdge, locale: string) {
-  if (edge.href) return edge.href;
-  return buildPassageHref(edge.direction === "incoming" ? edge.from : edge.to, locale);
+function edgeReaderHref(edge: CrossReferenceNetworkEdge, locale: string) {
+  return buildBibleReferenceHref(linkedReference(edge), { locale, from: "crossref" });
 }
 
 function uniqueEdges(network: CrossReferenceNetworkViewModel) {
@@ -426,7 +425,7 @@ function EdgeCard({ edge, locale, copy }: { edge: CrossReferenceNetworkEdge; loc
           <h3 className="mt-3 text-lg font-semibold tracking-tight text-[var(--ink)]">{edge.displayReference}</h3>
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{edge.excerpt}</p>
         </div>
-        <Link href={edgePassageHref(edge, locale)} className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
+        <Link href={edgeReaderHref(edge, locale)} className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
           {copy.readFull}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
@@ -516,7 +515,7 @@ export function CrossReferenceNetworkReader({
             </p>
           ))}
         </div>
-        <Link href={network.primary.href || buildPassageHref(network.primary.referenceSpan ?? network.summary.reference, appLocale)} className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
+        <Link href={buildBibleReferenceHref(network.primary.referenceSpan ?? network.summary.reference, { locale: appLocale, from: "crossref" })} className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
           {copy.readPrimary}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>

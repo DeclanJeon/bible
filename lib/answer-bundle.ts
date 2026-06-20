@@ -101,11 +101,24 @@ const BUNDLE_ELIGIBLE_MODES: Record<QuestionUnderstanding["answerMode"], true | 
 
 function confidenceFor(question: QuestionUnderstanding, candidates: HybridPassageCandidate[]): AnswerBundle["confidence"] {
   const primary = candidates[0];
-  if (!primary || question.confidence === "low") return "low";
-  if (question.answerMode === "survey_bundle" && candidates.length >= 3 && primary.finalScore >= 42) return "high";
-  if (question.answerMode === "wisdom_principle" && primary.finalScore >= 30) return "medium";
-  if (primary.finalScore >= 62 || (primary.directness === "direct" && candidates.length >= 2)) return "high";
-  if (primary.finalScore >= 28 || candidates.length >= 2) return "medium";
+  if (!primary) return "low";
+
+  const supportingCount = candidates
+    .slice(1)
+    .filter((candidate) => candidate.directness !== "weak" && candidate.finalScore >= Math.max(18, primary.finalScore * 0.38))
+    .length;
+  const evidenceCount = primary.matchedQueries.length + primary.matchedAxes.length;
+
+  if (question.confidence === "low") {
+    if (question.answerMode === "survey_bundle" && primary.finalScore >= 52 && supportingCount >= 2 && evidenceCount >= 2) return "medium";
+    if (primary.finalScore >= 64 && primary.directness === "direct" && supportingCount >= 1 && evidenceCount >= 2) return "medium";
+    return "low";
+  }
+
+  if (question.answerMode === "survey_bundle" && supportingCount >= 3 && primary.finalScore >= 40) return "high";
+  if (question.answerMode === "wisdom_principle" && primary.finalScore >= 30 && evidenceCount >= 1) return "medium";
+  if (primary.finalScore >= 60 || (primary.directness === "direct" && supportingCount >= 1 && evidenceCount >= 1)) return "high";
+  if (primary.finalScore >= 32 || (supportingCount >= 2 && evidenceCount >= 1)) return "medium";
   return "low";
 }
 
@@ -139,7 +152,7 @@ function promptFragment(question: QuestionUnderstanding, candidate: HybridPassag
 }
 
 function passageKeyLines(candidate: HybridPassageCandidate) {
-  const text = candidate.unit.text.replace(/\s+/g, " ").trim();
+  const text = (candidate.unit.text ?? candidate.unit.excerpt ?? "").replace(/\s+/g, " ").trim();
   if (!text) return [];
   const firstSentence = text.split(/(?<=[.!?。！？])\s+/u)[0] ?? text;
   return [firstSentence.slice(0, 220)];
@@ -318,10 +331,7 @@ export async function buildAnswerBundle(prompt: string, locale?: string, options
   const question = enrichQuestionWithExpansion(understandQuestion(prompt, locale), options);
   if (!BUNDLE_ELIGIBLE_MODES[question.answerMode]) return null;
 
-  const rawCandidates = await retrieveHybridPassageCandidates(question).catch((error: unknown) => {
-    if (error instanceof Error && /(passage-index|no such file|ENOENT|Invalid Bible passage index)/i.test(error.message)) return [];
-    throw error;
-  });
+  const rawCandidates = await retrieveHybridPassageCandidates(question);
   const candidates = rerankPassageCandidates(question, rawCandidates, 8);
   const confidence = confidenceFor(question, candidates);
   const primary = candidates[0];

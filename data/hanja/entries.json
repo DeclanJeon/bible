@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "slug": "ui-righteousness",
+      "character": "義",
+      "reading": "의",
+      "title": {
+        "ko": "의(義)",
+        "en": "Ui (義)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 義 자를 희생과 의로움의 연결로 읽는 해석 전통을 소개한다.",
+        "en": "This page introduces an interpretive tradition that reads 義 through a link between sacrifice and righteousness."
+      },
+      "explanation": {
+        "ko": "확정된 어원 주장으로 제시하지 않고, 이 해석이 어떤 성구와 자료를 통해 전개되는지 지지 자료와 비판 자료를 나란히 보여 준다.",
+        "en": "Instead of presenting a settled etymology, this page shows which passages and sources are used to develop the interpretation alongside critical material."
+      },
+      "mainPassages": [
+        { "code": "ROM", "chapter": 3, "startVerse": 21, "endVerse": 26 },
+        { "code": "GAL", "chapter": 2, "startVerse": 15, "endVerse": 21 }
+      ],
+      "relatedPassages": [
+        { "code": "MIC", "chapter": 6, "startVerse": 8, "endVerse": 8 },
+        { "code": "ISA", "chapter": 61, "startVerse": 10, "endVerse": 10 }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-youtube-story-behind-chinese-character",
+        "hanja-src-fgnews-kr-fg-fgnews-kr-2"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "bok-blessing",
+        "shin-god-spirit"
+      ],
+      "keywords": ["의", "義", "righteousness", "sacrifice"]
+    },
+    {
+      "slug": "bok-blessing",
+      "character": "福",
+      "reading": "복",
+      "title": {
+        "ko": "복(福)",
+        "en": "Bok (福)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 福 자를 제사와 복의 상징으로 연결하는 해석 전통을 정리한다.",
+        "en": "This page surveys an interpretive tradition that connects 福 with sacrifice and blessing."
+      },
+      "explanation": {
+        "ko": "문자 자체가 성경을 증명한다고 단정하지 않고, 복과 은혜를 연결해 읽는 설교·기사 전통과 비판 자료를 함께 묶어 보여 준다.",
+        "en": "Rather than claiming the character itself proves the Bible, this page gathers supportive teaching sources and a critical source around a blessing-centered reading."
+      },
+      "mainPassages": [
+        { "code": "EPH", "chapter": 1, "startVerse": 3, "endVerse": 6 },
+        { "code": "PSA", "chapter": 1, "startVerse": 1, "endVerse": 3 }
+      ],
+      "relatedPassages": [
+        { "code": "DEU", "chapter": 28, "startVerse": 1, "endVerse": 6 },
+        { "code": "MAT", "chapter": 5, "startVerse": 3, "endVerse": 12 }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-301",
+        "hanja-src-pluskorea-net-10"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "ui-righteousness",
+        "shin-god-spirit"
+      ],
+      "keywords": ["복", "福", "blessing", "grace"]
+    },
+    {
+      "slug": "shin-god-spirit",
+      "character": "神",
+      "reading": "신",
+      "title": {
+        "ko": "신(神)",
+        "en": "Shin (神)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 神 자를 창조주 하나님 또는 영의 개념과 연결해 읽는 해석 전통을 다룬다.",
+        "en": "This page covers an interpretive tradition that reads 神 in relation to the Creator God or spirit."
+      },
+      "explanation": {
+        "ko": "단일 정답을 선언하지 않고, 창조와 하나님 언어를 연결하는 지지 자료와 학술 비판 자료를 같이 배치해 독자가 해석의 성격을 분별하도록 돕는다.",
+        "en": "Instead of asserting a single conclusion, this page places supportive and critical sources side by side so readers can assess the character of the interpretation."
+      },
+      "mainPassages": [
+        { "code": "GEN", "chapter": 1, "startVerse": 1, "endVerse": 2 },
+        { "code": "JOH", "chapter": 1, "startVerse": 1, "endVerse": 3 }
+      ],
+      "relatedPassages": [
+        { "code": "ACT", "chapter": 17, "startVerse": 24, "endVerse": 28 },
+        { "code": "HEB", "chapter": 11, "startVerse": 3, "endVerse": 3 }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-289",
+        "hanja-src-fgnews-kr-fg-fgnews-kr"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "ui-righteousness",
+        "bok-blessing"
+      ],
+      "keywords": ["신", "神", "god", "spirit", "creation"]
+    }
+  ]
+}

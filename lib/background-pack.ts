@@ -117,8 +117,8 @@ function unitThemeStory(candidate: HybridPassageCandidate, sourceIds: string[], 
   return themes.map((theme) => ({
     theme,
     storyline: locale === "ko"
-      ? `이 주제는 ${unit.summary || unit.text.slice(0, 80)} 안에서 사용자의 질문을 성경의 더 큰 이야기로 연결합니다.`
-      : `This theme connects the user's question to the wider biblical storyline through ${unit.summary || unit.text.slice(0, 80)}.`,
+      ? `이 주제는 ${unit.summary || (unit.text ?? unit.excerpt ?? "").slice(0, 80)} 안에서 사용자의 질문을 성경의 더 큰 이야기로 연결합니다.`
+      : `This theme connects the user's question to the wider biblical storyline through ${unit.summary || (unit.text ?? unit.excerpt ?? "").slice(0, 80)}.`,
     canonicalLinks: [],
     sourceIds,
   }));

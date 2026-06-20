@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { headers } from "next/headers";
+
 import { OG_IMAGE_URL, SITE_URL, siteDescription, siteTitle } from "@/lib/page-metadata";
 import "./globals.css";
 
@@ -46,16 +46,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerList = await headers();
-  const locale = headerList.get("x-app-locale") === "en" ? "en" : "ko";
-
   return (
-    <html lang={locale}>
+    <html lang="ko">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

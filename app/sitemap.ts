@@ -1,11 +1,6 @@
 import type { MetadataRoute } from "next";
 import { STORY_CLUSTERS } from "@/lib/app-data";
-import { serializeBibleReference, type BibleReference } from "@/lib/bible";
 import { SITE_URL } from "@/lib/page-metadata";
-
-function passageKey(reference: BibleReference) {
-  return serializeBibleReference(reference);
-}
 
 function localizedUrl(locale: "en" | "ko", path = "") {
   return `${SITE_URL}/${locale}${path}`;
@@ -37,20 +32,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const passageSlugs = [
-    ...new Set(
-      STORY_CLUSTERS.flatMap((cluster) => [
-        cluster.primary,
-        ...cluster.supporting,
-        ...cluster.linkedTexts.map((item) => item.reference),
-      ]).map(passageKey),
-    ),
-  ];
-
-  const passagePages: MetadataRoute.Sitemap = passageSlugs.flatMap((slug) => [
-    { url: localizedUrl("ko", `/passage/${slug}`), lastModified: now, changeFrequency: "monthly", priority: 0.55 },
-    { url: localizedUrl("en", `/passage/${slug}`), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-  ]);
-
-  return [...staticPages, ...clusterPages, ...passagePages];
+  return [...staticPages, ...clusterPages];
 }

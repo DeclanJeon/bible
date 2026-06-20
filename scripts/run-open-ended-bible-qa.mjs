@@ -24,81 +24,9 @@ function toRef(ref) {
   return `${code} ${chapter}:${startVerse}${endVerse === startVerse ? '' : `-${endVerse}`}`;
 }
 
-function candidateRef(candidate) {
-  if (!candidate) return null;
-  return toRef(candidate.reference) ??
-    toRef(candidate.unit?.reference) ??
-    toRef(candidate.unit) ??
-    toRef(candidate.passage?.reference) ??
-    toRef(candidate.passage) ??
-    (typeof candidate.displayReference === 'string' ? candidate.displayReference : null) ??
-    (typeof candidate.reference === 'string' ? candidate.reference : null);
-}
-
-function refsFrom(value) {
+function refsFromRelatedPassages(value) {
   if (!Array.isArray(value)) return [];
-  return value.map((item) => candidateRef(item) ?? toRef(item)).filter(Boolean);
-}
-
-function isRetrievalReliable(retrieval) {
-  if (!retrieval) return false;
-  return retrieval.confidence !== 'low' && (
-    Number(retrieval.passageScore || 0) >= 5 ||
-    (retrieval.supportingReferences || []).length > 0 ||
-    (retrieval.reasons?.passageKeywords || []).length >= 2
-  );
-}
-
-function actualReliability(json) {
-  const bundleReliable = json.answerBundle?.reliable ?? json.bundle?.reliable;
-  if (typeof bundleReliable === 'boolean') return bundleReliable;
-  const bundleConfidence = json.answerBundle?.confidence ?? json.bundle?.confidence;
-  if (bundleConfidence) return bundleConfidence !== 'low';
-  if (typeof json.reliable === 'boolean') return json.reliable;
-  return isRetrievalReliable(json.retrieval);
-}
-
-function actualPolicy(json) {
-  return json.answerBundle?.answerPolicy ??
-    json.answerBundle?.policy ??
-    json.answerBundle?.question?.answerMode ??
-    json.bundle?.answerPolicy ??
-    json.bundle?.policy ??
-    json.policy ??
-    json.responsePolicy ??
-    json.question?.answerMode ??
-    json.questionUnderstanding?.answerMode ??
-    json.retrieval?.answerPolicy ??
-    json.retrieval?.policy ??
-    json.ragQuery?.answerPolicy ??
-    json.ragQuery?.policy ??
-    json.response?.answerPolicy ??
-    json.response?.policy ??
-    null;
-}
-
-function actualPrimaryRef(json) {
-  if (json.answerBundle && Object.hasOwn(json.answerBundle, 'primary')) {
-    return candidateRef(json.answerBundle.primary);
-  }
-  if (json.bundle && Object.hasOwn(json.bundle, 'primary')) {
-    return candidateRef(json.bundle.primary);
-  }
-  return toRef(json.retrieval?.primaryReference) ??
-    candidateRef(json.primary) ??
-    null;
-}
-
-function actualSupportingRefs(json) {
-  if (json.answerBundle && Object.hasOwn(json.answerBundle, 'supporting')) {
-    return refsFrom(json.answerBundle.supporting);
-  }
-  if (json.bundle && Object.hasOwn(json.bundle, 'supporting')) {
-    return refsFrom(json.bundle.supporting);
-  }
-  const retrievalSupporting = refsFrom(json.retrieval?.supportingReferences);
-  if (retrievalSupporting.length) return retrievalSupporting;
-  return refsFrom(json.supporting);
+  return value.map((item) => toRef(item?.reference)).filter(Boolean);
 }
 
 function textParts(value, parts = []) {
@@ -153,11 +81,11 @@ for (const testCase of cases) {
   }
 
   const latencyMs = Date.now() - started;
-  possible += 8;
+  possible += 9;
 
   if (!response.ok) {
     failures.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, reason: `HTTP ${response.status}`, latencyMs });
-    rows.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, status: response.status, latencyMs, caseScore: 0, possible: 8 });
+    rows.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, status: response.status, latencyMs, caseScore: 0, possible: 9 });
     continue;
   }
 
@@ -167,18 +95,25 @@ for (const testCase of cases) {
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     failures.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, reason: `Invalid JSON: ${reason}`, latencyMs });
-    rows.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, status: response.status, latencyMs, caseScore: 0, possible: 8 });
+    rows.push({ id: testCase.id, family: testCase.family, prompt: testCase.prompt, status: response.status, latencyMs, caseScore: 0, possible: 9 });
     continue;
   }
-  const policy = actualPolicy(json);
-  const reliable = actualReliability(json);
-  const primary = actualPrimaryRef(json);
-  const supportingRefs = actualSupportingRefs(json);
+
+  const policy = json.meta?.answerMode ?? json.questionUnderstanding?.answerMode ?? null;
+  const state = json.state ?? null;
+  const reliable = ['direct', 'safety_first'].includes(state);
+  const primary = toRef(json.primary?.reference);
+  const relatedRefs = refsFromRelatedPassages(json.relatedPassages);
   const safetyLevel = json.safety?.level ?? null;
   const responseText = textParts({
-    response: json.response,
-    answerBundle: json.answerBundle ?? json.bundle,
-    question: json.question ?? json.questionUnderstanding,
+    explanation: json.explanation,
+    background: json.background,
+    clarifyPrompt: json.clarifyPrompt,
+    safety: json.safety,
+    questionUnderstanding: json.questionUnderstanding,
+    relatedPassages: json.relatedPassages,
+    normalizedQuestion: json.normalizedQuestion,
+    prompt: json.prompt,
   }).join('\n');
   const maxLatencyMs = Number(testCase.maxLatencyMs ?? defaultMaxLatencyMs);
   const evidenceHits = countHits(responseText, testCase.expectedEvidenceTerms || []);
@@ -189,12 +124,16 @@ for (const testCase of cases) {
   checks.push({ name: 'policy', ok: policy === testCase.expectedPolicy });
   checks.push({ name: 'reliable', ok: reliable === testCase.expectedReliable });
   checks.push({
+    name: 'state',
+    ok: testCase.expectedReliable ? ['direct', 'safety_first'].includes(state) : ['tentative', 'unsupported'].includes(state),
+  });
+  checks.push({
     name: 'primary',
     ok: testCase.expectedReliable
-      ? (testCase.expectedPrimaryRefs || []).includes(primary)
-      : !primary || (testCase.expectedPrimaryRefs || []).length === 0 || (testCase.expectedPrimaryRefs || []).includes(primary),
+      ? !!primary && (testCase.expectedPrimaryRefs || []).includes(primary)
+      : true,
   });
-  checks.push({ name: 'supporting-count', ok: supportingRefs.length >= minSupportingCount && supportingRefs.length <= maxSupportingCount });
+  checks.push({ name: 'supporting-count', ok: relatedRefs.length >= minSupportingCount && relatedRefs.length <= maxSupportingCount });
   checks.push({ name: 'forbidden-phrases', ok: forbiddenHits.length === 0 });
   checks.push({ name: 'safety-level', ok: safetyLevel === testCase.expectedSafetyLevel });
   checks.push({ name: 'latency', ok: latencyMs <= maxLatencyMs });
@@ -212,8 +151,9 @@ for (const testCase of cases) {
     prompt: testCase.prompt,
     policy,
     expectedPolicy: testCase.expectedPolicy,
+    state,
     primary,
-    supportingCount: supportingRefs.length,
+    relatedCount: relatedRefs.length,
     reliable,
     expectedReliable: testCase.expectedReliable,
     safety: safetyLevel,
@@ -234,6 +174,7 @@ for (const testCase of cases) {
       maxLatencyMs,
       expectedSupportingCount: { min: minSupportingCount, max: Number.isFinite(maxSupportingCount) ? maxSupportingCount : null },
       responseEvidenceTerms: testCase.expectedEvidenceTerms || [],
+      relatedRefs,
       responseText,
     });
   }

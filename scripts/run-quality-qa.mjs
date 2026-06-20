@@ -1,12 +1,12 @@
 /**
  * Quality-based QA runner — tests real retrieval quality, not pre-assigned verses.
- * 
+ *
  * Checks (5 points per question):
- *  1. http         — responds within timeout
- *  2. query-plan   — uses deterministic/hermes planner
- *  3. has-primary   — always returns a primary reference (never empty)
- *  4. reliable      — confidence ≥ medium, passageScore ≥ 5
- *  5. explanation   — response contains relevant explanation terms (≥2)
+ *  1. http        — responds within timeout
+ *  2. query-plan  — uses deterministic/hermes planner
+ *  3. has-primary — returns a primary passage for direct passage-first answers
+ *  4. reliable    — direct/safety-first state with non-low confidence and solid passage score
+ *  5. explanation — explanation payload contains relevant terms
  *
  * No expectedPrimaryRefs needed — validates the system's actual behavior.
  */
@@ -24,42 +24,56 @@ const locale = option('--locale', 'ko');
 const baseUrl = process.env.BENCHMARK_BASE_URL || 'http://127.0.0.1:3000';
 const fixturePath = path.join(process.cwd(), fixtureRel);
 const maxLatencyMs = Number(option('--max-latency-ms', '120000'));
-const concurrency = Number(option('--concurrency', '1'));
 
 function toRef(ref) {
   if (!ref) return '';
   return `${ref.code} ${ref.chapter}:${ref.startVerse}${ref.endVerse === ref.startVerse ? '' : `-${ref.endVerse}`}`;
 }
 
+function textParts(value, parts = []) {
+  if (value == null) return parts;
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    parts.push(String(value));
+    return parts;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) textParts(item, parts);
+    return parts;
+  }
+  if (typeof value === 'object') {
+    for (const item of Object.values(value)) textParts(item, parts);
+  }
+  return parts;
+}
+
 function scoreCase(testCase, json, elapsed) {
-  const retrieval = json.retrieval || {};
-  const response = json.response || {};
   const rag = json.ragQuery || {};
-  const actualPrimary = toRef(retrieval.primaryReference);
-  const supportingCount = (retrieval.supportingReferences || []).length;
-  const text = [
-    retrieval.rationale,
-    response.concernSummary,
-    response.relevanceSummary,
-    response.whyTheseTexts,
-    response.personalConnection,
-  ].filter(Boolean).join('\n');
+  const actualPrimary = toRef(json.primary?.reference);
+  const supportingCount = Array.isArray(json.relatedPassages) ? json.relatedPassages.length : 0;
+  const text = textParts({ explanation: json.explanation, background: json.background, clarifyPrompt: json.clarifyPrompt }).join('\n');
   const hits = (testCase.expectedTerms || []).filter((term) => text.includes(term));
+  const expectsReliable = testCase.expectedReliable !== false;
+  const hasPrimaryOk = expectsReliable ? (json.primary !== null && !!actualPrimary) : !actualPrimary;
+  const reliableOk = expectsReliable
+    ? ['direct', 'safety_first'].includes(json.state) && json.confidence !== 'low' && Number(json.meta?.passageScore || 0) >= 5
+    : !['direct', 'safety_first'].includes(json.state) || json.confidence === 'low';
+  const explanationOk = (testCase.expectedTerms?.length ? hits.length >= 1 : text.length > 0) && (!!json.explanation || !!json.clarifyPrompt);
 
   const checks = [
-    { name: 'http',           ok: elapsed < maxLatencyMs / 1000 },
-    { name: 'query-plan',     ok: ['deterministic', 'hermes-agent', 'hermes'].includes(rag.expansionProvider) || retrieval.retrievalMode },
-    { name: 'has-primary',    ok: !!actualPrimary && actualPrimary !== '' },
-    { name: 'reliable',       ok: retrieval.confidence !== 'low' && Number(retrieval.passageScore || 0) >= 5 },
-    { name: 'explanation',    ok: hits.length >= 1 && !!response.whyTheseTexts && !!response.relevanceSummary },
+    { name: 'http', ok: elapsed < maxLatencyMs / 1000 },
+    { name: 'query-plan', ok: ['deterministic', 'hermes-agent', 'hermes'].includes(rag.expansionProvider) || !!json.meta?.retrievalMode },
+    { name: 'has-primary', ok: hasPrimaryOk },
+    { name: 'reliable', ok: reliableOk },
+    { name: 'explanation', ok: explanationOk },
   ];
 
   return {
     actualPrimary,
     supportingCount,
     hits,
-    confidence: retrieval.confidence,
-    passageScore: retrieval.passageScore,
+    confidence: json.confidence,
+    passageScore: json.meta?.passageScore,
+    state: json.state,
     checks,
     score: checks.filter((check) => check.ok).length,
   };
@@ -97,6 +111,7 @@ for (const [index, testCase] of cases.entries()) {
       supportingCount: result.supportingCount,
       confidence: result.confidence,
       passageScore: result.passageScore,
+      state: result.state,
       hits: result.hits,
       failedChecks: result.checks.filter((c) => !c.ok).map((c) => c.name),
     };
@@ -104,7 +119,6 @@ for (const [index, testCase] of cases.entries()) {
     if (result.score < 4) {
       failures.push(row);
     }
-    // Progress log every 50 questions
     if ((index + 1) % 50 === 0 || index === cases.length - 1) {
       const pct = possible ? ((earned / possible) * 100).toFixed(1) : '0.0';
       console.error(`[${index + 1}/${cases.length}] earned=${earned} possible=${possible} pct=${pct}%`);
@@ -123,13 +137,13 @@ for (const [index, testCase] of cases.entries()) {
       supportingCount: 0,
       confidence: 'error',
       passageScore: 0,
+      state: 'error',
       hits: [],
       failedChecks: ['http'],
       error: String(err),
     };
     rows.push(row);
     failures.push(row);
-    earned += 0;
     possible += 5;
   }
 }
@@ -139,7 +153,6 @@ const passed = rows.filter(r => r.score >= 4).length;
 const failed = rows.filter(r => r.score < 4).length;
 const avgElapsed = rows.reduce((s, r) => s + r.elapsed, 0) / rows.length;
 
-// Check failure breakdown
 const failReasons = {};
 for (const r of rows) {
   for (const f of r.failedChecks || []) {
@@ -148,6 +161,7 @@ for (const r of rows) {
 }
 
 const summary = {
+  baseUrl,
   total: cases.length,
   earned,
   possible,
@@ -156,7 +170,7 @@ const summary = {
   failed,
   avgElapsed: Number(avgElapsed.toFixed(1)),
   failReasons,
-  failures: failures.slice(0, 20), // first 20 failures for debugging
+  failures: failures.slice(0, 20),
 };
 
 console.log(JSON.stringify(summary, null, 2));

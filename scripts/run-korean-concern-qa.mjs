@@ -13,15 +13,29 @@ const baseUrl = process.env.BENCHMARK_BASE_URL || 'http://127.0.0.1:3000';
 const fixturePath = path.join(process.cwd(), fixtureRel);
 
 function toRef(ref) {
+  if (!ref) return null;
+  if (typeof ref === 'string') return ref;
   return `${ref.code} ${ref.chapter}:${ref.startVerse}${ref.endVerse === ref.startVerse ? '' : `-${ref.endVerse}`}`;
 }
 
-function isReliable(retrieval) {
-  return retrieval.confidence !== 'low' && (
-    retrieval.passageScore >= 5 ||
-    (retrieval.supportingReferences || []).length > 0 ||
-    (retrieval.reasons?.passageKeywords || []).length >= 2
-  );
+function isDirectState(state) {
+  return state === 'direct' || state === 'safety_first';
+}
+
+function textParts(value, parts = []) {
+  if (value == null) return parts;
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    parts.push(String(value));
+    return parts;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) textParts(item, parts);
+    return parts;
+  }
+  if (typeof value === 'object') {
+    for (const item of Object.values(value)) textParts(item, parts);
+  }
+  return parts;
 }
 
 function includesAny(text, terms) {
@@ -50,22 +64,19 @@ for (const testCase of cases) {
   }
 
   const json = await response.json();
-  const retrieval = json.retrieval;
-  const actualPrimary = toRef(retrieval.primaryReference);
-  const actualReliable = isReliable(retrieval);
-  const responseText = [
-    json.response?.concernSummary,
-    json.response?.relevanceSummary,
-    json.response?.whyTheseTexts,
-    json.response?.personalConnection,
-  ].filter(Boolean).join('\n');
+  const actualPrimary = toRef(json.primary?.reference);
+  const actualReliable = isDirectState(json.state);
+  const relatedPassages = Array.isArray(json.relatedPassages) ? json.relatedPassages : [];
+  const explanationText = textParts(json.explanation).join('\n');
+  const fallbackText = textParts({ clarifyPrompt: json.clarifyPrompt, state: json.state }).join('\n');
+  const explanationSource = explanationText || fallbackText;
 
   const reliableOk = actualReliable === testCase.expectedReliable;
   const primaryOk = !testCase.expectedReliable || testCase.expectedPrimaryRefs.includes(actualPrimary);
   const expansionOk = testCase.expectedReliable
-    ? (json.graphSuggestions || []).length > 0 || (retrieval.supportingReferences || []).length > 0
-    : (json.graphSuggestions || []).length === 0 && (json.supporting || []).length === 0 && (json.relatedClusters || []).length === 0;
-  const explanationOk = includesAny(responseText, testCase.expectedExplanationTerms || []);
+    ? relatedPassages.length > 0
+    : relatedPassages.length === 0 || json.state === 'unsupported';
+  const explanationOk = includesAny(explanationSource, testCase.expectedExplanationTerms || []);
   const safetyOk = testCase.expectedSafetyLevel
     ? json.safety?.level === testCase.expectedSafetyLevel
     : true;
@@ -77,8 +88,10 @@ for (const testCase of cases) {
     family: testCase.family,
     prompt: testCase.prompt,
     primary: actualPrimary,
-    confidence: retrieval.confidence,
-    passageScore: retrieval.passageScore,
+    confidence: json.confidence,
+    passageScore: json.meta?.passageScore,
+    state: json.state,
+    relatedCount: relatedPassages.length,
     reliable: actualReliable,
     caseScore,
     safety: json.safety?.level,
@@ -97,10 +110,11 @@ for (const testCase of cases) {
       actualSafety: json.safety?.level,
       actualPrimary,
       actualReliable,
-      confidence: retrieval.confidence,
-      passageScore: retrieval.passageScore,
-      rationale: retrieval.rationale,
-      responseText,
+      confidence: json.confidence,
+      passageScore: json.meta?.passageScore,
+      state: json.state,
+      relatedPassages,
+      explanationSource,
     });
   }
 }

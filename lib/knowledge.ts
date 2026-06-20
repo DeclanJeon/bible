@@ -1,6 +1,8 @@
 import { cache } from "react";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 import { formatBibleReference, getPassage, loadBookMetadata, type BibleReference } from "@/lib/bible";
 import { localizeCrossReferenceSupportType, resolveAppLocale } from "@/lib/content";
 
@@ -31,7 +33,30 @@ type PhraseStore = {
   byVerse: Record<string, Array<{ anchorPhrase: string; to: BibleReference; toLabel: string; source: string }>>;
 };
 
+type OpenBibleRow = {
+  from_key: string;
+  to_code: string;
+  to_chapter: number;
+  to_start_verse: number;
+  to_end_verse: number;
+  to_label: string;
+  votes: number;
+};
+
+type PhraseRow = {
+  from_key: string;
+  to_code: string;
+  to_chapter: number;
+  to_start_verse: number;
+  to_end_verse: number;
+  to_label: string;
+  anchor_phrase: string;
+};
+
 const ROOT = process.cwd();
+const CROSSREF_DB_PATH = path.join(ROOT, "data", "knowledge", "crossrefs.sqlite");
+
+let crossRefDb: DatabaseSync | null | undefined;
 
 function verseKey(reference: BibleReference, verse: number) {
   return `${reference.code} ${reference.chapter}:${verse}`;
@@ -57,6 +82,52 @@ function classifySupportType(votes: number, phraseAnchors: Set<string>) {
   return "phrase-anchor" satisfies CrossReferenceSupportType;
 }
 
+function openCrossRefDb() {
+  if (crossRefDb !== undefined) return crossRefDb;
+  if (!existsSync(CROSSREF_DB_PATH)) {
+    crossRefDb = null;
+    return crossRefDb;
+  }
+
+  crossRefDb = new DatabaseSync(CROSSREF_DB_PATH, { open: true, readOnly: true });
+  crossRefDb.exec("PRAGMA query_only = ON");
+  return crossRefDb;
+}
+
+function mapRowReference(row: OpenBibleRow | PhraseRow): BibleReference {
+  return {
+    code: row.to_code,
+    chapter: row.to_chapter,
+    startVerse: row.to_start_verse,
+    endVerse: row.to_end_verse,
+  };
+}
+
+function selectOpenBibleRows(keys: string[]) {
+  const db = openCrossRefDb();
+  if (!db || !keys.length) return [] as OpenBibleRow[];
+  const placeholders = keys.map(() => "?").join(", ");
+  return db
+    .prepare(
+      `SELECT from_key, to_code, to_chapter, to_start_verse, to_end_verse, to_label, votes
+       FROM openbible_links
+       WHERE from_key IN (${placeholders})`,
+    )
+    .all(...keys) as OpenBibleRow[];
+}
+
+function selectPhraseRows(keys: string[]) {
+  const db = openCrossRefDb();
+  if (!db || !keys.length) return [] as PhraseRow[];
+  const placeholders = keys.map(() => "?").join(", ");
+  return db
+    .prepare(
+      `SELECT from_key, to_code, to_chapter, to_start_verse, to_end_verse, to_label, anchor_phrase
+       FROM phrase_links
+       WHERE from_key IN (${placeholders})`,
+    )
+    .all(...keys) as PhraseRow[];
+}
 
 async function loadJson<T>(relativePath: string): Promise<T | null> {
   const filePath = path.join(ROOT, relativePath);
@@ -76,20 +147,13 @@ export const loadPhraseStore = cache(async () =>
   loadJson<PhraseStore>(path.join("data", "knowledge", "crossreferences-kjv.json")),
 );
 
-export async function getPassageCrossReferences(reference: BibleReference, limit = 6, locale?: string) {
-  const appLocale = resolveAppLocale(locale);
-  const [openBibleStore, phraseStore, books] = await Promise.all([
-    loadOpenBibleStore(),
-    loadPhraseStore(),
-    loadBookMetadata(appLocale),
-  ]);
-
+async function aggregateViaJsonFallback(reference: BibleReference) {
+  const [openBibleStore, phraseStore] = await Promise.all([loadOpenBibleStore(), loadPhraseStore()]);
   const aggregated = new Map<
     string,
     {
       target: BibleReference;
       votes: number;
-      openBibleAnchors: Set<string>;
       phraseAnchors: Set<string>;
       sources: Set<string>;
     }
@@ -103,12 +167,10 @@ export async function getPassageCrossReferences(reference: BibleReference, limit
       const bucket = aggregated.get(link.toLabel) ?? {
         target: link.to,
         votes: 0,
-        openBibleAnchors: new Set<string>(),
         phraseAnchors: new Set<string>(),
         sources: new Set<string>(),
       };
       bucket.votes += link.votes;
-      bucket.openBibleAnchors.add(key);
       bucket.sources.add("OpenBible Cross References");
       aggregated.set(link.toLabel, bucket);
     }
@@ -118,7 +180,6 @@ export async function getPassageCrossReferences(reference: BibleReference, limit
       const bucket = aggregated.get(link.toLabel) ?? {
         target: link.to,
         votes: 0,
-        openBibleAnchors: new Set<string>(),
         phraseAnchors: new Set<string>(),
         sources: new Set<string>(),
       };
@@ -127,6 +188,61 @@ export async function getPassageCrossReferences(reference: BibleReference, limit
       aggregated.set(link.toLabel, bucket);
     }
   }
+
+  return aggregated;
+}
+
+function aggregateViaSqlite(reference: BibleReference) {
+  const keys: string[] = [];
+  for (let verse = reference.startVerse; verse <= reference.endVerse; verse += 1) {
+    keys.push(verseKey(reference, verse));
+  }
+
+  const aggregated = new Map<
+    string,
+    {
+      target: BibleReference;
+      votes: number;
+      phraseAnchors: Set<string>;
+      sources: Set<string>;
+    }
+  >();
+
+  for (const row of selectOpenBibleRows(keys)) {
+    const target = mapRowReference(row);
+    if (overlaps(reference, target)) continue;
+    const bucket = aggregated.get(row.to_label) ?? {
+      target,
+      votes: 0,
+      phraseAnchors: new Set<string>(),
+      sources: new Set<string>(),
+    };
+    bucket.votes += row.votes;
+    bucket.sources.add("OpenBible Cross References");
+    aggregated.set(row.to_label, bucket);
+  }
+
+  for (const row of selectPhraseRows(keys)) {
+    const target = mapRowReference(row);
+    if (overlaps(reference, target)) continue;
+    const bucket = aggregated.get(row.to_label) ?? {
+      target,
+      votes: 0,
+      phraseAnchors: new Set<string>(),
+      sources: new Set<string>(),
+    };
+    bucket.phraseAnchors.add(row.anchor_phrase);
+    bucket.sources.add("Bible Cross References KJV");
+    aggregated.set(row.to_label, bucket);
+  }
+
+  return aggregated;
+}
+
+export async function getPassageCrossReferences(reference: BibleReference, limit = 6, locale?: string) {
+  const appLocale = resolveAppLocale(locale);
+  const books = await loadBookMetadata(appLocale);
+  const aggregated = openCrossRefDb() ? aggregateViaSqlite(reference) : await aggregateViaJsonFallback(reference);
 
   const ranked = [...aggregated.entries()]
     .map(([targetLabel, entry]) => ({

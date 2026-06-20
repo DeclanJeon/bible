@@ -1,5 +1,7 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 
 export type BibleReference = {
   code: string;
@@ -13,6 +15,7 @@ export type BibleVerse = {
   chapter: number;
   verse: number;
   text: string;
+  sourceLocale: BibleLocale;
 };
 
 export type BookMeta = {
@@ -21,11 +24,16 @@ export type BookMeta = {
   testament: string;
   order: number;
   file: string;
+  chapters: number;
+  verses: number;
 };
 
 export type BibleLocale = "en" | "ko";
 
 const ROOT = process.cwd();
+const BIBLE_DB_PATH = path.join(ROOT, "data", "bible", "bible.sqlite");
+const KO_FALLBACK_ALLOWLIST_PATH = path.join(ROOT, "data", "passage-index", "ko-fallback-allowlist.json");
+const CHAPTER_CACHE_LIMIT = 64;
 
 function resolveBibleLocale(locale?: string): BibleLocale {
   return locale === "ko" ? "ko" : "en";
@@ -45,8 +53,151 @@ function getTranslationPaths(locale: BibleLocale) {
   };
 }
 
+type KoFallbackAllowlist = {
+  sourceLocale: BibleLocale;
+  allowedMissingVerseKeys: string[];
+};
+
+function parseVpl(raw: string, sourceLocale: BibleLocale): BibleVerse[] {
+  return raw
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .flatMap((line) => {
+      const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/);
+      if (!match) {
+        return [];
+      }
+
+      const [, code, chapter, verse, text] = match;
+      return [{ code, chapter: Number(chapter), verse: Number(verse), text, sourceLocale }];
+    });
+}
+
+function mergeMissingVerses(primary: BibleVerse[], fallback: BibleVerse[], allowlist: Set<string>) {
+  const existing = new Set(primary.map((verse) => `${verse.code} ${verse.chapter}:${verse.verse}`));
+  const merged = [...primary];
+  for (const verse of fallback) {
+    const key = `${verse.code} ${verse.chapter}:${verse.verse}`;
+    if (!existing.has(key) && allowlist.has(key)) {
+      merged.push(verse);
+      existing.add(key);
+    }
+  }
+  return merged.sort(
+    (left, right) =>
+      left.code.localeCompare(right.code) ||
+      left.chapter - right.chapter ||
+      left.verse - right.verse,
+  );
+}
+
 const bookMetaCache = new Map<string, Record<string, BookMeta>>();
-const versesCache = new Map<string, BibleVerse[]>();
+const fallbackVersesCache = new Map<string, BibleVerse[]>();
+const chapterCache = new Map<string, BibleVerse[]>();
+let koFallbackAllowlistPromise: Promise<Set<string>> | null = null;
+let bibleDatabase: DatabaseSync | null | undefined;
+
+function getBibleDatabase() {
+  if (bibleDatabase !== undefined) {
+    return bibleDatabase;
+  }
+
+  bibleDatabase = existsSync(BIBLE_DB_PATH) ? new DatabaseSync(BIBLE_DB_PATH, { readOnly: true }) : null;
+  return bibleDatabase;
+}
+
+async function loadKoFallbackAllowlist(): Promise<Set<string>> {
+  if (!koFallbackAllowlistPromise) {
+    koFallbackAllowlistPromise = readFile(KO_FALLBACK_ALLOWLIST_PATH, "utf8").then((raw) => {
+      const parsed = JSON.parse(raw) as KoFallbackAllowlist;
+      return new Set(parsed.allowedMissingVerseKeys);
+    });
+  }
+  return koFallbackAllowlistPromise;
+}
+
+function cacheChapterVerses(cacheKey: string, verses: BibleVerse[]) {
+  if (chapterCache.has(cacheKey)) {
+    chapterCache.delete(cacheKey);
+  }
+  chapterCache.set(cacheKey, verses);
+  if (chapterCache.size > CHAPTER_CACHE_LIMIT) {
+    const oldestKey = chapterCache.keys().next().value;
+    if (oldestKey) {
+      chapterCache.delete(oldestKey);
+    }
+  }
+  return verses;
+}
+
+function mapVerseRow(row: {
+  code: string;
+  chapter: number;
+  verse: number;
+  text: string;
+  source_locale: string;
+}): BibleVerse {
+  return {
+    code: row.code,
+    chapter: Number(row.chapter),
+    verse: Number(row.verse),
+    text: row.text,
+    sourceLocale: resolveBibleLocale(row.source_locale),
+  };
+}
+
+async function loadFallbackVerses(locale: BibleLocale = "en"): Promise<BibleVerse[]> {
+  const cached = fallbackVersesCache.get(locale);
+  if (cached) return cached;
+
+  const { vplPath } = getTranslationPaths(locale);
+  const raw = await readFile(vplPath, "utf8");
+  let result = parseVpl(raw, locale);
+
+  if (locale === "ko") {
+    const fallbackRaw = await readFile(getTranslationPaths("en").vplPath, "utf8");
+    const allowlist = await loadKoFallbackAllowlist();
+    result = mergeMissingVerses(result, parseVpl(fallbackRaw, "en"), allowlist);
+  }
+
+  fallbackVersesCache.set(locale, result);
+  return result;
+}
+
+async function loadChapterVerses(locale: BibleLocale, code: string, chapter: number): Promise<BibleVerse[]> {
+  const cacheKey = `${locale}:${code}:${chapter}`;
+  const cached = chapterCache.get(cacheKey);
+  if (cached) {
+    chapterCache.delete(cacheKey);
+    chapterCache.set(cacheKey, cached);
+    return cached;
+  }
+
+  const db = getBibleDatabase();
+  if (db) {
+    const rows = db
+      .prepare(
+        `SELECT code, chapter, verse, text, source_locale
+         FROM verses
+         WHERE locale = ? AND code = ? AND chapter = ?
+         ORDER BY verse ASC`,
+      )
+      .all(locale, code, chapter) as Array<{
+      code: string;
+      chapter: number;
+      verse: number;
+      text: string;
+      source_locale: string;
+    }>;
+    return cacheChapterVerses(cacheKey, rows.map(mapVerseRow));
+  }
+
+  const verses = await loadFallbackVerses(locale);
+  return cacheChapterVerses(
+    cacheKey,
+    verses.filter((verse) => verse.code === code && verse.chapter === chapter),
+  );
+}
 
 export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Record<string, BookMeta>> {
   const cached = bookMetaCache.get(locale);
@@ -55,7 +206,15 @@ export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Reco
   const { metadataPath } = getTranslationPaths(locale);
   const raw = await readFile(metadataPath, "utf8");
   const parsed = JSON.parse(raw) as {
-    books: Array<{ code: string; name: string; testament: string; order: number; file: string }>;
+    books: Array<{
+      code: string;
+      name: string;
+      testament: string;
+      order: number;
+      file: string;
+      chapters: number;
+      verses: number;
+    }>;
   };
 
   const result = Object.fromEntries(parsed.books.map((book) => [book.code, book]));
@@ -64,25 +223,26 @@ export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Reco
 }
 
 export async function loadVerses(locale: BibleLocale = "en"): Promise<BibleVerse[]> {
-  const cached = versesCache.get(locale);
-  if (cached) return cached;
+  const db = getBibleDatabase();
+  if (db) {
+    const rows = db
+      .prepare(
+        `SELECT code, chapter, verse, text, source_locale
+         FROM verses
+         WHERE locale = ?
+         ORDER BY code ASC, chapter ASC, verse ASC`,
+      )
+      .all(locale) as Array<{
+      code: string;
+      chapter: number;
+      verse: number;
+      text: string;
+      source_locale: string;
+    }>;
+    return rows.map(mapVerseRow);
+  }
 
-  const { vplPath } = getTranslationPaths(locale);
-  const raw = await readFile(vplPath, "utf8");
-  const lines = raw.split(/\r?\n/).filter(Boolean);
-
-  const result = lines.flatMap((line) => {
-    const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/);
-    if (!match) {
-      return [];
-    }
-
-    const [, code, chapter, verse, text] = match;
-    return [{ code, chapter: Number(chapter), verse: Number(verse), text }];
-  });
-
-  versesCache.set(locale, result);
-  return result;
+  return loadFallbackVerses(locale);
 }
 
 type BibleVerseIndex = {
@@ -90,12 +250,7 @@ type BibleVerseIndex = {
   chaptersByBook: Map<string, number[]>;
 };
 
-const verseIndexCache = new Map<string, BibleVerseIndex>();
-
 export async function loadVerseIndex(locale: BibleLocale = "en"): Promise<BibleVerseIndex> {
-  const cached = verseIndexCache.get(locale);
-  if (cached) return cached;
-
   const verses = await loadVerses(locale);
   const byBook = new Map<string, Map<number, BibleVerse[]>>();
   const chaptersByBook = new Map<string, number[]>();
@@ -107,9 +262,9 @@ export async function loadVerseIndex(locale: BibleLocale = "en"): Promise<BibleV
       byBook.set(verse.code, book);
     }
 
-    const chapter = book.get(verse.chapter);
-    if (chapter) {
-      chapter.push(verse);
+    const chapterVerses = book.get(verse.chapter);
+    if (chapterVerses) {
+      chapterVerses.push(verse);
     } else {
       book.set(verse.chapter, [verse]);
     }
@@ -119,9 +274,7 @@ export async function loadVerseIndex(locale: BibleLocale = "en"): Promise<BibleV
     chaptersByBook.set(code, [...chapters.keys()].sort((a, b) => a - b));
   }
 
-  const result = { byBook, chaptersByBook };
-  verseIndexCache.set(locale, result);
-  return result;
+  return { byBook, chaptersByBook };
 }
 
 export function formatBibleReference(reference: BibleReference, bookName?: string) {
@@ -167,8 +320,10 @@ export function parseBibleReferenceSlug(slug: string): BibleReference | null {
 
 export async function getPassage(reference: BibleReference, locale?: string) {
   const bibleLocale = resolveBibleLocale(locale);
-  const [index, books] = await Promise.all([loadVerseIndex(bibleLocale), loadBookMetadata(bibleLocale)]);
-  const chapterVerses = index.byBook.get(reference.code)?.get(reference.chapter) ?? [];
+  const [chapterVerses, books] = await Promise.all([
+    loadChapterVerses(bibleLocale, reference.code, reference.chapter),
+    loadBookMetadata(bibleLocale),
+  ]);
   const passage = chapterVerses.filter(
     (verse) => verse.verse >= reference.startVerse && verse.verse <= reference.endVerse,
   );
@@ -184,8 +339,10 @@ export async function getPassage(reference: BibleReference, locale?: string) {
 
 export async function getChapterContext(reference: BibleReference, radius = 3, locale?: string) {
   const bibleLocale = resolveBibleLocale(locale);
-  const [index, books] = await Promise.all([loadVerseIndex(bibleLocale), loadBookMetadata(bibleLocale)]);
-  const chapterVerses = index.byBook.get(reference.code)?.get(reference.chapter) ?? [];
+  const [chapterVerses, books] = await Promise.all([
+    loadChapterVerses(bibleLocale, reference.code, reference.chapter),
+    loadBookMetadata(bibleLocale),
+  ]);
 
   const from = Math.max(reference.startVerse - radius, 1);
   const to = reference.endVerse + radius;
@@ -195,6 +352,7 @@ export async function getChapterContext(reference: BibleReference, radius = 3, l
     verses: chapterVerses.filter((verse) => verse.verse >= from && verse.verse <= to),
   };
 }
+
 export async function getBibleBooks(locale?: string) {
   const bibleLocale = resolveBibleLocale(locale);
   const books = await loadBookMetadata(bibleLocale);
@@ -211,7 +369,7 @@ export async function getBibleReaderState({
   locale?: string;
 }) {
   const bibleLocale = resolveBibleLocale(locale);
-  const [booksByCode, index] = await Promise.all([loadBookMetadata(bibleLocale), loadVerseIndex(bibleLocale)]);
+  const booksByCode = await loadBookMetadata(bibleLocale);
   const books = Object.values(booksByCode).sort((a, b) => a.order - b.order);
   const requestedCode = code?.toUpperCase();
   const selectedBook = (requestedCode && booksByCode[requestedCode]) || books[0];
@@ -220,12 +378,12 @@ export async function getBibleReaderState({
     return null;
   }
 
-  const chapters = index.chaptersByBook.get(selectedBook.code) ?? [];
+  const chapters = Array.from({ length: selectedBook.chapters }, (_, index) => index + 1);
   const fallbackChapter = chapters[0] ?? 1;
   const requestedChapter =
     typeof chapter === "number" && Number.isInteger(chapter) && chapter > 0 ? chapter : fallbackChapter;
   const selectedChapter = chapters.includes(requestedChapter) ? requestedChapter : fallbackChapter;
-  const chapterVerses = index.byBook.get(selectedBook.code)?.get(selectedChapter) ?? [];
+  const chapterVerses = await loadChapterVerses(bibleLocale, selectedBook.code, selectedChapter);
 
   const selectedBookIndex = books.findIndex((book) => book.code === selectedBook.code);
   const currentChapterIndex = chapters.indexOf(selectedChapter);
@@ -236,9 +394,7 @@ export async function getBibleReaderState({
       : selectedBookIndex > 0
         ? (() => {
             const previousBook = books[selectedBookIndex - 1];
-            const previousBookChapters = index.chaptersByBook.get(previousBook.code) ?? [];
-            const lastChapter = previousBookChapters.at(-1);
-            return lastChapter ? { code: previousBook.code, chapter: lastChapter } : null;
+            return { code: previousBook.code, chapter: previousBook.chapters };
           })()
         : null;
 
@@ -248,9 +404,7 @@ export async function getBibleReaderState({
       : selectedBookIndex < books.length - 1
         ? (() => {
             const nextBook = books[selectedBookIndex + 1];
-            const nextBookChapters = index.chaptersByBook.get(nextBook.code) ?? [];
-            const firstChapter = nextBookChapters[0];
-            return firstChapter ? { code: nextBook.code, chapter: firstChapter } : null;
+            return { code: nextBook.code, chapter: 1 };
           })()
         : null;
 

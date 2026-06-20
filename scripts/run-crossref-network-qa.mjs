@@ -241,6 +241,35 @@ function containsFullGraphPayload(value) {
   return Boolean(value?.all?.outgoing || value?.all?.incoming || value?.grouped?.byBook);
 }
 
+function validateReflectPayload(payload) {
+  return Boolean(payload)
+    && typeof payload.state === 'string'
+    && typeof payload.prompt === 'string'
+    && typeof payload.normalizedQuestion === 'string'
+    && typeof payload.confidence === 'string'
+    && typeof payload.meta?.answerMode === 'string'
+    && (payload.primary === null || (
+      payload.primary.reference
+      && typeof payload.primary.text === 'string'
+      && typeof payload.primary.reason === 'string'
+      && typeof payload.primary.score === 'number'
+    ))
+    && (payload.explanation === null || (
+      typeof payload.explanation.userConcernSummary === 'string'
+      && typeof payload.explanation.connectionToUser === 'string'
+      && typeof payload.explanation.whyThisPassage === 'string'
+      && (payload.explanation.limits === undefined || typeof payload.explanation.limits === 'string')
+    ))
+    && Array.isArray(payload.relatedPassages)
+    && typeof payload.questionUnderstanding?.answerMode === 'string';
+}
+
+function omitsLegacyReflectGraphFields(payload) {
+  return !Object.hasOwn(payload, 'crossReferenceSummary')
+    && !Object.hasOwn(payload, 'crossReferenceHighlights')
+    && !Object.hasOwn(payload, 'crossReferenceNetworkUrl')
+    && !containsFullGraphPayload(payload);
+}
 const reference = parseSlug(referenceSlug);
 const expected = await buildExpected(reference);
 
@@ -345,7 +374,12 @@ for (const locale of locales) {
   });
   record(`${locale}: reflect responds 2xx for reliable prompt`, reliable.response.ok, { status: reliable.response.status, url: reflectUrl });
   if (reliable.response.ok && reliable.json) {
-    record(`${locale}: reflect exposes summary/highlights/url but not full all payload`, !containsFullGraphPayload(reliable.json) && ('crossReferenceSummary' in reliable.json) && Array.isArray(reliable.json.crossReferenceHighlights) && ('crossReferenceNetworkUrl' in reliable.json));
+    record(`${locale}: reflect returns passage-first payload for reliable prompt`, validateReflectPayload(reliable.json) && reliable.json.state === 'direct' && reliable.json.primary !== null && reliable.json.explanation !== null && omitsLegacyReflectGraphFields(reliable.json), {
+      state: reliable.json.state,
+      answerMode: reliable.json.meta?.answerMode,
+      primary: reliable.json.primary?.reference,
+      hasExplanation: Boolean(reliable.json.explanation),
+    });
   }
 
   const low = await fetchJson(reflectUrl, {
@@ -353,11 +387,22 @@ for (const locale of locales) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ prompt: lowConfidencePrompt }),
   });
-  record(`${locale}: reflect responds 2xx for low-confidence safety prompt`, low.response.ok, { status: low.response.status, url: reflectUrl });
+  record(`${locale}: reflect responds 2xx for low-confidence prompt`, low.response.ok, { status: low.response.status, url: reflectUrl });
   if (low.response.ok && low.json) {
-    const lowConfidence = low.json.retrieval?.confidence === 'low';
-    const noExpansion = !containsFullGraphPayload(low.json) && (!low.json.crossReferenceSummary || low.json.crossReferenceSummary.totalEdges === 0) && (!low.json.crossReferenceHighlights || low.json.crossReferenceHighlights.length === 0);
-    record(`${locale}: low-confidence reflect pauses cross-reference expansion`, lowConfidence && noExpansion, { confidence: low.json.retrieval?.confidence, summary: low.json.crossReferenceSummary, highlights: low.json.crossReferenceHighlights?.length });
+    const lowConfidence = low.json.meta?.retrievalConfidence === 'low';
+    const passageFirst =
+      validateReflectPayload(low.json) &&
+      ['tentative', 'unsupported'].includes(low.json.state) &&
+      Array.isArray(low.json.relatedPassages) &&
+      low.json.relatedPassages.length === 0;
+    const asksToClarify = typeof low.json.clarifyPrompt === 'string' && low.json.clarifyPrompt.length > 0;
+    record(`${locale}: low-confidence reflect stays passage-first without legacy graph fields`, lowConfidence && passageFirst && asksToClarify && omitsLegacyReflectGraphFields(low.json), {
+      state: low.json.state,
+      answerMode: low.json.meta?.answerMode,
+      confidence: low.json.meta?.retrievalConfidence,
+      relatedCount: low.json.relatedPassages?.length ?? null,
+      hasClarifyPrompt: asksToClarify,
+    });
   }
 }
 

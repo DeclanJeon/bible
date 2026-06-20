@@ -23,6 +23,9 @@ pnpm-debug.log*
 .env.*
 !.env.example
 .data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 
 # OS/editor
 .DS_Store

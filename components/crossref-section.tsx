@@ -4,7 +4,7 @@ import type { CrossReferenceSuggestion } from "@/lib/knowledge";
 import { PassageCard } from "@/components/passage-card";
 import { Collapsible } from "@/components/collapsible";
 import { UI_COPY, localizeCrossReferenceSupportSummary, resolveAppLocale } from "@/lib/content";
-import { buildPassageHref } from "@/lib/navigation";
+import { buildBibleReferenceHref } from "@/lib/navigation";
 import { memo } from "react";
 
 export const CrossReferenceSection = memo(function CrossReferenceSection({
@@ -33,7 +33,7 @@ export const CrossReferenceSection = memo(function CrossReferenceSection({
             title={suggestion.title}
             referenceLabel={suggestion.displayReference}
             excerpt={suggestion.excerpt}
-            href={buildPassageHref(suggestion.target, appLocale)}
+            href={buildBibleReferenceHref(suggestion.target, { locale: appLocale, from: "crossref" })}
             meta={`${suggestion.supportLabel} · ${suggestion.supportLine}`}
             actionLabel={appLocale === "ko" ? "전체 본문 보기" : "Read full passage"}
           />

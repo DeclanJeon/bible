@@ -1,28 +1,14 @@
 import type { Metadata } from "next";
+
 import Link from "next/link";
-import { headers } from "next/headers";
-import { ArrowRight, BookOpen, Compass, Search } from "lucide-react";
+import { ArrowRight, BookOpenText, Search } from "lucide-react";
 import { PassageCard } from "@/components/passage-card";
-import { NoteCard } from "@/components/note-card";
-import { SourceList } from "@/components/source-list";
-import { CrossReferenceSection } from "@/components/crossref-section";
-import { buildCrossReferenceNetworkHref, FullNetworkCta } from "@/components/full-network-cta";
-import { BookProfileCard } from "@/components/book-profile-card";
 import { SafetyBanner } from "@/components/safety-banner";
-import { TabSection } from "@/components/tab-section";
-import { Collapsible } from "@/components/collapsible";
-import { getPassage } from "@/lib/bible";
-import { APP_SOURCES, getRelatedClustersFromReferences } from "@/lib/app-data";
-import { UI_COPY, localizeSourceLinks, localizeStoryCluster, resolveAppLocale } from "@/lib/content";
-import { getBookMetadata } from "@/lib/book-metadata";
-import { getPassageCrossReferences } from "@/lib/knowledge";
-import { buildBibleHref, buildCompanionHref, buildGraphHref, buildPassageHref, buildStudyHref } from "@/lib/navigation";
-import { buildReflectionResponse } from "@/lib/reflection";
-import { generateReflectionWithHermes } from "@/lib/hermes";
-import { buildRagQueryPlan } from "@/lib/rag-query";
-import { isRetrievalReliable, retrieveClusterForPrompt } from "@/lib/retrieval";
-import { assessPromptSafety } from "@/lib/safety";
+import { SecondaryNav } from "@/components/secondary-nav";
+import { UI_COPY, resolveAppLocale } from "@/lib/content";
+import { buildBibleHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
+import { buildPassageRecommendation } from "@/lib/passage-response";
 import { resolveLocale } from "@/lib/server-locale";
 
 type Props = {
@@ -30,11 +16,48 @@ type Props = {
   searchParams: Promise<{ prompt?: string }>;
 };
 
-function preview(text: string) {
-  return text.length > 220 ? `${text.slice(0, 220)}…` : text;
+function preview(text: string, max = 220) {
+  return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
+function compactLines(value: string | null | undefined) {
+  return value?.replace(/\s+/g, " ").trim() ?? "";
+}
 
+function formatDuration(seconds: number | undefined) {
+  if (!seconds || seconds < 1) return null;
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+  }
+
+  return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+}
+
+function youtubeMatchLabel(locale: string, matchType: "exact" | "book" | "keyword") {
+  if (locale === "ko") {
+    switch (matchType) {
+      case "exact":
+        return "본문 직접 일치";
+      case "book":
+        return "같은 책 기준";
+      default:
+        return "주제어 기준";
+    }
+  }
+
+  switch (matchType) {
+    case "exact":
+      return "Exact passage match";
+    case "book":
+      return "Same book match";
+    default:
+      return "Keyword match";
+  }
+}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: requestedLocale } = await params;
   const locale = await resolveLocale(requestedLocale);
@@ -46,368 +69,336 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CompanionPage({ params, searchParams }: Props) {
   const [{ locale: requestedLocale }, { prompt }] = await Promise.all([params, searchParams]);
-  const headerList = await headers();
   const appLocale = resolveAppLocale(requestedLocale);
   const defaultPrompt =
     appLocale === "ko"
       ? "성경 본문을 문맥과 연결 본문으로 공부하고 싶어요."
       : "Help me study a Bible passage with context and linked passages.";
   const userPrompt = prompt?.trim() || defaultPrompt;
-  const safety = assessPromptSafety(userPrompt, {
-    requestedLocale: appLocale,
-    acceptLanguage: headerList.get("accept-language") ?? undefined,
-    countryCode: headerList.get("x-vercel-ip-country") ?? headerList.get("cf-ipcountry") ?? undefined,
+  const build = await buildPassageRecommendation(userPrompt, {
+    locale: appLocale,
   });
-  const copy = UI_COPY[appLocale].companion;
-  const ragQuery = await buildRagQueryPlan(userPrompt, appLocale);
-  const retrieval = await retrieveClusterForPrompt(userPrompt, appLocale, {
-    queryPlan: ragQuery,
-  });
-  const answerBundle = retrieval.answerBundle ?? null;
-  const questionUnderstanding = retrieval.question ?? answerBundle?.question ?? null;
-  const hasReliablePrimary = isRetrievalReliable(retrieval);
-  const localizedCluster = localizeStoryCluster(retrieval.cluster, appLocale);
-  const primaryReference = retrieval.primaryReference;
-  const primary = await getPassage(primaryReference, appLocale);
-  const graphSuggestions = hasReliablePrimary ? await getPassageCrossReferences(primaryReference, 4, appLocale) : [];
-  const fallbackLinkedTexts = graphSuggestions.map((suggestion) => ({
-    label: suggestion.displayReference,
-    type: "theme" as const,
-    summary: suggestion.supportLine || suggestion.excerpt,
-    reference: suggestion.target,
-  }));
-  const supportingReferences = hasReliablePrimary
-    ? retrieval.supportingReferences.length
-      ? retrieval.supportingReferences
-      : localizedCluster.supporting.length
-        ? localizedCluster.supporting
-        : graphSuggestions.map((suggestion) => suggestion.target)
-    : [];
-  const cluster = {
-    ...localizedCluster,
-    primary: primaryReference,
-    supporting: supportingReferences,
-    linkedTexts: hasReliablePrimary && localizedCluster.linkedTexts.length ? localizedCluster.linkedTexts : fallbackLinkedTexts,
-  };
-  const supporting = await Promise.all(cluster.supporting.map((reference) => getPassage(reference, appLocale)));
-  const deterministic = await buildReflectionResponse(cluster, userPrompt, appLocale, {
-    retrieval,
-    graphSuggestions,
-    primaryReference,
-    supportingReferences,
-  });
-  const primaryBookMetadata = getBookMetadata(primaryReference.code, appLocale);
-  const relatedCodes = [
-    primaryReference.code,
-    ...supportingReferences.map((reference) => reference.code),
-    ...graphSuggestions.map((suggestion) => suggestion.target.code),
-  ];
-  const relatedClusters = hasReliablePrimary
-    ? getRelatedClustersFromReferences(cluster.slug, relatedCodes, 3).map((related) => localizeStoryCluster(related, appLocale))
-    : [];
-  const sources = localizeSourceLinks(APP_SOURCES, appLocale);
-  const crossReferenceNetworkUrl = hasReliablePrimary ? buildCrossReferenceNetworkHref(primaryReference, appLocale) : null;
-  const allowedEvidenceIds = ["primary", ...supportingReferences.map((_, index) => `supporting-${index}`)];
 
-  const generation = await generateReflectionWithHermes(
-    {
-      prompt: userPrompt,
-      safety,
-      retrieval,
-      cluster: {
-        slug: cluster.slug,
-        title: cluster.title,
-        themes: cluster.themes,
-        emotions: cluster.emotions,
-        pastoralPrompt: cluster.pastoralPrompt,
-        reflectionQuestions: cluster.reflectionQuestions,
-      },
-      primaryBookMetadata,
-      linkedTexts: cluster.linkedTexts,
-      context: cluster.context,
-      jesusLayer: cluster.jesusLayer,
-      paulLayer: cluster.paulLayer,
-      jewishReception: cluster.jewishReception,
-      graphSuggestions,
-      crossReferenceSummary: null,
-      crossReferenceHighlights: [],
-      crossReferenceNetworkUrl,
-      allowedEvidenceIds,
-      deterministicReflection: deterministic,
-    },
-    deterministic,
-  );
-  const structuredReflection = {
-    passageExplanations: deterministic.passageExplanations,
-    passageBackground: deterministic.passageBackground,
-    passageClaim: deterministic.passageClaim,
-    userConnection: deterministic.userConnection,
-    applicationBoundary: deterministic.applicationBoundary,
-  };
-  const hydratedResponse = {
-    ...generation.response,
-    ...structuredReflection,
-    generationMode: generation.provider,
-    generationModel: generation.model,
-    generationNote: generation.note,
-    answerPolicy: questionUnderstanding?.answerMode,
-    questionUnderstanding,
-  };
-
-  const totalNotes = 4;
-  const totalExplore = graphSuggestions.length + relatedClusters.length;
+  const { recommendation, safety, questionUnderstanding, ragQuery, primaryPassage, relatedPassageDetails } = build;
+  const youtubeResources = recommendation.externalResources?.youtube ?? recommendation.background?.youtubeResources ?? [];
 
   return (
-    <main className="mx-auto min-h-screen max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      {/* Header */}
-      <header className="glass rounded-2xl px-4 py-4 sm:px-6 sm:py-5">
-        <div className="flex items-center justify-between gap-3">
-          <Link href={`/${appLocale}`} className="shrink-0 text-sm font-semibold text-[var(--ink)] sm:text-base">{UI_COPY[appLocale].siteTitle}</Link>
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <Link href={buildBibleHref({ locale: appLocale })} className="rounded-lg border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] min-h-[36px] flex items-center">
-              {UI_COPY[appLocale].sidebar.navBible}
-            </Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "ko" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[44px] min-w-[44px] items-center justify-center flex ${appLocale === "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>KO</Link>
-            <Link href={buildCompanionHref({ prompt: userPrompt, locale: "en" })} className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition min-h-[44px] min-w-[44px] items-center justify-center flex ${appLocale !== "ko" ? "bg-[var(--gold)] text-[var(--canvas)]" : "border border-[var(--hairline-strong)] text-[var(--ink-muted)] hover:border-[var(--gold)]/30 hover:text-[var(--ink)]"}`}>EN</Link>
+    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <SecondaryNav locale={appLocale} active="companion" title={appLocale === "ko" ? "성구 추천" : "Passage recommendation"} />
+
+      <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:p-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="section-title text-base">{appLocale === "ko" ? "사용자 입력" : "Prompt"}</div>
+            <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl lg:text-5xl">
+              {appLocale === "ko" ? "가장 연결되는 본문부터 읽습니다" : "Start with the most connected passage"}
+            </h1>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)] sm:text-lg">
+              {appLocale === "ko"
+                ? "질문을 성경의 언어로 다시 읽고, 중심 본문과 연결 본문을 먼저 제시한 뒤 배경과 문맥을 붙입니다."
+                : "The companion rewrites the question in biblical language, then starts with a primary passage, related passages, and compact background context."}
+            </p>
           </div>
+          <Link
+            href={buildBibleHref({ locale: appLocale })}
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+          >
+            <BookOpenText className="h-4 w-4" />
+            {UI_COPY[appLocale].sidebar.navBible}
+          </Link>
         </div>
-        <form action={`/${appLocale}/companion`} className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
+        <form action={`/${appLocale}/companion`} className="mt-5 flex items-center gap-2 sm:gap-3">
           <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-3 py-2.5 sm:px-5 sm:py-3">
             <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
-            <input type="text" name="prompt" defaultValue={userPrompt} required minLength={2} className="w-full min-w-0 flex-1 border-0 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:text-base" />
+            <input
+              type="text"
+              name="prompt"
+              defaultValue={recommendation.prompt}
+              required
+              minLength={2}
+              className="w-full min-w-0 flex-1 border-0 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:text-base"
+            />
           </div>
-          <button type="submit" className="shrink-0 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-xs font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90 min-h-[44px] sm:px-5 sm:py-3 sm:text-sm">{UI_COPY[appLocale].prompt.submit}</button>
+          <button
+            type="submit"
+            className="shrink-0 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-xs font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90 min-h-[44px] sm:px-5 sm:py-3 sm:text-sm"
+          >
+            {UI_COPY[appLocale].prompt.submit}
+          </button>
         </form>
-      </header>
-
-      {/* Hero Section — always visible */}
-      <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
-        <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm text-[var(--muted)] italic leading-relaxed sm:rounded-2xl sm:px-5 sm:py-4 sm:text-base">&ldquo;{userPrompt}&rdquo;</div>
-        <h1 className="mt-3 text-xl font-bold text-[var(--ink)] tracking-tight leading-tight sm:mt-5 sm:text-3xl lg:text-5xl">
-          {hasReliablePrimary ? (answerBundle ? (appLocale === "ko" ? "성경 본문 묶음으로 답합니다" : "Answering with a Bible evidence bundle") : cluster.title) : appLocale === "ko" ? "더 구체적인 연결이 필요합니다" : "A more specific connection is needed"}
-        </h1>
-        <p className="mt-2 text-sm font-medium text-[var(--gold)]">
-          {hasReliablePrimary ? primary.reference : appLocale === "ko" ? "낮은 신뢰도 검색" : "Low-confidence retrieval"}
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] sm:text-lg lg:text-xl">{hydratedResponse.concernSummary}</p>
-        <p className="mt-3 rounded-lg border border-[var(--gold-border)] bg-[var(--gold-soft)] px-4 py-3 text-sm leading-relaxed text-[var(--ink)]">{hydratedResponse.relevanceSummary}</p>
-        {questionUnderstanding ? (
-          <div className="mt-3 rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
-            <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 이해" : "Question understood"}:</span>{" "}
-            {questionUnderstanding.normalized} · {questionUnderstanding.answerMode}
-          </div>
-        ) : null}
-        <div className="mt-3 sm:mt-5"><SafetyBanner safety={safety} /></div>
-
-        {hasReliablePrimary ? (
-          <div className="mt-8 rounded-2xl border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] p-6 lg:p-8">
-            <div className="text-base font-semibold text-[var(--gold)]">{primary.reference}</div>
-            <div className="mt-4 space-y-4 text-lg leading-relaxed text-[var(--text)]">
-              {primary.verses.slice(0, 3).map((verse) => (
-                <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
-              ))}
-            </div>
-            {primary.verses.length > 3 && (
-              <Collapsible trigger={<span>Show {primary.verses.length - 3} more verses</span>} className="mt-4">
-                <div className="space-y-4 text-lg leading-relaxed text-[var(--text)]">
-                  {primary.verses.slice(3).map((verse) => (
-                    <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}><span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>{verse.text}</p>
-                  ))}
-                </div>
-              </Collapsible>
-            )}
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href={buildStudyHref(cluster.slug, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold)]/90 transition min-h-[44px]">
-                <BookOpen className="h-4 w-4" />{copy.openStudyDesk}
-              </Link>
-              <Link href={buildGraphHref(cluster.slug, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition min-h-[44px]">
-                <Compass className="h-4 w-4" />{UI_COPY[appLocale].sidebar.navGraph}
-              </Link>
-              <Link href={buildPassageHref(primaryReference, appLocale)} className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition min-h-[44px]">
-                {appLocale === "ko" ? "전체 본문 읽기" : "Read full passage"}
-              </Link>
-              <FullNetworkCta reference={primaryReference} locale={appLocale} />
-            </div>
-          </div>
-        ) : (
-          <div className="mt-8 rounded-2xl border border-[var(--hairline-strong)] bg-[var(--surface-2)] p-6 lg:p-8">
-            <div className="text-base font-semibold text-[var(--gold)]">
-              {appLocale === "ko" ? "본문 추천 보류" : "Passage recommendation paused"}
-            </div>
-            <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.whyTheseTexts}</p>
-          </div>
-        )}
+        <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
+          “{recommendation.prompt}”
+        </div>
+        <div className="mt-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
+          <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 이해" : "Question understood"}:</span>{" "}
+          {recommendation.normalizedQuestion}
+          <span className="mx-2 text-[var(--hairline)]">·</span>
+          {questionUnderstanding.answerMode}
+          <span className="mx-2 text-[var(--hairline)]">·</span>
+          {recommendation.state}
+        </div>
+        <div className="mt-4">
+          <SafetyBanner safety={safety} />
+        </div>
       </section>
 
-      {/* Doctrine Presentation Section */}
-      {answerBundle?.doctrinePresentation ? (
-        <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:mt-8 lg:p-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] px-4 py-2 text-sm font-semibold text-[var(--gold)]">
-            {appLocale === "ko" ? "교리적 배경" : "Doctrinal Context"}
-          </div>
-          <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 sm:px-5 sm:py-4">
-            <div className="text-sm font-semibold text-[var(--ink)]">
-              {appLocale === "ko" ? "공통 핵심" : "Shared Core"}
-            </div>
-            <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">
-              {answerBundle.doctrinePresentation.sharedCore.summary}
-            </p>
-            {answerBundle.doctrinePresentation.sharedCore.limits ? (
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] italic">
-                {answerBundle.doctrinePresentation.sharedCore.limits}
-              </p>
-            ) : null}
-          </div>
-          {answerBundle.doctrinePresentation.mode !== "shared_core_only" ? (
-            <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 sm:px-5 sm:py-4">
-              <div className="text-sm font-semibold text-[var(--ink)]">
-                {appLocale === "ko" ? "전통별 해석 차이" : "Tradition Differences"}
-              </div>
-              <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">
-                {appLocale === "ko"
-                  ? "이 주제는 기독교 전통마다 해석이 다를 수 있습니다. 아래에서 전통별 관점을 확인하세요."
-                  : "This topic may be interpreted differently across Christian traditions. Check tradition-specific views below."}
-              </p>
-              {answerBundle.doctrinePresentation.views.length > 0 ? (
-                <div className="mt-4 space-y-3">
-                  {answerBundle.doctrinePresentation.views.map((view) => (
-                    <div key={view.tradition} className="rounded-lg border border-[var(--hairline)] bg-[var(--surface-1)] px-4 py-3">
-                      <div className="text-sm font-semibold text-[var(--gold)]">{view.label}</div>
-                      <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{view.summary}</p>
-                    </div>
+      <section className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)] lg:items-start">
+        <div className="space-y-6">
+          <article className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.08] p-5 sm:p-6 lg:p-8">
+            <div className="section-title text-base">{appLocale === "ko" ? "메인 성구" : "Primary passage"}</div>
+            {recommendation.primary && primaryPassage && (recommendation.state === "direct" || recommendation.state === "safety_first") ? (
+              <>
+                <div className="mt-3 text-lg font-semibold text-[var(--gold)]">{primaryPassage.reference}</div>
+                <div className="mt-5 space-y-4 text-lg leading-relaxed text-[var(--text)]">
+                  {primaryPassage.verses.map((verse) => (
+                    <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}>
+                      <span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>
+                      {verse.text}
+                    </p>
                   ))}
                 </div>
-              ) : (
-                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)] italic">
-                  {appLocale === "ko"
-                    ? "전통별 상세 데이터는 아직 준비 중입니다."
-                    : "Tradition-specific detail data is not yet available."}
-                </p>
-              )}
-            </div>
-          ) : null}
-        </section>
-      ) : null}
-
-      {/* Tabbed content */}
-      <div className="mt-8">
-        <TabSection
-          defaultKey="passages"
-          tabs={[
-            {
-              key: "passages",
-              label: copy.primaryAndLinked,
-              count: supporting.length,
-              content: (
-                <div>
-                  <p className="text-base text-[var(--muted)] leading-relaxed mb-6">{copy.primaryAndLinkedBody}</p>
-                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                    {supporting.map((passage, index) => (
-                      <PassageCard
-                        key={passage.reference}
-                        title={passage.book?.name ?? cluster.supporting[index].code}
-                        referenceLabel={passage.reference}
-                        excerpt={preview(passage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" "))}
-                        href={buildPassageHref(cluster.supporting[index], appLocale)}
-                        meta={`${copy.linkedText} ${index + 1}`}
-                        actionLabel={appLocale === "ko" ? "전체 본문 보기" : "Read full passage"}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ),
-            },
-            {
-              key: "explanation",
-              label: copy.groundedResponse,
-              content: (
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                  <div className="soft-glass rounded-2xl p-6">
-                    <div className="section-title text-sm">{copy.whyThisStoryFirst}</div>
-                    <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.whyTheseTexts}</p>
-                  </div>
-                  <div className="soft-glass rounded-2xl p-6">
-                    <div className="section-title text-sm">{copy.personalConnection}</div>
-                    <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.personalConnection}</p>
-                  </div>
-                  <div className="soft-glass rounded-2xl p-6">
-                    <div className="section-title text-sm">{copy.datePlaceAudience}</div>
-                    <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.datePlaceAudience}</p>
-                  </div>
-                  <div className="soft-glass rounded-2xl p-6">
-                    <div className="section-title text-sm">{copy.jesusPaul}</div>
-                    <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{hydratedResponse.jesusAndPaul}</p>
-                  </div>
-                </div>
-              ),
-            },
-            {
-              key: "notes",
-              label: copy.sourcedNotes,
-              count: totalNotes,
-              content: (
-                <div>
-                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                    <NoteCard note={cluster.context.author} eyebrow={copy.notes.author} locale={appLocale} />
-                    <NoteCard note={cluster.context.date} eyebrow={copy.notes.date} locale={appLocale} />
-                    <NoteCard note={cluster.context.place} eyebrow={copy.notes.place} locale={appLocale} />
-                    <NoteCard note={cluster.jewishReception} eyebrow={copy.notes.reception} locale={appLocale} />
-                  </div>
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-5">
-                    {primaryBookMetadata ? <BookProfileCard metadata={primaryBookMetadata} locale={appLocale} /> : null}
-                    <div className="glass rounded-2xl p-6">
-                      <div className="section-title text-sm">{copy.sourceInventory}</div>
-                      <div className="mt-4"><SourceList sources={sources} compact locale={appLocale} /></div>
-                    </div>
-                  </div>
-                </div>
-              ),
-            },
-            {
-              key: "reflection",
-              label: copy.reflectionQuestions,
-              count: hydratedResponse.reflectionQuestions.length,
-              content: (
-                <div className="space-y-4">
-                  {hydratedResponse.reflectionQuestions.map((question) => (
-                    <div key={question} className="soft-glass rounded-2xl p-5 text-base leading-relaxed text-[var(--muted)]">{question}</div>
-                  ))}
-                </div>
-              ),
-            },
-            {
-              key: "explore",
-              label: copy.relatedLanes ?? "Explore",
-              count: totalExplore,
-              content: (
-                <div className="space-y-8">
-                  <CrossReferenceSection suggestions={graphSuggestions} locale={appLocale} />
-                  {hasReliablePrimary ? <FullNetworkCta reference={primaryReference} locale={appLocale} /> : null}
-                  {relatedClusters.length ? (
-                    <div>
-                      <div className="section-title text-base">{copy.relatedLanes}</div>
-                      <p className="mt-3 text-base text-[var(--muted)] leading-relaxed">{copy.relatedLanesBody}</p>
-                      <div className="mt-6 space-y-4">
-                        {relatedClusters.map((related) => (
-                          <Link key={related.slug} href={buildCompanionHref({ prompt: related.starterPrompt, locale: appLocale })} className="block rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 transition hover:border-[var(--gold)]/25 hover:bg-[var(--surface-3)]">
-                            <div className="flex items-start justify-between gap-4">
-                              <div>
-                                <div className="text-base font-semibold text-[var(--ink)]">{related.title}</div>
-                                <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">{related.pastoralPrompt}</p>
-                              </div>
-                              <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-[var(--gold)]" />
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {recommendation.readerHref ? (
+                    <Link
+                      href={recommendation.readerHref}
+                      className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90"
+                    >
+                      {appLocale === "ko" ? "이 본문을 성경 전체 문맥에서 읽기" : "Read in the Bible reader"}
+                    </Link>
                   ) : null}
+                  <Link
+                    href={buildBibleHref({ book: recommendation.primary.reference.code, chapter: recommendation.primary.reference.chapter, locale: appLocale })}
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+                  >
+                    {appLocale === "ko" ? "이 장 전체 보기" : "Read the whole chapter"}
+                  </Link>
                 </div>
-              ),
-            },
-          ]}
-        />
-      </div>
+              </>
+            ) : recommendation.primary && primaryPassage ? (
+              <>
+                <div className="mt-3 text-lg font-semibold text-[var(--gold)]">
+                  {appLocale === "ko" ? "잠정 후보 본문" : "Tentative candidate passage"}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{primaryPassage.reference}</p>
+                <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{recommendation.clarifyPrompt}</p>
+                <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-7 text-[var(--muted)]">
+                  {preview(primaryPassage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" "), 260)}
+                </div>
+                {recommendation.readerHref ? (
+                  <div className="mt-5">
+                    <Link
+                      href={recommendation.readerHref}
+                      className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+                    >
+                      {appLocale === "ko" ? "후보 본문을 직접 확인하기" : "Inspect the candidate passage"}
+                    </Link>
+                  </div>
+                ) : null}
+              </>
+            ) : (
+              <>
+                <div className="mt-3 text-lg font-semibold text-[var(--gold)]">
+                  {recommendation.state === "unsupported"
+                    ? appLocale === "ko"
+                      ? "본문 추천 보류"
+                      : "No direct passage yet"
+                    : appLocale === "ko"
+                      ? "잠정 후보"
+                      : "Tentative candidate"}
+                </div>
+                <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">
+                  {recommendation.clarifyPrompt ??
+                    (appLocale === "ko"
+                      ? "질문을 조금 더 구체적으로 적으면 더 직접 연결되는 성구를 찾을 수 있습니다."
+                      : "A more specific prompt will help the companion find a more directly connected passage.")}
+                </p>
+              </>
+            )}
+          </article>
+
+          <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
+            <div className="section-title text-base">{appLocale === "ko" ? "왜 이 성구인가" : "Why this passage fits"}</div>
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 요약" : "Concern summary"}</div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                  {recommendation.explanation?.userConcernSummary ?? recommendation.clarifyPrompt}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "직접 연결 근거" : "Direct connection"}</div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                  {recommendation.explanation?.connectionToUser ?? compactLines(recommendation.clarifyPrompt)}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "본문 선택 이유" : "Why this text"}</div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                  {recommendation.explanation?.whyThisPassage ?? compactLines(recommendation.clarifyPrompt)}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "경계와 한계" : "Limits"}</div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                  {recommendation.explanation?.limits ??
+                    (recommendation.state === "unsupported"
+                      ? appLocale === "ko"
+                        ? "본문을 억지로 끼워 맞추지 않고, 더 분명한 질문을 기다립니다."
+                        : "The companion waits for a clearer question rather than forcing a weak passage."
+                      : compactLines(recommendation.clarifyPrompt))}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
+            <div className="section-title text-base">{appLocale === "ko" ? "배경과 역사" : "Background and history"}</div>
+            {recommendation.background ? (
+              <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "책과 이야기" : "Book and story"}</div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.storyContext}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "정경적 문맥" : "Canonical context"}</div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.canonicalContext}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "시대·장소·청중" : "Date, place, audience"}</div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                    {compactLines(recommendation.background.date)} {compactLines(recommendation.background.place)} {compactLines(recommendation.background.audience)}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "저자" : "Author"}</div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.author}</p>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-5 text-sm leading-7 text-[var(--muted)]">
+                {appLocale === "ko"
+                  ? "지금은 본문 배경보다 질문을 더 또렷하게 만드는 일이 우선입니다."
+                  : "Clarifying the question comes before building passage background in this state."}
+              </p>
+            )}
+          </section>
+
+          {youtubeResources.length ? (
+            <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
+              <div className="section-title text-base">{appLocale === "ko" ? "캐시된 외부 자료" : "Cached external resources"}</div>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                {appLocale === "ko"
+                  ? "메인 본문을 바꾸지 않고, 로컬 카탈로그에 이미 저장된 영상만 보조 자료로 노출합니다."
+                  : "These videos come only from the local cache-backed catalog and never influence the main passage choice."}
+              </p>
+              <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                {youtubeResources.map((resource) => (
+                  <a
+                    key={resource.videoId}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 transition hover:border-[var(--gold)]/25"
+                  >
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--gold)]">
+                      <span>{youtubeMatchLabel(appLocale, resource.matchType)}</span>
+                      {resource.durationSeconds ? <span>· {formatDuration(resource.durationSeconds)}</span> : null}
+                    </div>
+                    <div className="mt-3 text-base font-semibold leading-7 text-[var(--ink)]">{resource.title}</div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                      {resource.channelTitle}
+                      {resource.channelHandle ? ` · ${resource.channelHandle}` : ""}
+                    </p>
+                    {resource.summary ? <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{preview(resource.summary, 240)}</p> : null}
+                    <div className="mt-4 flex flex-wrap gap-2 text-xs leading-6 text-[var(--muted)]">
+                      {resource.matchedReference ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedReference}</span> : null}
+                      {resource.matchedBook ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedBook}</span> : null}
+                      {resource.matchedKeyword ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedKeyword}</span> : null}
+                      {resource.transcriptStatus !== "ok" ? (
+                        <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">
+                          {appLocale === "ko" ? "전사 일부 없음" : "Transcript incomplete"}
+                        </span>
+                      ) : null}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
+            <div className="section-title text-base">{appLocale === "ko" ? "관련 성구" : "Related passages"}</div>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+              {appLocale === "ko"
+                ? "메인 성구를 넓히거나 교차 검증하는 본문들입니다. 클릭하면 책과 장 문맥 안으로 이동합니다."
+                : "These passages widen or cross-check the main passage. Each link lands inside book-and-chapter context."}
+            </p>
+            {relatedPassageDetails.length ? (
+              <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                {relatedPassageDetails.map((card) => (
+                  <PassageCard
+                    key={`${card.reference.code}-${card.reference.chapter}-${card.reference.startVerse}-${card.reference.endVerse}`}
+                    title={card.title}
+                    referenceLabel={card.referenceLabel}
+                    excerpt={preview(card.excerpt)}
+                    href={card.href}
+                    meta={card.reason}
+                    actionLabel={appLocale === "ko" ? "성경 리더에서 읽기" : "Read in reader"}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-5 text-sm leading-6 text-[var(--muted)]">
+                {appLocale === "ko"
+                  ? "현재는 확장할 만큼 직접 연결된 관련 성구가 충분하지 않습니다."
+                  : "There are not enough directly connected passages to expand confidently yet."}
+              </p>
+            )}
+          </section>
+        </div>
+
+        <aside className="space-y-6">
+          <section className="glass rounded-2xl p-5 sm:p-6">
+            <div className="section-title text-base">{appLocale === "ko" ? "계속 읽기" : "Continue reading"}</div>
+            <div className="mt-5 space-y-3">
+              <Link
+                href={buildBibleHref({ locale: appLocale })}
+                className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
+              >
+                <span>{UI_COPY[appLocale].sidebar.navBible}</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              {recommendation.primary ? (
+                <Link
+                  href={buildBibleHref({ book: recommendation.primary.reference.code, chapter: recommendation.primary.reference.chapter, locale: appLocale })}
+                  className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
+                >
+                  <span>{appLocale === "ko" ? "이 책과 장 계속 읽기" : "Keep reading this chapter"}</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : null}
+            </div>
+          </section>
+
+          <section className="glass rounded-2xl p-5 sm:p-6">
+            <div className="section-title text-base">{appLocale === "ko" ? "검색 메모" : "Search notes"}</div>
+            <div className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
+              <p>
+                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "응답 모드" : "Answer mode"}:</span>{" "}
+                {questionUnderstanding.answerMode}
+              </p>
+              <p>
+                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "검색 확장" : "Query expansion"}:</span>{" "}
+                {ragQuery.expansionProvider}
+              </p>
+              <p>
+                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "신뢰도" : "Confidence"}:</span>{" "}
+                {recommendation.confidence}
+              </p>
+            </div>
+          </section>
+        </aside>
+      </section>
     </main>
   );
 }

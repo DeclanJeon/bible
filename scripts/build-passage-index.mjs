@@ -4,8 +4,14 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_DIR = path.join(ROOT, "data", "passage-index");
-const VERSION = "seed-2026-06-18-doctrine";
-const GENERATED_AT = "2026-06-18T21:15:00.000Z";
+const VERSION = "passage-unit-2026-06-20-v1";
+const GENERATED_AT = "2026-06-20T00:00:00.000Z";
+const KO_FALLBACK_ALLOWLIST_PATH = path.join(ROOT, "data", "passage-index", "ko-fallback-allowlist.json");
+
+async function loadKoFallbackAllowlist() {
+  const parsed = JSON.parse(await readFile(KO_FALLBACK_ALLOWLIST_PATH, "utf8"));
+  return new Set(parsed.allowedMissingVerseKeys ?? []);
+}
 
 const SEED_PASSAGES = [
   {
@@ -494,38 +500,418 @@ function vplPath(locale) {
   return path.join(ROOT, locale === "ko" ? "korean_bible" : "world_english_bible", "canon_66_vpl.txt");
 }
 
+const POETRY_BOOKS = new Set(["JOB", "PSA", "PRO", "ECC", "SOL", "LAM"]);
+const EPISTLE_BOOKS = new Set(["ROM", "1CO", "2CO", "GAL", "EPH", "PHP", "COL", "1TH", "2TH", "1TI", "2TI", "TIT", "PHM", "HEB", "JAM", "1PE", "2PE", "1JO", "2JO", "3JO", "JUD"]);
+const GOSPEL_BOOKS = new Set(["MAT", "MAR", "LUK", "JOH"]);
+const APOCALYPTIC_BOOKS = new Set(["DAN", "REV"]);
+const PROPHETIC_BOOKS = new Set(["ISA", "JER", "EZE", "HOS", "JOL", "AMO", "OBA", "JON", "MIC", "NAM", "HAB", "ZEP", "HAG", "ZEC", "MAL"]);
+const LAW_BOOKS = new Set(["GEN", "EXO", "LEV", "NUM", "DEU"]);
+
+const ENGLISH_STOP_WORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "because", "been", "before", "being", "but", "by", "for", "from", "had", "has", "have", "he", "her", "his", "i", "if", "in", "into", "is", "it", "its", "let", "me", "my", "no", "not", "of", "on", "or", "our", "so", "than", "that", "the", "their", "them", "there", "they", "this", "those", "to", "us", "was", "we", "were", "what", "when", "which", "who", "will", "with", "you", "your"
+]);
+
+const KOREAN_STOP_WORDS = new Set([
+  "그", "그가", "그는", "그를", "그의", "그들에게", "그들에게로", "그때", "그리하여", "너", "너희", "너희는", "나", "나는", "나를", "나의", "너를", "너의", "너희의", "우리", "우리는", "우리의", "내", "내가", "내게", "또", "또한", "및", "와", "과", "은", "는", "이", "가", "을", "를", "에", "에서", "에게", "에게서", "으로", "로", "도", "만", "이나", "나", "하며", "하고", "하니", "하라", "하시니", "하시고", "하셨으니", "이라", "이라도", "이는", "있는", "있고", "있으니", "있으라", "있다", "되니", "되어", "되며", "되었고", "된다", "하여", "하여금", "하되", "한", "할", "하는", "하며", "더", "즉", "저", "저희", "것", "수", "때", "모든"
+]);
+
+const LOCALIZED_LABELS = {
+  God: { en: "God", ko: "하나님" },
+  Jesus: { en: "Jesus", ko: "예수" },
+  Christ: { en: "Christ", ko: "그리스도" },
+  church: { en: "church", ko: "교회" },
+  community: { en: "community", ko: "공동체" },
+  covenant: { en: "covenant", ko: "언약" },
+  creation: { en: "creation", ko: "창조" },
+  deliverance: { en: "deliverance", ko: "구원" },
+  discipleship: { en: "discipleship", ko: "제자도" },
+  exile: { en: "exile", ko: "포로" },
+  faith: { en: "faith", ko: "믿음" },
+  forgiveness: { en: "forgiveness", ko: "용서" },
+  grace: { en: "grace", ko: "은혜" },
+  guidance: { en: "guidance", ko: "인도" },
+  grief: { en: "grief", ko: "슬픔" },
+  healing: { en: "healing", ko: "치유" },
+  holiness: { en: "holiness", ko: "거룩" },
+  hope: { en: "hope", ko: "소망" },
+  identity: { en: "identity", ko: "정체성" },
+  justice: { en: "justice", ko: "정의" },
+  judgment: { en: "judgment", ko: "심판" },
+  kingdom: { en: "kingdom", ko: "하나님 나라" },
+  law: { en: "law", ko: "율법" },
+  love: { en: "love", ko: "사랑" },
+  mercy: { en: "mercy", ko: "긍휼" },
+  mission: { en: "mission", ko: "사명" },
+  obedience: { en: "obedience", ko: "순종" },
+  prayer: { en: "prayer", ko: "기도" },
+  prophecy: { en: "prophecy", ko: "예언" },
+  promise: { en: "promise", ko: "약속" },
+  repentance: { en: "repentance", ko: "회개" },
+  resurrection: { en: "resurrection", ko: "부활" },
+  salvation: { en: "salvation", ko: "구원" },
+  scripture: { en: "scripture", ko: "성경" },
+  suffering: { en: "suffering", ko: "고난" },
+  trust: { en: "trust", ko: "신뢰" },
+  truth: { en: "truth", ko: "진리" },
+  wisdom: { en: "wisdom", ko: "지혜" },
+  worship: { en: "worship", ko: "예배" },
+  anxiety: { en: "anxiety", ko: "불안" },
+  belonging: { en: "belonging", ko: "소속" },
+  comfort: { en: "comfort", ko: "위로" },
+  conflict: { en: "conflict", ko: "갈등" },
+  despair: { en: "despair", ko: "절망" },
+  fear: { en: "fear", ko: "두려움" },
+  guilt: { en: "guilt", ko: "죄책감" },
+  meaning: { en: "meaning", ko: "의미" },
+  peace: { en: "peace", ko: "평안" },
+  purpose: { en: "purpose", ko: "목적" },
+  relationships: { en: "relationships", ko: "관계" },
+  weariness: { en: "weariness", ko: "피곤" },
+  worth: { en: "worth", ko: "존귀" },
+};
+
+const ENTITY_RULES = [
+  { canonical: "God", needles: { en: [" god ", " lord ", " yahweh ", " father ", " almighty "], ko: [" 하나님", " 여호와", " 주", " 아버지"] } },
+  { canonical: "Jesus", needles: { en: [" jesus ", " son of man ", " son of god "], ko: [" 예수", " 인자", " 하나님의 아들"] } },
+  { canonical: "Christ", needles: { en: [" christ ", " messiah "], ko: [" 그리스도", " 메시야", " 메시아"] } },
+  { canonical: "Holy Spirit", needles: { en: [" holy spirit ", " spirit of god ", " spirit of truth "], ko: [" 성령", " 하나님의 신", " 진리의 영", " 보혜사"] } },
+  { canonical: "Israel", needles: { en: [" israel ", " jacob "], ko: [" 이스라엘", " 야곱"] } },
+  { canonical: "Moses", needles: { en: [" moses "], ko: [" 모세"] } },
+  { canonical: "David", needles: { en: [" david "], ko: [" 다윗"] } },
+  { canonical: "Abraham", needles: { en: [" abraham "], ko: [" 아브라함"] } },
+  { canonical: "Jerusalem", needles: { en: [" jerusalem ", " zion "], ko: [" 예루살렘", " 시온"] } },
+  { canonical: "Paul", needles: { en: [" paul "], ko: [" 바울"] } },
+  { canonical: "Peter", needles: { en: [" peter "], ko: [" 베드로"] } },
+  { canonical: "church", needles: { en: [" church ", " churches ", " saints ", " brothers "], ko: [" 교회", " 성도", " 형제", " 자매"] } },
+  { canonical: "nations", needles: { en: [" nations ", " gentiles ", " peoples "], ko: [" 열방", " 이방", " 민족"] } },
+];
+
+const CONCEPT_RULES = [
+  {
+    key: "creation",
+    themes: ["creation", "God"],
+    doctrines: ["creation"],
+    humanConcerns: ["meaning", "identity"],
+    questionsAnswered: {
+      en: "How does this passage speak about creation and origin?",
+      ko: "이 본문은 창조와 기원에 대해 무엇을 말하는가?",
+    },
+    needles: { en: ["create", "created", "beginning", "heavens", "earth", "light"], ko: ["창조", "태초", "천지", "하늘", "땅", "빛"] },
+  },
+  {
+    key: "covenant",
+    themes: ["covenant", "promise"],
+    doctrines: ["covenant"],
+    humanConcerns: ["trust", "hope"],
+    questionsAnswered: {
+      en: "What promise or covenant does this passage highlight?",
+      ko: "이 본문은 어떤 약속과 언약을 강조하는가?",
+    },
+    needles: { en: ["covenant", "swore", "promise", "promised", "oath"], ko: ["언약", "맹세", "약속"] },
+  },
+  {
+    key: "deliverance",
+    themes: ["salvation", "deliverance"],
+    doctrines: ["salvation"],
+    humanConcerns: ["fear", "hope"],
+    questionsAnswered: {
+      en: "How does this passage describe God's rescue?",
+      ko: "이 본문은 하나님의 구원을 어떻게 보여 주는가?",
+    },
+    needles: { en: ["save", "saved", "deliver", "delivered", "redeem", "redeemed", "ransom", "rescue"], ko: ["구원", "구원하", "건지", "속량", "대속"] },
+  },
+  {
+    key: "law",
+    themes: ["law", "obedience"],
+    doctrines: ["law"],
+    humanConcerns: ["guidance", "purpose"],
+    questionsAnswered: {
+      en: "What obedience or command does this passage press?",
+      ko: "이 본문은 어떤 순종과 명령을 촉구하는가?",
+    },
+    needles: { en: ["command", "commandments", "statute", "law", "decree", "ordinance"], ko: ["계명", "율법", "명령", "규례", "법도"] },
+  },
+  {
+    key: "wisdom",
+    themes: ["wisdom", "instruction"],
+    doctrines: ["wisdom"],
+    humanConcerns: ["guidance", "trust"],
+    questionsAnswered: {
+      en: "What wisdom for life does this passage offer?",
+      ko: "이 본문은 삶의 지혜를 어떻게 제시하는가?",
+    },
+    needles: { en: ["wise", "wisdom", "understanding", "fool", "instruction"], ko: ["지혜", "슬기", "명철", "훈계", "미련"] },
+  },
+  {
+    key: "prayer",
+    themes: ["prayer", "worship"],
+    doctrines: ["prayer"],
+    humanConcerns: ["anxiety", "grief", "hope"],
+    questionsAnswered: {
+      en: "How does this passage teach prayer or worship?",
+      ko: "이 본문은 기도와 예배를 어떻게 가르치는가?",
+    },
+    needles: { en: ["pray", "prayer", "praise", "sing", "worship", "call upon"], ko: ["기도", "부르짖", "찬양", "예배", "노래"] },
+  },
+  {
+    key: "justice",
+    themes: ["justice", "mercy"],
+    doctrines: ["justice"],
+    humanConcerns: ["conflict", "peace", "relationships"],
+    questionsAnswered: {
+      en: "What does this passage say about justice and mercy?",
+      ko: "이 본문은 정의와 긍휼에 대해 무엇을 말하는가?",
+    },
+    needles: { en: ["justice", "righteous", "righteousness", "oppress", "widow", "poor", "mercy"], ko: ["정의", "공의", "긍휼", "가난", "압제", "고아", "과부"] },
+  },
+  {
+    key: "repentance",
+    themes: ["repentance", "holiness"],
+    doctrines: ["repentance"],
+    humanConcerns: ["guilt", "hope"],
+    questionsAnswered: {
+      en: "How does this passage call people to repent?",
+      ko: "이 본문은 어떻게 회개를 촉구하는가?",
+    },
+    needles: { en: ["repent", "turn", "return", "cleanse", "holy"], ko: ["회개", "돌이키", "정결", "거룩"] },
+  },
+  {
+    key: "suffering",
+    themes: ["suffering", "hope"],
+    doctrines: ["perseverance"],
+    humanConcerns: ["grief", "despair", "hope"],
+    questionsAnswered: {
+      en: "How does this passage address suffering?",
+      ko: "이 본문은 고난을 어떻게 다루는가?",
+    },
+    needles: { en: ["suffer", "suffering", "affliction", "tears", "trouble", "tribulation"], ko: ["고난", "환난", "고통", "눈물", "괴로움"] },
+  },
+  {
+    key: "faith",
+    themes: ["faith", "trust"],
+    doctrines: ["faith"],
+    humanConcerns: ["fear", "trust", "hope"],
+    questionsAnswered: {
+      en: "What does this passage say about faith and trust?",
+      ko: "이 본문은 믿음과 신뢰에 대해 무엇을 말하는가?",
+    },
+    needles: { en: ["faith", "believe", "believes", "trusted", "trust", "hope in"], ko: ["믿음", "믿는", "믿으", "신뢰", "의지"] },
+  },
+  {
+    key: "grace",
+    themes: ["grace", "salvation"],
+    doctrines: ["grace"],
+    humanConcerns: ["guilt", "worth", "hope"],
+    questionsAnswered: {
+      en: "How does this passage speak about grace?",
+      ko: "이 본문은 은혜를 어떻게 말하는가?",
+    },
+    needles: { en: ["grace", "gift", "mercy", "justified"], ko: ["은혜", "선물", "자비", "의롭다"] },
+  },
+  {
+    key: "love",
+    themes: ["love", "community"],
+    doctrines: ["love"],
+    humanConcerns: ["relationships", "belonging"],
+    questionsAnswered: {
+      en: "How does this passage define faithful love?",
+      ko: "이 본문은 신실한 사랑을 어떻게 보여 주는가?",
+    },
+    needles: { en: ["love", "beloved", "neighbor", "one another"], ko: ["사랑", "이웃", "서로"] },
+  },
+  {
+    key: "kingdom",
+    themes: ["kingdom", "mission"],
+    doctrines: ["kingdom"],
+    humanConcerns: ["purpose", "hope"],
+    questionsAnswered: {
+      en: "How does this passage speak about God's kingdom?",
+      ko: "이 본문은 하나님의 나라를 어떻게 말하는가?",
+    },
+    needles: { en: ["kingdom", "gospel", "disciple", "disciples", "nations"], ko: ["천국", "하나님 나라", "복음", "제자", "열방"] },
+  },
+  {
+    key: "prophecy",
+    themes: ["prophecy", "hope"],
+    doctrines: ["prophecy"],
+    humanConcerns: ["hope", "fear"],
+    questionsAnswered: {
+      en: "What future hope or warning does this passage carry?",
+      ko: "이 본문은 어떤 미래의 경고와 소망을 전하는가?",
+    },
+    needles: { en: ["vision", "oracle", "day of the lord", "behold", "coming"], ko: ["묵시", "이상", "여호와의 날", "보라", "오시리라"] },
+  },
+  {
+    key: "resurrection",
+    themes: ["resurrection", "hope"],
+    doctrines: ["resurrection"],
+    humanConcerns: ["grief", "hope", "weariness"],
+    questionsAnswered: {
+      en: "How does this passage speak about life, death, or resurrection?",
+      ko: "이 본문은 생명과 죽음과 부활을 어떻게 말하는가?",
+    },
+    needles: { en: ["rise", "risen", "raised", "alive", "life eternal", "resurrection"], ko: ["부활", "살아나", "일으키", "생명", "영생"] },
+  },
+  {
+    key: "spirit",
+    themes: ["Holy Spirit", "presence of God"],
+    doctrines: ["Holy Spirit"],
+    humanConcerns: ["guidance", "comfort", "hope"],
+    questionsAnswered: {
+      en: "How does this passage speak about the Spirit or God's presence?",
+      ko: "이 본문은 성령과 하나님의 임재를 어떻게 말하는가?",
+    },
+    needles: { en: ["spirit", "helper", "comforter", "presence"], ko: ["성령", "보혜사", "영", "임재"] },
+  },
+  {
+    key: "scripture",
+    themes: ["scripture", "truth"],
+    doctrines: ["scripture"],
+    humanConcerns: ["guidance", "truth"],
+    questionsAnswered: {
+      en: "How does this passage frame God's word or truth?",
+      ko: "이 본문은 하나님의 말씀과 진리를 어떻게 보여 주는가?",
+    },
+    needles: { en: ["word", "scripture", "truth", "law of the lord"], ko: ["말씀", "성경", "진리", "율법"] },
+  },
+];
+
 function normalizeText(value) {
   return value
     .normalize("NFKC")
     .toLowerCase()
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
     .replace(/[^\p{Letter}\p{Number}\s'-]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function localizeLabel(locale, value) {
+  return LOCALIZED_LABELS[value]?.[locale] ?? value;
+}
+
+function genreForBook(code) {
+  if (POETRY_BOOKS.has(code)) return code === "PRO" ? "wisdom" : "poetry";
+  if (EPISTLE_BOOKS.has(code)) return "epistle";
+  if (GOSPEL_BOOKS.has(code)) return "gospel";
+  if (APOCALYPTIC_BOOKS.has(code)) return "apocalyptic";
+  if (PROPHETIC_BOOKS.has(code)) return "prophetic";
+  if (LAW_BOOKS.has(code)) return "law";
+  return "narrative";
+}
+
+function segmentationRulesForGenre(genre) {
+  switch (genre) {
+    case "wisdom":
+    case "poetry":
+      return { min: 1, target: 3, max: 4 };
+    case "apocalyptic":
+      return { min: 2, target: 4, max: 6 };
+    case "epistle":
+      return { min: 3, target: 5, max: 8 };
+    case "gospel":
+      return { min: 3, target: 5, max: 7 };
+    case "prophetic":
+      return { min: 3, target: 6, max: 9 };
+    case "law":
+      return { min: 3, target: 6, max: 9 };
+    default:
+      return { min: 3, target: 6, max: 10 };
+  }
+}
+
+function tokenList(normalizedText) {
+  return normalizedText.split(/\s+/).filter(Boolean);
+}
+
+function shouldKeepToken(locale, token) {
+  if (!token || /^\d+$/.test(token)) return false;
+  if (locale === "ko") return token.length >= 2 && !KOREAN_STOP_WORDS.has(token);
+  return token.length >= 2 && !ENGLISH_STOP_WORDS.has(token);
+}
+
+function topKeywords(locale, normalizedText, limit = 8) {
+  const counts = new Map();
+  const firstSeen = new Map();
+  const tokens = tokenList(normalizedText);
+  tokens.forEach((token, index) => {
+    if (!shouldKeepToken(locale, token)) return;
+    counts.set(token, (counts.get(token) ?? 0) + 1);
+    if (!firstSeen.has(token)) firstSeen.set(token, index);
+  });
+  return [...counts.entries()]
+    .sort((left, right) => right[1] - left[1] || (firstSeen.get(left[0]) ?? 0) - (firstSeen.get(right[0]) ?? 0) || right[0].length - left[0].length)
+    .slice(0, limit)
+    .map(([token]) => token);
+}
+
 async function loadMetadata(locale) {
   const parsed = JSON.parse(await readFile(metadataPath(locale), "utf8"));
-  return Object.fromEntries(parsed.books.map((book) => [book.code, book]));
+  return {
+    raw: parsed,
+    books: Object.fromEntries(parsed.books.map((book) => [book.code, book])),
+  };
 }
 
 async function loadVerseText(locale) {
   const raw = await readFile(vplPath(locale), "utf8");
   const verses = new Map();
+  const chapters = new Map();
   for (const line of raw.split(/\r?\n/)) {
     const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/);
-    if (match) verses.set(`${match[1]} ${match[2]}:${match[3]}`, match[4]);
+    if (!match) continue;
+    const code = match[1];
+    const chapter = Number.parseInt(match[2], 10);
+    const verse = Number.parseInt(match[3], 10);
+    const text = match[4].trim();
+    const key = `${code} ${chapter}:${verse}`;
+    verses.set(key, { text, sourceLocale: locale });
+    const chapterKey = `${code} ${chapter}`;
+    const items = chapters.get(chapterKey) ?? [];
+    items.push({ verse, text, sourceLocale: locale });
+    chapters.set(chapterKey, items);
   }
-  return verses;
+  for (const items of chapters.values()) items.sort((left, right) => left.verse - right.verse);
+  const primary = { verses, chapters };
+  if (locale !== "ko") return primary;
+  const fallback = await loadVerseText("en");
+  const allowlist = await loadKoFallbackAllowlist();
+  return mergeFallbackChapters(primary, fallback, allowlist);
 }
 
-function verseKeys(seed) {
-  const keys = [];
-  for (let verse = seed.startVerse; verse <= seed.endVerse; verse += 1) {
-    keys.push(`${seed.code} ${seed.chapter}:${verse}`);
+function mergeFallbackChapters(primary, fallback, allowlist) {
+  const mergedVerses = new Map(primary.verses);
+  for (const [key, verse] of fallback.verses.entries()) {
+    if (!mergedVerses.has(key) && allowlist.has(key)) mergedVerses.set(key, verse);
   }
-  return keys;
+
+  const mergedChapters = new Map(primary.chapters);
+  for (const [chapterKey, fallbackEntries] of fallback.chapters.entries()) {
+    const existing = mergedChapters.get(chapterKey) ?? [];
+    const seen = new Set(existing.map((entry) => entry.verse));
+    const combined = [...existing];
+    for (const entry of fallbackEntries) {
+      const verseKey = `${chapterKey}:${entry.verse}`;
+      if (!seen.has(entry.verse) && allowlist.has(verseKey)) {
+        combined.push(entry);
+        seen.add(entry.verse);
+      }
+    }
+    combined.sort((left, right) => left.verse - right.verse);
+    mergedChapters.set(chapterKey, combined);
+  }
+
+  return { verses: mergedVerses, chapters: mergedChapters };
+}
+
+
+function verseEntriesForReference(reference, chapterVerses) {
+  return chapterVerses.filter((entry) => entry.verse >= reference.startVerse && entry.verse <= reference.endVerse);
 }
 
 function referenceLabel(reference, books) {
@@ -540,7 +926,6 @@ function parseCrossRefTargets(value) {
   if (Array.isArray(value)) return value.flatMap(parseCrossRefTargets);
   if (typeof value === "string") return /^[1-3]?[A-Z]{2,3} \d+:\d+/.test(value) ? [value] : [];
   if (typeof value !== "object") return [];
-
   if (typeof value.toLabel === "string") return [value.toLabel];
   if (typeof value.targetLabel === "string") return [value.targetLabel];
   if (typeof value.displayReference === "string") return [value.displayReference];
@@ -578,54 +963,372 @@ function passageCrossReferenceDegree(keys, degrees) {
   return total;
 }
 
-function buildUnit(seed, locale, books, verses, degrees, neighbors) {
-  const reference = {
-    code: seed.code,
-    chapter: seed.chapter,
-    startVerse: seed.startVerse,
-    endVerse: seed.endVerse,
-  };
-  const keys = verseKeys(seed);
-  const lines = keys.map((key) => verses.get(key));
-  const missing = lines.findIndex((line) => !line);
-  if (missing !== -1) throw new Error(`Missing verse ${keys[missing]} in ${locale} corpus`);
+function makeSeedMap() {
+  const bySpan = new Map();
+  const byChapter = new Map();
+  for (const seed of SEED_PASSAGES) {
+    const spanKey = `${seed.code}:${seed.chapter}:${seed.startVerse}-${seed.endVerse}`;
+    bySpan.set(spanKey, seed);
+    const chapterKey = `${seed.code}:${seed.chapter}`;
+    const current = byChapter.get(chapterKey) ?? [];
+    current.push(seed);
+    byChapter.set(chapterKey, current);
+  }
+  for (const seeds of byChapter.values()) seeds.sort((left, right) => left.startVerse - right.startVerse || left.endVerse - right.endVerse);
+  return { bySpan, byChapter };
+}
 
-  const text = lines.map((line, index) => `${seed.startVerse + index}. ${line}`).join(" ");
-  const crossReferences = passageCrossReferences(keys, neighbors);
-  const axes = [...new Set([...seed.themes, ...seed.doctrines, ...seed.humanConcerns])].sort();
+function chooseUnitSize(remaining, rules) {
+  if (remaining <= rules.max) return remaining;
+  let size = Math.min(rules.target, rules.max, remaining);
+  const remainder = remaining - size;
+  if (remainder > 0 && remainder < rules.min) size = Math.max(rules.min, size - (rules.min - remainder));
+  return Math.max(1, Math.min(size, remaining));
+}
 
+function splitIntoContiguousGroups(verseEntries) {
+  const groups = [];
+  let current = [];
+  for (const entry of verseEntries) {
+    const previous = current.at(-1);
+    if (previous && entry.verse !== previous.verse + 1) {
+      groups.push(current);
+      current = [];
+    }
+    current.push(entry);
+  }
+  if (current.length) groups.push(current);
+  return groups;
+}
+
+function segmentGap(code, chapter, verseEntries, rules) {
+  const spans = [];
+  let cursor = 0;
+  while (cursor < verseEntries.length) {
+    const remaining = verseEntries.length - cursor;
+    const size = chooseUnitSize(remaining, rules);
+    const slice = verseEntries.slice(cursor, cursor + size);
+    spans.push({ code, chapter, startVerse: slice[0].verse, endVerse: slice[slice.length - 1].verse });
+    cursor += size;
+  }
+  return spans;
+}
+
+function buildChapterReferences(code, chapter, verseEntries, seedRanges, rules) {
+  if (!verseEntries.length) return [];
+  const spans = [];
+  for (const group of splitIntoContiguousGroups(verseEntries)) {
+    let cursor = 0;
+    const groupStart = group[0].verse;
+    const groupEnd = group[group.length - 1].verse;
+    const groupSeeds = seedRanges.filter((seed) => seed.startVerse >= groupStart && seed.endVerse <= groupEnd);
+    for (const seed of groupSeeds) {
+      const seedStartIndex = group.findIndex((entry) => entry.verse === seed.startVerse);
+      const seedEndIndex = group.findIndex((entry) => entry.verse === seed.endVerse);
+      if (seedStartIndex === -1 || seedEndIndex === -1) continue;
+      if (seedStartIndex > cursor) spans.push(...segmentGap(code, chapter, group.slice(cursor, seedStartIndex), rules));
+      spans.push({ code, chapter, startVerse: seed.startVerse, endVerse: seed.endVerse });
+      cursor = seedEndIndex + 1;
+    }
+    if (cursor < group.length) spans.push(...segmentGap(code, chapter, group.slice(cursor), rules));
+  }
+  return spans;
+}
+
+
+function matchesNeedle(locale, normalizedText, needle) {
+  const normalizedNeedle = normalizeText(needle).trim();
+  if (!normalizedNeedle) return false;
+  if (locale === "ko") {
+    if (normalizedNeedle.length < 2) return false;
+    return tokenList(normalizedText).some((token) => token === normalizedNeedle || token.includes(normalizedNeedle));
+  }
+  const haystack = ` ${normalizedText} `;
+  return haystack.includes(` ${normalizedNeedle} `) || normalizedText.includes(normalizedNeedle);
+}
+
+function matchesConcept(rule, locale, normalizedText) {
+  return rule.needles[locale].some((needle) => matchesNeedle(locale, normalizedText, needle));
+}
+
+function detectEntities(locale, normalizedText) {
+  return ENTITY_RULES.filter((rule) => rule.needles[locale].some((needle) => matchesNeedle(locale, normalizedText, needle))).map((rule) => rule.canonical);
+}
+
+function baseMetadataForGenre(genre) {
+  switch (genre) {
+    case "wisdom":
+      return { themes: ["wisdom"], doctrines: ["wisdom"], humanConcerns: ["guidance", "trust"] };
+    case "poetry":
+      return { themes: ["worship", "prayer"], doctrines: ["worship"], humanConcerns: ["grief", "hope"] };
+    case "epistle":
+      return { themes: ["church", "discipleship"], doctrines: ["discipleship"], humanConcerns: ["belonging", "growth"] };
+    case "gospel":
+      return { themes: ["Jesus", "kingdom"], doctrines: ["Christology"], humanConcerns: ["faith", "hope"] };
+    case "prophetic":
+      return { themes: ["prophecy", "justice"], doctrines: ["prophecy"], humanConcerns: ["repentance", "hope"] };
+    case "apocalyptic":
+      return { themes: ["hope", "kingdom"], doctrines: ["future hope"], humanConcerns: ["fear", "hope"] };
+    case "law":
+      return { themes: ["covenant", "obedience"], doctrines: ["law"], humanConcerns: ["identity", "purpose"] };
+    default:
+      return { themes: ["God", "covenant"], doctrines: ["providence"], humanConcerns: ["trust", "guidance"] };
+  }
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function composeSummary(locale, displayReference, themes, entities) {
+  const themeLabels = themes.slice(0, 3).map((theme) => localizeLabel(locale, theme));
+  const entityLabels = entities.slice(0, 2).map((entity) => localizeLabel(locale, entity));
+  if (locale === "ko") {
+    if (themeLabels.length && entityLabels.length) return `${displayReference}는 ${entityLabels.join("과 ")} 및 ${themeLabels.join(", ")}에 초점을 둔다.`;
+    if (themeLabels.length) return `${displayReference}는 ${themeLabels.join(", ")}에 초점을 둔다.`;
+    return `${displayReference}는 이 장의 핵심 흐름을 묶는 본문 단위이다.`;
+  }
+  if (themeLabels.length && entityLabels.length) return `${displayReference} focuses on ${entityLabels.join(" and ")} and themes of ${themeLabels.join(", ")}.`;
+  if (themeLabels.length) return `${displayReference} focuses on ${themeLabels.join(", ")}.`;
+  return `${displayReference} is a chapter-bound passage unit for retrieval.`;
+}
+
+function fallbackQuestion(locale, theme) {
+  const label = localizeLabel(locale, theme);
+  return locale === "ko" ? `이 본문은 ${label}에 대해 무엇을 말하는가?` : `What does this passage say about ${label}?`;
+}
+
+function canonicalWeightFor(genre, crossReferenceDegree, themes, hasSeedOverride) {
+  let weight = 0.56;
+  switch (genre) {
+    case "gospel":
+      weight += 0.16;
+      break;
+    case "epistle":
+      weight += 0.14;
+      break;
+    case "apocalyptic":
+      weight += 0.11;
+      break;
+    case "prophetic":
+      weight += 0.1;
+      break;
+    case "law":
+      weight += 0.09;
+      break;
+    case "wisdom":
+      weight += 0.08;
+      break;
+    case "poetry":
+      weight += 0.06;
+      break;
+    default:
+      weight += 0.07;
+      break;
+  }
+  const highSignalThemes = new Set(["creation", "salvation", "love", "faith", "resurrection", "grace", "Jesus", "God", "Holy Spirit", "kingdom"]);
+  weight += themes.filter((theme) => highSignalThemes.has(theme)).length * 0.02;
+  weight += Math.min(crossReferenceDegree / 240, 0.16);
+  if (hasSeedOverride) weight = Math.max(weight, 0.95);
+  return Number(clamp(weight, 0.45, 1).toFixed(3));
+}
+
+function buildMetadata({ locale, displayReference, normalizedText, genre, crossReferenceDegree, seed }) {
+  if (seed) {
+    const themes = seed.themes;
+    const doctrines = seed.doctrines;
+    const humanConcerns = seed.humanConcerns;
+    const entities = seed.entities;
+    const keywords = unique([...seed.keywords, ...topKeywords(locale, normalizedText, 6)]).slice(0, 14);
+    const axes = unique([...themes, ...doctrines, ...humanConcerns, ...themes.map((theme) => localizeLabel(locale, theme)), ...humanConcerns.map((concern) => localizeLabel(locale, concern))]).slice(0, 18);
+    return {
+      summary: seed.summary[locale],
+      themes,
+      doctrines,
+      humanConcerns,
+      questionsAnswered: seed.questionsAnswered,
+      entities,
+      keywords,
+      axes,
+      canonicalWeight: Number(Math.max(seed.canonicalWeight, canonicalWeightFor(genre, crossReferenceDegree, themes, true)).toFixed(3)),
+      seedOverlay: true,
+    };
+  }
+
+  const matchedConcepts = CONCEPT_RULES.filter((rule) => matchesConcept(rule, locale, normalizedText));
+  const base = baseMetadataForGenre(genre);
+  const themes = unique([...matchedConcepts.flatMap((rule) => rule.themes), ...base.themes]).slice(0, 6);
+  const doctrines = unique([...matchedConcepts.flatMap((rule) => rule.doctrines), ...base.doctrines]).slice(0, 6);
+  const humanConcerns = unique([...matchedConcepts.flatMap((rule) => rule.humanConcerns), ...base.humanConcerns]).slice(0, 6);
+  const entities = unique(detectEntities(locale, normalizedText)).slice(0, 6);
+  const keywords = unique([
+    ...topKeywords(locale, normalizedText, 8),
+    ...themes.map((theme) => localizeLabel(locale, theme)),
+    ...entities.map((entity) => localizeLabel(locale, entity)),
+  ]).slice(0, 14);
+  const questionsAnswered = unique([
+    ...matchedConcepts.map((rule) => rule.questionsAnswered[locale]),
+    fallbackQuestion(locale, themes[0] ?? genre),
+    fallbackQuestion(locale, themes[1] ?? genre),
+  ]).slice(0, 4);
+  const axes = unique([
+    ...themes,
+    ...doctrines,
+    ...humanConcerns,
+    ...themes.map((theme) => localizeLabel(locale, theme)),
+    ...humanConcerns.map((concern) => localizeLabel(locale, concern)),
+  ]).slice(0, 18);
   return {
-    id: `${locale}:${seed.code}-${seed.chapter}-${seed.startVerse}-${seed.endVerse}`,
-    reference,
-    displayReference: referenceLabel(reference, books),
-    locale,
-    text,
-    normalizedText: normalizeText(text),
-    summary: seed.summary[locale],
-    themes: seed.themes,
-    doctrines: seed.doctrines,
-    humanConcerns: seed.humanConcerns,
-    questionsAnswered: seed.questionsAnswered,
-    entities: seed.entities,
-    keywords: seed.keywords,
+    summary: composeSummary(locale, displayReference, themes, entities),
+    themes,
+    doctrines,
+    humanConcerns,
+    questionsAnswered,
+    entities,
+    keywords,
     axes,
-    canonicalWeight: seed.canonicalWeight,
-    crossReferenceDegree: passageCrossReferenceDegree(keys, degrees),
-    crossReferences,
+    canonicalWeight: canonicalWeightFor(genre, crossReferenceDegree, themes, false),
+    seedOverlay: false,
   };
 }
 
-async function buildLocale(locale, crossReferences) {
-  const [books, verses] = await Promise.all([loadMetadata(locale), loadVerseText(locale)]);
-  const units = SEED_PASSAGES.map((seed) => buildUnit(seed, locale, books, verses, crossReferences.degrees, crossReferences.neighbors));
-  units.sort((a, b) => a.id.localeCompare(b.id));
+function buildUnit(reference, chapterVerses, locale, books, degrees, neighbors, seed) {
+  const entries = verseEntriesForReference(reference, chapterVerses);
+  if (!entries.length) throw new Error(`Missing verses for ${reference.code} ${reference.chapter}:${reference.startVerse}-${reference.endVerse} in ${locale} corpus`);
+
+  const keys = entries.map((entry) => `${reference.code} ${reference.chapter}:${entry.verse}`);
+  const text = entries.map((entry) => `${entry.verse}. ${entry.text}`).join(" ");
+  const normalizedText = normalizeText(text);
+  const crossReferences = passageCrossReferences(keys, neighbors);
+  const crossReferenceDegree = passageCrossReferenceDegree(keys, degrees);
+  const genre = genreForBook(reference.code);
+  const displayReference = referenceLabel(reference, books);
+  const metadata = buildMetadata({ locale, displayReference, normalizedText, genre, crossReferenceDegree, seed });
+  const sourceLocale = [...new Set(entries.map((entry) => entry.sourceLocale))];
+
+  return {
+    id: `${locale}:${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`,
+    reference,
+    displayReference,
+    locale,
+    text,
+    normalizedText,
+    summary: metadata.summary,
+    themes: metadata.themes,
+    doctrines: metadata.doctrines,
+    humanConcerns: metadata.humanConcerns,
+    questionsAnswered: metadata.questionsAnswered,
+    entities: metadata.entities,
+    keywords: metadata.keywords,
+    axes: metadata.axes,
+    canonicalWeight: metadata.canonicalWeight,
+    crossReferenceDegree,
+    crossReferences,
+    genre,
+    verseCount: entries.length,
+    indexVersion: VERSION,
+    provenance: {
+      method: metadata.seedOverlay ? "seed-overlay+deterministic" : "deterministic",
+      genre,
+      seedOverlay: metadata.seedOverlay,
+      sourceLocale: sourceLocale.length === 1 ? sourceLocale[0] : "mixed",
+    },
+  };
+}
+
+function uniqueStrings(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function buildRuntimeUnit(unit) {
+  const axisValues = uniqueStrings([
+    ...(unit.axes ?? []),
+    ...(unit.themes ?? []),
+    ...(unit.doctrines ?? []),
+    ...(unit.humanConcerns ?? []),
+    ...(unit.entities ?? []),
+  ]);
+  const searchCorpus = uniqueStrings([
+    unit.normalizedText,
+    unit.summary,
+    ...(unit.themes ?? []),
+    ...(unit.doctrines ?? []),
+    ...(unit.humanConcerns ?? []),
+    ...(unit.questionsAnswered ?? []),
+    ...(unit.entities ?? []),
+    ...(unit.keywords ?? []),
+    ...(unit.axes ?? []),
+  ]).join(" ");
+
+  return {
+    id: unit.id,
+    reference: unit.reference,
+    displayReference: unit.displayReference,
+    locale: unit.locale,
+    excerpt: unit.text.length > 320 ? `${unit.text.slice(0, 320)}…` : unit.text,
+    summary: unit.summary,
+    searchCorpus,
+    axisValues,
+    canonicalWeight: unit.canonicalWeight,
+    crossReferenceDegree: unit.crossReferenceDegree,
+    genre: unit.genre,
+    verseCount: unit.verseCount,
+    indexVersion: unit.indexVersion,
+    provenance: unit.provenance,
+  };
+}
+
+function buildRuntimeIndex(index) {
+  return {
+    ...index,
+    source: {
+      ...index.source,
+      runtimeProjection: "compact-search-v1",
+    },
+    units: index.units.map(buildRuntimeUnit),
+  };
+}
+
+async function buildLocale(locale, crossReferences, seedMaps) {
+  const [{ raw: metadata, books }, { chapters }] = await Promise.all([loadMetadata(locale), loadVerseText(locale)]);
+  const units = [];
+  for (const book of metadata.books) {
+    const genre = genreForBook(book.code);
+    const rules = segmentationRulesForGenre(genre);
+    const availableChapters = [...new Set(
+      [...chapters.keys()]
+        .filter((chapterKey) => chapterKey.startsWith(`${book.code} `))
+        .map((chapterKey) => Number.parseInt(chapterKey.split(" ")[1], 10))
+        .filter(Number.isInteger),
+    )].sort((left, right) => left - right);
+
+    for (const chapter of availableChapters) {
+      const chapterKey = `${book.code} ${chapter}`;
+      const chapterVerses = chapters.get(chapterKey) ?? [];
+      if (!chapterVerses.length) continue;
+      const seedRanges = seedMaps.byChapter.get(`${book.code}:${chapter}`) ?? [];
+      const references = buildChapterReferences(book.code, chapter, chapterVerses, seedRanges, rules);
+      for (const reference of references) {
+        const seed = seedMaps.bySpan.get(`${reference.code}:${reference.chapter}:${reference.startVerse}-${reference.endVerse}`);
+        units.push(buildUnit(reference, chapterVerses, locale, books, crossReferences.degrees, crossReferences.neighbors, seed));
+      }
+    }
+  }
+
+  units.sort((left, right) => left.id.localeCompare(right.id));
+  const genreCounts = units.reduce((accumulator, unit) => {
+    accumulator[unit.genre] = (accumulator[unit.genre] ?? 0) + 1;
+    return accumulator;
+  }, {});
+  const seedUnitCount = units.filter((unit) => unit.provenance.seedOverlay).length;
+  const totalVerseCount = units.reduce((sum, unit) => sum + unit.verseCount, 0);
 
   return {
     version: VERSION,
     generatedAt: GENERATED_AT,
     locale,
     source: {
-      translation: locale === "ko" ? "korean_bible" : "world_english_bible",
+      translation: metadata.translation,
       corpus: path.relative(ROOT, vplPath(locale)),
       metadata: path.relative(ROOT, metadataPath(locale)),
     },
@@ -633,19 +1336,29 @@ async function buildLocale(locale, crossReferences) {
     stats: {
       unitCount: units.length,
       seedReferenceCount: SEED_PASSAGES.length,
+      seedUnitCount,
+      bookCount: metadata.books.length,
+      chapterCount: chapters.size,
+      totalVerseCount,
+      averageUnitVerseCount: Number((totalVerseCount / Math.max(units.length, 1)).toFixed(3)),
       crossReferenceDegreeTotal: units.reduce((sum, unit) => sum + unit.crossReferenceDegree, 0),
+      genreCounts,
     },
   };
 }
 
 async function main() {
   const crossReferences = await loadCrossReferenceDegrees();
+  const seedMaps = makeSeedMap();
   await mkdir(OUTPUT_DIR, { recursive: true });
   for (const locale of ["en", "ko"]) {
-    const index = await buildLocale(locale, crossReferences);
+    const index = await buildLocale(locale, crossReferences, seedMaps);
     const outputPath = path.join(OUTPUT_DIR, `${locale}.json`);
+    const runtimePath = path.join(OUTPUT_DIR, `${locale}-runtime.json`);
     await writeFile(outputPath, `${JSON.stringify(index, null, 2)}\n`);
+    await writeFile(runtimePath, `${JSON.stringify(buildRuntimeIndex(index), null, 2)}\n`);
     console.log(`wrote ${path.relative(ROOT, outputPath)} (${index.units.length} units)`);
+    console.log(`wrote ${path.relative(ROOT, runtimePath)} (${index.units.length} units, compact runtime)`);
   }
 }
 

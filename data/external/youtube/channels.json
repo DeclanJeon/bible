@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-20T08:21:00Z",
+  "channels": [
+    {
+      "channelId": "UCyow7v3qo65Bvfwbp1aZZVA",
+      "channelTitle": "깊은밤성경",
+      "channelHandle": "@깊은밤성경",
+      "sourceUrl": "https://www.youtube.com/@깊은밤성경",
+      "videosUrl": "https://www.youtube.com/@깊은밤성경/videos",
+      "active": true,
+      "discoveredAt": "2026-06-20T00:00:00Z",
+      "refreshedAt": "2026-06-20T00:00:00Z"
+    },
+    {
+      "channelId": "UCNOTS1LcEAC-AIkPob-Sv_w",
+      "channelTitle": "말씀나침반",
+      "channelHandle": "@말씀나침반26",
+      "sourceUrl": "https://www.youtube.com/@말씀나침반26",
+      "videosUrl": "https://www.youtube.com/@말씀나침반26/videos",
+      "active": true,
+      "discoveredAt": "2026-06-20T00:00:00Z",
+      "refreshedAt": "2026-06-20T00:00:00Z"
+    },
+    {
+      "channelId": "UCPgHkvu6DQYyP6T_KNjSD9A",
+      "channelTitle": "성경 완전 해설",
+      "sourceUrl": "https://www.youtube.com/channel/UCPgHkvu6DQYyP6T_KNjSD9A",
+      "videosUrl": "https://www.youtube.com/channel/UCPgHkvu6DQYyP6T_KNjSD9A/videos",
+      "active": true,
+      "discoveredAt": "2026-06-20T00:00:00Z",
+      "channelHandle": "@성경완전해설",
+      "notes": "Normalized from approved G004 seed set; original user-supplied watch URL resolves to this channel.",
+      "refreshedAt": "2026-06-20T06:43:29Z"
+    },
+    {
+      "channelId": "UCVTaIjqAKLvt8jBFwZMMi2Q",
+      "channelTitle": "성경의 빛",
+      "channelHandle": "@성경의빛-f7o",
+      "sourceUrl": "https://www.youtube.com/@성경의빛-f7o",
+      "videosUrl": "https://www.youtube.com/@성경의빛-f7o/videos",
+      "active": true,
+      "discoveredAt": "2026-06-20T00:00:00Z",
+      "refreshedAt": "2026-06-20T00:00:00Z"
+    }
+  ]
+}
