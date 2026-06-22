@@ -78,7 +78,7 @@ export default async function StudyPage({ params }: Props) {
   ];
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <main className="page-shell">
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
@@ -88,7 +88,6 @@ export default async function StudyPage({ params }: Props) {
             <div className="max-w-3xl">
               <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-4xl lg:text-5xl leading-tight">{cluster.title}</h1>
               <p className="mt-3 text-base leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-xl">{cluster.pastoralPrompt}</p>
-              <p className="mt-4 text-xl leading-relaxed text-[var(--muted)]">{cluster.pastoralPrompt}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="inline-flex items-center gap-2 rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
@@ -115,10 +114,10 @@ export default async function StudyPage({ params }: Props) {
                   <div className="space-y-8">
                     <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6 lg:p-8">
                       <div className="text-xl font-semibold tracking-tight text-[var(--ink)]">{primary.reference}</div>
-                      <div className="mt-5 space-y-4 text-lg leading-relaxed text-[var(--text)]">
+                      <div className="verse-container reading-column space-y-4 text-[var(--ink)]">
                         {context.verses.map((verse) => (
                           <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}>
-                            <span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>
+                            <span className="verse-number mr-3">{verse.verse}</span>
                             {verse.text}
                           </p>
                         ))}

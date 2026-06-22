@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpenText, Search } from "lucide-react";
 import { PassageCard } from "@/components/passage-card";
 import { SafetyBanner } from "@/components/safety-banner";
+import { Collapsible } from "@/components/collapsible";
 
 import { UI_COPY, resolveAppLocale } from "@/lib/content";
 import { buildBibleHref } from "@/lib/navigation";
@@ -83,7 +84,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const youtubeResources = recommendation.externalResources?.youtube ?? recommendation.background?.youtubeResources ?? [];
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <main className="page-shell">
 
       <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -125,17 +126,28 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             {UI_COPY[appLocale].prompt.submit}
           </button>
         </form>
-        <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
-          “{recommendation.prompt}”
-        </div>
-        <div className="mt-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
-          <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 이해" : "Question understood"}:</span>{" "}
-          {recommendation.normalizedQuestion}
-          <span className="mx-2 text-[var(--hairline)]">·</span>
-          {questionUnderstanding.answerMode}
-          <span className="mx-2 text-[var(--hairline)]">·</span>
-          {recommendation.state}
-        </div>
+        <Collapsible
+          trigger={
+            <span className="text-sm font-semibold text-[var(--ink-muted)]">
+              {appLocale === "ko" ? "검색 메모 보기" : "View search notes"}
+            </span>
+          }
+          className="mt-4"
+        >
+          <div className="space-y-3">
+            <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--ink-muted)]">
+              &ldquo;{recommendation.prompt}&rdquo;
+            </div>
+            <div className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--ink-muted)]">
+              <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "질문 이해" : "Question understood"}:</span>{" "}
+              {recommendation.normalizedQuestion}
+              <span className="mx-2 text-[var(--hairline)]">·</span>
+              {questionUnderstanding.answerMode}
+              <span className="mx-2 text-[var(--hairline)]">·</span>
+              {recommendation.state}
+            </div>
+          </div>
+        </Collapsible>
         <div className="mt-4">
           <SafetyBanner safety={safety} />
         </div>
@@ -148,7 +160,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             {recommendation.primary && primaryPassage && (recommendation.state === "direct" || recommendation.state === "safety_first") ? (
               <>
                 <div className="mt-3 text-lg font-semibold text-[var(--gold)]">{primaryPassage.reference}</div>
-                <div className="mt-5 space-y-4 text-lg leading-relaxed text-[var(--text)]">
+                <div className="mt-5 space-y-4 text-lg leading-relaxed text-[var(--ink)]">
                   {primaryPassage.verses.map((verse) => (
                     <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}>
                       <span className="mr-3 text-[var(--gold)] font-medium">{verse.verse}</span>

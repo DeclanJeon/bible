@@ -50,7 +50,7 @@ export default async function GraphPage({ params }: Props) {
       }));
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
+    <main className="page-shell">
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
@@ -170,12 +170,12 @@ export default async function GraphPage({ params }: Props) {
             <div className="glass rounded-[32px] p-6 lg:p-8">
               <div className="section-title text-base">{copy.nextMove}</div>
               <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{copy.nextMoveBody}</p>
-              <Link href={buildStudyHref(cluster.slug, locale)} className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--accent)]/90 transition">
+              <Link href={buildStudyHref(cluster.slug, locale)} className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                 <BookOpen className="h-4 w-4" />
                 {copy.openStudyDesk}
               </Link>
 
-              <div className="mt-6 border-t border-[var(--line)] pt-6">
+              <div className="mt-6 border-t border-[var(--hairline)] pt-6">
                 <Collapsible trigger={<span className="text-base font-semibold text-white">{copy.boundaries}</span>}>
                   <div className="mt-4 space-y-3 text-base leading-relaxed text-[var(--muted)]">
                     {copy.boundaryLines.map((line) => (

@@ -2,15 +2,19 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-06-18
+- Last refreshed: 2026-06-22
 - Primary product surfaces:
   - `/[locale]/companion`: prompt-to-study result page.
   - `/[locale]/api/reflect`: prompt-to-study JSON API.
   - `/[locale]/study/[slug]`: guided study desk for a selected lane.
   - `/[locale]/graph/[slug]`: scripture hyperlink graph view.
   - `/[locale]/passage/[reference]`: passage reader with surrounding context and related navigation.
-  - Future `/[locale]/crossrefs/[reference]`: full cross-reference network reader.
-  - Future `/[locale]/api/crossrefs/[reference]`: full cross-reference network API.
+  - `/[locale]/crossrefs/[reference]`: full cross-reference network reader.
+  - `/[locale]/api/crossrefs/[reference]`: full cross-reference network API.
+  - `/[locale]/bible`: full Bible reader by book and chapter.
+  - `/[locale]/lanes`: study lane catalog.
+  - `/[locale]/reviews`: anonymous review board.
+  - `/[locale]/hanja` and `/[locale]/hanja/[slug]`: Hanja catalog and evidence/detail surfaces.
 - Evidence reviewed:
   - `README.md` — product positioning, routes, architecture, operating constraints.
   - `docs/bible-hyperlink-companion-design.md` — product direction, interaction model, graph intent, source policy.
@@ -29,6 +33,10 @@
 
   - `docs/open-ended-bible-qa-architecture.md` — current open-ended QA pipeline, answer-bundle contract, and verification gates.
   - `lib/question-understanding.ts`, `lib/answer-bundle.ts`, `lib/hybrid-retrieval.ts`, `lib/passage-reranker.ts` — current question understanding, bundle assembly, and ranking behavior.
+  - `app/[locale]/page.tsx`, `app/[locale]/companion/page.tsx`, `app/[locale]/bible/page.tsx`, `app/[locale]/lanes/page.tsx`, `app/[locale]/study/[slug]/page.tsx`, `app/[locale]/graph/[slug]/page.tsx`, `app/[locale]/crossrefs/[reference]/page.tsx`, `app/[locale]/reviews/page.tsx`, `app/[locale]/hanja/page.tsx`, `app/[locale]/hanja/[slug]/page.tsx` — 2026 UI audit of implemented pages.
+  - `app/globals.css`, `tailwind.config.ts`, `components/global-nav.tsx`, `components/quick-prompt-form.tsx`, `components/passage-card.tsx`, `components/crossref-network.tsx`, `components/review-board.tsx`, `components/bible-book-search.tsx`, `components/hanja-catalog-search.tsx` — current layout, typography, token, navigation, card, form, and dense-list patterns.
+  - `docs/design/concepts/home-google-style-ko.svg`, `docs/design/concepts/v2/overview-simplified-v2-ko.svg`, `docs/design/concepts/v2/companion-simplified-v2-ko.svg`, `docs/design/concepts/v2/study-simplified-v2-ko.svg`, `docs/design/concepts/v2/graph-simplified-v2-ko.svg`, `docs/design/concepts/v2/lanes-simplified-v2-ko.svg` — existing simplified concept direction.
+  - Live local audit on `http://localhost:3101/ko`: home, companion, Bible reader, lanes, study, graph, cross-reference summary/full, reviews, Hanja catalog/detail, passage redirect, and not-found screens.
 
 ## Brand
 - Personality:
@@ -172,6 +180,81 @@
 - Imagery/iconography:
   - Use existing Lucide icon language.
   - Gold only for scripture focus, active state, verse number, and primary CTA.
+
+
+## 2026 redesign audit and target direction
+
+### Current state
+- The implemented visual system already has a coherent dark canvas, warm gold accent, hairline borders, glass/soft-glass surfaces, responsive spacing variables, 44px touch targets, and reduced-motion handling.
+- The product concept is clear: passage-first Bible study, not chatbot-first advice.
+- The main weakness is information architecture density. Most internal pages expose too many equal-weight cards, panels, tabs, badges, and CTAs before the user has a clear reading path.
+- The second weakness is inconsistent hierarchy: some pages use a minimal search-home pattern, some use heavy hero cards, some use tabbed dashboards, and Hanja detail uses a different editorial layout without the shared glass language.
+- The third weakness is oversized unvirtualized lists: `/[locale]/lanes` renders the full 66-lane catalog and `/[locale]/crossrefs/[reference]?view=full` can become an extremely long page; Hanja catalog has over 1,000 searchable cards but a controlled visible count.
+
+### 2026 north star
+- Keep the dark, reverent, source-first identity. Do not pivot to a generic SaaS gradient dashboard.
+- Redesign around a single rule: **one screen = one primary decision**.
+- Make the product feel like a calm study instrument: search-first entry, reading-first results, data available on demand, provenance always visible but secondary.
+- Use the existing simplified concept assets as the visual direction: centered input on home, compact result summary on companion, Bible-text-first study page, guided graph explanation before network detail, catalog pages as search/filter surfaces.
+
+### Page-level target IA
+- Home: search engine layout. Keep only brand, one prompt input, 3–5 suggestion chips, and minimal navigation. Remove explanatory card clutter from the first viewport.
+- Companion: reorder to `one-sentence answer → primary passage → why this passage → related passages → background/provenance/sidebar`. Hide diagnostics such as answer mode, expansion provider, state, and confidence behind a compact “search notes” disclosure.
+- Bible reader: keep the two-column reader, but make the passage article visually quieter and more book-like. The selected chapter and chapter picker should be sticky/contextual; reflection CTA should not compete with the text.
+- Lanes: add an explicit H1 and make it a fast catalog: search, topic chips, result count, cards. Each card should have one dominant CTA; study/graph links can be secondary text actions.
+- Study desk: remove duplicated pastoral prompt. Default to the primary passage reading view. Move notes, related lanes, and source inventory into the right rail or below-the-fold disclosures.
+- Graph: make the first screen explain “why these passages connect” before showing cards. Visual node graph may be decorative only; accessible list remains primary.
+- Cross-reference network: default to summary + strongest links + load-full action. Full mode needs a denser table/list, sticky filters below the global nav, and chunking/pagination or virtualization so the page does not become an 80k+ px scroll.
+- Reviews: keep as a small trust/support page. Reduce hero height; put the form first on mobile and reviews first on desktop.
+- Hanja catalog: keep visible-count loading, but add a clearer H1/description tying it to Bible study and use a denser list/card hybrid for 1,000+ entries.
+- Hanja detail: align with the editorial reading template: character hero, thesis, evidence, passages, sources. Reuse shared surface classes and CTA styling so it does not feel like a separate product.
+- Loading/error/not-found: localize Korean/English copy by route locale where possible; remove emoji from error UI and use the same calm icon/card language as `BrandedLoadingPage`.
+
+### Typography and scale target
+- Keep `Pretendard` first for Korean, but load it explicitly or switch to a bundled/system Korean-safe stack. Do not rely on an undeclared local font.
+- Use a stricter type ramp: display 56/64 desktop, 40/48 tablet, 32/40 mobile; page H1 40–48 desktop; section H2 24–28; card title 17–20; body 16–18; metadata 12–13.
+- Long Bible text should use a dedicated reading style: 18–20px, 1.85–2.0 line-height, max line length 64–72 Korean characters, verse numbers in a fixed column.
+- Eyebrows should stay rare. Use them for source/provenance or major sections, not every card.
+
+### Layout and component target
+- Standardize page shells:
+  - `SearchShell`: home and compact search pages.
+  - `ReaderShell`: Bible, study, companion primary passage.
+  - `CatalogShell`: lanes and Hanja catalog.
+  - `NetworkShell`: graph and cross-reference network.
+  - `EditorialShell`: Hanja detail, reviews, support/info pages.
+- Standardize surfaces:
+  - `FocusCard`: gold-tinted primary scripture/result.
+  - `SurfaceCard`: normal content.
+  - `MutedPanel`: metadata/provenance/debug information.
+  - `ActionRow`: one primary CTA plus secondary text links.
+- Reduce radius variance. Default card radius 20–24px, input/button radius 14–16px, pills only for filters/tags.
+- Use gold only for primary action, active state, scripture focus, verse number, and evidence accent. Avoid white text on gold when contrast is weaker than dark text on gold.
+
+### Interaction and UX target
+- Progressive disclosure is mandatory for diagnostics, source inventory, long notes, and full networks.
+- Filters must be URL-backed and shareable; dense results must preserve total counts while paginating or virtualizing visible rows.
+- Sidebars must be sticky only after the global nav offset; mobile sidebars become ordered sections, not off-canvas drawers.
+- Preserve keyboard and screen-reader affordances: real headings, semantic lists/tables, visible focus, non-color-only badges.
+
+### Implementation order
+1. Token and shell pass: explicit font loading, page-shell components, unified surface/CTA classes.
+2. Home and companion pass: search-first home, result-summary-first companion, debug notes disclosure.
+3. Reader pass: Bible/study text hierarchy and duplicated prompt cleanup.
+4. Catalog pass: lanes H1, one-primary-action cards, Hanja dense catalog alignment.
+5. Network pass: cross-reference full-mode density, sticky filters, chunked/virtualized rendering strategy.
+6. Edge-state pass: localized not-found/error/loading alignment and final accessibility sweep.
+
+### Concrete defects found in the 2026 audit (verified, fix during redesign)
+- Duplicate pastoral prompt: `app/[locale]/study/[slug]/page.tsx:90-91` renders `{cluster.pastoralPrompt}` twice in a row. Remove one; keep a single subtitle line.
+- Inconsistent gold-CTA foreground token across the app — pick one (dark `text-[var(--canvas)]` on gold) and apply everywhere:
+  - Correct (dark on gold): `components/quick-prompt-form.tsx:34`, `app/[locale]/companion/page.tsx:163`, `app/[locale]/bible/page.tsx:198`, `app/[locale]/study/[slug]/page.tsx:94`.
+  - Low-contrast off-white on gold (`text-[var(--ink)]`): `app/[locale]/lanes/page.tsx:65,143,161`.
+  - Low-contrast white on gold (`text-white` on `--accent`): `app/[locale]/graph/[slug]/page.tsx:173`.
+- Legacy `--accent`/`text-slate-950` and English-only edge states: `app/error.tsx:19-26`, `app/not-found.tsx:7-21` use the legacy `--accent` alias, a raw emoji, and hardcoded English. Migrate to `--gold`/`--canvas`, drop the emoji, and localize.
+- Missing explicit web-font loading: `app/globals.css:89` declares `"Pretendard"` first but no `@font-face`/`next/font` ships it, so Korean type silently falls back per device. Bundle Pretendard via `next/font/local` (or a system Korean-safe stack) before relying on the new type ramp.
+- Lanes has no `H1`: `app/[locale]/lanes/page.tsx` opens at a `section-title` eyebrow; add a real page `H1` for hierarchy and SEO.
+- Unbounded scroll surfaces confirmed in live audit: `/[locale]/lanes` (full 66-lane catalog, ~11k px) and `/[locale]/crossrefs/[reference]?view=full` (~87k px when every edge card expands). Apply pagination/virtualization, not data truncation.
 
 ## Components
 - Existing components to reuse:

@@ -150,7 +150,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
       : `Help me study ${reader.selectedBook.name} ${reader.selectedChapter} with context and linked passages.`;
 
   return (
-    <main className="mx-auto min-h-screen max-w-7xl px-6 py-8 lg:px-8">
+    <main className="page-shell-wide">
 
       <section className="mt-8 glass rounded-2xl p-5 sm:p-6 lg:p-8">
         <div className="section-title text-base">{copy.current}</div>
@@ -218,7 +218,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
           </section>
 
           <article className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-5 sm:p-6 lg:p-8">
-            <div className="verse-container mx-auto max-w-3xl space-y-4 text-[var(--text)]">
+            <div className="verse-container reading-column space-y-4 text-[var(--ink)]">
               {reader.verses.map((verse) => {
                 const highlighted = verseIsHighlighted(highlightedRange, verse.verse);
                 return (

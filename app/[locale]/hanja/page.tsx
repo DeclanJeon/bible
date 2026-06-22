@@ -46,15 +46,20 @@ export default async function HanjaPage({ params }: Props) {
   }));
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <main className="page-shell">
       <section className="mt-8 space-y-8">
         <section className="glass rounded-xl p-5 sm:rounded-2xl sm:p-6 lg:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="section-title text-base">{locale === "ko" ? "한자" : "Hanja"}</div>
               <h1 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
-                {locale === "ko" ? `${entries.length}개 항목` : `${entries.length} entries`}
+                {locale === "ko" ? "성경 본문과 함께 읽는 한자" : "Hanja read alongside Scripture"}
               </h1>
+              <p className="mt-2 text-base leading-relaxed text-ink-muted">
+                {locale === "ko"
+                  ? `${entries.length}개 항목을 관련 성경 본문, 지지 자료, 비판 자료와 함께 탐색합니다.`
+                  : `Browse ${entries.length} entries linked to Bible passages, supportive sources, and critical sources.`}
+              </p>
             </div>
             <div className="flex gap-3">
               <div className="rounded-card border border-[var(--hairline)] bg-surface-2 px-4 py-2.5 text-center">

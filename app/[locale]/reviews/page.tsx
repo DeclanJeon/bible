@@ -26,7 +26,7 @@ export default async function ReviewsPage({ params }: Props) {
   const reviews = await listAnonymousReviews(locale, 50);
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
+    <main className="page-shell">
 
       <section className="mt-8 glass rounded-[36px] p-7 lg:p-10">
         <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] px-4 py-2 text-sm font-semibold text-[var(--gold)]">

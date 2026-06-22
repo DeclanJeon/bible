@@ -45,7 +45,7 @@ export const AccordionGroup = memo(function AccordionGroup({
         return (
           <div
             key={item.key}
-            className={`${isLast ? "" : "border-b border-[var(--line)]"}`}
+            className={`${isLast ? "" : "border-b border-[var(--hairline)]"}`}
           >
             <button
               type="button"

@@ -134,14 +134,14 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
   const baseHref = buildCrossReferenceNetworkHref(reference, locale);
 
   return (
-    <main className="mx-auto min-h-screen max-w-7xl px-6 py-8 lg:px-8">
+    <main className="page-shell-wide">
       <header className="glass rounded-[28px] px-6 py-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href={buildBibleReferenceHref(network.summary.reference, { locale, from: "crossref" })} className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[var(--muted)] transition hover:text-white">
+          <Link href={buildBibleReferenceHref(network.summary.reference, { locale, from: "crossref" })} className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[var(--ink-muted)] transition hover:text-[var(--ink)]">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {copy.back}
           </Link>
-          <div className="flex items-center gap-3 text-sm font-semibold text-white">
+          <div className="flex items-center gap-3 text-sm font-semibold text-[var(--ink)]">
             <BookOpen className="h-4 w-4 text-[var(--gold)]" aria-hidden="true" />
             {UI_COPY[locale].siteTitle}
           </div>
@@ -152,8 +152,8 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
         <div className="section-title text-base">{copy.eyebrow}</div>
         <div className="mt-4 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="text-4xl font-bold leading-tight text-white lg:text-5xl">{network.primary.reference}</h1>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)]">{copy.body}</p>
+            <h1 className="text-4xl font-bold leading-tight text-[var(--ink)] lg:text-5xl">{network.primary.reference}</h1>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--ink-muted)]">{copy.body}</p>
           </div>
           <div className="rounded-2xl border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] px-5 py-4 text-center">
             <div className="text-4xl font-bold tracking-tight text-[var(--ink)]">{network.summary.totalEdges}</div>

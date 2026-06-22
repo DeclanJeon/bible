@@ -47,11 +47,14 @@ export default async function LanesPage({ params, searchParams }: Props) {
   });
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <main className="page-shell">
 
       <section className="mt-8 space-y-8">
         {/* Compact search panel */}
         <section className="glass rounded-xl p-4 sm:rounded-2xl sm:p-6 lg:p-8">
+          <h1 className="mb-4 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-4xl lg:text-5xl leading-tight">
+            {copy.heading}
+          </h1>
           <form action={`/${locale}/lanes`} className="space-y-4">
             {activeTopic ? <input type="hidden" name="topic" value={activeTopic} /> : null}
             <div className="flex flex-col gap-3 lg:flex-row">
@@ -62,7 +65,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
                 placeholder={copy.searchPlaceholder}
                 className="min-w-0 flex-1 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-5 py-3.5 text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus-within:border-[var(--focus-ring)] transition"
               />
-              <button type="submit" className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3.5 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
+              <button type="submit" className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3.5 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                 {copy.filter}
               </button>
             </div>
@@ -139,14 +142,14 @@ export default async function LanesPage({ params, searchParams }: Props) {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
+                  <div className="mt-6 flex flex-wrap items-center gap-3">
+                    <Link href={buildCompanionHref({ prompt: cluster.starterPrompt, locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                       {copy.startReflection}
                     </Link>
-                    <Link href={buildStudyHref(cluster.slug, locale)} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                    <Link href={buildStudyHref(cluster.slug, locale)} className="text-sm font-semibold text-[var(--ink-muted)] transition hover:text-[var(--gold)]">
                       {copy.openStudyDesk}
                     </Link>
-                    <Link href={buildGraphHref(cluster.slug, locale)} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">
+                    <Link href={buildGraphHref(cluster.slug, locale)} className="text-sm font-semibold text-[var(--ink-muted)] transition hover:text-[var(--gold)]">
                       {copy.viewGraph}
                     </Link>
                   </div>
@@ -158,7 +161,7 @@ export default async function LanesPage({ params, searchParams }: Props) {
               <div className="text-xl font-semibold tracking-tight text-[var(--ink)]">{copy.noMatch}</div>
               <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{copy.noMatchBody}</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href={buildLanesHref({ locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--gold-hover)] transition">
+                <Link href={buildLanesHref({ locale })} className="rounded-lg min-h-[44px] bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] hover:bg-[var(--gold-hover)] transition">
                   {copy.clearFilters}
                 </Link>
                 <Link href={buildCompanionHref({ locale })} className="rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)] transition">

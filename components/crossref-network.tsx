@@ -540,7 +540,7 @@ export function CrossReferenceNetworkReader({
       <section className="rounded-[32px] border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] p-6 lg:p-8" aria-labelledby="primary-passage">
         <div className="section-title text-base">{copy.primary}</div>
         <h2 id="primary-passage" className="mt-3 text-2xl font-semibold tracking-tight text-[var(--ink)]">{network.primary.reference}</h2>
-        <div className="mt-5 space-y-4 text-lg leading-8 text-[var(--text)]">
+        <div className="mt-5 space-y-4 text-lg leading-8 text-[var(--ink)]">
           {network.primary.verses.map((verse) => (
             <p key={`${verse.code}-${verse.chapter}-${verse.verse}`}>
               <span className="mr-3 text-base font-semibold text-[var(--gold)]">{verse.verse}</span>
@@ -619,7 +619,7 @@ export function CrossReferenceNetworkReader({
 
       {fullNetworkLoaded ? (
         <section className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
-          <aside className="glass rounded-[28px] p-5 lg:sticky lg:top-6" aria-labelledby="network-filters">
+          <aside className="glass rounded-[28px] p-5 lg:sticky lg:top-[calc(var(--nav-height)+1.5rem)]" aria-labelledby="network-filters">
             <div className="flex items-center gap-2">
               <Filter className="h-4 w-4 text-[var(--gold)]" aria-hidden="true" />
               <h2 id="network-filters" className="section-title text-base">{copy.filters}</h2>

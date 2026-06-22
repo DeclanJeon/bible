@@ -129,7 +129,7 @@ export default async function HanjaDetailPage({ params }: Props) {
   const contextBody = [entry.resolvedThesis, entry.resolvedExplanation].filter(Boolean).join(" ");
 
   return (
-    <main className="mx-auto min-h-screen max-w-content px-gutter py-8">
+    <main className="page-shell">
       {/* Back link */}
       <Link
         href={`/${locale}/hanja`}
