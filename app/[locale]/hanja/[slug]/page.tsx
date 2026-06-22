@@ -252,19 +252,30 @@ export default async function HanjaDetailPage({ params }: Props) {
                       {entry.meaningEvidence.slice(0, 3).map((evidence) => (
                         <li key={`${evidence.sourceId}-${evidence.text}`} className="rounded-xl border border-[var(--hairline)] px-4 py-3">
                           <div className="text-sm leading-relaxed text-[var(--ink)]">{evidence.text}</div>
-                          <div className="mt-2 text-xs text-[var(--ink-subtle)]">
-                            {evidence.source.title}
-                            {evidence.stance === "critical"
-                              ? locale === "ko"
-                                ? " · 비판 자료"
-                                : " · Critical source"
-                              : evidence.stance === "supportive"
+                          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="text-xs text-[var(--ink-subtle)]">
+                              {evidence.source.title}
+                              {evidence.stance === "critical"
                                 ? locale === "ko"
-                                  ? " · 지지 자료"
-                                  : " · Supportive source"
-                                : locale === "ko"
-                                  ? " · 참고 자료"
-                                  : " · Reference source"}
+                                  ? " · 비판 자료"
+                                  : " · Critical source"
+                                : evidence.stance === "supportive"
+                                  ? locale === "ko"
+                                    ? " · 지지 자료"
+                                    : " · Supportive source"
+                                  : locale === "ko"
+                                    ? " · 참고 자료"
+                                    : " · Reference source"}
+                            </div>
+                            <a
+                              href={evidence.source.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-3 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                              {copy.openOriginal}
+                            </a>
                           </div>
                         </li>
                       ))}
