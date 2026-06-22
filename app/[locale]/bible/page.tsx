@@ -141,6 +141,9 @@ export default async function BiblePage({ params, searchParams }: Props) {
     </div>
   );
 
+  const previousBook = reader.previous ? reader.books.find((item) => item.code === reader.previous?.code) : null;
+  const nextBook = reader.next ? reader.books.find((item) => item.code === reader.next?.code) : null;
+
   const chapterPrompt =
     locale === "ko"
       ? `${reader.selectedBook.name} ${reader.selectedChapter}장을 문맥과 연결 본문으로 공부하고 싶어요.`
