@@ -10,16 +10,18 @@ type Book = {
   testament: string;
 };
 
+function buildBibleHref(code: string, locale: string) {
+  return `/${locale}/bible?book=${code}&chapter=1`;
+}
+
 export function BibleBookSearch({
   books,
   selectedCode,
-  buildHref,
   locale,
   copy,
 }: {
   books: Book[];
   selectedCode: string;
-  buildHref: (code: string) => string;
   locale: "ko" | "en";
   copy: {
     old: string;
@@ -75,7 +77,7 @@ export function BibleBookSearch({
                   return (
                     <Link
                       key={book.code}
-                      href={buildHref(book.code)}
+                      href={buildBibleHref(book.code, locale)}
                       className={`min-h-[44px] rounded-input px-3 py-2 text-sm font-medium transition ${
                         selected
                           ? "bg-gold text-[var(--canvas)]"

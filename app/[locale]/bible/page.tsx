@@ -172,7 +172,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
             <BibleBookSearch
               books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
               selectedCode={reader.selectedBook.code}
-              buildHref={(code) => buildBibleHref({ book: code, chapter: 1, locale, from: sourceTag })}
+
               locale={locale}
               copy={{
                 old: copy.testament.old,

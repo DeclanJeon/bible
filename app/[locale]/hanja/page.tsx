@@ -71,7 +71,7 @@ export default async function HanjaPage({ params }: Props) {
 
         <HanjaCatalogSearch
           entries={searchableEntries}
-          buildHref={(slug) => `/${locale}/hanja/${slug}`}
+          locale={locale}
           copy={{
             searchPlaceholder: locale === "ko" ? "한자, 음독, 뜻으로 검색…" : "Search by character, reading, or meaning…",
             all: locale === "ko" ? "전체" : "All",

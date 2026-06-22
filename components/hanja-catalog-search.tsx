@@ -17,12 +17,12 @@ type Entry = {
 
 export function HanjaCatalogSearch({
   entries,
-  buildHref,
+  locale,
   copy,
   initialCount = 48,
 }: {
   entries: Entry[];
-  buildHref: (slug: string) => string;
+  locale: "ko" | "en";
   copy: {
     searchPlaceholder: string;
     all: string;
@@ -99,7 +99,7 @@ export function HanjaCatalogSearch({
         {visible.map((entry) => (
           <Link
             key={entry.slug}
-            href={buildHref(entry.slug)}
+            href={`/${locale}/hanja/${entry.slug}`}
             className="group rounded-card border border-[var(--hairline)] bg-surface-1 p-4 transition hover:border-[var(--hairline-hover)]"
           >
             <div className="flex items-start justify-between">
