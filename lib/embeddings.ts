@@ -1,7 +1,8 @@
-import { cache } from "react";
 import { resolveHermesProviderConfig } from "@/lib/hermes";
 
 export type EmbeddingProviderField = "apiKey" | "baseUrl";
+
+type ProviderProbeStatus = "pending" | "ready";
 
 export type EmbeddingProviderConfig = {
   apiKey: string;
@@ -15,6 +16,11 @@ export type EmbeddingProviderConfig = {
     baseUrl: string | null;
     model: string;
   };
+};
+
+export type EmbeddingProviderRuntimeStatus = {
+  ready: boolean;
+  probeStatus: ProviderProbeStatus;
 };
 
 type Candidate = {
@@ -42,8 +48,55 @@ const PREFERRED_EMBEDDING_MODELS = [
   "sentence-transformers/all-mpnet-base-v2",
 ] as const;
 
+let embeddingProviderConfigPromise: Promise<EmbeddingProviderConfig> | null = null;
+let embeddingProviderRuntimeStatus: EmbeddingProviderRuntimeStatus = {
+  ready: false,
+  probeStatus: "pending",
+};
+let embeddingProviderProbeStarted = false;
+
 function firstConfigured(candidates: Candidate[]) {
   return candidates.find((candidate) => candidate.value.trim());
+}
+
+function quickEmbeddingProviderRuntimeStatus(): EmbeddingProviderRuntimeStatus {
+  const envApiKey = firstConfigured([
+    { value: process.env.EMBEDDINGS_API_KEY ?? "", source: "EMBEDDINGS_API_KEY" },
+    { value: process.env.OPENAI_API_KEY ?? "", source: "OPENAI_API_KEY" },
+    { value: process.env.HERMES_API_KEY ?? "", source: "HERMES_API_KEY" },
+  ]);
+  const envBaseUrl = firstConfigured([
+    { value: process.env.EMBEDDINGS_BASE_URL ?? "", source: "EMBEDDINGS_BASE_URL" },
+    { value: process.env.EMBEDDINGS_API_BASE ?? "", source: "EMBEDDINGS_API_BASE" },
+    { value: process.env.OPENAI_BASE_URL ?? "", source: "OPENAI_BASE_URL" },
+    { value: process.env.OPENAI_API_BASE ?? "", source: "OPENAI_API_BASE" },
+    { value: process.env.HERMES_BASE_URL ?? "", source: "HERMES_BASE_URL" },
+    { value: process.env.HERMES_API_BASE ?? "", source: "HERMES_API_BASE" },
+  ]);
+  return {
+    ready: !!envApiKey?.value && !!envBaseUrl?.value,
+    probeStatus: "pending",
+  };
+}
+
+function updateEmbeddingProviderRuntimeStatus(config: EmbeddingProviderConfig) {
+  embeddingProviderRuntimeStatus = {
+    ready: config.ready,
+    probeStatus: "ready",
+  };
+}
+
+function ensureEmbeddingProviderConfigWarm() {
+  if (embeddingProviderProbeStarted) {
+    return;
+  }
+  embeddingProviderProbeStarted = true;
+  void resolveEmbeddingProviderConfig().catch(() => {});
+}
+
+export function getEmbeddingProviderRuntimeStatus() {
+  ensureEmbeddingProviderConfigWarm();
+  return embeddingProviderRuntimeStatus;
 }
 
 function describeMissingConfig(missing: EmbeddingProviderField[]) {
@@ -211,7 +264,7 @@ async function requestEmbedding(config: Pick<EmbeddingProviderConfig, "apiKey" |
   }
 }
 
-export const getEmbeddingProviderConfig = cache(async (): Promise<EmbeddingProviderConfig> => {
+async function loadEmbeddingProviderConfig(): Promise<EmbeddingProviderConfig> {
   const envApiKey = firstConfigured([
     { value: process.env.EMBEDDINGS_API_KEY ?? "", source: "EMBEDDINGS_API_KEY" },
     { value: process.env.OPENAI_API_KEY ?? "", source: "OPENAI_API_KEY" },
@@ -248,7 +301,7 @@ export const getEmbeddingProviderConfig = cache(async (): Promise<EmbeddingProvi
   const note = describeMissingConfig(missing);
 
   if (note) {
-    return {
+    const config = {
       apiKey,
       baseUrl,
       model,
@@ -260,11 +313,13 @@ export const getEmbeddingProviderConfig = cache(async (): Promise<EmbeddingProvi
         baseUrl: envBaseUrl?.source ?? hermes?.sources.baseUrl ?? null,
         model: envModel?.source ?? catalogModel?.source ?? `fallback:${DEFAULT_EMBEDDING_MODEL}`,
       },
-    };
+    } satisfies EmbeddingProviderConfig;
+    updateEmbeddingProviderRuntimeStatus(config);
+    return config;
   }
 
   const probe = await requestEmbedding({ apiKey, baseUrl, model }, "grace and peace");
-  return {
+  const config = {
     apiKey,
     baseUrl,
     model,
@@ -276,12 +331,26 @@ export const getEmbeddingProviderConfig = cache(async (): Promise<EmbeddingProvi
       baseUrl: envBaseUrl?.source ?? hermes?.sources.baseUrl ?? null,
       model: envModel?.source ?? catalogModel?.source ?? `fallback:${DEFAULT_EMBEDDING_MODEL}`,
     },
-  };
-});
+  } satisfies EmbeddingProviderConfig;
+  updateEmbeddingProviderRuntimeStatus(config);
+  return config;
+}
 
 export async function resolveEmbeddingProviderConfig() {
-  return getEmbeddingProviderConfig();
+  embeddingProviderConfigPromise ??= loadEmbeddingProviderConfig().catch((error) => {
+    embeddingProviderConfigPromise = null;
+    embeddingProviderProbeStarted = false;
+    throw error;
+  });
+  return embeddingProviderConfigPromise;
 }
+
+export async function getEmbeddingProviderConfig() {
+  return resolveEmbeddingProviderConfig();
+}
+
+embeddingProviderRuntimeStatus = quickEmbeddingProviderRuntimeStatus();
+ensureEmbeddingProviderConfigWarm();
 
 export async function createEmbedding(input: string): Promise<number[] | null> {
   const config = await getEmbeddingProviderConfig();

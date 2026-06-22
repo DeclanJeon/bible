@@ -1,4 +1,5 @@
 import { getPassage, type BibleReference } from "@/lib/bible";
+import { getBookMetadata } from "@/lib/book-metadata";
 import type { AnswerBundle, PassageExplanation } from "@/lib/answer-bundle";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
 import { getPassageCrossReferences, type CrossReferenceSuggestion } from "@/lib/knowledge";
@@ -67,6 +68,14 @@ function referenceKey(reference: BibleReference) {
   return `${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
 }
 
+function formatReferenceLabel(reference: BibleReference, locale: AppLocale) {
+  const bookTitle = getBookMetadata(reference.code, locale)?.title ?? reference.code;
+  const verseLabel = reference.startVerse === reference.endVerse
+    ? `${reference.chapter}:${reference.startVerse}`
+    : `${reference.chapter}:${reference.startVerse}-${reference.endVerse}`;
+  return `${bookTitle} ${verseLabel}`;
+}
+
 function responseConfidence(answerBundle: AnswerBundle | null, retrieval: RetrievalResult): PassageRecommendationResponse["confidence"] {
   return answerBundle?.confidence ?? retrieval.confidence;
 }
@@ -130,18 +139,19 @@ async function buildRelatedDetails(
   supportingReferences: BibleReference[],
   graphSuggestions: CrossReferenceSuggestion[],
   answerBundle: AnswerBundle | null,
+  includePassageDetails: boolean,
 ) {
   const related: RelatedPassageRecommendation[] = [];
   const seen = new Set<string>();
-  const explanationByReference = new Map(
-    (answerBundle?.relationMap ?? []).map((relation) => [relation.explanation.reference, relation]),
+  const relationByKey = new Map(
+    (answerBundle?.relationMap ?? []).map((relation) => [referenceKey(relation.explanation.reference), relation] as const),
   );
 
   for (const reference of supportingReferences) {
     const key = referenceKey(reference);
     if (seen.has(key)) continue;
     seen.add(key);
-    const relation = explanationByReference.get(reference) ?? (answerBundle?.relationMap ?? []).find((item) => referenceKey(item.explanation.reference) === key);
+    const relation = relationByKey.get(key);
     const reason = relation
       ? joinLines(relation.answers, relation.userConnection, relation.limits)
       : locale === "ko"
@@ -170,6 +180,23 @@ async function buildRelatedDetails(
 
   return Promise.all(
     related.slice(0, 6).map(async (item) => {
+      const relation = relationByKey.get(referenceKey(item.reference));
+      if (relation) {
+        return {
+          ...item,
+          title: getBookMetadata(item.reference.code, locale)?.title ?? item.reference.code,
+          referenceLabel: relation.explanation.displayReference,
+          excerpt: relation.explanation.passageClaim.keyLines.join(" ") || relation.answers,
+        };
+      }
+      if (!includePassageDetails) {
+        return {
+          ...item,
+          title: getBookMetadata(item.reference.code, locale)?.title ?? item.reference.code,
+          referenceLabel: formatReferenceLabel(item.reference, locale),
+          excerpt: "",
+        };
+      }
       const passage = await getPassage(item.reference, locale);
       return {
         ...item,
@@ -240,6 +267,8 @@ export async function buildPassageRecommendation(
     locale?: string;
     acceptLanguage?: string;
     countryCode?: string;
+    includeRelatedPassageDetails?: boolean;
+    includeExternalResources?: boolean;
   } = {},
 ): Promise<PassageRecommendationBuild> {
   const locale = resolveAppLocale(options.locale);
@@ -276,18 +305,23 @@ export async function buildPassageRecommendation(
     state === "direct" || state === "safety_first"
       ? retrieval.supportingReferences
       : [];
+  const includeRelatedPassageDetails = options.includeRelatedPassageDetails !== false;
+  const graphSuggestionLimit = Math.max(0, 4 - supportingReferences.length);
   const graphSuggestions =
-    primaryRef && (state === "direct" || state === "safety_first")
-      ? await getPassageCrossReferences(primaryRef, 4, locale)
+    primaryRef && (state === "direct" || state === "safety_first") && graphSuggestionLimit > 0
+      ? await getPassageCrossReferences(primaryRef, graphSuggestionLimit, locale)
       : [];
-  const relatedPassageDetails = await buildRelatedDetails(locale, supportingReferences, graphSuggestions, answerBundle);
+  const relatedPassageDetails = await buildRelatedDetails(locale, supportingReferences, graphSuggestions, answerBundle, includeRelatedPassageDetails);
   const backgroundBase =
     state === "unsupported" || suppressTentativePrimary || !primaryPassage
       ? null
       : bundleExplanation
         ? summarizeBackgroundPack(bundleExplanation.background, locale)
         : await buildLocalPassageBackground(primaryRef, locale);
-  const background = backgroundBase ? await buildBackgroundWithResources(locale, normalizedPrompt, primaryRef, backgroundBase) : null;
+  const background =
+    backgroundBase && options.includeExternalResources !== false
+      ? await buildBackgroundWithResources(locale, normalizedPrompt, primaryRef, backgroundBase)
+      : backgroundBase;
   const primary =
     state === "unsupported" || suppressTentativePrimary || !primaryPassage
       ? null

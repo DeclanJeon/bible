@@ -1,5 +1,5 @@
 import type { BibleReference } from "@/lib/bible";
-import { loadBiblePassageIndex, type BiblePassageUnit } from "@/lib/bible-passage-index";
+import { type BiblePassageUnit } from "@/lib/bible-passage-index";
 import { findCandidatePassageUnits } from "@/lib/passage-index-db";
 import type { QuestionUnderstanding } from "@/lib/question-understanding";
 
@@ -138,7 +138,7 @@ export async function retrieveHybridPassageCandidates(question: QuestionUndersta
       locale: question.locale,
       terms: queryTerms,
       limit: Math.max(limit * 10, 80),
-    })) ?? (await loadBiblePassageIndex(question.locale)).units;
+    })) ?? [];
 
   const scored = candidatePool.map((unit) => {
     const indexedUnit = unit as IndexedUnit;

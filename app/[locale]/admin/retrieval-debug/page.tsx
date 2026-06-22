@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPassage, type BibleVerse, type BookMeta } from "@/lib/bible";
+import { getBibleRuntimeStatus, getPassage, type BibleVerse, type BookMeta } from "@/lib/bible";
 import { getBookMetadata, type BookMetadata } from "@/lib/book-metadata";
+import { getPassageIndexRuntimeStatus } from "@/lib/bible-passage-index";
 import { APP_SOURCES, getRelatedClustersFromReferences } from "@/lib/app-data";
 import { localizeSourceLinks, localizeStoryCluster, resolveAppLocale } from "@/lib/content";
-import { getPassageCrossReferences, type CrossReferenceSuggestion } from "@/lib/knowledge";
+import { getCrossReferenceRuntimeStatus, getPassageCrossReferences, type CrossReferenceSuggestion } from "@/lib/knowledge";
 import { buildReflectionResponse, type ReflectionResponse } from "@/lib/reflection";
 import { retrieveClusterForPrompt, type RetrievalResult } from "@/lib/retrieval";
 import { resolveLocale } from "@/lib/server-locale";
@@ -28,6 +29,11 @@ type RetrievalDebugData = {
   relatedClusters: Array<{ slug: string; title: string }>;
   reflection: ReflectionResponse;
   primaryBookMetadata: BookMetadata | undefined;
+  runtime: {
+    bible: ReturnType<typeof getBibleRuntimeStatus>;
+    passageIndex: ReturnType<typeof getPassageIndexRuntimeStatus>;
+    crossrefs: ReturnType<typeof getCrossReferenceRuntimeStatus>;
+  };
 };
 
 export default async function RetrievalDebugPage({ params, searchParams }: Props) {
@@ -78,6 +84,11 @@ export default async function RetrievalDebugPage({ params, searchParams }: Props
       title: localizeStoryCluster(related, appLocale).title,
     }));
 
+    const runtime = {
+      bible: getBibleRuntimeStatus(),
+      passageIndex: getPassageIndexRuntimeStatus(),
+      crossrefs: getCrossReferenceRuntimeStatus(),
+    };
     debug = {
       retrieval,
       primary,
@@ -86,6 +97,7 @@ export default async function RetrievalDebugPage({ params, searchParams }: Props
       relatedClusters,
       reflection,
       primaryBookMetadata: getBookMetadata(primaryReference.code, appLocale),
+      runtime,
     };
   }
 
@@ -117,6 +129,10 @@ export default async function RetrievalDebugPage({ params, searchParams }: Props
           <section className="glass rounded-2xl p-6">
             <h2 className="text-xl font-semibold tracking-tight text-[var(--ink)]">Retrieval</h2>
             <pre className="mt-4 overflow-x-auto rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] p-4 text-xs leading-6 text-[var(--ink)]">{JSON.stringify(debug.retrieval, null, 2)}</pre>
+          </section>
+          <section className="glass rounded-2xl p-6">
+            <h2 className="text-xl font-semibold tracking-tight text-[var(--ink)]">Runtime sources</h2>
+            <pre className="mt-4 overflow-x-auto rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] p-4 text-xs leading-6 text-[var(--ink)]">{JSON.stringify(debug.runtime, null, 2)}</pre>
           </section>
           <section className="glass rounded-2xl p-6">
             <h2 className="text-xl font-semibold tracking-tight text-[var(--ink)]">Primary & supporting</h2>

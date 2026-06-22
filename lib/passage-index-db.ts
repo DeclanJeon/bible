@@ -22,6 +22,14 @@ function getPassageIndexDb() {
   return passageIndexDb;
 }
 
+export function getPassageIndexDbStatus() {
+  const db = getPassageIndexDb();
+  return {
+    dbAvailable: !!db,
+    dbDisabled: PASSAGE_INDEX_DB_DISABLED,
+  };
+}
+
 function parseJsonArray(value: string | null): string[] | undefined {
   if (!value) return undefined;
   const parsed = JSON.parse(value) as unknown;

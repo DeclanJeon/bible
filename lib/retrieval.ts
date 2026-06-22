@@ -713,6 +713,104 @@ function confidenceFor(score: number, passageScore: number, matchedConcepts: num
   return "low";
 }
 
+type ClusterRetrievalScoreParams = {
+  appLocale: ReturnType<typeof resolveAppLocale>;
+  expandedPrompt: string;
+  promptTokens: string[];
+  promptTf: Map<string, number>;
+  corpora: ClusterCorpusEntry[];
+  idf: Map<string, number>;
+  bestPassage: PassageCandidate | null;
+  supportingReferences: BibleReference[];
+  passageCandidates: PassageCandidate[];
+  options: RetrievalOptions;
+  question: QuestionUnderstanding;
+  embeddingModel: string | null;
+  clusterVectors: Map<string, number[]> | null;
+  promptEmbedding: number[] | null;
+};
+
+function shouldUseClusterEmbeddings(promptTokens: string[], tfidfBest: RetrievalResult | null) {
+  if (!ENABLE_RUNTIME_CLUSTER_EMBEDDINGS) return false;
+  if (promptTokens.length < 3) return false;
+  return !tfidfBest || tfidfBest.confidence === "low";
+}
+
+function scoreClusterRetrievals({
+  appLocale,
+  expandedPrompt,
+  promptTokens,
+  promptTf,
+  corpora,
+  idf,
+  bestPassage,
+  supportingReferences,
+  passageCandidates,
+  options,
+  question,
+  embeddingModel,
+  clusterVectors,
+  promptEmbedding,
+}: ClusterRetrievalScoreParams): RetrievalResult[] {
+  const lowerPrompt = expandedPrompt.toLowerCase();
+  const embeddingEnabled = !!promptEmbedding && !!clusterVectors && !!embeddingModel;
+
+  return corpora.map(({ cluster, corpus, tf }) => {
+    const matchedHints = cluster.searchHints.filter((hint) => lowerPrompt.includes(hint.toLowerCase()));
+    const matchedThemes = cluster.themes.filter((theme) => lowerPrompt.includes(theme.toLowerCase()));
+    const matchedEmotions = cluster.emotions.filter((emotion) => lowerPrompt.includes(emotion.toLowerCase()));
+    const semanticTerms = [...new Set(promptTokens.filter((token) => tf.has(token)))].sort((a, b) => (idf.get(b) ?? 0) - (idf.get(a) ?? 0)).slice(0, 5);
+    const semanticScore = cosineTfIdfSimilarity(promptTf, tf, idf);
+    const embeddingScore = embeddingEnabled && clusterVectors.has(cluster.slug) ? cosineEmbeddingSimilarity(promptEmbedding, clusterVectors.get(cluster.slug) ?? []) : 0;
+    const passageMatch = bestPassage && bestPassage.reference.code === cluster.primary.code ? bestPassage : null;
+    const passageKeywords = passageMatch?.matchedTerms.slice(0, 6) ?? [...new Set(promptTokens.filter((token) => corpus.includes(token)))].slice(0, 6);
+    const laneScore = matchedHints.length * 3 + matchedThemes.length * 2 + matchedEmotions.length * 2 + semanticScore * 6 + embeddingScore * 10;
+    const passageScore = passageMatch?.score ?? 0;
+    const score = laneScore + passageScore * 6;
+    const confidence = confidenceFor(score, passageScore, passageMatch?.matchedConcepts.length ?? 0);
+    const rationaleParts = appLocale === "ko"
+      ? [
+          passageMatch ? `대표 본문: ${formatPassageReference(passageMatch.reference)}` : null,
+          passageKeywords.length ? `맞은 본문어: ${passageKeywords.join(", ")}` : null,
+          passageMatch?.matchedConcepts.length ? `질문 개념: ${passageMatch.matchedConcepts.join(", ")}` : null,
+          semanticTerms.length ? `의미상 핵심어: ${semanticTerms.join(", ")}` : null,
+          passageScore ? `본문 점수: ${passageScore.toFixed(2)}` : null,
+          semanticScore ? `의미 점수: ${semanticScore.toFixed(3)}` : null,
+          embeddingScore ? `임베딩 점수: ${embeddingScore.toFixed(3)}` : null,
+        ].filter(Boolean)
+      : [
+          passageMatch ? `primary passage: ${formatPassageReference(passageMatch.reference)}` : null,
+          passageKeywords.length ? `matched passage terms: ${passageKeywords.join(", ")}` : null,
+          passageMatch?.matchedConcepts.length ? `query concepts: ${passageMatch.matchedConcepts.join(", ")}` : null,
+          semanticTerms.length ? `semantic terms: ${semanticTerms.join(", ")}` : null,
+          passageScore ? `passage score: ${passageScore.toFixed(2)}` : null,
+          semanticScore ? `semantic score: ${semanticScore.toFixed(3)}` : null,
+          embeddingScore ? `embedding score: ${embeddingScore.toFixed(3)}` : null,
+        ].filter(Boolean);
+
+    return {
+      cluster,
+      score,
+      laneScore,
+      passageScore,
+      semanticScore,
+      embeddingScore,
+      retrievalMode: embeddingEnabled ? "embeddings" : embeddingModel ? "embedding-fallback" : "tfidf",
+      embeddingModel,
+      reasons: { matchedHints, matchedThemes, matchedEmotions, passageKeywords, semanticTerms },
+      rationale: rationaleParts.join(" · ") || (appLocale === "ko" ? "66권 성경 코퍼스 기본 매칭" : "66-book corpus baseline match"),
+      confidence,
+      primaryReference: passageMatch?.reference ?? cluster.primary,
+      primaryExcerpt: passageMatch?.excerpt ?? "",
+      supportingReferences,
+      passageCandidates,
+      expansionSummary: options.queryPlan?.expansionSummary ?? options.expansionSummary ?? null,
+      expansionProvider: options.queryPlan?.expansionProvider ?? options.expansionProvider ?? null,
+      question,
+    } satisfies RetrievalResult;
+  });
+}
+
 function buildRuleBasedRetrieval(prompt: string, locale?: string, options: RetrievalOptions = {}): RetrievalResult | null {
   const appLocale = resolveAppLocale(locale);
   const matchedRule = DOCTRINAL_ROUTING_RULES.find((rule) => rule.match.test(prompt));
@@ -968,86 +1066,87 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   const expandedPrompt = `${expandQuery(normalizedPrompt)}${externalExpansion}`;
   const promptTokens = tokenize(expandedPrompt);
   const promptTf = buildTermFrequency(promptTokens);
-  const [candidateUnits, { corpora, idf }, clusterEmbeddings, priorPassageCandidates] = await Promise.all([
+  const [candidateUnits, { corpora, idf }, priorPassageCandidates] = await Promise.all([
     findCandidatePassageUnits({ locale: appLocale, terms: promptTokens, limit: 72 }),
     loadClusterCorpora(appLocale),
-    loadClusterEmbeddings(appLocale),
     buildPriorPassageCandidates(appLocale, normalizedPrompt),
   ]);
-  const promptEmbedding = clusterEmbeddings.vectors ? await createEmbedding(expandedPrompt) : null;
-  const embeddingEnabled = !!promptEmbedding && !!clusterEmbeddings.vectors && !!clusterEmbeddings.model;
   const passageCandidates = mergePassageCandidates(
     priorPassageCandidates,
     buildGlobalPassageCandidates(candidateUnits ?? [], promptTokens, normalizedPrompt),
   );
   const bestPassage = passageCandidates[0] ?? null;
   const supportingReferences = passageCandidates.slice(1, 5).map((candidate) => candidate.reference);
+  const tfidfScored = scoreClusterRetrievals({
+    appLocale,
+    expandedPrompt,
+    promptTokens,
+    promptTf,
+    corpora,
+    idf,
+    bestPassage,
+    supportingReferences,
+    passageCandidates,
+    options,
+    question,
+    embeddingModel: null,
+    clusterVectors: null,
+    promptEmbedding: null,
+  });
+  tfidfScored.sort((a, b) => b.score - a.score);
+  const tfidfBest = tfidfScored[0] ?? null;
 
-  const scored = corpora.map(({ cluster, corpus, tf }) => {
-    const lowerPrompt = expandedPrompt.toLowerCase();
-    const matchedHints = cluster.searchHints.filter((hint) => lowerPrompt.includes(hint.toLowerCase()));
-    const matchedThemes = cluster.themes.filter((theme) => lowerPrompt.includes(theme.toLowerCase()));
-    const matchedEmotions = cluster.emotions.filter((emotion) => lowerPrompt.includes(emotion.toLowerCase()));
-    const semanticTerms = [...new Set(promptTokens.filter((token) => tf.has(token)))].sort((a, b) => (idf.get(b) ?? 0) - (idf.get(a) ?? 0)).slice(0, 5);
-    const semanticScore = cosineTfIdfSimilarity(promptTf, tf, idf);
-    const embeddingScore = embeddingEnabled && clusterEmbeddings.vectors?.has(cluster.slug) ? cosineEmbeddingSimilarity(promptEmbedding, clusterEmbeddings.vectors.get(cluster.slug) ?? []) : 0;
-    const passageMatch = bestPassage && bestPassage.reference.code === cluster.primary.code ? bestPassage : null;
-    const passageKeywords = passageMatch?.matchedTerms.slice(0, 6) ?? [...new Set(promptTokens.filter((token) => corpus.includes(token)))].slice(0, 6);
-    const laneScore = matchedHints.length * 3 + matchedThemes.length * 2 + matchedEmotions.length * 2 + semanticScore * 6 + embeddingScore * 10;
-    const passageScore = passageMatch?.score ?? 0;
-    const score = laneScore + passageScore * 6;
-    const confidence = confidenceFor(score, passageScore, passageMatch?.matchedConcepts.length ?? 0);
-    const rationaleParts = appLocale === "ko"
-      ? [
-          passageMatch ? `대표 본문: ${formatPassageReference(passageMatch.reference)}` : null,
-          passageKeywords.length ? `맞은 본문어: ${passageKeywords.join(", ")}` : null,
-          passageMatch?.matchedConcepts.length ? `질문 개념: ${passageMatch.matchedConcepts.join(", ")}` : null,
-          semanticTerms.length ? `의미상 핵심어: ${semanticTerms.join(", ")}` : null,
-          passageScore ? `본문 점수: ${passageScore.toFixed(2)}` : null,
-          semanticScore ? `의미 점수: ${semanticScore.toFixed(3)}` : null,
-          embeddingScore ? `임베딩 점수: ${embeddingScore.toFixed(3)}` : null,
-        ].filter(Boolean)
-      : [
-          passageMatch ? `primary passage: ${formatPassageReference(passageMatch.reference)}` : null,
-          passageKeywords.length ? `matched passage terms: ${passageKeywords.join(", ")}` : null,
-          passageMatch?.matchedConcepts.length ? `query concepts: ${passageMatch.matchedConcepts.join(", ")}` : null,
-          semanticTerms.length ? `semantic terms: ${semanticTerms.join(", ")}` : null,
-          passageScore ? `passage score: ${passageScore.toFixed(2)}` : null,
-          semanticScore ? `semantic score: ${semanticScore.toFixed(3)}` : null,
-          embeddingScore ? `embedding score: ${embeddingScore.toFixed(3)}` : null,
-        ].filter(Boolean);
-    return {
-      cluster,
-      score,
-      laneScore,
-      passageScore,
-      semanticScore,
-      embeddingScore,
-      retrievalMode: embeddingEnabled ? "embeddings" : clusterEmbeddings.model ? "embedding-fallback" : "tfidf",
-      embeddingModel: clusterEmbeddings.model,
-      reasons: { matchedHints, matchedThemes, matchedEmotions, passageKeywords, semanticTerms },
-      rationale: rationaleParts.join(" · ") || (appLocale === "ko" ? "66권 성경 코퍼스 기본 매칭" : "66-book corpus baseline match"),
-      confidence,
-      primaryReference: passageMatch?.reference ?? cluster.primary,
-      primaryExcerpt: passageMatch?.excerpt ?? "",
-      supportingReferences,
-      passageCandidates,
+  if (!shouldUseClusterEmbeddings(promptTokens, tfidfBest)) {
+    return tfidfBest ?? {
+      cluster: localizeStoryCluster(STORY_CLUSTERS[0], appLocale),
+      score: 0,
+      laneScore: 0,
+      passageScore: 0,
+      semanticScore: 0,
+      embeddingScore: 0,
+      retrievalMode: "tfidf",
+      embeddingModel: null,
+      reasons: { matchedHints: [], matchedThemes: [], matchedEmotions: [], passageKeywords: [], semanticTerms: [] },
+      rationale: appLocale === "ko" ? "66권 성경 코퍼스 기본 매칭" : "66-book corpus baseline match",
+      confidence: "low",
+      primaryReference: STORY_CLUSTERS[0].primary,
+      primaryExcerpt: "",
+      supportingReferences: [],
+      passageCandidates: [],
       expansionSummary: options.queryPlan?.expansionSummary ?? options.expansionSummary ?? null,
       expansionProvider: options.queryPlan?.expansionProvider ?? options.expansionProvider ?? null,
       question,
-    } satisfies RetrievalResult;
-  });
+    };
+  }
 
-  scored.sort((a, b) => b.score - a.score);
-  return scored[0] ?? {
+  const clusterEmbeddings = await loadClusterEmbeddings(appLocale);
+  const promptEmbedding = clusterEmbeddings.vectors ? await createEmbedding(expandedPrompt) : null;
+  const embeddingScored = scoreClusterRetrievals({
+    appLocale,
+    expandedPrompt,
+    promptTokens,
+    promptTf,
+    corpora,
+    idf,
+    bestPassage,
+    supportingReferences,
+    passageCandidates,
+    options,
+    question,
+    embeddingModel: clusterEmbeddings.model,
+    clusterVectors: clusterEmbeddings.vectors,
+    promptEmbedding,
+  });
+  embeddingScored.sort((a, b) => b.score - a.score);
+  return embeddingScored[0] ?? tfidfBest ?? {
     cluster: localizeStoryCluster(STORY_CLUSTERS[0], appLocale),
     score: 0,
     laneScore: 0,
     passageScore: 0,
     semanticScore: 0,
     embeddingScore: 0,
-    retrievalMode: "tfidf",
-    embeddingModel: null,
+    retrievalMode: clusterEmbeddings.model ? "embedding-fallback" : "tfidf",
+    embeddingModel: clusterEmbeddings.model,
     reasons: { matchedHints: [], matchedThemes: [], matchedEmotions: [], passageKeywords: [], semanticTerms: [] },
     rationale: appLocale === "ko" ? "66권 성경 코퍼스 기본 매칭" : "66-book corpus baseline match",
     confidence: "low",

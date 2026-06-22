@@ -54,6 +54,8 @@ export async function POST(
     locale: requestedLocale,
     acceptLanguage: request.headers.get("accept-language") ?? undefined,
     countryCode: request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry") ?? undefined,
+    includeRelatedPassageDetails: false,
+    includeExternalResources: false,
   });
 
   return NextResponse.json({

@@ -2,9 +2,9 @@ module.exports = {
   apps: [
     {
       name: "bible",
-      script: "node_modules/.bin/next",
+      script: "node_modules/next/dist/bin/next",
       args: "start",
-      instances: "max",
+      instances: 2,
       exec_mode: "cluster",
       env: {
         NODE_ENV: "production",

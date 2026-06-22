@@ -1,5 +1,6 @@
-import { existsSync } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { createInterface } from "node:readline";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
@@ -34,6 +35,10 @@ const ROOT = process.cwd();
 const BIBLE_DB_PATH = path.join(ROOT, "data", "bible", "bible.sqlite");
 const KO_FALLBACK_ALLOWLIST_PATH = path.join(ROOT, "data", "passage-index", "ko-fallback-allowlist.json");
 const CHAPTER_CACHE_LIMIT = 64;
+const ALLOW_WHOLE_CORPUS_BIBLE_LOAD = process.env.BIBLE_WHOLE_CORPUS_OK === "1";
+const ALLOW_BIBLE_TEXT_JSON_FALLBACK = process.env.BIBLE_TEXT_JSON_FALLBACK === "1";
+export type BibleRuntimeSource = "sqlite" | "json-chapter-fallback" | "unavailable";
+
 
 function resolveBibleLocale(locale?: string): BibleLocale {
   return locale === "ko" ? "ko" : "en";
@@ -58,18 +63,24 @@ type KoFallbackAllowlist = {
   allowedMissingVerseKeys: string[];
 };
 
+const VPL_LINE_PATTERN = /^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/;
+function parseVplLine(line: string, sourceLocale: BibleLocale): BibleVerse | null {
+  const match = line.match(VPL_LINE_PATTERN);
+  if (!match) {
+    return null;
+  }
+
+  const [, code, chapter, verse, text] = match;
+  return { code, chapter: Number(chapter), verse: Number(verse), text, sourceLocale };
+}
+
 function parseVpl(raw: string, sourceLocale: BibleLocale): BibleVerse[] {
   return raw
     .split(/\r?\n/)
     .filter(Boolean)
     .flatMap((line) => {
-      const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+(.*)$/);
-      if (!match) {
-        return [];
-      }
-
-      const [, code, chapter, verse, text] = match;
-      return [{ code, chapter: Number(chapter), verse: Number(verse), text, sourceLocale }];
+      const verse = parseVplLine(line, sourceLocale);
+      return verse ? [verse] : [];
     });
 }
 
@@ -116,6 +127,32 @@ async function loadKoFallbackAllowlist(): Promise<Set<string>> {
   return koFallbackAllowlistPromise;
 }
 
+function assertWholeCorpusBibleLoadAllowed(loaderName: string) {
+  if (!ALLOW_WHOLE_CORPUS_BIBLE_LOAD) {
+    throw new Error(`${loaderName} is offline/debug-only; use chapter-bounded SQLite helpers on request paths.`);
+  }
+}
+
+function assertBibleChapterFallbackAllowed(locale: BibleLocale, code: string, chapter: number) {
+  if (!ALLOW_BIBLE_TEXT_JSON_FALLBACK) {
+    throw new Error(`Bible SQLite is unavailable and JSON chapter fallback is disabled for ${locale}:${code}:${chapter}.`);
+  }
+}
+
+export function getBibleRuntimeStatus() {
+  const db = getBibleDatabase();
+  return {
+    dbAvailable: !!db,
+    wholeCorpusAllowed: ALLOW_WHOLE_CORPUS_BIBLE_LOAD,
+    jsonFallbackEnabled: ALLOW_BIBLE_TEXT_JSON_FALLBACK,
+    runtimeSource: (db
+      ? "sqlite"
+      : ALLOW_BIBLE_TEXT_JSON_FALLBACK
+        ? "json-chapter-fallback"
+        : "unavailable") satisfies BibleRuntimeSource,
+  };
+}
+
 function cacheChapterVerses(cacheKey: string, verses: BibleVerse[]) {
   if (chapterCache.has(cacheKey)) {
     chapterCache.delete(cacheKey);
@@ -144,6 +181,49 @@ function mapVerseRow(row: {
     text: row.text,
     sourceLocale: resolveBibleLocale(row.source_locale),
   };
+}
+
+async function loadFallbackChapterFromFile(
+  vplPath: string,
+  sourceLocale: BibleLocale,
+  code: string,
+  chapter: number,
+): Promise<BibleVerse[]> {
+  const verses: BibleVerse[] = [];
+  const stream = createReadStream(vplPath, { encoding: "utf8" });
+  const reader = createInterface({ input: stream, crlfDelay: Infinity });
+
+  try {
+    for await (const line of reader) {
+      const verse = parseVplLine(line, sourceLocale);
+      if (verse && verse.code === code && verse.chapter === chapter) {
+        verses.push(verse);
+      }
+    }
+  } finally {
+    reader.close();
+    stream.destroy();
+  }
+
+  return verses;
+}
+
+async function loadFallbackChapterVerses(locale: BibleLocale, code: string, chapter: number): Promise<BibleVerse[]> {
+  const { vplPath } = getTranslationPaths(locale);
+  const verses = await loadFallbackChapterFromFile(vplPath, locale, code, chapter);
+  if (locale !== "ko") {
+    return verses;
+  }
+
+  const allowlist = await loadKoFallbackAllowlist();
+  const chapterPrefix = `${code} ${chapter}:`;
+  const hasAllowlistedFallback = [...allowlist].some((key) => key.startsWith(chapterPrefix));
+  if (!hasAllowlistedFallback) {
+    return verses;
+  }
+
+  const englishFallback = await loadFallbackChapterFromFile(getTranslationPaths("en").vplPath, "en", code, chapter);
+  return mergeMissingVerses(verses, englishFallback, allowlist);
 }
 
 async function loadFallbackVerses(locale: BibleLocale = "en"): Promise<BibleVerse[]> {
@@ -192,11 +272,8 @@ async function loadChapterVerses(locale: BibleLocale, code: string, chapter: num
     return cacheChapterVerses(cacheKey, rows.map(mapVerseRow));
   }
 
-  const verses = await loadFallbackVerses(locale);
-  return cacheChapterVerses(
-    cacheKey,
-    verses.filter((verse) => verse.code === code && verse.chapter === chapter),
-  );
+  assertBibleChapterFallbackAllowed(locale, code, chapter);
+  return cacheChapterVerses(cacheKey, await loadFallbackChapterVerses(locale, code, chapter));
 }
 
 export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Record<string, BookMeta>> {
@@ -222,7 +299,12 @@ export async function loadBookMetadata(locale: BibleLocale = "en"): Promise<Reco
   return result;
 }
 
+// Whole-corpus loaders are intentionally kept for offline builders, QA, and explicit debug/admin surfaces.
+// Companion, reader, background, and crossref request paths should stay on chapter-bounded SQLite reads.
+
+// Explicit opt-in only. This should never be the default runtime path.
 export async function loadVerses(locale: BibleLocale = "en"): Promise<BibleVerse[]> {
+  assertWholeCorpusBibleLoadAllowed("loadVerses");
   const db = getBibleDatabase();
   if (db) {
     const rows = db
@@ -250,7 +332,9 @@ type BibleVerseIndex = {
   chaptersByBook: Map<string, number[]>;
 };
 
+// This expands the entire locale corpus and should not be used on normal request paths.
 export async function loadVerseIndex(locale: BibleLocale = "en"): Promise<BibleVerseIndex> {
+  assertWholeCorpusBibleLoadAllowed("loadVerseIndex");
   const verses = await loadVerses(locale);
   const byBook = new Map<string, Map<number, BibleVerse[]>>();
   const chaptersByBook = new Map<string, number[]>();

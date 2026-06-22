@@ -138,6 +138,7 @@ async function main() {
       source TEXT NOT NULL
     );
     CREATE INDEX idx_openbible_from_key ON openbible_links (from_key);
+    CREATE INDEX idx_openbible_to_span ON openbible_links (to_code, to_chapter, to_start_verse, to_end_verse);
 
     CREATE TABLE phrase_links (
       from_key TEXT NOT NULL,
@@ -150,6 +151,7 @@ async function main() {
       source TEXT NOT NULL
     );
     CREATE INDEX idx_phrase_from_key ON phrase_links (from_key);
+    CREATE INDEX idx_phrase_to_span ON phrase_links (to_code, to_chapter, to_start_verse, to_end_verse);
   `);
 
   const insertMetadata = db.prepare("INSERT INTO metadata (key, value) VALUES (?, ?)");

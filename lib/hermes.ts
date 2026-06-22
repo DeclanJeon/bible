@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { access, readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -10,6 +9,8 @@ import type { ReflectionResponse } from "@/lib/reflection";
 const execFile = promisify(execFileCallback);
 
 export type HermesProviderField = "apiKey" | "baseUrl";
+
+type ProviderProbeStatus = "pending" | "ready";
 
 export type HermesProviderConfig = {
   apiKey: string;
@@ -24,6 +25,12 @@ export type HermesProviderConfig = {
     baseUrl: string | null;
     model: string;
   };
+};
+
+export type HermesProviderRuntimeStatus = {
+  ready: boolean;
+  transport: HermesProviderConfig["transport"];
+  probeStatus: ProviderProbeStatus;
 };
 
 export type ReflectionGenerationResult = {
@@ -48,6 +55,16 @@ type HermesAgentRuntimeCredentials = {
   source: string;
 };
 
+let hermesAgentRuntimeCredentialsPromise: Promise<HermesAgentRuntimeCredentials | null> | null = null;
+let hermesAgentOneshotCommandPromise: Promise<string | null> | null = null;
+let hermesAgentDefaultModelPromise: Promise<string | null> | null = null;
+let hermesProviderConfigPromise: Promise<HermesProviderConfig> | null = null;
+let hermesProviderRuntimeStatus: HermesProviderRuntimeStatus = {
+  ready: false,
+  transport: null,
+  probeStatus: "pending",
+};
+let hermesProviderProbeStarted = false;
 const HERMES_AGENT_CREDENTIAL_SCRIPT = `
 import json
 import sys
@@ -84,6 +101,46 @@ function firstConfigured(candidates: Candidate[]) {
   return candidates.find((candidate) => candidate.value.trim());
 }
 
+function quickHermesProviderRuntimeStatus(): HermesProviderRuntimeStatus {
+  const envApiKey = firstConfigured([
+    { value: process.env.HERMES_API_KEY ?? "", source: "HERMES_API_KEY" },
+    { value: process.env.OPENAI_API_KEY ?? "", source: "OPENAI_API_KEY" },
+  ]);
+  const envBaseUrl = firstConfigured([
+    { value: process.env.HERMES_BASE_URL ?? "", source: "HERMES_BASE_URL" },
+    { value: process.env.HERMES_API_BASE ?? "", source: "HERMES_API_BASE" },
+    { value: process.env.OPENAI_BASE_URL ?? "", source: "OPENAI_BASE_URL" },
+    { value: process.env.OPENAI_API_BASE ?? "", source: "OPENAI_API_BASE" },
+  ]);
+  const chatReady = !!envApiKey?.value && !!envBaseUrl?.value;
+  return {
+    ready: chatReady,
+    transport: chatReady ? "chat-completions" : null,
+    probeStatus: "pending",
+  };
+}
+
+function updateHermesProviderRuntimeStatus(config: HermesProviderConfig) {
+  hermesProviderRuntimeStatus = {
+    ready: config.ready,
+    transport: config.transport,
+    probeStatus: "ready",
+  };
+}
+
+function ensureHermesProviderConfigWarm() {
+  if (hermesProviderProbeStarted) {
+    return;
+  }
+  hermesProviderProbeStarted = true;
+  void resolveHermesProviderConfig().catch(() => {});
+}
+
+export function getHermesProviderRuntimeStatus() {
+  ensureHermesProviderConfigWarm();
+  return hermesProviderRuntimeStatus;
+}
+
 async function fileExists(path: string) {
   try {
     await access(path);
@@ -111,7 +168,7 @@ function resolveHermesAgentPaths() {
   };
 }
 
-async function readHermesAgentDefaultModel(configPath: string) {
+async function loadHermesAgentDefaultModel(configPath: string) {
   try {
     const raw = await readFile(configPath, "utf8");
     const match = raw.match(/(^|\n)model:\s*\n(?:[ \t].*\n)*?[ \t]+default:\s*([^\n#]+)/m);
@@ -122,7 +179,12 @@ async function readHermesAgentDefaultModel(configPath: string) {
   }
 }
 
-async function resolveHermesAgentRuntimeCredentials(): Promise<HermesAgentRuntimeCredentials | null> {
+async function readHermesAgentDefaultModel(configPath: string) {
+  hermesAgentDefaultModelPromise ??= loadHermesAgentDefaultModel(configPath);
+  return hermesAgentDefaultModelPromise;
+}
+
+async function loadHermesAgentRuntimeCredentials(): Promise<HermesAgentRuntimeCredentials | null> {
   if (process.env.HERMES_AGENT_REUSE === "0") {
     return null;
   }
@@ -156,7 +218,12 @@ async function resolveHermesAgentRuntimeCredentials(): Promise<HermesAgentRuntim
   return null;
 }
 
-async function resolveHermesAgentOneshotCommand() {
+async function resolveHermesAgentRuntimeCredentials(): Promise<HermesAgentRuntimeCredentials | null> {
+  hermesAgentRuntimeCredentialsPromise ??= loadHermesAgentRuntimeCredentials();
+  return hermesAgentRuntimeCredentialsPromise;
+}
+
+async function loadHermesAgentOneshotCommand() {
   if (process.env.HERMES_AGENT_ONESHOT === "0") {
     return null;
   }
@@ -175,6 +242,11 @@ async function resolveHermesAgentOneshotCommand() {
   }
 
   return null;
+}
+
+async function resolveHermesAgentOneshotCommand() {
+  hermesAgentOneshotCommandPromise ??= loadHermesAgentOneshotCommand();
+  return hermesAgentOneshotCommandPromise;
 }
 
 export async function runHermesAgentOneshot(prompt: string, timeoutMs = 75_000) {
@@ -357,7 +429,7 @@ function extractJson(text: string) {
   }
 }
 
-const getHermesProviderConfig = cache(async (): Promise<HermesProviderConfig> => {
+async function loadHermesProviderConfig(): Promise<HermesProviderConfig> {
   const envApiKey = firstConfigured([
     { value: process.env.HERMES_API_KEY ?? "", source: "HERMES_API_KEY" },
     { value: process.env.OPENAI_API_KEY ?? "", source: "OPENAI_API_KEY" },
@@ -396,7 +468,7 @@ const getHermesProviderConfig = cache(async (): Promise<HermesProviderConfig> =>
   const preferChatCompletions = process.env.HERMES_CHAT_COMPLETIONS_FIRST === "1";
   const transport = agentCommand && !preferChatCompletions ? "agent-oneshot" : chatReady ? "chat-completions" : agentCommand ? "agent-oneshot" : null;
 
-  return {
+  const config = {
     apiKey,
     baseUrl,
     model,
@@ -409,12 +481,22 @@ const getHermesProviderConfig = cache(async (): Promise<HermesProviderConfig> =>
       baseUrl: envBaseUrl?.source ?? agentCredentials?.source ?? null,
       model: envModel?.source ?? (agentModel ? "hermes-agent-config:model.default" : agentCommand ? "hermes-agent:oneshot-default" : "fallback:hermes-default"),
     },
-  };
-});
+  } satisfies HermesProviderConfig;
+  updateHermesProviderRuntimeStatus(config);
+  return config;
+}
 
 export async function resolveHermesProviderConfig() {
-  return getHermesProviderConfig();
+  hermesProviderConfigPromise ??= loadHermesProviderConfig().catch((error) => {
+    hermesProviderConfigPromise = null;
+    hermesProviderProbeStarted = false;
+    throw error;
+  });
+  return hermesProviderConfigPromise;
 }
+
+hermesProviderRuntimeStatus = quickHermesProviderRuntimeStatus();
+ensureHermesProviderConfigWarm();
 
 export async function generateReflectionWithHermes(
   contractArgs: HermesEvidenceContract,

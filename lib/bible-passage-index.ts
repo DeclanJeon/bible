@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { BibleReference } from "@/lib/bible";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
-import { findExactPassageUnit as findExactPassageUnitInDb, findOverlappingPassageUnit as findOverlappingPassageUnitInDb } from "@/lib/passage-index-db";
+import { findExactPassageUnit as findExactPassageUnitInDb, findOverlappingPassageUnit as findOverlappingPassageUnitInDb, getPassageIndexDbStatus } from "@/lib/passage-index-db";
 
 export type BiblePassageProvenance = {
   method: string;
@@ -71,6 +71,10 @@ type BiblePassageLookup = {
 const ROOT = process.cwd();
 const indexCache = new Map<AppLocale, Promise<BiblePassageIndex>>();
 const lookupCache = new Map<AppLocale, Promise<BiblePassageLookup>>();
+const ALLOW_PASSAGE_INDEX_JSON_FALLBACK = process.env.PASSAGE_INDEX_JSON_FALLBACK === "1";
+export type PassageIndexRuntimeSource = "sqlite" | "json-fallback" | "unavailable";
+
+
 
 function hasStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === "string");
@@ -171,6 +175,10 @@ function validateIndex(value: unknown, locale: AppLocale): BiblePassageIndex {
 }
 
 async function readPassageIndex(locale: AppLocale) {
+  if (!ALLOW_PASSAGE_INDEX_JSON_FALLBACK) {
+    throw new Error(`Passage-index JSON fallback is disabled for locale ${locale}`);
+  }
+
   const runtimePath = path.join(ROOT, "data", "passage-index", `${locale}-runtime.json`);
   try {
     const raw = await readFile(runtimePath, "utf8");
@@ -221,6 +229,8 @@ async function buildLookup(locale: AppLocale): Promise<BiblePassageLookup> {
 }
 
 async function loadFallbackLookup(locale?: string) {
+  if (!ALLOW_PASSAGE_INDEX_JSON_FALLBACK) return null;
+
   const resolvedLocale = resolveAppLocale(locale);
   const cached = lookupCache.get(resolvedLocale);
   if (cached) return cached;
@@ -230,6 +240,22 @@ async function loadFallbackLookup(locale?: string) {
   return loading;
 }
 
+export function getPassageIndexRuntimeStatus() {
+  const { dbAvailable, dbDisabled } = getPassageIndexDbStatus();
+  return {
+    dbAvailable,
+    dbDisabled,
+    jsonFallbackEnabled: ALLOW_PASSAGE_INDEX_JSON_FALLBACK,
+    runtimeSource: (dbAvailable
+      ? "sqlite"
+      : ALLOW_PASSAGE_INDEX_JSON_FALLBACK
+        ? "json-fallback"
+        : "unavailable") satisfies PassageIndexRuntimeSource,
+  };
+}
+
+// Normal request flow should resolve from passage-index.sqlite only.
+
 export async function findPassageUnit(reference: BibleReference, locale?: string): Promise<BiblePassageUnit | null> {
   const exact = await findExactPassageUnitInDb(reference, locale);
   if (exact) return exact;
@@ -238,8 +264,8 @@ export async function findPassageUnit(reference: BibleReference, locale?: string
   if (overlapping) return overlapping;
 
   const lookup = await loadFallbackLookup(locale);
-  const fallbackExact = lookup.exact.get(referenceKey(reference));
+  const fallbackExact = lookup?.exact.get(referenceKey(reference));
   if (fallbackExact) return fallbackExact;
-  const chapterUnits = lookup.byChapter.get(chapterKey(reference)) ?? [];
+  const chapterUnits = lookup?.byChapter.get(chapterKey(reference)) ?? [];
   return chapterUnits.find((unit) => overlapsReference(unit.reference, reference)) ?? null;
 }

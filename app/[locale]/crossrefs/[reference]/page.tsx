@@ -60,6 +60,22 @@ function parseFilters(searchParams: Record<string, string | string[] | undefined
   };
 }
 
+function hasActiveFilters(filters: CrossReferenceFiltersState) {
+  return (
+    filters.direction !== "all" ||
+    Boolean(filters.relation) ||
+    Boolean(filters.source) ||
+    Boolean(filters.book) ||
+    Boolean(filters.canon) ||
+    Boolean(filters.phrase) ||
+    filters.minVotes !== null
+  );
+}
+
+function wantsFullNetwork(query: Record<string, string | string[] | undefined>, filters: CrossReferenceFiltersState) {
+  return firstParam(query.view) === "full" || hasActiveFilters(filters);
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: requestedLocale, reference: referenceSlug } = await params;
   const locale = await resolveLocale(requestedLocale);
@@ -90,7 +106,9 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
     notFound();
   }
 
-
+  const query = await (searchParams ?? Promise.resolve({}));
+  const filters = parseFilters(query);
+  const fullNetworkLoaded = wantsFullNetwork(query, filters);
   const passage = await getPassage(reference, locale);
   const expectedVerseCount = reference.endVerse - reference.startVerse + 1;
   const exactCoverage =
@@ -100,16 +118,13 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
   if (!exactCoverage) {
     notFound();
   }
-  const [network, query] = await Promise.all([
-    getCrossReferenceNetwork(reference, {
-      locale,
-      highlightLimit: 8,
-      includeExcerpts: "preview",
-      includeBackground: true,
-      summaryOnly: false,
-    }) as Promise<CrossReferenceNetworkViewModel>,
-    searchParams ?? Promise.resolve({}),
-  ]);
+  const network = (await getCrossReferenceNetwork(reference, {
+    locale,
+    highlightLimit: 8,
+    includeExcerpts: "preview",
+    includeBackground: true,
+    summaryOnly: !fullNetworkLoaded,
+  })) as CrossReferenceNetworkViewModel;
 
   if (!network.primary.verses.length) {
     notFound();
@@ -117,7 +132,6 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
 
   const copy = COPY[locale];
   const baseHref = buildCrossReferenceNetworkHref(reference, locale);
-  const filters = parseFilters(query);
 
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-6 py-8 lg:px-8">
@@ -149,7 +163,7 @@ export default async function CrossReferencesPage({ params, searchParams }: Prop
       </section>
 
       <div className="mt-8">
-        <CrossReferenceNetworkReader network={network} filters={filters} locale={locale} baseHref={baseHref} />
+        <CrossReferenceNetworkReader network={network} filters={filters} locale={locale} baseHref={baseHref} fullNetworkLoaded={fullNetworkLoaded} />
       </div>
     </main>
   );

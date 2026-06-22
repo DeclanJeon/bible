@@ -134,6 +134,7 @@ export type CrossReferenceNetworkViewModel = {
     collapsedRanges?: number;
     missingSources?: string[];
     availableSources?: string[];
+    runtimeSource?: "sqlite" | "json-fallback" | "unavailable";
   };
   sources: SourceLink[];
   version: {
@@ -158,6 +159,8 @@ type Copy = {
   phraseSearch: string;
   minVotes: string;
   completeList: string;
+  loadFullNetwork: string;
+  summaryModeNote: string;
   empty: string;
   noFilterMatches: string;
   background: string;
@@ -198,29 +201,31 @@ const COPY: Record<"en" | "ko", Copy> = {
     allCanon: "All canon sections",
     phraseSearch: "Phrase anchor contains",
     minVotes: "Minimum OpenBible votes",
-    completeList: "Complete grouped network",
-    empty: "No direct links were found for this passage in the ingested cross-reference datasets.",
-    noFilterMatches: "No links match the current filters. The unfiltered network count remains shown above.",
-    background: "Book background and reception context",
-    sources: "Sources and provenance",
-    coverage: "Coverage",
-    dataQuality: "Data quality",
-    readFull: "Read full passage",
-    why: "Why connected",
-    anchorPhrases: "KJV phrase anchors",
-    anchorVerses: "Anchor verses",
-    votes: "OpenBible votes",
-    generated: "Generated",
-    booksTouched: "Books touched",
-    directTotal: "Direct links",
-    outgoing: "Outgoing",
-    incoming: "Incoming",
-    mutual: "Mutual",
-    consensus: "Consensus",
-    voteSupported: "Vote-supported",
-    phraseAnchor: "Phrase anchor",
-    interpretationGuard: "Interpretive safety: these are dataset-backed direct links, not a claim that every link has the same theological meaning. Read the cited passages before drawing conclusions.",
-    qualityCounts: "Normalization counts",
+completeList: "Complete grouped network",
+loadFullNetwork: "Load complete grouped network",
+summaryModeNote: "Initial render keeps only the summary and strongest links on the server. Load the grouped network only when you need the full one-hop graph.",
+empty: "No direct links were found for this passage in the ingested cross-reference datasets.",
+noFilterMatches: "No links match the current filters. The unfiltered network count remains shown above.",
+background: "Book background and reception context",
+sources: "Sources and provenance",
+coverage: "Coverage",
+dataQuality: "Data quality",
+readFull: "Read full passage",
+why: "Why connected",
+anchorPhrases: "KJV phrase anchors",
+anchorVerses: "Anchor verses",
+votes: "OpenBible votes",
+generated: "Generated",
+booksTouched: "Books touched",
+directTotal: "Direct links",
+outgoing: "Outgoing",
+incoming: "Incoming",
+mutual: "Mutual",
+consensus: "Consensus",
+voteSupported: "Vote-supported",
+phraseAnchor: "Phrase anchor",
+interpretationGuard: "Interpretive safety: these are dataset-backed direct links, not a claim that every link has the same theological meaning. Read the cited passages before drawing conclusions.",
+qualityCounts: "Normalization counts",
   },
   ko: {
     summary: "네트워크 요약",
@@ -237,29 +242,31 @@ const COPY: Record<"en" | "ko", Copy> = {
     allCanon: "모든 정경 구간",
     phraseSearch: "구문 앵커 포함",
     minVotes: "OpenBible 최소 투표수",
-    completeList: "그룹별 전체 네트워크",
-    empty: "이 본문에 대해 수집된 상호참조 데이터셋에서 직접 연결을 찾지 못했습니다.",
-    noFilterMatches: "현재 필터에 맞는 연결이 없습니다. 필터 전 전체 개수는 위에 계속 표시됩니다.",
-    background: "책 배경과 수용 맥락",
-    sources: "출처와 근거",
-    coverage: "수록 범위",
-    dataQuality: "데이터 품질",
-    readFull: "전체 본문 보기",
-    why: "연결 근거",
-    anchorPhrases: "KJV 구문 앵커",
-    anchorVerses: "앵커 절",
-    votes: "OpenBible 투표",
-    generated: "생성 시각",
-    booksTouched: "연결된 책",
-    directTotal: "직접 연결",
-    outgoing: "나가는 참조",
-    incoming: "들어오는 참조",
-    mutual: "상호 링크",
-    consensus: "합의 링크",
-    voteSupported: "투표 근거",
-    phraseAnchor: "구문 앵커",
-    interpretationGuard: "해석 안전장치: 여기에 보이는 연결은 데이터셋에 근거한 직접 링크이며, 모든 링크가 같은 신학적 의미를 가진다는 주장이 아닙니다. 결론을 내리기 전에 인용 본문을 먼저 읽어야 합니다.",
-    qualityCounts: "정규화 수치",
+completeList: "그룹별 전체 네트워크",
+loadFullNetwork: "그룹별 전체 네트워크 불러오기",
+summaryModeNote: "초기 화면은 서버 부담을 줄이기 위해 요약과 가장 강한 연결만 먼저 보여줍니다. 전체 1단계 네트워크는 필요할 때만 불러오세요.",
+empty: "이 본문에 대해 수집된 상호참조 데이터셋에서 직접 연결을 찾지 못했습니다.",
+noFilterMatches: "현재 필터에 맞는 연결이 없습니다. 필터 전 전체 개수는 위에 계속 표시됩니다.",
+background: "책 배경과 수용 맥락",
+sources: "출처와 근거",
+coverage: "수록 범위",
+dataQuality: "데이터 품질",
+readFull: "전체 본문 보기",
+why: "연결 근거",
+anchorPhrases: "KJV 구문 앵커",
+anchorVerses: "앵커 절",
+votes: "OpenBible 투표",
+generated: "생성 시각",
+booksTouched: "연결된 책",
+directTotal: "직접 연결",
+outgoing: "나가는 참조",
+incoming: "들어오는 참조",
+mutual: "상호 링크",
+consensus: "합의 링크",
+voteSupported: "투표 근거",
+phraseAnchor: "구문 앵커",
+interpretationGuard: "해석 안전장치: 여기에 보이는 연결은 데이터셋에 근거한 직접 링크이며, 모든 링크가 같은 신학적 의미를 가진다는 주장이 아닙니다. 결론을 내리기 전에 인용 본문을 먼저 읽어야 합니다.",
+qualityCounts: "정규화 수치",
   },
 };
 
@@ -329,8 +336,7 @@ function matchesFilters(edge: CrossReferenceNetworkEdge, filters: CrossReference
   return true;
 }
 
-function collectOptions(network: CrossReferenceNetworkViewModel) {
-  const edges = uniqueEdges(network);
+function collectOptions(edges: CrossReferenceNetworkEdge[], network: CrossReferenceNetworkViewModel) {
   const relations = new Set<string>();
   const sources = new Map<string, string>();
   const books = new Map<string, string>();
@@ -352,12 +358,16 @@ function collectOptions(network: CrossReferenceNetworkViewModel) {
   };
 }
 
-function groupFilteredEdges(network: CrossReferenceNetworkViewModel, filters: CrossReferenceFiltersState) {
-  const edgeCanonSections = canonSectionsByEdge(network);
-  const matching = uniqueEdges(network).filter((edge) => matchesFilters(edge, filters, edgeCanonSections.get(edge.id) ?? []));
+function groupFilteredEdges(
+  edges: CrossReferenceNetworkEdge[],
+  edgeCanonSections: Map<string, string[]>,
+  byBookGroups: CrossReferenceNetworkViewModel["grouped"]["byBook"],
+  filters: CrossReferenceFiltersState,
+) {
+  const matching = edges.filter((edge) => matchesFilters(edge, filters, edgeCanonSections.get(edge.id) ?? []));
   const byBook = new Map<string, { name: string; edges: CrossReferenceNetworkEdge[]; total: number }>();
 
-  for (const group of network.grouped.byBook) {
+  for (const group of byBookGroups) {
     byBook.set(group.code, { name: group.name, edges: [], total: group.count });
   }
 
@@ -489,18 +499,24 @@ export function CrossReferenceNetworkReader({
   filters,
   locale,
   baseHref,
+  fullNetworkLoaded,
 }: {
   network: CrossReferenceNetworkViewModel;
   filters: CrossReferenceFiltersState;
   locale?: string;
   baseHref: string;
+  fullNetworkLoaded: boolean;
 }) {
   const appLocale = localeKey(locale);
   const copy = COPY[appLocale];
-  const options = collectOptions(network);
-  const groups = groupFilteredEdges(network, filters);
+  const edges = fullNetworkLoaded ? uniqueEdges(network) : [];
+  const edgeCanonSections = fullNetworkLoaded ? canonSectionsByEdge(network) : new Map<string, string[]>();
+  const options = fullNetworkLoaded ? collectOptions(edges, network) : null;
+  const groups = fullNetworkLoaded ? groupFilteredEdges(edges, edgeCanonSections, network.grouped.byBook, filters) : [];
+  const visibleEdgeCount = groups.reduce((sum, group) => sum + group.edges.length, 0);
   const primaryBook = primaryMetadata(network.background);
   const hasAnyEdges = network.summary.totalEdges > 0;
+  const loadFullHref = `${baseHref}?view=full`;
 
   return (
     <div className="space-y-8">
@@ -576,89 +592,108 @@ export function CrossReferenceNetworkReader({
         </section>
       ) : null}
 
-      <section className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
-        <aside className="glass rounded-[28px] p-5 lg:sticky lg:top-6" aria-labelledby="network-filters">
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-[var(--gold)]" aria-hidden="true" />
-            <h2 id="network-filters" className="section-title text-base">{copy.filters}</h2>
-          </div>
-          <form action={baseHref} className="mt-5 space-y-4">
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              Direction
-              <select name="direction" defaultValue={filters.direction} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
-                <option value="all">{copy.allDirections}</option>
-                <option value="outgoing">{copy.outgoing}</option>
-                <option value="incoming">{copy.incoming}</option>
-                <option value="mutual">{copy.mutual}</option>
-              </select>
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              Relation
-              <select name="relation" defaultValue={filters.relation} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
-                <option value="">{copy.allRelations}</option>
-                {options.relations.map((relation) => <option key={relation} value={relation}>{relationLabel(relation, copy)}</option>)}
-              </select>
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              Source
-              <select name="source" defaultValue={filters.source} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
-                <option value="">{copy.allSources}</option>
-                {options.sources.map(([source, label]) => <option key={source} value={source}>{label}</option>)}
-              </select>
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              Book
-              <select name="book" defaultValue={filters.book} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
-                <option value="">{copy.allBooks}</option>
-                {options.books.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
-              </select>
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              Canon section
-              <select name="canon" defaultValue={filters.canon} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
-                <option value="">{copy.allCanon}</option>
-                {options.canonSections.map((section) => <option key={section} value={section}>{section}</option>)}
-              </select>
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              {copy.phraseSearch}
-              <input name="phrase" defaultValue={filters.phrase} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]" />
-            </label>
-            <label className="block text-sm font-semibold text-[var(--ink)]">
-              {copy.minVotes}
-              <input name="minVotes" type="number" min="0" defaultValue={filters.minVotes ?? ""} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]" />
-            </label>
-            <div className="pt-2">
-              <button type="submit" className="min-h-[44px] rounded-xl bg-[var(--gold)] px-4 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]">{copy.apply}</button>
+      {fullNetworkLoaded ? (
+        <section className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
+          <aside className="glass rounded-[28px] p-5 lg:sticky lg:top-6" aria-labelledby="network-filters">
+            <div className="flex items-center gap-2">
+              <Filter className="h-4 w-4 text-[var(--gold)]" aria-hidden="true" />
+              <h2 id="network-filters" className="section-title text-base">{copy.filters}</h2>
             </div>
-          </form>
-          <form action={baseHref} className="mt-3">
-            <button type="submit" className="min-h-[44px] rounded-xl border border-[var(--hairline)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">{copy.clear}</button>
-          </form>
-        </aside>
+            <form action={baseHref} className="mt-5 space-y-4">
+              <input type="hidden" name="view" value="full" />
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                Direction
+                <select name="direction" defaultValue={filters.direction} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
+                  <option value="all">{copy.allDirections}</option>
+                  <option value="outgoing">{copy.outgoing}</option>
+                  <option value="incoming">{copy.incoming}</option>
+                  <option value="mutual">{copy.mutual}</option>
+                </select>
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                Relation
+                <select name="relation" defaultValue={filters.relation} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
+                  <option value="">{copy.allRelations}</option>
+                  {options?.relations.map((relation) => <option key={relation} value={relation}>{relationLabel(relation, copy)}</option>)}
+                </select>
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                Source
+                <select name="source" defaultValue={filters.source} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
+                  <option value="">{copy.allSources}</option>
+                  {options?.sources.map(([source, label]) => <option key={source} value={source}>{label}</option>)}
+                </select>
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                Book
+                <select name="book" defaultValue={filters.book} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
+                  <option value="">{copy.allBooks}</option>
+                  {options?.books.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+                </select>
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                Canon section
+                <select name="canon" defaultValue={filters.canon} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]">
+                  <option value="">{copy.allCanon}</option>
+                  {options?.canonSections.map((section) => <option key={section} value={section}>{section}</option>)}
+                </select>
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                {copy.phraseSearch}
+                <input name="phrase" defaultValue={filters.phrase} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]" />
+              </label>
+              <label className="block text-sm font-semibold text-[var(--ink)]">
+                {copy.minVotes}
+                <input name="minVotes" type="number" min="0" defaultValue={filters.minVotes ?? ""} className="mt-2 min-h-[44px] w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm text-[var(--ink)]" />
+              </label>
+              <div className="pt-2">
+                <button type="submit" className="min-h-[44px] rounded-xl bg-[var(--gold)] px-4 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]">{copy.apply}</button>
+              </div>
+            </form>
+            <form action={baseHref} className="mt-3">
+              <button type="submit" className="min-h-[44px] rounded-xl border border-[var(--hairline)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">{copy.clear}</button>
+            </form>
+          </aside>
 
+          <section className="glass rounded-[32px] p-6 lg:p-8" aria-labelledby="complete-network">
+            <h2 id="complete-network" className="section-title text-base">{copy.completeList}</h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              {visibleEdgeCount} / {network.summary.totalEdges}
+            </p>
+            {!hasAnyEdges ? <p className="mt-6 rounded-2xl border border-[var(--hairline)] bg-black/15 p-5 text-sm leading-7 text-[var(--muted)]">{copy.empty}</p> : null}
+            {hasAnyEdges && !groups.length ? <p className="mt-6 rounded-2xl border border-[var(--hairline)] bg-black/15 p-5 text-sm leading-7 text-[var(--muted)]">{copy.noFilterMatches}</p> : null}
+            <div className="mt-6 space-y-6">
+              {groups.map((group) => (
+                <section key={group.code} aria-labelledby={`book-${group.code}`} className="rounded-2xl border border-[var(--hairline)] bg-black/10 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <h3 id={`book-${group.code}`} className="text-lg font-semibold text-[var(--ink)]">{group.name}</h3>
+                    <span className="rounded-full border border-[var(--hairline)] px-3 py-1 text-xs font-semibold text-[var(--muted)]">{group.edges.length} / {group.total || group.edges.length}</span>
+                  </div>
+                  <ul className="mt-4 space-y-4">
+                    {group.edges.map((edge) => <EdgeCard key={edge.id} edge={edge} locale={appLocale} copy={copy} />)}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </section>
+        </section>
+      ) : hasAnyEdges ? (
         <section className="glass rounded-[32px] p-6 lg:p-8" aria-labelledby="complete-network">
           <h2 id="complete-network" className="section-title text-base">{copy.completeList}</h2>
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            {groups.reduce((sum, group) => sum + group.edges.length, 0)} / {network.summary.totalEdges}
-          </p>
-          {!hasAnyEdges ? <p className="mt-6 rounded-2xl border border-[var(--hairline)] bg-black/15 p-5 text-sm leading-7 text-[var(--muted)]">{copy.empty}</p> : null}
-          {hasAnyEdges && !groups.length ? <p className="mt-6 rounded-2xl border border-[var(--hairline)] bg-black/15 p-5 text-sm leading-7 text-[var(--muted)]">{copy.noFilterMatches}</p> : null}
-          <div className="mt-6 space-y-6">
-            {groups.map((group) => (
-              <section key={group.code} aria-labelledby={`book-${group.code}`} className="rounded-2xl border border-[var(--hairline)] bg-black/10 p-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h3 id={`book-${group.code}`} className="text-lg font-semibold text-[var(--ink)]">{group.name}</h3>
-                  <span className="rounded-full border border-[var(--hairline)] px-3 py-1 text-xs font-semibold text-[var(--muted)]">{group.edges.length} / {group.total || group.edges.length}</span>
-                </div>
-                <ul className="mt-4 space-y-4">
-                  {group.edges.map((edge) => <EdgeCard key={edge.id} edge={edge} locale={appLocale} copy={copy} />)}
-                </ul>
-              </section>
-            ))}
+          <p className="mt-2 max-w-3xl text-sm leading-7 text-[var(--muted)]">{copy.summaryModeNote}</p>
+          <div className="mt-5">
+            <Link href={loadFullHref} className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[var(--gold)] px-4 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]">
+              {copy.loadFullNetwork}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </section>
-      </section>
+      ) : (
+        <section className="glass rounded-[32px] p-6 lg:p-8" aria-labelledby="complete-network">
+          <h2 id="complete-network" className="section-title text-base">{copy.completeList}</h2>
+          <p className="mt-6 rounded-2xl border border-[var(--hairline)] bg-black/15 p-5 text-sm leading-7 text-[var(--muted)]">{copy.empty}</p>
+        </section>
+      )}
 
       <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.75fr)]" aria-labelledby="network-background">
         <div className="glass rounded-[32px] p-6 lg:p-8">
