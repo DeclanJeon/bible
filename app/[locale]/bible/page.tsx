@@ -141,6 +141,11 @@ export default async function BiblePage({ params, searchParams }: Props) {
     </div>
   );
 
+  const chapterPrompt =
+    locale === "ko"
+      ? `${reader.selectedBook.name} ${reader.selectedChapter}장을 문맥과 연결 본문으로 공부하고 싶어요.`
+      : `Help me study ${reader.selectedBook.name} ${reader.selectedChapter} with context and linked passages.`;
+
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-6 py-8 lg:px-8">
 
