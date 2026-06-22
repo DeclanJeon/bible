@@ -1,0 +1,28 @@
+{
+  "sourceId": "hanja-src-honey55-com-1372-document",
+  "sourceType": "book",
+  "canonicalUrl": "https://honey55.com/?page_id=1372&mod=document&uid=3948",
+  "fetchedAt": "2026-06-22T08:59:23Z",
+  "status": "ok",
+  "title": "honey55.com",
+  "publisher": null,
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "honey55.com",
+  "contentMarkdown": "honey55.com",
+  "contentSummary": "honey55.com",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:22 GMT",
+      "server": "Apache",
+      "connection": "close",
+      "transfer-encoding": "chunked",
+      "content-type": "text/html; charset=UTF-8"
+    }
+  },
+  "errors": []
+}

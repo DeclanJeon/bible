@@ -1,0 +1,22 @@
+{
+  "sourceId": "hanja-src-youtube-01",
+  "sourceType": "channel",
+  "canonicalUrl": "https://www.youtube.com/@동탄명성교회",
+  "fetchedAt": "2026-06-22T08:58:43Z",
+  "status": "ok",
+  "title": "동탄명성교회",
+  "publisher": "동탄명성교회",
+  "author": "동탄명성교회",
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "주요 한국어 강사/채널",
+  "contentMarkdown": null,
+  "contentSummary": "Indexed 0 videos from the linked channel.",
+  "fetchMethod": "yt-dlp",
+  "metadata": {
+    "videoCount": 0,
+    "sampleVideoIds": []
+  },
+  "errors": []
+}

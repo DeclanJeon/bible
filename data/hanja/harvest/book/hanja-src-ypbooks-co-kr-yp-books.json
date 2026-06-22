@@ -1,0 +1,35 @@
+{
+  "sourceId": "hanja-src-ypbooks-co-kr-yp-books",
+  "sourceType": "book",
+  "canonicalUrl": "https://www.ypbooks.co.kr/books/202308231323724373",
+  "fetchedAt": "2026-06-22T08:59:25Z",
+  "status": "ok",
+  "title": "영풍문고 - 서점다운 서점",
+  "publisher": null,
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "영풍문고 - 서점다운 서점",
+  "contentMarkdown": "영풍문고 - 서점다운 서점",
+  "contentSummary": "영풍문고 - 서점다운 서점",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:25 GMT",
+      "content-type": "text/html",
+      "content-length": "11122",
+      "connection": "close",
+      "server": "nginx/1.25.1",
+      "last-modified": "Fri, 12 Jun 2026 10:42:49 GMT",
+      "vary": "Accept-Encoding",
+      "etag": "\"6a2be2a9-2b72\"",
+      "cache-control": "no-store, no-cache, must-revalidate",
+      "pragma": "no-cache",
+      "expires": "0",
+      "accept-ranges": "bytes"
+    }
+  },
+  "errors": []
+}

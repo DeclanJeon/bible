@@ -1,0 +1,23 @@
+{
+  "sourceId": "hanja-src-youtube-1-1",
+  "sourceType": "video",
+  "canonicalUrl": "https://www.youtube.com/watch?v=XgZlr13XEMQ",
+  "fetchedAt": "2026-06-22T08:58:39Z",
+  "status": "ok",
+  "title": "창세기 1:1의 비밀(창조과학 세미나) ㅣ 김명현 박사",
+  "publisher": "뉴웨이브 처치",
+  "author": "뉴웨이브 처치",
+  "publishDate": "20250325",
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "창세기 1:1의 비밀(창조과학 세미나) ㅣ 김명현 박사\n\n2025년 3월 22일 토요일 창조과학 세미나 2강\n설교 : 김명현 박사\n\n뉴웨이브 처치(부산대)\n부산광역시 금정구 부산대학로63번길 33 2층\n주일 예배시간: 2시",
+  "contentMarkdown": "2025년 3월 22일 토요일 창조과학 세미나 2강\n설교 : 김명현 박사\n\n뉴웨이브 처치(부산대)\n부산광역시 금정구 부산대학로63번길 33 2층\n주일 예배시간: 2시",
+  "contentSummary": "2025년 3월 22일 토요일 창조과학 세미나 2강\n설교 : 김명현 박사\n\n뉴웨이브 처치(부산대)\n부산광역시 금정구 부산대학로63번길 33 2층\n주일 예배시간: 2시",
+  "fetchMethod": "yt-dlp",
+  "metadata": {
+    "videoId": "XgZlr13XEMQ",
+    "channelId": "UCLTwzEh9sleKJnTsVq8TOPw",
+    "viewCount": 17262
+  },
+  "errors": []
+}

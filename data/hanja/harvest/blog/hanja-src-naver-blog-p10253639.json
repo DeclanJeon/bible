@@ -1,0 +1,33 @@
+{
+  "sourceId": "hanja-src-naver-blog-p10253639",
+  "sourceType": "blog",
+  "canonicalUrl": "https://blog.naver.com/p10253639",
+  "fetchedAt": "2026-06-22T08:59:29Z",
+  "status": "ok",
+  "title": "칼럼리스트 PARK SUNG MIN : 네이버 블로그",
+  "publisher": "Naver Blog",
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "unclear",
+  "contentText": "칼럼리스트 PARK SUNG MIN : 네이버 블로그",
+  "contentMarkdown": "칼럼리스트 PARK SUNG MIN : 네이버 블로그",
+  "contentSummary": "칼럼리스트 PARK SUNG MIN : 네이버 블로그",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:29 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "content-length": "2825",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache",
+      "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "set-cookie": "JSESSIONID=997989D3D564C058B69CA51F4040A11D.jvm1; Path=/; Secure; HttpOnly",
+      "referrer-policy": "unsafe-url",
+      "server": "nfront",
+      "connection": "close"
+    }
+  },
+  "errors": []
+}

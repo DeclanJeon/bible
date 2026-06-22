@@ -1,0 +1,25 @@
+{
+  "sourceId": "hanja-src-youtube-153",
+  "sourceType": "channel",
+  "canonicalUrl": "https://www.youtube.com/@153쉴터",
+  "fetchedAt": "2026-06-22T08:58:55Z",
+  "status": "ok",
+  "title": "김명현 박사",
+  "publisher": "김명현 박사",
+  "author": "김명현 박사",
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "김명현 박사 - Videos ::\n김명현 박사 - Live ::",
+  "contentMarkdown": null,
+  "contentSummary": "Indexed 2 videos from the linked channel.",
+  "fetchMethod": "yt-dlp",
+  "metadata": {
+    "videoCount": 2,
+    "sampleVideoIds": [
+      "UCdPOyzwyg6q0ETClz_nMLAw",
+      "UCdPOyzwyg6q0ETClz_nMLAw"
+    ]
+  },
+  "errors": []
+}

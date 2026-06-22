@@ -1,0 +1,4660 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-22T08:59:33Z",
+  "claims": [
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-7",
+      "text": "허신은 한 일(一)자를 ‘유초태극 도립어일(惟初太極 道立於一)’이라 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "惟",
+        "初",
+        "太"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-8",
+      "text": "오직 맨 처음에 태극의 도가 一에서 세워졌다’는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-10",
+      "text": "우리는 흔히 길 도(道)라고 읽습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-11",
+      "text": "하지만 여기서 道는 ‘길’을 의미하는 것이 아니라 ‘도 도(道)’자였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-12",
+      "text": "사람이 가야 할 바른 길이란 뜻으로 길 도(道)의 의미도 후에 추가했던 것이지요.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-13",
+      "text": "한자를 만든 원리의 한 가지를 뜻하는데 이것을 전주(轉注)라고 합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "轉",
+        "注"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-14",
+      "text": "전주(轉注)란 원래 뜻에 다른 뜻도 추가적으로 집어넣어 사용하는 방법을 뜻합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "轉",
+        "注"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-15",
+      "text": "예를 들면 ‘樂’이란 한자는 원래의 뜻과 음(音)은 ‘즐겁다’는 뜻으로 ‘즐거울 락’이였는데, 후에 ‘좋아한다’는 뜻을 추가하여 ‘좋아할 요’라고도 읽게 되었고, 또한 ‘풍류’라는 뜻으로도 의미를 확대시켜서 ‘풍류 악’이라는 뜻으로도 사용하는 경우입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "樂",
+        "音"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-16",
+      "text": "그래서 ‘音樂’이라는 단어는 ‘음악’이라고 읽어야 하고, ‘苦樂’이라는 단어는 ‘고락’이라고 읽으며, ‘樂山樂水’라는 글은 ‘요산요수’라고 읽게 되는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "樂",
+        "音",
+        "樂",
+        "苦"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "claimId": "hanja-src-londontimes-222-17",
+      "text": "그렇다면 다른 길 도(途)자도 있는데 뜻도 같고 음도 같은 글자를 왜 또 만들어 놓았을까요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "途"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-2",
+      "text": "박재성 | 입력 : 2008/05/12 [09:18] 공유하기 더보기 두 번째 글자 ‘두 이(二)’자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "二"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-8",
+      "text": "지지수야(地之數也)’라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "地",
+        "之",
+        "數",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-10",
+      "text": "어조사 지(之)’ 자는 어떻게 해석하느냐에 따라서 문장의 의미가 완전히 달라지기 때문에 이 之 자의 쓰임만 정확히 알아도 한문 실력이 많이 향상될 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-13",
+      "text": "예를 들면 “부모애지(父母愛之)”라는 문장에서 ‘부모님께서 그것을 사랑하시다’라고 풀이하여 대명사로 풀이되고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之",
+        "父",
+        "母",
+        "愛"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-17",
+      "text": "사자성어에서 세 번째 있는 지(之) 자는 주로 “~의”로 해석되는 경우가 많습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "之"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-18",
+      "text": "예를 들어 ‘새옹지마(塞翁之馬)’ 하면 ‘변방에 사는 할아버지의 말[馬]’이라 하여 소유격 어조사로 쓰이는 것이죠.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之",
+        "塞",
+        "翁",
+        "馬"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-20",
+      "text": "예를 들어 ‘왕지불왕(王之不王)’은 왕이 왕노릇 하지 못한다’라고 풀이합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之",
+        "王",
+        "不"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-23",
+      "text": "예를 들어, ‘출필곡지(出必告之)’를 ‘나아갈 때는 반드시 뵙고 청하고 가라’의 풀이하듯이 이때는 갈 지(之)라고 읽습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之",
+        "出",
+        "必",
+        "告"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-24",
+      "text": "이 네 가지 의미 중 ‘지지수야(地之數也)’에서는 어조사로서 ‘땅의 수이다’라는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "地",
+        "之",
+        "數",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-231",
+      "claimId": "hanja-src-londontimes-231-25",
+      "text": "즉 두 이(二)자는 하늘이 아니고 땅이라는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "二"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-2",
+      "text": "元’ 이란 처음이라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元"
+      ],
+      "relatedReferences": [],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-3",
+      "text": "하늘의 도가 상도(常道)라면 그 常道의 으뜸은 원(元)이요 형(亨)이요 이(利)요 정(貞)이다, 즉 ‘원형이정(元亨利貞)’ 이라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "常",
+        "道",
+        "亨"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-5",
+      "text": "인간은 누구나 사유(四維), 즉 인의예지(仁義禮智)가 있고 하늘에는 봄, 여름, 가을, 겨울이 존재하듯이 하늘의 도(道)요 떳떳한 도(道)는 원형이정(元亨利貞)이라는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "道",
+        "亨",
+        "利"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-8",
+      "text": "이 원(元) 자를 풀어보겠습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-12",
+      "text": "그래서 元은 ‘시야(始也)’ 라고 풀이했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "始",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-15",
+      "text": "그래서 주역에는 ‘元’ 자는 ‘기지시야(氣之始也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "始",
+        "也",
+        "氣"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-16",
+      "text": "이 元이라는 것은 기(氣)의 처음이라는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "氣"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-22",
+      "text": "氣 란 땅에서 안개가 올라가는 것이라 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "氣"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-245",
+      "claimId": "hanja-src-londontimes-245-27",
+      "text": "원(元)의 두 이(二)자는 둘 이라는 수 이름이 아니고 위에 있는 하늘을 의미한다는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元",
+        "二"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-15",
+      "text": "3이란 ‘수명천지인지도야(數名 天地人之道也)’라고 하여, ‘3은 수 이름인데 하늘과 땅과 사람의 도이다.’고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "數",
+        "名",
+        "天",
+        "地"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-16",
+      "text": "중국 고대 대표적인 철학자인 노자(老子)의 말을 빌어보면 그 의미가 한결 쉽게 다가올 수 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "老",
+        "子"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-17",
+      "text": "노자는 ‘일생이 이생삼 삼생만물(一生二 二生三 三生萬物)’이라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "三",
+        "一",
+        "生",
+        "二"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-18",
+      "text": "一은 二를 만들었고 二는 三을 만들었고 三은 만물을 만들었다’는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "三",
+        "一",
+        "二"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-21",
+      "text": "허신이 ‘천지인지도야(天地人之道也)’ 즉, ‘하늘과 땅과 사람의 도’라고 말한 바는 다음에 이어지는 ‘뚫을 곤(丨)’자와 연관 지어 설명하겠습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "天",
+        "地",
+        "人",
+        "之"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-22",
+      "text": "▲ 애신라각부의(愛新覺羅溥儀)-청황실은 애신라각(愛新覺羅)이라는 성씨를 사용하고 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "愛",
+        "新",
+        "覺",
+        "羅"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-28",
+      "text": "뚫을 곤(丨)-하상통야(下上通也) 다섯 번 째 글자 ‘뚫을 곤(丨)’자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "也",
+        "丨"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-31",
+      "text": "허신은 이를 ‘하상통야(下上通也)’ 라고 풀이하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-43",
+      "text": "왕은 ‘천하소귀왕야(天下所歸往也)’라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "天",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "claimId": "hanja-src-londontimes-261-45",
+      "text": "그리고 공자는 ‘일관삼위왕(一貫三爲王)’이라 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "三",
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 2:1",
+        "1TI 6:15"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-4",
+      "text": "이 대(大)자는 갑골문자로는 이렇게 보여집니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-6",
+      "text": "다시 말해서 이 큰 대(大)자는 사람이 다리를 벌리고 서 있으며 양팔을 벌리고 서 있는 상형 자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-8",
+      "text": "허신은 대(大) 자를 어떻게 풀이했을까요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-11",
+      "text": "이어서 풀이하기를 ‘故大象人形(고대상인형)’ 즉 ‘그러므로 大의 모양은 사람의 형상이다.’고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "大",
+        "人",
+        "故",
+        "象"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-18",
+      "text": "그래서 공자 또한 ‘하나로써 셋을 통한 자가 왕[一貫三爲王]’이라고 말하기를 주저하지 않았던 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "貫",
+        "三",
+        "爲"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-21",
+      "text": "노자는 이 ‘큰 대(大)’자에 대해서 ‘道大天大地大人亦大(도대천대지대인역대) 人法地地法天天法道(인법지지법천천법도)’라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "大",
+        "天",
+        "地",
+        "人"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-22",
+      "text": "이것도 뭔가 부족하다고 생각한 노자는 앞에 ‘道大(도대)’를 붙인 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "大",
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-24",
+      "text": "道(도)란 곧 법이요, 길이요, 말씀이라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-26",
+      "text": "道吾善者是吾賊(도오선자시오적)’ 이라 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道",
+        "吾",
+        "善",
+        "者"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "claimId": "hanja-src-londontimes-270-29",
+      "text": "그렇다면 왜 이 ‘道’ 한 자에다가 ‘길’이란 뜻도 넣고, ‘법’이란 뜻도 넣고, ‘말한다’라는 뜻도 넣었을까요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "道"
+      ],
+      "relatedReferences": [
+        "GEN 1:27"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-2",
+      "text": "큰 대(大)’자에서 파생된 글자가 바로 ‘사내 부(夫)’자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "夫",
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-11",
+      "text": "설문에는 이 글자를 ‘ 장부야 종대일(丈夫也 從大一) ’이라 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "丈",
+        "夫",
+        "也",
+        "從"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-13",
+      "text": "대(大)자를 따라서 일(一)자를 그었다.고 풀이됩니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "大",
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-14",
+      "text": "그리고 단옥재(段玉栽)는 ‘종일대즉위천(從一大則爲天) 종대일즉위부(從大一則爲夫)’이라고 풀이하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "夫",
+        "從",
+        "大",
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-16",
+      "text": "무슨 말이냐면, 一 자 밑에 大 자를 쓰면 하늘 천(天) 자가 되지만 大 자 위에 一 자를 그으면 사내 부(夫) 자가 된다는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "夫",
+        "大",
+        "一",
+        "天"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-17",
+      "text": "제가 앞 시간에도 말씀 드린 것처럼 이 하늘 일(一) 자를 짧게 쓰느냐 길게 쓰느냐에 따라서 의미가 이렇게 엄청나게 달라집니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-18",
+      "text": "이어서 단옥재는 “ 어차견인거천동야(於此見人與天同也 )”라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "也",
+        "人",
+        "天",
+        "於"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-22",
+      "text": "그래서 남자가 부모를 떠나 그 아내와 연합하여 둘이 한 몸을 이룰지로다는 성경 말씀을 따라서 夫 자를 만들었다는 것은 이 부(夫)가 갖는 의미는 보통의미의 남자가 아닌 두 사람을 책임져야 될, 하나님의 창조하신 뜻대로 살아야 한다는 의미를 담고 있다고 보여집니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "夫"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-23",
+      "text": "그래서 우리는 무엇을 익히는 것을 공부(工夫)라고 합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "夫",
+        "工"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "claimId": "hanja-src-londontimes-277-52",
+      "text": "후한(後漢) 때 허신(許愼)이 지은 〈설문해자 說文解字〉의 주석서인 〈설문해자 주(注)〉 30권을 저술하여, 자음(字音)·자의(字義)의 변화를 밝히고 실례를 들어 고전해석의 방법을 제시했다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "漢",
+        "字"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-2",
+      "text": "흔히 이 ‘보일 시(示)’ 자는 어떤 한자를 이루는 왼편에 오기 때문에 보일 시(礻) 변이라고 일컫습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "礻"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-3",
+      "text": "실제 각 자전에 수록되어 있는 부수 일람표에는 ‘보일 시(示) 변’이라고 소개하고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-5",
+      "text": "뜻밖에도 이 ‘보일 시’가 변으로 쓰일 때 축복을 뜻하는 ‘복 복(福)’자나 복을 뜻하는 ‘복 상(祥)’ 자가 되는데, 과연 무엇이 보여서 복을 받고 상서로운 것인지 반문하고 싶습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "祥"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-7",
+      "text": "허신은 이 ‘보일 시(示)’자를 풀이하기를 ‘신사야(神事也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "神",
+        "事",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-8",
+      "text": "신을 섬김이다.’ 그러므로 이 ‘보일 시(示)’ 자는 ‘신을 섬길 시(示)’라고 해야 마땅할 듯 싶습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-10",
+      "text": "왜냐하면 단옥재(段玉栽)는 이 ‘示’ 자를 풀이하기를 “고문(古文)에 위에 있는 ‘두 이(二)’자는 ‘윗 상(上)’자요, 밑에 세 개가 드리워 진 것은 ‘일월성야(日月星也)’ 라고 하였습니다.” 즉 위에 있는 두 이(二) 자는 윗 상(上) 자의 옛 고문자요, 밑에 있는 ‘작을 소(小)’ 자는 해와 달과 별을 뜻합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "也",
+        "段",
+        "玉"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-13",
+      "text": "왜냐하면 이런 내용을 간과한 채 ‘보일 시(示)’ 라고 가르쳐 왔던 사람들이 틀렸다는 것이 너무 명확해졌기 때문입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-15",
+      "text": "그래야지 한자를 정확히 파자(破字)하여 뜻을 풀이할 수 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字",
+        "破"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-16",
+      "text": "부수(部首)란 어떤 한자의 중요한 부분 글자라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "部",
+        "首"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "claimId": "hanja-src-londontimes-283-18",
+      "text": "예를 들어, 어떤 한자의 왼쪽에 위치하는 부수를 ‘변(邊)’이라고 하고, 오른쪽에 위치하는 부수를 ‘방(傍)’이라고 하며, 위쪽에 위치하면 ‘머리’ 혹은 ‘두(頭)’ 라고 하고, 아래에 위치하면 ‘받침’ 또는 ‘발’이라고 합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "邊"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-3",
+      "text": "이제껏 ‘神’자를 ‘귀신 신(神)’ 자라고 가르쳐 왔습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-5",
+      "text": "그리고 왼쪽에 위치한 부수자 示가 ‘귀신을 섬긴다’는 뜻의 시(示) 자일까요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-6",
+      "text": "허신은 ‘천신인출 만물자야(天神 引出萬物者也)’ 라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "天",
+        "引",
+        "出"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-10",
+      "text": "그래서 홍콩에서 출간된 한문본 성경책을 봤더니 창세기 1장 1절을 “기초신창조천지(起初神創造天地)”라고 번역하고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "天",
+        "起",
+        "初"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-11",
+      "text": "처음에 신이 천지를 창조하셨다”라고 하나님의 자리에 신(神) 자를 쓰고 있는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-12",
+      "text": "그래서 귀신 신(神)이라 한다면 말이 안 되는 것이지요.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-13",
+      "text": "여러분 이 보일 시(示) 자야말로 바로 ‘하나님’을 뜻하기 때문에 하나님께서 맨 처음 에덴동산에 한 사람을 만들어 축복하셨다는 축복 복(福)자의 변이 되는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "福"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-15",
+      "text": "이와 같이 ‘神’과 ‘示’ 자는 귀신이나 보인다는 뜻이 아니고 하나님을 뜻하는 글자임을 분명히 알 수 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-16",
+      "text": "여기에서 ‘示’ 자를 풀이하면서 유독 아래의 小 자를 설문에서 ‘삼(三)’이라고 표현한 것에 대해서 집착하는 까닭은 ‘해와 달과 별’이라는 의미뿐만 아니라 하늘과 땅과 사람이라는 만물을 표현하는 숫자이기 때문입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "小",
+        "三"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "claimId": "hanja-src-londontimes-289-26",
+      "text": "그 문구는 ‘응천상지삼광(應天上之三光)’ 즉 하늘의 해·달·별님은 감응하시어, ‘비지상지오복(備地上之五福)’ 즉 땅 위에 오복을 갖추어 내려주시라는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "天",
+        "地",
+        "福",
+        "三"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-4",
+      "text": "복(福)은 '비야(備也)'라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "備",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-7",
+      "text": "그런 의미에서 보았을 때 '복' 자는 하나님이 나오고(示) 첫 번째(一) 만든 사람(口)이 나오고 에덴동산(田)이 등장함을 알 수 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "一",
+        "口",
+        "田"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-8",
+      "text": "허신은 '부(富)' 자마저도 ‘복야(福也)’ 라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "也",
+        "富"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-10",
+      "text": "지금으로부터 1907년 전의 허신 선생은 『설문해자(說文解字)』를 통해 참된 복은 부(富)요, 부(富)는 곧 복(福)이라 하였으니, 이 ‘부(富)’자를 파자(破字)해 보면 해답을 찾을 수 있을 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "字",
+        "富",
+        "說"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-11",
+      "text": "집을 뜻하는 글자[宀]에 즉 하나님께서 위에서 아래로 통[丨]하셔서 천지를 덮으시고[冖] 창조하신 후에 한[一] 사람[口]을 에덴동산[田]에 두었다는 글과 똑같은 의미를 갖고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "口",
+        "田",
+        "宀"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-20",
+      "text": "김씨의 김은 곧 금(金)을 뜻하는 것으로, 金을 자신들의 성(姓)으로 삼은 것은 이들이 금을 숭배한 집단이었음을 의미합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "金",
+        "金",
+        "姓"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-26",
+      "text": "일연의 『삼국사기』에서는 백제의 시조 온조왕(溫祖王)을 주몽의 아들이라고 말하 고 있지 않습니까?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "溫",
+        "祖",
+        "王"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-43",
+      "text": "제가 중국의 임금을 소개할 때, 황(皇)과 제(帝), 왕(王)과 군(君)이라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "王"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-55",
+      "text": "하지만 저는 이 전자(篆字)모양이 한자의 서체 중에 진시황제의 명을 받은 이사가 통일한 바로 그 전서체였다기 보다는 『환단고기 1) 』에 실린 가림토의 생김새는 한글 특히 훈민정음 창제 대 판본체의 한글과 비슷하기 때문에 ‘고전을 모방하였다’는 『세종실록』의 기록을 훈민정음은 가림토를 본 떠 만든 것이라고 풀이하는 것이 의미가 있다고 생각합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字"
+      ],
+      "relatedReferences": [],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-londontimes-301",
+      "claimId": "hanja-src-londontimes-301-67",
+      "text": "이를 저는 ‘복 복(福)’ 자에서 다시 보거니와, ‘福’은 비(備)하다, 그리고 ‘현자지제야(賢者之祭也)’ 라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "備",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-4",
+      "text": "그 글자는 있을 재(在)자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "在"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-5",
+      "text": "이 있을 재(在)자의 전서체를 보면 와 같은데, 사람을 뜻하는 자는 아담의 갈비뼈를 취하하여 하와를 만들었으니 사람 인(人)자가 되었다고 설명 드린 바 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "人"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-7",
+      "text": "이에 대하여 허신은 ‘있을 재(在)’ 자는 ‘존야(存也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "存",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-11",
+      "text": "오죽하면 단옥재도 이 在와 存자의 본뜻이 제대로 전해지지 않고 있음을 안타까워 한 나머지 이 부분을 다음의 해석을 곁들이고 있을까요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "存"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-13",
+      "text": "이것을 풀이해보면 ‘지금 사람이, 있을 재(在) 자와 있을 존(存) 자에 있어서 모두 그 본뜻을 얻지 못하였다’는 것 입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "存"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-16",
+      "text": "원래 있을 재(在) 자와 있을 존(存)자는 창세기 2장 7절의 “여호와 하나님이 흙으로 사람을 지으시고 생기를 그 코에 불어 넣으시니 사람이 생령이 된지라”는 말씀과 맥을 같이 합니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "在",
+        "存"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-17",
+      "text": "원래 ‘있을 재(在)’ 자는 ‘휼문야(恤問也)’ 라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "也",
+        "恤",
+        "問"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-18",
+      "text": "恤’자는 불쌍한 사람을 찾아 구원하는 구휼할 휼(恤) 자이고, ‘問’ 자는 ‘물을 문(問)’ 자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "恤",
+        "問"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-26",
+      "text": "지금 사람들이 재(在)와 존(存) 자에 있어서 모두 다 그 본뜻을 얻지 못하고 있다는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在",
+        "存"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "claimId": "hanja-src-londontimes-313-27",
+      "text": "그리고 하나님이 사람을 흙으로 지어서 에덴동산에 있게 한 사실을 이 있을 재(在) 자가 정확히 표현하고 있음에도 불구하고 많은 사람들이 그 뜻을 잊은 채 한자를 전수하고 있으니, 우리는 그 잃어버린 한자를 다시 찾아야 하지 않을까 생각해 봅니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "在"
+      ],
+      "relatedReferences": [
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-2",
+      "text": "제3강에서 으뜸 원(元)자가 하나님의 창조물이기 때문에 하나님께서 만든 두 사람을 표현한 글자라고 말씀드렸습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "元"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-7",
+      "text": "이 ‘완전할 완(完)’ 자를 설문해자는 ‘전야(全也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "完",
+        "全",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-9",
+      "text": "또 ‘전작동(全作仝)’이라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "全",
+        "作",
+        "仝"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-11",
+      "text": "앞 시간에 배워 알 수 있듯이, ‘完’의 윗부분 글자인 ‘집 면(宀)’자와 아래의 ‘으뜸 원(元)’을 풀이하면 위아래를 통[丨]하신 분이 온 천지를 덮어[冖] 가장 먼저 두[二] 사람[人]을 만들었으니 완전하다는 뜻풀이가 됩니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "完",
+        "元",
+        "宀",
+        "丨"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-15",
+      "text": "동중서(董仲舒) 1) 가 이를 공맹(孔孟)의 교리에 입각해 삼강으로 체계화한 것이고, 오륜(五倫)은 그 오래 전 임금이었던 순임금 때 설(契) 2) 이라고 하는 학자가 사람들을 가르치기 위하야 정리한 다섯 가지 조목입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "董",
+        "仲",
+        "舒"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-19",
+      "text": "흔히 우리는 부자유친(父子有親)을 해석할 때 ‘아버지와 자식의 사이에는 친함이 있어야 한다’고 가르칩니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "父",
+        "子"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-31",
+      "text": "왜냐하면 진정한 부자유친(父子有親)의 의미는 이렇게 부자(父子)가 친하지 않으니 친해야 한다는 당위성을 설파한 것이기 때문입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "父",
+        "子"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-35",
+      "text": "이 내용 역시 하나님의 창조에 의해서 만들어진 아담이 자기를 만드신 아버지의 뜻을 거역하고 다른 길을 걸었기 때문에 마치 오륜(五倫)의 첫 항목인 부자유친(父子有親)과 상당한 관계가 있다고 느껴집니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "父",
+        "子"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-38",
+      "text": "지난 시간에 말씀드렸듯이 이 부(夫)란 두 사람을 뜻합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "夫"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "claimId": "hanja-src-londontimes-319-42",
+      "text": "이것이 진정한 부부유별이며, 이것이 하나님께서 만드신 완전할 완(完)자의 의미일 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "完"
+      ],
+      "relatedReferences": [
+        "GEN 2:24"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-4",
+      "text": "그런데 한자로 옷 의(衣) 자를 써 놓고 보면 이 글자가 왜 그러한 뜻이 되었는지 설명하기 쉽지 않습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "衣"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-5",
+      "text": "많은 한자 교과서들은 옷 의(衣) 자를 상의를 그려놓고 부분과 부분으로 이루어졌고 들 입(入) 자로 되어 있어 옷 속으로 머리가 들어가 있는 것으로 설명하고 있습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "衣",
+        "入"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-8",
+      "text": "옷 의(衣) 자는 머리 부분이 없고 글 전체가 부수글자인 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "衣"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-10",
+      "text": "옷 의(衣) 자를 옛날 갑골문자는 어떻게 표현하고 있을까요?",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "衣"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-15",
+      "text": "이 옷 의(衣)자에 대해서 허신의 설문해자에서는 이 ‘衣’는 ‘의야(依也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "衣",
+        "依",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-17",
+      "text": "그리고 단옥재는 주석을 덧붙이기를 ‘상왈의(上曰衣) 하왈군(下曰裙) 상복이인지형(象覆二人之形)’이라, 즉 ‘위의 옷을 의라 말하고 아래 옷을 치마 군(裙)이라고 하는데, 그 모양은 두 사람의 형체를 덮어놓았다’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "衣",
+        "上",
+        "曰",
+        "下"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-19",
+      "text": "혹시 이 글자가 우연이고 견강부회(牽强附會)한 해석이라 생각하셨다면 저는 다음 글자의 설문해자를 통해서 이것이 억지가 아님을 보여 드리기 위하여 열 세 번 째 글자 ‘처음 초(初)’을 설명드리겠습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "初",
+        "牽",
+        "强",
+        "附"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-20",
+      "text": "옷 의(衣)’ 하면 생각나는 글자가 바로 ‘처음 초(初)’ 자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "衣",
+        "初"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-22",
+      "text": "어떤 글자의 왼쪽에 위치해 있는 부수를 ‘변(邊)’이라고 하였지요?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "邊"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "claimId": "hanja-src-londontimes-329-30",
+      "text": "그리고 이 처음 초(初) 자에서 발전된 글자가 치마 군(裙) 자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "初",
+        "裙"
+      ],
+      "relatedReferences": [
+        "GEN 3:7",
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-9",
+      "text": "그런데 더더욱 저를 놀라게 한 것은 이 ‘갓옷 구(裘)’ 자가 이 ‘구할 구(求)’ 자와 같은 글자라는 사실입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "裘",
+        "求"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-10",
+      "text": "이제껏 여러분도 이 ‘구할 구(求)’ 자는 ‘물에 빠진 사람을 배 위로 건졌다’라는 의미로 배웠을 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "求"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-11",
+      "text": "그런데 이 『성경이 만든 한자』의 여행을 통해서 ‘가죽 구(裘)’ 자와 ‘구할 구(求)’ 자가 본디는 뜻이 같은 것이었을 분명히 밝혀두고자 합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "裘",
+        "求"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-14",
+      "text": "告’자는 ‘알리다’라는 뜻으로 쓰일 때에는 ‘고’라는 음(音)으로 읽어야 하지만, ‘뵙고 청하다’라는 뜻이라면 ‘곡’이라고 읽어야 하는 두 가지 음이 있음을 기억해 주기 바립니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "告",
+        "音"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-15",
+      "text": "예로부터 서당에서 초학자의 교재로 사용되었고 요즈음에도 한문 학습서로 활용되어지고 있는 시중에 나와 있는 사자소학(四字小學)이라고 하는 책을 보면 ‘출필곡지(出必告之) 반필배알(反必拜謁)’ 하라는 문장이 나옵니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字",
+        "告",
+        "四",
+        "小"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-16",
+      "text": "이 문장에서의 ‘告’자의 음을 ‘고’로 읽을 때와 ‘곡’으로 읽을 때는 뜻이 전혀 달라집니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "告"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-17",
+      "text": "출필곡지(出必告之)’란 ‘집 밖으로 나갈 때는 반드시 뵙고 청하여 허락을 받고 가라’는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "告",
+        "出",
+        "必",
+        "之"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-18",
+      "text": "여기서는 ‘지(之)’자를 “가다”라고 해석해 주십시오.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-20",
+      "text": "여기에서 바른 풀이는 ‘뵙고 청할 곡(告)’자로서 아이들이 부모님이 살아계시는 동안에는 반드시 집 밖으로 나갈 때에는 너의 갈 바, 행선지를 부모님께 뵙고 다녀와도 되겠느냐고 청하라는 의미입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "告"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "claimId": "hanja-src-londontimes-338-24",
+      "text": "이것으로 끝나는 것이 아니고 ‘반필배알(反必拜謁)’, 즉 ‘돌아와서는 반드시 절을 하고 보이라’는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "必",
+        "反",
+        "拜",
+        "謁"
+      ],
+      "relatedReferences": [
+        "GEN 3:21"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-4",
+      "text": "우리가 종교인이든 비종교인이든 간에 아담과 하와가 선악과를 따먹고 그로 인해서 옷 벗은 줄 알았다는 의미가 담긴 ‘裸’자 는 다 알고 있을 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "裸"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-7",
+      "text": "놀랍게도 전서체에서도 이 옷 벗을 나(裸) 자는 (a)으로 창세기적인 형태를 그대로 가지고 있음을 알 수 있습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "裸"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-12",
+      "text": "설문에는 ‘裸’는 ‘위적체무의야(謂赤體無衣也)’라고 풀이하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "謂",
+        "赤",
+        "體",
+        "無"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-13",
+      "text": "이 ‘옷벗을 나(裸)’자는 ‘붉을 적(赤)’ ‘몸 체(體)’ 즉, ‘붉은 몸뚱이에 옷이 없는 것을 말한다’는 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "赤",
+        "體",
+        "裸"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-14",
+      "text": "그리고 ‘치위불통(致爲不通)’이라 하였으니, 이 말은 ‘이르게 하였으나 통하지 아니하였다’는 뜻이 됩니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "致",
+        "爲",
+        "不",
+        "通"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-18",
+      "text": "허신의 설문해자만으로 ‘옷 벗을 나(裸)’자를 풀이하고자 하는 것은 아닙니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "裸"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-26",
+      "text": "자, 각종 나무의 실과는 네가 임의로 먹어도 되지만 선악을 알게 하는 나무, 즉 각종 나무(木+木=林)의 실과는 먹되 선악을 알게 하는 나무의 실과를 먹지 말라고 하신 하나님(示)께서 금하셨기 때문에 ‘금할 금(禁)’자가 이루어진 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "禁",
+        "木",
+        "林",
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-27",
+      "text": "앞에서 ‘示’는 ‘하나님 시(示)’라고 풀이해드렸던 것을 기억하셨을 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-28",
+      "text": "금할 금(禁)’자를 허신은 ‘길흉지기야(吉凶之忌也)’라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "禁",
+        "也",
+        "吉",
+        "凶"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "claimId": "hanja-src-londontimes-367-37",
+      "text": "그래서 길흉(吉凶)은 바꿔 말하면 선악(善惡)이며 꺼리다[忌]는 글자는 ‘몸 기(己)’자 아래에 ‘마음 심(心)’자를 받친 한자입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "吉",
+        "凶",
+        "忌"
+      ],
+      "relatedReferences": [
+        "GEN 3:11",
+        "GEN 2:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-4",
+      "text": "박재성 성경이 만든 한자 제13강 옷 의(衣)와 처음 초(初).///./.././ 열 두 번 째 글자 ‘의(衣)’ 자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "衣",
+        "初"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-8",
+      "text": "박재성 성경이 만든 한자 제12강 열 한 번 째 글자 ‘완(完)’ 자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "完"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-10",
+      "text": "박재성 성경이 만든 한자 제11강 열 번 째 글자 ‘재(在)’ 자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "在"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-13",
+      "text": "박재성 성경이 만든 한자 아홉 번 째 글자 ‘복(福)’ 자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "福"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-16",
+      "text": "박재성 성경이 만든 한자 제 9강-신(神) 여덟 번 째 글자 ‘신(神)’ 자를 보겠습니다.앞서 말씀드렸듯이, 보일 시(示)가 ‘하나님 시(示)’여야 한 ...",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "神",
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-18",
+      "text": "런던타임즈 LONDONTIMES 성경이 만든 한자 제 6강-장부야 종대일(丈夫也 從大一) 여섯 번 째 글자 ‘사내 부(夫)’자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "也",
+        "丈",
+        "夫",
+        "從"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-19",
+      "text": "큰 대(大)’자에서 파생된 글자가 바로 ...",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "claimId": "hanja-src-londontimes-hanja-20",
+      "text": "런던타임즈 LONDONTIMES 성경이 만든 한자 제 6강-큰 대(大) 다섯 번 째 글자 ‘큰 대(大)’자를 보겠습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "大"
+      ],
+      "relatedReferences": [
+        "GEN 1:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-7",
+      "text": "동이(東夷)에는 자부선인(紫府仙人)이라 하는 훌륭한 분이 계셨는데 황제헌원이 문하에서 내황문(內皇文)을 배워와 염제신농의 뒤를 이어 중화의 임금이 되었다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "東",
+        "夷",
+        "紫",
+        "府"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-8",
+      "text": "東方有古國 名曰東夷 星分箕尾 地接鮮白 始有神人 檀君 遂應九夷之推戴而爲君 與堯병立 虞舜 生於東夷 而入中國 爲天子至治 卓冠百王 紫府仙人 有通之學 過人之智 黃帝受內皇文於門下 代炎帝而爲帝) 위의 기록을 <태백일사 소도경정본훈>에서는 다음과 같이 상세하게 설명해주고 있다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "東",
+        "夷",
+        "紫",
+        "府"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-14",
+      "text": "이 문자는 배달국 1대 환웅천왕 때 만든 태고문자(太古文字)이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "字",
+        "文",
+        "古"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-25",
+      "text": "또한 중국은 은나라 유적지에서 발견된 갑골문(甲骨文)을 현 한자의 기원이라고 말하고 있는데, 이 역시 대단히 잘못된 주장이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "文"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-29",
+      "text": "최치원이 일찌기 신지의 전문(篆文)을 옛 비석에서 보고 다시 이를 첩(帖)으로 만들어 세상에 전하게 된 것이다.\"라는 설명이 있다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "文"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-londontimes-3-2",
+      "claimId": "hanja-src-londontimes-3-2-60",
+      "text": "중국 언론에 따르면, 중국 고고학자들이 \"당시 산둥지역은 한민족을 포함한 동이(東夷)족들이 집단으로 거주했기 때문에 이 골각문자는 동이문자로 봐야 한다.”고 주장했고, “문자의 모양도 고대 상형문자인 동이문자 계열에 속한다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "東",
+        "夷"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-16",
+      "text": "큰 배 船(선) 자는 배 舟, 여덟 八, 입 口로 구성 되어있다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "船",
+        "舟",
+        "八",
+        "口"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-17",
+      "text": "여덟 명의 사람(입구 자는 일반적으로 식구, 인구 할 때와 같이 사람을 의미한다)이 한 배에 탄 모양이 큰 배 船 자를 의미하고 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "船"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-20",
+      "text": "만들 造(조) 자는 생기를 준다는 의미인 삐침 변, 흙 土(토), 입 口(구), 걷는다는 의미를 주는 책받침 변으로 되어있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "口",
+        "造",
+        "土"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-25",
+      "text": "금할 禁(금) 자는 두개의 나무 木, 木(목) 자와 볼 示(시) 자로 되어있다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "禁",
+        "木",
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-26",
+      "text": "한자에서 볼 示 자는 하나님을 의미한다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-27",
+      "text": "神(신), 祈禱(기도), 禮拜(예배), 祭祀(제사) 등의 글자에 볼 示 변으로 되어있는 것은 이러한 이유에서이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "示",
+        "神",
+        "祈",
+        "禱"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "claimId": "hanja-src-creation-kr-1-28",
+      "text": "하나님이 그 사람을 쫓아 내시고 에덴 동산 동편에 그룹들과 두루 도는 화염검을 두어 생명나무의 길을 지키게 하시니라 (창세기 3:24)” 두 개의 나무와 같이 있는 글자가 있는데 바로 탐할 婪(람) 자 이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "婪"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 7:7",
+        "GEN 2:7",
+        "GEN 3:24"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-8",
+      "text": "지난 호에 보여주었던 船, 造, 禁, 婪에 이어 몇 글자를 더 추가해 보았다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "船",
+        "造",
+        "禁",
+        "婪"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-9",
+      "text": "한자에서 볼 示 자는 하나님을 의미한다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-10",
+      "text": "神(신), 祈禱(기도), 禮拜(예배), 祭祀(제사) 등의 글자에 볼 示 변으로 되어있는 것은 이러한 이유에서이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "示",
+        "神",
+        "祈",
+        "禱"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-12",
+      "text": "조상을 뜻하는 祖(조) 자는 하나님을 의미하는 示 자와 같다는 의미인 且(차)를 합해서 만들 글자이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "祖",
+        "且"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-14",
+      "text": "하나님을 뜻하는 볼 示 자와 양 羊(양) 자를 합하여 만든 글자가 행복을 의미하는 상서로울 祥(상)자이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "羊",
+        "祥"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-16",
+      "text": "羊(양) 자와 자신을 의미하는 나 我(아) 자를 합치면 옳을 義(의) 자가 된다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "羊",
+        "我",
+        "義"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-18",
+      "text": "아벨은 자기도 양의 첫 새끼와 그 기름으로 드렸더니 여호와께서 아벨의 제물은 열납하셨으나 (창세기 4:4)” ”믿음으로 아벨은 가인보다 더 나은 제사를 하나님께 드림으로 의(義)로운 자라 하시는 증거를 얻었으니 (히브리서 11:4)” 왜 양과 내가 합해서 의롭다는 의미가 되었을까?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "義"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-21",
+      "text": "벗다라고 하는 裸(라)자는 옷을 의미하는 衣(의)자와 실과를 의미하는 果(과)가 합해서 만들어진 글자이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "裸",
+        "衣",
+        "果"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "claimId": "hanja-src-creation-kr-2-22",
+      "text": "여자가 그 실과(果)를 따먹고 자기와 함께 한 남편에게도 주매 그도 먹은지라 이에 그들의 눈이 밝아 자기들의 몸이 벗은(裸) 줄을 알고 무화과(果) 나뭇잎을 엮어 치마를 하였더라 (창세기 3:6)” 떠내려 간다는 沿(연) 자도 물 水(수) 변에 여덟 八(팔)과 사람을 뜻하는 입 口(구) 자로 되어있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "裸",
+        "果",
+        "沿",
+        "水"
+      ],
+      "relatedReferences": [
+        "GEN 1:27",
+        "GEN 4:4",
+        "GEN 3:6",
+        "GEN 7:18"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "claimId": "hanja-src-creation-kr-archaeology-13",
+      "text": "고대 중국인들은 미신보다 유일신인 하나님을 섬겼다는 증거들이 도처에서 발견되며, 하나님을 '하늘 위에 계신 통치자 = 상제(上帝, 샹다이, Shangdai)' 라고 부르고 모심.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "上",
+        "帝"
+      ],
+      "relatedReferences": [
+        "GEN 17:1",
+        "GEN 2:7",
+        "GEN 2:10-14",
+        "GEN 2:21-22"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "claimId": "hanja-src-creation-kr-archaeology-45",
+      "text": "生 (날 생) : 수평의 3 획은 하늘, 땅, 바다를 상징.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "生"
+      ],
+      "relatedReferences": [
+        "GEN 17:1",
+        "GEN 2:7",
+        "GEN 2:10-14",
+        "GEN 2:21-22"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "claimId": "hanja-src-creation-kr-5-21",
+      "text": "유태인 독자들을 돕기 위해서 그들은 네 자의 子音 발음 글자 YHWH 에 모음 발음 adonai 를 첨가했다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "子",
+        "音"
+      ],
+      "relatedReferences": [
+        "GEN 2",
+        "GEN 15:7",
+        "GEN 1:2",
+        "GEN 1:26"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "claimId": "hanja-src-creation-kr-5-92",
+      "text": "히브리어의 문법에 관한한, 성경이 신격(Deity)의 속성에 非-남성적인 요소를 나타낸다고 주장할 아무런 근거도 없다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "非"
+      ],
+      "relatedReferences": [
+        "GEN 2",
+        "GEN 15:7",
+        "GEN 1:2",
+        "GEN 1:26"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-3",
+      "text": "복(福)은 '비야(備也)'라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "備",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-6",
+      "text": "그런 의미에서 보았을 때 '복' 자는 하나님이 나오고(示) 첫 번째(一) 만든 사람(口)이 나오고 에덴동산(田)이 등장함을 알 수 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "一",
+        "口",
+        "田"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-7",
+      "text": "허신은 '부(富)' 자마저도 ‘복야(福也)’ 라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "也",
+        "富"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-9",
+      "text": "지금으로부터 1907년 전의 허신 선생은 『설문해자(說文解字)』를 통해 참된 복은 부(富)요, 부(富)는 곧 복(福)이라 하였으니, 이 ‘부(富)’자를 파자(破字)해 보면 해답을 찾을 수 있을 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "富",
+        "說",
+        "文"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-10",
+      "text": "집을 뜻하는 글자[宀]에 즉 하나님께서 위에서 아래로 통[丨]하셔서 천지를 덮으시고[冖] 창조하신 후에 한[一] 사람[口]을 에덴동산[田]에 두었다는 글과 똑같은 의미를 갖고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "口",
+        "田",
+        "宀"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-19",
+      "text": "김씨의 김은 곧 금(金)을 뜻하는 것으로, 金을 자신들의 성(姓)으로 삼은 것은 이들이 금을 숭배한 집단이었음을 의미합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "金",
+        "金",
+        "姓"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-25",
+      "text": "일연의 『삼국사기』에서는 백제의 시조 온조왕(溫祖王)을 주몽의 아들이라고 말하 고 있지 않습니까?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "溫",
+        "祖",
+        "王"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-42",
+      "text": "제가 중국의 임금을 소개할 때, 황(皇)과 제(帝), 왕(王)과 군(君)이라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "王"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-54",
+      "text": "하지만 저는 이 전자(篆字)모양이 한자의 서체 중에 진시황제의 명을 받은 이사가 통일한 바로 그 전서체였다기 보다는 『환단고기 1) 』에 실린 가림토의 생김새는 한글 특히 훈민정음 창제 대 판본체의 한글과 비슷하기 때문에 ‘고전을 모방하였다’는 『세종실록』의 기록을 훈민정음은 가림토를 본 떠 만든 것이라고 풀이하는 것이 의미가 있다고 생각합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字"
+      ],
+      "relatedReferences": [],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-pluskorea-net-10",
+      "claimId": "hanja-src-pluskorea-net-10-66",
+      "text": "이를 저는 ‘복 복(福)’ 자에서 다시 보거니와, ‘福’은 비(備)하다, 그리고 ‘현자지제야(賢者之祭也)’ 라고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "備",
+        "也"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-10",
+      "text": "송태정 박사는 ‘갑골문자(甲骨文字)의 신학적 해석 연구’(2024년)로 웨스트민스터대학원대학교에서 박사학위(Ed.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "甲",
+        "骨",
+        "文",
+        "字"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-27",
+      "text": "그렇지 않으면 우리는 얼마든지 이치에 맞지 않는 말을 억지로 끌어 붙여 해석하는 견강부회(牽强附會)만 난무하게 될 것은 뻔한 이치인 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "牽",
+        "强",
+        "附",
+        "會"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-29",
+      "text": "송태정 : 갑골문자는 상(商)나라(은나라) 시대인 주전 1250년부터 주(周)나라에 멸망될 때(주전 1046)까지 있던 문자로, 주(周)나라 시대에도 갑골문이 발견되기도 합니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "商",
+        "周"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-30",
+      "text": "갑골문은 뼈와 거북 배딱지에 칼로 새겨진 글자라고 한다면, 금문은 청동기 틀에 주물(鑄物)로 제작하여 만든 문자입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "鑄",
+        "物"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-32",
+      "text": "갑골문자는 신에게 제사 드리면서 신의 뜻인 신탁(神託)을 점을 치는 용도로 사용되었고, 금문 글자들은 조상에게 제사할 때, 조상의 공적을 기록한 내용들이 많습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "託"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-49",
+      "text": "그리고 주전 136년 한(漢)의 무제는 동중서의 제안을 받아들여 유교를 국교화 하면서, 철저한 역사의 날조가 이루어졌기 때문에 그보다 앞선 문명들의 증거들이 요청된 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "漢"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "claimId": "hanja-src-bonhd-net-bonhd-net-79",
+      "text": "대부분 우리가 현재 사용하고 있는 한자를 왼쪽 글자와 오른쪽의 글자를 쪼개서 해석한 것이기 때문에, 오히려 이치에 맞지도 않는 말을 억지로 끌어다가 붙여 해석하는 견강부회(牽强附會)적인 해석으로 밖에 보이질 않는다는 것입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "牽",
+        "强",
+        "附",
+        "會"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-23",
+      "text": "고대 중국인들은 미신보다 유일신인 하나님을 섬겼다는 증거들이 도처에서 발견되며, 하나님을 '하늘 위에 계신 통치자 = 상제 (上帝, 샹다이, Shangdai)' 라고 부르고 모심.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "上",
+        "帝"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-55",
+      "text": "生 (날 생) : 수평의 3 획은 하늘, 땅, 바다를 상징.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "生"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-157",
+      "text": "내가 생각하기엔 교육받은 사람이라면 대부분 진화론을 믿을 테니까요.'''' 이때까지만 해도 창세기에 기록된 인류의 기원을 입증할 만한 과학적이고 설득력 있는 증거를 지니고 있지 못했던 강목사는 이 말을 듣고 몹시 당황하여 고심하던 중에, 선교사들이 사용하던 중국어 책에서 배를 뜻하는 한자(船)에 대한 주석을 읽은 것이 이를 연구하게된 계기가 되었다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "船"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-158",
+      "text": "이 한자는 舟(배), 八(여덟), 口(입 혹은 사람)로 구성되어 있는데, 이것은 인류 최초의 거대한 배, 즉 노아의 방주를 나타낸 글씨로 그 방주에는 여덟 명의 승객(노아와 부인, 세 아들과 그 부인들)이 타고 있었다는 설명이었다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "舟",
+        "八",
+        "口"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-162",
+      "text": "禁(금할 금)---(금하다, 경고하다)의 뜻으로 쓰이는 한자인데 林과 示로 구성되어있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "林"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-163",
+      "text": "林은 두 그루의 나무(木)를 이용하여 만든 글자로서 현재는 숲을 의미하는 글자로 쓰이며, 示는 神(신), 福(복)에서 보듯이 하나님을 뜻하는 글자인 동시에 (보이다, 가르치다, 명령하다)라는 뜻을 가진 동사이기도 하다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "林"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-166",
+      "text": "금하다)라는 뜻을 가진 글자(禁)속에 성경의 내용과 일치하는 두 개의 나무(林)와 (하나님, 명령하다)를 나타내는 글자(示)가 같이 포함되어 있다는 것은 참으로 놀라운 일이 아닌가?魔(마귀 마)---본성을 잃고 홀리게 한다는 뜻을 가진 이 한자 속에도 두 개의 나무(林)가 들어있고, 동산(garden)을 나타내는 (田)과, 사탄, 귀신을 의미하는 글자(鬼)가 보인다.''''뱀이 여자에게 이르되 너희가 결코 죽지 아니하리라.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "田",
+        "鬼",
+        "魔",
+        "林"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-167",
+      "text": "너희가 그것을 먹는 날에는 너희 눈이 밝아 하나님과 같이 되어 선악을 알 줄을 하나님이 아심이니라''''(창 3:4,5)라고 기록된 것처럼 뱀으로 위장한 사탄(鬼)이 에덴동산(田)에서 두 그루의 나무(林) 중, 선악을 알게 하는 나무를 먹으라고 유혹하였다(魔).婪(탐할 람)---(탐낸다, 원하다)라는 뜻을 가진 이 한자 속에도 두 개의 나무를 뜻하는 林과 하와를 의미하는 女(여자)로 이루어져 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "田",
+        "女",
+        "鬼",
+        "魔"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-168",
+      "text": "여자가 그 나무를 본즉 먹음직도 하고 보암직도 하고 지혜롭게 할만큼 탐스럽기도 한 나무인지라 여자가 그 실과를 따먹고''''(창 3:6) 위에서 예로든 세 가지 한자(禁, 魔, 婪) 들은 일반적으로 볼 때 서로 밀접한 관련이 없는 글자들인데도 불구하고, 공통적으로 두 그루의 나무(林)가 포함되어 있는 것은 과연 우연의 일치라고만 할 수 있을까?裸(벌거숭이 라)---(벌거벗은)이란 뜻을 가진 이 한자는 옷(衣), 동산(田), 나무(木), 과일(果)을 의미하는 글자로 구성되어 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "田",
+        "魔",
+        "林"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "claimId": "hanja-src-dongtanms-kr-faith-resources-220605-173",
+      "text": "위에서 언급된 한자들을 이렇게 해석할 수 있는 근거는첫째, 중국인들이 오래 전에 유일신을 믿고 있었다.중국에 유교, 도교, 불교가 융성하기 시작한 BC 500년 이전에는 유일신인 상제(上帝)를 모시는 종교가 있었는데, 이 上帝가 기독교에서 말하는 하나님과 동일한 것으로 짐작된다.둘째, 한자가 기독교의 영향을 받아서 만들어졌을 가능성이 없다.중국에 기독교가 최초로 전해진 시기(AD 781년) 이전에 이미 한자의 체계가 확립되었다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "上",
+        "帝"
+      ],
+      "relatedReferences": [
+        "GEN 10",
+        "GEN 1",
+        "GEN 17:1",
+        "GEN 2:7"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-3",
+      "text": "신 ( 神 ➀ ) 자는 귀신을 의미하는 것이 아니라 , 하나님을 상징하는 제단 시 ( 示 ) 자와 번개 ( 申 ➂ ) 를 쳐서 비바람과 농작물을 주관하시는 생명의 주인이 바로 절대권능의 하나님이라는 글자이다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "示",
+        "申"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-5",
+      "text": "이 신 ( 神 ) 자를 보여 주면서 무슨 글자냐고 물으면 거의가 다 ‘ 귀신 신 ’ 자라고 한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-8",
+      "text": "그런데 이 신 ( 神 ) 자에 대하여 ‘ 귀신 ’, ‘ 신령 ’, ‘ 정신 ’ 등 16 가지의 뜻이 실려 있었지만 ‘ 하나님 ’ 이라는 뜻은 찾지 못해서 실망이었다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-13",
+      "text": "왜냐하면 이 글자가 바로 최초의 ‘ 하나님 신 ( 神 ) 자라는 것을 중국고대문헌과 최고의 학자들의 주장을 통해서 증명만 하면 될 일이기 때문이다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-15",
+      "text": "갑골문에서도 근원을 말할 때 나무 ( 木 ) 뿌리 부분에 표시 ( 一 ) 를 하여 근본이 뿌리 ( 本 ) 라고 한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "木",
+        "一",
+        "本"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-18",
+      "text": "마찬가지로 지금 이 세대의 아무리 권위 있다고 하는 분이 신 ( 神 ) 자를 ‘ 귀신 신 ’ 자 라고 주장을 한다고 해도 원래 맨 처음의 뜻과 수천 년의 역사를 가진 중국고대문헌과 최고의 권위를 가진 학자들의 주장을 통해서 귀신 신 ( 神 ) 이 아니라 하나님 신 ( 神 ) 자라는 것을 명확히 밝혀내면 될 일인 것이다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-19",
+      "text": "먼저 이 신 ( 神 ) 자는 절대로 우리가 알고 있는 귀신의 뜻이 아니라 천지와 만물을 이끌어 창조해 내신 분이라는 사실이다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-23",
+      "text": " 신 ( 神 ) 자는 천신 ( 天神 ) 으로써 모든 만물을 이끌어내어 창조하신 분이라는 뜻이다 ( 天神引出萬物者也 )” 라고 했다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "天",
+        "引",
+        "出"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-24",
+      "text": "여기서 그는 이 신 ( 神 ) 은 땅의 귀신이 아니라 분명히 천신 ( 天神 ) 이라고 하여 ‘ 하늘의 신 ( 天神 )’ 이라고 하였으며 , 또한 이 하늘의 신의 존재에 대하여는 ‘ 천지 만물을 이끌어내어 창조하신 분 ’ 이라고 했다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "天"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-27",
+      "text": "허신은 「 설문해자 」 에서 ‘ 신 ( 申 ) 은 번개 ( 電 ) 이며 신 ( 神 ) 자의 뜻이다 ’ 라고 했다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "申",
+        "電"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-3",
+      "text": "의로울 의 ( 義 ) 자는 세 갈래로 난 삼지창을 들고 있는 왕 ( 我 ) 이자 최고의 신이신 분이 희생양 ( 羊 ) 이 되심으로 죄인들에게 의 ( 義 ) 롭다 함을 주신다는 것을 증거 하는 글자 위의 ➀ 번은 갑골문의 의로울 의 ( 義 ) 자인데 , 의 ( 義 ) 자는 갑골문에서 ➁ 번의 희생 양 ( 羊 ) 자와 ➂ 번의 나 아 ( 我 ) 자로 구성되어 있는데 , ➂ 번은 삼지창을 손에 들고 있는 왕의 모습이다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "義",
+        "我",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-5",
+      "text": "그리고 아 ( 我 ) 자는 ‘ 나 ’ 라는 의미도 있지만 ‘ 우리 ’ 라는 의미도 담겨져 있다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "我"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-9",
+      "text": "의로울 의 ( 義 ) 자는 양 양 ( 羊 ) 자와 나 아 ( 我 ) 자로 구성되었다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "義",
+        "我",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-11",
+      "text": "옳을 의 ( 義 ) 자의 양 ( 羊 ) 자는 그대로 남아 있다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "義",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-12",
+      "text": "그리고 나 아 ( 我 ) 자는 손 수 ( 手 ) 와 창 과 ( 戈 ) 자로 되어져 있는데 , 왕의 손 ( 手 ) 에 세 갈래로 난 삼지창 ( 戈 ) 을 가지고 있는 것이기 때문에 3300 년 전의 갑골문이나 지금 쓰고 있는 글자가 달라지지는 않았다는 것을 알 수가 있다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "我",
+        "手",
+        "戈"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-17",
+      "text": "하나님의 아들이신 예수님도 세상 죄를 지고 가는 하나님의 어린 양 ( 羊 ) 이라고 하지만 진짜 양은 아니며 ( 요 1:29), 또한 어린 양이 보좌 사이에 서 있는데 이 분은 성자 하나님이신 것을 알 수가 있다 ( 계 5:6).",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-18",
+      "text": "어린 양 ( 羊 ) 은 두 가지 의미를 가지고 있다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-21",
+      "text": "여기에서의 양 양 ( 羊 ) 자는 먼저 소개했던 불에 태워져 희생이 되는 어린 양 고 ( 羔 ) 자의 의미인데 , 이것은 범죄 한 아담과 하와에게 지어주신 가죽 옷의 희생제물이며 , 아벨이 드린 양의 첫 새끼 ( 창 4:4) 이며 , 세상 죄를 지고 가는 하나님의 어린 양이신 우리 주 예수 그리스도를 상징하는 것이다 ( 요 1:29).",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "羊",
+        "羔"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-22",
+      "text": "세계 고대문명을 연구했던 저명한 인류학자 프레이저는 ‘ 고대에 신의 아들 ( 天子 ) 이라고 불렸던 왕들은 국가적 재난이 닥치거나 천재지변이 일어나면 희생양 ( 犧牲羊 ) 이 되어 불에 태워졌었다 ’ 고 하면서 , ‘ 왕이 그 나라의 재앙을 대신 지고 가는 희생양이 됨으로서 백성들은 그 재앙에서 벗어날 수 있었다는 믿음을 가지고 있었던 것 ’ 을 알 수가 있다고 했다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "羊",
+        "天",
+        "子",
+        "犧"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "claimId": "hanja-src-fgnews-kr-fg-fgnews-kr-2-25",
+      "text": "다음으로는 의 ( 義 ) 자는 정복하여 바르게 한다는 의미를 담고 있는데 , 이것은 창세기 3 장 15 절 원시복음에서 뱀의 머리를 밟고 정복하시는 사건을 의미하는 것이다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "義"
+      ],
+      "relatedReferences": [
+        "GEN 3:15",
+        "GEN 4:4",
+        "PSA 18:2",
+        "ISA 9:6"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-chicagokoreatimes-com-53610",
+      "claimId": "hanja-src-chicagokoreatimes-com-53610-4",
+      "text": "58.6 F Chicago Monday, June 22, 2026 Los Angeles New York Washington DC San Francisco Seattle Philadelphia Hawaii Atlanta Toronto Home 종합뉴스 주요뉴스 한국일보 경제 교육 스포츠종합 연예 종교 시카고 라이프 시카고 한인 개척자들 주간한국 기획시리즈 Featured 로컬뉴스 이민·유학 부동산 장익경 특파원 이가희 특파원 오피니언 전문가 칼럼 노병천 박사 칼럼 채규만 교수의 심리학 세계 김성한 칼럼 H마트 알아두면 유용한 식품상식 이명덕 재정칼럼 전자신문 업소록 A",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "義",
+        "人",
+        "羊",
+        "我"
+      ],
+      "relatedReferences": [
+        "EXO 12",
+        "HAB 2:4"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-chicagokoreatimes-com-53610",
+      "claimId": "hanja-src-chicagokoreatimes-com-53610-12",
+      "text": "이천년 전, 하나님의 어린 양(羊)이신 예수님이 이 땅에 오셔서 십자가에 달리사 나(我)의 모든 죄를 사하시기 위하여 죽으시고 삼일 만에 부활하신 그 일은, 바로 우리를 영생의 길로 인도하시는 하나님의 사랑과 은혜를 증거한 일이었습니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "羊",
+        "我"
+      ],
+      "relatedReferences": [
+        "EXO 12",
+        "HAB 2:4"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-8",
+      "text": "금할 금(禁) 자는 두 나무를 바라보고 있는 모습입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "禁"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-10",
+      "text": "배 선(船) 자는 당연히 방주에 여덟 사람이 있다는 뜻으로 노아의 방주와 그 가족인 8명을 상징합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "船"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-11",
+      "text": "올 래(來)자는 장차 십자가에 사람 셋이 달리는 날이 온다는 뜻입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "來"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-21",
+      "text": "왜냐하면 ‘神’자의 의미가 그의 머릿속에도 ‘귀신 신’이라고 먼저 각인되어 있었기 때문입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-23",
+      "text": "그는 국내에서 출판된 한자 자전 20여 권 중 2권을 제외한 나머지 모든 자전이 ‘神’을 ‘귀신 신’이라고 대표 훈을 표기해 놓고 있음을 확인하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-24",
+      "text": "무언가 잘못 전달되었을 거라는 확신을 갖고 고문서를 검색하다가 드디어 지금으로부터 1800여 년 전에 후한의 허신(許愼 : A.D 58~124)이 편찬한 ‘설문해자’라는 最高이자 最古인 한자 자원을 풀이한 책에서 ‘神’은 ‘天神引出萬物者也’라고 해석하고 있다는 것을 확인하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "天",
+        "引",
+        "出"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-25",
+      "text": "이 풀이는 ‘神자는 하늘의 신으로서 만물을 이끌어 내신 분이다’라는 뜻으로, 부연 설명할 필요도 없이 ‘창조주 하나님’이라고 명쾌하게 풀이하고 있기 때문입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-26",
+      "text": "그렇다면 혹시 ‘귀신’을 뜻하는 한자도 있을까 하여 계속 설문해자를 처음부터 정독을 하다가 드디어 ‘귀신 신(䰠)’자를 찾아내었는데, 허신은 이 ‘䰠’자를 풀이하기를 ‘귀신이란 놈이 자칭 신이라(神鬼者 鬼之神者也)’한다고 하였습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "者",
+        "也",
+        "䰠"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "claimId": "hanja-src-churchr-or-kr-churchr-or-kr-28",
+      "text": "예를 들면 ‘衣(옷 의)’자를 풀이하기를 ‘象覆二人之形(상복이인지형)’ 즉 ‘두 사람의 형체를 덮어놓은 모양을 본뜬 글자’라는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之"
+      ],
+      "relatedReferences": [
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "claimId": "hanja-src-christiantoday-co-kr-news-255831-4",
+      "text": "우리나라는 표의문자 한자와 표음문자 한글이라는 세계 최고의 문자를 소유한, 문자 최이상국(國)으로서 언어 교육에 충실하면 능히 세계를 선도할 수 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "國"
+      ],
+      "relatedReferences": [
+        "JOH 14:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "claimId": "hanja-src-christiantoday-co-kr-news-255831-32",
+      "text": "殺(살)은 “사람이 죽으면 어디로 가는지 모른다”는 뜻 “사람이 죽으면 어디로 가는지 모르기 때문에 죽인다”는 것을 殺(죽일 살)이 말해주고 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "殺"
+      ],
+      "relatedReferences": [
+        "JOH 14:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "claimId": "hanja-src-christiantoday-co-kr-news-255831-33",
+      "text": "殺은 杀(살)과 殳(수)로 되었는데, 殳(수)는 ‘창’ 또는 ‘몽둥이’를 들고 친다는 뜻으로 어떻게 죽이는지 나타내고, 杀(살)은 일상에서 쓰지 않는 한자라 잘 알 수 없는 한자인데 본래 뜻이 “갈 곳을 모른다”는 뜻이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "殺",
+        "杀",
+        "殳"
+      ],
+      "relatedReferences": [
+        "JOH 14:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "claimId": "hanja-src-christiantoday-co-kr-news-255831-34",
+      "text": "殺(살)은 이 두 한자가 합한 자로서 殺人(살인)이란 ‘사람을 죽이다’는 뜻이지만 이 한자어 속에는 “사람이 사람을 죽이는 것은, 사람이 죽으면 어디로 가는지 모르기 때문에 죽인다”는 것까지 그 뜻을 설명하고 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "殺",
+        "人"
+      ],
+      "relatedReferences": [
+        "JOH 14:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "claimId": "hanja-src-christiantoday-co-kr-news-255831-47",
+      "text": "예수께서 가라사대 내가 곧 길이요 진리요 생명이니 나로 말미암지 않고는 아버지께로 올 자가 없느니라”(요 14:6) 仁(인) 속에 있는 자기 부정과 타인을 높임 仁(어질 인)이란, “사람은 둘이 있어야 산다는 것”을 나타낸다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "仁"
+      ],
+      "relatedReferences": [
+        "JOH 14:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "claimId": "hanja-src-christiandaily-co-kr-news-136894-7",
+      "text": "09 08:58 칭의(稱義)와 정의(正義) 양기성 박사(웨슬리언교회지도자협의회 대표회장) 기독일보 글자크기 --> 트윗하기 양기성 박사 가장 귀한 것이 가장 흔한 보통의 가치로 나타난 것들이 있다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "稱",
+        "義",
+        "正"
+      ],
+      "relatedReferences": [
+        "GEN 15:6",
+        "MAT 6:33",
+        "JOH 1:29",
+        "ROM 4:11-12"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "claimId": "hanja-src-christiandaily-co-kr-news-136894-15",
+      "text": "구불구불 휘어진 것은 곧은 것이 아니기에, 믿음이나 신념에서의 갈 지(之)자 행보는 의라 말 할 수 없고, 그런 사람을 의인이라 말할 수 없다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "之"
+      ],
+      "relatedReferences": [
+        "GEN 15:6",
+        "MAT 6:33",
+        "JOH 1:29",
+        "ROM 4:11-12"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "claimId": "hanja-src-christiandaily-co-kr-news-136894-18",
+      "text": "동양에서 의(義)의 한자는 羊(양)과 我(아/나)의 합성어인데, 말하자면 양 아래 내가(인간) 있는 형상이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "義",
+        "羊",
+        "我"
+      ],
+      "relatedReferences": [
+        "GEN 15:6",
+        "MAT 6:33",
+        "JOH 1:29",
+        "ROM 4:11-12"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-newspower-co-kr-newspower",
+      "claimId": "hanja-src-newspower-co-kr-newspower-21",
+      "text": "▲글자 왼쪽의 示는 계시, 더 나아가 계시를 주시는 분인 하나님을 의미한다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [
+        "GEN 2:17"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "claimId": "hanja-src-crs-news-com-crs-news-26",
+      "text": "중국한자에 숨겨진 창조 사상 ‘靈’한자풀이- “성부 성자 성령이 사람을 만들어” 1984년 출간된‘창세기와 중국문자’(1984.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "靈"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 3",
+        "GEN 4",
+        "GEN 7:7"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-20",
+      "text": "의롭다는 뜻의 ‘의 義’는 어린 ‘양羊’과 ‘나 아我’의 복합어로 희생제물에 의지해 나갈때 의롭다함을 받는다는 내용이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "義",
+        "羊",
+        "我"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-22",
+      "text": "신을 의미하는 신(神)은 하나님을 뜻하는 시(示:보이다)와 신(申:펴다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "示",
+        "申"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-24",
+      "text": "示’ 는 제단 모양을 본뜬 글자로 제사를 드릴 때 계시를 내린다는 의미다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-25",
+      "text": "신(神)의 본래 뜻은 하나님(示)이 말씀으로 명하여 만물이 펼쳐진다는 내용이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "示"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-28",
+      "text": "또 몸 ‘육(肉)’의 한자어는 몸에 들어간(入) 사람(人)이라는 뜻이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "肉",
+        "入",
+        "人"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-daehanilbo-com-article-php",
+      "claimId": "hanja-src-daehanilbo-com-article-php-31",
+      "text": "아내를 일컫는 내자(內子)도 동일한 의미다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "內",
+        "子"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "claimId": "hanja-src-subkorea-com-1-50",
+      "text": "금할 금(禁)자는 두 나무 사이에 하나님을 그려놓고, 금할 금 자라고 썼습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "禁"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "GEN 2:16-17",
+        "GEN 3:1",
+        "GEN 3:6"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "claimId": "hanja-src-subkorea-com-1-51",
+      "text": "최초의 한문학자인 허신(許愼)도 설문해자(說文解字)에서 이 뜻을 밝히지 못했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字",
+        "許",
+        "愼",
+        "說"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "GEN 2:16-17",
+        "GEN 3:1",
+        "GEN 3:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "claimId": "hanja-src-subkorea-com-1-59",
+      "text": "한문학자들이 풀지 못했던 것을 창세기(創世記) 기록을 적용하면 그 신비에 싸여있던 한자(漢字)들의 뜻이 분명하고 오해 없이 이해(理解)되는 것입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "漢",
+        "字",
+        "解",
+        "創"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "GEN 2:16-17",
+        "GEN 3:1",
+        "GEN 3:6"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "claimId": "hanja-src-subkorea-com-1-89",
+      "text": "여자가 그 실과를 따먹고 자기와 함께 한 남편에게도 주매......(창세기 3장 6절)\" 찾을 색(索)자의 갑골문자는 나무(木)에 입(口) 달린 것, 즉 하나님이 나무를 두고 하신 말씀, 제한해 놓은 금단의 나무(束)에, 밑에서 위로 올라간 손, 인간의 손, 즉 이브의 손이 이것을 따먹을까 저것을 따먹을까 찾는 손입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "木",
+        "束",
+        "口"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "GEN 2:16-17",
+        "GEN 3:1",
+        "GEN 3:6"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "claimId": "hanja-src-subkorea-com-1-90",
+      "text": "슬플 초(楚)자는 두 나무(木 木) 사이에 앉은 여자가 한쪽 나무에 손을 내밀어, 과일을 따려는 그 순간을 그려놓고 슬플 초(楚)자라고 했습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "木"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "GEN 2:16-17",
+        "GEN 3:1",
+        "GEN 3:6"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-2",
+      "claimId": "hanja-src-subkorea-com-2-48",
+      "text": "이후 \" next %> 분 방문) 세계 최대규모의 상형문자 漢字, 그 글자들이 어떻게 만들어졌을까요?",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "漢",
+        "字"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "EPH 4:29"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-2",
+      "claimId": "hanja-src-subkorea-com-2-50",
+      "text": "그들이 가리키는 바 또는 뜻하는 바를 해석한 설문해자(設文解字), 이 책이 못다 풀었거나 틀리게 해석한 글자들의 기원이 구약성서 제 1권 '창세기'에 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "字",
+        "設",
+        "文",
+        "解"
+      ],
+      "relatedReferences": [
+        "GEN 6",
+        "EPH 4:29"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-cdntv-co-kr-cdntv",
+      "claimId": "hanja-src-cdntv-co-kr-cdntv-1",
+      "text": "교단/교회 > CDN Christian Daily News\" /> 교단/교회 > CDN Christian Daily News\" /> 교단/교회 > CDN Christian Daily News\" /> 교단/교회 > CDN Christian Daily News\" /> 교단/교회 > CDN Christian Daily News,한국교회공보, dstv, 교계뉴스, 기독교뉴스, 교계소식, 기독교소식, 실시간뉴스, 실시간교계뉴스, 디에스티브이\" /> 송태정 목사, 갑골문자(甲骨文字)의 신학적 해석 연구 논문 발표 > 교단/교회 > CDN Christian Daily News 팝",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "甲",
+        "骨",
+        "文",
+        "字"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-cdntv-co-kr-cdntv",
+      "claimId": "hanja-src-cdntv-co-kr-cdntv-5",
+      "text": "먼저는 파자법(破字法)으로 한자의 왼쪽과 오른쪽에 있는 글자를 쪼개서 자의적(恣意的)으로 해석을 했으며, 다른 하나는 요한계시록이 기록될 당시 A.D 100년 후한의 허신의 <설문해자> 근거한 해석법이다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "字",
+        "破",
+        "法",
+        "恣"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-cdntv-co-kr-cdntv",
+      "claimId": "hanja-src-cdntv-co-kr-cdntv-8",
+      "text": "송 목사는 어려서부터 서예를 했던 터라 맨 처음에 <창세기의 발견>에 나오는 파자(破字) 해석법을 따라 만나는 목회자들에게 성경 이야기를 전했다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "字",
+        "破"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-cdntv-co-kr-cdntv",
+      "claimId": "hanja-src-cdntv-co-kr-cdntv-18",
+      "text": "또한 “황하문명보다 앞선 수메르(메소포타미아)가 존재했던 고대 근동의 서사들과의 기록과 수메르의 원천인 구약의 에덴의 역사까지를 거슬러 창조시대의 원(原)역사까지를 아우르는 신학적 관점으로 갑골문자를 재해석함으로써 새로운 길을 제시하게 됐다”며 “갑골문학계에는 기독교적 신앙을 가진 훌륭한 학자 분들이 많은 줄 안다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "原"
+      ],
+      "relatedReferences": [
+        "GEN 3:15"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-5",
+      "text": "그렇다면 상서롭다는 상 ( 祥 ) 자에 왜 제단을 의미하는 시 ( 示 ) 자와 희생 양 ( 羊 ) 이라는 글자가 합쳐져서 도대체 어떤 상서로움을 가져다주는가에 대하여 살펴보고 또한 상서롭다는 뜻이 무엇인가를 구체적으로 살펴보고자 한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "祥",
+        "示",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-6",
+      "text": "후한 ( 後漢 ) 100 년에 완성된 허신의 『 설문해자 』 에 ‘ 상서롭다는 상 ( 祥 ) 자는 복 ( 福 ) 이라는 뜻이다 ’ 라고 하였고 , 일설에는 ‘ 좋다 , 선하다 ( 善 ) 는 뜻이다 ’ 라고 하였다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "祥",
+        "後",
+        "漢",
+        "福"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-7",
+      "text": "그러니까 상서로움이란 뜻은 ‘ 복 ( 福 )’ 과 ‘ 행복 ( 幸福 )’ 을 말한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "幸"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-8",
+      "text": "그리고 상서로움이란 뜻은 또한 ‘ 좋다 ’ 와 ‘ 선하다 ’( 善 ) 의 의미를 가지고 있다고 한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "善"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-13",
+      "text": "그렇다면 이제부터 제단 시 ( 示 ) 자와 양 양 ( 羊 ) 자가 가지고 있었던 원래의 의미를 해석하고 이것을 최초의 고대 역사서인 구약성경을 통해서 왜 그런 뜻이 나오게 되었는가를 설명해 나가고자 한다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-14",
+      "text": "먼저 양 양 ( 羊 ) 자에 대해서 허신의 『 설문해자 』 에서 ‘ 양 ( 羊 ) 은 상서롭다 ( 祥 ) 는 뜻이다 ’ 고 하였다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "祥",
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-17",
+      "text": "장정 ( 張靜 ) 은 ‘ 고대인들은 고대 기물에 길양 ( 吉羊 ) 으로서 길상 ( 吉祥 ) 의 뜻을 표시하였다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "祥",
+        "羊",
+        "張",
+        "靜"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-18",
+      "text": "원시시대에서는 양에게 항상 아름답고 훌륭한 이미지가 부여 되었으며 , 심지어 신격화 ( 神格化 ) 되거나 인의 ( 仁義 : 사랑과 의로움 ) 의 상서로운 동물로 여겨지기도 하였다 .’ 라고 하였다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "格",
+        "化",
+        "仁"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-24",
+      "text": "그렇다면 이 양 ( 羊 ) 이 희생제물 이었다는 증거는 무엇인가 ?",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "claimId": "hanja-src-dstv-kr-dstv-25",
+      "text": "먼저는 이 양 ( 羊 ) 의 상형문자가 그것을 증거하고 있기 때문이다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "羊"
+      ],
+      "relatedReferences": [
+        "GEN 4",
+        "GEN 4:4",
+        "PSA 1",
+        "PSA 32"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-41",
+      "text": "하나님을 뜻하는 한문자 \"神\"은 示와 申으로 구성됩니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "示",
+        "申"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-42",
+      "text": "示의 위에 있는 一은 '하늘'을 뜻하고 아래에 있는 一은 '땅'을 나타냅니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "一"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-43",
+      "text": "그리고 小는 셋을 의미합니 다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "小"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-44",
+      "text": "즉 이 문자는 하늘에서 땅으로 삼위 하나님(세분이신 삼위일체 하나님)이 오셔 서 에덴 동산(田)이라고 하는 밭을 펼쳐(申) 만드셨다는 의미를 담고 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "申",
+        "田"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-47",
+      "text": "창1:1 \"태초에 하나님(神)이천지를 창조하시니라\") 또한 하나님은 靈이시라고 성경은 말합니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "神",
+        "靈"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-49",
+      "text": "다시 雨는 하늘을 뜻하는 一과 덮는 것을 나타내는 그리고 물(水)로 나뉘어 집니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "雨",
+        "水"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-51",
+      "text": "그 아래에 있는 세 개의 口자는 세분이신 하나님의 인격을 나타냅니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "口"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-56",
+      "text": "그 아래의 巫자는 工자 안에 두개의 人자가 있는 모습입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "巫",
+        "工",
+        "人"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-58",
+      "text": "그러므로 하나님을 나타내는 靈이라는 문자에는 이러한 뜻이 함축되어 있습니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "靈"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "claimId": "hanja-src-ubf-kr-ubf-korea-65",
+      "text": "이 렇게 오직 인간만이 하나님의 형상과 모양을 따라 창조함을 입었음을 나타내는 문 자가 祖자 입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "祖"
+      ],
+      "relatedReferences": [
+        "GEN 11",
+        "GEN 1:2",
+        "GEN 3",
+        "GEN 1:1"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "claimId": "hanja-src-christianreview-com-au-australian-christian-review-4",
+      "text": "칭의의 한자의 의미를 풀이하면, 일컬을 ‘칭(稱)’자에 옳을 ‘의(義)’이다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "稱",
+        "義"
+      ],
+      "relatedReferences": [
+        "GEN 12:1-3",
+        "GEN 15:6",
+        "PSA 106:24-27",
+        "MAT 3:17"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "claimId": "hanja-src-christianreview-com-au-australian-christian-review-37",
+      "text": "즉, 구약에서 말하는 의(義)라는 개념은 본질적으로 두 인격 간의 관계상의 의무와 요구의 성취라고 볼 수 있다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "義"
+      ],
+      "relatedReferences": [
+        "GEN 12:1-3",
+        "GEN 15:6",
+        "PSA 106:24-27",
+        "MAT 3:17"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-youtube-20",
+      "claimId": "hanja-src-youtube-20-2",
+      "text": "숨을 은, 새꼬리 은 乚 yǐn] – 한국어 한자와 중국어 번체자 간체자 한자 4000자의 부호적 재해석 – [숨은 뜻]으로 배우기 :: [한자바이블] 0009.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "乚"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-youtube-20",
+      "claimId": "hanja-src-youtube-20-3",
+      "text": "숨을 은, 새꼬리 은 乚 yǐn] – 한국어 한자와 중국어 번체자 간체자 한자 4000자의 부호적 재해석 – [숨은 뜻]으로 ...",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "乚"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-youtube-in-15",
+      "claimId": "hanja-src-youtube-in-15-3",
+      "text": "성경해자 (聖經解字) 옳을 의(義) 성경한자해석 한문 :: 자신의 의가 없음을 깨닫는 것이 새로운 길의 시작입니다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "聖",
+        "經",
+        "解",
+        "字"
+      ],
+      "relatedReferences": [],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-4",
+      "text": "< 런던타임즈 제 10 강 > 아홉 번 째 글자 ‘ 복 ( 福 )’ 자를 보겠습니다 .",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "福"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 10
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-6",
+      "text": " 福 ’ 은 무슨 뜻일까요 ?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "medium",
+      "score": 6
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-7",
+      "text": "복 ( 福 ) 은 ' 비야 ( 備也 )' 라고 했습니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "備",
+        "也"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-10",
+      "text": "그런 의미에서 보았을 때 ' 복 ' 자는 하나님이 나오고 ( 示 ) 첫 번째 ( 一 ) 만든 사람 ( 口 ) 이 나오고 에덴동산 ( 田 ) 이 등장함을 알 수 있습니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "示",
+        "一",
+        "口",
+        "田"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-11",
+      "text": "허신은 ' 부 ( 富 )' 자마저도 ‘ 복야 ( 福也 )’ 라고 하였습니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "也",
+        "富"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-13",
+      "text": "지금으로부터 1907 년 전의 허신 선생은 『설문해자 ( 說文解字 ) 』를 통해 참된 복은 부 ( 富 ) 요 , 부 ( 富 ) 는 곧 복 ( 福 ) 이라 하였으니 , 이 ‘ 부 ( 富 )’ 자를 파자 ( 破字 ) 해 보면 해답을 찾을 수 있을 것입니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "福",
+        "富",
+        "說",
+        "文"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 8
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-14",
+      "text": "집을 뜻하는 글자 [ 宀 ] 에 즉 하나님께서 위에서 아래로 통 [ 丨 ] 하셔서 천지를 덮으시고 [ 冖 ] 창조하신 후에 한 [ 一 ] 사람 [ 口 ] 을 에덴동산 [ 田 ] 에 두었다는 글과 똑같은 의미를 갖고 있습니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "一",
+        "口",
+        "田",
+        "宀"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-23",
+      "text": "김씨의 김은 곧 금 ( 金 ) 을 뜻하는 것으로 , 金을 자신들의 성 ( 姓 ) 으로 삼은 것은 이들이 금을 숭배한 집단이었음을 의미합니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "金",
+        "金",
+        "姓"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-29",
+      "text": "일연의 『삼국사기』에서는 백제의 시조 온조왕 ( 溫祖王 ) 을 주몽의 아들이라고 말하고 있지 않습니까 ?",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "溫",
+        "祖",
+        "王"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "claimId": "hanja-src-keepbible-keepbible-46",
+      "text": "제가 중국의 임금을 소개할 때 , 황 ( 皇 ) 과 제 ( 帝 ), 왕 ( 王 ) 과 군 ( 君 ) 이라고 하였습니다 .",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "王"
+      ],
+      "relatedReferences": [
+        "GEN 2:7",
+        "2TI 3:16"
+      ],
+      "confidence": "high",
+      "score": 7
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "claimId": "hanja-src-fingerofthomas-org-finger-of-thomas-195",
+      "text": "가령 예를들어 흙 토(土)자를 풀이 할때 ‘지지토생 만물자야(地之吐生 萬物者也), 이상지지하 지지중 물출형야(二象地之下 地之中 物出形也)’라고 했는데, 이를 풀이하면 땅이 만물이 살도록 토해냈다, 흙 토(土)에서 가로 획 두 이(二)자는 땅의 아래요, 땅의 가운데에 있는 작대기는 사물이 나오는 모양이라는 것 입니다.",
+      "claimType": "etymology",
+      "relatedCharacters": [
+        "土",
+        "地",
+        "之",
+        "吐"
+      ],
+      "relatedReferences": [
+        "GEN 1",
+        "GEN 2:7",
+        "GEN 2:19",
+        "GEN 1:12"
+      ],
+      "confidence": "high",
+      "score": 9
+    },
+    {
+      "sourceId": "hanja-src-wordsquare-wordsquare",
+      "claimId": "hanja-src-wordsquare-wordsquare-2",
+      "text": "진실 한자: 眞實 [1] , 영어: faithfulness(KJV, NASB, NIV) 요약 참되고 거짓 이 없는 것을 말한다.",
+      "claimType": "summary",
+      "relatedCharacters": [
+        "眞",
+        "實"
+      ],
+      "relatedReferences": [
+        "JOH 3:5",
+        "JOH 5:19",
+        "JOH 8:51",
+        "JOH 16:23"
+      ],
+      "confidence": "high",
+      "score": 7
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "sourceId": "hanja-src-bible-science-bible-science",
+  "sourceType": "reference",
+  "canonicalUrl": "https://www.biblescience.org/staff",
+  "fetchedAt": "2026-06-22T08:59:29Z",
+  "status": "ok",
+  "title": "성경과학연구소(IBS) 섬기는 이들",
+  "publisher": "Bible Science",
+  "author": "Bible Science",
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "성경과학연구소(IBS)는 성경과 과학, 창조론, 성경 본문 연구를 함께 다루는 연구·교육 단체로 소개된다. 섬기는 이들로는 김명현 박사, 최무용 목사, 채현민 실장이 언급되며, 한자와 성경을 연결하는 강연·연구의 배경 인물 정보로 함께 읽힌다.",
+  "contentMarkdown": "성경과학연구소(IBS)는 성경과 과학, 창조론, 성경 본문 연구를 함께 다루는 연구·교육 단체로 소개된다. 섬기는 이들로는 김명현 박사, 최무용 목사, 채현민 실장이 언급되며, 한자와 성경을 연결하는 강연·연구의 배경 인물 정보로 함께 읽힌다.",
+  "contentSummary": "성경과학연구소 소개와 섬기는 이들 정보를 묶어 한자·성경 연구 맥락의 인물 정보를 남긴다.",
+  "fetchMethod": "curated-fallback",
+  "metadata": {
+    "fallback": "hanja-src-bible-science-bible-science"
+  },
+  "errors": [
+    "HTTP Error 404: Not Found"
+  ]
+}

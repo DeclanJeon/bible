@@ -18,12 +18,32 @@
         "en": "Instead of presenting a settled etymology, this page shows which passages and sources are used to develop the interpretation alongside critical material."
       },
       "mainPassages": [
-        { "code": "ROM", "chapter": 3, "startVerse": 21, "endVerse": 26 },
-        { "code": "GAL", "chapter": 2, "startVerse": 15, "endVerse": 21 }
+        {
+          "code": "ROM",
+          "chapter": 3,
+          "startVerse": 21,
+          "endVerse": 26
+        },
+        {
+          "code": "GAL",
+          "chapter": 2,
+          "startVerse": 15,
+          "endVerse": 21
+        }
       ],
       "relatedPassages": [
-        { "code": "MIC", "chapter": 6, "startVerse": 8, "endVerse": 8 },
-        { "code": "ISA", "chapter": 61, "startVerse": 10, "endVerse": 10 }
+        {
+          "code": "MIC",
+          "chapter": 6,
+          "startVerse": 8,
+          "endVerse": 8
+        },
+        {
+          "code": "ISA",
+          "chapter": 61,
+          "startVerse": 10,
+          "endVerse": 10
+        }
       ],
       "supportiveSourceIds": [
         "hanja-src-youtube-story-behind-chinese-character",
@@ -36,7 +56,12 @@
         "bok-blessing",
         "shin-god-spirit"
       ],
-      "keywords": ["의", "義", "righteousness", "sacrifice"]
+      "keywords": [
+        "의",
+        "義",
+        "righteousness",
+        "sacrifice"
+      ]
     },
     {
       "slug": "bok-blessing",
@@ -55,12 +80,32 @@
         "en": "Rather than claiming the character itself proves the Bible, this page gathers supportive teaching sources and a critical source around a blessing-centered reading."
       },
       "mainPassages": [
-        { "code": "EPH", "chapter": 1, "startVerse": 3, "endVerse": 6 },
-        { "code": "PSA", "chapter": 1, "startVerse": 1, "endVerse": 3 }
+        {
+          "code": "EPH",
+          "chapter": 1,
+          "startVerse": 3,
+          "endVerse": 6
+        },
+        {
+          "code": "PSA",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 3
+        }
       ],
       "relatedPassages": [
-        { "code": "DEU", "chapter": 28, "startVerse": 1, "endVerse": 6 },
-        { "code": "MAT", "chapter": 5, "startVerse": 3, "endVerse": 12 }
+        {
+          "code": "DEU",
+          "chapter": 28,
+          "startVerse": 1,
+          "endVerse": 6
+        },
+        {
+          "code": "MAT",
+          "chapter": 5,
+          "startVerse": 3,
+          "endVerse": 12
+        }
       ],
       "supportiveSourceIds": [
         "hanja-src-londontimes-301",
@@ -73,7 +118,12 @@
         "ui-righteousness",
         "shin-god-spirit"
       ],
-      "keywords": ["복", "福", "blessing", "grace"]
+      "keywords": [
+        "복",
+        "福",
+        "blessing",
+        "grace"
+      ]
     },
     {
       "slug": "shin-god-spirit",
@@ -92,12 +142,32 @@
         "en": "Instead of asserting a single conclusion, this page places supportive and critical sources side by side so readers can assess the character of the interpretation."
       },
       "mainPassages": [
-        { "code": "GEN", "chapter": 1, "startVerse": 1, "endVerse": 2 },
-        { "code": "JOH", "chapter": 1, "startVerse": 1, "endVerse": 3 }
+        {
+          "code": "GEN",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 2
+        },
+        {
+          "code": "JOH",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 3
+        }
       ],
       "relatedPassages": [
-        { "code": "ACT", "chapter": 17, "startVerse": 24, "endVerse": 28 },
-        { "code": "HEB", "chapter": 11, "startVerse": 3, "endVerse": 3 }
+        {
+          "code": "ACT",
+          "chapter": 17,
+          "startVerse": 24,
+          "endVerse": 28
+        },
+        {
+          "code": "HEB",
+          "chapter": 11,
+          "startVerse": 3,
+          "endVerse": 3
+        }
       ],
       "supportiveSourceIds": [
         "hanja-src-londontimes-289",
@@ -110,7 +180,398 @@
         "ui-righteousness",
         "bok-blessing"
       ],
-      "keywords": ["신", "神", "god", "spirit", "creation"]
+      "keywords": [
+        "신",
+        "神",
+        "god",
+        "spirit",
+        "creation"
+      ]
+    },
+    {
+      "slug": "il-creation-beginning",
+      "character": "一",
+      "reading": "일",
+      "title": {
+        "ko": "일(一)",
+        "en": "Il (一)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 一 자를 시작과 하나님의 첫 말씀, 창조의 출발점과 연결해 읽는 해석 전통을 정리한다.",
+        "en": "This page surveys an interpretive tradition that reads 一 in relation to beginnings, first speech, and creation."
+      },
+      "explanation": {
+        "ko": "문자 하나에 창세기 전체를 증명한다고 단정하지 않고, 시작·하나·처음이라는 주제가 어떤 본문과 자료를 통해 연결되는지 보여 준다.",
+        "en": "Rather than claiming a single character proves Genesis, this page shows how themes of beginning, oneness, and firstness are connected through passages and sources."
+      },
+      "mainPassages": [
+        {
+          "code": "GEN",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 5
+        },
+        {
+          "code": "JOH",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 3
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "COL",
+          "chapter": 1,
+          "startVerse": 15,
+          "endVerse": 17
+        },
+        {
+          "code": "REV",
+          "chapter": 22,
+          "startVerse": 13,
+          "endVerse": 13
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-222",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "won-origin-first",
+        "shin-god-spirit",
+        "wan-completion-rest"
+      ],
+      "keywords": [
+        "일",
+        "一",
+        "beginning",
+        "creation",
+        "first"
+      ]
+    },
+    {
+      "slug": "won-origin-first",
+      "character": "元",
+      "reading": "원",
+      "title": {
+        "ko": "원(元)",
+        "en": "Won (元)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 元 자를 으뜸·처음·근원이라는 주제와 연결해 읽는 해석 전통을 소개한다.",
+        "en": "This page introduces an interpretive tradition that reads 元 through themes of firstness, origin, and source."
+      },
+      "explanation": {
+        "ko": "문자 모양을 최종 증거로 삼지 않고, 근원과 처음이라는 언어가 성경의 하나님 이해와 어떻게 겹쳐 읽히는지 지지 자료와 비판 자료를 같이 묶는다.",
+        "en": "Instead of treating the character form as final proof, this page groups supportive and critical sources around how origin and firstness are read alongside biblical language about God."
+      },
+      "mainPassages": [
+        {
+          "code": "ISA",
+          "chapter": 44,
+          "startVerse": 6,
+          "endVerse": 6
+        },
+        {
+          "code": "REV",
+          "chapter": 22,
+          "startVerse": 13,
+          "endVerse": 13
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "JOH",
+          "chapter": 1,
+          "startVerse": 1,
+          "endVerse": 2
+        },
+        {
+          "code": "COL",
+          "chapter": 1,
+          "startVerse": 16,
+          "endVerse": 17
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-245",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "il-creation-beginning",
+        "shin-god-spirit"
+      ],
+      "keywords": [
+        "원",
+        "元",
+        "origin",
+        "first",
+        "alpha"
+      ]
+    },
+    {
+      "slug": "ja-abiding-presence",
+      "character": "在",
+      "reading": "재",
+      "title": {
+        "ko": "재(在)",
+        "en": "Jae (在)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 在 자를 하나님이 함께 계심과 거함의 언어로 읽는 해석 전통을 정리한다.",
+        "en": "This page surveys an interpretive tradition that reads 在 through biblical language of presence and abiding."
+      },
+      "explanation": {
+        "ko": "한 글자에서 교리를 고정하지 않고, 임재·거함·함께함이라는 주제가 어떤 본문을 통해 전개되는지 보게 한다.",
+        "en": "Without fixing doctrine from a single character, this page lets readers see how themes of presence, abiding, and being with are developed through passages."
+      },
+      "mainPassages": [
+        {
+          "code": "ACT",
+          "chapter": 17,
+          "startVerse": 24,
+          "endVerse": 28
+        },
+        {
+          "code": "JOH",
+          "chapter": 15,
+          "startVerse": 4,
+          "endVerse": 5
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "MAT",
+          "chapter": 28,
+          "startVerse": 20,
+          "endVerse": 20
+        },
+        {
+          "code": "COL",
+          "chapter": 1,
+          "startVerse": 17,
+          "endVerse": 17
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-313",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "shin-god-spirit",
+        "won-origin-first"
+      ],
+      "keywords": [
+        "재",
+        "在",
+        "abide",
+        "presence",
+        "with"
+      ]
+    },
+    {
+      "slug": "wan-completion-rest",
+      "character": "完",
+      "reading": "완",
+      "title": {
+        "ko": "완(完)",
+        "en": "Wan (完)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 完 자를 완성·마침·안식의 주제와 연결해 읽는 해석 전통을 소개한다.",
+        "en": "This page introduces an interpretive tradition that reads 完 in relation to completion, finishing, and rest."
+      },
+      "explanation": {
+        "ko": "창조의 마침과 십자가의 “다 이루었다”를 함께 읽으면서, 해석 전통이 어떤 본문과 자료를 기대는지 보여 준다.",
+        "en": "Reading the completion of creation alongside “It is finished” on the cross, this page shows which passages and sources the interpretive tradition leans on."
+      },
+      "mainPassages": [
+        {
+          "code": "GEN",
+          "chapter": 2,
+          "startVerse": 1,
+          "endVerse": 3
+        },
+        {
+          "code": "JOH",
+          "chapter": 19,
+          "startVerse": 28,
+          "endVerse": 30
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "HEB",
+          "chapter": 4,
+          "startVerse": 9,
+          "endVerse": 11
+        },
+        {
+          "code": "PHI",
+          "chapter": 1,
+          "startVerse": 6,
+          "endVerse": 6
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-319",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "il-creation-beginning",
+        "ui-cho-garment-beginning"
+      ],
+      "keywords": [
+        "완",
+        "完",
+        "completion",
+        "rest",
+        "finished"
+      ]
+    },
+    {
+      "slug": "ui-cho-garment-beginning",
+      "character": "衣·初",
+      "reading": "의·초",
+      "title": {
+        "ko": "의·초(衣·初)",
+        "en": "Ui · Cho (衣 · 初)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 옷과 시작이라는 두 글자를 창세기의 가죽옷과 새 삶의 입음이라는 주제로 묶어 읽는 해석 전통을 다룬다.",
+        "en": "This page treats a tradition that reads clothing and beginning together through Genesis garments and the language of putting on a new life."
+      },
+      "explanation": {
+        "ko": "한자 획을 교리처럼 확정하지 않고, 하나님이 덮어 입히심과 새 출발의 이미지를 연결하는 본문과 자료를 나란히 보여 준다.",
+        "en": "Without fixing the character strokes as doctrine, this page places passages and sources side by side that connect divine covering with a new beginning."
+      },
+      "mainPassages": [
+        {
+          "code": "GEN",
+          "chapter": 3,
+          "startVerse": 21,
+          "endVerse": 21
+        },
+        {
+          "code": "GAL",
+          "chapter": 3,
+          "startVerse": 26,
+          "endVerse": 27
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "ROM",
+          "chapter": 13,
+          "startVerse": 14,
+          "endVerse": 14
+        },
+        {
+          "code": "REV",
+          "chapter": 7,
+          "startVerse": 13,
+          "endVerse": 14
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-329",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "ra-geum-nakedness-prohibition",
+        "ui-righteousness",
+        "bok-blessing"
+      ],
+      "keywords": [
+        "의",
+        "초",
+        "衣",
+        "初",
+        "garment",
+        "beginning",
+        "covering"
+      ]
+    },
+    {
+      "slug": "ra-geum-nakedness-prohibition",
+      "character": "裸·禁",
+      "reading": "라·금",
+      "title": {
+        "ko": "라·금(裸·禁)",
+        "en": "Ra · Geum (裸 · 禁)"
+      },
+      "thesis": {
+        "ko": "이 페이지는 벌거벗음과 금함의 이미지를 타락과 수치, 금지된 경계라는 주제로 읽는 해석 전통을 소개한다.",
+        "en": "This page introduces a tradition that reads nakedness and prohibition through themes of the fall, shame, and forbidden boundaries."
+      },
+      "explanation": {
+        "ko": "인간의 타락을 문자 하나로 증명한다고 말하지 않고, 금지와 수치의 이야기가 어떤 성구와 자료 위에서 해석되는지 보여 준다.",
+        "en": "Rather than claiming the fall is proven by a character, this page shows which passages and sources are used to interpret themes of prohibition and shame."
+      },
+      "mainPassages": [
+        {
+          "code": "GEN",
+          "chapter": 2,
+          "startVerse": 16,
+          "endVerse": 17
+        },
+        {
+          "code": "GEN",
+          "chapter": 3,
+          "startVerse": 7,
+          "endVerse": 11
+        }
+      ],
+      "relatedPassages": [
+        {
+          "code": "REV",
+          "chapter": 3,
+          "startVerse": 18,
+          "endVerse": 18
+        },
+        {
+          "code": "HEB",
+          "chapter": 4,
+          "startVerse": 13,
+          "endVerse": 13
+        }
+      ],
+      "supportiveSourceIds": [
+        "hanja-src-londontimes-367",
+        "hanja-src-londontimes-hanja"
+      ],
+      "criticalSourceIds": [
+        "hanja-src-sino-platonic-papers-sino-platonic-papers"
+      ],
+      "relatedEntrySlugs": [
+        "ui-cho-garment-beginning",
+        "il-creation-beginning",
+        "shin-god-spirit"
+      ],
+      "keywords": [
+        "라",
+        "금",
+        "裸",
+        "禁",
+        "fall",
+        "shame",
+        "forbidden"
+      ]
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "sourceId": "hanja-src-youtube-channel",
+  "sourceType": "channel",
+  "canonicalUrl": "https://www.youtube.com/@성경한자사관학교",
+  "fetchedAt": "2026-06-22T08:58:52Z",
+  "status": "ok",
+  "title": "성경한자사관학교",
+  "publisher": "YouTube",
+  "author": "YouTube",
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "전용 채널",
+  "contentMarkdown": null,
+  "contentSummary": "Recovered 0 YouTube search matches for the channel.",
+  "fetchMethod": "yt-dlp-search",
+  "metadata": {
+    "videoCount": 0,
+    "sampleVideoIds": [],
+    "searchQuery": "성경한자사관학교 전용 채널 hanja bible"
+  },
+  "errors": []
+}

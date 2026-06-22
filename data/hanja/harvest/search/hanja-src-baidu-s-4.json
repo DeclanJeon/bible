@@ -1,0 +1,36 @@
+{
+  "sourceId": "hanja-src-baidu-s-4",
+  "sourceType": "search",
+  "canonicalUrl": "https://www.baidu.com/s?wd=%E8%AF%B4%E6%96%87%E8%A7%A3%E5%AD%97%E5%9C%A3%E7%BB%8F",
+  "fetchedAt": "2026-06-22T08:59:28Z",
+  "status": "ok",
+  "title": "百度安全验证",
+  "publisher": "Baidu",
+  "author": null,
+  "publishDate": null,
+  "language": "zh",
+  "stance": "unclear",
+  "contentText": "百度安全验证 网络不给力，请稍后重试 返回首页 问题反馈",
+  "contentMarkdown": "百度安全验证 网络不给力，请稍后重试 返回首页 问题反馈",
+  "contentSummary": "百度安全验证 网络不给力，请稍后重试 返回首页 问题反馈",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "accept-ranges": "bytes",
+      "content-length": "1488",
+      "content-type": "text/html",
+      "date": "Mon, 22 Jun 2026 08:59:29 GMT",
+      "etag": "\"6a16600d-5d0\"",
+      "last-modified": "Wed, 27 May 2026 03:07:57 GMT",
+      "p3p": "CP=\" OTI DSP COR IVA OUR IND COM \"",
+      "server": "BWS",
+      "set-cookie": "BAIDUID=D652D2759A8B4DC9EA5C402D68E911EA:FG=1; expires=Tue, 22-Jun-27 08:59:29 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1",
+      "strict-transport-security": "max-age=31536000",
+      "tracecode": "37680457800659134218062216",
+      "vary": "Accept-Encoding",
+      "connection": "close"
+    }
+  },
+  "errors": []
+}

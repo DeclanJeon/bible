@@ -45,6 +45,13 @@ function localizeStrings(locale: "ko" | "en") {
     publisherMissing: locale === "ko" ? "출처 표기 없음" : "Publisher not listed",
     section: locale === "ko" ? "섹션" : "Section",
     relatedEntries: locale === "ko" ? "연결 항목" : "Related entries",
+    sampleContexts: locale === "ko" ? "수집된 문맥 예시" : "Sample harvested contexts",
+    coverage: locale === "ko" ? "출처 범위" : "Source coverage",
+    sourceMeaning: locale === "ko" ? "링크 본문에서 정리한 뜻" : "Meaning distilled from linked sources",
+    sourceMeaningBody:
+      locale === "ko"
+        ? "수집한 링크 본문에서 이 한자를 실제로 어떻게 풀어 설명하는지 먼저 보여 줍니다."
+        : "This section foregrounds the meaning lines taken directly from the harvested source bodies.",
   };
 }
 
@@ -138,6 +145,7 @@ async function PassageSection({
   references: { code: string; chapter: number; startVerse: number; endVerse: number }[];
   locale: "ko" | "en";
 }) {
+  if (!references.length) return null;
   const copy = localizeStrings(locale);
   const passages = await Promise.all(references.map((reference) => getPassage(reference, locale)));
 
@@ -194,6 +202,7 @@ export default async function HanjaDetailPage({ params }: Props) {
   if (!entry) notFound();
 
   const copy = localizeStrings(locale);
+  const relatedEntries = entry.relatedEntries.slice(0, 8);
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
@@ -211,7 +220,7 @@ export default async function HanjaDetailPage({ params }: Props) {
 
           <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">{entry.reading}</div>
+              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">{entry.reading || entry.character}</div>
               <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">{entry.character}</h1>
               <div className="mt-3 text-2xl font-semibold tracking-tight text-[var(--ink)]">{entry.resolvedTitle}</div>
               <div className="mt-5 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
@@ -219,6 +228,38 @@ export default async function HanjaDetailPage({ params }: Props) {
                 <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">{entry.resolvedThesis}</p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--ink-subtle)]">{entry.resolvedExplanation}</p>
               </div>
+              {entry.resolvedMeaningSummary || entry.meaningEvidence.length ? (
+                <div className="mt-4 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-5">
+                  <div className="section-title text-sm">{copy.sourceMeaning}</div>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{copy.sourceMeaningBody}</p>
+                  {entry.resolvedMeaningSummary ? (
+                    <p className="mt-4 text-base leading-relaxed text-[var(--ink)]">{entry.resolvedMeaningSummary}</p>
+                  ) : null}
+                  {entry.meaningEvidence.length ? (
+                    <ul className="mt-4 space-y-3">
+                      {entry.meaningEvidence.slice(0, 3).map((evidence) => (
+                        <li key={`${evidence.sourceId}-${evidence.text}`} className="rounded-xl border border-[var(--hairline)] px-4 py-3">
+                          <div className="text-sm leading-relaxed text-[var(--ink)]">{evidence.text}</div>
+                          <div className="mt-2 text-xs text-[var(--ink-subtle)]">
+                            {evidence.source.title}
+                            {evidence.stance === "critical"
+                              ? locale === "ko"
+                                ? " · 비판 자료"
+                                : " · Critical source"
+                              : evidence.stance === "supportive"
+                                ? locale === "ko"
+                                  ? " · 지지 자료"
+                                  : " · Supportive source"
+                                : locale === "ko"
+                                  ? " · 참고 자료"
+                                  : " · Reference source"}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
@@ -234,14 +275,28 @@ export default async function HanjaDetailPage({ params }: Props) {
                 </div>
               </div>
               <div className="soft-glass rounded-xl p-4">
-                <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">{copy.relatedEntries}</div>
+                <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">{copy.coverage}</div>
                 <div className="mt-3 flex flex-wrap gap-2 text-xs text-[var(--ink)]">
-                  {entry.relatedEntrySlugs.map((relatedSlug) => (
-                    <Link key={relatedSlug} href={`/${locale}/hanja/${relatedSlug}`} className="chip text-xs text-[var(--ink)]">
-                      {relatedSlug}
-                    </Link>
-                  ))}
+                  <span className="rounded-full border border-sky-500/25 bg-sky-500/10 px-2.5 py-1 font-semibold text-sky-200">
+                    {locale === "ko" ? `출처 ${entry.sourceCount ?? entry.supportiveSourceIds.length + entry.criticalSourceIds.length}` : `Sources ${entry.sourceCount ?? entry.supportiveSourceIds.length + entry.criticalSourceIds.length}`}
+                  </span>
+                  <span className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 font-semibold text-emerald-200">
+                    {locale === "ko" ? `지지 ${entry.supportiveSourceIds.length}` : `Supportive ${entry.supportiveSourceIds.length}`}
+                  </span>
+                  <span className="rounded-full border border-rose-500/25 bg-rose-500/10 px-2.5 py-1 font-semibold text-rose-200">
+                    {locale === "ko" ? `비판 ${entry.criticalSourceIds.length}` : `Critical ${entry.criticalSourceIds.length}`}
+                  </span>
                 </div>
+                {entry.sampleContexts?.length ? (
+                  <div className="mt-4">
+                    <div className="text-sm font-semibold text-[var(--ink)]">{copy.sampleContexts}</div>
+                    <ul className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--muted)]">
+                      {entry.sampleContexts.slice(0, 3).map((context) => (
+                        <li key={context} className="rounded-xl border border-[var(--hairline)] px-3 py-2">{context}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -249,6 +304,23 @@ export default async function HanjaDetailPage({ params }: Props) {
 
         <PassageSection locale={locale} title={copy.mainPassages} references={entry.mainPassages} />
         <PassageSection locale={locale} title={copy.relatedPassages} references={entry.relatedPassages} />
+
+        {relatedEntries.length ? (
+          <section className="glass rounded-xl p-5 sm:rounded-2xl sm:p-8 lg:p-10">
+            <div className="section-title text-base">{copy.relatedEntries}</div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {relatedEntries.map((relatedEntry) => (
+                <Link
+                  key={relatedEntry.slug}
+                  href={`/${locale}/hanja/${relatedEntry.slug}`}
+                  className="rounded-full border border-[var(--hairline-strong)] px-3 py-1.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+                >
+                  {relatedEntry.character} · {(relatedEntry.title[locale] ?? relatedEntry.title.ko ?? relatedEntry.title.en ?? relatedEntry.slug)}
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <div className="grid gap-8 xl:grid-cols-2">
           <SourceSection locale={locale} title={copy.supportive} body={copy.supportiveBody} sources={entry.supportiveSources} tone="supportive" />

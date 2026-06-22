@@ -1,0 +1,33 @@
+{
+  "sourceId": "hanja-src-naver-blog-panzer90",
+  "sourceType": "blog",
+  "canonicalUrl": "https://blog.naver.com/panzer90",
+  "fetchedAt": "2026-06-22T08:59:29Z",
+  "status": "ok",
+  "title": "빅터의 다국어 고전문학 : 네이버 블로그",
+  "publisher": "Naver Blog",
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "unclear",
+  "contentText": "빅터의 다국어 고전문학 : 네이버 블로그",
+  "contentMarkdown": "빅터의 다국어 고전문학 : 네이버 블로그",
+  "contentSummary": "빅터의 다국어 고전문학 : 네이버 블로그",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:29 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "content-length": "2824",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache",
+      "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "set-cookie": "JSESSIONID=C303692EC8C4D35B5EB99B8F872F6DF0.jvm1; Path=/; Secure; HttpOnly",
+      "referrer-policy": "unsafe-url",
+      "server": "nfront",
+      "connection": "close"
+    }
+  },
+  "errors": []
+}

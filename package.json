@@ -19,7 +19,9 @@
     "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py && node scripts/build-crossref-sqlite.mjs",
     "build:crossref-db": "node scripts/build-crossref-sqlite.mjs",
     "build:bible-db": "node scripts/build-bible-sqlite.mjs",
-    "build:passage-index-db": "node scripts/build-passage-index-sqlite.mjs"
+    "build:passage-index-db": "node scripts/build-passage-index-sqlite.mjs",
+    "sync:hanja-note": "python3 scripts/sync_hanja_import_note.py",
+    "build:hanja-harvest": "python3 scripts/build_hanja_harvest.py"
   },
   "dependencies": {
     "lucide-react": "^1.18.0",

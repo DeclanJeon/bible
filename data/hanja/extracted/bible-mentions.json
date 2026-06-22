@@ -1,0 +1,2516 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-22T08:59:33Z",
+  "mentions": [
+    {
+      "sourceId": "hanja-src-londontimes-1900",
+      "referenceLabel": "GEN 11",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 11,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-1900",
+      "referenceLabel": "GEN 5",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 5,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-222",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "referenceLabel": "GEN 2:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-261",
+      "referenceLabel": "1TI 6:15",
+      "normalizedReference": {
+        "code": "1TI",
+        "chapter": 6,
+        "startVerse": 15,
+        "endVerse": 15
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-270",
+      "referenceLabel": "GEN 1:27",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 27,
+        "endVerse": 27
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-277",
+      "referenceLabel": "GEN 2:24",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 24,
+        "endVerse": 24
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-283",
+      "referenceLabel": "GEN 1:16",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-289",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-313",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-319",
+      "referenceLabel": "GEN 2:24",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 24,
+        "endVerse": 24
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "referenceLabel": "GEN 3:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-329",
+      "referenceLabel": "GEN 3:21",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 21,
+        "endVerse": 21
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-338",
+      "referenceLabel": "GEN 3:21",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 21,
+        "endVerse": 21
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "referenceLabel": "GEN 3:11",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 11,
+        "endVerse": 11
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-367",
+      "referenceLabel": "GEN 2:16",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-londontimes-hanja",
+      "referenceLabel": "GEN 1:16",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 7:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 7,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 3:24",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 24,
+        "endVerse": 24
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 3:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-1",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "GEN 1:27",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 27,
+        "endVerse": 27
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "GEN 4:4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "GEN 3:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "GEN 7:18",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 7,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "HEB 11:4",
+      "normalizedReference": {
+        "code": "HEB",
+        "chapter": 11,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-2",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3",
+      "referenceLabel": "JDG 2",
+      "normalizedReference": {
+        "code": "JDG",
+        "chapter": 2,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3",
+      "referenceLabel": "ISA 29:13",
+      "normalizedReference": {
+        "code": "ISA",
+        "chapter": 29,
+        "startVerse": 13,
+        "endVerse": 13
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "GEN 17:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 17,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "GEN 2:10-14",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 10,
+        "endVerse": 14
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "GEN 2:21-22",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 21,
+        "endVerse": 22
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "PSA 91:1",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 91,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "JOH 14:16",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-archaeology",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-topic502",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-topic502",
+      "referenceLabel": "GEN 3000",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 3000",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3000-3d",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3000-3d",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3000-3d",
+      "referenceLabel": "GEN 3000",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 3000",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-3000-3d",
+      "referenceLabel": "GEN 2016",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 2016",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 2",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 15:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 15,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 1:2",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 2,
+        "endVerse": 2
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 1:26",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 26,
+        "endVerse": 26
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 2:18",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "EXO 3:14",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 3,
+        "startVerse": 14,
+        "endVerse": 14
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "1SA 7:12",
+      "normalizedReference": {
+        "code": "1SA",
+        "chapter": 7,
+        "startVerse": 12,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "ISA 37:12",
+      "normalizedReference": {
+        "code": "ISA",
+        "chapter": 37,
+        "startVerse": 12,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "LUK 24:27",
+      "normalizedReference": {
+        "code": "LUK",
+        "chapter": 24,
+        "startVerse": 27,
+        "endVerse": 27
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "GEN 100",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "창세기 100",
+      "aliasPattern": "창세기"
+    },
+    {
+      "sourceId": "hanja-src-creation-kr-5",
+      "referenceLabel": "1KI 24:27",
+      "normalizedReference": null,
+      "mentionType": "rejected",
+      "confidence": "low",
+      "reason": "chapter-out-of-range",
+      "matchedText": "열왕기상 24:27",
+      "aliasPattern": "열왕기상"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "EXO 24:8",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 24,
+        "startVerse": 8,
+        "endVerse": 8
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "EXO 28",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 28,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "LEV 4:13-35",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 4,
+        "startVerse": 13,
+        "endVerse": 35
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "LEV 4:32-35",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 4,
+        "startVerse": 32,
+        "endVerse": 35
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "LEV 16:10",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 16,
+        "startVerse": 10,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "MAT 26:28",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 26,
+        "startVerse": 28,
+        "endVerse": 28
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-the-lamb-of-god-hidden-in-chinese-characters",
+      "referenceLabel": "ROM 10:9-10",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 10,
+        "startVerse": 9,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-do-chinese-characters-support-genesis",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-answers-in-genesis-chinese-characters-and-genesis",
+      "referenceLabel": "GEN 6:3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 6,
+        "startVerse": 3,
+        "endVerse": 3
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "GEN 6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 6,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "GEN 2:2-3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 2,
+        "endVerse": 3
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "EXO 20:11",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 20,
+        "startVerse": 11,
+        "endVerse": 11
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "EZR 7:10",
+      "normalizedReference": {
+        "code": "EZR",
+        "chapter": 7,
+        "startVerse": 10,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "JOB 12:10",
+      "normalizedReference": {
+        "code": "JOB",
+        "chapter": 12,
+        "startVerse": 10,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "PSA 23",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 23,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "LUK 15",
+      "normalizedReference": {
+        "code": "LUK",
+        "chapter": 15,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "LUK 15:7",
+      "normalizedReference": {
+        "code": "LUK",
+        "chapter": 15,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "LUK 10:20",
+      "normalizedReference": {
+        "code": "LUK",
+        "chapter": 10,
+        "startVerse": 20,
+        "endVerse": 20
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "JOH 10",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 10,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "JOH 5:39",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 5,
+        "startVerse": 39,
+        "endVerse": 39
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "ROM 4:3",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 4,
+        "startVerse": 3,
+        "endVerse": 3
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-institute-for-creation-research-genesis-in-chinese-pictographs",
+      "referenceLabel": "REV 4:11",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 4,
+        "startVerse": 11,
+        "endVerse": 11
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "EXO 24:8",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 24,
+        "startVerse": 8,
+        "endVerse": 8
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "EXO 28",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 28,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "LEV 4:13-35",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 4,
+        "startVerse": 13,
+        "endVerse": 35
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "LEV 4:32-35",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 4,
+        "startVerse": 32,
+        "endVerse": 35
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "LEV 16:10",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 16,
+        "startVerse": 10,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "MAT 26:28",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 26,
+        "startVerse": 28,
+        "endVerse": 28
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-creation-com-chinese-characters-and-genesis-pdf",
+      "referenceLabel": "ROM 10:9-10",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 10,
+        "startVerse": 9,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-sino-platonic-papers-sino-platonic-papers",
+      "referenceLabel": "JDG 1",
+      "normalizedReference": {
+        "code": "JDG",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-shinmoongo-net-1900",
+      "referenceLabel": "GEN 11",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 11,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-shinmoongo-net-1900",
+      "referenceLabel": "GEN 5",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 5,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-cjob-co-kr-116",
+      "referenceLabel": "EPH 6:18",
+      "normalizedReference": {
+        "code": "EPH",
+        "chapter": 6,
+        "startVerse": 18,
+        "endVerse": 18
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-bonhd-net-bonhd-net",
+      "referenceLabel": "GEN 3:15",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 15,
+        "endVerse": 15
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 10",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 10,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 17:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 17,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:10-14",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 10,
+        "endVerse": 14
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:21-22",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 21,
+        "endVerse": 22
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:8",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 8,
+        "endVerse": 8
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:16",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 3:4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 3:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 3:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 4:4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "GEN 2:17",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 17,
+        "endVerse": 17
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "LEV 9:2",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 9,
+        "startVerse": 2,
+        "endVerse": 2
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "1CH 1",
+      "normalizedReference": {
+        "code": "1CH",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "PSA 91:1",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 91,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "ISA 13:19-22",
+      "normalizedReference": {
+        "code": "ISA",
+        "chapter": 13,
+        "startVerse": 19,
+        "endVerse": 22
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "JOH 14:16",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "1CO 9:24-25",
+      "normalizedReference": {
+        "code": "1CO",
+        "chapter": 9,
+        "startVerse": 24,
+        "endVerse": 25
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "EPH 5:27",
+      "normalizedReference": {
+        "code": "EPH",
+        "chapter": 5,
+        "startVerse": 27,
+        "endVerse": 27
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "PHI 4:1",
+      "normalizedReference": {
+        "code": "PHI",
+        "chapter": 4,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "1TH 2:19",
+      "normalizedReference": {
+        "code": "1TH",
+        "chapter": 2,
+        "startVerse": 19,
+        "endVerse": 19
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "2TI 4:8",
+      "normalizedReference": {
+        "code": "2TI",
+        "chapter": 4,
+        "startVerse": 8,
+        "endVerse": 8
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dongtanms-kr-faith-resources-220605",
+      "referenceLabel": "JAM 1:12",
+      "normalizedReference": {
+        "code": "JAM",
+        "chapter": 1,
+        "startVerse": 12,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "GEN 3:15",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 15,
+        "endVerse": 15
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "GEN 4:4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "PSA 18:2",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 18,
+        "startVerse": 2,
+        "endVerse": 2
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "ISA 9:6",
+      "normalizedReference": {
+        "code": "ISA",
+        "chapter": 9,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "LUK 11:21-22",
+      "normalizedReference": {
+        "code": "LUK",
+        "chapter": 11,
+        "startVerse": 21,
+        "endVerse": 22
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "JOH 1:29",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 29,
+        "endVerse": 29
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "COL 2:15",
+      "normalizedReference": {
+        "code": "COL",
+        "chapter": 2,
+        "startVerse": 15,
+        "endVerse": 15
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "REV 5:6",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 5,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fgnews-kr-fg-fgnews-kr-2",
+      "referenceLabel": "REV 3:14",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 3,
+        "startVerse": 14,
+        "endVerse": 14
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-chicagokoreatimes-com-53610",
+      "referenceLabel": "EXO 12",
+      "normalizedReference": {
+        "code": "EXO",
+        "chapter": 12,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-chicagokoreatimes-com-53610",
+      "referenceLabel": "HAB 2:4",
+      "normalizedReference": {
+        "code": "HAB",
+        "chapter": 2,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-churchr-or-kr-churchr-or-kr",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiantoday-co-kr-news-255831",
+      "referenceLabel": "JOH 14:6",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 14,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "referenceLabel": "GEN 15:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 15,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "referenceLabel": "MAT 6:33",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 6,
+        "startVerse": 33,
+        "endVerse": 33
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "referenceLabel": "JOH 1:29",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 29,
+        "endVerse": 29
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "referenceLabel": "ROM 4:11-12",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 4,
+        "startVerse": 11,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christiandaily-co-kr-news-136894",
+      "referenceLabel": "HEB 11:6",
+      "normalizedReference": {
+        "code": "HEB",
+        "chapter": 11,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-newspower-co-kr-newspower",
+      "referenceLabel": "GEN 2:17",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 17,
+        "endVerse": 17
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "GEN 3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "GEN 4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "GEN 7:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 7,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "LEV 9:2",
+      "normalizedReference": {
+        "code": "LEV",
+        "chapter": 9,
+        "startVerse": 2,
+        "endVerse": 2
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "PSA 119:105",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 119,
+        "startVerse": 105,
+        "endVerse": 105
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "ISA 34:16",
+      "normalizedReference": {
+        "code": "ISA",
+        "chapter": 34,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "DAN 2:4",
+      "normalizedReference": {
+        "code": "DAN",
+        "chapter": 2,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "MAT 3:16",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "MAT 4:4",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 4,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "JOH 5:39",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 5,
+        "startVerse": 39,
+        "endVerse": 39
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "2TI 3:16",
+      "normalizedReference": {
+        "code": "2TI",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "REV 20",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 20,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-crs-news-com-crs-news",
+      "referenceLabel": "REV 19",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 19,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-kehcnews-co-kr-kehc-news",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 6,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 2:16-17",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 16,
+        "endVerse": 17
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3:6-7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 6,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3:21",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 21,
+        "endVerse": 21
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "GEN 3:17",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 17,
+        "endVerse": 17
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-1",
+      "referenceLabel": "EPH 4:29",
+      "normalizedReference": {
+        "code": "EPH",
+        "chapter": 4,
+        "startVerse": 29,
+        "endVerse": 29
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-2",
+      "referenceLabel": "GEN 6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 6,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-subkorea-com-2",
+      "referenceLabel": "EPH 4:29",
+      "normalizedReference": {
+        "code": "EPH",
+        "chapter": 4,
+        "startVerse": 29,
+        "endVerse": 29
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-cdntv-co-kr-cdntv",
+      "referenceLabel": "GEN 3:15",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 15,
+        "endVerse": 15
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "GEN 4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "GEN 4:4",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 4,
+        "startVerse": 4,
+        "endVerse": 4
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "PSA 1",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "PSA 32",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 32,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "PSA 23",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 23,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "PSA 22",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 22,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "MAT 27:46",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 27,
+        "startVerse": 46,
+        "endVerse": 46
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "JOH 10:11",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 10,
+        "startVerse": 11,
+        "endVerse": 11
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "ROM 4:6-8",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 4,
+        "startVerse": 6,
+        "endVerse": 8
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "2CO 6:10",
+      "normalizedReference": {
+        "code": "2CO",
+        "chapter": 6,
+        "startVerse": 10,
+        "endVerse": 10
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-dstv-kr-dstv",
+      "referenceLabel": "REV 22:3",
+      "normalizedReference": {
+        "code": "REV",
+        "chapter": 22,
+        "startVerse": 3,
+        "endVerse": 3
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 11",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 11,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 1:2",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 2,
+        "endVerse": 2
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 3,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 1:26",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 26,
+        "endVerse": 26
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "PSA 104:1",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 104,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-ubf-kr-ubf-korea",
+      "referenceLabel": "JOH 4:24",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 4,
+        "startVerse": 24,
+        "endVerse": 24
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "GEN 12:1-3",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 12,
+        "startVerse": 1,
+        "endVerse": 3
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "GEN 15:6",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 15,
+        "startVerse": 6,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "PSA 106:24-27",
+      "normalizedReference": {
+        "code": "PSA",
+        "chapter": 106,
+        "startVerse": 24,
+        "endVerse": 27
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "MAT 3:17",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 3,
+        "startVerse": 17,
+        "endVerse": 17
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "JOH 1:12-13",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 12,
+        "endVerse": 13
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "JOH 1:12",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 1,
+        "startVerse": 12,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "ROM 8:15-16",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 8,
+        "startVerse": 15,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "ROM 3:20-21",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 3,
+        "startVerse": 20,
+        "endVerse": 21
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "GAL 4:5-6",
+      "normalizedReference": {
+        "code": "GAL",
+        "chapter": 4,
+        "startVerse": 5,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-christianreview-com-au-australian-christian-review",
+      "referenceLabel": "GAL 2:21",
+      "normalizedReference": {
+        "code": "GAL",
+        "chapter": 2,
+        "startVerse": 21,
+        "endVerse": 21
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-42-8-views",
+      "referenceLabel": "MAT 2:7-9",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 9
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-15-7-views",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-1-1",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-god-of-the-bible-in-ancient-china-37-views",
+      "referenceLabel": "PRO 2:1-6",
+      "normalizedReference": {
+        "code": "PRO",
+        "chapter": 2,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-bible-proof-chinese-characters-tells-gospel-12-views",
+      "referenceLabel": "MAT 5:16",
+      "normalizedReference": {
+        "code": "MAT",
+        "chapter": 5,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-youtube-bible-proof-chinese-characters-tells-gospel-12-views",
+      "referenceLabel": "EPH 5:11",
+      "normalizedReference": {
+        "code": "EPH",
+        "chapter": 5,
+        "startVerse": 11,
+        "endVerse": 11
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-keepbible-keepbible",
+      "referenceLabel": "2TI 3:16",
+      "normalizedReference": {
+        "code": "2TI",
+        "chapter": 3,
+        "startVerse": 16,
+        "endVerse": 16
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "GEN 1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "GEN 2:7",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 7,
+        "endVerse": 7
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "GEN 2:19",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 2,
+        "startVerse": 19,
+        "endVerse": 19
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "GEN 1:12",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 12,
+        "endVerse": 12
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "GEN 23",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 23,
+        "startVerse": 1,
+        "endVerse": 6
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-fingerofthomas-org-finger-of-thomas",
+      "referenceLabel": "ROM 1:20",
+      "normalizedReference": {
+        "code": "ROM",
+        "chapter": 1,
+        "startVerse": 20,
+        "endVerse": 20
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-wordsquare-wordsquare",
+      "referenceLabel": "JOH 3:5",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 3,
+        "startVerse": 5,
+        "endVerse": 5
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-wordsquare-wordsquare",
+      "referenceLabel": "JOH 5:19",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 5,
+        "startVerse": 19,
+        "endVerse": 19
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-wordsquare-wordsquare",
+      "referenceLabel": "JOH 8:51",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 8,
+        "startVerse": 51,
+        "endVerse": 51
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-wordsquare-wordsquare",
+      "referenceLabel": "JOH 16:23",
+      "normalizedReference": {
+        "code": "JOH",
+        "chapter": 16,
+        "startVerse": 23,
+        "endVerse": 23
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    },
+    {
+      "sourceId": "hanja-src-yes24-com-24",
+      "referenceLabel": "GEN 1:1",
+      "normalizedReference": {
+        "code": "GEN",
+        "chapter": 1,
+        "startVerse": 1,
+        "endVerse": 1
+      },
+      "mentionType": "explicit",
+      "confidence": "high"
+    }
+  ]
+}

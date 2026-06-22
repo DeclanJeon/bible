@@ -1,0 +1,3 @@
+The Gospel Message in Chinese Characters
+
+This video is about the amazing discovery of the foundation of the Gospel message being encoded into the Chinese pictograms. The early Genesis account, including the creation, the fall, the origin of sin and death, the promise of the mighty Redeemer and His great sacrifice, the great flood and the tower of Babel are preserved in the symbolic meaning behind many of the ancient Chinese characters. Jesus Christ is the one and only true Saviour of all mankind. The Bible is not just a Western book - it is the true message of salvation for people of all lands, including the most populous nation on this planet - China.

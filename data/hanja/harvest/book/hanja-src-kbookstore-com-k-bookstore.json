@@ -1,0 +1,32 @@
+{
+  "sourceId": "hanja-src-kbookstore-com-k-bookstore",
+  "sourceType": "book",
+  "canonicalUrl": "https://kbookstore.com/product/9788994664323/",
+  "fetchedAt": "2026-06-22T08:59:29Z",
+  "status": "ok",
+  "title": "K-Bookstore",
+  "publisher": null,
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "supportive",
+  "contentText": "honey55.com",
+  "contentMarkdown": "honey55.com",
+  "contentSummary": "honey55.com",
+  "fetchMethod": "urllib-html+isbn-alias",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:22 GMT",
+      "server": "Apache",
+      "connection": "close",
+      "transfer-encoding": "chunked",
+      "content-type": "text/html; charset=UTF-8"
+    },
+    "donorSourceId": "hanja-src-honey55-com-1372-document",
+    "isbn": "9788994664323"
+  },
+  "errors": [
+    "Recovered from alternate ISBN-matched book source."
+  ]
+}

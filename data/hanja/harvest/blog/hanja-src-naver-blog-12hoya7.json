@@ -1,0 +1,33 @@
+{
+  "sourceId": "hanja-src-naver-blog-12hoya7",
+  "sourceType": "blog",
+  "canonicalUrl": "https://blog.naver.com/12hoya7",
+  "fetchedAt": "2026-06-22T08:59:29Z",
+  "status": "ok",
+  "title": "호야의 슬기로운 생활 : 네이버 블로그",
+  "publisher": "Naver Blog",
+  "author": null,
+  "publishDate": null,
+  "language": "ko",
+  "stance": "unclear",
+  "contentText": "호야의 슬기로운 생활 : 네이버 블로그",
+  "contentMarkdown": "호야의 슬기로운 생활 : 네이버 블로그",
+  "contentSummary": "호야의 슬기로운 생활 : 네이버 블로그",
+  "fetchMethod": "urllib-html",
+  "metadata": {
+    "contentType": "text/html",
+    "headers": {
+      "date": "Mon, 22 Jun 2026 08:59:29 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "content-length": "2817",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache",
+      "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+      "set-cookie": "JSESSIONID=9D78E27818BDC42F3ECA8B8ECF4985A7.jvm1; Path=/; Secure; HttpOnly",
+      "referrer-policy": "unsafe-url",
+      "server": "nfront",
+      "connection": "close"
+    }
+  },
+  "errors": []
+}
