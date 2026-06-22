@@ -1,3 +1,4 @@
+import { GlobalNavShell } from "@/components/global-nav-shell";
 import { PassagePanelProvider } from "@/components/passage-panel";
 import { notFound } from "next/navigation";
 
@@ -14,5 +15,10 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return <PassagePanelProvider locale={locale}>{children}</PassagePanelProvider>;
+  return (
+    <PassagePanelProvider locale={locale}>
+      <GlobalNavShell locale={locale} />
+      {children}
+    </PassagePanelProvider>
+  );
 }

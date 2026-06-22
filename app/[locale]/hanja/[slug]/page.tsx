@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ExternalLink, Languages } from "lucide-react";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { PassagePanelLink } from "@/components/passage-panel";
 import { getPassage } from "@/lib/bible";
 import { getHanjaEntries, getHanjaEntryView, type HanjaSource } from "@/lib/hanja-catalog";
@@ -218,7 +218,6 @@ export default async function HanjaDetailPage({ params }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <SecondaryNav locale={locale} active="hanja" title={entry.resolvedTitle} />
 
       <section className="mt-8 space-y-8">
         <section className="glass rounded-xl p-5 sm:rounded-2xl sm:p-6 lg:p-8">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { MessageSquareText } from "lucide-react";
 import { ReviewBoard } from "@/components/review-board";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { UI_COPY } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { listAnonymousReviews } from "@/lib/reviews";
@@ -27,7 +27,6 @@ export default async function ReviewsPage({ params }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
-      <SecondaryNav locale={locale} active="reviews" title={copy.title} />
 
       <section className="mt-8 glass rounded-[36px] p-7 lg:p-10">
         <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[var(--gold)]/[0.08] px-4 py-2 text-sm font-semibold text-[var(--gold)]">

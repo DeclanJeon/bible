@@ -15,23 +15,23 @@ export function QuickPromptForm({
 
   return (
     <div>
-      <form action={`/${appLocale}/companion`} className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-2 shadow-2xl shadow-black/15 sm:rounded-2xl">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <div className="flex flex-1 items-center gap-2 rounded-lg px-3 py-3 sm:gap-3 sm:px-4">
-            <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
+      <form action={`/${appLocale}/companion`} className="rounded-card border border-[var(--input-border)] bg-[var(--input-bg)] p-1.5 sm:p-2">
+        <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2">
+          <div className="flex flex-1 items-center gap-2.5 rounded-input px-3.5 py-3 sm:px-4">
+            <Search className="h-4 w-4 shrink-0 text-ink-subtle sm:h-5 sm:w-5" />
             <input
               type="text"
               name="prompt"
               defaultValue={defaultValue}
               required
               minLength={2}
-              className="w-full min-w-0 flex-1 border-0 bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+              className="w-full min-w-0 flex-1 border-0 bg-transparent text-base text-ink outline-none placeholder:text-[var(--input-placeholder)]"
               placeholder={copy.placeholder}
             />
           </div>
           <button
             type="submit"
-            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] transition hover:brightness-110"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-input bg-gold px-5 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-gold-hover"
           >
             {copy.submit}
             <ArrowRight className="h-4 w-4" />
@@ -39,12 +39,12 @@ export function QuickPromptForm({
         </div>
       </form>
       {suggestions?.length ? (
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
           {suggestions.map((suggestion) => (
             <a
               key={suggestion.label}
               href={`/${appLocale}/companion?prompt=${encodeURIComponent(suggestion.prompt)}`}
-              className="chip text-sm text-[var(--ink)] hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+              className="chip text-sm text-ink hover:border-[var(--hairline-hover)] hover:text-gold"
             >
               {suggestion.label}
             </a>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpenText, Search } from "lucide-react";
 import { PassageCard } from "@/components/passage-card";
 import { SafetyBanner } from "@/components/safety-banner";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { UI_COPY, resolveAppLocale } from "@/lib/content";
 import { buildBibleHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
@@ -84,7 +84,6 @@ export default async function CompanionPage({ params, searchParams }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <SecondaryNav locale={appLocale} active="companion" title={appLocale === "ko" ? "성구 추천" : "Passage recommendation"} />
 
       <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -252,81 +251,6 @@ export default async function CompanionPage({ params, searchParams }: Props) {
           </section>
 
           <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
-            <div className="section-title text-base">{appLocale === "ko" ? "배경과 역사" : "Background and history"}</div>
-            {recommendation.background ? (
-              <div className="mt-5 grid gap-4 lg:grid-cols-2">
-                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
-                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "책과 이야기" : "Book and story"}</div>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.storyContext}</p>
-                </div>
-                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
-                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "정경적 문맥" : "Canonical context"}</div>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.canonicalContext}</p>
-                </div>
-                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
-                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "시대·장소·청중" : "Date, place, audience"}</div>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-                    {compactLines(recommendation.background.date)} {compactLines(recommendation.background.place)} {compactLines(recommendation.background.audience)}
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
-                  <div className="text-sm font-semibold text-[var(--ink)]">{appLocale === "ko" ? "저자" : "Author"}</div>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{recommendation.background.author}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="mt-5 text-sm leading-7 text-[var(--muted)]">
-                {appLocale === "ko"
-                  ? "지금은 본문 배경보다 질문을 더 또렷하게 만드는 일이 우선입니다."
-                  : "Clarifying the question comes before building passage background in this state."}
-              </p>
-            )}
-          </section>
-
-          {youtubeResources.length ? (
-            <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
-              <div className="section-title text-base">{appLocale === "ko" ? "캐시된 외부 자료" : "Cached external resources"}</div>
-              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-                {appLocale === "ko"
-                  ? "메인 본문을 바꾸지 않고, 로컬 카탈로그에 이미 저장된 영상만 보조 자료로 노출합니다."
-                  : "These videos come only from the local cache-backed catalog and never influence the main passage choice."}
-              </p>
-              <div className="mt-5 grid gap-4 lg:grid-cols-2">
-                {youtubeResources.map((resource) => (
-                  <a
-                    key={resource.videoId}
-                    href={resource.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 transition hover:border-[var(--gold)]/25"
-                  >
-                    <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--gold)]">
-                      <span>{youtubeMatchLabel(appLocale, resource.matchType)}</span>
-                      {resource.durationSeconds ? <span>· {formatDuration(resource.durationSeconds)}</span> : null}
-                    </div>
-                    <div className="mt-3 text-base font-semibold leading-7 text-[var(--ink)]">{resource.title}</div>
-                    <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-                      {resource.channelTitle}
-                      {resource.channelHandle ? ` · ${resource.channelHandle}` : ""}
-                    </p>
-                    {resource.summary ? <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{preview(resource.summary, 240)}</p> : null}
-                    <div className="mt-4 flex flex-wrap gap-2 text-xs leading-6 text-[var(--muted)]">
-                      {resource.matchedReference ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedReference}</span> : null}
-                      {resource.matchedBook ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedBook}</span> : null}
-                      {resource.matchedKeyword ? <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">{resource.matchedKeyword}</span> : null}
-                      {resource.transcriptStatus !== "ok" ? (
-                        <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5">
-                          {appLocale === "ko" ? "전사 일부 없음" : "Transcript incomplete"}
-                        </span>
-                      ) : null}
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
             <div className="section-title text-base">{appLocale === "ko" ? "관련 성구" : "Related passages"}</div>
             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
               {appLocale === "ko"
@@ -362,13 +286,65 @@ export default async function CompanionPage({ params, searchParams }: Props) {
           </section>
         </div>
 
-        <aside className="space-y-6">
+        <aside className="space-y-6 lg:sticky lg:top-[calc(var(--nav-height)+1.5rem)]">
+          {recommendation.background ? (
+            <section className="glass rounded-2xl p-5 sm:p-6">
+              <div className="section-title text-base">{appLocale === "ko" ? "배경과 역사" : "Background and history"}</div>
+              <div className="mt-4 space-y-4 text-sm leading-7 text-ink-muted">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "책과 이야기" : "Book and story"}</div>
+                  <p className="mt-1.5">{recommendation.background.storyContext}</p>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "정경적 문맥" : "Canonical context"}</div>
+                  <p className="mt-1.5">{recommendation.background.canonicalContext}</p>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "시대·장소·청중" : "Date / place / audience"}</div>
+                  <p className="mt-1.5">
+                    {compactLines(recommendation.background.date)} {compactLines(recommendation.background.place)} {compactLines(recommendation.background.audience)}
+                  </p>
+                </div>
+                {recommendation.background.author ? (
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "저자" : "Author"}</div>
+                    <p className="mt-1.5">{recommendation.background.author}</p>
+                  </div>
+                ) : null}
+              </div>
+            </section>
+          ) : null}
+
+          {youtubeResources.length ? (
+            <section className="glass rounded-2xl p-5 sm:p-6">
+              <div className="section-title text-base">{appLocale === "ko" ? "관련 영상" : "Related videos"}</div>
+              <div className="mt-4 space-y-3">
+                {youtubeResources.slice(0, 3).map((resource) => (
+                  <a
+                    key={resource.videoId}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-xl border border-[var(--hairline)] bg-surface-2 p-3.5 transition hover:border-[var(--hairline-hover)]"
+                  >
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+                      {youtubeMatchLabel(appLocale, resource.matchType)}
+                      {resource.durationSeconds ? ` · ${formatDuration(resource.durationSeconds)}` : ""}
+                    </div>
+                    <div className="mt-2 text-sm font-semibold text-ink leading-snug">{resource.title}</div>
+                    <p className="mt-1 text-xs text-ink-subtle">{resource.channelTitle}</p>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
           <section className="glass rounded-2xl p-5 sm:p-6">
             <div className="section-title text-base">{appLocale === "ko" ? "계속 읽기" : "Continue reading"}</div>
-            <div className="mt-5 space-y-3">
+            <div className="mt-4 space-y-2.5">
               <Link
                 href={buildBibleHref({ locale: appLocale })}
-                className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
+                className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-surface-2 px-4 py-3 text-sm font-semibold text-ink transition hover:border-[var(--hairline-hover)] hover:text-gold"
               >
                 <span>{UI_COPY[appLocale].sidebar.navBible}</span>
                 <ArrowRight className="h-4 w-4" />
@@ -376,7 +352,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               {recommendation.primary ? (
                 <Link
                   href={buildBibleHref({ book: recommendation.primary.reference.code, chapter: recommendation.primary.reference.chapter, locale: appLocale })}
-                  className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/25 hover:text-[var(--gold)]"
+                  className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-surface-2 px-4 py-3 text-sm font-semibold text-ink transition hover:border-[var(--hairline-hover)] hover:text-gold"
                 >
                   <span>{appLocale === "ko" ? "이 책과 장 계속 읽기" : "Keep reading this chapter"}</span>
                   <ArrowRight className="h-4 w-4" />
@@ -387,17 +363,17 @@ export default async function CompanionPage({ params, searchParams }: Props) {
 
           <section className="glass rounded-2xl p-5 sm:p-6">
             <div className="section-title text-base">{appLocale === "ko" ? "검색 메모" : "Search notes"}</div>
-            <div className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
+            <div className="mt-4 space-y-3 text-sm leading-6 text-ink-muted">
               <p>
-                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "응답 모드" : "Answer mode"}:</span>{" "}
+                <span className="font-semibold text-ink">{appLocale === "ko" ? "응답 모드" : "Answer mode"}:</span>{" "}
                 {questionUnderstanding.answerMode}
               </p>
               <p>
-                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "검색 확장" : "Query expansion"}:</span>{" "}
+                <span className="font-semibold text-ink">{appLocale === "ko" ? "검색 확장" : "Query expansion"}:</span>{" "}
                 {ragQuery.expansionProvider}
               </p>
               <p>
-                <span className="font-semibold text-[var(--ink)]">{appLocale === "ko" ? "신뢰도" : "Confidence"}:</span>{" "}
+                <span className="font-semibold text-ink">{appLocale === "ko" ? "신뢰도" : "Confidence"}:</span>{" "}
                 {recommendation.confidence}
               </p>
             </div>

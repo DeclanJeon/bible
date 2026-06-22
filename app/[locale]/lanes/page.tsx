@@ -8,7 +8,7 @@ import { buildCompanionHref, buildGraphHref, buildLanesHref, buildStudyHref } fr
 
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { Collapsible } from "@/components/collapsible";
 
 type Props = {
@@ -48,7 +48,6 @@ export default async function LanesPage({ params, searchParams }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <SecondaryNav locale={locale} active="lanes" title={copy.heading} />
 
       <section className="mt-8 space-y-8">
         {/* Compact search panel */}

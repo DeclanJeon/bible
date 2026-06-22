@@ -1,0 +1,18 @@
+import { hasHanjaCatalogEntries } from "@/lib/hanja-catalog";
+import { GlobalNav } from "@/components/global-nav";
+
+type AppLocale = "ko" | "en";
+
+export async function GlobalNavShell({ locale }: { locale: AppLocale }) {
+  const hasHanja = await hasHanjaCatalogEntries();
+
+  const links = [
+    { key: "bible", href: `/${locale}/bible`, label: locale === "ko" ? "성경 읽기" : "Bible" },
+    ...(hasHanja ? [{ key: "hanja", href: `/${locale}/hanja`, label: locale === "ko" ? "한자" : "Hanja" }] : []),
+    { key: "companion", href: `/${locale}/companion`, label: locale === "ko" ? "컴패니언" : "Companion" },
+    { key: "lanes", href: `/${locale}/lanes`, label: locale === "ko" ? "공부 레인" : "Lanes" },
+    { key: "reviews", href: `/${locale}/reviews`, label: locale === "ko" ? "리뷰" : "Reviews" },
+  ];
+
+  return <GlobalNav locale={locale} links={links} />;
+}

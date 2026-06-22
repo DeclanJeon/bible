@@ -8,7 +8,7 @@ import { NoteCard } from "@/components/note-card";
 import { SourceList } from "@/components/source-list";
 import { CrossReferenceSection } from "@/components/crossref-section";
 import { BookProfileCard } from "@/components/book-profile-card";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { TabSection } from "@/components/tab-section";
 import { AccordionGroup } from "@/components/accordion-group";
 import { Collapsible } from "@/components/collapsible";
@@ -79,7 +79,6 @@ export default async function StudyPage({ params }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <SecondaryNav locale={locale} active="study" slug={cluster.slug} title={cluster.title} />
 
       <section className="mt-8 space-y-8">
         {/* Hero */}

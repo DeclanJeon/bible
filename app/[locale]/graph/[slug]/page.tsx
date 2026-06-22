@@ -5,7 +5,7 @@ import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { CrossReferenceSection } from "@/components/crossref-section";
 import { FullNetworkCta } from "@/components/full-network-cta";
 import { PassagePanelLink } from "@/components/passage-panel";
-import { SecondaryNav } from "@/components/secondary-nav";
+
 import { TabSection } from "@/components/tab-section";
 import { Collapsible } from "@/components/collapsible";
 import { getClusterBySlug, getRelatedClusters } from "@/lib/app-data";
@@ -51,7 +51,6 @@ export default async function GraphPage({ params }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-6 py-8 lg:px-8">
-      <SecondaryNav locale={locale} active="graph" slug={cluster.slug} title={cluster.title} />
 
       <section className="mt-8 space-y-8">
         {/* Hero */}
