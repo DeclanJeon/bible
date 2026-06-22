@@ -10,6 +10,7 @@ import { UI_COPY, resolveAppLocale } from "@/lib/content";
 import { buildBibleHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { buildPassageRecommendation } from "@/lib/passage-response";
+import { getBookMetadata } from "@/lib/book-metadata";
 import { resolveLocale } from "@/lib/server-locale";
 
 type Props = {
@@ -82,6 +83,11 @@ export default async function CompanionPage({ params, searchParams }: Props) {
 
   const { recommendation, safety, questionUnderstanding, ragQuery, primaryPassage, relatedPassageDetails } = build;
   const youtubeResources = recommendation.externalResources?.youtube ?? recommendation.background?.youtubeResources ?? [];
+  const primaryBookCode = recommendation.primary?.reference.code;
+  const primaryBookMetadata = primaryBookCode ? getBookMetadata(primaryBookCode, appLocale) : undefined;
+  const referenceSources = primaryBookMetadata?.notes.authorship.sources.filter(
+    (s) => s.label === "Wikipedia" || s.label === "한국어 위키피디아" || s.label === "나무위키"
+  ) ?? [];
 
   return (
     <main className="page-shell">
@@ -323,6 +329,26 @@ export default async function CompanionPage({ params, searchParams }: Props) {
                     <p className="mt-1.5">{recommendation.background.author}</p>
                   </div>
                 ) : null}
+              </div>
+            </section>
+          ) : null}
+
+          {referenceSources.length ? (
+            <section className="glass rounded-2xl p-5 sm:p-6">
+              <div className="section-title text-base">{appLocale === "ko" ? "참고 링크" : "Reference links"}</div>
+              <div className="mt-4 space-y-2">
+                {referenceSources.map((source) => (
+                  <a
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="source-link flex items-center gap-2 text-sm"
+                  >
+                    {source.label}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                ))}
               </div>
             </section>
           ) : null}

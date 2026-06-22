@@ -1,4 +1,4 @@
-import type { ContextNote } from "@/lib/app-data";
+import type { ContextNote, SourceLink } from "@/lib/app-data";
 import { resolveAppLocale } from "@/lib/content";
 
 
@@ -32,6 +32,74 @@ const COMMON_SOURCES = {
     { label: "STEPBible places", url: "https://www.stepbible.org/html/places.html" },
   ],
 };
+
+// Wikipedia article names for each book (English Wikipedia)
+const WIKI_ARTICLES: Record<string, string> = {
+  GEN: "Book_of_Genesis", EXO: "Book_of_Exodus", LEV: "Book_of_Leviticus",
+  NUM: "Book_of_Numbers", DEU: "Book_of_Deuteronomy", JOS: "Book_of_Joshua",
+  JDG: "Book_of_Judges", RUT: "Book_of_Ruth", "1SA": "Books_of_Samuel",
+  "2SA": "Books_of_Samuel", "1KI": "Books_of_Kings", "2KI": "Books_of_Kings",
+  "1CH": "Books_of_Chronicles", "2CH": "Books_of_Chronicles",
+  EZR: "Book_of_Ezra", NEH: "Book_of_Nehemiah", EST: "Book_of_Esther",
+  JOB: "Book_of_Job", PSA: "Psalms", PRO: "Book_of_Proverbs",
+  ECC: "Ecclesiastes", SOL: "Song_of_Songs",
+  ISA: "Book_of_Isaiah", JER: "Book_of_Jeremiah", LAM: "Book_of_Lamentations",
+  EZE: "Book_of_Ezekiel", DAN: "Book_of_Daniel",
+  HOS: "Book_of_Hosea", JOE: "Book_of_Joel", AMO: "Book_of_Amos",
+  OBA: "Book_of_Obadiah", JON: "Book_of_Jonah", MIC: "Book_of_Micah",
+  NAH: "Book_of_Nahum", HAB: "Book_of_Habakkuk", ZEP: "Book_of_Zephaniah",
+  HAG: "Book_of_Haggai", ZEC: "Book_of_Zechariah", MAL: "Book_of_Malachi",
+  MAT: "Gospel_of_Matthew", MAR: "Gospel_of_Mark", LUK: "Gospel_of_Luke",
+  JOH: "Gospel_of_John", ACT: "Acts_of_the_Apostles",
+  ROM: "Epistle_to_the_Romans", "1CO": "First_Epistle_to_the_Corinthians",
+  "2CO": "Second_Epistle_to_the_Corinthians", GAL: "Epistle_to_the_Galatians",
+  EPH: "Epistle_to_the_Ephesians", PHI: "Epistle_to_the_Philippians",
+  COL: "Epistle_to_the_Colossians", "1TH": "First_Epistle_to_the_Thessalonians",
+  "2TH": "Second_Epistle_to_the_Thessalonians", "1TI": "First_Epistle_to_Timothy",
+  "2TI": "Second_Epistle_to_Timothy", TIT: "Epistle_to_Titus",
+  PHM: "Epistle_to_Philemon", HEB: "Epistle_to_the_Hebrews",
+  JAM: "Epistle_of_James", "1PE": "First_Epistle_of_Peter",
+  "2PE": "Second_Epistle_of_Peter", "1JO": "First_Epistle_of_John",
+  "2JO": "Second_Epistle_of_John", "3JO": "Third_Epistle_of_John",
+  JUD: "Epistle_of_Jude", REV: "Book_of_Revelation",
+};
+
+// Namuwiki article names (Korean)
+const NAMU_WIKI_ARTICLES: Record<string, string> = {
+  GEN: "창세기", EXO: "출애굽기", LEV: "레위기", NUM: "민수기", DEU: "신명기",
+  JOS: "여호수아", JDG: "사사기", RUT: "룻기", "1SA": "사무엘상", "2SA": "사무엘하",
+  "1KI": "열왕기상", "2KI": "열왕기하", "1CH": "역대상", "2CH": "역대하",
+  EZR: "에스라", NEH: "느헤미야", EST: "에스더",
+  JOB: "욥기", PSA: "시편", PRO: "잠언", ECC: "전도서", SOL: "아가",
+  ISA: "이사야", JER: "예레미야", LAM: "예레미야 애가", EZE: "에스겔", DAN: "다니엘",
+  HOS: "호세아", JOF: "요엘", AMO: "아모스", OBA: "오바댜", JON: "요나",
+  MIC: "미가", NAH: "나훔", HAB: "하박국", ZEP: "스바냐", HAG: "학개",
+  ZEC: "스가랴", MAL: "말라기",
+  MAT: "마태복음", MAR: "마가복음", LUK: "누가복음", JOH: "요한복음",
+  ACT: "사도행전", ROM: "로마서",
+  "1CO": "고린도전서", "2CO": "고린도후서", GAL: "갈라디아서", EPH: "에베소서",
+  PHI: "빌립보서", COL: "골로새서", "1TH": "데살로니가전서", "2TH": "데살로니가후서",
+  "1TI": "디모데전서", "2TI": "디모데후서", TIT: "디도서", PHM: "빌레몬서",
+  HEB: "히브리서", JAM: "야고보서", "1PE": "베드로전서", "2PE": "베드로후서",
+  "1JO": "요한1서", "2JO": "요한2서", "3JO": "요한3서", JUD: "유다서", REV: "요한계시록",
+};
+
+function bookReferenceSources(code: string): SourceLink[] {
+  const sources: SourceLink[] = [];
+  const enArticle = WIKI_ARTICLES[code];
+  if (enArticle) {
+    sources.push({ label: "Wikipedia", url: `https://en.wikipedia.org/wiki/${enArticle}` });
+  }
+  const koTitle = KO_BOOK_TITLES[code] ?? BOOK_TITLES[code];
+  if (koTitle) {
+    sources.push({ label: "한국어 위키피디아", url: `https://ko.wikipedia.org/wiki/${koTitle}` });
+  }
+  const namuArticle = NAMU_WIKI_ARTICLES[code];
+  if (namuArticle) {
+    sources.push({ label: "나무위키", url: `https://namu.wiki/w/${encodeURIComponent(namuArticle)}` });
+  }
+  return sources;
+}
 
 function note(title: string, body: string, confidence: ContextNote["confidence"], sources: ContextNote["sources"]): ContextNote {
   return { title, body, confidence, sources };
@@ -857,7 +925,7 @@ const KO_BOOK_METADATA_OVERRIDES: Partial<Record<string, LocalizedBookMetadataCo
       },
       place: {
         title: "장소",
-        body: "정서적 지평은 폐허가 된 예루살렘입니다. 이 도시는 심판과 상실과 기억의 장소로 공적 탄식 속에 남아 있습니다.",
+        body: "이 애가는 예루살렘과 유다 땅의 파괴를 배경으로 합니다. 성전과 도시의 기억이 슬픔의 지리적 중심입니다.",
       },
       audience: {
         title: "청중",
@@ -925,5 +993,17 @@ function localizeBookMetadata(metadata: BookMetadata, locale?: string): BookMeta
 
 export function getBookMetadata(code: string, locale?: string) {
   const metadata = BOOK_METADATA[code] ?? buildFallbackMetadata(code);
-  return metadata ? localizeBookMetadata(metadata, locale) : undefined;
+  if (!metadata) return undefined;
+  const localized = localizeBookMetadata(metadata, locale);
+  const refSources = bookReferenceSources(code);
+  if (!refSources.length) return localized;
+  return {
+    ...localized,
+    notes: {
+      authorship: { ...localized.notes.authorship, sources: [...localized.notes.authorship.sources, ...refSources] },
+      date: { ...localized.notes.date, sources: [...localized.notes.date.sources, ...refSources] },
+      place: { ...localized.notes.place, sources: [...localized.notes.place.sources, ...refSources] },
+      audience: { ...localized.notes.audience, sources: [...localized.notes.audience.sources, ...refSources] },
+    },
+  };
 }
