@@ -160,6 +160,9 @@ export default async function HanjaPage({ params }: Props) {
                               href={buildBibleReferenceHref(reference, { locale, from: "hanja" })}
                               reference={reference}
                               locale={locale}
+                              contextTitle={locale === "ko" ? `${summary.title}와 연결되는 이유` : `Why this passage connects to ${summary.title}`}
+                              contextBody={[summary.thesis, summary.explanation].filter(Boolean).join(" ")}
+                              contextMeta={entry.reading || entry.character}
                               className="rounded-full border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                             >
                               {formatReferenceLabel(reference)}
@@ -181,6 +184,9 @@ export default async function HanjaPage({ params }: Props) {
                           href={buildBibleReferenceHref(primaryReference, { locale, from: "hanja" })}
                           reference={primaryReference}
                           locale={locale}
+                          contextTitle={locale === "ko" ? `${summary.title}와 연결되는 이유` : `Why this passage connects to ${summary.title}`}
+                          contextBody={[summary.thesis, summary.explanation].filter(Boolean).join(" ")}
+                          contextMeta={entry.reading || entry.character}
                           className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                         >
                           {locale === "ko" ? "본문 읽기" : "Read passage"}

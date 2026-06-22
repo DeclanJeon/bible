@@ -440,8 +440,19 @@ function EdgeCard({ edge, locale, copy }: { edge: CrossReferenceNetworkEdge; loc
           href={edgeReaderHref(edge, locale)}
           reference={linkedReference(edge)}
           locale={locale}
+          contextTitle={copy.why}
+          contextBody={[
+            relationLabel(edge.direction, copy),
+            ...edge.relationTypes.map((relation) => relationLabel(relation, copy)),
+            edge.anchorPhrases.length ? `${copy.anchorPhrases}: ${edge.anchorPhrases.join(", ")}` : "",
+            edge.totalVotes ? `${copy.votes}: ${edge.totalVotes}` : "",
+          ]
+            .filter(Boolean)
+            .join(" · ")}
+          contextMeta={edge.displayReference}
           className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]"
         >
+
           {copy.readFull}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </PassagePanelLink>
@@ -541,6 +552,9 @@ export function CrossReferenceNetworkReader({
           href={buildBibleReferenceHref(network.primary.referenceSpan ?? network.summary.reference, { locale: appLocale, from: "crossref" })}
           reference={network.primary.referenceSpan ?? network.summary.reference}
           locale={appLocale}
+          contextTitle={copy.summary}
+          contextBody={network.summary.coverageNote}
+          contextMeta={network.primary.reference}
           className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]"
         >
           {copy.readPrimary}

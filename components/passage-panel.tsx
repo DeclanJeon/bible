@@ -41,14 +41,31 @@ type PassagePanelData = {
     verse: number;
     text: string;
   }>;
+  background: {
+    bookName: string;
+    author?: string;
+    date?: string;
+    place?: string;
+    audience?: string;
+    storyContext: string;
+    canonicalContext?: string;
+  };
   fullReaderHref: string;
   crossrefsHref: string;
+};
+
+
+type PassagePanelContextNote = {
+  title?: string;
+  body: string;
+  meta?: string;
 };
 
 type PassagePanelRequest = {
   locale: AppLocale;
   reference: BibleReferenceLike;
   href: string;
+  context: PassagePanelContextNote | null;
 };
 
 type PassagePanelContextValue = {
@@ -68,6 +85,14 @@ const COPY = {
     retry: "다시 시도",
     openReader: "성경 리더에서 열기",
     openCrossrefs: "연관 성구 보기",
+    relationTitle: "왜 지금 이 본문을 보나",
+    backgroundTitle: "배경과 역사",
+    storyContextLabel: "본문 문맥",
+    canonicalContextLabel: "정경과 적용",
+    authorLabel: "저자",
+    dateLabel: "시기",
+    placeLabel: "장소",
+    audienceLabel: "청중",
     close: "닫기",
   },
   en: {
@@ -78,13 +103,32 @@ const COPY = {
     retry: "Retry",
     openReader: "Open in Bible reader",
     openCrossrefs: "View cross references",
+    relationTitle: "Why this passage matters here",
+    backgroundTitle: "Background and history",
+    storyContextLabel: "Story context",
+    canonicalContextLabel: "Canonical reading",
+    authorLabel: "Author",
+    dateLabel: "Date",
+    placeLabel: "Place",
+    audienceLabel: "Audience",
     close: "Close",
   },
 } as const;
 
+
 function normalizeLocale(locale?: string): AppLocale {
   return locale === "en" ? "en" : "ko";
 }
+
+function backgroundFacts(data: PassagePanelData, copy: (typeof COPY)[AppLocale]): Array<{ label: string; value: string }> {
+  return [
+    { label: copy.authorLabel, value: data.background.author },
+    { label: copy.dateLabel, value: data.background.date },
+    { label: copy.placeLabel, value: data.background.place },
+    { label: copy.audienceLabel, value: data.background.audience },
+  ].flatMap((item) => (item.value?.trim() ? [{ label: item.label, value: item.value.trim() }] : []));
+}
+
 
 function cacheKey(locale: AppLocale, reference: BibleReferenceLike) {
   return `${locale}:${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
@@ -317,6 +361,48 @@ export function PassagePanelProvider({ locale, children }: PropsWithChildren<{ l
                     </div>
                   </section>
 
+                  {request.context?.body ? (
+                    <section className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6">
+                      <div className="text-sm font-semibold text-[var(--ink)]">
+                        {request.context.title?.trim() || copy.relationTitle}
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{request.context.body}</p>
+                      {request.context.meta?.trim() ? (
+                        <div className="mt-3 text-xs uppercase tracking-[0.16em] text-[var(--gold)]">{request.context.meta}</div>
+                      ) : null}
+                    </section>
+                  ) : null}
+                  <section className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6">
+                    <div className="text-sm font-semibold text-[var(--ink)]">{copy.backgroundTitle}</div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {backgroundFacts(data, copy).map((fact) => (
+                        <div
+                          key={`${data.reference.slug}-${fact.label}`}
+                          className="rounded-full border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-1.5 text-xs text-[var(--muted)]"
+                        >
+                          <span className="font-semibold text-[var(--ink)]">{fact.label}:</span>
+                          <span className="ml-2">{fact.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-5 space-y-5 text-sm leading-7 text-[var(--muted)]">
+                      <div>
+                        <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold)]">
+                          {copy.storyContextLabel}
+                        </div>
+                        <p className="mt-2">{data.background.storyContext}</p>
+                      </div>
+                      {data.background.canonicalContext?.trim() ? (
+                        <div>
+                          <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold)]">
+                            {copy.canonicalContextLabel}
+                          </div>
+                          <p className="mt-2">{data.background.canonicalContext}</p>
+                        </div>
+                      ) : null}
+                    </div>
+                  </section>
+
                   <section className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-5 sm:p-6">
                     <div className="verse-container space-y-4 text-[var(--text)]">
                       {data.verses.map((verse) => (
@@ -343,6 +429,9 @@ export function PassagePanelLink({
   href,
   reference,
   locale,
+  contextTitle,
+  contextBody,
+  contextMeta,
   onClick,
   children,
   className,
@@ -352,6 +441,9 @@ export function PassagePanelLink({
   href: string;
   reference: BibleReferenceLike;
   locale: string;
+  contextTitle?: string;
+  contextBody?: string;
+  contextMeta?: string;
   className?: string;
   ariaLabel?: string;
   title?: string;
@@ -373,7 +465,18 @@ export function PassagePanelLink({
         }
 
         event.preventDefault();
-        openPanel({ href, reference, locale: appLocale });
+        openPanel({
+          href,
+          reference,
+          locale: appLocale,
+          context: contextBody?.trim()
+            ? {
+                title: contextTitle?.trim() || undefined,
+                body: contextBody.trim(),
+                meta: contextMeta?.trim() || undefined,
+              }
+            : null,
+        });
       }}
     >
       {children}

@@ -345,6 +345,9 @@ export default async function CompanionPage({ params, searchParams }: Props) {
                     reference={card.reference}
                     locale={appLocale}
                     meta={card.reason}
+                    panelContextTitle={appLocale === "ko" ? "이 본문이 지금 질문과 연결되는 이유" : "How this passage connects to your question"}
+                    panelContextBody={card.reason}
+                    panelContextMeta={card.referenceLabel}
                     actionLabel={appLocale === "ko" ? "성경 리더에서 읽기" : "Read in reader"}
                   />
                 ))}

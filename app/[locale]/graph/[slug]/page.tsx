@@ -97,6 +97,9 @@ export default async function GraphPage({ params }: Props) {
                           href={buildPassageHref(item.reference, locale)}
                           reference={item.reference}
                           locale={locale}
+                          contextTitle={locale === "ko" ? "이 본문이 현재 그래프와 연결되는 이유" : "How this passage connects to the current graph"}
+                          contextBody={item.summary}
+                          contextMeta={localizeRelationTypeLabel(item.type, locale)}
                           className="block soft-glass rounded-[24px] p-6 transition hover:border-[var(--gold)]/25 hover:bg-white/[0.05]"
                         >
                           <div className="text-xs uppercase tracking-[0.18em] text-[var(--gold)] font-semibold">{localizeRelationTypeLabel(item.type, locale)}</div>

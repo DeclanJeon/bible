@@ -128,6 +128,9 @@ export default async function StudyPage({ params }: Props) {
                         href={buildPassageHref(cluster.primary, locale)}
                         reference={cluster.primary}
                         locale={locale}
+                        contextTitle={locale === "ko" ? "이 본문을 먼저 읽는 이유" : "Why this is the primary text"}
+                        contextBody={response.primaryStory}
+                        contextMeta={primary.reference}
                         className="mt-6 inline-flex items-center gap-2 rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                       >
                         {locale === "ko" ? "전체 본문 읽기" : "Read full passage"}
@@ -175,6 +178,9 @@ export default async function StudyPage({ params }: Props) {
                           reference={cluster.linkedTexts[index].reference}
                           locale={locale}
                           meta={localizeRelationTypeLabel(cluster.linkedTexts[index].type, locale)}
+                          panelContextTitle={locale === "ko" ? "이 본문을 함께 읽는 이유" : "Why this passage belongs in the same study lane"}
+                          panelContextBody={cluster.linkedTexts[index].summary}
+                          panelContextMeta={localizeRelationTypeLabel(cluster.linkedTexts[index].type, locale)}
                           actionLabel={locale === "ko" ? "전체 본문 보기" : "Read full passage"}
                         />
                       ))}

@@ -141,10 +141,16 @@ async function PassageSection({
   title,
   references,
   locale,
+  contextTitle,
+  contextBody,
+  contextMeta,
 }: {
   title: string;
   references: { code: string; chapter: number; startVerse: number; endVerse: number }[];
   locale: "ko" | "en";
+  contextTitle?: string;
+  contextBody?: string;
+  contextMeta?: string;
 }) {
   if (!references.length) return null;
   const copy = localizeStrings(locale);
@@ -169,6 +175,9 @@ async function PassageSection({
                   href={buildBibleReferenceHref(reference, { locale, from: "hanja" })}
                   reference={reference}
                   locale={locale}
+                  contextTitle={contextTitle}
+                  contextBody={contextBody}
+                  contextMeta={contextMeta}
                   className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-3 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                 >
                   {copy.readInBible}
@@ -305,8 +314,22 @@ export default async function HanjaDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <PassageSection locale={locale} title={copy.mainPassages} references={entry.mainPassages} />
-        <PassageSection locale={locale} title={copy.relatedPassages} references={entry.relatedPassages} />
+        <PassageSection
+          locale={locale}
+          title={copy.mainPassages}
+          references={entry.mainPassages}
+          contextTitle={locale === "ko" ? `${entry.resolvedTitle}와 연결되는 이유` : `Why this passage connects to ${entry.resolvedTitle}`}
+          contextBody={[entry.resolvedThesis, entry.resolvedExplanation].filter(Boolean).join(" ")}
+          contextMeta={entry.reading || entry.character}
+        />
+        <PassageSection
+          locale={locale}
+          title={copy.relatedPassages}
+          references={entry.relatedPassages}
+          contextTitle={locale === "ko" ? `${entry.resolvedTitle}와 연결되는 이유` : `Why this passage connects to ${entry.resolvedTitle}`}
+          contextBody={[entry.resolvedThesis, entry.resolvedExplanation].filter(Boolean).join(" ")}
+          contextMeta={entry.reading || entry.character}
+        />
 
         {relatedEntries.length ? (
           <section className="glass rounded-xl p-5 sm:rounded-2xl sm:p-8 lg:p-10">

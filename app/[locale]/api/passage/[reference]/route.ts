@@ -1,3 +1,5 @@
+import { buildLocalPassageBackground } from "@/lib/passage-background";
+
 import { NextResponse } from "next/server";
 import { getPassage, parseBibleReferenceSlug } from "@/lib/bible";
 import { resolveAppLocale } from "@/lib/content";
@@ -19,6 +21,8 @@ export async function GET(
 
   const locale = resolveAppLocale(requestedLocale);
   const passage = await getPassage(reference, locale);
+  const background = await buildLocalPassageBackground(reference, locale);
+
   const expectedVerseCount = reference.endVerse - reference.startVerse + 1;
   const exactCoverage =
     passage.verses.length === expectedVerseCount &&
@@ -39,6 +43,15 @@ export async function GET(
     },
     book: passage.book ? { code: passage.book.code, name: passage.book.name, testament: passage.book.testament } : null,
     verses: passage.verses.map((verse) => ({ verse: verse.verse, text: verse.text })),
+    background: {
+      bookName: background.bookName,
+      author: background.author,
+      date: background.date,
+      place: background.place,
+      audience: background.audience,
+      storyContext: background.storyContext,
+      canonicalContext: background.canonicalContext,
+    },
     fullReaderHref: buildBibleReferenceHref(reference, { locale, from: "panel" }),
     crossrefsHref: `/${locale}/crossrefs/${slug}`,
   });

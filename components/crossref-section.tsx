@@ -37,6 +37,9 @@ export const CrossReferenceSection = memo(function CrossReferenceSection({
             reference={suggestion.target}
             locale={appLocale}
             meta={`${suggestion.supportLabel} · ${suggestion.supportLine}`}
+            panelContextTitle={appLocale === "ko" ? "이 본문이 현재 본문과 연결되는 이유" : "How this passage connects to the current text"}
+            panelContextBody={[suggestion.supportLabel, suggestion.supportLine, suggestion.excerpt].filter(Boolean).join(" ")}
+            panelContextMeta={suggestion.displayReference}
             actionLabel={appLocale === "ko" ? "전체 본문 보기" : "Read full passage"}
           />
         ))}

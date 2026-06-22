@@ -15,6 +15,9 @@ export function PassageCard({
   locale,
   meta,
   actionLabel,
+  panelContextTitle,
+  panelContextBody,
+  panelContextMeta,
 }: {
   title: string;
   referenceLabel: string;
@@ -24,6 +27,9 @@ export function PassageCard({
   locale?: string;
   meta?: string;
   actionLabel?: string;
+  panelContextTitle?: string;
+  panelContextBody?: string;
+  panelContextMeta?: string;
 }) {
   const shouldShowTitle = !referenceLabel.toLocaleLowerCase().startsWith(title.toLocaleLowerCase());
   const content = (
@@ -51,7 +57,14 @@ export function PassageCard({
 
   if (reference && locale) {
     return (
-      <PassagePanelLink href={href} reference={reference} locale={locale}>
+      <PassagePanelLink
+        href={href}
+        reference={reference}
+        locale={locale}
+        contextTitle={panelContextTitle}
+        contextBody={panelContextBody}
+        contextMeta={panelContextMeta}
+      >
         {content}
       </PassagePanelLink>
     );
