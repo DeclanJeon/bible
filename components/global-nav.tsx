@@ -150,7 +150,7 @@ export function GlobalNav({
 
   return (
     <>
-      <header className="sticky top-0 z-nav bg-surface-1/80 backdrop-blur-xl border-b border-[var(--hairline)]">
+      <header className="sticky top-0 z-nav bg-surface-1/80 backdrop-blur-xl border-b border-[var(--hairline)]" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
         <div className="mx-auto flex h-nav max-w-content items-center justify-between px-gutter">
           <Link
             href={`/${locale}`}
@@ -207,7 +207,7 @@ export function GlobalNav({
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
-              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink-muted hover:text-ink transition"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg text-ink-muted hover:text-ink transition"
               aria-label={copy.open}
             >
               <Menu className="h-5 w-5" />

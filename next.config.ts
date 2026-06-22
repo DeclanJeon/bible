@@ -10,9 +10,9 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      "style-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
       "img-src 'self' data: https:",
-      "font-src 'self'",
+      "font-src 'self' https://cdn.jsdelivr.net",
       "connect-src 'self' https:",
       "frame-ancestors 'none'",
     ].join("; "),

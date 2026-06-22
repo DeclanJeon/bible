@@ -122,7 +122,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
               defaultValue={recommendation.prompt}
               required
               minLength={2}
-              className="w-full min-w-0 flex-1 border-0 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:text-base"
+              className="w-full min-w-0 flex-1 border-0 bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
             />
           </div>
           <button
