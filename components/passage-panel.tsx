@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ExternalLink, Network, X } from "lucide-react";
 import {
+  Suspense,
   createContext,
   useCallback,
   useContext,
@@ -110,12 +111,19 @@ function usePassagePanel() {
   return value;
 }
 
+function PassagePanelNavigationSync({ closePanel }: { closePanel: () => void }) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    closePanel();
+  }, [pathname, closePanel]);
+
+  return null;
+}
+
 export function PassagePanelProvider({ locale, children }: PropsWithChildren<{ locale: string }>) {
   const appLocale = normalizeLocale(locale);
   const copy = COPY[appLocale];
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const searchKey = searchParams.toString();
   const [request, setRequest] = useState<PassagePanelRequest | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [data, setData] = useState<PassagePanelData | null>(null);
@@ -133,9 +141,6 @@ export function PassagePanelProvider({ locale, children }: PropsWithChildren<{ l
     latestRequestKey.current = cacheKey(next.locale, next.reference);
   }, []);
 
-  useEffect(() => {
-    closePanel();
-  }, [pathname, searchKey, closePanel]);
 
   useEffect(() => {
     if (!request) {
@@ -227,6 +232,9 @@ export function PassagePanelProvider({ locale, children }: PropsWithChildren<{ l
   return (
     <PassagePanelContext.Provider value={value}>
       {children}
+      <Suspense fallback={null}>
+        <PassagePanelNavigationSync closePanel={closePanel} />
+      </Suspense>
       {request ? (
         <div className="fixed inset-0 z-50 hidden lg:block" aria-live="polite">
           <button
