@@ -330,8 +330,8 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             <div className="section-title text-base">{appLocale === "ko" ? "관련 성구" : "Related passages"}</div>
             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
               {appLocale === "ko"
-                ? "메인 성구를 넓히거나 교차 검증하는 본문들입니다. 클릭하면 책과 장 문맥 안으로 이동합니다."
-                : "These passages widen or cross-check the main passage. Each link lands inside book-and-chapter context."}
+                ? "메인 성구를 넓히거나 교차 검증하는 본문들입니다. 넓은 화면에서는 우측 패널에서 바로 읽고, 필요하면 성경 리더 전체 화면으로 이어서 볼 수 있습니다."
+                : "These passages widen or cross-check the main passage. On wider screens they open in a side panel first, with a full Bible reader fallback when you want more context."}
             </p>
             {relatedPassageDetails.length ? (
               <div className="mt-5 grid gap-4 lg:grid-cols-2">
@@ -342,6 +342,8 @@ export default async function CompanionPage({ params, searchParams }: Props) {
                     referenceLabel={card.referenceLabel}
                     excerpt={preview(card.excerpt)}
                     href={card.href}
+                    reference={card.reference}
+                    locale={appLocale}
                     meta={card.reason}
                     actionLabel={appLocale === "ko" ? "성경 리더에서 읽기" : "Read in reader"}
                   />

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { CrossReferenceSection } from "@/components/crossref-section";
 import { FullNetworkCta } from "@/components/full-network-cta";
+import { PassagePanelLink } from "@/components/passage-panel";
 import { SecondaryNav } from "@/components/secondary-nav";
 import { TabSection } from "@/components/tab-section";
 import { Collapsible } from "@/components/collapsible";
@@ -91,14 +92,20 @@ export default async function GraphPage({ params }: Props) {
                     </div>
                     <div className="grid gap-5 lg:grid-cols-3">
                       {graphLinks.map((item) => (
-                        <Link key={`${item.label}-${item.reference.code}-${item.reference.chapter}-${item.reference.startVerse}`} href={buildPassageHref(item.reference, locale)} className="block soft-glass rounded-[24px] p-6 transition hover:border-[var(--gold)]/25 hover:bg-white/[0.05]">
+                        <PassagePanelLink
+                          key={`${item.label}-${item.reference.code}-${item.reference.chapter}-${item.reference.startVerse}`}
+                          href={buildPassageHref(item.reference, locale)}
+                          reference={item.reference}
+                          locale={locale}
+                          className="block soft-glass rounded-[24px] p-6 transition hover:border-[var(--gold)]/25 hover:bg-white/[0.05]"
+                        >
                           <div className="text-xs uppercase tracking-[0.18em] text-[var(--gold)] font-semibold">{localizeRelationTypeLabel(item.type, locale)}</div>
                           <div className="mt-3 text-base font-semibold text-white">{item.label}</div>
                           <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">{item.summary}</p>
                           <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--gold)]">
                             {locale === "ko" ? "전체 본문 보기" : "Read full passage"} <ArrowRight className="h-4 w-4" />
                           </div>
-                        </Link>
+                        </PassagePanelLink>
                       ))}
                     </div>
                   </div>

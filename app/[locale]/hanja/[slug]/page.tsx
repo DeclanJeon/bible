@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ExternalLink, Languages } from "lucide-react";
 import { SecondaryNav } from "@/components/secondary-nav";
+import { PassagePanelLink } from "@/components/passage-panel";
 import { getPassage } from "@/lib/bible";
 import { getHanjaEntries, getHanjaEntryView, type HanjaSource } from "@/lib/hanja-catalog";
 import { buildBibleReferenceHref } from "@/lib/navigation";
@@ -33,8 +34,8 @@ function localizeStrings(locale: "ko" | "en") {
     relatedPassages: locale === "ko" ? "관련 본문" : "Related passages",
     passagesBody:
       locale === "ko"
-        ? "모든 본문 링크는 공용 성경 리더로 열리며, 현재 항목 맥락을 유지한 채 본문으로 이동합니다."
-        : "Every passage link opens in the shared Bible reader while preserving the current Hanja context.",
+        ? "넓은 화면에서는 우측 패널에서 본문을 먼저 읽고, 더 길게 보려면 공용 성경 리더 전체 화면으로 이어서 열 수 있습니다."
+        : "On wider screens, passage links open in a side panel first, with the shared Bible reader available when you want the full chapter context.",
     sourceMeta: locale === "ko" ? "자료 메타" : "Source metadata",
     openOriginal: locale === "ko" ? "원문 열기" : "Open source",
     backToCatalog: locale === "ko" ? "카탈로그로 돌아가기" : "Back to catalog",
@@ -164,12 +165,14 @@ async function PassageSection({
                   <div className="text-lg font-semibold tracking-tight text-[var(--ink)]">{passage.reference}</div>
                   <div className="mt-2 text-sm text-[var(--gold)]">{formatReferenceLabel(reference)}</div>
                 </div>
-                <Link
+                <PassagePanelLink
                   href={buildBibleReferenceHref(reference, { locale, from: "hanja" })}
+                  reference={reference}
+                  locale={locale}
                   className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-3 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                 >
                   {copy.readInBible}
-                </Link>
+                </PassagePanelLink>
               </div>
               <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">{passage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" ")}</p>
             </article>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Compass, Sparkles } from "lucide-react";
 import { PassageCard } from "@/components/passage-card";
+import { PassagePanelLink } from "@/components/passage-panel";
 import { NoteCard } from "@/components/note-card";
 import { SourceList } from "@/components/source-list";
 import { CrossReferenceSection } from "@/components/crossref-section";
@@ -123,10 +124,15 @@ export default async function StudyPage({ params }: Props) {
                           </p>
                         ))}
                       </div>
-                      <Link href={buildPassageHref(cluster.primary, locale)} className="mt-6 inline-flex items-center gap-2 rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]">
+                      <PassagePanelLink
+                        href={buildPassageHref(cluster.primary, locale)}
+                        reference={cluster.primary}
+                        locale={locale}
+                        className="mt-6 inline-flex items-center gap-2 rounded-lg min-h-[44px] border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+                      >
                         {locale === "ko" ? "전체 본문 읽기" : "Read full passage"}
                         <ArrowRight className="h-4 w-4" />
-                      </Link>
+                      </PassagePanelLink>
                     </div>
                     <div>
                       <div className="section-title text-base mb-4">{copy.whatPassageDoing}</div>
@@ -166,6 +172,8 @@ export default async function StudyPage({ params }: Props) {
                           referenceLabel={passage.reference}
                           excerpt={cluster.linkedTexts[index].summary}
                           href={buildPassageHref(cluster.linkedTexts[index].reference, locale)}
+                          reference={cluster.linkedTexts[index].reference}
+                          locale={locale}
                           meta={localizeRelationTypeLabel(cluster.linkedTexts[index].type, locale)}
                           actionLabel={locale === "ko" ? "전체 본문 보기" : "Read full passage"}
                         />

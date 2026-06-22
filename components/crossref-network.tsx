@@ -4,6 +4,7 @@ import type { BookMetadata } from "@/lib/book-metadata";
 import type { BibleReference } from "@/lib/bible";
 import type { SourceLink } from "@/lib/app-data";
 import { SourceList } from "@/components/source-list";
+import { PassagePanelLink } from "@/components/passage-panel";
 import { buildBibleReferenceHref } from "@/lib/navigation";
 import { localizeConfidenceLabel } from "@/lib/content";
 
@@ -435,10 +436,15 @@ function EdgeCard({ edge, locale, copy }: { edge: CrossReferenceNetworkEdge; loc
           <h3 className="mt-3 text-lg font-semibold tracking-tight text-[var(--ink)]">{edge.displayReference}</h3>
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{edge.excerpt}</p>
         </div>
-        <Link href={edgeReaderHref(edge, locale)} className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
+        <PassagePanelLink
+          href={edgeReaderHref(edge, locale)}
+          reference={linkedReference(edge)}
+          locale={locale}
+          className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]"
+        >
           {copy.readFull}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </PassagePanelLink>
       </div>
       <div className="mt-5 rounded-xl border border-[var(--hairline)] bg-black/20 p-4">
         <div className="text-sm font-semibold text-[var(--ink)]">{copy.why}</div>
@@ -531,10 +537,15 @@ export function CrossReferenceNetworkReader({
             </p>
           ))}
         </div>
-        <Link href={buildBibleReferenceHref(network.primary.referenceSpan ?? network.summary.reference, { locale: appLocale, from: "crossref" })} className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]">
+        <PassagePanelLink
+          href={buildBibleReferenceHref(network.primary.referenceSpan ?? network.summary.reference, { locale: appLocale, from: "crossref" })}
+          reference={network.primary.referenceSpan ?? network.summary.reference}
+          locale={appLocale}
+          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[var(--gold)]/25 px-4 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-[var(--gold)]/[0.10]"
+        >
           {copy.readPrimary}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </PassagePanelLink>
       </section>
 
       <section className="glass rounded-[32px] p-6 lg:p-8" aria-labelledby="network-summary">

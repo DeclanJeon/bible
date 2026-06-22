@@ -9,7 +9,7 @@ type BibleReferenceInput = {
   endVerse: number;
 };
 
-function serializeReference(reference: BibleReferenceInput) {
+export function serializeBibleReferenceSlug(reference: BibleReferenceInput) {
   return `${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
 }
 
@@ -78,9 +78,13 @@ export function buildGraphHref(slug: string, locale?: LocaleInput) {
 
 export function buildPassageHref(reference: BibleReferenceInput, locale?: LocaleInput) {
   const params = new URLSearchParams();
-  return withQuery(localizedPath(locale, `/passage/${serializeReference(reference)}`), params);
+  return withQuery(localizedPath(locale, `/passage/${serializeBibleReferenceSlug(reference)}`), params);
 }
 
+export function buildPassageApiHref(reference: BibleReferenceInput, locale?: LocaleInput) {
+  const params = new URLSearchParams();
+  return withQuery(localizedPath(locale, `/api/passage/${serializeBibleReferenceSlug(reference)}`), params);
+}
 export function buildBibleHref(options: {
   book?: SearchValue;
   chapter?: number | string | null;

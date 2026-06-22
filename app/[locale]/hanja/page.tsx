@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpenText, Languages } from "lucide-react";
 import { SecondaryNav } from "@/components/secondary-nav";
+import { PassagePanelLink } from "@/components/passage-panel";
 import { getHanjaCatalogListEntries, getHanjaPublishedCharacterCount, type HanjaCatalogListEntry, type LocalizedHanjaText } from "@/lib/hanja-catalog";
 import { buildBibleReferenceHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
@@ -154,13 +155,15 @@ export default async function HanjaPage({ params }: Props) {
                         <div className="text-sm font-semibold text-[var(--ink)]">{locale === "ko" ? "주요 본문" : "Primary passages"}</div>
                         <div className="mt-3 flex flex-wrap gap-2">
                           {entry.mainPassages.slice(0, 3).map((reference) => (
-                            <Link
+                            <PassagePanelLink
                               key={`${entry.slug}-${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`}
                               href={buildBibleReferenceHref(reference, { locale, from: "hanja" })}
+                              reference={reference}
+                              locale={locale}
                               className="rounded-full border border-[var(--hairline-strong)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                             >
                               {formatReferenceLabel(reference)}
-                            </Link>
+                            </PassagePanelLink>
                           ))}
                         </div>
                       </div>
@@ -174,12 +177,14 @@ export default async function HanjaPage({ params }: Props) {
                         {locale === "ko" ? "항목 열기" : "Open entry"}
                       </Link>
                       {primaryReference ? (
-                        <Link
+                        <PassagePanelLink
                           href={buildBibleReferenceHref(primaryReference, { locale, from: "hanja" })}
+                          reference={primaryReference}
+                          locale={locale}
                           className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
                         >
                           {locale === "ko" ? "본문 읽기" : "Read passage"}
-                        </Link>
+                        </PassagePanelLink>
                       ) : null}
                     </div>
                   </article>

@@ -1,3 +1,4 @@
+import { PassagePanelProvider } from "@/components/passage-panel";
 import { notFound } from "next/navigation";
 
 export default async function LocaleLayout({
@@ -13,5 +14,5 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  return <PassagePanelProvider locale={locale}>{children}</PassagePanelProvider>;
 }

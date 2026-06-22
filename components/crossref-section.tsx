@@ -34,6 +34,8 @@ export const CrossReferenceSection = memo(function CrossReferenceSection({
             referenceLabel={suggestion.displayReference}
             excerpt={suggestion.excerpt}
             href={buildBibleReferenceHref(suggestion.target, { locale: appLocale, from: "crossref" })}
+            reference={suggestion.target}
+            locale={appLocale}
             meta={`${suggestion.supportLabel} · ${suggestion.supportLine}`}
             actionLabel={appLocale === "ko" ? "전체 본문 보기" : "Read full passage"}
           />

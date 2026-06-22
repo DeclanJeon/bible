@@ -1,3 +1,4 @@
+import { PassagePanelLink } from "@/components/passage-panel";
 import Link from "next/link";
 import type { BibleReference } from "@/lib/bible";
 
@@ -10,6 +11,8 @@ export function PassageCard({
   referenceLabel,
   excerpt,
   href,
+  reference,
+  locale,
   meta,
   actionLabel,
 }: {
@@ -17,6 +20,8 @@ export function PassageCard({
   referenceLabel: string;
   excerpt: string;
   href?: string;
+  reference?: BibleReference;
+  locale?: string;
   meta?: string;
   actionLabel?: string;
 }) {
@@ -42,6 +47,14 @@ export function PassageCard({
 
   if (!href) {
     return content;
+  }
+
+  if (reference && locale) {
+    return (
+      <PassagePanelLink href={href} reference={reference} locale={locale}>
+        {content}
+      </PassagePanelLink>
+    );
   }
 
   return <Link href={href}>{content}</Link>;
