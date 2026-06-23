@@ -5,6 +5,7 @@
   "start_url": "/ko",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#08080d",
   "theme_color": "#08080d",

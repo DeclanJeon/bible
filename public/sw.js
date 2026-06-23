@@ -1,15 +1,19 @@
-const CACHE_NAME = "bible-companion-v1";
-const STATIC_CACHE = "static-v1";
-const PAGE_CACHE = "pages-v1";
+const CACHE_VERSION = "v2";
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const PAGE_CACHE = `pages-${CACHE_VERSION}`;
+
+const OFFLINE_URL = "/offline.html";
 
 const STATIC_ASSETS = [
   "/favicon.svg",
   "/apple-touch-icon.png",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/icon-maskable-512.png",
   "/og-image.png",
   "/manifest.json",
+  OFFLINE_URL,
 ];
-
-const OFFLINE_URL = "/offline.html";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

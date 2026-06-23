@@ -1,5 +1,6 @@
 import { GlobalNavShell } from "@/components/global-nav-shell";
 import { PassagePanelProvider } from "@/components/passage-panel";
+import { PwaExperience } from "@/components/pwa-experience";
 import { notFound } from "next/navigation";
 
 export default async function LocaleLayout({
@@ -18,6 +19,7 @@ export default async function LocaleLayout({
   return (
     <PassagePanelProvider locale={locale}>
       <GlobalNavShell locale={locale} />
+      <PwaExperience locale={locale} />
       {children}
     </PassagePanelProvider>
   );
