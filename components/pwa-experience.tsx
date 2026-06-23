@@ -1,6 +1,7 @@
 "use client";
 
-import { Download, PlusSquare, Share, Smartphone, X } from "lucide-react";
+import { ArrowLeft, Download, PlusSquare, Share, Smartphone, X } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type AppLocale = "ko" | "en";
@@ -41,6 +42,14 @@ const COPY = {
     stepOpen: "Open from icon",
   },
 } as const;
+
+const BACK_FALLBACK_BY_SOURCE: Record<string, (locale: AppLocale) => string> = {
+  "faith-basics": (locale) => `/${locale}/faith-basics`,
+  hanja: (locale) => `/${locale}/hanja`,
+  panel: (locale) => `/${locale}/companion`,
+  passage: (locale) => `/${locale}`,
+  crossref: (locale) => `/${locale}/lanes`,
+};
 
 function isStandaloneDisplay() {
   if (typeof window === "undefined") return false;
@@ -104,6 +113,46 @@ function PwaBootController() {
   }, []);
 
   return null;
+}
+
+function PwaBackButton({ locale }: { locale: AppLocale }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(isStandaloneDisplay());
+  }, [pathname]);
+
+  const fallbackHref = useMemo(() => {
+    const source = searchParams.get("from");
+    const sourceFallback = source ? BACK_FALLBACK_BY_SOURCE[source]?.(locale) : undefined;
+    return sourceFallback ?? `/${locale}`;
+  }, [locale, searchParams]);
+
+  const goBack = useCallback(() => {
+    if (window.history.length > 1) {
+      router.back();
+      return;
+    }
+
+    router.push(fallbackHref);
+  }, [fallbackHref, router]);
+
+  if (!visible || pathname === `/${locale}`) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={goBack}
+      className="fixed left-3 top-[calc(var(--nav-height)+env(safe-area-inset-top)+0.75rem)] z-[65] inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--hairline-strong)] bg-[var(--surface-1)]/95 px-4 py-2 text-sm font-semibold text-[var(--ink)] shadow-xl shadow-black/30 backdrop-blur-xl transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)] sm:left-5"
+      aria-label={locale === "ko" ? "이전 화면으로 돌아가기" : "Go back"}
+    >
+      <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+      {locale === "ko" ? "이전으로" : "Back"}
+    </button>
+  );
 }
 
 function PwaInstallPrompt({ locale }: { locale: AppLocale }) {
@@ -241,6 +290,7 @@ export function PwaExperience({ locale }: { locale: AppLocale }) {
   return (
     <>
       <PwaBootController />
+      <PwaBackButton locale={locale} />
       <PwaInstallPrompt locale={locale} />
     </>
   );
