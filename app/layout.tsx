@@ -84,6 +84,27 @@ export default function RootLayout({
         <meta name="theme-color" content="#08080d" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#08080d" media="(prefers-color-scheme: light)" />
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var standalone =
+                    window.matchMedia('(display-mode: standalone)').matches ||
+                    window.matchMedia('(display-mode: fullscreen)').matches ||
+                    window.navigator.standalone === true ||
+                    document.referrer.indexOf('android-app://') === 0;
+                  document.documentElement.dataset.pwaReady = standalone ? 'false' : 'true';
+                  if (standalone) {
+                    document.documentElement.dataset.pwaStandalone = 'true';
+                  }
+                } catch (e) {
+                  document.documentElement.dataset.pwaReady = 'true';
+                }
+              })();
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

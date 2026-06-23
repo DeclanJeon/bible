@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Download, PlusSquare, Share, Smartphone, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -18,9 +17,6 @@ const DISMISS_MS = 7 * 24 * 60 * 60 * 1000;
 
 const COPY = {
   ko: {
-    splashEyebrow: "성경 컴패니언",
-    splashTitle: "본문을 준비하고 있습니다",
-    splashDescription: "홈 화면 앱 모드로 성경, 문맥, 연결 본문을 불러오는 중입니다.",
     installTitle: "성경 컴패니언을 홈 화면에 설치하세요",
     androidBody: "앱처럼 빠르게 열고, 더 안정적으로 다시 접속할 수 있습니다.",
     iosBody: "Safari 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택하세요.",
@@ -33,9 +29,6 @@ const COPY = {
     stepOpen: "아이콘으로 실행",
   },
   en: {
-    splashEyebrow: "Bible Companion",
-    splashTitle: "Preparing Scripture",
-    splashDescription: "Opening Bible passages, context, and cross-references in app mode.",
     installTitle: "Install Bible Companion on your home screen",
     androidBody: "Open it like an app and return more reliably on mobile or tablet.",
     iosBody: "Tap Safari’s Share button, then choose Add to Home Screen.",
@@ -92,39 +85,25 @@ function dismissForNow() {
   }
 }
 
-function PwaLaunchSplash({ locale }: { locale: AppLocale }) {
-  const copy = COPY[locale];
-  const [visible, setVisible] = useState(false);
-
+function PwaBootController() {
   useEffect(() => {
-    if (!isStandaloneDisplay()) return;
-    setVisible(true);
-    const timer = window.setTimeout(() => setVisible(false), 1250);
+    const root = document.documentElement;
+
+    if (!isStandaloneDisplay()) {
+      root.dataset.pwaReady = "true";
+      root.removeAttribute("data-pwa-standalone");
+      return;
+    }
+
+    root.dataset.pwaStandalone = "true";
+    const timer = window.setTimeout(() => {
+      root.dataset.pwaReady = "true";
+    }, 1250);
+
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (!visible) return null;
-
-  return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-hidden bg-[var(--canvas)] px-6 py-10" role="status" aria-live="polite">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_32%,rgba(212,168,83,0.20),transparent_34%),radial-gradient(circle_at_20%_80%,rgba(138,180,232,0.10),transparent_30%)]" />
-      <section className="glass relative w-full max-w-sm rounded-[32px] p-7 text-center shadow-2xl shadow-black/30">
-        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[28px] border border-[var(--gold-border)] bg-[var(--gold-soft)] shadow-[0_0_56px_rgba(212,168,83,0.24)]">
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-[22px] bg-[var(--canvas)] ring-1 ring-white/10">
-            <span className="absolute inset-0 rounded-[22px] border border-[var(--gold)]/35 motion-safe:animate-ping motion-reduce:animate-none" />
-            <Image src="/favicon.svg" alt="" width={52} height={52} priority className="relative h-12 w-12" />
-          </div>
-        </div>
-        <div className="mt-7 section-title text-sm">{copy.splashEyebrow}</div>
-        <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)]">{copy.splashTitle}</h1>
-        <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{copy.splashDescription}</p>
-        <div className="mx-auto mt-7 h-1.5 max-w-[220px] overflow-hidden rounded-full bg-white/10">
-          <div className="h-full w-1/2 rounded-full bg-[linear-gradient(90deg,transparent,var(--gold),transparent)] motion-safe:animate-[pulse_1.25s_ease-in-out_infinite] motion-reduce:animate-none" />
-        </div>
-        <span className="sr-only">Loading</span>
-      </section>
-    </div>
-  );
+  return null;
 }
 
 function PwaInstallPrompt({ locale }: { locale: AppLocale }) {
@@ -261,7 +240,7 @@ function PwaInstallPrompt({ locale }: { locale: AppLocale }) {
 export function PwaExperience({ locale }: { locale: AppLocale }) {
   return (
     <>
-      <PwaLaunchSplash locale={locale} />
+      <PwaBootController />
       <PwaInstallPrompt locale={locale} />
     </>
   );
