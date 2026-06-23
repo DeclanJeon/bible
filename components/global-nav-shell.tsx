@@ -10,6 +10,7 @@ export async function GlobalNavShell({ locale }: { locale: AppLocale }) {
     { key: "bible", href: `/${locale}/bible`, label: locale === "ko" ? "성경 읽기" : "Bible" },
     ...(hasHanja ? [{ key: "hanja", href: `/${locale}/hanja`, label: locale === "ko" ? "한자" : "Hanja" }] : []),
     { key: "companion", href: `/${locale}/companion`, label: locale === "ko" ? "컴패니언" : "Companion" },
+    { key: "faith-basics", href: `/${locale}/faith-basics`, label: locale === "ko" ? "신앙의 기본" : "Faith Basics" },
     { key: "lanes", href: `/${locale}/lanes`, label: locale === "ko" ? "공부 레인" : "Lanes" },
     { key: "reviews", href: `/${locale}/reviews`, label: locale === "ko" ? "리뷰" : "Reviews" },
   ];

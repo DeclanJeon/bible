@@ -18,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: localizedUrl("en", "/bible"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: localizedUrl("ko", "/companion"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: localizedUrl("en", "/companion"), lastModified: now, changeFrequency: "weekly", priority: 0.75 },
+    { url: localizedUrl("ko", "/faith-basics"), lastModified: now, changeFrequency: "monthly", priority: 0.75 },
+    { url: localizedUrl("en", "/faith-basics"), lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: localizedUrl("ko", "/reviews"), lastModified: now, changeFrequency: "weekly", priority: 0.55 },
     { url: localizedUrl("en", "/reviews"), lastModified: now, changeFrequency: "weekly", priority: 0.5 },
   ];
