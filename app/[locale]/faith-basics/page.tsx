@@ -119,6 +119,59 @@ const PASSAGES = [
   { label: "1 Corinthians 13:13", reference: { code: "1CO", chapter: 13, startVerse: 13, endVerse: 13 } },
 ] as const;
 
+const SCRIPTURE_GROUPS = {
+  justice: [
+    { label: "Psalm 89:14", reference: { code: "PSA", chapter: 89, startVerse: 14, endVerse: 14 } },
+    { label: "Micah 6:8", reference: { code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 } },
+    { label: "Amos 5:24", reference: { code: "AMO", chapter: 5, startVerse: 24, endVerse: 24 } },
+    { label: "Isaiah 1:17", reference: { code: "ISA", chapter: 1, startVerse: 17, endVerse: 17 } },
+  ],
+  goodEvil: [
+    { label: "Genesis 2:15–17", reference: { code: "GEN", chapter: 2, startVerse: 15, endVerse: 17 } },
+    { label: "Isaiah 5:20", reference: { code: "ISA", chapter: 5, startVerse: 20, endVerse: 20 } },
+    { label: "Romans 12:9", reference: { code: "ROM", chapter: 12, startVerse: 9, endVerse: 9 } },
+    { label: "Hebrews 5:14", reference: { code: "HEB", chapter: 5, startVerse: 14, endVerse: 14 } },
+  ],
+  love: [
+    { label: "John 13:34–35", reference: { code: "JOH", chapter: 13, startVerse: 34, endVerse: 35 } },
+    { label: "Matthew 22:37–40", reference: { code: "MAT", chapter: 22, startVerse: 37, endVerse: 40 } },
+    { label: "Romans 13:8–10", reference: { code: "ROM", chapter: 13, startVerse: 8, endVerse: 10 } },
+    { label: "1 Corinthians 13:13", reference: { code: "1CO", chapter: 13, startVerse: 13, endVerse: 13 } },
+    { label: "1 John 4:7–12", reference: { code: "1JO", chapter: 4, startVerse: 7, endVerse: 12 } },
+  ],
+  christ: [
+    { label: "John 1:1–14", reference: { code: "JOH", chapter: 1, startVerse: 1, endVerse: 14 } },
+    { label: "Philippians 2:5–8", reference: { code: "PHI", chapter: 2, startVerse: 5, endVerse: 8 } },
+    { label: "Hebrews 4:14–16", reference: { code: "HEB", chapter: 4, startVerse: 14, endVerse: 16 } },
+    { label: "1 Peter 2:21–24", reference: { code: "1PE", chapter: 2, startVerse: 21, endVerse: 24 } },
+  ],
+  spirit: [
+    { label: "John 14:16–17", reference: { code: "JOH", chapter: 14, startVerse: 16, endVerse: 17 } },
+    { label: "John 14:26", reference: { code: "JOH", chapter: 14, startVerse: 26, endVerse: 26 } },
+    { label: "John 16:7–15", reference: { code: "JOH", chapter: 16, startVerse: 7, endVerse: 15 } },
+    { label: "Galatians 5:22–23", reference: { code: "GAL", chapter: 5, startVerse: 22, endVerse: 23 } },
+  ],
+  trinity: [
+    { label: "Genesis 1:26–27", reference: { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 } },
+    { label: "Matthew 3:16–17", reference: { code: "MAT", chapter: 3, startVerse: 16, endVerse: 17 } },
+    { label: "Matthew 28:19", reference: { code: "MAT", chapter: 28, startVerse: 19, endVerse: 19 } },
+    { label: "John 10:30", reference: { code: "JOH", chapter: 10, startVerse: 30, endVerse: 30 } },
+    { label: "2 Corinthians 13:14", reference: { code: "2CO", chapter: 13, startVerse: 14, endVerse: 14 } },
+  ],
+  freedom: [
+    { label: "Galatians 5:13–14", reference: { code: "GAL", chapter: 5, startVerse: 13, endVerse: 14 } },
+    { label: "1 Peter 2:16–17", reference: { code: "1PE", chapter: 2, startVerse: 16, endVerse: 17 } },
+    { label: "Romans 14:17–19", reference: { code: "ROM", chapter: 14, startVerse: 17, endVerse: 19 } },
+    { label: "James 1:27", reference: { code: "JAM", chapter: 1, startVerse: 27, endVerse: 27 } },
+  ],
+  practice: [
+    { label: "2 Timothy 3:16–17", reference: { code: "2TI", chapter: 3, startVerse: 16, endVerse: 17 } },
+    { label: "James 1:22–27", reference: { code: "JAM", chapter: 1, startVerse: 22, endVerse: 27 } },
+    { label: "Matthew 7:24–27", reference: { code: "MAT", chapter: 7, startVerse: 24, endVerse: 27 } },
+    { label: "Romans 12:1–2", reference: { code: "ROM", chapter: 12, startVerse: 1, endVerse: 2 } },
+  ],
+} as const;
+
 function T({ locale, ko, en }: { locale: AppLocale; ko: string; en: string }) {
   return locale === "ko" ? ko : en;
 }
@@ -151,6 +204,36 @@ function PrincipleCard({
       <h3 className="mt-3 text-xl font-semibold tracking-tight text-[var(--ink)]">{title}</h3>
       <div className="mt-4 space-y-3 text-sm leading-7 text-[var(--muted)]">{children}</div>
     </article>
+  );
+}
+
+function ScriptureLinks({
+  locale,
+  passages,
+}: {
+  locale: AppLocale;
+  passages: readonly {
+    label: string;
+    reference: { code: string; chapter: number; startVerse: number; endVerse: number };
+  }[];
+}) {
+  return (
+    <div className="mt-4 rounded-xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4">
+      <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">
+        <T locale={locale} ko="성경은 이렇게 말합니다" en="Scripture says" />
+      </div>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {passages.map((passage) => (
+          <Link
+            key={passage.label}
+            href={buildBibleReferenceHref(passage.reference, { locale, from: "faith-basics" })}
+            className="rounded-full border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2 text-xs font-medium text-[var(--ink-muted)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+          >
+            {passage.label}
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -232,6 +315,7 @@ export default async function FaithBasicsPage({ params }: Props) {
               en="Righteousness is the fitting duty and responsibility within relationship. It does not stop at a legal clause; before God it sees life, neighbor, the vulnerable, freedom, and love together."
             />
           </p>
+          <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.justice} />
         </PrincipleCard>
 
         <PrincipleCard
@@ -252,6 +336,7 @@ export default async function FaithBasicsPage({ params }: Props) {
               en="Good and evil are not defined by mood or convenience but discerned by God’s justice and righteousness. The difference appears when we ask whether to condemn a person crossing wrongly or first rescue the person in danger."
             />
           </p>
+          <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.goodEvil} />
         </PrincipleCard>
       </section>
 
@@ -275,6 +360,7 @@ export default async function FaithBasicsPage({ params }: Props) {
                   en="God, the source of all things, did not create humanity out of need. Yet God desired relationship and entered the human place symbolized by Eden to be with humanity. Creation is not God’s deficiency; it is love’s invitation."
                 />
               </p>
+              <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.love} />
               <p>
                 <T
                   locale={locale}
@@ -282,6 +368,7 @@ export default async function FaithBasicsPage({ params }: Props) {
                   en="Jesus reveals that love most clearly. God came in flesh, took the lower place, shared human suffering, and through the cross and resurrection showed that love is not a slogan but self-giving."
                 />
               </p>
+              <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.christ} />
             </div>
           </div>
         </div>
@@ -313,6 +400,7 @@ export default async function FaithBasicsPage({ params }: Props) {
                 en="But the Spirit is not a coercive controller. God honors human freedom so deeply that even rejecting God is possible. When good and evil both pull within us, the responsibility for where to add the next gram remains ours."
               />
             </p>
+            <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.spirit} />
           </div>
         </article>
 
@@ -355,6 +443,7 @@ export default async function FaithBasicsPage({ params }: Props) {
                 en="The Father is the source of love, the Son reveals that love in flesh and on the cross, and the Spirit helps that love become discerned and practiced within us. Faith is the blessing of being invited to live with this God."
               />
             </p>
+            <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.trinity} />
           </div>
         </article>
       </section>
@@ -391,6 +480,7 @@ export default async function FaithBasicsPage({ params }: Props) {
               en="Good done for righteousness flows toward the low place. We taste the kingdom of God where the vulnerable are protected, injustice is addressed, freedom is honored, and responsibility is carried in love."
             />
           </p>
+          <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.freedom} />
         </div>
       </section>
 
@@ -420,6 +510,7 @@ export default async function FaithBasicsPage({ params }: Props) {
               <T locale={locale} ko="성령의 도움을 구하되 선택을 회피하지 마십시오. 행하는 것은 우리에게 맡겨진 믿음의 응답입니다." en="Seek the Spirit’s help without avoiding choice. Action is the faithful response entrusted to us." />
             </li>
           </ol>
+          <ScriptureLinks locale={locale} passages={SCRIPTURE_GROUPS.practice} />
         </article>
 
         <aside className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6">
