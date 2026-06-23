@@ -1,12 +1,13 @@
 {
   "name": "bible-hyperlink-companion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "version:bump": "node scripts/bump-package-version.mjs",
     "benchmark:ko": "node scripts/run-korean-prompt-benchmark.mjs --fixture qa/korean-prompt-benchmark.json --locale ko",
     "benchmark:en": "node scripts/run-korean-prompt-benchmark.mjs --fixture qa/english-prompt-benchmark.json --locale en",
     "benchmark": "npm run benchmark:ko && npm run benchmark:en",
