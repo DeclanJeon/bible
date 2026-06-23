@@ -494,19 +494,15 @@ export default async function FaithBasicsPage({ params }: Props) {
           </div>
           <ol className="mt-5 space-y-4 text-sm leading-7 text-[var(--muted)]">
             <li>
-              <span className="font-semibold text-[var(--ink)]">1. </span>
               <T locale={locale} ko="성경을 공부하고 세상도 공부하십시오. 공의와 선과 사랑은 무지 위에 세워지지 않습니다." en="Study Scripture and also study the world. Righteousness, good, and love are not built on ignorance." />
             </li>
             <li>
-              <span className="font-semibold text-[var(--ink)]">2. </span>
               <T locale={locale} ko="법의 정의와 관계의 공의를 함께 보십시오. 하나님께서는 둘 다 보십니다." en="Hold together legal justice and relational righteousness. God sees both." />
             </li>
             <li>
-              <span className="font-semibold text-[var(--ink)]">3. </span>
               <T locale={locale} ko="예수님의 낮아지심을 기준으로 사랑을 배우십시오. 사랑은 감정 이전에 자발적 책임입니다." en="Learn love from Jesus’ humility. Love is voluntary responsibility before it is emotion." />
             </li>
             <li>
-              <span className="font-semibold text-[var(--ink)]">4. </span>
               <T locale={locale} ko="성령의 도움을 구하되 선택을 회피하지 마십시오. 행하는 것은 우리에게 맡겨진 믿음의 응답입니다." en="Seek the Spirit’s help without avoiding choice. Action is the faithful response entrusted to us." />
             </li>
           </ol>
