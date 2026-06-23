@@ -97,6 +97,9 @@ export default function RootLayout({
                   if (standalone) {
                     document.documentElement.dataset.pwaStandalone = 'true';
                   }
+                    window.setTimeout(function() {
+                      document.documentElement.dataset.pwaReady = 'true';
+                    }, 1400);
                 } catch (e) {
                   document.documentElement.dataset.pwaReady = 'true';
                 }
