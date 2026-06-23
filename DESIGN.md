@@ -15,6 +15,7 @@
   - `/[locale]/lanes`: study lane catalog.
   - `/[locale]/reviews`: anonymous review board.
   - `/[locale]/hanja` and `/[locale]/hanja/[slug]`: Hanja catalog and evidence/detail surfaces.
+  - `/[locale]/faith-basics` and `/[locale]/spirit-soul-body`: editorial doctrine/concept pages with source-separated Scripture review.
 - Evidence reviewed:
   - `README.md` — product positioning, routes, architecture, operating constraints.
   - `docs/bible-hyperlink-companion-design.md` — product direction, interaction model, graph intent, source policy.
@@ -37,6 +38,7 @@
   - `app/globals.css`, `tailwind.config.ts`, `components/global-nav.tsx`, `components/quick-prompt-form.tsx`, `components/passage-card.tsx`, `components/crossref-network.tsx`, `components/review-board.tsx`, `components/bible-book-search.tsx`, `components/hanja-catalog-search.tsx` — current layout, typography, token, navigation, card, form, and dense-list patterns.
   - `docs/design/concepts/home-google-style-ko.svg`, `docs/design/concepts/v2/overview-simplified-v2-ko.svg`, `docs/design/concepts/v2/companion-simplified-v2-ko.svg`, `docs/design/concepts/v2/study-simplified-v2-ko.svg`, `docs/design/concepts/v2/graph-simplified-v2-ko.svg`, `docs/design/concepts/v2/lanes-simplified-v2-ko.svg` — existing simplified concept direction.
   - Live local audit on `http://localhost:3101/ko`: home, companion, Bible reader, lanes, study, graph, cross-reference summary/full, reviews, Hanja catalog/detail, passage redirect, and not-found screens.
+  - `app/[locale]/spirit-soul-body/page.tsx` — page-specific redesign around the concept question, source/transcript separation, sticky section journey, and Scripture review map.
 
 ## Brand
 - Personality:
@@ -208,6 +210,7 @@
 - Reviews: keep as a small trust/support page. Reduce hero height; put the form first on mobile and reviews first on desktop.
 - Hanja catalog: keep visible-count loading, but add a clearer H1/description tying it to Bible study and use a denser list/card hybrid for 1,000+ entries.
 - Hanja detail: align with the editorial reading template: character hero, thesis, evidence, passages, sources. Reuse shared surface classes and CTA styling so it does not feel like a separate product.
+- Spirit/soul/body: treat as an editorial concept-review page, not a doctrine dashboard. First screen states the live question and caution, then the body follows `concept model → transcript argument flow → Scripture review map → sources`; keep claim, transcript basis, and review point visibly separate.
 - Loading/error/not-found: localize Korean/English copy by route locale where possible; remove emoji from error UI and use the same calm icon/card language as `BrandedLoadingPage`.
 
 ### Typography and scale target
