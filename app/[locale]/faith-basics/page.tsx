@@ -4,6 +4,7 @@ import { BookOpenText, HeartHandshake, Landmark, Scale, Sparkles } from "lucide-
 
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
+import { buildBibleReferenceHref } from "@/lib/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -101,25 +102,22 @@ const SOURCES: Source[] = [
 ];
 
 const PASSAGES = [
-  "Genesis 1:26–27",
-  "Genesis 2:15–17",
-  "Micah 6:8",
-  "Amos 5:24",
-  "Psalm 89:14",
-  "Isaiah 1:17",
-  "Matthew 22:37–40",
-  "John 13:34–35",
-  "John 14:16–17, 26",
-  "John 16:7–15",
-  "Romans 12:9",
-  "Galatians 5:22–23",
-  "Philippians 2:5–8",
-  "1 Corinthians 13:13",
-];
-
-function bibleGatewayHref(reference: string) {
-  return `https://www.biblegateway.com/passage/?search=${encodeURIComponent(reference)}&version=ESV`;
-}
+  { label: "Genesis 1:26–27", reference: { code: "GEN", chapter: 1, startVerse: 26, endVerse: 27 } },
+  { label: "Genesis 2:15–17", reference: { code: "GEN", chapter: 2, startVerse: 15, endVerse: 17 } },
+  { label: "Micah 6:8", reference: { code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 } },
+  { label: "Amos 5:24", reference: { code: "AMO", chapter: 5, startVerse: 24, endVerse: 24 } },
+  { label: "Psalm 89:14", reference: { code: "PSA", chapter: 89, startVerse: 14, endVerse: 14 } },
+  { label: "Isaiah 1:17", reference: { code: "ISA", chapter: 1, startVerse: 17, endVerse: 17 } },
+  { label: "Matthew 22:37–40", reference: { code: "MAT", chapter: 22, startVerse: 37, endVerse: 40 } },
+  { label: "John 13:34–35", reference: { code: "JOH", chapter: 13, startVerse: 34, endVerse: 35 } },
+  { label: "John 14:16–17", reference: { code: "JOH", chapter: 14, startVerse: 16, endVerse: 17 } },
+  { label: "John 14:26", reference: { code: "JOH", chapter: 14, startVerse: 26, endVerse: 26 } },
+  { label: "John 16:7–15", reference: { code: "JOH", chapter: 16, startVerse: 7, endVerse: 15 } },
+  { label: "Romans 12:9", reference: { code: "ROM", chapter: 12, startVerse: 9, endVerse: 9 } },
+  { label: "Galatians 5:22–23", reference: { code: "GAL", chapter: 5, startVerse: 22, endVerse: 23 } },
+  { label: "Philippians 2:5–8", reference: { code: "PHI", chapter: 2, startVerse: 5, endVerse: 8 } },
+  { label: "1 Corinthians 13:13", reference: { code: "1CO", chapter: 13, startVerse: 13, endVerse: 13 } },
+] as const;
 
 function T({ locale, ko, en }: { locale: AppLocale; ko: string; en: string }) {
   return locale === "ko" ? ko : en;
@@ -429,14 +427,14 @@ export default async function FaithBasicsPage({ params }: Props) {
             <T locale={locale} ko="함께 읽을 본문" en="Passages to read" />
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            {PASSAGES.map((reference) => (
-              <a
-                key={reference}
-                href={bibleGatewayHref(reference)}
+            {PASSAGES.map((passage) => (
+              <Link
+                key={passage.label}
+                href={buildBibleReferenceHref(passage.reference, { locale, from: "faith-basics" })}
                 className="rounded-full border border-[var(--hairline)] bg-[var(--surface-1)] px-3 py-2 text-xs font-medium text-[var(--ink-muted)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
               >
-                {reference}
-              </a>
+                {passage.label}
+              </Link>
             ))}
           </div>
           <Link
