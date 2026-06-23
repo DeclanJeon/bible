@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, Download, PlusSquare, Share, Smartphone, X } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type AppLocale = "ko" | "en";
@@ -118,18 +118,16 @@ function PwaBootController() {
 function PwaBackButton({ locale }: { locale: AppLocale }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [fallbackHref, setFallbackHref] = useState(`/${locale}`);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(isStandaloneDisplay());
-  }, [pathname]);
-
-  const fallbackHref = useMemo(() => {
-    const source = searchParams.get("from");
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get("from");
     const sourceFallback = source ? BACK_FALLBACK_BY_SOURCE[source]?.(locale) : undefined;
-    return sourceFallback ?? `/${locale}`;
-  }, [locale, searchParams]);
+    setFallbackHref(sourceFallback ?? `/${locale}`);
+    setVisible(isStandaloneDisplay());
+  }, [locale, pathname]);
 
   const goBack = useCallback(() => {
     if (window.history.length > 1) {
