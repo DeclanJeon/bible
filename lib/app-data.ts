@@ -80,7 +80,7 @@ type CanonBook = {
 const SOURCE_GROUPS = {
   scripture: [
     { label: "World English Bible text", url: "https://worldenglish.bible" },
-    { label: "Korean Bible text", url: "https://github.com/seven1m/open-bibles" },
+    { label: "Open Bibles Korean Bible text (not NKRV)", url: "https://github.com/seven1m/open-bibles" },
   ],
   crossReferences: [
     { label: "Bible Cross References project", url: "https://crossreferences.org/project/" },
@@ -93,7 +93,7 @@ const SOURCE_GROUPS = {
   ],
   data: [
     { label: "STEPBible data", url: "https://github.com/STEPBible/STEPBible-Data" },
-    { label: "Open Bibles Korean source", url: "https://github.com/seven1m/open-bibles" },
+    { label: "Open Bibles kor-korean.osis.xml source", url: "https://github.com/seven1m/open-bibles" },
   ],
 };
 
@@ -497,7 +497,7 @@ export function filterClusterCatalog(options: { topic?: string; q?: string; loca
 
 export const APP_SOURCES: SourceLink[] = [
   { label: "World English Bible text", url: "https://worldenglish.bible" },
-  { label: "Korean Bible text", url: "https://github.com/seven1m/open-bibles" },
+  { label: "Open Bibles Korean Bible text (not NKRV)", url: "https://github.com/seven1m/open-bibles" },
   { label: "Bible Cross References", url: "https://crossreferences.org/project/" },
   { label: "CrossWire TSK", url: "https://www2.crosswire.org/sword/modules/ModInfo.jsp?beta=true&modName=TSK" },
   { label: "STEPBible Data", url: "https://github.com/STEPBible/STEPBible-Data" },

@@ -510,8 +510,8 @@ export function localizeSourceLinks(sources: SourceLink[], locale?: string): Sou
   const labels: Record<string, string> = {
     "WEB metadata": "WEB 메타데이터",
     "World English Bible text": "World English Bible 본문",
-    "Korean Bible text": "한국어 성경 본문",
-    "Open Bibles Korean source": "Open Bibles 한국어 성경 원천",
+    "Open Bibles Korean Bible text (not NKRV)": "Open Bibles 한국어 성경 본문(개역개정 아님)",
+    "Open Bibles kor-korean.osis.xml source": "Open Bibles kor-korean.osis.xml 원천",
     "Bible Cross References": "Bible Cross References",
     "CrossWire TSK": "CrossWire TSK",
     "STEPBible Data": "STEPBible 데이터",

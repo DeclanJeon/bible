@@ -429,8 +429,8 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
   const locale = await resolveLocale(requestedLocale);
   const sectionLinks = [
     { href: "#concept-model", label: { ko: "컨셉 모델", en: "Concept model" } },
-    { href: "#argument-flow", label: { ko: "전사본 흐름", en: "Argument flow" } },
     { href: "#scripture-map", label: { ko: "성구 검토", en: "Scripture map" } },
+    { href: "#argument-flow", label: { ko: "사례 전사본", en: "Case transcript" } },
     { href: "#sources", label: { ko: "출처", en: "Sources" } },
   ] as const;
   const passagePath = [PASSAGES.wholePerson, PASSAGES.newCreation, PASSAGES.renewMind, PASSAGES.fleshSpirit] as const;
@@ -442,16 +442,16 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
         <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.96fr)] lg:items-center">
           <div>
             <div className="section-title text-base">
-              <T locale={locale} ko="영혼육 페이지 컨셉" en="Spirit, soul, and body concept" />
+              <T locale={locale} ko="영·혼·육 검토 지도" en="Spirit, soul, and body review map" />
             </div>
             <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-tight tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-              <T locale={locale} ko="새 피조물과 현실의 간극을 따라 읽는 영·혼·육 지도" en="A map for the gap between new creation and lived reality" />
+              <T locale={locale} ko="성구에서 시작하는 영·혼·육 검토 지도" en="A Scripture-first map for spirit, soul, and body" />
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
               <T
                 locale={locale}
-                ko="이 페이지의 핵심은 ‘사람을 세 조각으로 해부하기’가 아니라, 새 창조의 선언과 아직 훈련이 필요한 생각·감정·몸의 현실을 성구로 함께 검토하게 하는 것입니다. 전사본의 주장을 먼저 읽고, 바로 성경 본문과 보조 자료로 확인하도록 재구성했습니다."
-                en="The point is not to dissect a person into three parts. It is to help readers test the claim of new creation alongside the still-training realities of thought, emotion, and body through Scripture and source notes."
+                ko="이 페이지의 중심은 특정 강의가 아니라 성경 본문입니다. 영·혼·육을 기계적 삼분법으로 고정하지 않고, 새 창조의 선언과 생각·감정·몸의 현실을 먼저 성구로 검토한 뒤 주안에스토리 전사본은 하나의 사례 자료로 대조합니다."
+                en="The center of this page is Scripture, not one teaching source. It tests spirit, soul, and body through passages first, then uses the Juane Story transcript as one case source rather than the controlling frame."
               />
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -462,7 +462,7 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
                 className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-4 py-2.5 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]"
               >
                 <Link2 className="h-4 w-4" aria-hidden="true" />
-                <T locale={locale} ko="원 영상 보기" en="Open source video" />
+                <T locale={locale} ko="사례 영상 보기" en="Open case video" />
               </a>
               <Link
                 href={buildBibleReferenceHref(PASSAGES.wholePerson.reference, { locale, from: "spirit-soul-body" })}
@@ -488,7 +488,7 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
           <aside className="rounded-3xl border border-[var(--gold)]/20 bg-[var(--surface-0)]/70 p-5 shadow-2xl shadow-black/20 sm:p-6">
             <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
               <ScrollText className="h-5 w-5 text-[var(--gold)]" aria-hidden="true" />
-              <T locale={locale} ko="리디자인 판독" en="Redesign reading" />
+              <T locale={locale} ko="읽기 기준" en="Reading standard" />
             </div>
             <dl className="mt-5 space-y-5 text-sm leading-6 text-[var(--muted)]">
               <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4">
@@ -579,16 +579,16 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
           <section id="argument-flow" className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-7">
             <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
               <GitBranch className="h-5 w-5 text-[var(--gold)]" aria-hidden="true" />
-              <T locale={locale} ko="전사본 핵심 흐름" en="Transcript argument flow" />
+              <T locale={locale} ko="사례 전사본 흐름" en="Case transcript flow" />
             </div>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[var(--ink)]">
-              <T locale={locale} ko="간증 → 난제 → 영 → 혼 → 몸의 순서로 따라가기" en="Follow testimony → problem → spirit → soul → body" />
+              <T locale={locale} ko="주안에스토리 자료는 ‘검토 대상’으로 읽기" en="Read the Juane Story source as a case to test" />
             </h2>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
               <T
                 locale={locale}
-                ko="기존 카드 나열을 읽기 흐름으로 바꿨습니다. 각 단계는 ‘강의 주장’, ‘전사본 근거’, ‘검토 포인트’를 분리해 독자가 주장과 검증을 혼동하지 않게 합니다."
-                en="The old card list is now a reading flow. Each step separates teaching claim, transcript basis, and review point so readers do not confuse claim with verification."
+                ko="이 섹션은 페이지의 결론이 아니라 한 자료의 주장 구조를 투명하게 펼친 것입니다. 각 단계는 ‘강의 주장’, ‘전사본 근거’, ‘검토 포인트’를 분리해 독자가 주장과 성경 검증을 혼동하지 않게 합니다."
+                en="This section is not the page's verdict; it transparently lays out one source's argument. Each step separates teaching claim, transcript basis, and review point so readers do not confuse the claim with biblical verification."
               />
             </p>
             <div className="mt-7 space-y-5">

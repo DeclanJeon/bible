@@ -122,8 +122,8 @@ Current production target:
 
 ## Data sources
 
-- World English Bible public-domain corpus
-- Korean Bible corpus stored locally in `korean_bible/`
+- World English Bible public-domain corpus for English Bible text
+- Korean Bible corpus stored locally in `korean_bible/`, derived from Open Bibles `kor-korean.osis.xml`; this is not NKRV/개역개정
 - OpenBible / cross-reference derived knowledge data under `data/knowledge/`
 
 ## Operating constraints
