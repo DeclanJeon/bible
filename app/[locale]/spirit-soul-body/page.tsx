@@ -576,6 +576,49 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
             </div>
           </section>
 
+          <section id="scripture-map" className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-7">
+            <div className="section-title">
+              <T locale={locale} ko="성구 검토 지도" en="Scripture review map" />
+            </div>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[var(--ink)]">
+              <T locale={locale} ko="세 렌즈와 네 본문으로 과장 없이 확인하기" en="Use three lenses and four passages to test the claim" />
+            </h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {CROSS_CHECKS.map((item) => (
+                <article key={item.title.ko} className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-5">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">
+                    <T locale={locale} ko="검토 렌즈" en="Review lens" />
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-[var(--ink)]">{item.title[locale]}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description[locale]}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.passages.map((passage) => (
+                      <ScriptureChip key={referenceKey(passage)} passage={passage} locale={locale} />
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-5">
+              <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
+                <Layers3 className="h-5 w-5 text-[var(--gold)]" aria-hidden="true" />
+                <T locale={locale} ko="추천 읽기 순서" en="Recommended reading path" />
+              </div>
+              <div className="mt-5 grid gap-4 lg:grid-cols-4">
+                {passagePath.map((passage, index) => (
+                  <div key={referenceKey(passage)} className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4">
+                    <ScriptureChip passage={passage} locale={locale} />
+                    <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{passage.note[locale]}</p>
+                    {index < passagePath.length - 1 ? (
+                      <ArrowRight className="mt-4 hidden h-4 w-4 text-[var(--gold)] lg:block" aria-hidden="true" />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <section id="argument-flow" className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-7">
             <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
               <GitBranch className="h-5 w-5 text-[var(--gold)]" aria-hidden="true" />
@@ -627,49 +670,6 @@ export default async function SpiritSoulBodyPage({ params }: Props) {
                   </div>
                 </article>
               ))}
-            </div>
-          </section>
-
-          <section id="scripture-map" className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-7">
-            <div className="section-title">
-              <T locale={locale} ko="성구 검토 지도" en="Scripture review map" />
-            </div>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[var(--ink)]">
-              <T locale={locale} ko="세 렌즈와 네 본문으로 과장 없이 확인하기" en="Use three lenses and four passages to test the claim" />
-            </h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {CROSS_CHECKS.map((item) => (
-                <article key={item.title.ko} className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-5">
-                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">
-                    <T locale={locale} ko="검토 렌즈" en="Review lens" />
-                  </div>
-                  <h3 className="mt-3 text-lg font-semibold text-[var(--ink)]">{item.title[locale]}</h3>
-                  <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description[locale]}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {item.passages.map((passage) => (
-                      <ScriptureChip key={referenceKey(passage)} passage={passage} locale={locale} />
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-5">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
-                <Layers3 className="h-5 w-5 text-[var(--gold)]" aria-hidden="true" />
-                <T locale={locale} ko="추천 읽기 순서" en="Recommended reading path" />
-              </div>
-              <div className="mt-5 grid gap-4 lg:grid-cols-4">
-                {passagePath.map((passage, index) => (
-                  <div key={referenceKey(passage)} className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4">
-                    <ScriptureChip passage={passage} locale={locale} />
-                    <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{passage.note[locale]}</p>
-                    {index < passagePath.length - 1 ? (
-                      <ArrowRight className="mt-4 hidden h-4 w-4 text-[var(--gold)] lg:block" aria-hidden="true" />
-                    ) : null}
-                  </div>
-                ))}
-              </div>
             </div>
           </section>
 
