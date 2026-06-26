@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   BookOpen,
-  Cross,
   Heart,
   HelpCircle,
   Home,
@@ -65,25 +65,31 @@ function isActive(href: string, pathname: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  document.documentElement.style.colorScheme = theme;
+}
+
 function ThemeToggle({ label }: { label: string }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("bible-theme");
+    const current = document.documentElement.dataset.theme;
     const initial: Theme =
-      stored === "dark" || stored === "light"
-        ? stored
+      current === "dark" || current === "light"
+        ? current
         : window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
     setTheme(initial);
-    document.documentElement.dataset.theme = initial;
+    applyTheme(initial);
   }, []);
 
   const toggle = useCallback(() => {
     setTheme((current) => {
       const next = current === "dark" ? "light" : "dark";
-      document.documentElement.dataset.theme = next;
+      applyTheme(next);
       window.localStorage.setItem("bible-theme", next);
       return next;
     });
@@ -97,6 +103,7 @@ function ThemeToggle({ label }: { label: string }) {
       onClick={toggle}
       className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
       aria-label={label}
+      aria-pressed={theme === "dark"}
       title={label}
     >
       <Icon className="h-4 w-4" />
@@ -178,9 +185,7 @@ function MobileDrawer({
       <nav ref={panelRef} className="absolute right-0 top-0 flex h-full w-72 flex-col border-l border-[var(--hairline)] bg-surface-1 shadow-2xl">
         <div className="flex items-center justify-between border-b border-[var(--hairline)] px-4 py-4">
           <span className="flex items-center gap-2 text-sm font-semibold text-ink">
-            <span className="flex h-5 w-5 items-center justify-center rounded bg-[var(--logo-bg)] text-white">
-              <Cross className="h-3.5 w-3.5" />
-            </span>
+            <Image src="/logo.svg" alt="" width={20} height={20} className="h-5 w-5 rounded" priority />
             {copy.siteTitle}
           </span>
           <button
@@ -261,9 +266,7 @@ export function GlobalNav({
             href={`/${locale}`}
             className="flex items-center gap-2 text-base font-semibold tracking-tight text-ink transition-opacity hover:opacity-80"
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded bg-[var(--logo-bg)] text-white">
-              <Cross className="h-3.5 w-3.5" />
-            </span>
+            <Image src="/logo.svg" alt="" width={20} height={20} className="h-5 w-5 rounded" priority />
             {copy.siteTitle}
           </Link>
 
