@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Languages, Layers, Search, Shield, Sparkles, type LucideIcon } from "lucide-react";
 import { UI_COPY, localizeStoryCluster, localizeTopicLabel } from "@/lib/content";
-import { buildPageMetadata } from "@/lib/page-metadata";
+import { buildPageMetadata, siteDescription } from "@/lib/page-metadata";
 import { STORY_CLUSTERS, getTopicStarts } from "@/lib/app-data";
 
 type Props = {
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = requestedLocale === "en" ? "en" : "ko";
   const copy = UI_COPY[locale].home;
 
-  return buildPageMetadata(locale, copy.heroTitle, copy.heroSubtitle, "/");
+  return buildPageMetadata(locale, copy.heroTitle, siteDescription(locale), "/");
 }
 
 export default async function HomePage({ params }: Props) {

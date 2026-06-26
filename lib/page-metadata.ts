@@ -18,6 +18,34 @@ function absoluteUrl(path: string) {
 }
 
 export const OG_IMAGE_URL = absoluteUrl("/og-image.png");
+export function siteImageAlt(locale: AppLocale) {
+  return locale === "ko"
+    ? "성경 길찾기 - 고민 한 문장을 본문, 맥락, 교차참조로 연결하는 성경 공부 앱"
+    : "Bible Guidance - a Bible study app that connects one concern to passages, context, and cross references";
+}
+
+export function siteKeywords(locale: AppLocale) {
+  return locale === "ko"
+    ? [
+        "성경 공부",
+        "성경 묵상",
+        "성경 교차참조",
+        "성경 본문",
+        "신앙 질문",
+        "성경 길찾기",
+        "성경 하이퍼링크 컴패니언",
+      ]
+    : [
+        "Bible study",
+        "Bible reflection",
+        "Bible cross references",
+        "Scripture context",
+        "faith questions",
+        "Bible guidance",
+        "Bible Hyperlink Companion",
+      ];
+}
+
 
 export function buildPageMetadata(locale: AppLocale, title: string, description: string, path?: string): Metadata {
   const siteName = UI_COPY[locale].siteTitle;
@@ -27,8 +55,9 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
   const url = absoluteUrl(canonicalPath);
 
   return {
-    title: fullTitle,
+    title,
     description,
+    keywords: siteKeywords(locale),
     metadataBase: new URL(SITE_URL),
     alternates: {
       canonical: url,
@@ -49,7 +78,7 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
           url: OG_IMAGE_URL,
           width: 1200,
           height: 630,
-          alt: siteName,
+          alt: siteImageAlt(locale),
         },
       ],
     },
@@ -64,8 +93,8 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
 
 export function siteDescription(locale: AppLocale) {
   return locale === "ko"
-    ? "삶의 고민을 성경 본문, 문맥, 교차참조, 시대와 장소의 층위로 연결해 주는 근거 중심 성경 공부 컴패니언입니다."
-    : "A grounded Bible study companion that connects lived concerns to scripture, context, and cross references.";
+    ? "고민 한 문장을 입력하면 성경 본문, 문맥, 교차참조, 시대·장소·저자 정보를 따라 공부 경로를 제안하는 한국어 성경 공부 앱입니다."
+    : "Enter one concern and follow a grounded Bible study path through passages, context, cross references, date, place, and authorship.";
 }
 
 export function siteTitle(locale: AppLocale) {

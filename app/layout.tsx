@@ -1,22 +1,39 @@
 import type { Metadata, Viewport } from "next";
 
-import { OG_IMAGE_URL, SITE_URL, siteDescription, siteTitle } from "@/lib/page-metadata";
+import { OG_IMAGE_URL, SITE_URL, siteDescription, siteImageAlt, siteKeywords, siteTitle } from "@/lib/page-metadata";
 import "./globals.css";
+
+const defaultLocale = "ko";
+const defaultTitle = `성경 길찾기 | ${siteTitle(defaultLocale)}`;
+const defaultDescription = siteDescription(defaultLocale);
+const defaultImageAlt = siteImageAlt(defaultLocale);
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: siteTitle("ko"),
-  description: siteDescription("ko"),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteTitle(defaultLocale)}`,
+  },
+  applicationName: siteTitle(defaultLocale),
+  description: defaultDescription,
+  keywords: siteKeywords(defaultLocale),
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  alternates: {
+    canonical: `${SITE_URL}/ko`,
+    languages: {
+      ko: `${SITE_URL}/ko`,
+      en: `${SITE_URL}/en`,
+    },
+  },
   openGraph: {
-    title: siteTitle("ko"),
-    description: siteDescription("ko"),
+    title: defaultTitle,
+    description: defaultDescription,
     url: `${SITE_URL}/ko`,
-    siteName: siteTitle("ko"),
+    siteName: siteTitle(defaultLocale),
     type: "website",
     locale: "ko_KR",
     images: [
@@ -24,16 +41,19 @@ export const metadata: Metadata = {
         url: OG_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: siteTitle("ko"),
+        alt: defaultImageAlt,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle("ko"),
-    description: siteDescription("ko"),
+    title: defaultTitle,
+    description: defaultDescription,
     images: [OG_IMAGE_URL],
   },
+  creator: "Ponslink",
+  publisher: "Ponslink",
+  category: "Bible study",
   icons: {
     icon: "/favicon.svg",
     apple: "/apple-touch-icon.png",
@@ -133,11 +153,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "성경 하이퍼링크 컴패니언",
-              alternateName: "Bible Hyperlink Companion",
+              name: defaultTitle,
+              alternateName: siteTitle(defaultLocale),
               url: SITE_URL,
-              description:
-                "삶의 고민을 성경 본문, 문맥, 교차참조, 시대와 장소의 층위로 연결해 주는 근거 중심 성경 공부 컴패니언입니다.",
+              description: defaultDescription,
               inLanguage: ["ko", "en"],
               potentialAction: {
                 "@type": "SearchAction",
