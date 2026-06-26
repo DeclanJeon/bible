@@ -18,6 +18,10 @@ rsync -a \
   --exclude node_modules \
   --exclude .next \
   --exclude .data \
+  --exclude v2 \
+  --exclude v2.tar \
+  --exclude .omx \
+  --exclude .omx-artifacts \
   --exclude dist \
   --exclude build \
   --exclude coverage \

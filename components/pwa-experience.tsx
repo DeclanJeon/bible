@@ -155,13 +155,14 @@ function PwaBackButton({ locale }: { locale: AppLocale }) {
 
 function PwaInstallPrompt({ locale }: { locale: AppLocale }) {
   const copy = COPY[locale];
+  const pathname = usePathname();
   const [installEvent, setInstallEvent] = useState<BeforeInstallPromptEvent | null>(null);
   const [mode, setMode] = useState<InstallMode | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const updateVisibility = () => {
-      if (isStandaloneDisplay() || !isTouchDevice() || recentlyDismissed()) {
+      if (pathname === `/${locale}` || isStandaloneDisplay() || !isTouchDevice() || recentlyDismissed()) {
         setVisible(false);
         setMode(null);
         return;
@@ -186,7 +187,7 @@ function PwaInstallPrompt({ locale }: { locale: AppLocale }) {
     updateVisibility();
     const timer = window.setTimeout(updateVisibility, 900);
     return () => window.clearTimeout(timer);
-  }, [installEvent]);
+  }, [installEvent, locale, pathname]);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: Event) => {

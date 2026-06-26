@@ -7,6 +7,7 @@ export async function GlobalNavShell({ locale }: { locale: AppLocale }) {
   const hasHanja = await hasHanjaCatalogEntries();
 
   const links = [
+    { key: "home", href: `/${locale}`, label: locale === "ko" ? "홈" : "Home" },
     { key: "bible", href: `/${locale}/bible`, label: locale === "ko" ? "성경 읽기" : "Bible" },
     ...(hasHanja ? [{ key: "hanja", href: `/${locale}/hanja`, label: locale === "ko" ? "한자" : "Hanja" }] : []),
     { key: "companion", href: `/${locale}/companion`, label: locale === "ko" ? "컴패니언" : "Companion" },

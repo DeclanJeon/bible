@@ -3,61 +3,63 @@
 @tailwind utilities;
 
 :root {
-  /* Canvas — near-black (Linear/Raycast reference range) */
-  --canvas: #08080d;
-  --surface-0: #060609;
-  --surface-1: #0e0e16;
-  --surface-2: #16161f;
-  --surface-3: #1e1e28;
+  /* Visual Ralph reference tokens — copied from the live/v2 parchment baseline */
+  --canvas: oklch(0.98 0.005 85);
+  --surface-0: oklch(0.98 0.005 85);
+  --surface-1: oklch(1 0 0);
+  --surface-2: oklch(0.95 0.01 85);
+  --surface-3: oklch(0.93 0.02 85);
+  --nav-bg: oklch(0.98 0.005 85 / 88%);
 
-  /* Hairline — subtle borders */
-  --hairline: rgba(255, 255, 255, 0.06);
-  --hairline-strong: rgba(255, 255, 255, 0.12);
-  --hairline-hover: rgba(212, 168, 83, 0.25);
+  /* Hairline — reference uses subtle warm OKLCH borders */
+  --hairline: oklch(0.90 0.015 85);
+  --hairline-strong: oklch(0.84 0.02 85);
+  --hairline-hover: oklch(0.65 0.16 70 / 35%);
 
-  /* Text hierarchy — warm off-white */
-  --ink: #f0ece4;
-  --ink-muted: #8a8480;
-  --ink-subtle: #5a5550;
+  /* Text hierarchy */
+  --ink: oklch(0.18 0.02 60);
+  --ink-muted: oklch(0.50 0.02 60);
+  --ink-subtle: oklch(0.62 0.02 70);
 
-  /* Accent — gold (preserved) */
-  --gold: #d4a853;
-  --gold-hover: #e0bc6a;
-  --gold-deep: #b8923f;
-  --gold-soft: rgba(212, 168, 83, 0.08);
-  --gold-border: rgba(212, 168, 83, 0.25);
+  /* Accent — v2 gold scale */
+  --gold: oklch(0.65 0.16 70);
+  --gold-hover: oklch(0.45 0.18 60);
+  --gold-deep: oklch(0.45 0.18 60);
+  --gold-soft: oklch(0.65 0.16 70 / 10%);
+  --gold-border: oklch(0.65 0.16 70 / 28%);
+  --logo-bg: #a855b7;
 
   /* Link */
-  --link: #8ab4e8;
+  --link: oklch(0.55 0.15 65);
 
-  /* Input (Raycast/Cleo pattern) */
-  --input-bg: #0c0c14;
-  --input-border: rgba(255, 255, 255, 0.08);
-  --input-focus-border: rgba(212, 168, 83, 0.40);
-  --input-placeholder: #4a4540;
+  /* Input */
+  --input-bg: oklch(0.982 0.005 85);
+  --input-border: oklch(0.90 0.015 85 / 70%);
+  --input-focus-border: oklch(0.55 0.15 65 / 42%);
+  --input-placeholder: oklch(0.50 0.02 60);
 
   /* Focus (WCAG) */
-  --focus-ring: rgba(212, 168, 83, 0.5);
+  --focus-ring: rgba(181, 101, 25, 0.45);
 
-  /* Transitions (Linear/Raycast easing) */
+  /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
 
-  /* Spacing (clamp-based, responsive) */
+  /* Spacing */
   --container-max: clamp(320px, 92vw, 1200px);
   --gutter: clamp(16px, 4vw, 48px);
   --section-pad: clamp(48px, 8vw, 120px);
   --card-gap: clamp(12px, 2vw, 24px);
 
-  /* Radius (Stripe/Notion ranges) */
+  /* Radius */
   --radius-card: 12px;
-  --radius-input: 8px;
+  --radius-input: 12px;
   --radius-pill: 999px;
 
-  /* Nav (all references) */
-  --nav-height: clamp(56px, 6vw, 72px);
+  /* Nav */
+  --nav-height: 56px;
 
   /* Z-index layers */
   --z-bg: 0;
@@ -66,11 +68,37 @@
   --z-overlay: 50;
   --z-modal: 60;
 
-  /* Legacy aliases — backward compatibility */
+  /* Legacy aliases */
   --accent: var(--gold);
   --text: var(--ink);
   --muted: var(--ink-muted);
   --line: var(--hairline);
+}
+
+:root[data-theme="dark"] {
+  --canvas: #12100d;
+  --surface-0: #12100d;
+  --surface-1: #1b1814;
+  --surface-2: #242019;
+  --surface-3: #30291f;
+  --nav-bg: rgba(18, 16, 13, 0.86);
+  --hairline: rgba(255, 244, 224, 0.10);
+  --hairline-strong: rgba(255, 244, 224, 0.18);
+  --hairline-hover: rgba(221, 157, 74, 0.34);
+  --ink: #f2eee6;
+  --ink-muted: #b9afa2;
+  --ink-subtle: #83776a;
+  --gold: #dd9d4a;
+  --gold-hover: #efb96c;
+  --gold-deep: #b76519;
+  --gold-soft: rgba(221, 157, 74, 0.12);
+  --gold-border: rgba(221, 157, 74, 0.32);
+  --link: #efb96c;
+  --input-bg: #17140f;
+  --input-border: rgba(255, 244, 224, 0.12);
+  --input-focus-border: rgba(221, 157, 74, 0.50);
+  --input-placeholder: #8d8274;
+  --focus-ring: rgba(221, 157, 74, 0.50);
 }
 
 * {
@@ -86,7 +114,7 @@ html {
 body {
   background: var(--canvas);
   color: var(--ink);
-  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -163,7 +191,7 @@ html[data-pwa-standalone="true"]:not([data-pwa-ready="true"]) .pwa-boot-splash {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--gold), #e0bc6a);
+  background: linear-gradient(135deg, #a93c05, #b76519);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

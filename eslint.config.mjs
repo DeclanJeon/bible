@@ -19,6 +19,8 @@ const eslintConfig = [
       "artifacts/**",
       "world_english_bible/**",
       "korean_bible/**",
+      "v2/**",
+      ".omx-artifacts/**",
     ],
   },
 ];
