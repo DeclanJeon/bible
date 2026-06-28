@@ -1,0 +1,2291 @@
+[
+  {
+    "id": "gq-ko-full-001",
+    "bucket": "gold",
+    "query": "사탄은 누구인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Satan.html",
+    "expectedAnyCategoryIds": [
+      "angels"
+    ],
+    "expectedAnyReferences": [
+      "ISA-14-13-14",
+      "EZK-28-15-15",
+      "1TI-3-6-6"
+    ],
+    "expectedStanceTags": [
+      "angels"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-002",
+    "bucket": "gold",
+    "query": "진리란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-is-truth.html",
+    "expectedAnyCategoryIds": [
+      "apologetics-worldview"
+    ],
+    "expectedAnyReferences": [
+      "LUK-23-2-2",
+      "MAT-22-21-21",
+      "JHN-18-33-38"
+    ],
+    "expectedStanceTags": [
+      "apologetics-worldview"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-003",
+    "bucket": "gold",
+    "query": "정경이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-canon-of-scripture.html",
+    "expectedAnyCategoryIds": [
+      "bible"
+    ],
+    "expectedAnyReferences": [
+      "JUD-1-3-3",
+      "PSA-119-160-160",
+      "ISA-9-6-7"
+    ],
+    "expectedStanceTags": [
+      "bible"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-004",
+    "bucket": "gold",
+    "query": "아볼로는 누구입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-who-Apollos.html",
+    "expectedAnyCategoryIds": [
+      "bible-people"
+    ],
+    "expectedAnyReferences": [
+      "ACT-18-24-24",
+      "ACT-18-25-25",
+      "ACT-18-26-26"
+    ],
+    "expectedStanceTags": [
+      "bible-people"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-005",
+    "bucket": "gold",
+    "query": "영적인 성장이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-spiritual-growth.html",
+    "expectedAnyCategoryIds": [
+      "christian"
+    ],
+    "expectedAnyReferences": [
+      "GAL-5-22-23",
+      "JHN-14-16-17",
+      "2CO-5-17-17"
+    ],
+    "expectedStanceTags": [
+      "christian"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-006",
+    "bucket": "gold",
+    "query": "교회는 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-church.html",
+    "expectedAnyCategoryIds": [
+      "church"
+    ],
+    "expectedAnyReferences": [
+      "1CO-12-13-13",
+      "JHN-3-16-16"
+    ],
+    "expectedStanceTags": [
+      "church"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-007",
+    "bucket": "gold",
+    "query": "간격이론이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-gap-theory.html",
+    "expectedAnyCategoryIds": [
+      "creation"
+    ],
+    "expectedAnyReferences": [
+      "GEN-1-1-2",
+      "GEN-1-1-1",
+      "GEN-1-2-2"
+    ],
+    "expectedStanceTags": [
+      "creation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-008",
+    "bucket": "gold",
+    "query": "환난이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-tribulation.html",
+    "expectedAnyCategoryIds": [
+      "end-times"
+    ],
+    "expectedAnyReferences": [
+      "1TH-4-13-18",
+      "1CO-15-51-53",
+      "1TH-5-9-9"
+    ],
+    "expectedStanceTags": [
+      "end-times"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-009",
+    "bucket": "gold",
+    "query": "내세가 있습니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-afterlife.html",
+    "expectedAnyCategoryIds": [
+      "eternity"
+    ],
+    "expectedAnyReferences": [
+      "JOB-14-14-14",
+      "JHN-3-13-13",
+      "MRK-12-26-27"
+    ],
+    "expectedStanceTags": [
+      "eternity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-010",
+    "bucket": "gold",
+    "query": "무신론이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-atheism.html",
+    "expectedAnyCategoryIds": [
+      "false"
+    ],
+    "expectedAnyReferences": [
+      "2PE-3-9-9",
+      "JHN-3-16-16",
+      "EXO-14-21-22"
+    ],
+    "expectedStanceTags": [
+      "false"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-011",
+    "bucket": "gold",
+    "query": "부모를 공경하라는 것은 어떤 의미인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-honor-father-mother.html",
+    "expectedAnyCategoryIds": [
+      "family"
+    ],
+    "expectedAnyReferences": [
+      "EXO-20-12-12",
+      "EPH-6-1-3",
+      "JER-35-18-19"
+    ],
+    "expectedStanceTags": [
+      "family"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-012",
+    "bucket": "gold",
+    "query": "하나님은 존재하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Does-God-Exist.html",
+    "expectedAnyCategoryIds": [
+      "god"
+    ],
+    "expectedAnyReferences": [
+      "HEB-11-6-6",
+      "JHN-20-29-29",
+      "PSA-19-1-4"
+    ],
+    "expectedStanceTags": [
+      "god"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-013",
+    "bucket": "gold",
+    "query": "생기란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-breath-of-life.html",
+    "expectedAnyCategoryIds": [
+      "humanity"
+    ],
+    "expectedAnyReferences": [
+      "GEN-2-7-7",
+      "JHN-20-22-22"
+    ],
+    "expectedStanceTags": [
+      "humanity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-014",
+    "bucket": "gold",
+    "query": "예수님은 하나님이신가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Is-Jesus-God.html",
+    "expectedAnyCategoryIds": [
+      "jesus"
+    ],
+    "expectedAnyReferences": [
+      "JHN-10-33-33",
+      "LEV-24-16-16",
+      "JHN-1-1-1"
+    ],
+    "expectedStanceTags": [
+      "jesus"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-015",
+    "bucket": "gold",
+    "query": "크리스천도 휴가를 가도 될까요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Christian-vacation.html",
+    "expectedAnyCategoryIds": [
+      "life"
+    ],
+    "expectedAnyReferences": [
+      "GEN-2-2-3",
+      "EXO-20-8-11",
+      "MRK-2-27-27"
+    ],
+    "expectedStanceTags": [
+      "life"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-016",
+    "bucket": "gold",
+    "query": "천국에 결혼이 있는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-marriage-heaven.html",
+    "expectedAnyCategoryIds": [
+      "marriage"
+    ],
+    "expectedAnyReferences": [
+      "MAT-22-30-30",
+      "MAT-22-23-28",
+      "GEN-2-18-18"
+    ],
+    "expectedStanceTags": [
+      "marriage"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-017",
+    "bucket": "gold",
+    "query": "룻기",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-book-Ruth.html",
+    "expectedAnyCategoryIds": [
+      "miscellaneous"
+    ],
+    "expectedAnyReferences": [
+      "RUT-1-16-16",
+      "RUT-3-9-9",
+      "RUT-4-17-17"
+    ],
+    "expectedStanceTags": [
+      "miscellaneous"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-018",
+    "bucket": "gold",
+    "query": "왜 기도하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-why-pray.html",
+    "expectedAnyCategoryIds": [
+      "prayer"
+    ],
+    "expectedAnyReferences": [
+      "LUK-2-36-38",
+      "PHP-4-6-7",
+      "MRK-1-35-35"
+    ],
+    "expectedStanceTags": [
+      "prayer"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-019",
+    "bucket": "gold",
+    "query": "순결의 회복이라는 것이 가능한가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-born-again-virginity.html",
+    "expectedAnyCategoryIds": [
+      "relationships"
+    ],
+    "expectedAnyReferences": [
+      "1JN-1-9-9",
+      "2CO-5-17-17",
+      "JER-31-34-34"
+    ],
+    "expectedStanceTags": [
+      "relationships"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-020",
+    "bucket": "gold",
+    "query": "몰몬교란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Mormonism.html",
+    "expectedAnyCategoryIds": [
+      "religions"
+    ],
+    "expectedAnyReferences": [
+      "2TI-3-16-16",
+      "DEU-6-4-4",
+      "ISA-43-10-10"
+    ],
+    "expectedStanceTags": [
+      "religions"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-021",
+    "bucket": "gold",
+    "query": "대속이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-atonement.html",
+    "expectedAnyCategoryIds": [
+      "salvation"
+    ],
+    "expectedAnyReferences": [
+      "ROM-3-9-18",
+      "ROM-3-23-23",
+      "2CO-5-21-21"
+    ],
+    "expectedStanceTags": [
+      "salvation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-022",
+    "bucket": "gold",
+    "query": "식탐은 죄인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-gluttony-sin.html",
+    "expectedAnyCategoryIds": [
+      "sin"
+    ],
+    "expectedAnyReferences": [
+      "DEU-21-20-20",
+      "PRO-23-2-2",
+      "1PE-1-5-7"
+    ],
+    "expectedStanceTags": [
+      "sin"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-023",
+    "bucket": "gold",
+    "query": "성령님은 누구신가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Holy-Spirit.html",
+    "expectedAnyCategoryIds": [
+      "spirit"
+    ],
+    "expectedAnyReferences": [
+      "1CO-2-10-10",
+      "EPH-4-30-30",
+      "ROM-8-26-27"
+    ],
+    "expectedStanceTags": [
+      "spirit"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-024",
+    "bucket": "gold",
+    "query": "신학이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-is-theology.html",
+    "expectedAnyCategoryIds": [
+      "theology"
+    ],
+    "expectedAnyReferences": [
+      "ROM-11-33-36",
+      "2TI-3-16-17",
+      "EXO-3-14-14"
+    ],
+    "expectedStanceTags": [
+      "theology"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-025",
+    "bucket": "gold",
+    "query": "에로스 사랑은 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-eros-love.html",
+    "expectedAnyCategoryIds": [
+      "topical"
+    ],
+    "expectedAnyReferences": [
+      "LUK-6-35-35",
+      "ROM-5-8-8",
+      "COL-3-5-5"
+    ],
+    "expectedStanceTags": [
+      "topical"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-026",
+    "bucket": "gold",
+    "query": "수호천사가 있는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-guardian-angels.html",
+    "expectedAnyCategoryIds": [
+      "angels"
+    ],
+    "expectedAnyReferences": [
+      "MAT-18-10-10",
+      "DAN-6-20-23",
+      "2KI-6-13-17"
+    ],
+    "expectedStanceTags": [
+      "angels"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-027",
+    "bucket": "gold",
+    "query": "불신자란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-infidel.html",
+    "expectedAnyCategoryIds": [
+      "apologetics-worldview"
+    ],
+    "expectedAnyReferences": [
+      "JHN-20-9-9",
+      "DEU-21-23-23",
+      "PSA-14-1-1"
+    ],
+    "expectedStanceTags": [
+      "apologetics-worldview"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-028",
+    "bucket": "gold",
+    "query": "성경은 동화입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Bible-fairy-tale.html",
+    "expectedAnyCategoryIds": [
+      "bible"
+    ],
+    "expectedAnyReferences": [
+      "GEN-3-1-5",
+      "2TI-3-16-16",
+      "2PE-1-21-21"
+    ],
+    "expectedStanceTags": [
+      "bible"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-029",
+    "bucket": "gold",
+    "query": "가룟 유다는 누구입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Judas-Iscariot.html",
+    "expectedAnyCategoryIds": [
+      "bible-people"
+    ],
+    "expectedAnyReferences": [
+      "JHN-12-6-6",
+      "JHN-14-22-22",
+      "MRK-6-3-3"
+    ],
+    "expectedStanceTags": [
+      "bible-people"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-030",
+    "bucket": "gold",
+    "query": "기독교 영성이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-spirituality-christian.html",
+    "expectedAnyCategoryIds": [
+      "christian"
+    ],
+    "expectedAnyReferences": [
+      "EPH-1-13-13",
+      "EPH-1-4-4",
+      "JHN-16-13-13"
+    ],
+    "expectedStanceTags": [
+      "christian"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-031",
+    "bucket": "gold",
+    "query": "교회의 목적은 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-purpose-church.html",
+    "expectedAnyCategoryIds": [
+      "church"
+    ],
+    "expectedAnyReferences": [
+      "ROM-12-10-10",
+      "ROM-15-14-14",
+      "EPH-4-32-32"
+    ],
+    "expectedStanceTags": [
+      "church"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-032",
+    "bucket": "gold",
+    "query": "아담과 하와에 대한 질문",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Adam-and-Eve-questions.html",
+    "expectedAnyCategoryIds": [
+      "creation"
+    ],
+    "expectedAnyReferences": [
+      "GEN-3-15-15",
+      "GEN-3-21-21",
+      "GEN-4-1-1"
+    ],
+    "expectedStanceTags": [
+      "creation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-033",
+    "bucket": "gold",
+    "query": "십사만사천은 누구인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-144000.html",
+    "expectedAnyCategoryIds": [
+      "end-times"
+    ],
+    "expectedAnyReferences": [
+      "REV-1-3-3",
+      "REV-7-4-4",
+      "DAN-9-24-27"
+    ],
+    "expectedStanceTags": [
+      "end-times"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-034",
+    "bucket": "gold",
+    "query": "천국은 어떤 곳인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-heaven-like.html",
+    "expectedAnyCategoryIds": [
+      "eternity"
+    ],
+    "expectedAnyReferences": [
+      "2CO-12-1-9",
+      "GEN-1-14-18",
+      "JHN-14-2-2"
+    ],
+    "expectedStanceTags": [
+      "eternity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-035",
+    "bucket": "gold",
+    "query": "관상기도란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-contemplative-prayer.html",
+    "expectedAnyCategoryIds": [
+      "false"
+    ],
+    "expectedAnyReferences": [
+      "1CO-14-15-15",
+      "PHP-4-6-6",
+      "JHN-16-23-24"
+    ],
+    "expectedStanceTags": [
+      "false"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-036",
+    "bucket": "gold",
+    "query": "성경은 가족계획에 대해 어떻게 말하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-birth-control.html",
+    "expectedAnyCategoryIds": [
+      "family"
+    ],
+    "expectedAnyReferences": [
+      "GEN-4-1-1",
+      "PSA-127-3-5",
+      "LUK-1-42-42"
+    ],
+    "expectedStanceTags": [
+      "family"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-037",
+    "bucket": "gold",
+    "query": "하나님은 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-is-God.html",
+    "expectedAnyCategoryIds": [
+      "god"
+    ],
+    "expectedAnyReferences": [
+      "JOB-11-7-8",
+      "EXO-3-13-13",
+      "EXO-3-14-14"
+    ],
+    "expectedStanceTags": [
+      "god"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-038",
+    "bucket": "gold",
+    "query": "육신이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-the-flesh.html",
+    "expectedAnyCategoryIds": [
+      "humanity"
+    ],
+    "expectedAnyReferences": [
+      "ROM-5-12-12",
+      "ROM-7-14-24",
+      "GEN-1-26-27"
+    ],
+    "expectedStanceTags": [
+      "humanity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-039",
+    "bucket": "gold",
+    "query": "예수님은 유대인이었나요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-was-Jesus-a-Jew.html",
+    "expectedAnyCategoryIds": [
+      "jesus"
+    ],
+    "expectedAnyReferences": [
+      "DEU-7-1-5",
+      "LEV-24-10-10",
+      "EZR-10-2-3"
+    ],
+    "expectedStanceTags": [
+      "jesus"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-040",
+    "bucket": "gold",
+    "query": "그리스도인은 운동을 해야 하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Christian-exercise.html",
+    "expectedAnyCategoryIds": [
+      "life"
+    ],
+    "expectedAnyReferences": [
+      "1CO-6-19-20",
+      "1SA-16-7-7",
+      "PRO-31-30-30"
+    ],
+    "expectedStanceTags": [
+      "life"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-041",
+    "bucket": "paraphrase",
+    "query": "결혼의 정의는 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-definition-of-marriage.html",
+    "expectedAnyCategoryIds": [
+      "marriage"
+    ],
+    "expectedAnyReferences": [
+      "GEN-2-25-25",
+      "GEN-2-24-24",
+      "MAT-19-4-6"
+    ],
+    "expectedStanceTags": [
+      "marriage"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-042",
+    "bucket": "paraphrase",
+    "query": "욥기",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-book-Job.html",
+    "expectedAnyCategoryIds": [
+      "miscellaneous"
+    ],
+    "expectedAnyReferences": [
+      "JOB-1-1-1",
+      "JOB-1-21-21",
+      "JOB-38-1-2"
+    ],
+    "expectedStanceTags": [
+      "miscellaneous"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-043",
+    "bucket": "paraphrase",
+    "query": "중보기도란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-intercessory-prayer.html",
+    "expectedAnyCategoryIds": [
+      "prayer"
+    ],
+    "expectedAnyReferences": [
+      "1TI-2-5-5",
+      "ROM-8-34-34",
+      "1TI-2-2-2"
+    ],
+    "expectedStanceTags": [
+      "prayer"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-044",
+    "bucket": "paraphrase",
+    "query": "데이트와 교제의 차이점은 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-difference-dating-courting.html",
+    "expectedAnyCategoryIds": [
+      "relationships"
+    ],
+    "expectedAnyReferences": [
+      "2CO-6-14-15",
+      "1CO-6-18-20",
+      "1CO-10-31-31"
+    ],
+    "expectedStanceTags": [
+      "relationships"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-045",
+    "bucket": "paraphrase",
+    "query": "유교는 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-confucianism.html",
+    "expectedAnyCategoryIds": [
+      "religions"
+    ],
+    "expectedAnyReferences": [
+      "JER-17-9-9",
+      "ROM-3-20-20",
+      "2CO-5-21-21"
+    ],
+    "expectedStanceTags": [
+      "religions"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-046",
+    "bucket": "paraphrase",
+    "query": "영화란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-glorification.html",
+    "expectedAnyCategoryIds": [
+      "salvation"
+    ],
+    "expectedAnyReferences": [
+      "ROM-8-18-18",
+      "2CO-4-17-17",
+      "ROM-5-2-2"
+    ],
+    "expectedStanceTags": [
+      "salvation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-047",
+    "bucket": "paraphrase",
+    "query": "원죄란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-original-sin.html",
+    "expectedAnyCategoryIds": [
+      "sin"
+    ],
+    "expectedAnyReferences": [
+      "EPH-2-1-2",
+      "MAT-15-18-19",
+      "ROM-7-23-23"
+    ],
+    "expectedStanceTags": [
+      "sin"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-048",
+    "bucket": "paraphrase",
+    "query": "성령님은 인격입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Holy-Spirit-person.html",
+    "expectedAnyCategoryIds": [
+      "spirit"
+    ],
+    "expectedAnyReferences": [
+      "JHN-15-26-26",
+      "MAT-28-19-19",
+      "EPH-4-30-30"
+    ],
+    "expectedStanceTags": [
+      "spirit"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-049",
+    "bucket": "paraphrase",
+    "query": "조직신학은 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-systematic-theology.html",
+    "expectedAnyCategoryIds": [
+      "theology"
+    ],
+    "expectedAnyReferences": [
+      "JHN-1-1-1",
+      "JHN-1-14-14"
+    ],
+    "expectedStanceTags": [
+      "theology"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-050",
+    "bucket": "paraphrase",
+    "query": "아가페적 사랑이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-agape-love.html",
+    "expectedAnyCategoryIds": [
+      "topical"
+    ],
+    "expectedAnyReferences": [
+      "1JN-4-8-8",
+      "LUK-10-27-27",
+      "MAT-6-24-24"
+    ],
+    "expectedStanceTags": [
+      "topical"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-051",
+    "bucket": "paraphrase",
+    "query": "천사장들은 누구인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-archangels.html",
+    "expectedAnyCategoryIds": [
+      "angels"
+    ],
+    "expectedAnyReferences": [
+      "1TH-4-16-16",
+      "JUD-1-9-9",
+      "DAN-10-13-13"
+    ],
+    "expectedStanceTags": [
+      "angels"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-052",
+    "bucket": "paraphrase",
+    "query": "실존주의란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-existentialism.html",
+    "expectedAnyCategoryIds": [
+      "apologetics-worldview"
+    ],
+    "expectedAnyReferences": [
+      "ROM-6-23-23"
+    ],
+    "expectedStanceTags": [
+      "apologetics-worldview"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-053",
+    "bucket": "paraphrase",
+    "query": "팔복이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-beatitudes.html",
+    "expectedAnyCategoryIds": [
+      "bible"
+    ],
+    "expectedAnyReferences": [
+      "MAT-5-3-12",
+      "JHN-20-29-29",
+      "JHN-20-14-14"
+    ],
+    "expectedStanceTags": [
+      "bible"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-054",
+    "bucket": "paraphrase",
+    "query": "성경 속의 아담은 누구였습니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Adam-in-the-Bible.html",
+    "expectedAnyCategoryIds": [
+      "bible-people"
+    ],
+    "expectedAnyReferences": [
+      "GEN-1-27-27",
+      "1CO-15-45-45",
+      "GEN-2-8-8"
+    ],
+    "expectedStanceTags": [
+      "bible-people"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-055",
+    "bucket": "paraphrase",
+    "query": "진정한 예배란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-true-worship.html",
+    "expectedAnyCategoryIds": [
+      "christian"
+    ],
+    "expectedAnyReferences": [
+      "ROM-12-1-2",
+      "1CO-2-16-16",
+      "JHN-4-24-24"
+    ],
+    "expectedStanceTags": [
+      "christian"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-056",
+    "bucket": "paraphrase",
+    "query": "교회에 왜 나가야 하나?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-church-attendance.html",
+    "expectedAnyCategoryIds": [
+      "church"
+    ],
+    "expectedAnyReferences": [
+      "ACT-2-42-42",
+      "ACT-2-46-46",
+      "1JN-4-12-12"
+    ],
+    "expectedStanceTags": [
+      "church"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-057",
+    "bucket": "paraphrase",
+    "query": "리워야단은 무엇이었나요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-leviathan.html",
+    "expectedAnyCategoryIds": [
+      "creation"
+    ],
+    "expectedAnyReferences": [
+      "ISA-27-1-1",
+      "PSA-104-25-26",
+      "PSA-74-14-14"
+    ],
+    "expectedStanceTags": [
+      "creation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-058",
+    "bucket": "paraphrase",
+    "query": "적그리스도는 누구인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-antichrist.html",
+    "expectedAnyCategoryIds": [
+      "end-times"
+    ],
+    "expectedAnyReferences": [
+      "DAN-7-24-25",
+      "REV-17-7-7",
+      "2TH-2-3-4"
+    ],
+    "expectedStanceTags": [
+      "end-times"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-059",
+    "bucket": "paraphrase",
+    "query": "영생이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-is-eternal-life.html",
+    "expectedAnyCategoryIds": [
+      "eternity"
+    ],
+    "expectedAnyReferences": [
+      "ROM-6-23-23",
+      "JHN-11-25-25",
+      "JHN-3-36-36"
+    ],
+    "expectedStanceTags": [
+      "eternity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-060",
+    "bucket": "paraphrase",
+    "query": "이원론이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-dualism.html",
+    "expectedAnyCategoryIds": [
+      "false"
+    ],
+    "expectedAnyReferences": [
+      "ISA-14-12-15",
+      "EZK-28-13-17",
+      "1JN-4-4-4"
+    ],
+    "expectedStanceTags": [
+      "false"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-061",
+    "bucket": "paraphrase",
+    "query": "입양에 대해 성경은 무엇이라고 말하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-adoption.html",
+    "expectedAnyCategoryIds": [
+      "family"
+    ],
+    "expectedAnyReferences": [
+      "EXO-2-1-10",
+      "MAT-1-18-18",
+      "ROM-8-15-15"
+    ],
+    "expectedStanceTags": [
+      "family"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-062",
+    "bucket": "paraphrase",
+    "query": "하나님은 공정하신가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-is-God-fair.html",
+    "expectedAnyCategoryIds": [
+      "god"
+    ],
+    "expectedAnyReferences": [
+      "ROM-3-23-23",
+      "ROM-6-23-23",
+      "REV-20-14-15"
+    ],
+    "expectedStanceTags": [
+      "god"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-063",
+    "bucket": "paraphrase",
+    "query": "마음이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-what-is-the-heart.html",
+    "expectedAnyCategoryIds": [
+      "humanity"
+    ],
+    "expectedAnyReferences": [
+      "ACT-13-22-22",
+      "1SA-2-35-35",
+      "JER-3-15-15"
+    ],
+    "expectedStanceTags": [
+      "humanity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-064",
+    "bucket": "paraphrase",
+    "query": "예수 그리스도는 누구신가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Jesus-Christ.html",
+    "expectedAnyCategoryIds": [
+      "jesus"
+    ],
+    "expectedAnyReferences": [
+      "JHN-10-33-33",
+      "JHN-10-30-30",
+      "JHN-8-59-59"
+    ],
+    "expectedStanceTags": [
+      "jesus"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-065",
+    "bucket": "paraphrase",
+    "query": "크리스천이 파를 만들어도 될까요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Christian-cliques.html",
+    "expectedAnyCategoryIds": [
+      "life"
+    ],
+    "expectedAnyReferences": [
+      "GAL-5-14-14",
+      "1PE-5-5-5",
+      "JAS-2-1-1"
+    ],
+    "expectedStanceTags": [
+      "life"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-066",
+    "bucket": "paraphrase",
+    "query": "예외 조항이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-exception-clause.html",
+    "expectedAnyCategoryIds": [
+      "marriage"
+    ],
+    "expectedAnyReferences": [
+      "MAT-5-32-32",
+      "MAT-19-9-9"
+    ],
+    "expectedStanceTags": [
+      "marriage"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-067",
+    "bucket": "paraphrase",
+    "query": "시편",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-book-Psalms.html",
+    "expectedAnyCategoryIds": [
+      "miscellaneous"
+    ],
+    "expectedAnyReferences": [
+      "PSA-19-1-1",
+      "PSA-22-16-19",
+      "PSA-23-1-1"
+    ],
+    "expectedStanceTags": [
+      "miscellaneous"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-068",
+    "bucket": "paraphrase",
+    "query": "합심 기도는 중요한가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-corporate-prayer.html",
+    "expectedAnyCategoryIds": [
+      "prayer"
+    ],
+    "expectedAnyReferences": [
+      "ACT-2-42-42",
+      "JAS-4-10-10",
+      "PSA-145-18-18"
+    ],
+    "expectedStanceTags": [
+      "prayer"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-069",
+    "bucket": "paraphrase",
+    "query": "결혼을 위해 어떤 준비를 해야 하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-prepare-marriage.html",
+    "expectedAnyCategoryIds": [
+      "relationships"
+    ],
+    "expectedAnyReferences": [
+      "MAT-22-37-37",
+      "EPH-5-22-33",
+      "1CO-10-31-31"
+    ],
+    "expectedStanceTags": [
+      "relationships"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-070",
+    "bucket": "paraphrase",
+    "query": "신도는 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Shintoism.html",
+    "expectedAnyCategoryIds": [
+      "religions"
+    ],
+    "expectedAnyReferences": [
+      "DEU-7-6-6",
+      "ISA-45-5-5",
+      "2CO-6-17-18"
+    ],
+    "expectedStanceTags": [
+      "religions"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-071",
+    "bucket": "paraphrase",
+    "query": "속량이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-propitiation.html",
+    "expectedAnyCategoryIds": [
+      "salvation"
+    ],
+    "expectedAnyReferences": [
+      "HEB-2-17-17",
+      "ROM-3-24-25",
+      "ROM-1-18-18"
+    ],
+    "expectedStanceTags": [
+      "salvation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-072",
+    "bucket": "paraphrase",
+    "query": "죄론이 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Hamartiology.html",
+    "expectedAnyCategoryIds": [
+      "sin"
+    ],
+    "expectedAnyReferences": [
+      "ROM-3-23-23",
+      "1JN-3-4-4",
+      "DEU-9-7-7"
+    ],
+    "expectedStanceTags": [
+      "sin"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-073",
+    "bucket": "paraphrase",
+    "query": "성령세례 란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-baptism-Spirit.html",
+    "expectedAnyCategoryIds": [
+      "spirit"
+    ],
+    "expectedAnyReferences": [
+      "MRK-1-8-8",
+      "ACT-1-5-5",
+      "ACT-2-1-4"
+    ],
+    "expectedStanceTags": [
+      "spirit"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-074",
+    "bucket": "paraphrase",
+    "query": "예정론이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-predestination.html",
+    "expectedAnyCategoryIds": [
+      "theology"
+    ],
+    "expectedAnyReferences": [
+      "MAT-24-22-22",
+      "MAT-24-31-31",
+      "MRK-13-20-20"
+    ],
+    "expectedStanceTags": [
+      "theology"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-075",
+    "bucket": "paraphrase",
+    "query": "크리스천의 소망이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-hope-Bible.html",
+    "expectedAnyCategoryIds": [
+      "topical"
+    ],
+    "expectedAnyReferences": [
+      "ROM-8-24-25",
+      "HEB-11-1-1",
+      "HEB-11-7-7"
+    ],
+    "expectedStanceTags": [
+      "topical"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-076",
+    "bucket": "adversarial",
+    "query": "사역마란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-familiar-spirits.html",
+    "expectedAnyCategoryIds": [
+      "angels"
+    ],
+    "expectedAnyReferences": [
+      "LEV-19-31-31",
+      "LEV-19-20-20",
+      "DEU-18-9-14"
+    ],
+    "expectedStanceTags": [
+      "angels"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-077",
+    "bucket": "adversarial",
+    "query": "결과는 수단을 정당화하나요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-ends-justify-means.html",
+    "expectedAnyCategoryIds": [
+      "apologetics-worldview"
+    ],
+    "expectedAnyReferences": [
+      "1PE-1-15-16",
+      "2CO-5-17-17",
+      "PSA-19-7-7"
+    ],
+    "expectedStanceTags": [
+      "apologetics-worldview"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-078",
+    "bucket": "adversarial",
+    "query": "성경의 저자는 누구인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-bible-authors.html",
+    "expectedAnyCategoryIds": [
+      "bible"
+    ],
+    "expectedAnyReferences": [
+      "2TI-3-16-16",
+      "JHN-14-6-6",
+      "ACT-4-12-12"
+    ],
+    "expectedStanceTags": [
+      "bible"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-079",
+    "bucket": "adversarial",
+    "query": "성경 속의 하와는 누구였습니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Eve-in-the-Bible.html",
+    "expectedAnyCategoryIds": [
+      "bible-people"
+    ],
+    "expectedAnyReferences": [
+      "GEN-4-1-2",
+      "GEN-4-25-25",
+      "GEN-3-20-20"
+    ],
+    "expectedStanceTags": [
+      "bible-people"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-080",
+    "bucket": "adversarial",
+    "query": "영적 훈련이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-spiritual-disciplines.html",
+    "expectedAnyCategoryIds": [
+      "christian"
+    ],
+    "expectedAnyReferences": [
+      "2CO-5-17-17",
+      "COL-3-9-10",
+      "2TI-3-16-17"
+    ],
+    "expectedStanceTags": [
+      "christian"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-081",
+    "bucket": "adversarial",
+    "query": "성경적인 분리란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-biblical-separation.html",
+    "expectedAnyCategoryIds": [
+      "church"
+    ],
+    "expectedAnyReferences": [
+      "DAN-1-8-8",
+      "ROM-13-14-14",
+      "1TH-5-22-22"
+    ],
+    "expectedStanceTags": [
+      "church"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-082",
+    "bucket": "adversarial",
+    "query": "에덴 동산의 위치는 어디인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-garden-of-Eden-location.html",
+    "expectedAnyCategoryIds": [
+      "creation"
+    ],
+    "expectedAnyReferences": [
+      "GEN-2-10-14"
+    ],
+    "expectedStanceTags": [
+      "creation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-083",
+    "bucket": "adversarial",
+    "query": "종말/묵시란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-apocalypse.html",
+    "expectedAnyCategoryIds": [
+      "end-times"
+    ],
+    "expectedAnyReferences": [
+      "JHN-14-9-9",
+      "HEB-1-2-2"
+    ],
+    "expectedStanceTags": [
+      "end-times"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-084",
+    "bucket": "adversarial",
+    "query": "사후세계가 존재하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Life-After-Death.html",
+    "expectedAnyCategoryIds": [
+      "eternity"
+    ],
+    "expectedAnyReferences": [
+      "JOB-14-1-2",
+      "JOB-14-14-14",
+      "1CO-2-9-9"
+    ],
+    "expectedStanceTags": [
+      "eternity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-085",
+    "bucket": "adversarial",
+    "query": "범신론이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-pantheism.html",
+    "expectedAnyCategoryIds": [
+      "false"
+    ],
+    "expectedAnyReferences": [
+      "PSA-139-7-8"
+    ],
+    "expectedStanceTags": [
+      "false"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-086",
+    "bucket": "adversarial",
+    "query": "무엇이 가족의 우선순위가 되어야 하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-family-priorities.html",
+    "expectedAnyCategoryIds": [
+      "family"
+    ],
+    "expectedAnyReferences": [
+      "DEU-6-5-5",
+      "EPH-5-25-25",
+      "EPH-5-22-22"
+    ],
+    "expectedStanceTags": [
+      "family"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-087",
+    "bucket": "adversarial",
+    "query": "하나님은 인격이십니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-is-God-a-person.html",
+    "expectedAnyCategoryIds": [
+      "god"
+    ],
+    "expectedAnyReferences": [
+      "PSA-139-17-17",
+      "PSA-78-41-41",
+      "1CO-1-1-1"
+    ],
+    "expectedStanceTags": [
+      "god"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-088",
+    "bucket": "adversarial",
+    "query": "양심이란 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-conscience.html",
+    "expectedAnyCategoryIds": [
+      "humanity"
+    ],
+    "expectedAnyReferences": [
+      "ACT-23-1-1",
+      "ACT-23-24-24",
+      "1CO-4-4-4"
+    ],
+    "expectedStanceTags": [
+      "humanity"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-089",
+    "bucket": "adversarial",
+    "query": "위격의 연합이란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-hypostatic-union.html",
+    "expectedAnyCategoryIds": [
+      "jesus"
+    ],
+    "expectedAnyReferences": [
+      "JHN-8-58-58",
+      "JHN-8-10-10",
+      "JHN-1-14-14"
+    ],
+    "expectedStanceTags": [
+      "jesus"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-090",
+    "bucket": "adversarial",
+    "query": "크리스천이 취미를 가져도 될까요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Christian-hobbies.html",
+    "expectedAnyCategoryIds": [
+      "life"
+    ],
+    "expectedAnyReferences": [
+      "COL-3-17-17",
+      "1CO-10-31-31",
+      "GAL-5-13-13"
+    ],
+    "expectedStanceTags": [
+      "life"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-091",
+    "bucket": "adversarial",
+    "query": "결혼의 목적은 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-purpose-of-marriage.html",
+    "expectedAnyCategoryIds": [
+      "marriage"
+    ],
+    "expectedAnyReferences": [
+      "GEN-2-18-18",
+      "MAL-2-13-15",
+      "2CO-6-14-14"
+    ],
+    "expectedStanceTags": [
+      "marriage"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-092",
+    "bucket": "adversarial",
+    "query": "잠언",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-book-Proverbs.html",
+    "expectedAnyCategoryIds": [
+      "miscellaneous"
+    ],
+    "expectedAnyReferences": [
+      "1KI-4-34-34",
+      "PRO-1-5-5",
+      "PRO-1-7-7"
+    ],
+    "expectedStanceTags": [
+      "miscellaneous"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-093",
+    "bucket": "adversarial",
+    "query": "죄인의 기도란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-Sinners-Prayer.html",
+    "expectedAnyCategoryIds": [
+      "prayer"
+    ],
+    "expectedAnyReferences": [
+      "TIT-3-5-7",
+      "MAT-25-46-46",
+      "JHN-1-1-1"
+    ],
+    "expectedStanceTags": [
+      "prayer"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-094",
+    "bucket": "adversarial",
+    "query": "아내를 찾을 때 무엇을 보아야 하는가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-wife-looking.html",
+    "expectedAnyCategoryIds": [
+      "relationships"
+    ],
+    "expectedAnyReferences": [
+      "2CO-6-14-14",
+      "EPH-5-22-24",
+      "1TI-3-11-11"
+    ],
+    "expectedStanceTags": [
+      "relationships"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-095",
+    "bucket": "adversarial",
+    "query": "도교는 무엇인가요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-taoism-daoism.html",
+    "expectedAnyCategoryIds": [
+      "religions"
+    ],
+    "expectedAnyReferences": [
+      "JHN-14-6-6",
+      "2CO-5-21-21",
+      "EPH-2-8-9"
+    ],
+    "expectedStanceTags": [
+      "religions"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-096",
+    "bucket": "adversarial",
+    "query": "생명책이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-book-of-life.html",
+    "expectedAnyCategoryIds": [
+      "salvation"
+    ],
+    "expectedAnyReferences": [
+      "REV-20-15-15",
+      "REV-3-5-5",
+      "REV-13-8-8"
+    ],
+    "expectedStanceTags": [
+      "salvation"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-097",
+    "bucket": "adversarial",
+    "query": "죄성이란 무엇입니까?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-sin-nature.html",
+    "expectedAnyCategoryIds": [
+      "sin"
+    ],
+    "expectedAnyReferences": [
+      "ROM-8-3-3",
+      "COL-3-5-5",
+      "ROM-6-6-6"
+    ],
+    "expectedStanceTags": [
+      "sin"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-098",
+    "bucket": "adversarial",
+    "query": "방언 기도란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-praying-in-tongues.html",
+    "expectedAnyCategoryIds": [
+      "spirit"
+    ],
+    "expectedAnyReferences": [
+      "ROM-8-26-26",
+      "1CO-14-4-17",
+      "EPH-6-18-18"
+    ],
+    "expectedStanceTags": [
+      "spirit"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-099",
+    "bucket": "adversarial",
+    "query": "무천년주의란 무엇인가?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-amillennialism.html",
+    "expectedAnyCategoryIds": [
+      "theology"
+    ],
+    "expectedAnyReferences": [
+      "2SA-7-8-16",
+      "2SA-7-23-23",
+      "PSA-89-3-4"
+    ],
+    "expectedStanceTags": [
+      "theology"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  },
+  {
+    "id": "gq-ko-full-100",
+    "bucket": "adversarial",
+    "query": "성경은 성공을 어떻게 정의하나요?",
+    "expectedArticleUrl": "https://www.gotquestions.org/Korean/Korean-success-Bible.html",
+    "expectedAnyCategoryIds": [
+      "topical"
+    ],
+    "expectedAnyReferences": [
+      "1KI-2-3-3",
+      "1KI-3-1-14",
+      "PRO-3-1-4"
+    ],
+    "expectedStanceTags": [
+      "topical"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "unsupportedReference",
+      "bodySummary"
+    ],
+    "fixtureSet": "full-gotquestions-ko-g003"
+  }
+]

@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-28T17:59:28.052Z",
+  "robotsUrl": "https://www.gotquestions.org/robots.txt",
+  "sitemapUrl": "https://www.gotquestions.org/Korean/korean.xml",
+  "copyrightPolicyUrl": "https://www.gotquestions.org/copyright.html",
+  "robotsMentionsSitemap": true,
+  "urlCounts": {
+    "sitemapObserved": 1490,
+    "category": 26,
+    "article": 1463,
+    "sitemapArticleCandidates": 1461,
+    "staticNonQuestion": 0,
+    "excluded": 5
+  },
+  "classificationCounts": {
+    "article": 1461,
+    "category": 24,
+    "static": 0,
+    "excluded": 5
+  },
+  "excludedReasons": {
+    "non-korean": 1,
+    "static-or-non-question": 4
+  },
+  "classificationSample": [
+    {
+      "url": "https://www.gotquestions.org/Korean",
+      "kind": "excluded",
+      "reason": "non-korean"
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-salvation.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-Bible.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-FAQ.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-good-news.html",
+      "kind": "excluded",
+      "reason": "static-or-non-question"
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-crucial.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Got-Eternal-Life.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-God.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-Jesus.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-Spirit.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-church.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-end-times.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-angels.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-humanity.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-theology.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-Christian.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-prayer.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-sin.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-eternity.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-marriage.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-relationships.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-family.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-life.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-topical.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-creation.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-religions.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-miscellaneous.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Got-Forgiveness.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Q-false.html",
+      "kind": "category",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-assurance-salvation.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-atonement.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-never-heard.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Jesus-Only.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Plan-Salvation.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Faith-Alone.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-license-sin.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-once-saved-always.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-eternal-security.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Bible-errors.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Bible-relevant.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-canon-Bible.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-study-Bible.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-before-Jesus.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Bible-inspired.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-after-death.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-why-read-Bible.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-sovereign-free.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-Bible-Word.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-baptism.html",
+      "kind": "article",
+      "reason": null
+    },
+    {
+      "url": "https://www.gotquestions.org/Korean/Korean-suicide-Bible.html",
+      "kind": "article",
+      "reason": null
+    }
+  ],
+  "articleReferenceFetch": {
+    "enabled": true,
+    "attempted": 1463,
+    "linked": 1423,
+    "noneDetected": 40
+  },
+  "optionalMode": false,
+  "bodyStored": false,
+  "bodyFetchedAtRuntime": false,
+  "assertion": "This receipt contains URL/title/category metadata and extracted scripture-reference metadata only; article prose is not stored or redistributed."
+}

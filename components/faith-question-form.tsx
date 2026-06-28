@@ -31,6 +31,12 @@ type ApiMatch = {
   score: number;
   matchedTerms: string[];
 };
+type ApiReason = {
+  passageKey?: string;
+  resourceId?: string;
+  reason: string;
+};
+
 
 type FaithQuestionResponse = {
   summary: string;
@@ -39,11 +45,34 @@ type FaithQuestionResponse = {
   passages: ApiPassage[];
   resources: ApiResource[];
   nextQuestions: string[];
+  biblicalDirection?: string;
+  passageReasons?: ApiReason[];
+  resourceReasons?: ApiReason[];
   meta: {
     mode: string;
+    aiUsed: boolean;
+    bibleRagUsed: boolean;
+    evidenceLocked: boolean;
     externalBodyFetched: boolean;
     externalBodyStored: boolean;
     matchedCount: number;
+    retrievalConfidence?: string;
+    retrievalMode?: string;
+    gotQuestionsRag?: {
+      used: boolean;
+      indexVersion: string | null;
+      matchedCount: number;
+      coverage: string;
+      bodyFetched: boolean;
+      bodyStored: boolean;
+      articles?: Array<{
+        id: string;
+        titleKo: string;
+        url: string;
+        categoryIds: string[];
+        references: Array<{ key: string; label: string }>;
+      }>;
+    };
   };
 };
 
@@ -59,7 +88,20 @@ function localizedHref(href: string, locale: AppLocale) {
 function isInternalHref(href: string) {
   return href.startsWith("/");
 }
+function reasonForResource(answer: FaithQuestionResponse, resourceId: string) {
+  return answer.resourceReasons?.find((item) => item.resourceId === resourceId)?.reason;
+}
 
+
+function gotQuestionsResources(answer: FaithQuestionResponse) {
+  const articleIds = new Set(answer.meta.gotQuestionsRag?.articles?.map((article) => article.id) ?? []);
+  return answer.resources.filter((resource) => articleIds.has(resource.id) || resource.source === "GotQuestions");
+}
+
+function nonGotQuestionsResources(answer: FaithQuestionResponse) {
+  const gotQuestionsIds = new Set(gotQuestionsResources(answer).map((resource) => resource.id));
+  return answer.resources.filter((resource) => !gotQuestionsIds.has(resource.id));
+}
 export function FaithQuestionForm({ locale }: { locale: AppLocale }) {
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState<FaithQuestionResponse | null>(null);
@@ -173,6 +215,14 @@ export function FaithQuestionForm({ locale }: { locale: AppLocale }) {
                 <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">{locale === "ko" ? "짧은 답" : "Short answer"}</div>
                 <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{answer.summary}</p>
                 <p className="mt-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-3 text-xs leading-5 text-[var(--ink-muted)]">{answer.caveat}</p>
+                {answer.biblicalDirection ? (
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{answer.biblicalDirection}</p>
+                ) : null}
+                <p className="mt-3 text-[11px] leading-5 text-[var(--ink-muted)]">
+                  {locale === "ko"
+                    ? `${answer.meta.aiUsed ? "AI 근거 안내" : "근거 기반 라우팅"} · 성경 RAG ${answer.meta.bibleRagUsed ? "사용" : "보류"} · 외부 전문 저장 없음`
+                    : `${answer.meta.aiUsed ? "AI evidence guide" : "Grounded routing"} · Bible RAG ${answer.meta.bibleRagUsed ? "used" : "paused"} · no external body storage`}
+                </p>
               </div>
 
               <div>
@@ -190,17 +240,84 @@ export function FaithQuestionForm({ locale }: { locale: AppLocale }) {
                     </Link>
                   ))}
                 </div>
+                {answer.passageReasons?.length ? (
+                  <ul className="mt-3 space-y-2 text-xs leading-5 text-[var(--ink-muted)]">
+                    {answer.passageReasons.map((item) => (
+                      <li key={`${item.passageKey}-${item.reason}`}>• {item.reason}</li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
+
+              {answer.meta.gotQuestionsRag?.used ? (
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">
+                    {locale === "ko" ? "GotQuestions Korean 관련 문답" : "Related GotQuestions Korean Q&A"}
+                  </div>
+                  <div className="mt-3 grid gap-2">
+                    {(answer.meta.gotQuestionsRag.articles ?? []).slice(0, 3).map((article) => (
+                      <a
+                        key={article.id}
+                        href={article.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm text-[var(--ink-muted)] transition hover:border-[var(--gold)]/40 hover:text-[var(--ink)]"
+                      >
+                        <span className="flex items-center justify-between gap-3 font-medium">
+                          <span>{article.titleKo}</span>
+                          <ExternalLink className="h-3.5 w-3.5 flex-none text-[var(--gold)]" aria-hidden="true" />
+                        </span>
+                        <span className="mt-2 flex flex-wrap gap-1.5">
+                          {article.categoryIds.slice(0, 3).map((categoryId) => (
+                            <span key={categoryId} className="rounded-full border border-[var(--hairline)] px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+                              {categoryId}
+                            </span>
+                          ))}
+                          {article.references.slice(0, 4).map((reference) => (
+                            <span key={reference.key} className="rounded-full border border-[var(--gold)]/25 px-2 py-1 text-[10px] text-[var(--gold)]">
+                              {reference.label}
+                            </span>
+                          ))}
+                        </span>
+                      </a>
+                    ))}
+                    {(answer.meta.gotQuestionsRag.articles?.length ?? 0) > 3 ? (
+                      <details>
+                        <summary className="cursor-pointer rounded-xl border border-[var(--hairline)] px-3 py-2 text-xs font-semibold text-[var(--gold)]">
+                          {locale === "ko" ? `GotQuestions 문답 ${(answer.meta.gotQuestionsRag.articles?.length ?? 0) - 3}개 더 보기` : `Show ${(answer.meta.gotQuestionsRag.articles?.length ?? 0) - 3} more GotQuestions articles`}
+                        </summary>
+                        <div className="mt-2 grid gap-2">
+                          {(answer.meta.gotQuestionsRag.articles ?? []).slice(3).map((article) => (
+                            <a key={article.id} href={article.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm font-medium text-[var(--ink-muted)] transition hover:border-[var(--gold)]/40 hover:text-[var(--ink)]">
+                              {article.titleKo}
+                              <ExternalLink className="h-3.5 w-3.5 flex-none text-[var(--gold)]" aria-hidden="true" />
+                            </a>
+                          ))}
+                        </div>
+                      </details>
+                    ) : null}
+                    <p className="text-xs leading-5 text-[var(--ink-muted)]">
+                      {locale === "ko"
+                        ? "GotQuestions Ministries 원문 전문은 외부 링크에서 확인하세요. 이 앱은 제목, 링크, 분류, 성구 연결만 보관합니다."
+                        : "Read the full GotQuestions Ministries source through the external link. This app stores only title, link, category, and Scripture-link metadata."}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
 
               <div>
                 <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">{locale === "ko" ? "더 깊게 보기" : "Go deeper"}</div>
                 <div className="mt-3 grid gap-2">
-                  {answer.resources.map((resource) => {
+                  {nonGotQuestionsResources(answer).slice(0, 3).map((resource) => {
                     const href = localizedHref(resource.href, locale);
+                    const reason = reasonForResource(answer, resource.id);
                     const content = (
                       <>
-                        <span>{resource.title}</span>
-                        <ExternalLink className="h-3.5 w-3.5 text-[var(--gold)]" aria-hidden="true" />
+                        <span>
+                          {resource.title}
+                          {reason ? <span className="mt-1 block text-xs font-normal leading-5 text-[var(--ink-muted)]">{reason}</span> : null}
+                        </span>
+                        <ExternalLink className="h-3.5 w-3.5 flex-none text-[var(--gold)]" aria-hidden="true" />
                       </>
                     );
                     const className = "flex items-center justify-between gap-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 py-2.5 text-sm font-medium text-[var(--ink-muted)] transition hover:border-[var(--gold)]/40 hover:text-[var(--ink)]";

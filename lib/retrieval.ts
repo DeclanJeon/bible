@@ -410,6 +410,19 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["두렵", "부르심", "미래", "감당"],
   },
   {
+    match: /(사업|창업|직업|직장|일터|일을|일은|커리어|진로|재정|돈|business|startup|career|vocation|work|finance|money).*(어떻게|분별|해야|하면|결정|선택|성경|신앙)|((어떻게|분별|해야|하면|결정|선택).*(사업|창업|직업|직장|일터|재정|돈|business|startup|career|vocation|work|finance|money))/i,
+    primaryReference: { code: "COL", chapter: 3, startVerse: 23, endVerse: 24 },
+    supportingReferences: [
+      { code: "PRO", chapter: 16, startVerse: 3, endVerse: 3 },
+      { code: "MAT", chapter: 6, startVerse: 24, endVerse: 34 },
+      { code: "1TI", chapter: 6, startVerse: 6, endVerse: 10 },
+    ],
+    rationaleKo: "질문이 사업·직업·재정 판단을 묻고 있어서, 먼저 무슨 일을 하든 사람에게 하듯 하지 말고 주께 하듯 하라는 골로새서 3:23-24를 우선 본문으로 선택했습니다.",
+    rationaleEn: "Because the prompt asks about business, work, or financial discernment, the primary passage is Colossians 3:23-24, which frames work as service before the Lord.",
+    passageKeywordsKo: ["무슨 일을 하든지", "주께 하듯", "기업의 상"],
+    semanticTermsKo: ["사업", "직업", "일", "재정", "청지기", "분별"],
+  },
+  {
     match: /(지혜|결정|혼란|분별|인도).*(싶|필요)|((싶|필요).*(지혜|결정|혼란))|((wisdom|decision|confused|guidance).*(need|major|big))|((decision).*(wisdom|confused))/i,
     primaryReference: { code: "JAM", chapter: 1, startVerse: 5, endVerse: 5 },
     supportingReferences: [

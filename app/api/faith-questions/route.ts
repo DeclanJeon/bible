@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { routeFaithQuestion } from "@/lib/faith-question-router";
+import { buildFaithQuestionAnswer } from "@/lib/faith-question-answer";
 
 const MAX_QUERY_LENGTH = 1000;
 
@@ -51,15 +51,12 @@ export async function POST(request: Request) {
     return body;
   }
 
-  const answer = routeFaithQuestion({ query: body.query ?? "", locale: body.locale });
-
-  return NextResponse.json({
-    ...answer,
-    meta: {
-      mode: "deterministic-link-router",
-      externalBodyFetched: false,
-      externalBodyStored: false,
-      matchedCount: answer.matches.length,
-    },
+  const answer = await buildFaithQuestionAnswer({
+    query: body.query ?? "",
+    locale: body.locale,
+    acceptLanguage: request.headers.get("accept-language"),
+    countryCode: request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry"),
   });
+
+  return NextResponse.json(answer);
 }
