@@ -151,80 +151,112 @@ export default async function BiblePage({ params, searchParams }: Props) {
 
   return (
     <main className="page-shell-wide">
-
-      <section className="mt-8 glass rounded-2xl p-5 sm:p-6 lg:p-8">
-        <div className="section-title text-base">{copy.current}</div>
-        <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-[var(--ink)] lg:text-6xl">{copy.title}</h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--muted)]">{copy.subtitle}</p>
-          </div>
-          <div className="rounded-[24px] border border-[var(--gold)]/20 bg-[var(--gold)]/[0.08] px-5 py-4 text-sm leading-6 text-[var(--muted)] lg:max-w-xs">
-            {copy.sourceNote}
-          </div>
-        </div>
-      </section>
-
-      <section className="mt-8 grid gap-8 md:grid-cols-[280px_minmax(0,1fr)] lg:grid-cols-[320px_minmax(0,1fr)] md:items-start">
-        <aside className="glass scrollbar-thin rounded-2xl p-5 sm:p-6 lg:sticky lg:top-[calc(var(--nav-height)+1.5rem)] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto">
-          <div className="section-title text-base">{copy.books}</div>
-          <div className="mt-4">
-            <BibleBookSearch
-              books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
-              selectedCode={reader.selectedBook.code}
-
-              locale={locale}
-              copy={{
-                old: copy.testament.old,
-                new: copy.testament.new,
-                searchPlaceholder: copy.searchPlaceholder,
-                books: copy.books,
-              }}
-            />
+      <section className="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
+        <aside className="hidden lg:sticky lg:top-[calc(var(--nav-height)+1rem)] lg:block lg:max-h-[calc(100dvh-var(--nav-height)-2rem)] lg:overflow-hidden">
+          <div className="glass flex max-h-[inherit] flex-col rounded-2xl p-5">
+            <div>
+              <div className="section-title text-base">{copy.books}</div>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.sourceNote}</p>
+            </div>
+            <div className="mt-4 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+              <BibleBookSearch
+                books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
+                selectedCode={reader.selectedBook.code}
+                locale={locale}
+                copy={{
+                  old: copy.testament.old,
+                  new: copy.testament.new,
+                  searchPlaceholder: copy.searchPlaceholder,
+                  books: copy.books,
+                }}
+              />
+            </div>
           </div>
         </aside>
 
-        <div className="space-y-8">
-          <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-              <div>
-                <div className="section-title text-base">{copy.current}</div>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--ink)] lg:text-5xl">
+        <div className="min-w-0">
+          <section className="glass sticky top-[calc(var(--nav-height)+0.5rem)] z-20 rounded-2xl p-3 shadow-lg shadow-black/5 sm:p-4 lg:top-[calc(var(--nav-height)+1rem)]">
+            <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+              <div className="min-w-0">
+                <div className="section-title text-xs sm:text-sm">{copy.current}</div>
+                <h1 className="mt-1 truncate text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl lg:text-4xl">
                   {reader.selectedBook.name} {reader.selectedChapter}{copy.chapter}
-                </h2>
+                </h1>
               </div>
-              <Link
-                href={buildCompanionHref({ prompt: chapterPrompt, locale })}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]"
-              >
-                <Sparkles className="h-4 w-4" />
-                {copy.startReflection}
-              </Link>
+
+              <div className="grid grid-cols-[1fr_auto_1fr] items-stretch gap-2">
+                {reader.previous && previousBook ? (
+                  <Link
+                    href={buildBibleHref({ book: reader.previous.code, chapter: reader.previous.chapter, locale, from: sourceTag })}
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                    aria-label={`${copy.previous}: ${previousBook.name} ${reader.previous.chapter}${copy.chapter}`}
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="hidden sm:inline">{copy.previous}</span>
+                  </Link>
+                ) : (
+                  <span aria-hidden="true" />
+                )}
+
+                <details className="group relative">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-center rounded-xl bg-[var(--gold)] px-4 text-sm font-bold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)] [&::-webkit-details-marker]:hidden">
+                    {copy.chapters}
+                  </summary>
+                  <div className="absolute right-1/2 z-30 mt-3 max-h-[min(70dvh,34rem)] w-[min(calc(100vw-2rem),42rem)] translate-x-1/2 overflow-y-auto rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 shadow-2xl shadow-black/20 scrollbar-thin sm:right-0 sm:translate-x-0">
+                    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)]">
+                      <div className="lg:hidden">
+                        <div className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">{copy.books}</div>
+                        <BibleBookSearch
+                          books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
+                          selectedCode={reader.selectedBook.code}
+                          locale={locale}
+                          copy={{
+                            old: copy.testament.old,
+                            new: copy.testament.new,
+                            searchPlaceholder: copy.searchPlaceholder,
+                            books: copy.books,
+                          }}
+                        />
+                      </div>
+                      <div className="order-first md:order-none md:col-start-2 lg:col-start-1">
+                        <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
+                          <BookOpen className="h-4 w-4 text-[var(--gold)]" />
+                          {reader.selectedBook.name} · {copy.chapters}
+                        </div>
+                        {renderChapterLinks("grid grid-cols-5 gap-2 sm:grid-cols-6")}
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+                {reader.next && nextBook ? (
+                  <Link
+                    href={buildBibleHref({ book: reader.next.code, chapter: reader.next.chapter, locale, from: sourceTag })}
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                    aria-label={`${copy.next}: ${nextBook.name} ${reader.next.chapter}${copy.chapter}`}
+                  >
+                    <span className="hidden sm:inline">{copy.next}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : (
+                  <span aria-hidden="true" />
+                )}
+              </div>
             </div>
 
-            <div className="mt-7 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5 sm:p-6 lg:p-8">
-              <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
-                <BookOpen className="h-4 w-4 text-[var(--gold)]" />
-                {copy.chapters}
-              </div>
-              <details className="md:hidden">
-                <summary className="cursor-pointer rounded-lg border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--ink)]">
-                  {copy.chapters} · {reader.selectedChapter}{copy.chapter}
-                </summary>
-                <div className="mt-4">{renderChapterLinks("flex flex-wrap gap-2")}</div>
-              </details>
-              {renderChapterLinks("hidden flex-wrap gap-2 md:flex")}
+            <div className="mt-3 hidden rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-3 lg:block">
+              {renderChapterLinks("flex max-h-24 flex-wrap gap-2 overflow-y-auto pr-1 scrollbar-thin")}
             </div>
           </section>
 
-          <article className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-5 sm:p-6 lg:p-8">
-            <div className="verse-container reading-column space-y-4 text-[var(--ink)]">
+          <article className="mt-4 rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-4 sm:p-6 lg:max-h-[calc(100dvh-var(--nav-height)-12rem)] lg:overflow-y-auto lg:p-8 lg:scrollbar-thin">
+            <div className="verse-container reading-column space-y-3 text-[var(--ink)] sm:space-y-4">
               {reader.verses.map((verse) => {
                 const highlighted = verseIsHighlighted(highlightedRange, verse.verse);
                 return (
                   <p
                     key={`${verse.code}-${verse.chapter}-${verse.verse}`}
-                    className={`grid grid-cols-[3rem_minmax(0,1fr)] gap-3 rounded-xl ${
+                    className={`grid grid-cols-[2.75rem_minmax(0,1fr)] gap-3 rounded-xl text-lg leading-8 sm:grid-cols-[3rem_minmax(0,1fr)] ${
                       highlighted ? "border border-[var(--gold)]/30 bg-[var(--gold)]/[0.16] px-3 py-3" : ""
                     }`}
                   >
@@ -249,36 +281,18 @@ export default async function BiblePage({ params, searchParams }: Props) {
             </div>
           </article>
 
-          <nav className="grid gap-4 sm:grid-cols-2" aria-label="Chapter navigation">
-            {reader.previous && previousBook ? (
-              <Link
-                href={buildBibleHref({ book: reader.previous.code, chapter: reader.previous.chapter, locale, from: sourceTag })}
-                className="glass rounded-2xl p-5 transition hover:border-[var(--gold)]/30"
-              >
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
-                  <ArrowLeft className="h-4 w-4" />
-                  {copy.previous}
-                </span>
-                <span className="mt-2 block text-lg font-bold text-[var(--ink)]">
-                  {previousBook.name} {reader.previous.chapter}{copy.chapter}
-                </span>
-              </Link>
-            ) : null}
-            {reader.next && nextBook ? (
-              <Link
-                href={buildBibleHref({ book: reader.next.code, chapter: reader.next.chapter, locale, from: sourceTag })}
-                className={`glass rounded-2xl p-5 text-right transition hover:border-[var(--gold)]/30 ${!reader.previous || !previousBook ? "sm:col-span-2" : ""}`}
-              >
-                <span className="inline-flex items-center justify-end gap-2 text-sm font-semibold text-[var(--muted)]">
-                  {copy.next}
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-                <span className="mt-2 block text-lg font-bold text-[var(--ink)]">
-                  {nextBook.name} {reader.next.chapter}{copy.chapter}
-                </span>
-              </Link>
-            ) : null}
-          </nav>
+          <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto]">
+            <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-6 text-[var(--muted)] lg:hidden">
+              {copy.sourceNote}
+            </div>
+            <Link
+              href={buildCompanionHref({ prompt: chapterPrompt, locale })}
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]"
+            >
+              <Sparkles className="h-4 w-4" />
+              {copy.startReflection}
+            </Link>
+          </div>
         </div>
       </section>
     </main>
