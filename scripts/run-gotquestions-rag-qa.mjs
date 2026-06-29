@@ -6,14 +6,14 @@ process.env.HERMES_CHAT_COMPLETIONS_FIRST = "1";
 
 const { readFile } = await import("node:fs/promises");
 const path = await import("node:path");
-const { DatabaseSync } = await import("node:sqlite");
 
 const ROOT = process.cwd();
 const indexPath = path.join(ROOT, "data", "faith", "gotquestions-ko.index.json");
 const auditPath = path.join(ROOT, "data", "faith", "gotquestions-ko.source-audit.json");
 const fixturePath = path.join(ROOT, "qa", "gotquestions-100.json");
 const parserGoldPath = path.join(ROOT, "qa", "gotquestions-reference-parser-gold.json");
-const bibleDbPath = path.join(ROOT, "data", "bible", "bible.sqlite");
+const koVplPath = path.join(ROOT, "korean_bible", "canon_66_vpl.txt");
+const enVplPath = path.join(ROOT, "world_english_bible", "canon_66_vpl.txt");
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -31,8 +31,14 @@ const forbiddenKeys = /^(body|content|answer|html|markdown|excerpt|quote|paragra
 const requiredArticleFields = ["id", "slug", "url", "titleKo", "questionTextKo", "categoryIds", "attribution", "copyrightPolicyUrl"];
 const categories = new Set(index.categories.map((category) => category.id));
 const urls = new Set();
-const bibleDb = new DatabaseSync(bibleDbPath, { readOnly: true });
-const verseExists = bibleDb.prepare("SELECT 1 FROM verses WHERE locale = 'ko' AND code = ? AND chapter = ? AND verse = ? LIMIT 1");
+const verseKeys = new Set();
+for (const vplPath of [koVplPath, enVplPath]) {
+  const raw = await readFile(vplPath, "utf8");
+  for (const line of raw.split(/\r?\n/)) {
+    const match = line.match(/^([0-9A-Z]{3})\s+(\d+):(\d+)\s+/);
+    if (match) verseKeys.add(`${match[1]}-${Number(match[2])}-${Number(match[3])}`);
+  }
+}
 const DB_CODE_ALIASES = new Map([
   ["JHN", "JOH"],
   ["MRK", "MAR"],
@@ -55,8 +61,8 @@ function dbCode(code) {
 function isResolvableReference(reference) {
   const code = dbCode(reference.code);
   return Boolean(
-    verseExists.get(code, reference.chapter, reference.startVerse) &&
-      verseExists.get(code, reference.chapter, reference.endVerse),
+    verseKeys.has(`${code}-${reference.chapter}-${reference.startVerse}`) &&
+      verseKeys.has(`${code}-${reference.chapter}-${reference.endVerse}`),
   );
 }
 
