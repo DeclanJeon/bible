@@ -1,0 +1,6 @@
+{
+  "bundleRoot": "docs/okf",
+  "systemName": "성경 하이퍼링크 컴패니언",
+  "validatorCommand": "node scripts/validate-okf-bundle.mjs",
+  "initCommand": "node scripts/init-okf-bundle.mjs"
+}

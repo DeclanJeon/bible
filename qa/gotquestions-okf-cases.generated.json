@@ -1,0 +1,43 @@
+[
+  {
+    "id": "okf-companion-heaven-duplicate-output",
+    "surface": "companion",
+    "query": "천국은 어떤 곳인가? 죽어서 가는 곳인가?",
+    "requiredAll": [
+      "GotQuestions 관련 문답"
+    ],
+    "requiredAny": [
+      "요한계시록 21:1-5",
+      "새 하늘",
+      "새 하늘과 새 땅"
+    ],
+    "requiredAnyLinks": [
+      "Korean-heaven-like",
+      "Korean-Heaven-perfect",
+      "Korean-afterlife",
+      "Korean-life-after-death"
+    ],
+    "forbidden": [
+      "마태복음 16:16-20"
+    ],
+    "noImmediateDuplicatePhrase": true,
+    "source": "docs/okf/gotquestions/qa/companion-heaven-duplicate-output.md"
+  },
+  {
+    "id": "okf-heaven-after-death",
+    "bucket": "paraphrase",
+    "surface": "rag",
+    "query": "천국은 어떤 곳인가? 죽어서 가는 곳인가?",
+    "expectedAnyCategoryIds": [
+      "eternity"
+    ],
+    "expectedAnyReferences": [
+      "REV-21-1-5"
+    ],
+    "forbidden": [
+      "externalBodyStored",
+      "bodySummary"
+    ],
+    "source": "docs/okf/gotquestions/qa/heaven-after-death.md"
+  }
+]

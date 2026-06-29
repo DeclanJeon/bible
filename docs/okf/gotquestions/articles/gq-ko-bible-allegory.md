@@ -1,0 +1,41 @@
+---
+type: GotQuestions Article Metadata
+title: "성경에는 우화가 포함되어 있습니까?"
+description: "성경에는 우화가 포함되어 있습니까?"
+resource: https://www.gotquestions.org/Korean/Korean-Bible-allegory.html
+tags: ["gotquestions", "bible"]
+timestamp: 2026-06-28T17:59:28.052Z
+bodyStored: false
+articleId: gq-ko-bible-allegory
+slug: Korean-Bible-allegory
+primaryCategoryId: bible
+referenceStatus: linked
+---
+
+# Question
+
+성경에는 우화가 포함되어 있습니까?
+
+# Scripture links
+
+- MAT 13:3-9
+- LUK 15:11-32
+- REV 12:1-6
+- EPH 5:31-32
+- GAL 4:22-26
+
+# Retrieval hints
+
+- canonical question: 성경에는 우화가 포함되어 있습니까?
+- safe aliases: 성경에는 우화가 포함되어 있습니까?, 성경에는 우화가 포함되어 있습니까?, 성경, 영감, 정경, 신뢰성, 성경에는, 우화가, 포함되어, 있습니까
+- category intent: bible
+
+# Boundaries
+
+- bodyStored: false
+- 원문 전문은 GotQuestions.org 링크에서 확인한다.
+- 이 concept은 제목, 링크, 분류, 성구 연결만 보관한다.
+
+# Citations
+
+[GotQuestions Korean](https://www.gotquestions.org/Korean/Korean-Bible-allegory.html)

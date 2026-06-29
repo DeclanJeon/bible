@@ -1,0 +1,28 @@
+---
+type: GotQuestions Category Metadata
+title: "죄에 관한 질문들"
+description: "죄에 관한 질문들 category metadata and retrieval policy."
+resource: https://www.gotquestions.org/Korean/Korean-Q-sin.html
+tags: ["gotquestions", "category", "sin", "죄에", "관한", "질문들"]
+timestamp: 2026-06-28T17:59:28.052Z
+bodyStored: false
+categoryId: sin
+order: 17
+articleCount: 55
+---
+
+# Category
+
+죄에 관한 질문들
+
+# Retrieval topics
+
+- 죄에
+- 관한
+- 질문들
+
+# Policy
+
+- bodyStored: false
+- Category concepts store category metadata only.
+- Article source text is not stored here.

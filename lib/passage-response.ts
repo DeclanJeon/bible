@@ -122,8 +122,28 @@ function clarifyPrompt(locale: AppLocale, question: QuestionUnderstanding) {
     : "A slightly more specific prompt will help the companion find a more directly connected passage.";
 }
 
+function normalizeForRepeat(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function joinLines(...values: Array<string | undefined>) {
-  return values.map((value) => value?.trim()).filter(Boolean).join(" ");
+  const seen = new Set<string>();
+  const parts: string[] = [];
+
+  for (const value of values) {
+    const trimmed = value?.trim();
+    if (!trimmed) continue;
+    const normalized = normalizeForRepeat(trimmed);
+    if (normalized && seen.has(normalized)) continue;
+    seen.add(normalized);
+    parts.push(trimmed);
+  }
+
+  return parts.join(" ");
 }
 function questionContextSummary(locale: AppLocale, question: QuestionUnderstanding) {
   const axes = [...question.concernAxes, ...question.theologicalAxes].filter(Boolean).join(", ");
@@ -219,7 +239,7 @@ function buildBundleExplanation(
 ): PassageRecommendationResponse["explanation"] {
   return {
     userConcernSummary: questionContextSummary(locale, question),
-    connectionToUser: joinLines(question.original, explanation.userConnection.promptFragment, explanation.userConnection.connectionReason),
+    connectionToUser: joinLines(explanation.userConnection.promptFragment, explanation.userConnection.connectionReason),
     whyThisPassage: joinLines(explanation.passageClaim.summary, locale === "ko" ? `질문 핵심: ${question.normalized}` : `Question focus: ${question.normalized}`),
     limits: joinLines(explanation.applicationBoundary.caution, ...explanation.applicationBoundary.doesNotSettle),
   };
@@ -235,13 +255,12 @@ function buildFallbackExplanation(
   const semanticTerms = retrieval.reasons.semanticTerms.join(", ");
   return {
     userConcernSummary: questionContextSummary(locale, question),
-    connectionToUser: joinLines(question.original, retrieval.rationale),
+    connectionToUser: retrieval.rationale,
     whyThisPassage:
-      matchedTerms || semanticTerms || retrieval.primaryExcerpt
+      matchedTerms || semanticTerms
         ? joinLines(
-            retrieval.rationale,
-            matchedTerms ? (locale === "ko" ? `직접 맞닿은 단어: ${matchedTerms}` : `Matched terms: ${matchedTerms}`) : undefined,
-            semanticTerms ? (locale === "ko" ? `질문 핵심어: ${semanticTerms}` : `Query concepts: ${semanticTerms}`) : undefined,
+            matchedTerms ? (locale === "ko" ? `본문 자체의 직접 단서: ${matchedTerms}` : `Text-level cues: ${matchedTerms}`) : undefined,
+            semanticTerms ? (locale === "ko" ? `질문 핵심어와 이어지는 주제: ${semanticTerms}` : `Query concepts connected to the text: ${semanticTerms}`) : undefined,
           )
         : retrieval.rationale,
     limits: reliable
