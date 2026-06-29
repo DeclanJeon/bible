@@ -1,6 +1,6 @@
 {
   "name": "bible-hyperlink-companion",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "private": true,
   "scripts": {
     "dev": "next dev",
