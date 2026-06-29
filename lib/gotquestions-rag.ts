@@ -93,7 +93,9 @@ function normalizeText(value: string) {
 }
 
 function normalizeKoreanTerm(value: string) {
-  return value.replace(/(으로는|으로도|에게는|에게도|에서는|에서|에게|부터|까지|처럼|보다|라도|이며|이고|라는|이라|입니다|해요|어요|아요|이에요|예요|은|는|이|가|을|를|에|의|와|과|도|만|로|으로|요)$/u, "");
+  return value
+    .replace(/적$/u, "")
+    .replace(/(으로는|으로도|에게는|에게도|에서는|에서|에게|부터|까지|처럼|보다|라도|이며|이고|라는|이라|입니다|해요|어요|아요|이에요|예요|은|는|이|가|을|를|에|의|와|과|도|만|로|으로|요)$/u, "");
 }
 
 function tokenize(value: string) {
@@ -146,6 +148,7 @@ function scoreArticle(article: GotQuestionsArticleMeta, query: string, terms: st
   const normalizedQuestion = normalizeText(article.questionTextKo);
   const normalizedSearch = normalizeText([article.searchTextKo, article.keywords.join(" "), article.topics.join(" ")].join(" "));
   const normalizedQuery = normalizeText(query);
+  const queryTerms = normalizedQuery.split(" ").filter(Boolean);
   const matchedTerms: string[] = [];
   let score = 0;
   let matchKind: GotQuestionsRagHit["matchKind"] = "category-topic";
@@ -153,8 +156,16 @@ function scoreArticle(article: GotQuestionsArticleMeta, query: string, terms: st
   if (normalizedQuery && (normalizedTitle === normalizedQuery || normalizedQuestion === normalizedQuery)) {
     score += 45;
     matchKind = "exact-title";
+  } else if (
+    normalizedQuery &&
+    ((normalizedTitle.length >= 4 && normalizedQuery.includes(normalizedTitle)) ||
+      (normalizedQuestion.length >= 4 && normalizedQuery.includes(normalizedQuestion)) ||
+      (normalizedTitle.length >= 2 && queryTerms.includes(normalizedTitle)) ||
+      (normalizedQuestion.length >= 2 && queryTerms.includes(normalizedQuestion)))
+  ) {
+    score += 36;
+    matchKind = "exact-title";
   }
-
   for (const term of terms) {
     if (normalizedTitle.includes(term) || normalizedQuestion.includes(term)) {
       score += 8;
