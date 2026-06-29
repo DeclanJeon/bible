@@ -149,7 +149,6 @@ function questionContextSummary(locale: AppLocale, question: QuestionUnderstandi
   const axes = [...question.concernAxes, ...question.theologicalAxes].filter(Boolean).join(", ");
   return joinLines(
     question.original,
-    question.normalized !== question.original ? question.normalized : undefined,
     axes ? (locale === "ko" ? `질문 축: ${axes}` : `Question axes: ${axes}`) : undefined,
   );
 }
