@@ -6,12 +6,14 @@ process.env.HERMES_CHAT_COMPLETIONS_FIRST = "1";
 
 const { readFile } = await import("node:fs/promises");
 const path = await import("node:path");
+const { DatabaseSync } = await import("node:sqlite");
 
 const ROOT = process.cwd();
 const indexPath = path.join(ROOT, "data", "faith", "gotquestions-ko.index.json");
 const auditPath = path.join(ROOT, "data", "faith", "gotquestions-ko.source-audit.json");
 const fixturePath = path.join(ROOT, "qa", "gotquestions-100.json");
 const parserGoldPath = path.join(ROOT, "qa", "gotquestions-reference-parser-gold.json");
+const bibleDbPath = path.join(ROOT, "data", "bible", "bible.sqlite");
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -29,6 +31,35 @@ const forbiddenKeys = /^(body|content|answer|html|markdown|excerpt|quote|paragra
 const requiredArticleFields = ["id", "slug", "url", "titleKo", "questionTextKo", "categoryIds", "attribution", "copyrightPolicyUrl"];
 const categories = new Set(index.categories.map((category) => category.id));
 const urls = new Set();
+const bibleDb = new DatabaseSync(bibleDbPath, { readOnly: true });
+const verseExists = bibleDb.prepare("SELECT 1 FROM verses WHERE locale = 'ko' AND code = ? AND chapter = ? AND verse = ? LIMIT 1");
+const DB_CODE_ALIASES = new Map([
+  ["JHN", "JOH"],
+  ["MRK", "MAR"],
+  ["JAS", "JAM"],
+  ["JOL", "JOE"],
+  ["EZK", "EZE"],
+  ["NAM", "NAH"],
+  ["SNG", "SOL"],
+  ["PHP", "PHI"],
+  ["1JN", "1JO"],
+  ["2JN", "2JO"],
+  ["3JN", "3JO"],
+]);
+
+function dbCode(code) {
+  return DB_CODE_ALIASES.get(code) ?? code;
+}
+
+
+function isResolvableReference(reference) {
+  const code = dbCode(reference.code);
+  return Boolean(
+    verseExists.get(code, reference.chapter, reference.startVerse) &&
+      verseExists.get(code, reference.chapter, reference.endVerse),
+  );
+}
+
 for (const article of index.articles) {
   for (const field of requiredArticleFields) assert(article[field] && (!Array.isArray(article[field]) || article[field].length), `article ${article.id} missing ${field}`);
   assert(article.bodyStored === false, `article ${article.id} must not store body`);
@@ -37,7 +68,21 @@ for (const article of index.articles) {
   for (const categoryId of article.categoryIds) assert(categories.has(categoryId), `article ${article.id} has unknown category ${categoryId}`);
   assert((article.titleKo || "").length <= 180, `article ${article.id} title too long`);
   assert((article.questionTextKo || "").length <= 220, `article ${article.id} question text too long`);
+  for (const keyword of article.keywords ?? []) {
+    assert(keyword.length <= 32, `article ${article.id} keyword too long`);
+    assert(!/[.!?。！？].{4,}/u.test(keyword), `article ${article.id} keyword looks sentence-like`);
+  }
+  assert((article.keywords ?? []).length <= 24, `article ${article.id} has too many keywords`);
+  for (const evidence of article.referenceEvidence ?? []) {
+    assert((evidence.raw ?? "").length <= 40, `article ${article.id} reference raw too long`);
+  }
+  for (const reference of article.references ?? []) {
+    assert(isResolvableReference(reference), `article ${article.id} has unresolved reference ${referenceKey(reference)}`);
+  }
 }
+assert(!urls.has("https://www.gotquestions.org/Korean/Korean-crucial.html"), "Korean-crucial list page must not be indexed as an article");
+assert(!urls.has("https://www.gotquestions.org/Korean/Korean-FAQ.html"), "Korean-FAQ list page must not be indexed as an article");
+
 
 function scanForbidden(value, trail = []) {
   if (!value || typeof value !== "object") return;
@@ -47,6 +92,23 @@ function scanForbidden(value, trail = []) {
   }
 }
 scanForbidden(index);
+
+function scanLongProse(value, trail = []) {
+  if (typeof value === "string") {
+    const key = trail.at(-1) ?? "";
+    const allowedLongFields = new Set(["titleKo", "questionTextKo", "searchTextKo", "raw"]);
+    const koreanTokens = value.match(/[가-힣]{2,}/gu) ?? [];
+    const sentenceLike = /[가-힣][^.!?。！？]{35,}[.!?。！？]/u.test(value);
+    assert(allowedLongFields.has(key) || (!sentenceLike && koreanTokens.length <= 18), `possible stored body prose at ${trail.join(".")}`);
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+  for (const [key, child] of Object.entries(value)) scanLongProse(child, [...trail, key]);
+}
+scanLongProse(index);
+scanForbidden(audit);
+scanLongProse(audit);
+
 
 const BOOK_ALIASES = new Map([
   ["gen", "GEN"],
@@ -353,13 +415,31 @@ try {
 } catch {
   fixtures = [];
 }
+assert(fixtures.length >= 100, `GotQuestions QA fixture must contain at least 100 cases, got ${fixtures.length}`);
+const fixtureBucketCounts = fixtures.reduce((counts, row) => {
+  counts[row.bucket] = (counts[row.bucket] ?? 0) + 1;
+  return counts;
+}, {});
+assert(fixtureBucketCounts.gold >= 40, `gold bucket must contain at least 40 cases, got ${fixtureBucketCounts.gold ?? 0}`);
+assert(fixtureBucketCounts.paraphrase >= 35, `paraphrase bucket must contain at least 35 cases, got ${fixtureBucketCounts.paraphrase ?? 0}`);
+assert(fixtureBucketCounts.adversarial >= 25, `adversarial bucket must contain at least 25 cases, got ${fixtureBucketCounts.adversarial ?? 0}`);
 
+
+const invalidGenerationProbe = {
+  summary: "Unsupported https://gotquestions.org/Korean/fake-body.html and MAT 7:21 should be rejected.",
+  biblicalDirection: "Unsupported MAT 7:21 and 마태복음 7:21 must not be accepted.",
+  caveat: "This pretends to summarize a GotQuestions answer body.",
+  passageReasons: [{ passageKey: "MAT-7-21-21", reason: "Unsupported passage key must fail." }],
+  resourceReasons: [{ resourceId: "gq-ko-not-real", reason: "Unsupported resource id and URL https://example.invalid/body must fail." }],
+  nextQuestions: ["Unsupported ROM 8:28 should not pass."],
+};
+assert(!resourceIds({ resources: [{ id: "gq-ko-plan-salvation" }] }).includes(invalidGenerationProbe.resourceReasons[0].resourceId), "invalid generation probe must use unsupported resource id");
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
   assert(!url.includes("gotquestions.org"), `runtime must not fetch GotQuestions: ${url}`);
   if (url.startsWith("https://gotquestions-rag-qa.invalid")) {
-    return new Response(JSON.stringify({ choices: [{ message: { content: JSON.stringify({ summary: "QA fallback", caveat: "QA", biblicalDirection: "QA", passageReasons: [], resourceReasons: [], nextQuestions: [] }) } }] }), { status: 200, headers: { "content-type": "application/json" } });
+    return new Response(JSON.stringify({ choices: [{ message: { content: JSON.stringify(invalidGenerationProbe) } }] }), { status: 200, headers: { "content-type": "application/json" } });
   }
   return originalFetch(input, init);
 };
@@ -385,6 +465,13 @@ const cases = fixtures.length ? fixtures : [
 ];
 
 const results = [];
+const THRESHOLDS = {
+  overall: { top3: 0.99, category: 0.99, reference: 0.99, stance: 0.99 },
+  gold: { top1: 0.95, top3: 0.99, category: 0.99, reference: 0.99, stance: 0.99 },
+  paraphrase: { top3: 0.95, category: 0.99, reference: 0.99, stance: 0.99 },
+  adversarial: { category: 0.95, reference: 0.95, stance: 0.95 },
+};
+
 const metrics = new Map();
 for (const testCase of cases) {
   const result = await callFaithQuestion(testCase.query);
@@ -394,6 +481,10 @@ for (const testCase of cases) {
   assert(result.data.meta?.gotQuestionsRag?.bodyFetched === false, `${testCase.id} GQ bodyFetched must be false`);
   assert(result.data.meta?.gotQuestionsRag?.bodyStored === false, `${testCase.id} GQ bodyStored must be false`);
   assert((result.data.meta?.gotQuestionsRag?.matchedCount ?? 0) > 0, `${testCase.id} should have GotQuestions matches`);
+  const returnedPayload = JSON.stringify(result.data);
+  for (const sentinel of ["fake-body.html", "MAT 7:21", "마태복음 7:21", "gq-ko-not-real", "Unsupported resource id", "Unsupported passage key", "Unsupported ROM 8:28"]) {
+    assert(!returnedPayload.includes(sentinel), `${testCase.id} leaked invalid generated sentinel ${sentinel}`);
+  }
 
   const hrefs = resourceHrefs(result.data);
   const topResourceIds = resourceIds(result.data).slice(0, 3);
@@ -409,9 +500,9 @@ for (const testCase of cases) {
   }
 
   if (testCase.expectedAnyCategoryIds?.length) {
-    const actualCategories = new Set(resourceArticles(result.data).flatMap((article) => article.categoryIds));
-    const categoryMatched = testCase.expectedAnyCategoryIds.some((categoryId) => actualCategories.has(categoryId));
-    assert(categoryMatched, `${testCase.id} should include one expected category ${testCase.expectedAnyCategoryIds.join(",")}`);
+    const topArticle = articleByResourceId.get(resourceIds(result.data)[0]);
+    const categoryMatched = testCase.expectedAnyCategoryIds.some((categoryId) => topArticle?.categoryIds.includes(categoryId));
+    assert(categoryMatched, `${testCase.id} top article should include one expected category ${testCase.expectedAnyCategoryIds.join(",")}`);
     bucketMetrics.category += 1;
   }
 
@@ -445,14 +536,38 @@ for (const testCase of cases) {
   results.push({ id: testCase.id, bucket, coverage: result.data.meta?.gotQuestionsRag?.coverage, matchedCount: result.data.meta?.gotQuestionsRag?.matchedCount, topResources: topResourceIds });
 }
 
-for (const [bucket, bucketMetrics] of metrics) {
-  if (bucket === "gold") {
-    assert(bucketMetrics.top3 === bucketMetrics.total, `gold bucket top3 must be 100%, got ${bucketMetrics.top3}/${bucketMetrics.total}`);
-    assert(bucketMetrics.category === bucketMetrics.total, `gold bucket category coverage must be 100%, got ${bucketMetrics.category}/${bucketMetrics.total}`);
-    assert(bucketMetrics.reference === bucketMetrics.total, `gold bucket reference coverage must be 100%, got ${bucketMetrics.reference}/${bucketMetrics.total}`);
-    assert(bucketMetrics.stance === bucketMetrics.stanceApplicable, `gold bucket stance coverage must be 100%, got ${bucketMetrics.stance}/${bucketMetrics.stanceApplicable}`);
-  }
+function rate(numerator, denominator) {
+  return denominator ? numerator / denominator : 1;
 }
+
+function assertRate(label, numerator, denominator, minRate) {
+  const actual = rate(numerator, denominator);
+  assert(actual >= minRate, `${label} must be >= ${minRate}, got ${numerator}/${denominator} (${actual.toFixed(4)})`);
+}
+
+const overallMetrics = { total: 0, top1: 0, top3: 0, category: 0, reference: 0, stance: 0, stanceApplicable: 0 };
+for (const [bucket, bucketMetrics] of metrics) {
+  overallMetrics.total += bucketMetrics.total;
+  overallMetrics.top1 += bucketMetrics.top1;
+  overallMetrics.top3 += bucketMetrics.top3;
+  overallMetrics.category += bucketMetrics.category;
+  overallMetrics.reference += bucketMetrics.reference;
+  overallMetrics.stance += bucketMetrics.stance;
+  overallMetrics.stanceApplicable += bucketMetrics.stanceApplicable;
+
+  const bucketThresholds = THRESHOLDS[bucket];
+  assert(bucketThresholds, `unknown GotQuestions QA bucket ${bucket}`);
+  if (bucketThresholds.top1 !== undefined) assertRate(`${bucket} top1`, bucketMetrics.top1, bucketMetrics.total, bucketThresholds.top1);
+  if (bucketThresholds.top3 !== undefined) assertRate(`${bucket} top3`, bucketMetrics.top3, bucketMetrics.total, bucketThresholds.top3);
+  if (bucketThresholds.category !== undefined) assertRate(`${bucket} category`, bucketMetrics.category, bucketMetrics.total, bucketThresholds.category);
+  if (bucketThresholds.reference !== undefined) assertRate(`${bucket} reference`, bucketMetrics.reference, bucketMetrics.total, bucketThresholds.reference);
+  if (bucketThresholds.stance !== undefined) assertRate(`${bucket} stance`, bucketMetrics.stance, bucketMetrics.stanceApplicable, bucketThresholds.stance);
+}
+
+assertRate("overall top3", overallMetrics.top3, overallMetrics.total, THRESHOLDS.overall.top3);
+assertRate("overall category", overallMetrics.category, overallMetrics.total, THRESHOLDS.overall.category);
+assertRate("overall reference", overallMetrics.reference, overallMetrics.total, THRESHOLDS.overall.reference);
+assertRate("overall stance", overallMetrics.stance, overallMetrics.stanceApplicable, THRESHOLDS.overall.stance);
 
 globalThis.fetch = originalFetch;
 console.log(JSON.stringify({ status: "passed", optionalMode: process.env.GOTQUESTIONS_RAG_OPTIONAL === "1", indexArticles: index.articles.length, parserGoldCases: parserGold.length, metrics: Object.fromEntries(metrics), checkedCases: results }, null, 2));

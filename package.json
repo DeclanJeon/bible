@@ -25,6 +25,7 @@
     "ingest:gotquestions": "node scripts/ingest-gotquestions-korean.mjs",
     "qa:gotquestions-rag": "node scripts/run-gotquestions-rag-qa.mjs",
     "qa:gotquestions-large": "node scripts/run-gotquestions-large-qa.mjs --limit=10000",
+    "qa:companion-probes": "node scripts/run-companion-probes.mjs",
     "sync:hanja-note": "python3 scripts/sync_hanja_import_note.py",
     "build:hanja-harvest": "python3 scripts/build_hanja_harvest.py"
   },

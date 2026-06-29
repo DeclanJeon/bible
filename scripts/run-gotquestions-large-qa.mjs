@@ -7,6 +7,7 @@ const indexPath = path.join(ROOT, "data", "faith", "gotquestions-ko.index.json")
 const limitArg = process.argv.find((arg) => arg.startsWith("--limit="));
 const LIMIT = Number(limitArg?.slice("--limit=".length) || 10000);
 const MIN_RATE = Number(process.env.GOTQUESTIONS_LARGE_QA_MIN_RATE || 0.99);
+const RUNTIME_SAMPLE = Number(process.env.GOTQUESTIONS_LARGE_RUNTIME_SAMPLE || 100);
 const index = JSON.parse(await readFile(indexPath, "utf8"));
 
 function assert(condition, message) {
@@ -158,6 +159,43 @@ const metrics = {
   reference,
   referenceRate: reference / cases.length,
 };
+
+async function runRuntimeParitySample(sampleCases) {
+  if (!sampleCases.length) return [];
+  const routeModule = await import("../.next/server/app/api/faith-questions/route.js");
+  const post = routeModule.default?.routeModule?.userland?.POST ?? routeModule.routeModule?.userland?.POST;
+  assert(typeof post === "function", "Built faith-questions route POST handler not found. Run npm run build first.");
+  const runtimeFailures = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (input, init) => {
+    const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+    assert(!url.includes("gotquestions.org"), `runtime must not fetch GotQuestions: ${url}`);
+    return originalFetch(input, init);
+  };
+  try {
+    for (const testCase of sampleCases) {
+      const response = await post(new Request("http://localhost/api/faith-questions", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ query: testCase.query, locale: "ko" }),
+      }));
+      assert(response.status === 200, `runtime parity ${testCase.id} returned ${response.status}`);
+      const data = await response.json();
+      assert(data.meta?.gotQuestionsRag?.bodyFetched === false, `runtime parity ${testCase.id} bodyFetched must be false`);
+      assert(data.meta?.gotQuestionsRag?.bodyStored === false, `runtime parity ${testCase.id} bodyStored must be false`);
+      const hrefs = (data.resources ?? []).map((resource) => resource.href);
+      const passed = hrefs.slice(0, 3).includes(testCase.expectedArticleUrl);
+      if (!passed) runtimeFailures.push({ id: testCase.id, query: testCase.query, expectedArticleUrl: testCase.expectedArticleUrl, topUrls: hrefs.slice(0, 3) });
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  return runtimeFailures;
+}
+
 const passed = metrics.top3Rate >= MIN_RATE && metrics.categoryRate >= MIN_RATE && metrics.referenceRate >= MIN_RATE;
-console.log(JSON.stringify({ status: passed ? "passed" : "failed", minRate: MIN_RATE, indexArticles: index.articles.length, metrics, sampledFailures: failures }, null, 2));
+const runtimeCases = cases.filter((_, index) => index % Math.max(1, Math.floor(cases.length / RUNTIME_SAMPLE)) === 0).slice(0, RUNTIME_SAMPLE);
+const runtimeFailures = await runRuntimeParitySample(runtimeCases);
+assert(runtimeFailures.length === 0, `runtime parity sample failed ${runtimeFailures.length}/${runtimeCases.length}: ${JSON.stringify(runtimeFailures.slice(0, 5))}`);
+console.log(JSON.stringify({ status: passed ? "passed" : "failed", minRate: MIN_RATE, indexArticles: index.articles.length, metrics, runtimeParity: { total: runtimeCases.length, failed: runtimeFailures.length }, sampledFailures: failures }, null, 2));
 if (!passed) process.exit(1);

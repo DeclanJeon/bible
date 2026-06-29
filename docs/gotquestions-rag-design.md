@@ -553,6 +553,97 @@ Fixture 예:
 }
 ```
 
+### 7.5 10,000문항 대량 회귀 QA
+
+100문항 curated QA는 실제 품질 판단의 중심이고, 10,000문항 QA는 regression/fuzz layer로 둔다. 대량 QA는 “사용자가 반드시 이렇게 묻는다”는 gold truth가 아니라, GotQuestions Korean article metadata에서 자동 생성한 다양한 질문 표면이 ranking을 깨뜨리지 않는지 확인하는 장치다.
+
+대량 QA case source:
+
+1. Indexed article title/question exact form.
+2. Title/question + “성경적으로 설명해줘” 같은 일반 사용자 suffix.
+3. “관련 성구를 연결해줘” scripture-link intent.
+4. “GotQuestions 기준으로 … 문답을 찾아줘” source-constrained intent.
+5. “궁금합니다: …” conversational wrapper.
+6. category/topic prefix + article title.
+7. adversarial wrapper: “회의적인 사람이 ‘…’라고 물으면 어떻게 답하나요?”
+
+대량 QA pass 기준:
+
+- sample size: 기본 10,000 cases, `--limit`로 조정 가능.
+- expected article top1 >= 99%를 목표 지표로 기록한다.
+- expected article top3 >= 99%는 hard gate.
+- expected category coverage >= 99% hard gate.
+- expected reference overlap >= 99% hard gate.
+- sampled failures는 최소 100개까지 JSON에 출력해 failure taxonomy를 바로 볼 수 있어야 한다.
+- body-storage guard와 runtime network guard는 curated `qa:gotquestions-rag`에서 계속 hard gate로 유지한다.
+
+대량 QA가 잡아야 하는 실패 유형:
+
+- 짧은 성경 책명/title query가 “성경적/성경적인” 같은 일반 형용사 article로 밀리는 문제.
+- exact title이 query token으로 들어있는데 category prior가 과도하게 이기는 문제.
+- eternity/heaven/death 같은 manual prior가 책명·인명·정확 제목을 덮어쓰는 문제.
+- category는 맞지만 reference overlap이 없는 관련 없는 article cluster.
+- adversarial wrapper 때문에 핵심 title token이 희석되는 문제.
+
+대량 QA가 증명하지 못하는 것:
+
+- GotQuestions 본문 의미와 생성 답변의 완전한 신학적 NLI 일치.
+- 사용자의 모든 open-ended companion 질문 품질.
+- companion page의 main Bible passage routing 정확도.
+
+따라서 release gate는 `qa:gotquestions-rag` + `qa:gotquestions-large` + representative companion-page probes + `qa:faith-questions` + `build`를 함께 요구한다. 대량 QA만 단독으로 “99% 완성”이라고 보고하지 않는다.
+
+### 7.6 Companion page representative probes
+
+`qa:gotquestions-large` proves local metadata ranking; it does not prove the actual `/ko/companion` user surface. Add a separate representative page probe gate before release.
+
+Minimum probe set:
+
+1. `천국은 어떤 곳인가? 죽어서 가는 곳인가?`
+   - route: `/ko/companion?prompt=...`
+   - must show `요한계시록 21:1-5` or `새 하늘과 새 땅` as the main Bible direction.
+   - must not show `마태복음 16:16-20` as the main answer.
+   - must show the GotQuestions section with a heaven/afterlife article such as `Korean-heaven-like`, `Korean-Heaven-perfect`, `Korean-afterlife`, or `Korean-life-after-death`.
+2. `사탄은 누구인가?`
+   - must show GotQuestions article `Korean-Satan.html` in the related Q&A section.
+   - must include at least one scripture chip from the article metadata.
+3. `구원받으려면 무엇을 믿어야 하나요?`
+   - must prioritize salvation/plan-of-salvation resources and internal Bible links.
+4. `창세기 성경적으로 설명해줘`
+   - must not be captured by generic “성경적” articles when the exact book-title article exists in GotQuestions metadata.
+5. `회의적인 사람이 '로마서'라고 물으면 어떻게 답하나요?`
+   - must keep the exact book-title article in top results despite the adversarial wrapper.
+
+Probe evidence format:
+
+- JSON artifact with `{ route, query, status, assertions, matchedText, forbiddenTextAbsent }`.
+- For local/dev runs, HTML text extraction is enough for first implementation.
+- Browser automation plus non-uniform screenshot is required only when validating final visual UX changes; metadata/ranking-only changes may use HTML/API probes.
+- Every probe must assert body-storage wording or metadata flags where available: no GotQuestions body storage and no runtime GotQuestions body fetch.
+
+Package command:
+
+- Add `qa:companion-probes` when the probe runner is implemented.
+- Release gate command set becomes:
+  - `npm run qa:gotquestions-rag`
+  - `npm run qa:gotquestions-large`
+  - `npm run qa:companion-probes`
+  - `npm run qa:faith-questions`
+  - `npm run build`
+
+### 7.7 QA implementation gap backlog
+
+The current design is accepted only when these implementation gaps are explicitly tracked for G002/G003:
+
+- `qa:gotquestions-rag` must enforce, not merely print, the documented bucket thresholds: gold/paraphrase/adversarial and overall top1/top3/category/reference/stance rates.
+- Category expectations must distinguish top1 category versus any top-N category coverage.
+- Safety-first fixtures must be explicit and must fail if GotQuestions retrieval outranks safety routing.
+- Stance contradiction fixtures must include blocked contradiction phrases, not only positive stance tags.
+- GotQuestions-specific invalid generation rejection must be exercised with injected unsupported URL/reference/body-summary output.
+- URL classification must keep FAQ/crucial/list pages out of the article denominator unless they represent a single article.
+- Reference extraction must validate normalized references against the internal Bible DB and isolate unresolved references from answer evidence.
+- Body-storage guard must scan generated artifacts, test artifacts, logs/snapshots created by QA, runtime summaries, and generated keyword fields for body-like prose, not only top-level JSON keys.
+
 ## 8. 구현 순서
 
 1. `lib/bible-reference-parser.ts` 추가 또는 기존 parser 통합
@@ -562,7 +653,7 @@ Fixture 예:
 5. `lib/faith-question-answer.ts`에 evidence 병합
 6. `components/faith-question-form.tsx` 결과 UI에 GotQuestions section 추가
 7. `scripts/run-gotquestions-rag-qa.mjs`와 `qa/gotquestions-100.json` 추가
-8. `package.json`에 `ingest:gotquestions`, `qa:gotquestions-rag` 추가
+8. `package.json`에 `ingest:gotquestions`, `qa:gotquestions-rag`, `qa:gotquestions-large`, `qa:companion-probes` 추가
 9. Fallback/corrupt-index behavior:
    - If the GotQuestions index is absent/corrupt in development or tests, preserve current curated `FAITH_RESOURCES` and `routeFaithQuestion()` behavior and set `meta.gotQuestionsRag.used=false`.
    - Production build/QA must fail if the generated index is absent unless `GOTQUESTIONS_RAG_OPTIONAL=1` is explicitly set for an isolated test.
@@ -597,14 +688,19 @@ Expected implementation files:
 G002 구현 완료 조건:
 
 - ingestion 산출물 생성 및 검증 통과
-- faith question API가 GotQuestions article hits와 scripture links를 반환
-- 기존 faith-question QA 통과
-- 새 GotQuestions RAG QA 통과
+- faith question API와 companion page가 GotQuestions article hits와 scripture links를 반환
+- `qa:gotquestions-rag`가 bucket/overall threshold, body-storage guard, runtime-network guard, invalid-generation rejection을 hard fail로 강제
+- `qa:gotquestions-large`가 10,000개 기본 sweep에서 top3/category/reference >= 99%를 hard fail로 강제하고 top1을 보고
+- `qa:companion-probes`가 대표 `/ko/companion` 질의의 HTML/API surface assertion을 hard fail로 강제
+- 기존 `qa:faith-questions` 통과
 
 G003 완료 조건:
 
 - `qa/gotquestions-100.json` 100개 fixture 존재
-- 100문항 실행 결과 top3 article match >= 99%, category top1 >= 99%
+- 100문항 실행 결과 top3 article match >= 99%, category coverage >= 99%, stance proxy >= 99%
+- 10,000문항 large QA 결과 top3/category/reference >= 99%, top1 목표 >= 99% 또는 실패 taxonomy 기록 후 source fix
+- companion representative probes 100% 통과
 - unsupported generated URL/reference 0개
 - body fetch/store false 100%
+- `npm run qa:gotquestions-rag`, `npm run qa:gotquestions-large`, `npm run qa:companion-probes`, `npm run qa:faith-questions`, `npm run build` full rerun 통과
 - 실패가 있으면 수정 후 full rerun
