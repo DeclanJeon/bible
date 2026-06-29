@@ -11,6 +11,8 @@ import { buildBibleHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { buildPassageRecommendation } from "@/lib/passage-response";
 import { getBookMetadata } from "@/lib/book-metadata";
+import { searchGotQuestionsRag } from "@/lib/gotquestions-rag";
+import { parseBibleReferences } from "@/lib/bible-reference-parser";
 import { resolveLocale } from "@/lib/server-locale";
 
 type Props = {
@@ -60,6 +62,13 @@ function youtubeMatchLabel(locale: string, matchType: "exact" | "book" | "keywor
       return "Keyword match";
   }
 }
+
+function formatReferenceLabel(reference: { code: string; chapter: number; startVerse: number; endVerse: number }, locale: string) {
+  const bookTitle = getBookMetadata(reference.code, locale === "en" ? "en" : "ko")?.title ?? reference.code;
+  const verse = reference.startVerse === reference.endVerse ? `${reference.startVerse}` : `${reference.startVerse}-${reference.endVerse}`;
+  return `${bookTitle} ${reference.chapter}:${verse}`;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: requestedLocale } = await params;
   const locale = await resolveLocale(requestedLocale);
@@ -88,6 +97,11 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   const referenceSources = primaryBookMetadata?.notes.authorship.sources.filter(
     (s) => s.label === "Wikipedia" || s.label === "한국어 위키피디아" || s.label === "나무위키"
   ) ?? [];
+  const gotQuestions = searchGotQuestionsRag(userPrompt, appLocale, [
+    ...parseBibleReferences(userPrompt),
+    ...(recommendation.primary ? [recommendation.primary.reference] : []),
+    ...recommendation.relatedPassages.map((passage) => passage.reference),
+  ]);
 
   return (
     <main className="page-shell">
@@ -333,6 +347,46 @@ export default async function CompanionPage({ params, searchParams }: Props) {
             </section>
           ) : null}
 
+          {gotQuestions.hits.length ? (
+            <section className="glass rounded-2xl p-5 sm:p-6">
+              <div className="section-title text-base">
+                {appLocale === "ko" ? "GotQuestions 관련 문답" : "Related GotQuestions Q&A"}
+              </div>
+              <div className="mt-4 space-y-3">
+                {gotQuestions.hits.slice(0, 4).map((hit) => (
+                  <a
+                    key={hit.article.id}
+                    href={hit.article.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-xl border border-[var(--hairline)] bg-surface-2 p-3.5 transition hover:border-[var(--hairline-hover)]"
+                  >
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+                      {hit.matchKind} · score {hit.score}
+                    </div>
+                    <div className="mt-2 text-sm font-semibold leading-snug text-ink">{hit.article.titleKo}</div>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {hit.article.categoryIds.slice(0, 3).map((categoryId) => (
+                        <span key={categoryId} className="rounded-full border border-[var(--hairline)] px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+                          {categoryId}
+                        </span>
+                      ))}
+                      {hit.article.references.slice(0, 4).map((reference) => (
+                        <span key={`${hit.article.id}-${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`} className="rounded-full border border-[var(--gold)]/25 px-2 py-1 text-[10px] text-[var(--gold)]">
+                          {formatReferenceLabel(reference, appLocale)}
+                        </span>
+                      ))}
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <p className="mt-3 text-xs leading-5 text-[var(--ink-muted)]">
+                {appLocale === "ko"
+                  ? "원문 전문은 GotQuestions.org 링크에서 확인합니다. 이 앱은 제목, 링크, 분류, 성구 연결만 보관합니다."
+                  : "Read the full source at GotQuestions.org. This app stores only title, link, category, and Scripture-link metadata."}
+              </p>
+            </section>
+          ) : null}
           {referenceSources.length ? (
             <section className="glass rounded-2xl p-5 sm:p-6">
               <div className="section-title text-base">{appLocale === "ko" ? "참고 링크" : "Reference links"}</div>

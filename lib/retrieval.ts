@@ -281,7 +281,22 @@ const DOCTRINAL_ROUTING_RULES: RoutingRule[] = [
     semanticTermsKo: ["살아", "천국", "하늘", "죽은 자"],
   },
   {
-    match: /(죽으면|죽은 후|죽고 나면|바로).*(천국|하늘나라|낙원)|((천국|하늘나라|낙원).*(죽으면|죽은 후|바로))|((after death|immediately|right after|right away).*(heaven|paradise))|((heaven|paradise).*(after death|immediately|right after))/i,
+    match: /((천국|하늘나라|낙원).*(어떤 곳|무엇|어디|죽어서|죽은 뒤|죽은 다음|죽으면|가는 곳|가나|가나요))|((죽어서|죽은 뒤|죽은 다음|죽으면).*(천국|하늘나라|낙원))|((what|where).*(heaven|paradise))|((after death|die).*(heaven|paradise))/i,
+    primaryReference: { code: "REV", chapter: 21, startVerse: 1, endVerse: 5 },
+    supportingReferences: [
+      { code: "LUK", chapter: 23, startVerse: 43, endVerse: 43 },
+      { code: "PHI", chapter: 1, startVerse: 23, endVerse: 23 },
+      { code: "2CO", chapter: 5, startVerse: 8, endVerse: 8 },
+      { code: "JOH", chapter: 14, startVerse: 1, endVerse: 3 },
+      { code: "HEB", chapter: 11, startVerse: 13, endVerse: 16 },
+    ],
+    rationaleKo: "질문이 천국을 단순히 ‘죽어서 가는 장소’로만 묻는 것이 아니라 어떤 곳인지까지 묻기 때문에, 최종 소망을 ‘하나님이 사람들과 함께 거하시는 새 하늘과 새 땅’으로 보여 주는 요한계시록 21:1-5를 우선 본문으로 선택했습니다. 죽음 직후 그리스도와 함께 있음은 누가복음 23:43, 빌립보서 1:23, 고린도후서 5:8로 함께 확인합니다.",
+    rationaleEn: "Because the prompt asks what heaven is, not merely whether people go somewhere after death, the primary passage is Revelation 21:1-5, which frames the final hope as God dwelling with his people in the new heaven and new earth. Luke 23:43, Philippians 1:23, and 2 Corinthians 5:8 are included for the intermediate hope of being with Christ after death.",
+    passageKeywordsKo: ["새 하늘", "새 땅", "하나님의 장막", "함께", "눈물"],
+    semanticTermsKo: ["천국", "하늘나라", "죽어서", "낙원", "새 창조"],
+  },
+  {
+    match: /(죽으면|죽은 후|죽고 나면|죽어서|죽은 뒤|죽은 다음|바로).*(천국|하늘나라|낙원)|((천국|하늘나라|낙원).*(죽으면|죽은 후|죽어서|죽은 뒤|죽은 다음|바로))|((after death|immediately|right after|right away).*(heaven|paradise))|((heaven|paradise).*(after death|immediately|right after))/i,
     primaryReference: { code: "LUK", chapter: 23, startVerse: 43, endVerse: 43 },
     supportingReferences: [
       { code: "PHI", chapter: 1, startVerse: 23, endVerse: 23 },
