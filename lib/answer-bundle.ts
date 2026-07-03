@@ -326,13 +326,25 @@ function enrichQuestionWithExpansion(
     confidence,
   };
 }
+function isGroundedCandidate(question: QuestionUnderstanding, candidate: HybridPassageCandidate) {
+  const evidenceCount = candidate.matchedQueries.length + candidate.matchedAxes.length;
+  if (candidate.directness === "weak" || candidate.finalScore < 18 || evidenceCount === 0) return false;
+
+  if (question.answerMode === "survey_bundle" || question.intent === "meaning" || question.intent === "doctrine") {
+    return candidate.finalScore >= 26 && evidenceCount >= 2;
+  }
+
+  return true;
+}
+
 
 export async function buildAnswerBundle(prompt: string, locale?: string, options: AnswerBundleOptions = {}): Promise<AnswerBundle | null> {
   const question = enrichQuestionWithExpansion(understandQuestion(prompt, locale), options);
   if (!BUNDLE_ELIGIBLE_MODES[question.answerMode]) return null;
 
   const rawCandidates = await retrieveHybridPassageCandidates(question);
-  const candidates = rerankPassageCandidates(question, rawCandidates, 8);
+  const groundedCandidates = rawCandidates.filter((candidate) => isGroundedCandidate(question, candidate));
+  const candidates = rerankPassageCandidates(question, groundedCandidates, 8);
   const confidence = confidenceFor(question, candidates);
   const primary = candidates[0];
   if (!primary || confidence === "low") return null;

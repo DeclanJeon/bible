@@ -262,6 +262,20 @@ const TOPIC_RULES: Array<{ key: string; ko: RegExp; en: RegExp; rule: Rule }> = 
     },
   },
   {
+    key: "human-how-to-live",
+    ko: /사람.*어떻게.*살|인간.*어떻게.*살|어떻게\s*살아야|어떻게\s*살\s*것|삶.*방식/,
+    en: /\b(how should (we|people|humans|i|a person) live|how to live)\b/i,
+    rule: {
+      normalized: "사람은 어떻게 살아야 하는가",
+      intent: "meaning",
+      answerMode: "survey_bundle",
+      confidence: "high",
+      concernAxes: ["purpose", "identity", "moral responsibility", "neighbor"],
+      theologicalAxes: ["justice", "mercy", "humility", "love of God and neighbor", "good works", "image of God"],
+      searchQueries: ["사람은 어떻게 살아야 하는가", "정의를 행하며 인자를 사랑하며 겸손히 하나님과 함께 행하라", "하나님 사랑 이웃 사랑", "선한 일을 위하여 지으심", "how should humans live justice mercy humility"],
+    },
+  },
+  {
     key: "human-purpose",
     ko: /사람.*왜|인생.*의미|삶.*의미|왜\s*사는|목적|존재\s*이유/,
     en: /\b(why do (we|people|humans) live|meaning of life|human purpose|why am i here|purpose of life)\b/i,

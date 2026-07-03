@@ -184,7 +184,10 @@ type PassagePriorProfile = {
 };
 
 const PHILOSOPHICAL_PASSAGE_PRIORS: PassagePriorProfile[] = [
+  { match: /(사람.*어떻게.*살|인간.*어떻게.*살|어떻게\s*살아야|어떻게\s*살\s*것|삶.*방식|how should.*live|how.*to live)/i, references: [{ code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }, { code: "MAT", chapter: 22, startVerse: 37, endVerse: 40 }, { code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 }, { code: "ROM", chapter: 12, startVerse: 1, endVerse: 2 }], terms: ["살아야", "정의", "인자", "겸손", "하나님", "사랑", "이웃", "선한 일"] },
+
   { match: /(왜.*태어|무엇을 위해 살아|왜\s?살아야|살아야\s?(하는|되는|될)?지|살\s?이유|사는\s?이유|사람은\s?왜\s?사는|인간은\s?왜\s?사는|삶의 목적|삶.*의미|존재.*이유|purpose.*born|why.*born|reason to live|why.*live|purpose.*life|meaning.*life)/i, references: [{ code: "EPH", chapter: 2, startVerse: 10, endVerse: 10 }, { code: "PSA", chapter: 139, startVerse: 13, endVerse: 16 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }, { code: "GEN", chapter: 1, startVerse: 26, endVerse: 28 }], terms: ["목적", "살아야", "태어", "지으심", "형상", "소망", "하나님"] },
+  { match: /(죽음.*이후|죽은\s*후|왜.*죽|죽는가|사망.*이후|what happens after death|why.*die|meaning.*death)/i, references: [{ code: "ROM", chapter: 6, startVerse: 22, endVerse: 23 }, { code: "1CO", chapter: 15, startVerse: 54, endVerse: 58 }, { code: "JOH", chapter: 11, startVerse: 25, endVerse: 26 }, { code: "ECC", chapter: 12, startVerse: 13, endVerse: 14 }, { code: "REV", chapter: 21, startVerse: 3, endVerse: 4 }], terms: ["죽음", "사망", "죄", "부활", "영생", "소망", "심판"] },
   { match: /(양심|conscience)/i, references: [{ code: "ROM", chapter: 2, startVerse: 14, endVerse: 15 }, { code: "HEB", chapter: 10, startVerse: 22, endVerse: 22 }, { code: "1TI", chapter: 1, startVerse: 5, endVerse: 5 }, { code: "PRO", chapter: 20, startVerse: 27, endVerse: 27 }], terms: ["양심", "마음", "율법", "선", "하나님"] },
   { match: /(불공평|불공정|선하게 사는|선하게 살|unfair)/i, references: [{ code: "PSA", chapter: 73, startVerse: 16, endVerse: 17 }, { code: "GAL", chapter: 6, startVerse: 9, endVerse: 9 }, { code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 }, { code: "ROM", chapter: 12, startVerse: 21, endVerse: 21 }], terms: ["불공평", "선", "의미", "공의", "낙심"] },
   { match: /(이뤘는데도|원하던.*이뤘|마음이 비어|공허|empty.*success)/i, references: [{ code: "ECC", chapter: 2, startVerse: 10, endVerse: 11 }, { code: "MAR", chapter: 8, startVerse: 36, endVerse: 36 }, { code: "JOH", chapter: 6, startVerse: 35, endVerse: 35 }, { code: "PSA", chapter: 16, startVerse: 11, endVerse: 11 }], terms: ["성취", "마음", "공허", "헛됨", "생명"] },
@@ -672,9 +675,21 @@ function buildReferenceCandidateFromUnit(
     matchedConcepts: ["curated-prior"],
   };
 }
+function priorProfileFor(prompt: string, question?: QuestionUnderstanding) {
+  const haystack = [
+    prompt,
+    question?.normalized,
+    ...(question?.searchQueries ?? []),
+    ...(question?.concernAxes ?? []),
+    ...(question?.theologicalAxes ?? []),
+  ].filter(Boolean).join(" ");
 
-async function buildPriorPassageCandidates(locale: string | undefined, prompt: string): Promise<PassageCandidate[]> {
-  const profile = PHILOSOPHICAL_PASSAGE_PRIORS.find((entry) => entry.match.test(prompt));
+  return PHILOSOPHICAL_PASSAGE_PRIORS.find((entry) => entry.match.test(haystack));
+}
+
+
+async function buildPriorPassageCandidates(locale: string | undefined, prompt: string, question?: QuestionUnderstanding): Promise<PassageCandidate[]> {
+  const profile = priorProfileFor(prompt, question);
   if (!profile) return [];
 
   const candidates = await Promise.all(
@@ -879,9 +894,9 @@ function buildRuleBasedRetrieval(prompt: string, locale?: string, options: Retri
   };
 }
 
-function buildPriorProfileRetrieval(prompt: string, locale?: string, options: RetrievalOptions = {}): RetrievalResult | null {
+function buildPriorProfileRetrieval(prompt: string, locale?: string, options: RetrievalOptions = {}, question?: QuestionUnderstanding): RetrievalResult | null {
   const appLocale = resolveAppLocale(locale);
-  const profile = PHILOSOPHICAL_PASSAGE_PRIORS.find((entry) => entry.match.test(prompt));
+  const profile = priorProfileFor(prompt, question);
   if (!profile) return null;
 
   const [primaryReference, ...supportingReferences] = profile.references;
@@ -1070,7 +1085,7 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   const ruleBased = buildRuleBasedRetrieval(normalizedPrompt, appLocale, options);
   if (ruleBased) return { ...ruleBased, question };
 
-  const priorBased = buildPriorProfileRetrieval(normalizedPrompt, appLocale, options);
+  const priorBased = buildPriorProfileRetrieval(normalizedPrompt, appLocale, options, question);
   if (priorBased) return { ...priorBased, question };
 
   if (question.intent === "external_fact" || (question.answerMode === "clarify_with_starters" && question.confidence === "high")) {
@@ -1097,7 +1112,7 @@ export async function retrieveClusterForPrompt(prompt: string, locale?: string, 
   const [candidateUnits, { corpora, idf }, priorPassageCandidates] = await Promise.all([
     findCandidatePassageUnits({ locale: appLocale, terms: promptTokens, limit: 72 }),
     loadClusterCorpora(appLocale),
-    buildPriorPassageCandidates(appLocale, normalizedPrompt),
+    buildPriorPassageCandidates(appLocale, normalizedPrompt, question),
   ]);
   const passageCandidates = mergePassageCandidates(
     priorPassageCandidates,

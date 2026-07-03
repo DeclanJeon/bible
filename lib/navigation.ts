@@ -10,7 +10,7 @@ type BibleReferenceInput = {
 };
 
 export function serializeBibleReferenceSlug(reference: BibleReferenceInput) {
-  return `${reference.code}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
+  return `${canonicalBookCode(reference.code)}-${reference.chapter}-${reference.startVerse}-${reference.endVerse}`;
 }
 
 function serializeHighlight(reference: BibleReferenceInput) {
@@ -18,10 +18,28 @@ function serializeHighlight(reference: BibleReferenceInput) {
     ? String(reference.startVerse)
     : `${reference.startVerse}-${reference.endVerse}`;
 }
+const BOOK_CODE_ALIASES: Record<string, string> = {
+  JHN: "JOH",
+  MRK: "MAR",
+  EZK: "EZE",
+  JAS: "JAM",
+  "1JN": "1JO",
+  "2JN": "2JO",
+  "3JN": "3JO",
+  JOL: "JOE",
+  NAM: "NAH",
+  PHP: "PHI",
+};
+
+function canonicalBookCode(code: string) {
+  const normalized = code.trim().toUpperCase();
+  return BOOK_CODE_ALIASES[normalized] ?? normalized;
+}
+
 
 function normalizeBookCode(value: SearchValue) {
   const normalized = value?.trim().toUpperCase();
-  return normalized && /^[0-9A-Z]{3}$/.test(normalized) ? normalized : null;
+  return normalized && /^[0-9A-Z]{3}$/.test(normalized) ? canonicalBookCode(normalized) : null;
 }
 
 function normalizeChapter(value: number | string | null | undefined) {

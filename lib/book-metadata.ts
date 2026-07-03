@@ -991,12 +991,30 @@ function localizeBookMetadata(metadata: BookMetadata, locale?: string): BookMeta
   };
 }
 
+const BOOK_CODE_ALIASES: Record<string, string> = {
+  JHN: "JOH",
+  MRK: "MAR",
+  EZK: "EZE",
+  JAS: "JAM",
+  "1JN": "1JO",
+  "2JN": "2JO",
+  "3JN": "3JO",
+  JOL: "JOE",
+  NAM: "NAH",
+  PHP: "PHI",
+};
+
+function canonicalBookCode(code: string) {
+  const normalized = code.trim().toUpperCase();
+  return BOOK_CODE_ALIASES[normalized] ?? normalized;
+}
+
 export function getBookMetadata(code: string, locale?: string) {
-  const metadata = BOOK_METADATA[code] ?? buildFallbackMetadata(code);
+  const canonicalCode = canonicalBookCode(code);
+  const metadata = BOOK_METADATA[canonicalCode] ?? buildFallbackMetadata(canonicalCode);
   if (!metadata) return undefined;
   const localized = localizeBookMetadata(metadata, locale);
-  const refSources = bookReferenceSources(code);
-  if (!refSources.length) return localized;
+  const refSources = bookReferenceSources(canonicalCode);
   return {
     ...localized,
     notes: {

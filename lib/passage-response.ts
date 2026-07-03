@@ -145,6 +145,13 @@ function joinLines(...values: Array<string | undefined>) {
 
   return parts.join(" ");
 }
+function localizeReferenceCodes(text: string, locale: AppLocale) {
+  return text.replace(/\b([1-3]?[A-Z]{2,3}) (\d+:\d+(?:-\d+)?)\b/g, (match, code: string, verse: string) => {
+    const title = getBookMetadata(code, locale)?.title;
+    return title ? `${title} ${verse}` : match;
+  });
+}
+
 function questionContextSummary(locale: AppLocale, question: QuestionUnderstanding) {
   const axes = [...question.concernAxes, ...question.theologicalAxes].filter(Boolean).join(", ");
   return joinLines(
@@ -152,6 +159,44 @@ function questionContextSummary(locale: AppLocale, question: QuestionUnderstandi
     axes ? (locale === "ko" ? `질문 축: ${axes}` : `Question axes: ${axes}`) : undefined,
   );
 }
+function readableKeyLines(lines: string[]) {
+  return lines
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter((line) => line.length > 6 && !/^\d+\.?$/.test(line));
+}
+
+function relatedHelpText(
+  locale: AppLocale,
+  relation: AnswerBundle["relationMap"][number] | undefined,
+  fallback: string,
+) {
+  if (!relation) return fallback;
+
+  const helpsWith = relation.explanation.applicationBoundary.helpsWith.slice(0, 3).join(", ");
+  return joinLines(
+    relation.answers,
+    helpsWith
+      ? locale === "ko"
+        ? `이 본문은 다음 주제를 차분히 점검하게 합니다: ${helpsWith}.`
+        : `This passage helps the reader examine these themes carefully: ${helpsWith}.`
+      : undefined,
+    relation.limits ?? relation.explanation.applicationBoundary.doesNotSettle[0],
+  );
+}
+function passageTextHelp(locale: AppLocale, passageText: string) {
+  const compactText = passageText.replace(/\s+/g, " ").trim();
+  if (!compactText) {
+    return locale === "ko"
+      ? "본문을 직접 읽으며 메인 성구의 원칙이 다른 성경 자리에서 어떻게 확인되는지 살펴볼 수 있습니다."
+      : "Read this passage directly to see how the primary passage's principle is confirmed elsewhere in Scripture.";
+  }
+
+  return locale === "ko"
+    ? `본문 자체가 메인 성구의 원칙을 더 구체적으로 풀어 줍니다. 핵심 구절: ${compactText}`
+    : `The text itself makes the primary principle more concrete. Key lines: ${compactText}`;
+}
+
+
 
 async function buildRelatedDetails(
   locale: AppLocale,
@@ -204,8 +249,12 @@ async function buildRelatedDetails(
         return {
           ...item,
           title: getBookMetadata(item.reference.code, locale)?.title ?? item.reference.code,
-          referenceLabel: relation.explanation.displayReference,
-          excerpt: relation.explanation.passageClaim.keyLines.join(" ") || relation.answers,
+          referenceLabel: formatReferenceLabel(item.reference, locale),
+          excerpt: relatedHelpText(
+            locale,
+            relation,
+            readableKeyLines(relation.explanation.passageClaim.keyLines).join(" ") || relation.answers,
+          ),
         };
       }
       if (!includePassageDetails) {
@@ -217,11 +266,12 @@ async function buildRelatedDetails(
         };
       }
       const passage = await getPassage(item.reference, locale);
+      const passageText = passage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" ");
       return {
         ...item,
         title: passage.book?.name ?? item.reference.code,
         referenceLabel: passage.reference,
-        excerpt: passage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" "),
+        excerpt: passageTextHelp(locale, passageText),
       };
     }),
   );
@@ -254,14 +304,14 @@ function buildFallbackExplanation(
   const semanticTerms = retrieval.reasons.semanticTerms.join(", ");
   return {
     userConcernSummary: questionContextSummary(locale, question),
-    connectionToUser: retrieval.rationale,
+    connectionToUser: localizeReferenceCodes(retrieval.rationale, locale),
     whyThisPassage:
       matchedTerms || semanticTerms
         ? joinLines(
             matchedTerms ? (locale === "ko" ? `본문 자체의 직접 단서: ${matchedTerms}` : `Text-level cues: ${matchedTerms}`) : undefined,
             semanticTerms ? (locale === "ko" ? `질문 핵심어와 이어지는 주제: ${semanticTerms}` : `Query concepts connected to the text: ${semanticTerms}`) : undefined,
           )
-        : retrieval.rationale,
+        : localizeReferenceCodes(retrieval.rationale, locale),
     limits: reliable
       ? undefined
       : locale === "ko"
