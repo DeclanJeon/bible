@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import Link from "next/link";
 import { ArrowRight, BookOpenText, Search } from "lucide-react";
-import { PassageCard } from "@/components/passage-card";
 import { SafetyBanner } from "@/components/safety-banner";
 import { Collapsible } from "@/components/collapsible";
 
@@ -26,6 +25,38 @@ function preview(text: string, max = 220) {
 
 function compactLines(value: string | null | undefined) {
   return value?.replace(/\s+/g, " ").trim() ?? "";
+}
+
+function relationTone(locale: string, relation: "crossref" | "theme" | "echo" | "support") {
+  if (locale === "ko") {
+    switch (relation) {
+      case "crossref":
+        return "교차 검증";
+      case "echo":
+        return "배경과 언어";
+      case "support":
+        return "상담적 보강";
+      default:
+        return "주제 연결";
+    }
+  }
+
+  switch (relation) {
+    case "crossref":
+      return "Cross-check";
+    case "echo":
+      return "Background echo";
+    case "support":
+      return "Pastoral support";
+    default:
+      return "Theme link";
+  }
+}
+
+function counselLead(locale: string, referenceLabel: string) {
+  return locale === "ko"
+    ? `${referenceLabel}은(는) 지금 고민을 성경의 언어로 다시 붙잡게 해 주는 보조 본문입니다.`
+    : `${referenceLabel} helps restate this concern in biblical language.`;
 }
 
 function formatDuration(seconds: number | undefined) {
@@ -283,36 +314,68 @@ export default async function CompanionPage({ params, searchParams }: Props) {
           </section>
 
           <section className="glass rounded-2xl p-5 sm:p-6 lg:p-8">
-            <div className="section-title text-base">{appLocale === "ko" ? "관련 성구" : "Related passages"}</div>
+            <div className="section-title text-base">{appLocale === "ko" ? "관련 성구 상담 노트" : "Related passage counsel"}</div>
             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
               {appLocale === "ko"
-                ? "메인 성구를 넓히거나 교차 검증하는 본문들입니다. 넓은 화면에서는 우측 패널에서 바로 읽고, 필요하면 성경 리더 전체 화면으로 이어서 볼 수 있습니다."
-                : "These passages widen or cross-check the main passage. On wider screens they open in a side panel first, with a full Bible reader fallback when you want more context."}
+                ? "단순히 성구 목록을 던지지 않고, 왜 이 본문이 지금 질문과 연결되는지와 어떻게 도움이 되는지를 상담하듯이 정리했습니다. 리더로 열면 해당 본문을 뒷받침하는 성구들도 이어서 확인할 수 있습니다."
+                : "These are not just verse links. Each note explains why the passage connects to the concern, how it helps, and the reader continues into supporting linked passages."}
             </p>
             {relatedPassageDetails.length ? (
-              <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <div className="mt-5 space-y-4">
                 {relatedPassageDetails.map((card) => (
-                  <PassageCard
+                  <article
                     key={`${card.reference.code}-${card.reference.chapter}-${card.reference.startVerse}-${card.reference.endVerse}`}
-                    title={card.title}
-                    referenceLabel={card.referenceLabel}
-                    excerpt={preview(card.excerpt)}
-                    href={card.href}
-                    reference={card.reference}
-                    locale={appLocale}
-                    meta={card.reason}
-                    panelContextTitle={appLocale === "ko" ? "이 본문이 지금 질문과 연결되는 이유" : "How this passage connects to your question"}
-                    panelContextBody={card.reason}
-                    panelContextMeta={card.referenceLabel}
-                    actionLabel={appLocale === "ko" ? "성경 리더에서 읽기" : "Read in reader"}
-                  />
+                    className="soft-glass rounded-2xl p-5 transition hover:border-[var(--gold)]/30 hover:bg-[var(--surface-2)]"
+                  >
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="min-w-0">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/20 bg-[var(--gold)]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--gold)]">
+                          <BookOpenText className="h-3.5 w-3.5" />
+                          {relationTone(appLocale, card.relation)}
+                        </div>
+                        <h3 className="mt-3 text-lg font-bold tracking-tight text-[var(--ink)]">
+                          {card.referenceLabel}
+                        </h3>
+                      </div>
+                      <Link
+                        href={card.href}
+                        className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-4 py-2 text-sm font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)]"
+                      >
+                        {appLocale === "ko" ? "리더에서 본문과 뒷받침 성구 보기" : "Open text and support links"}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+
+                    <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+                      <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4">
+                        <div className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--gold)]">
+                          {appLocale === "ko" ? "왜 관련이 있나" : "Why it connects"}
+                        </div>
+                        <p className="mt-2 text-sm leading-7 text-[var(--ink)]">
+                          {counselLead(appLocale, card.referenceLabel)} {card.reason}
+                        </p>
+                      </div>
+                      <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4">
+                        <div className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--gold)]">
+                          {appLocale === "ko" ? "어떻게 도움이 되나" : "How it helps"}
+                        </div>
+                        <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                          {card.excerpt
+                            ? preview(card.excerpt, 260)
+                            : appLocale === "ko"
+                              ? "본문을 열어 직접 읽으면서 핵심 구절과 이어지는 성구들을 함께 확인해 보세요."
+                              : "Open the passage to read it directly with the supporting links that follow it."}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
                 ))}
               </div>
             ) : (
               <p className="mt-5 text-sm leading-6 text-[var(--muted)]">
                 {appLocale === "ko"
-                  ? "현재는 확장할 만큼 직접 연결된 관련 성구가 충분하지 않습니다."
-                  : "There are not enough directly connected passages to expand confidently yet."}
+                  ? "현재는 상담 노트로 확장할 만큼 직접 연결된 관련 성구가 충분하지 않습니다."
+                  : "There are not enough directly connected passages to expand into counsel notes yet."}
               </p>
             )}
           </section>
