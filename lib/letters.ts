@@ -850,11 +850,6 @@ function publicGenerationMetadata(metadata: Record<string, unknown> | undefined)
   return metadata ? { provider: "codex-imagen" } : undefined;
 }
 
-function scheduleCardImageGeneration(card: LetterCard, context: { body: string; locale: AppLocale }) {
-  void queueCardImageGeneration(card, context)
-    .then((result) => updateCardGeneration(card.id, result))
-    .catch(() => updateCardGeneration(card.id, { status: "failed", metadata: { provider: "codex-imagen" } }));
-}
 
 function publicBundle(data: LettersData, letter: AnonymousLetter, options: { includePrivateAnswer?: boolean } = {}): PublicLetterBundle {
   const card = data.cards.find((entry) => entry.letterId === letter.id && entry.kind === "question") ?? null;
@@ -1476,6 +1471,8 @@ export async function createAnonymousLetter(input: {
   if (deliveryReservation) {
     const { delivery, recipientEmail, unsubscribeToken } = deliveryReservation;
     const deliveryId = delivery.id;
+    const imageResult = await queueCardImageGeneration(card, { body, locale });
+    await updateCardGeneration(card.id, imageResult);
     const replyUrl = makeShareUrl(`/${locale}/letters/reply/${replyToken}`);
     const unsubscribeUrl = unsubscribeToken ? makeShareUrl(`/${locale}/letters/unsubscribe/${unsubscribeToken}`) : null;
     const footerText = unsubscribeUrl
@@ -1484,11 +1481,14 @@ export async function createAnonymousLetter(input: {
     const footerHtml = unsubscribeUrl
       ? `<p><a href="${unsubscribeUrl}">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a></p>`
       : "";
+    const imageHtml = imageResult.imageUrl
+      ? `<p><img src="${makeShareUrl(imageResult.imageUrl)}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
+      : "";
     const email = await sendSystemEmail({
       to: recipientEmail,
       subject: locale === "ko" ? "익명의 말씀편지가 도착했습니다" : "An anonymous Scripture letter arrived",
       text: `${card.title}\n\n${card.summary}\n\n${scripture.reference}\n${scripture.text}\n\n${replyUrl}${footerText}`,
-      html: `<p><strong>${card.title}</strong></p><p>${escapeHtml(card.summary)}</p><blockquote>${escapeHtml(scripture.text)}</blockquote><p>${escapeHtml(scripture.reference)}</p><p><a href="${replyUrl}">답변과 성구 보내기</a></p>${footerHtml}`,
+      html: `<p><strong>${escapeHtml(card.title)}</strong></p>${imageHtml}<p>${escapeHtml(card.summary)}</p><blockquote>${escapeHtml(scripture.text)}</blockquote><p>${escapeHtml(scripture.reference)}</p><p><a href="${replyUrl}">답변과 성구 보내기</a></p>${footerHtml}`,
     });
     await mutateLettersFile((data) => {
       const storedLetter = data.letters.find((entry) => entry.id === letter.id);
@@ -1503,7 +1503,6 @@ export async function createAnonymousLetter(input: {
       }
     });
   }
-  scheduleCardImageGeneration(card, { body, locale });
 
 
   return { ok: true as const, bundle: await getLetterBundle(letter.id), replyToken: process.env.NODE_ENV === "test" ? replyToken : undefined };
@@ -1609,13 +1608,17 @@ export async function createLetterAnswer(input: {
   if (!reserveResult.ok) {
     return reserveResult;
   }
-
+  const imageResult = await queueCardImageGeneration(answerCard, { body: answerBody, locale });
+  await updateCardGeneration(answerCard.id, imageResult);
   const answerUrl = makeShareUrl(`/${locale}/letters/answer/${readToken}`);
+  const imageHtml = imageResult.imageUrl
+    ? `<p><img src="${makeShareUrl(imageResult.imageUrl)}" alt="${escapeHtml(answerCard.title)}" style="max-width:100%;border-radius:12px;" /></p>`
+    : "";
   const email = await sendSystemEmail({
     to: letter.authorEmail,
     subject: locale === "ko" ? "익명의 답장이 도착했습니다" : "Your anonymous reply arrived",
-    text: `${answerCard.title}\n\n${answerCard.summary}\n\n${selectedScripture.reference}\n${answerUrl}`,
-    html: `<p><strong>${answerCard.title}</strong></p><p>${escapeHtml(answerCard.summary)}</p><blockquote>${escapeHtml(selectedScripture.text)}</blockquote><p>${escapeHtml(selectedScripture.reference)}</p><p><a href="${answerUrl}">답변 카드 보기</a></p>`,
+    text: `${answerCard.title}\n\n${answerCard.summary}\n\n${selectedScripture.reference}\n\n${answerUrl}`,
+    html: `<p><strong>${escapeHtml(answerCard.title)}</strong></p>${imageHtml}<p>${escapeHtml(answerCard.summary)}</p><blockquote>${escapeHtml(selectedScripture.text)}</blockquote><p>${escapeHtml(selectedScripture.reference)}</p><p><a href="${answerUrl}">답변 카드 보기</a></p>`,
   });
   if (!email.ok) {
     await mutateLettersFile((draft) => {
@@ -1641,7 +1644,6 @@ export async function createLetterAnswer(input: {
     }
   });
 
-  scheduleCardImageGeneration(answerCard, { body: answerBody, locale });
 
   return { ok: true as const, answer, answerCard, readToken };
 }

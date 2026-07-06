@@ -231,6 +231,7 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
 
     return {
       status: "ready",
+      imageUrl: `/api/letters/card/${card.id}/image`,
       metadata: {
         provider: "codex-imagen",
         model: parsed.model || CODEX_IMAGEN_MODEL,
@@ -248,7 +249,6 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
     };
   } finally {
     await Promise.allSettled([
-      rm(localOutputPath, { force: true }),
       rm(localPromptPath, { force: true }),
       runRemoteShell(`rm -rf ${shellQuote(remoteDir)}`, 15_000),
     ]);

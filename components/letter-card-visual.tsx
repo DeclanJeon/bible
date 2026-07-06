@@ -71,10 +71,12 @@ export function LetterActionPanel({ bundle, card, locale }: { bundle: PublicLett
             {locale === "ko" ? "말씀 전체 읽기" : "Read passage"}
           </Link>
         ) : null}
-        <a href={card.imageUrl || href} download className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] px-4 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
-          <ImageDown className="h-4 w-4" />
-          {locale === "ko" ? "이미지로 저장" : "Save image"}
-        </a>
+        {card.imageUrl ? (
+          <a href={card.imageUrl} download className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] px-4 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
+            <ImageDown className="h-4 w-4" />
+            {locale === "ko" ? "이미지로 저장" : "Save image"}
+          </a>
+        ) : null}
         <Link href={href.replace(/^https?:\/\/[^/]+/, "")} className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] px-4 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
           <Share2 className="h-4 w-4" />
           {locale === "ko" ? "공유 카드 열기" : "Open share card"}

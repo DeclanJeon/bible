@@ -117,51 +117,6 @@ async function flushAsyncWork() {
   await new Promise((resolve) => setImmediate(resolve));
 }
 
-async function assertReturnsWithoutAwaitingQueuedImage(operationPromise, beforeCallCount, label) {
-  let settled = false;
-  let value;
-  let error;
-  const settlement = operationPromise.then(
-    (result) => {
-      settled = true;
-      value = result;
-      return { type: "settled", result };
-    },
-    (caught) => {
-      settled = true;
-      error = caught;
-      return { type: "rejected", error: caught };
-    },
-  );
-  const queued = cardGenerationCalls.length > beforeCallCount
-    ? Promise.resolve({ type: "queued", call: cardGenerationCalls.at(-1) })
-    : new Promise((resolve) => {
-        cardGenerationWaiters.push((call) => resolve({ type: "queued", call }));
-      });
-
-  const first = await Promise.race([queued, settlement]);
-  if (first.type === "rejected") {
-    throw first.error;
-  }
-  assert(
-    first.type === "queued",
-    `${label} must queue card image generation before returning its core result`,
-    first.result,
-  );
-
-  for (let turns = 0; turns < 1000 && !settled; turns += 1) {
-    await new Promise((resolve) => setImmediate(resolve));
-  }
-  if (error) {
-    throw error;
-  }
-  assert(
-    settled,
-    `${label} must return its core result without awaiting the unresolved queueCardImageGeneration promise`,
-    first.call,
-  );
-  return value;
-}
 
 function assertNoGenerationMetadata(bundle, label, forbiddenValues = []) {
   const metadataKeyLeaks = collectForbiddenKeys(bundle, /^generationMetadata$/);
@@ -205,7 +160,7 @@ try {
         const call = { cardId: card.id, kind: card.kind, locale: context.locale };
         cardGenerationCalls.push(call);
         cardGenerationWaiters.shift()?.(call);
-        return new Promise(() => {});
+        return Promise.resolve({ status: "skipped", metadata: { provider: "codex-imagen", reason: "test mock" } });
       },
     },
     "@/lib/letter-email": {
@@ -242,15 +197,14 @@ try {
   });
   assert(contactLetter.ok === false && contactLetter.error === "contact-info-not-allowed", "letter bodies containing phone/contact info must be rejected before storage or delivery", contactLetter);
 
-  const normalLetterImageCallCount = cardGenerationCalls.length;
-  const normalLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    const normalLetter = await letters.createAnonymousLetter({
     locale: "ko",
     category: "concern",
     shareVisibility: "unlisted",
     authorEmail,
     authorNickname: "익명",
     body: "요즘 마음이 무너질 때가 많아서 위로의 말씀을 함께 받고 싶습니다.",
-  }), normalLetterImageCallCount, "createAnonymousLetter");
+  });
   await flushAsyncWork();
   assert(normalLetter.ok === true, "valid anonymous letter should be accepted", normalLetter);
   assert(typeof normalLetter.replyToken === "string" && normalLetter.replyToken.length > 20, "test-mode creation must return a one-time reply token for local QA");
@@ -291,14 +245,13 @@ try {
   });
   assert(invalidScriptureReply.ok === false && invalidScriptureReply.error === "contact-info-not-allowed", "reply scripture references containing contact info must be rejected before consuming the token", invalidScriptureReply);
 
-  const answerImageCallCount = cardGenerationCalls.length;
-  const answer = await assertReturnsWithoutAwaitingQueuedImage(letters.createLetterAnswer({
+    const answer = await letters.createLetterAnswer({
     locale: "ko",
     token: normalLetter.replyToken,
     responderNickname: "말씀친구",
     body: "혼자가 아니라는 것을 기억하세요. 오늘은 시편의 위로를 천천히 붙드시면 좋겠습니다.",
     scriptureRef: "시편 23:1",
-  }), answerImageCallCount, "createLetterAnswer");
+  });
   await flushAsyncWork();
   assert(answer.ok === true, "valid reply should be accepted with the original reply token", answer);
   assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
@@ -403,27 +356,26 @@ try {
   });
   assert(resumedSettings.ok === true && resumedSettings.participant.status === "active" && resumedSettings.participant.canReceiveLetters === true && resumedSettings.participant.selectionLimitPerDay === 1, "settings update should resume receiving with the configured cap", resumedSettings);
 
-  const participantLetterImageCallCount = cardGenerationCalls.length;
-  const participantMatchedLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    const participantMatchedLetter = await letters.createAnonymousLetter({
     locale: "ko",
     category: "question",
     shareVisibility: "unlisted",
     authorEmail: "participant-author@example.test",
     body: "참여자 랜덤 수신 풀이 실제로 우선 선택되는지 확인하는 테스트 편지입니다.",
-  }), participantLetterImageCallCount, "createAnonymousLetter participant dispatch");
+  });
   await flushAsyncWork();
   assert(participantMatchedLetter.ok === true, "letter creation should still succeed with an active participant recipient", participantMatchedLetter);
   assert(emailCalls.at(-1)?.to === participantEmail, "active opted-in participant should be selected before env fallback recipients", emailCalls.at(-1));
   assert(participantMatchedLetter.bundle?.delivery?.status === "sent", "participant delivery should be recorded in the public bundle without exposing recipient identity", participantMatchedLetter.bundle?.delivery);
   assertPublicBundleSanitized(participantMatchedLetter.bundle, "participant-matched letter", ["participant-author@example.test", participantEmail, helperEmail]);
   const participantDeliveryEmail = emailCalls.at(-1);
-  const participantAuthoredLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+  const participantAuthoredLetter = await letters.createAnonymousLetter({
     locale: "ko",
     category: "reflection",
     shareVisibility: "unlisted",
     authorEmail: participantEmail,
     body: "참여자가 직접 작성한 말씀편지는 내 편지함에서 다시 확인할 수 있어야 합니다.",
-  }), cardGenerationCalls.length, "createAnonymousLetter participant authored history");
+  });
   await flushAsyncWork();
   assert(participantAuthoredLetter.ok === true, "participant-authored letter should be created before history lookup", participantAuthoredLetter);
   const participantHistory = await letters.getLetterParticipantHistory(verifiedParticipant.sessionToken);
@@ -454,14 +406,13 @@ try {
   const sessionAfterUnsubscribe = await letters.getLetterParticipantSession(verifiedParticipant.sessionToken);
   assert(sessionAfterUnsubscribe === null, "unsubscribe should invalidate the participant session token");
 
-  const participantSelfLetterImageCallCount = cardGenerationCalls.length;
-  const participantSelfLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    const participantSelfLetter = await letters.createAnonymousLetter({
     locale: "ko",
     category: "reflection",
     shareVisibility: "unlisted",
     authorEmail: participantEmail,
     body: "내가 작성자인 경우에는 내 이메일이 랜덤 수신자로 다시 선택되지 않아야 합니다.",
-  }), participantSelfLetterImageCallCount, "createAnonymousLetter participant self exclusion");
+  });
   await flushAsyncWork();
   assert(participantSelfLetter.ok === true, "letter creation should succeed when author is also a participant", participantSelfLetter);
   assert(emailCalls.at(-1)?.to === "creator@example.test", "author participant must be excluded from recipient selection and fall back to system creator when no other participant is eligible", emailCalls.at(-1));
@@ -625,9 +576,9 @@ try {
     }, { body: "이미지 생성 성공 후 로컬 파일 정리 확인", locale: "ko" });
 
     assert(ready.status === "ready", "Codex Imagen enabled mode must return ready when the adapter reports a generated image", ready);
-    assert(!Object.prototype.hasOwnProperty.call(ready, "imageUrl") && ready.imageUrl === undefined, "Codex Imagen enabled mode must not return a public imageUrl for local artifacts", ready);
+    assert(ready.imageUrl === `/api/letters/card/${enabledCardId}/image`, "Codex Imagen enabled mode must return a public imageUrl for the generated image", ready);
     assert(!localFiles.has(localPromptPath), "Codex Imagen enabled mode must remove the local prompt artifact after completion", { localPromptPath, localFiles: [...localFiles] });
-    assert(!localFiles.has(localOutputPath), "Codex Imagen enabled mode must remove the local output artifact after completion", { localOutputPath, localFiles: [...localFiles] });
+    assert(localFiles.has(localOutputPath), "Codex Imagen enabled mode must keep the local output image for serving", { localOutputPath, localFiles: [...localFiles] });
     assert(execCalls.some((call) => call.command === "ssh" && call.args[1].includes(imagenCli)), "Codex Imagen enabled mode must invoke the generator through the remote adapter command", execCalls);
     assert(execCalls.some((call) => call.command === "scp" && call.args.at(-1) === `${imagenHost}:${remotePromptPath}`), "Codex Imagen enabled mode must upload the local prompt through the adapter path", execCalls);
     assert(execCalls.some((call) => call.command === "scp" && call.args.at(-2) === `${imagenHost}:${remoteOutputPath}`), "Codex Imagen enabled mode must download the remote output through the adapter path before cleanup", execCalls);
@@ -693,7 +644,7 @@ try {
       "reply bundle includes scripture recommendation for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
-      "Codex Imagen enabled mode returns ready without imageUrl and removes local prompt/output files",
+      "Codex Imagen enabled mode returns ready with imageUrl and keeps local output for serving",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],
     artifacts: {
