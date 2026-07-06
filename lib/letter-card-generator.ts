@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { promisify } from "node:util";
 
 import type { AppLocale } from "@/lib/content";
-import { letterCardDriveFolderId, uploadLetterCardImage } from "@/lib/google-drive";
+import { isLetterCardDriveConfigured, letterCardDriveFolderId, uploadLetterCardImage } from "@/lib/google-drive";
 import type { GenerationStatus, LetterCard } from "@/lib/letters";
 
 const execFileAsync = promisify(execFile);
@@ -206,6 +206,16 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
       },
     };
   }
+  if (!isLetterCardDriveConfigured()) {
+    return {
+      status: "failed",
+      metadata: {
+        reason: "Google Drive service account env is not configured",
+        provider: "codex-imagen",
+      },
+    };
+  }
+
 
   const promptDir = process.env.LETTERS_CARD_PROMPT_DIR || DEFAULT_PROMPT_DIR;
   const outputDir = process.env.LETTERS_CARD_OUTPUT_DIR || DEFAULT_OUTPUT_DIR;

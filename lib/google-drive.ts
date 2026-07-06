@@ -136,6 +136,10 @@ function publicDriveImageUrl(fileId: string) {
   return `https://drive.google.com/uc?export=view&id=${encodeURIComponent(fileId)}`;
 }
 
+export function isLetterCardDriveConfigured() {
+  return serviceAccountFromEnv() !== null;
+}
+
 export async function uploadLetterCardImage(input: UploadLetterCardImageInput): Promise<DriveUploadResult> {
   const serviceAccount = serviceAccountFromEnv();
   if (!serviceAccount) {
@@ -161,6 +165,7 @@ export async function uploadLetterCardImage(input: UploadLetterCardImageInput): 
       return { ok: false, error: `Google Drive upload failed: ${uploadResponse.status} ${text.slice(0, 200)}` };
     }
     const uploaded = await uploadResponse.json() as { id?: string };
+
     if (!uploaded.id) {
       return { ok: false, error: "Google Drive upload response did not include file id" };
     }

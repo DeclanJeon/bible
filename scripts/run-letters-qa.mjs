@@ -657,6 +657,7 @@ try {
       },
       "@/lib/google-drive": {
         letterCardDriveFolderId: () => driveFolderId,
+        isLetterCardDriveConfigured: () => true,
         uploadLetterCardImage,
       },
     });
