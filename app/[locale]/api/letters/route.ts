@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 import { createAnonymousLetter, getLetterParticipantAuthor } from "@/lib/letters";
@@ -48,6 +48,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ loc
     shareVisibility: parsed.shareVisibility,
     acceptLanguage: request.headers.get("accept-language") ?? undefined,
     countryCode: request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry") ?? undefined,
+    scheduleDispatch: after,
   });
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: 400 });

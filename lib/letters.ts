@@ -1374,6 +1374,21 @@ export async function getAnswerBundle(token: string) {
   return publicBundle(data, letter, { includePrivateAnswer: true });
 }
 
+async function scheduleLetterDispatch(work: () => Promise<void>, scheduler?: (work: () => Promise<void>) => void) {
+  const guardedWork = async () => {
+    try {
+      await work();
+    } catch (error) {
+      console.error("Letter dispatch background task failed", error);
+    }
+  };
+  if (scheduler) {
+    scheduler(guardedWork);
+    return;
+  }
+  await guardedWork();
+}
+
 export async function createAnonymousLetter(input: {
   locale?: string;
   category?: unknown;
@@ -1383,6 +1398,7 @@ export async function createAnonymousLetter(input: {
   shareVisibility?: unknown;
   acceptLanguage?: string;
   countryCode?: string;
+  scheduleDispatch?: (work: () => Promise<void>) => void;
 }) {
   const locale = resolveAppLocale(input.locale);
   const body = normalizeBody(input.body);
@@ -1469,39 +1485,41 @@ export async function createAnonymousLetter(input: {
   });
 
   if (deliveryReservation) {
-    const { delivery, recipientEmail, unsubscribeToken } = deliveryReservation;
-    const deliveryId = delivery.id;
-    const imageResult = await queueCardImageGeneration(card, { body, locale });
-    await updateCardGeneration(card.id, imageResult);
-    const replyUrl = makeShareUrl(`/${locale}/letters/reply/${replyToken}`);
-    const unsubscribeUrl = unsubscribeToken ? makeShareUrl(`/${locale}/letters/unsubscribe/${unsubscribeToken}`) : null;
-    const footerText = unsubscribeUrl
-      ? (locale === "ko" ? `\n\n수신을 중단하려면: ${unsubscribeUrl}` : `\n\nStop receiving letters: ${unsubscribeUrl}`)
-      : "";
-    const footerHtml = unsubscribeUrl
-      ? `<p><a href="${unsubscribeUrl}">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a></p>`
-      : "";
-    const imageHtml = imageResult.imageUrl
-      ? `<p><img src="${makeShareUrl(imageResult.imageUrl)}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
-      : "";
-    const email = await sendSystemEmail({
-      to: recipientEmail,
-      subject: locale === "ko" ? "익명의 말씀편지가 도착했습니다" : "An anonymous Scripture letter arrived",
-      text: `${card.title}\n\n${card.summary}\n\n${scripture.reference}\n${scripture.text}\n\n${replyUrl}${footerText}`,
-      html: `<p><strong>${escapeHtml(card.title)}</strong></p>${imageHtml}<p>${escapeHtml(card.summary)}</p><blockquote>${escapeHtml(scripture.text)}</blockquote><p>${escapeHtml(scripture.reference)}</p><p><a href="${replyUrl}">답변과 성구 보내기</a></p>${footerHtml}`,
-    });
-    await mutateLettersFile((data) => {
-      const storedLetter = data.letters.find((entry) => entry.id === letter.id);
-      const storedDelivery = data.deliveries.find((entry) => entry.id === deliveryId);
-      if (storedLetter) {
-        storedLetter.status = email.ok ? "sent" : "matched";
-        storedLetter.updatedAt = new Date().toISOString();
-      }
-      if (storedDelivery) {
-        storedDelivery.status = email.ok ? "sent" : "skipped";
-        storedDelivery.sentAt = email.ok ? new Date().toISOString() : undefined;
-      }
-    });
+    await scheduleLetterDispatch(async () => {
+      const { delivery, recipientEmail, unsubscribeToken } = deliveryReservation;
+      const deliveryId = delivery.id;
+      const imageResult = await queueCardImageGeneration(card, { body, locale });
+      await updateCardGeneration(card.id, imageResult);
+      const replyUrl = makeShareUrl(`/${locale}/letters/reply/${replyToken}`);
+      const unsubscribeUrl = unsubscribeToken ? makeShareUrl(`/${locale}/letters/unsubscribe/${unsubscribeToken}`) : null;
+      const footerText = unsubscribeUrl
+        ? (locale === "ko" ? `\n\n수신을 중단하려면: ${unsubscribeUrl}` : `\n\nStop receiving letters: ${unsubscribeUrl}`)
+        : "";
+      const footerHtml = unsubscribeUrl
+        ? `<p><a href="${unsubscribeUrl}">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a></p>`
+        : "";
+      const imageHtml = imageResult.imageUrl
+        ? `<p><img src="${makeShareUrl(imageResult.imageUrl)}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
+        : "";
+      const email = await sendSystemEmail({
+        to: recipientEmail,
+        subject: locale === "ko" ? "익명의 말씀편지가 도착했습니다" : "An anonymous Scripture letter arrived",
+        text: `${card.title}\n\n${card.summary}\n\n${scripture.reference}\n${scripture.text}\n\n${replyUrl}${footerText}`,
+        html: `<p><strong>${escapeHtml(card.title)}</strong></p>${imageHtml}<p>${escapeHtml(card.summary)}</p><blockquote>${escapeHtml(scripture.text)}</blockquote><p>${escapeHtml(scripture.reference)}</p><p><a href="${replyUrl}">답변과 성구 보내기</a></p>${footerHtml}`,
+      });
+      await mutateLettersFile((data) => {
+        const storedLetter = data.letters.find((entry) => entry.id === letter.id);
+        const storedDelivery = data.deliveries.find((entry) => entry.id === deliveryId);
+        if (storedLetter) {
+          storedLetter.status = email.ok ? "sent" : "matched";
+          storedLetter.updatedAt = new Date().toISOString();
+        }
+        if (storedDelivery) {
+          storedDelivery.status = email.ok ? "sent" : "skipped";
+          storedDelivery.sentAt = email.ok ? new Date().toISOString() : undefined;
+        }
+      });
+    }, input.scheduleDispatch);
   }
 
 
