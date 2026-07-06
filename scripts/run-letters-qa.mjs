@@ -1201,6 +1201,35 @@ try {
   assert(!("answer" in routeJson) && !JSON.stringify(routeJson).includes("must-not-leak"), "reply route must not serialize raw answer internals", routeJson);
   assert(routeCalls[0]?.token === "route-reply-token" && routeCalls[0]?.locale === "ko", "reply route must pass locale and URL token into createLetterAnswer", routeCalls[0]);
 
+  const ecosystemPath = requireFromRepo.resolve("../ecosystem.config.cjs");
+  delete requireFromRepo.cache[ecosystemPath];
+  const ecosystem = requireFromRepo("../ecosystem.config.cjs");
+  const bibleApp = ecosystem.apps?.find((entry) => entry.name === "bible");
+  const pm2EnvKeys = Object.keys(bibleApp?.env ?? {});
+  for (const key of [
+    "LETTERS_N8N_IMAGE_UPLOAD_URL",
+    "LETTERS_N8N_IMAGE_UPLOAD_TOKEN",
+    "LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN",
+    "LETTERS_GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON",
+    "LETTERS_GOOGLE_DRIVE_CLIENT_EMAIL",
+    "LETTERS_GOOGLE_DRIVE_PRIVATE_KEY",
+  ]) {
+    process.env[key] = `qa-${key.toLowerCase()}`;
+  }
+  delete requireFromRepo.cache[ecosystemPath];
+  const ecosystemWithImageEnv = requireFromRepo("../ecosystem.config.cjs");
+  const bibleAppWithImageEnv = ecosystemWithImageEnv.apps?.find((entry) => entry.name === "bible");
+  for (const key of [
+    "LETTERS_N8N_IMAGE_UPLOAD_URL",
+    "LETTERS_N8N_IMAGE_UPLOAD_TOKEN",
+    "LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN",
+    "LETTERS_GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON",
+    "LETTERS_GOOGLE_DRIVE_CLIENT_EMAIL",
+    "LETTERS_GOOGLE_DRIVE_PRIVATE_KEY",
+  ]) {
+    assert(bibleAppWithImageEnv?.env?.[key] === `qa-${key.toLowerCase()}`, `PM2 ecosystem env must pass through ${key} for production card image delivery`, { key, pm2EnvKeys });
+  }
+
   console.log(JSON.stringify({
     status: "passed",
     contracts: [
@@ -1230,6 +1259,7 @@ try {
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "letter POST API route returns 202 accepted:true without serializing bundle/cardId/letterId and schedules createAnonymousLetter after acknowledgement",
       "LetterWriteForm starts the concern POST, navigates to sent immediately, and keeps the submit button out of pending-spinner state",
+      "PM2 ecosystem passes n8n and Google Drive image upload env through to production workers",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],
     artifacts: {
