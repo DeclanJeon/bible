@@ -1014,6 +1014,158 @@ try {
     restoreEnabledImagenEnv();
   }
 
+  const pendingCreate = {};
+  pendingCreate.promise = new Promise((resolve) => {
+    pendingCreate.resolve = resolve;
+  });
+  const letterRouteCalls = [];
+  const scheduledLetterJobs = [];
+  class LetterRouteNextResponse extends Response {
+    static json(body, init) {
+      return Response.json(body, init);
+    }
+  }
+  const letterRoute = loadTsModule("app/[locale]/api/letters/route.ts", {
+    "next/server": {
+      NextResponse: LetterRouteNextResponse,
+      after: (callback) => {
+        scheduledLetterJobs.push(callback);
+      },
+    },
+    "next/headers": {
+      cookies: async () => ({ get: () => undefined }),
+    },
+    "@/lib/content": {
+      resolveAppLocale: (locale) => (locale === "en" ? "en" : "ko"),
+    },
+    "@/lib/letters": {
+      getLetterParticipantAuthor: async () => null,
+      createAnonymousLetter: async (input) => {
+        letterRouteCalls.push(input);
+        await pendingCreate.promise;
+        return {
+          ok: true,
+          replyToken: "route-reply-token-must-not-leak",
+          bundle: {
+            letter: { id: "route-letter-id", status: "matched" },
+            card: { id: "route-card-id" },
+          },
+        };
+      },
+    },
+  });
+  const quickLetterResponsePromise = letterRoute.POST(new Request("https://bible.ponslink.test/ko/api/letters", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "accept-language": "ko-KR,ko;q=0.9",
+      "x-vercel-ip-country": "KR",
+    },
+    body: JSON.stringify({
+      body: "라우트는 카드 생성과 이메일 완료를 기다리지 않고 즉시 접수해야 합니다.",
+      authorEmail: "route-author@example.test",
+      authorNickname: "빠른접수",
+      category: "concern",
+      shareVisibility: "unlisted",
+    }),
+  }), { params: Promise.resolve({ locale: "ko" }) });
+  const quickLetterRace = await Promise.race([
+    quickLetterResponsePromise.then((response) => ({ type: "response", response })),
+    flushAsyncWork().then(() => ({ type: "pending" })),
+  ]);
+  assert(quickLetterRace.type === "response", "/[locale]/api/letters POST must acknowledge before createAnonymousLetter/image/email work settles");
+  const quickLetterResponse = quickLetterRace.response;
+  const quickLetterJson = await quickLetterResponse.json();
+  assert(quickLetterResponse.status === 202, "/[locale]/api/letters POST should return 202 Accepted for queued concern creation", quickLetterJson);
+  assert(quickLetterJson.accepted === true, "/[locale]/api/letters POST should return accepted:true for queued concern creation", quickLetterJson);
+  assert(!("bundle" in quickLetterJson) && !("letterId" in quickLetterJson) && !("cardId" in quickLetterJson) && !JSON.stringify(quickLetterJson).includes("route-reply-token-must-not-leak"), "/[locale]/api/letters POST must not serialize bundle/card identifiers or raw createAnonymousLetter internals", quickLetterJson);
+  assert(letterRouteCalls.length === 0, "/[locale]/api/letters POST should schedule createAnonymousLetter after the acknowledgement instead of running it inline", letterRouteCalls);
+  assert(scheduledLetterJobs.length === 1, "/[locale]/api/letters POST should schedule exactly one background createAnonymousLetter job", scheduledLetterJobs.length);
+  const scheduledLetterWork = Promise.allSettled(scheduledLetterJobs.map((job) => job()));
+  await flushAsyncWork();
+  assert(letterRouteCalls.length === 1, "scheduled /[locale]/api/letters background job should eventually invoke createAnonymousLetter", letterRouteCalls);
+  assert(letterRouteCalls[0]?.locale === "ko" && letterRouteCalls[0]?.category === "concern" && letterRouteCalls[0]?.authorEmail === "route-author@example.test", "scheduled /[locale]/api/letters job should pass the submitted concern fields into createAnonymousLetter", letterRouteCalls[0]);
+  pendingCreate.resolve();
+  const scheduledLetterResults = await scheduledLetterWork;
+  assert(scheduledLetterResults.every((result) => result.status === "fulfilled"), "scheduled /[locale]/api/letters background createAnonymousLetter job should settle without throwing", scheduledLetterResults);
+
+  const originalFetch = globalThis.fetch;
+  const originalWindow = globalThis.window;
+  const formFetchCalls = [];
+  let letterFormRenderState = { values: [], isPending: false };
+  function formIcon(name) {
+    const Component = () => ({ type: name, props: {} });
+    Component.displayName = name;
+    return Component;
+  }
+  function formElement(type, props) {
+    return { type, props: props ?? {} };
+  }
+  function collectFormNodes(node, predicate, matches = []) {
+    if (!node || typeof node !== "object") return matches;
+    if (Array.isArray(node)) {
+      node.forEach((child) => collectFormNodes(child, predicate, matches));
+      return matches;
+    }
+    if (predicate(node)) matches.push(node);
+    collectFormNodes(node.props?.children, predicate, matches);
+    return matches;
+  }
+  try {
+    const letterForms = loadTsModule("components/letter-forms.tsx", {
+      "next/link": { default: (props) => formElement("a", props) },
+      "react": {
+        useState: (initial) => {
+          const value = letterFormRenderState.values.length > 0 ? letterFormRenderState.values.shift() : initial;
+          return [value, () => undefined];
+        },
+        useMemo: (factory) => factory(),
+        useTransition: () => [
+          letterFormRenderState.isPending,
+          (callback) => callback(),
+        ],
+      },
+      "react/jsx-runtime": {
+        jsx: formElement,
+        jsxs: formElement,
+        Fragment: Symbol.for("react.fragment"),
+      },
+      "lucide-react": {
+        CheckCircle2: formIcon("CheckCircle2"),
+        Loader2: formIcon("Loader2"),
+        Mail: formIcon("Mail"),
+        Send: formIcon("Send"),
+        ShieldCheck: formIcon("ShieldCheck"),
+      },
+    });
+    letterFormRenderState = { values: ["This concern body is long enough to submit immediately.", "", "concern", null], isPending: false };
+    globalThis.window = { location: { href: "about:blank" } };
+    globalThis.fetch = (...args) => {
+      formFetchCalls.push(args);
+      return new Promise(() => undefined);
+    };
+    const writeForm = letterForms.LetterWriteForm({ locale: "ko", authorEmail: "form-author@example.test" });
+    const [writeFormNode] = collectFormNodes(writeForm, (node) => node.type === "form");
+    assert(typeof writeFormNode?.props?.onSubmit === "function", "LetterWriteForm should expose a submit handler on its form element");
+    writeFormNode.props.onSubmit({ preventDefault: () => undefined });
+    assert(formFetchCalls.length === 1, "LetterWriteForm submit should start the concern POST request", formFetchCalls);
+    assert(globalThis.window.location.href === "/ko/letters/sent", "LetterWriteForm should navigate to the sent page immediately after starting the concern POST request", { href: globalThis.window.location.href, formFetchCalls });
+
+    letterFormRenderState = { values: ["This concern body is long enough to keep the submit button enabled.", "", "concern", null], isPending: true };
+    const pendingWriteForm = letterForms.LetterWriteForm({ locale: "ko", authorEmail: "form-author@example.test" });
+    const [submitButton] = collectFormNodes(pendingWriteForm, (node) => node.type === "button" && node.props?.type === "submit");
+    assert(submitButton?.props?.disabled !== true, "LetterWriteForm submit button should not be disabled only because a concern POST is pending", submitButton?.props);
+    const pendingIcons = collectFormNodes(submitButton, (node) => typeof node.type === "function").map((node) => node.type.displayName ?? node.type.name);
+    assert(!pendingIcons.includes("Loader2") && pendingIcons.includes("Send"), "LetterWriteForm submit button should not render a pending spinner for quick concern submission", pendingIcons);
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalWindow === undefined) {
+      delete globalThis.window;
+    } else {
+      globalThis.window = originalWindow;
+    }
+  }
+
   const routeCalls = [];
   const replyRoute = loadTsModule("app/[locale]/api/letters/reply/[token]/route.ts", {
     "next/server": {
@@ -1076,6 +1228,8 @@ try {
       "letter and reply email HTML use returned Drive image URLs with useful alt text, reject localized/root server card image routes, and keep designed scripture card blocks when images are missing",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
+      "letter POST API route returns 202 accepted:true without serializing bundle/cardId/letterId and schedules createAnonymousLetter after acknowledgement",
+      "LetterWriteForm starts the concern POST, navigates to sent immediately, and keeps the submit button out of pending-spinner state",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],
     artifacts: {

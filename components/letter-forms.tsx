@@ -420,26 +420,22 @@ export function LetterWriteForm({ locale, authorEmail }: { locale: AppLocale; au
   const [category, setCategory] = useState("concern");
   const visibility = "unlisted";
   const [message, setMessage] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
   const canSubmit = body.trim().length >= 20 && body.length <= 1200;
   const countClass = body.length > 1200 ? "text-red-700" : "text-[var(--ink-muted)]";
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage(null);
-    startTransition(async () => {
-      const response = await fetch(`/${locale}/api/letters`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ body, authorEmail, authorNickname: nickname, category, shareVisibility: visibility }),
-      });
-      const result = await response.json() as { error?: string; letterId?: string; cardId?: string };
-      if (!response.ok || result.error || !result.cardId) {
-        setMessage(errorMessage(result.error ?? "unknown", locale));
-        return;
-      }
-      window.location.href = `/${locale}/letters/sent`;
+    const payload = JSON.stringify({ body, authorEmail, authorNickname: nickname, category, shareVisibility: visibility });
+    void fetch(`/${locale}/api/letters`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: payload,
+      keepalive: true,
+    }).catch((error) => {
+      console.error("Letter quick submit failed", error);
     });
+    window.location.href = `/${locale}/letters/sent`;
   }
 
   return (
@@ -465,8 +461,8 @@ export function LetterWriteForm({ locale, authorEmail }: { locale: AppLocale; au
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className={`text-sm ${countClass}`}>{body.length}/1200</p>
         {message ? <p className="text-sm font-semibold text-red-700" role="alert">{message}</p> : null}
-        <button type="submit" disabled={!canSubmit || isPending} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)] disabled:cursor-not-allowed disabled:opacity-50">
-          {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+        <button type="submit" disabled={!canSubmit} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)] disabled:cursor-not-allowed disabled:opacity-50">
+          <Send className="h-4 w-4" />
           {locale === "ko" ? "고민 보내기" : "Send concern"}
         </button>
       </div>

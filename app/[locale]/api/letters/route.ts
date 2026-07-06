@@ -39,8 +39,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ loc
   const session = await getLetterParticipantAuthor((await cookies()).get(SESSION_COOKIE)?.value ?? null);
   const authorEmail = parsed.authorEmail ?? session?.email;
   const authorNickname = parsed.authorNickname ?? session?.nickname;
-  const result = await createAnonymousLetter({
-    locale: resolveAppLocale(locale),
+  const requestLocale = resolveAppLocale(locale);
+  const work = {
+    locale: requestLocale,
     body: parsed.body,
     authorEmail,
     authorNickname,
@@ -48,10 +49,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ loc
     shareVisibility: parsed.shareVisibility,
     acceptLanguage: request.headers.get("accept-language") ?? undefined,
     countryCode: request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry") ?? undefined,
-    scheduleDispatch: after,
+  };
+  after(async () => {
+    const result = await createAnonymousLetter(work);
+    if (!result.ok) {
+      console.error("Letter background creation failed", result.error);
+    }
   });
-  if (!result.ok) {
-    return NextResponse.json({ error: result.error }, { status: 400 });
-  }
-  return NextResponse.json({ ok: true, letterId: result.bundle?.letter.id, cardId: result.bundle?.card?.id, bundle: result.bundle });
+  return NextResponse.json({ ok: true, accepted: true }, { status: 202 });
 }
