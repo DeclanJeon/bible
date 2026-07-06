@@ -1,4 +1,4 @@
-import { getPassage, type BibleReference } from "@/lib/bible";
+import { getPassage, type BiblePassage, type BibleReference } from "@/lib/bible";
 import { getBookMetadata } from "@/lib/book-metadata";
 import type { AnswerBundle, PassageExplanation } from "@/lib/answer-bundle";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
@@ -60,7 +60,7 @@ export type PassageRecommendationBuild = {
   ragQuery: RetrievalQueryPlan;
   retrieval: RetrievalResult;
   answerBundle: AnswerBundle | null;
-  primaryPassage: Awaited<ReturnType<typeof getPassage>> | null;
+  primaryPassage: BiblePassage | null;
   relatedPassageDetails: Array<RelatedPassageRecommendation & { title: string; referenceLabel: string; excerpt: string }>;
 };
 

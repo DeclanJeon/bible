@@ -1,0 +1,708 @@
+#!/usr/bin/env node
+
+import Module from "node:module";
+import { createRequire } from "node:module";
+import { mkdtemp, rm, readFile, writeFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { tmpdir } from "node:os";
+import { fileURLToPath } from "node:url";
+
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const repoRoot = join(scriptDir, "..");
+const requireFromRepo = createRequire(import.meta.url);
+const ts = requireFromRepo("typescript");
+
+function assert(condition, message, detail) {
+  if (!condition) {
+    const suffix = detail === undefined ? "" : `\n${typeof detail === "string" ? detail : JSON.stringify(detail, null, 2)}`;
+    throw new Error(`${message}${suffix}`);
+  }
+}
+
+function loadTsModule(relativePath, stubs = {}) {
+  const filename = join(repoRoot, relativePath);
+  const source = readFileSync(filename, "utf8");
+  const { outputText } = ts.transpileModule(source, {
+    fileName: filename,
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2022,
+      esModuleInterop: true,
+      jsx: ts.JsxEmit.ReactJSX,
+    },
+  });
+
+  const mod = new Module(filename);
+  mod.filename = filename;
+  mod.paths = Module._nodeModulePaths(dirname(filename));
+  mod.require = (id) => {
+    if (Object.prototype.hasOwnProperty.call(stubs, id)) {
+      return stubs[id];
+    }
+    return requireFromRepo(id);
+  };
+  mod._compile(outputText, filename);
+  return mod.exports;
+}
+
+function collectForbiddenKeys(value, forbiddenKeyPattern, path = "$", leaks = []) {
+  if (!value || typeof value !== "object") return leaks;
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectForbiddenKeys(item, forbiddenKeyPattern, `${path}[${index}]`, leaks));
+    return leaks;
+  }
+  for (const [key, child] of Object.entries(value)) {
+    const childPath = `${path}.${key}`;
+    if (forbiddenKeyPattern.test(key)) {
+      leaks.push(childPath);
+    }
+    collectForbiddenKeys(child, forbiddenKeyPattern, childPath, leaks);
+  }
+  return leaks;
+}
+
+function collectForbiddenStrings(value, forbiddenValues, path = "$", leaks = []) {
+  if (typeof value === "string") {
+    for (const secret of forbiddenValues) {
+      if (secret && value.includes(secret)) {
+        leaks.push(`${path} contains ${secret}`);
+      }
+    }
+    return leaks;
+  }
+  if (!value || typeof value !== "object") return leaks;
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectForbiddenStrings(item, forbiddenValues, `${path}[${index}]`, leaks));
+    return leaks;
+  }
+  for (const [key, child] of Object.entries(value)) {
+    collectForbiddenStrings(child, forbiddenValues, `${path}.${key}`, leaks);
+  }
+  return leaks;
+}
+
+function assertPublicBundleSanitized(bundle, label, forbiddenValues = []) {
+  const forbiddenKeyLeaks = collectForbiddenKeys(
+    bundle,
+    /^(authorEmail|authorEmailHash|authorEmailEncrypted|recipientEmail|recipientEmailHash|replyTokenHash|readTokenHash|readToken)$/,
+  );
+  assert(forbiddenKeyLeaks.length === 0, `${label} public bundle must not expose email or token fields`, forbiddenKeyLeaks);
+
+  const forbiddenValueLeaks = collectForbiddenStrings(bundle, forbiddenValues);
+  assert(forbiddenValueLeaks.length === 0, `${label} public bundle must not expose user email values`, forbiddenValueLeaks);
+}
+
+function makeRecommendation(prompt, locale) {
+  const crisis = /crisis|self[-\s]?harm|자해|죽고 싶/i.test(prompt);
+  return {
+    safety: {
+      level: crisis ? "crisis" : "safe",
+      reasons: crisis ? ["crisis-language"] : [],
+    },
+    recommendation: {
+      primary: {
+        reference: { code: "PSA", chapter: 23, startVerse: 1, endVerse: 4 },
+        text: locale === "ko" ? "여호와는 나의 목자시니 내게 부족함이 없으리로다" : "The LORD is my shepherd; I shall not want.",
+        reason: locale === "ko" ? "하나님의 돌보심을 붙듭니다." : "It anchors comfort in God's care.",
+      },
+      readerHref: `/${locale}/bible/PSA.23.1`,
+      confidence: 0.91,
+    },
+  };
+}
+
+async function flushAsyncWork() {
+  await new Promise((resolve) => setImmediate(resolve));
+  await new Promise((resolve) => setImmediate(resolve));
+}
+
+async function assertReturnsWithoutAwaitingQueuedImage(operationPromise, beforeCallCount, label) {
+  let settled = false;
+  let value;
+  let error;
+  const settlement = operationPromise.then(
+    (result) => {
+      settled = true;
+      value = result;
+      return { type: "settled", result };
+    },
+    (caught) => {
+      settled = true;
+      error = caught;
+      return { type: "rejected", error: caught };
+    },
+  );
+  const queued = cardGenerationCalls.length > beforeCallCount
+    ? Promise.resolve({ type: "queued", call: cardGenerationCalls.at(-1) })
+    : new Promise((resolve) => {
+        cardGenerationWaiters.push((call) => resolve({ type: "queued", call }));
+      });
+
+  const first = await Promise.race([queued, settlement]);
+  if (first.type === "rejected") {
+    throw first.error;
+  }
+  assert(
+    first.type === "queued",
+    `${label} must queue card image generation before returning its core result`,
+    first.result,
+  );
+
+  for (let turns = 0; turns < 1000 && !settled; turns += 1) {
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+  if (error) {
+    throw error;
+  }
+  assert(
+    settled,
+    `${label} must return its core result without awaiting the unresolved queueCardImageGeneration promise`,
+    first.call,
+  );
+  return value;
+}
+
+function assertNoGenerationMetadata(bundle, label, forbiddenValues = []) {
+  const metadataKeyLeaks = collectForbiddenKeys(bundle, /^generationMetadata$/);
+  assert(metadataKeyLeaks.length === 0, `${label} public bundle must not expose card generationMetadata`, metadataKeyLeaks);
+
+  const metadataValueLeaks = collectForbiddenStrings(bundle, forbiddenValues);
+  assert(metadataValueLeaks.length === 0, `${label} public bundle must not expose sensitive generation metadata values`, metadataValueLeaks);
+}
+
+const originalEnv = { ...process.env };
+const tempDir = await mkdtemp(join(tmpdir(), "letters-qa-"));
+const cardGenerationCalls = [];
+const cardGenerationWaiters = [];
+const emailCalls = [];
+
+try {
+  process.env.NODE_ENV = "test";
+  process.env.LETTERS_DATA_FILE = join(tempDir, "letters.json");
+  process.env.LETTERS_RECIPIENT_EMAILS = "helper@example.test";
+  process.env.LETTERS_SYSTEM_CREATOR_EMAIL = "creator@example.test";
+  process.env.NEXT_PUBLIC_SITE_URL = "https://bible.ponslink.test";
+  process.env.LETTERS_EMAIL_ENCRYPTION_KEY = "qa-email-encryption-key";
+  delete process.env.SMTP_HOST;
+  delete process.env.LETTERS_ENABLE_CODEX_IMAGEN;
+
+  const letters = loadTsModule("lib/letters.ts", {
+    "@/lib/content": {
+      resolveAppLocale: (locale) => (locale === "en" ? "en" : "ko"),
+    },
+    "@/lib/navigation": {
+      buildBibleReferenceHref: (reference, options) => `/${options?.locale ?? "ko"}/bible/${reference.code}.${reference.chapter}.${reference.startVerse}`,
+    },
+    "@/lib/letter-env": {
+      loadLettersEmailEnv: () => undefined,
+    },
+    "@/lib/passage-response": {
+      buildPassageRecommendation: async (prompt, options) => makeRecommendation(prompt, options?.locale ?? "ko"),
+    },
+    "@/lib/letter-card-generator": {
+      queueCardImageGeneration: (card, context) => {
+        const call = { cardId: card.id, kind: card.kind, locale: context.locale };
+        cardGenerationCalls.push(call);
+        cardGenerationWaiters.shift()?.(call);
+        return new Promise(() => {});
+      },
+    },
+    "@/lib/letter-email": {
+      sendSystemEmail: async (message) => {
+        emailCalls.push(message);
+        return emailCalls.length === 1
+          ? { ok: false, skipped: true, error: "SMTP env is not configured" }
+          : { ok: true };
+      },
+    },
+  });
+
+  const authorEmail = "author@example.test";
+  const helperEmail = "helper@example.test";
+  const sensitiveGenerationMetadataValues = [
+    "qa-revised-prompt-with-user-context",
+    "renderer stderr: failed while loading private stack",
+    "/tmp/letters-card/private-source.json",
+    "imagen-worker.internal",
+    "codex-imagen --render --debug",
+  ];
+  const sensitiveGenerationMetadata = {
+    revisedPrompt: sensitiveGenerationMetadataValues[0],
+    error: sensitiveGenerationMetadataValues[1],
+    sourcePath: sensitiveGenerationMetadataValues[2],
+    host: sensitiveGenerationMetadataValues[3],
+    cliCommand: sensitiveGenerationMetadataValues[4],
+  };
+
+  const contactLetter = await letters.createAnonymousLetter({
+    locale: "ko",
+    authorEmail,
+    body: "제 연락처는 010-1234-5678 입니다. 직접 연락해 주세요.",
+  });
+  assert(contactLetter.ok === false && contactLetter.error === "contact-info-not-allowed", "letter bodies containing phone/contact info must be rejected before storage or delivery", contactLetter);
+
+  const normalLetterImageCallCount = cardGenerationCalls.length;
+  const normalLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    locale: "ko",
+    category: "concern",
+    shareVisibility: "unlisted",
+    authorEmail,
+    authorNickname: "익명",
+    body: "요즘 마음이 무너질 때가 많아서 위로의 말씀을 함께 받고 싶습니다.",
+  }), normalLetterImageCallCount, "createAnonymousLetter");
+  await flushAsyncWork();
+  assert(normalLetter.ok === true, "valid anonymous letter should be accepted", normalLetter);
+  assert(typeof normalLetter.replyToken === "string" && normalLetter.replyToken.length > 20, "test-mode creation must return a one-time reply token for local QA");
+  assert(normalLetter.bundle?.letter?.status === "matched", "non-crisis letter with a distinct configured recipient should be matched even when SMTP is skipped", normalLetter.bundle?.letter);
+  assert(normalLetter.bundle?.delivery?.status === "skipped", "SMTP-disabled delivery should be recorded as skipped instead of attempting live mail", normalLetter.bundle?.delivery);
+  assert(emailCalls.length === 1 && emailCalls[0].to === "creator@example.test", "non-crisis dispatch should address the system creator as first recipient", emailCalls);
+  assertPublicBundleSanitized(normalLetter.bundle, "new letter", [authorEmail, "creator@example.test"]);
+
+  const storedAfterCreate = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
+  assert(!storedAfterCreate.includes(normalLetter.replyToken), "raw reply tokens must never be persisted; only replyTokenHash may be stored");
+
+  const crisisLetter = await letters.createAnonymousLetter({
+    locale: "ko",
+    authorEmail: "crisis-author@example.test",
+    body: "crisis self-harm 자해 생각 때문에 오늘 밤이 너무 위험합니다. 도와주세요.",
+  });
+  await flushAsyncWork();
+  assert(crisisLetter.ok === true, "crisis letters should still be accepted for safe handling", crisisLetter);
+  assert(crisisLetter.bundle?.letter?.status === "blocked", "crisis safety assessment must mark the public letter as blocked", crisisLetter.bundle?.letter);
+  assert(crisisLetter.bundle?.delivery === undefined, "crisis letters must not create public delivery metadata", crisisLetter.bundle?.delivery);
+  assert(emailCalls.length === 1, "crisis letters must not dispatch helper SMTP email", emailCalls);
+  assertPublicBundleSanitized(crisisLetter.bundle, "crisis letter", ["crisis-author@example.test", helperEmail]);
+
+  const invalidReply = await letters.createLetterAnswer({
+    locale: "ko",
+    token: normalLetter.replyToken,
+    responderNickname: "도움이",
+    body: "카카오톡으로 연락해 주세요. kakao id를 보내겠습니다.",
+  });
+  assert(invalidReply.ok === false && invalidReply.error === "contact-info-not-allowed", "reply bodies containing direct contact handles must be rejected before consuming the token", invalidReply);
+
+  const invalidScriptureReply = await letters.createLetterAnswer({
+    locale: "ko",
+    token: normalLetter.replyToken,
+    responderNickname: "도움이",
+    body: "본문은 깨끗하지만 성구 칸으로 연락처를 숨기는 시도입니다.",
+    scriptureRef: "email helper@example.test",
+  });
+  assert(invalidScriptureReply.ok === false && invalidScriptureReply.error === "contact-info-not-allowed", "reply scripture references containing contact info must be rejected before consuming the token", invalidScriptureReply);
+
+  const answerImageCallCount = cardGenerationCalls.length;
+  const answer = await assertReturnsWithoutAwaitingQueuedImage(letters.createLetterAnswer({
+    locale: "ko",
+    token: normalLetter.replyToken,
+    responderNickname: "말씀친구",
+    body: "혼자가 아니라는 것을 기억하세요. 오늘은 시편의 위로를 천천히 붙드시면 좋겠습니다.",
+    scriptureRef: "시편 23:1",
+  }), answerImageCallCount, "createLetterAnswer");
+  await flushAsyncWork();
+  assert(answer.ok === true, "valid reply should be accepted with the original reply token", answer);
+  assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
+  assert(emailCalls.length === 2 && emailCalls[1].to === authorEmail, "accepted replies should notify only the original author", emailCalls);
+  assert(emailCalls[1].text.includes(`/ko/letters/answer/${answer.readToken}`), "author notification must contain the tokenized answer URL");
+
+  const secondAnswer = await letters.createLetterAnswer({
+    locale: "ko",
+    token: normalLetter.replyToken,
+    body: "이미 답장한 토큰으로 다시 보내려는 시도입니다.",
+  });
+  assert(secondAnswer.ok === false && secondAnswer.error === "already-answered", "reply tokens must be single-use after an accepted answer", secondAnswer);
+
+  const wrongAnswerBundle = await letters.getAnswerBundle("not-a-real-read-token");
+  assert(wrongAnswerBundle === null, "answer bundles must require the token that hashes to the stored readTokenHash");
+
+  const answerBundle = await letters.getAnswerBundle(answer.readToken);
+  assert(answerBundle?.answer?.id === answer.answer.id, "read token should resolve the accepted answer bundle");
+  assertPublicBundleSanitized(answerBundle, "answer", [authorEmail, helperEmail]);
+
+  const publicLetterAfterAnswer = await letters.getLetterBundle(normalLetter.bundle.letter.id);
+  assert(publicLetterAfterAnswer?.answer?.id === answer.answer.id, "letter bundle should include the accepted answer without exposing private fields");
+  assertPublicBundleSanitized(publicLetterAfterAnswer, "answered letter", [authorEmail, helperEmail]);
+
+  const questionCardBundle = await letters.getCardBundle(normalLetter.bundle.card.id);
+  assert(questionCardBundle?.requestedCard?.id === normalLetter.bundle.card.id, "public card lookup must resolve by question card id, not letter id", questionCardBundle);
+  const legacyLetterCardBundle = await letters.getCardBundle(normalLetter.bundle.letter.id);
+  assert(legacyLetterCardBundle?.requestedCard?.id === normalLetter.bundle.card.id, "public card lookup should keep existing letter-id links resolving to the question card", legacyLetterCardBundle);
+  const answerCardBundle = await letters.getCardBundle(answer.answerCard.id);
+  assert(answerCardBundle?.requestedCard?.id === answer.answerCard.id && answerCardBundle.requestedCard.kind === "answer", "public card lookup must resolve answer card ids", answerCardBundle);
+
+  const storedWithSensitiveMetadata = JSON.parse(await readFile(process.env.LETTERS_DATA_FILE, "utf8"));
+  for (const card of storedWithSensitiveMetadata.cards) {
+    if (card.id === normalLetter.bundle.card.id || card.id === answer.answerCard.id) {
+      card.generationMetadata = { ...sensitiveGenerationMetadata, storedCardKind: card.kind };
+    }
+  }
+  await writeFile(process.env.LETTERS_DATA_FILE, JSON.stringify(storedWithSensitiveMetadata, null, 2));
+
+  const metadataLetterBundle = await letters.getLetterBundle(normalLetter.bundle.letter.id);
+  assertNoGenerationMetadata(metadataLetterBundle, "letter bundle with stored question and answer metadata", sensitiveGenerationMetadataValues);
+  const metadataQuestionCardBundle = await letters.getCardBundle(normalLetter.bundle.card.id);
+  assert(metadataQuestionCardBundle?.requestedCard?.id === normalLetter.bundle.card.id, "question card lookup must still resolve after stored metadata is added", metadataQuestionCardBundle);
+  assertNoGenerationMetadata(metadataQuestionCardBundle, "question card bundle with stored metadata", sensitiveGenerationMetadataValues);
+  const metadataAnswerCardBundle = await letters.getCardBundle(answer.answerCard.id);
+  assert(metadataAnswerCardBundle?.requestedCard?.id === answer.answerCard.id && metadataAnswerCardBundle.requestedCard.kind === "answer", "answer card lookup must still resolve after stored metadata is added", metadataAnswerCardBundle);
+  assertNoGenerationMetadata(metadataAnswerCardBundle, "answer card bundle with stored metadata", sensitiveGenerationMetadataValues);
+  const metadataAnswerBundle = await letters.getAnswerBundle(answer.readToken);
+  assertNoGenerationMetadata(metadataAnswerBundle, "answer bundle with stored question and answer metadata", sensitiveGenerationMetadataValues);
+  await letters.updateCardVisibility(answer.answerCard.id, "private");
+  const privateAnswerCardBundle = await letters.getCardBundle(answer.answerCard.id);
+  assert(privateAnswerCardBundle === null, "bare public card lookup must not return private cards", privateAnswerCardBundle);
+  const questionAfterPrivateAnswer = await letters.getCardBundle(normalLetter.bundle.card.id);
+  assert(questionAfterPrivateAnswer?.answer === undefined && questionAfterPrivateAnswer?.answerCard === null, "question card bundles must not expose a related private answer card or answer body", questionAfterPrivateAnswer);
+
+  const storedAfterAnswer = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
+  assert(!storedAfterAnswer.includes(normalLetter.replyToken), "raw reply token must remain absent after answering");
+  assert(!storedAfterAnswer.includes(answer.readToken), "raw answer read token must never be persisted; only readTokenHash may be stored");
+
+  const participantEmail = "participant@example.test";
+  const participantOtpRequest = await letters.requestLetterParticipantOtp({
+    locale: "ko",
+    email: participantEmail,
+    nickname: "말씀동행",
+    canReceiveLetters: true,
+    preferredLocale: "ko",
+    maxLettersPerDay: 1,
+  });
+  assert(participantOtpRequest.ok === true, "participant OTP request should send a verification email", participantOtpRequest);
+  const otpMessage = emailCalls.at(-1);
+  assert(otpMessage?.to === participantEmail, "participant OTP email should be addressed only to the joining email", otpMessage);
+  const otpMatch = `${otpMessage.text}\n${otpMessage.html}`.match(/\b\d{6}\b/);
+  assert(otpMatch, "participant OTP email should contain a six-digit code");
+  const verifiedParticipant = await letters.verifyLetterParticipantOtp({ email: participantEmail, otp: otpMatch[0] });
+  assert(verifiedParticipant.ok === true, "participant OTP verify should activate the participant", verifiedParticipant);
+  assert(verifiedParticipant.participant?.canReceiveLetters === true, "verified opt-in participant should be eligible to receive letters", verifiedParticipant);
+  assert(!JSON.stringify(verifiedParticipant).includes(participantEmail), "participant API response must expose only masked email, not raw email", verifiedParticipant);
+  assert(typeof verifiedParticipant.sessionToken === "string" && verifiedParticipant.sessionToken.length > 20, "OTP verify should mint a participant session token for the route cookie");
+  const storedAfterVerify = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
+  assert(!storedAfterVerify.includes(verifiedParticipant.sessionToken), "raw participant session token must not be persisted");
+  const sessionParticipant = await letters.getLetterParticipantSession(verifiedParticipant.sessionToken);
+  assert(sessionParticipant?.participantId === verifiedParticipant.participant.participantId, "session token should resolve the verified participant public status", sessionParticipant);
+  const sessionAuthor = await letters.getLetterParticipantAuthor(verifiedParticipant.sessionToken);
+  assert(sessionAuthor?.email === participantEmail, "session token should resolve the server-only participant author email", sessionAuthor);
+  assert(!JSON.stringify(sessionParticipant).includes(participantEmail), "session public status must not expose raw email", sessionParticipant);
+  const pausedSettings = await letters.updateLetterParticipantSettings({
+    sessionToken: verifiedParticipant.sessionToken,
+    nickname: "잠시쉼",
+    canReceiveLetters: false,
+    pauseDays: 7,
+    preferredLocale: "en",
+    maxLettersPerDay: 2,
+  });
+  assert(pausedSettings.ok === true && pausedSettings.participant.status === "paused" && pausedSettings.participant.canReceiveLetters === false && pausedSettings.participant.preferredLocale === "en" && pausedSettings.participant.maxLettersPerDay === 2, "settings update should support pause, locale preference, and receiving cap", pausedSettings);
+  const resumedSettings = await letters.updateLetterParticipantSettings({
+    sessionToken: verifiedParticipant.sessionToken,
+    nickname: "말씀동행",
+    canReceiveLetters: true,
+    pauseDays: 0,
+    preferredLocale: "ko",
+    maxLettersPerDay: 1,
+  });
+  assert(resumedSettings.ok === true && resumedSettings.participant.status === "active" && resumedSettings.participant.canReceiveLetters === true && resumedSettings.participant.selectionLimitPerDay === 1, "settings update should resume receiving with the configured cap", resumedSettings);
+
+  const participantLetterImageCallCount = cardGenerationCalls.length;
+  const participantMatchedLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    locale: "ko",
+    category: "question",
+    shareVisibility: "unlisted",
+    authorEmail: "participant-author@example.test",
+    body: "참여자 랜덤 수신 풀이 실제로 우선 선택되는지 확인하는 테스트 편지입니다.",
+  }), participantLetterImageCallCount, "createAnonymousLetter participant dispatch");
+  await flushAsyncWork();
+  assert(participantMatchedLetter.ok === true, "letter creation should still succeed with an active participant recipient", participantMatchedLetter);
+  assert(emailCalls.at(-1)?.to === participantEmail, "active opted-in participant should be selected before env fallback recipients", emailCalls.at(-1));
+  assert(participantMatchedLetter.bundle?.delivery?.status === "sent", "participant delivery should be recorded in the public bundle without exposing recipient identity", participantMatchedLetter.bundle?.delivery);
+  assertPublicBundleSanitized(participantMatchedLetter.bundle, "participant-matched letter", ["participant-author@example.test", participantEmail, helperEmail]);
+  const participantDeliveryEmail = emailCalls.at(-1);
+  const participantAuthoredLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    locale: "ko",
+    category: "reflection",
+    shareVisibility: "unlisted",
+    authorEmail: participantEmail,
+    body: "참여자가 직접 작성한 말씀편지는 내 편지함에서 다시 확인할 수 있어야 합니다.",
+  }), cardGenerationCalls.length, "createAnonymousLetter participant authored history");
+  await flushAsyncWork();
+  assert(participantAuthoredLetter.ok === true, "participant-authored letter should be created before history lookup", participantAuthoredLetter);
+  const participantHistory = await letters.getLetterParticipantHistory(verifiedParticipant.sessionToken);
+  assert(participantHistory?.authored.some((item) => item.letter.id === participantAuthoredLetter.bundle.letter.id), "participant history should include letters authored by the verified participant", participantHistory);
+  assert(participantHistory?.received.some((item) => item.letter.id === participantMatchedLetter.bundle.letter.id), "participant history should include letters delivered to the verified participant", participantHistory);
+  assert(!JSON.stringify(participantHistory).includes(participantEmail), "participant history must not expose raw participant email", participantHistory);
+
+  // Relay contract: scripture stripped from public bundles for author view
+  const authorBundle = await letters.getLetterBundle(normalLetter.bundle.letter.id);
+  assert(authorBundle?.letter.scripture.reference === "", "public letter bundle must strip scripture recommendation from author view", authorBundle?.letter.scripture);
+
+  // Relay contract: reply bundle includes scripture for relay runner
+  const runnerBundle = await letters.getReplyBundle(normalLetter.replyToken);
+  assert(runnerBundle?.scriptureRecommendations?.length > 0, "reply bundle must include scripture recommendations for relay runner", runnerBundle?.scriptureRecommendations);
+  assert(runnerBundle?.letter.scripture.reference.length > 0, "reply bundle letter must include scripture for relay runner", runnerBundle?.letter.scripture);
+
+  // Relay contract: accept relay participation
+  const relayResult = await letters.acceptRelayParticipation(verifiedParticipant.sessionToken);
+  assert(relayResult.ok === true && relayResult.participant.canReceiveLetters === true, "relay accept must set canReceiveLetters through session token", relayResult);
+  const unsubscribeMatch = `${participantDeliveryEmail?.text}\n${participantDeliveryEmail?.html}`.match(/\/letters\/unsubscribe\/([A-Za-z0-9_-]+)/);
+  assert(unsubscribeMatch, "participant delivery email should include an unsubscribe token link", participantDeliveryEmail);
+  const rawUnsubscribeToken = unsubscribeMatch[1];
+  const storedAfterDelivery = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
+  assert(!storedAfterDelivery.includes(rawUnsubscribeToken), "raw unsubscribe token must not be persisted");
+  assert(!storedAfterDelivery.includes(participantEmail) && !storedAfterDelivery.includes("participant-author@example.test") && !storedAfterDelivery.includes(helperEmail), "configured email encryption should keep raw stored letter emails out of the data file", storedAfterDelivery);
+  const unsubscribedByToken = await letters.unsubscribeLetterParticipant({ token: rawUnsubscribeToken });
+  assert(unsubscribedByToken.ok === true && unsubscribedByToken.participant.status === "unsubscribed" && unsubscribedByToken.participant.canReceiveLetters === false, "unsubscribe token should remove participant from receiving pool", unsubscribedByToken);
+  const sessionAfterUnsubscribe = await letters.getLetterParticipantSession(verifiedParticipant.sessionToken);
+  assert(sessionAfterUnsubscribe === null, "unsubscribe should invalidate the participant session token");
+
+  const participantSelfLetterImageCallCount = cardGenerationCalls.length;
+  const participantSelfLetter = await assertReturnsWithoutAwaitingQueuedImage(letters.createAnonymousLetter({
+    locale: "ko",
+    category: "reflection",
+    shareVisibility: "unlisted",
+    authorEmail: participantEmail,
+    body: "내가 작성자인 경우에는 내 이메일이 랜덤 수신자로 다시 선택되지 않아야 합니다.",
+  }), participantSelfLetterImageCallCount, "createAnonymousLetter participant self exclusion");
+  await flushAsyncWork();
+  assert(participantSelfLetter.ok === true, "letter creation should succeed when author is also a participant", participantSelfLetter);
+  assert(emailCalls.at(-1)?.to === "creator@example.test", "author participant must be excluded from recipient selection and fall back to system creator when no other participant is eligible", emailCalls.at(-1));
+  assertPublicBundleSanitized(participantSelfLetter.bundle, "participant self-exclusion letter", [participantEmail, "creator@example.test"]);
+
+
+  let remoteExecCount = 0;
+  const disabledCardGenerator = loadTsModule("lib/letter-card-generator.ts", {
+    "node:child_process": {
+      execFile: (...args) => {
+        remoteExecCount += 1;
+        throw new Error(`remote image command should be disabled during QA: ${JSON.stringify(args)}`);
+      },
+    },
+  });
+  const fallback = await disabledCardGenerator.queueCardImageGeneration({
+    id: "card-disabled",
+    title: "위로의 말씀",
+    scripture: { reference: "시편 23:1", text: "여호와는 나의 목자시니", reason: "comfort", href: "/ko/bible/PSA.23.1", confidence: 0.9 },
+    visualTheme: { tone: "warm", palette: ["#111111", "#ffffff"], symbols: ["shepherd"], layoutHint: "square" },
+  }, { body: "이미지 생성 비활성화 확인", locale: "ko" });
+  assert(fallback.status === "skipped", "Codex Imagen must return a skipped fallback when LETTERS_ENABLE_CODEX_IMAGEN is not enabled", fallback);
+  assert(fallback.metadata?.provider === "codex-imagen", "disabled Imagen fallback must preserve provider metadata", fallback);
+  assert(typeof fallback.metadata?.reason === "string" && fallback.metadata.reason.includes("LETTERS_ENABLE_CODEX_IMAGEN"), "disabled Imagen fallback must explain the enabling env flag", fallback);
+  assert(remoteExecCount === 0, "disabled Imagen fallback must not call ssh or the Codex Imagen CLI", { remoteExecCount });
+
+  const enabledImagenEnv = {
+    LETTERS_ENABLE_CODEX_IMAGEN: process.env.LETTERS_ENABLE_CODEX_IMAGEN,
+    LETTERS_CODEX_IMAGEN_BIN: process.env.LETTERS_CODEX_IMAGEN_BIN,
+    LETTERS_CODEX_IMAGEN_HOST: process.env.LETTERS_CODEX_IMAGEN_HOST,
+    LETTERS_CODEX_IMAGEN_LOCAL: process.env.LETTERS_CODEX_IMAGEN_LOCAL,
+    LETTERS_CODEX_IMAGEN_MODEL: process.env.LETTERS_CODEX_IMAGEN_MODEL,
+    LETTERS_CARD_PROMPT_DIR: process.env.LETTERS_CARD_PROMPT_DIR,
+    LETTERS_CARD_OUTPUT_DIR: process.env.LETTERS_CARD_OUTPUT_DIR,
+  };
+  const restoreEnabledImagenEnv = () => {
+    for (const [key, value] of Object.entries(enabledImagenEnv)) {
+      if (value === undefined) {
+        delete process.env[key];
+      } else {
+        process.env[key] = value;
+      }
+    }
+  };
+  try {
+    const enabledCardId = "card-enabled";
+    const imagenHost = "qa-imagen-host";
+    const imagenCli = "/qa/bin/codex-imagen";
+    const promptDir = join(tempDir, "imagen-prompts");
+    const outputDir = join(tempDir, "imagen-output");
+    const localPromptPath = join(promptDir, `${enabledCardId}.prompt.txt`);
+    const localOutputPath = join(outputDir, `${enabledCardId}.png`);
+    const remoteDir = `/tmp/bible-letters-codex-imagen/${enabledCardId}`;
+    const remotePromptPath = `${remoteDir}/prompt.txt`;
+    const remoteOutputPath = `${remoteDir}/output.png`;
+    const localFiles = new Set();
+    const remoteFiles = new Set();
+    const execCalls = [];
+
+    process.env.LETTERS_ENABLE_CODEX_IMAGEN = "1";
+    process.env.LETTERS_CODEX_IMAGEN_HOST = imagenHost;
+    process.env.LETTERS_CODEX_IMAGEN_BIN = imagenCli;
+    process.env.LETTERS_CODEX_IMAGEN_MODEL = "qa-model";
+    process.env.LETTERS_CARD_PROMPT_DIR = promptDir;
+    process.env.LETTERS_CARD_OUTPUT_DIR = outputDir;
+    delete process.env.LETTERS_CODEX_IMAGEN_LOCAL;
+
+    const execFileStub = (command, args, options, callback) => {
+      const done = typeof options === "function" ? options : callback;
+      execCalls.push({ command, args });
+      try {
+        let stdout = "";
+        if (command === "ssh") {
+          assert(args[0] === imagenHost, "Codex Imagen remote shell must target the configured adapter host", { args });
+          const shellCommand = args[1];
+          if (shellCommand.includes("mkdir -p") && shellCommand.includes(remoteDir)) {
+            stdout = "";
+          } else if (shellCommand.includes(imagenCli)) {
+            assert(shellCommand.includes("--prompt-file") && shellCommand.includes(remotePromptPath), "Codex Imagen command must reference the remote prompt artifact", { shellCommand });
+            assert(shellCommand.includes("--output") && shellCommand.includes(remoteOutputPath), "Codex Imagen command must reference the remote output artifact", { shellCommand });
+            assert(remoteFiles.has(remotePromptPath), "Codex Imagen command must run after the prompt is copied to the remote host", { remoteFiles: [...remoteFiles] });
+            remoteFiles.add(remoteOutputPath);
+            stdout = JSON.stringify({
+              model: "qa-model",
+              images: [{ decodedPath: remoteOutputPath, sha256: "qa-sha256", revised_prompt: null }],
+            });
+          } else if (shellCommand.includes("rm -rf") && shellCommand.includes(remoteDir)) {
+            for (const path of [...remoteFiles]) {
+              if (path.startsWith(remoteDir)) remoteFiles.delete(path);
+            }
+          } else {
+            assert(false, "unexpected Codex Imagen ssh command", { shellCommand });
+          }
+        } else if (command === "scp") {
+          const source = args.at(-2);
+          const destination = args.at(-1);
+          if (source === localPromptPath && destination === `${imagenHost}:${remotePromptPath}`) {
+            assert(localFiles.has(localPromptPath), "Codex Imagen prompt must be written locally before upload", { localFiles: [...localFiles] });
+            remoteFiles.add(remotePromptPath);
+          } else if (source === `${imagenHost}:${remoteOutputPath}` && destination === localOutputPath) {
+            assert(remoteFiles.has(remoteOutputPath), "Codex Imagen output must exist remotely before download", { remoteFiles: [...remoteFiles] });
+            localFiles.add(localOutputPath);
+          } else {
+            assert(false, "unexpected Codex Imagen scp command", { args });
+          }
+        } else {
+          assert(false, "Codex Imagen must use ssh/scp adapter commands in QA", { command, args });
+        }
+        done(null, stdout, "");
+      } catch (error) {
+        done(error);
+      }
+    };
+    execFileStub[Symbol.for("nodejs.util.promisify.custom")] = (command, args, options) => new Promise((resolve, reject) => {
+      execFileStub(command, args, options, (error, stdout, stderr) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve({ stdout, stderr });
+        }
+      });
+    });
+
+    const enabledCardGenerator = loadTsModule("lib/letter-card-generator.ts", {
+      "node:child_process": {
+        execFile: execFileStub,
+      },
+      "node:fs/promises": {
+        mkdir: async () => undefined,
+        writeFile: async (path) => {
+          localFiles.add(path);
+        },
+        copyFile: async () => {
+          throw new Error("Codex Imagen QA should not use local copyFile when a remote host is configured");
+        },
+        rm: async (path) => {
+          localFiles.delete(path);
+        },
+      },
+    });
+
+    const ready = await enabledCardGenerator.queueCardImageGeneration({
+      id: enabledCardId,
+      letterId: "letter-enabled",
+      kind: "question",
+      title: "위로의 말씀",
+      summary: "하나님의 돌보심을 기억합니다.",
+      scripture: { reference: "시편 23:1", text: "여호와는 나의 목자시니 내게 부족함이 없으리로다", reason: "comfort", href: "/ko/bible/PSA.23.1", confidence: "high" },
+      visualTheme: {
+        coreMessage: "하나님은 양처럼 지친 마음을 돌보십니다.",
+        spiritualTheme: "divine comfort",
+        emotionalTone: "warm and peaceful",
+        visualMetaphor: "a shepherd guiding one lamb through soft dawn light",
+        environment: "quiet hillside at sunrise",
+        includeHumanFigure: true,
+      },
+      generationProvider: "codex-imagen",
+      generationStatus: "pending",
+      visibility: "unlisted",
+      createdAt: "2026-07-06T00:00:00.000Z",
+    }, { body: "이미지 생성 성공 후 로컬 파일 정리 확인", locale: "ko" });
+
+    assert(ready.status === "ready", "Codex Imagen enabled mode must return ready when the adapter reports a generated image", ready);
+    assert(!Object.prototype.hasOwnProperty.call(ready, "imageUrl") && ready.imageUrl === undefined, "Codex Imagen enabled mode must not return a public imageUrl for local artifacts", ready);
+    assert(!localFiles.has(localPromptPath), "Codex Imagen enabled mode must remove the local prompt artifact after completion", { localPromptPath, localFiles: [...localFiles] });
+    assert(!localFiles.has(localOutputPath), "Codex Imagen enabled mode must remove the local output artifact after completion", { localOutputPath, localFiles: [...localFiles] });
+    assert(execCalls.some((call) => call.command === "ssh" && call.args[1].includes(imagenCli)), "Codex Imagen enabled mode must invoke the generator through the remote adapter command", execCalls);
+    assert(execCalls.some((call) => call.command === "scp" && call.args.at(-1) === `${imagenHost}:${remotePromptPath}`), "Codex Imagen enabled mode must upload the local prompt through the adapter path", execCalls);
+    assert(execCalls.some((call) => call.command === "scp" && call.args.at(-2) === `${imagenHost}:${remoteOutputPath}`), "Codex Imagen enabled mode must download the remote output through the adapter path before cleanup", execCalls);
+  } finally {
+    restoreEnabledImagenEnv();
+  }
+
+  const routeCalls = [];
+  const replyRoute = loadTsModule("app/[locale]/api/letters/reply/[token]/route.ts", {
+    "next/server": {
+      NextResponse: { json: (body, init) => Response.json(body, init) },
+    },
+    "@/lib/content": {
+      resolveAppLocale: (locale) => (locale === "en" ? "en" : "ko"),
+    },
+    "@/lib/letters": {
+      createLetterAnswer: async (input) => {
+        routeCalls.push(input);
+        return {
+          ok: true,
+          answer: {
+            id: "answer-route-id",
+            readTokenHash: "must-not-leak",
+            readToken: "must-not-leak-either",
+            body: "route body",
+          },
+          readToken: "route-read-token",
+        };
+      },
+    },
+  });
+  const routeResponse = await replyRoute.POST(new Request("https://bible.ponslink.test/ko/api/letters/reply/route-reply-token", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ body: "라우트 답장 본문은 충분한 길이를 갖습니다.", responderNickname: "요한", scriptureRef: "John 3:16" }),
+  }), { params: Promise.resolve({ locale: "ko", token: "route-reply-token" }) });
+  const routeJson = await routeResponse.json();
+  assert(routeResponse.status === 200, "reply route should return 200 when createLetterAnswer succeeds", routeJson);
+  assert(routeJson.ok === true && routeJson.answerId === "answer-route-id" && routeJson.readToken === "route-read-token", "reply route should return only answerId and readToken from a successful answer", routeJson);
+  assert(!("answer" in routeJson) && !JSON.stringify(routeJson).includes("must-not-leak"), "reply route must not serialize raw answer internals", routeJson);
+  assert(routeCalls[0]?.token === "route-reply-token" && routeCalls[0]?.locale === "ko", "reply route must pass locale and URL token into createLetterAnswer", routeCalls[0]);
+
+  console.log(JSON.stringify({
+    status: "passed",
+    contracts: [
+      "public bundles omit user email fields, token hashes, and raw token fields",
+      "createAnonymousLetter and createLetterAnswer return required results/emails without awaiting unresolved image generation promises",
+      "letter and reply contact info is rejected before delivery/token consumption",
+      "crisis safety blocks helper dispatch and public delivery metadata",
+      "reply tokens are stored hashed, single-use, and required to resolve answer bundles",
+      "answer read tokens are emailed as tokenized URLs but not persisted raw",
+      "reply scripture references reject hidden contact info before token consumption",
+      "participant OTP verifies an active opt-in participant without exposing raw email",
+      "participant session tokens resolve server author identity without persisting raw tokens",
+      "participant settings support opt-out, pause, locale preference, receiving caps, and resume through the session token",
+      "participant history resolves authored and received letters without exposing raw email",
+      "configured email encryption removes stored raw letter, participant, and delivery emails",
+      "participant delivery emails include unsubscribe token links without persisting raw unsubscribe tokens",
+      "active opted-in participants are selected before env fallback while excluding the author",
+      "system creator email is the primary fallback when no eligible relay participant exists",
+      "public letter bundles strip scripture recommendation from author view",
+      "relay accept sets canReceiveLetters through session token",
+      "reply bundle includes scripture recommendation for relay runner",
+      "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
+      "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
+      "Codex Imagen enabled mode returns ready without imageUrl and removes local prompt/output files",
+      "reply API route returns only answerId/readToken and does not serialize answer internals",
+    ],
+    artifacts: {
+      tempDataFile: process.env.LETTERS_DATA_FILE,
+      cardGenerationCalls: cardGenerationCalls.length,
+      emailCalls: emailCalls.map((message) => ({ to: message.to, subject: message.subject })),
+    },
+  }, null, 2));
+} finally {
+  process.env = originalEnv;
+  await rm(tempDir, { recursive: true, force: true });
+}

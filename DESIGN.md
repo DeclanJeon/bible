@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-06-22
+- Last refreshed: 2026-07-06
 - Primary product surfaces:
   - `/[locale]/companion`: prompt-to-study result page.
   - `/[locale]/api/reflect`: prompt-to-study JSON API.
@@ -16,6 +16,8 @@
   - `/[locale]/reviews`: anonymous review board.
   - `/[locale]/hanja` and `/[locale]/hanja/[slug]`: Hanja catalog and evidence/detail surfaces.
   - `/[locale]/faith-basics` and `/[locale]/spirit-soul-body`: editorial doctrine/concept pages with source-separated Scripture review.
+  - `/[locale]/letters`, `/[locale]/letters/write`, `/[locale]/letters/reply/[token]`, `/[locale]/letters/answer/[token]`: observed Letters of Comfort anonymous-card relay surfaces.
+  - Intended Letters participant surfaces: `/[locale]/letters/join`, `/[locale]/letters/verify`, `/[locale]/letters/settings`, and `/[locale]/letters/unsubscribe/[token]`.
 - Evidence reviewed:
   - `README.md` — product positioning, routes, architecture, operating constraints.
   - `docs/bible-hyperlink-companion-design.md` — product direction, interaction model, graph intent, source policy.
@@ -39,6 +41,8 @@
   - `docs/design/concepts/home-google-style-ko.svg`, `docs/design/concepts/v2/overview-simplified-v2-ko.svg`, `docs/design/concepts/v2/companion-simplified-v2-ko.svg`, `docs/design/concepts/v2/study-simplified-v2-ko.svg`, `docs/design/concepts/v2/graph-simplified-v2-ko.svg`, `docs/design/concepts/v2/lanes-simplified-v2-ko.svg` — existing simplified concept direction.
   - Live local audit on `http://localhost:3101/ko`: home, companion, Bible reader, lanes, study, graph, cross-reference summary/full, reviews, Hanja catalog/detail, passage redirect, and not-found screens.
   - `app/[locale]/spirit-soul-body/page.tsx` — page-specific redesign around the concept question, source/transcript separation, sticky section journey, and Scripture review map.
+  - `docs/letters-of-comfort-design.md` — Letters of Comfort feature design, observed env-recipient implementation, and intended email OTP participant model.
+  - `lib/letters.ts`, `lib/letter-env.ts`, `components/letter-forms.tsx`, `components/letter-card-visual.tsx`, and `app/[locale]/letters/**` — observed current Letters implementation: JSON file store, env recipient fallback, anonymous write/reply/card pages, hashed reply/read token lookup, and no participant OTP/settings surfaces yet.
 
 ## Brand
 - Personality:
@@ -50,12 +54,16 @@
   - Every relationship shown with source provenance.
   - Historical/background notes labeled by confidence.
   - Dataset limits disclosed instead of hidden.
+  - Letters trust copy states the exact privacy boundary: emails are hidden from the other participant and relayed by the system; it must not imply the service stores no operational data.
+  - Email OTP join/settings flows make opt-in, pause, and unsubscribe visible before a participant enters the recipient pool.
 - Avoid:
   - Isolated verse advice.
   - Hidden curation by omission.
   - Invented historical claims.
   - Fake certainty around disputed authorship/date/place.
   - Overloading the first answer with hundreds of prose explanations.
+  - Social-login dependency for the Letters participant MVP; Google OAuth is explicitly out of scope.
+  - “Anonymous” claims that overpromise zero data retention rather than “not shown to the other person.”
 
 ## Product goals
 - Goals:
@@ -66,6 +74,7 @@
   - Make the full cross-reference network navigable by book, canon section, direction, relation type, source, strength, and phrase anchor.
   - Interpret unpredictable free-form user concerns through an AI/query-planner middleware before retrieval, while keeping the Bible corpus and evidence contract as the source of truth for final passage selection.
   - For doctrine prompts, distinguish common Christian core claims from tradition-sensitive interpretations instead of flattening everything into one undifferentiated doctrinal voice.
+  - For Letters of Comfort, move beyond the current env-recipient MVP into an email OTP participant model where verified participants can submit anonymous letters and opt in to receive/respond to other letters.
 - Non-goals:
   - Do not claim to know every possible theological relationship beyond the datasets and local metadata.
   - Do not force every cross-reference into the generated answer body.
@@ -73,6 +82,9 @@
   - Do not add external historical facts unless they are ingested into the local evidence layer with provenance.
   - Do not flatten materially disputed doctrine into a fake universal consensus.
   - Do not attribute a denominational view unless the app has explicit local sources for that tradition.
+  - Do not add Google OAuth or any other social login to the Letters participant MVP.
+  - Do not expose raw emails, OTPs, reply/read/unsubscribe tokens, participant ids, provider metadata, or internal image paths in public bundles.
+  - Do not treat Letters as a public feed, social graph, counseling product, or real-time chat.
 - Success signals:
   - The full network endpoint returns all dataset-backed direct links for a passage without top-N truncation.
   - The companion page clearly states total available links and offers full exploration.
@@ -81,27 +93,34 @@
   - QA includes exact-count recall checks for known anchors and no-truncation checks for the full endpoint.
   - Korean free-form concern QA covers at least 30 prompts across weariness, purpose, despair, safety, unrelated everyday input, and theological questions with ≥95% pass rate.
   - Doctrine prompts with real interpretive divergence show a shared-core summary first, then clearly labeled tradition-specific views with cited limits and source provenance.
+  - Letters success includes a verified participant completing OTP, explicitly opting in, receiving no more than the configured cap, and being able to pause/unsubscribe without contacting support.
+  - Letters matching success is not “always find a public user”; it is “select an eligible active participant, otherwise fall back to internal/admin recipients honestly.”
 
 ## Personas and jobs
 - Primary personas:
   - Korean and English Bible readers who begin with a personal concern and need a grounded study path.
   - Bible teachers/small-group leaders who need all cross-reference links visible before preparing a lesson.
   - Serious lay readers who want context, history, and canonical echoes without losing the primary text.
+  - Letters participants who want to give/receive quiet encouragement without revealing their email address to another person.
 - User jobs:
   - “Show me the passages connected to this concern.”
   - “Do not hide links from me; let me inspect the whole network.”
   - “Tell me why each passage is connected.”
   - “Show the book/background/history context so I do not misuse a verse.”
   - “Let me jump directly to every referenced passage.”
+  - “Let me verify by email, write anonymously, and decide separately whether I want to receive letters.”
+  - “Let me stop, pause, or unsubscribe without exposing myself or losing access to my own cards.”
 - Key contexts of use:
   - Mobile devotional reading: needs summary and progressive disclosure.
   - Desktop study preparation: needs full network, filters, and dense lists.
   - Bilingual study: Korean/English routes must preserve the same graph semantics.
+  - Letters email flows: users may enter from an OTP email, reply email, answer email, or unsubscribe/settings link, often on mobile.
 
 ## Information architecture
 - Primary navigation:
   - Home → Companion → Study desk → Graph → Passage reader.
   - New path: Companion / Passage reader / Graph → Full cross-reference network.
+  - Letters path: Home/global nav → Letters landing → write/join/settings → card/reply/answer token surfaces.
 - Core routes/screens:
   - `/[locale]/companion`: summary, primary passage, highlights, context, and full-network call-to-action.
   - `/[locale]/api/reflect`: same evidence contract for API clients, with full-network summary and URL.
@@ -109,6 +128,11 @@
   - `/[locale]/api/crossrefs/[reference]`: full network JSON endpoint.
   - `/[locale]/passage/[reference]`: passage text, surrounding context, and entry into the full network.
   - `/[locale]/graph/[slug]`: lane-level map; should link to the full passage-level network for the primary reference.
+  - `/[locale]/letters`: Letters landing with write, join, and settings CTAs.
+  - `/[locale]/letters/join` and `/[locale]/letters/verify`: intended email OTP participant activation.
+  - `/[locale]/letters/settings` and `/[locale]/letters/unsubscribe/[token]`: intended opt-in, pause, and unsubscribe IA.
+  - `/[locale]/letters/write`: anonymous letter writing tied to active participant or OTP verification.
+  - `/[locale]/letters/reply/[token]` and `/[locale]/letters/answer/[token]`: token-access reply and answer flows.
 - Content hierarchy:
   1. Center passage and confidence.
   2. Why this passage was selected.
@@ -117,6 +141,8 @@
   5. Full network access.
   6. Complete grouped network.
   7. Interpretation guide and cautions.
+  8. Letters participant join/settings/unsubscribe controls.
+  9. Letters anonymous card/reply flows with trust notices.
 
 ## Design principles
 - Principle 1: No curation by omission.
@@ -144,6 +170,15 @@
   - No Catholic / Orthodox / Reformed / Baptist / Pentecostal card may appear unless local evidence exists for that tradition's reading.
 - Principle 10: Difference should be visible, not noisy.
   - Tradition-specific detail belongs in a secondary layer by default so the first answer remains readable.
+
+- Principle 11: Email OTP over OAuth for Letters MVP.
+  - The participant model verifies email ownership with one-time codes; do not introduce Google OAuth or profile identity into the anonymous-care flow.
+- Principle 12: Opt-in is separate from writing.
+  - Writing a letter and agreeing to receive others' letters are distinct choices. `canReceiveLetters` must be explicit and reversible.
+- Principle 13: Recipient eligibility is a trust contract.
+  - Only active, verified, opted-in, not-paused, not-unsubscribed participants can be randomly selected; exclude the author and enforce basic cooldown/cap protection.
+- Principle 14: Private relay means private presentation.
+  - Raw emails, OTPs, tokens, participant ids, internal image paths, and raw generation metadata stay out of public bundles and UI copy.
 
 ## Visual language
 - Color:
@@ -266,6 +301,7 @@
   - `NoteCard` and `BookProfileCard` for context/history notes.
   - `TabSection` and `Collapsible` for progressive disclosure.
   - `SourceList` for source provenance.
+  - Existing Letters components: `LetterWriteForm`, `LetterReplyForm`, `LetterCardVisual`, `LetterActionPanel`, and `TrustNotice`.
 - New/changed components:
   - `CrossReferenceNetworkSummary`: totals, directions, books touched, strongest sources.
   - `CrossReferenceNetworkTable`: all edges with filters/sort.
@@ -275,12 +311,19 @@
   - `CrossReferenceEmptyState`: explicit message when source datasets have no links for a reference.
   - `FullNetworkCta`: reusable CTA from companion, graph, study, and passage pages.
   - `BrandedLoadingPage`: logo-led route loading page for prompt/response waits and generic route transitions.
+  - `LetterJoinOtpForm`: email capture, OTP resend cooldown, and one-time-code input.
+  - `LetterParticipantSettings`: `canReceiveLetters`, pause duration, locale preference, and unsubscribe controls.
+  - `LetterUnsubscribeResult`: confirmation, undo/rejoin affordance, and privacy-safe status copy.
+  - `LetterTrustNotice` variants for write, join, reply, settings, email, and card pages.
 - Variants and states:
   - Highlight mode: 4–8 strongest links.
   - Full mode: no edge truncation; paginated/virtualized only as a rendering strategy, never as data loss.
   - Dense mode: desktop table/list.
   - Card mode: mobile stacked cards.
   - Low-confidence mode: no expansion from weak primary passage; first try AI/deterministic query normalization for concern intent, then pause expansion if the normalized query still lacks a reliable passage.
+  - Letters OTP states: requesting, sent, cooldown, verifying, invalid/expired, verified.
+  - Letters participant states: pending, active, paused, unsubscribed, capped for today.
+  - Letters matching states: participant matched, env fallback used, no send because crisis/safety hold.
 - Token/component ownership:
   - Use existing CSS variables and Tailwind patterns.
   - Do not introduce a new design-system dependency.
@@ -303,6 +346,8 @@
 - Reduced motion and sensory considerations:
   - Avoid animated graph force layouts as the only navigation path.
   - Text/list view is the primary accessible representation.
+  - OTP inputs support paste, numeric mobile keyboards, autocomplete `one-time-code`, visible focus, alert semantics for invalid/expired codes, and keyboard-only resend/submit.
+  - Settings and unsubscribe controls must use real buttons/checkboxes with state text; never rely on color-only toggles.
 
 ## Responsive behavior
 - Supported breakpoints/devices:
@@ -315,6 +360,7 @@
 - Touch/hover differences:
   - Minimum 44px touch targets.
   - Hover affordances must have focus equivalents.
+  - Letters join, settings, unsubscribe, and reply links are email-entry flows; every primary action remains at least 44px and works on mobile email webviews.
 
 ## Interaction states
 - Loading:
@@ -334,6 +380,9 @@
 - Offline/slow network:
   - Reflect summary can render first; full network loads independently.
   - Preserve direct passage links once loaded.
+- Letters OTP/settings:
+  - OTP request/verify states show cooldown, invalid/expired code, too-many-attempts, and success without revealing whether an email belongs to a known participant.
+  - Settings success states confirm “수신을 멈췄습니다”, “다시 받을 수 있습니다”, or “하루 최대 수신량에 도달했습니다” plainly.
 
 ## Content voice
 - Tone:
@@ -355,6 +404,11 @@
   - Avoid “성경은 명백히 오직 …를 뜻한다” when multiple orthodox traditions materially disagree.
   - If the app can only justify common ground, say so directly and do not improvise denominational nuance.
 
+  - Letters trust copy: say “이메일은 상대에게 보이지 않습니다. 모든 편지와 답장은 시스템 링크로만 전달됩니다.”
+  - Letters opt-in copy: say “나도 다른 말씀편지를 받아보고 답장할래요” rather than hiding participation in terms text.
+  - Letters unsubscribe copy: reassure “받는 것을 멈춰도 내가 쓴 편지와 받은 답장은 사라지지 않습니다.”
+  - Avoid saying “완전 익명” without the privacy boundary; use “상대에게 이메일이 보이지 않습니다.”
+
 ## Implementation constraints
 - Framework/styling system:
   - Next.js App Router, React 19, TypeScript, Tailwind CSS.
@@ -370,6 +424,12 @@
 - Compatibility constraints:
   - Preserve current `getPassageCrossReferences(reference, limit, locale)` behavior until all callers migrate, then remove compatibility shims in the same cutover.
   - Existing APIs should gain summary/URL fields without breaking required current payload fields during the migration window only if unavoidable. Final target is a clean cutover.
+- Letters participant constraints:
+  - Use email OTP only; Google OAuth is out of scope.
+  - Raw OTPs and raw reply/read/unsubscribe tokens are never stored; store hashes plus expiry/attempt metadata.
+  - Raw email may be used only server-side for delivery/settings, preferably encrypted at rest, and must not appear in public DTOs, card prompts, generated image metadata, or client bundles.
+  - Existing env recipient fallback remains only for admin/internal delivery when no eligible participant exists.
+  - Letter card images remain ephemeral; do not persist public `imageUrl` values as the durable sharing contract.
 - Test/screenshot expectations:
   - Unit coverage for graph normalization, incoming/outgoing/mutual classification, no-truncation full output, and source provenance.
   - API coverage for reflect summary vs full graph endpoint.
@@ -1238,6 +1298,48 @@ type DoctrinePresentation = {
 - Extend answer bundle / reflection contract with `DoctrinePresentation`.
 - Add doctrine-difference UI section on companion and API payload.
 - Add QA fixtures for shared-core, divergent, and tradition-requested doctrine prompts.
+
+## Letters of Comfort participant design
+
+### Observed implementation boundary
+- Current Letters implementation exists under `app/[locale]/letters/**`, `components/letter-forms.tsx`, `components/letter-card-visual.tsx`, `lib/letters.ts`, and `lib/letter-env.ts`.
+- It uses a JSON file store with lock/mutate helpers for letters, cards, deliveries, answers, and reports.
+- It currently asks the author for a reply email on the write form, chooses recipients from `LETTERS_RECIPIENT_EMAILS` or `PONSLINK_ADMIN_EMAILS`, and has no participant OTP, settings, pause, or unsubscribe IA yet.
+- Reply/read tokens are looked up by hash, but the current minimal model still includes raw author/recipient email fields for delivery.
+
+### Intended participant model
+- Participant activation uses email OTP only. Google OAuth is not part of the MVP.
+- `LetterParticipant` owns `emailHash`, encrypted server-side email, `status`, `canReceiveLetters`, `emailVerifiedAt`, `pausedUntil`, `unsubscribedAt`, locale, and basic cap/cooldown fields.
+- `LetterOtpChallenge` stores `otpHash`, purpose, attempts, expiry, and consumed time; raw OTP is never stored.
+- Writing a letter should either use an active participant session/token or require OTP verification before final submission.
+- Opting in to receive other letters is explicit and reversible; it must not be pre-checked.
+
+### Join/settings/unsubscribe IA
+1. Landing explains anonymous relay, then offers `익명 말씀편지 쓰기`, `이메일로 참여하기`, and `수신 설정 관리`.
+2. Join requests an email, sends a 6-digit OTP, and verifies with numeric input, paste support, one-time-code autocomplete, resend cooldown, and accessible error messaging.
+3. Settings manages `canReceiveLetters`, pause duration, locale preference, frequency/cap explanation, and unsubscribe.
+4. Every recipient email includes a settings/unsubscribe link.
+5. Unsubscribe excludes the participant from matching immediately and offers a clear rejoin path without exposing raw email/token/id.
+
+### Recipient selection contract
+- Eligible participant means active, email-verified, `canReceiveLetters=true`, not paused, not unsubscribed, not over daily cap, and not the author by participant id or email hash.
+- Prefer same locale, then randomize among eligible candidates.
+- If no eligible participant exists, use the env recipient fallback for admin/internal delivery and avoid copy that implies another participant received it.
+- Matching/cap logic is privacy-sensitive backend behavior; UI only shows honest delivery states such as queued, delivered, answered, safety hold, or internal fallback where appropriate.
+
+### OTP, privacy, and accessibility requirements
+- Store raw OTP/token never; hash OTP, reply/read/unsubscribe tokens, and expire them.
+- Apply email/IP cooldown, daily OTP request cap, maximum OTP verification attempts, and consumed-token handling.
+- Do not expose raw email, masked email by default, participant id, OTP, token, internal image path, provider metadata, or raw card-generation prompt in public bundles.
+- Card images are ephemeral/no public durable `imageUrl`; card data and token/link access are the durable sharing model.
+- OTP, settings, and unsubscribe controls need visible focus, semantic labels, `role="alert"` for errors, non-color-only status, and 44px minimum touch targets.
+- Trust copy must be precise: “emails are not shown to each other” is allowed; “we store nothing” is not.
+
+### UI/UX trust copy
+- Korean write/reply notice: “이메일은 서로에게 보이지 않습니다. 모든 편지와 답장은 시스템 링크로만 전달됩니다.”
+- Korean opt-in: “나도 다른 말씀편지를 받아보고 답장할래요.”
+- Korean pause/unsubscribe reassurance: “받는 것을 멈춰도 내가 쓴 편지와 받은 답장은 사라지지 않습니다.”
+- English notice: “Emails are never shown to the other person. Letters and replies are relayed only through system links.”
 
 ## Open questions
 - [ ] Should “full network” include 2-hop expansion as an optional mode, or only 1-hop direct links? Owner: product. Impact: network size and interpretive noise.

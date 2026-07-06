@@ -21,6 +21,15 @@ type PassageDebug = {
   verses: BibleVerse[];
 };
 
+
+type RuntimeStatus = {
+  dbAvailable: boolean;
+  dbDisabled?: boolean;
+  wholeCorpusAllowed?: boolean;
+  jsonFallbackEnabled: boolean;
+  runtimeSource: string;
+};
+
 type RetrievalDebugData = {
   retrieval: RetrievalResult;
   primary: PassageDebug;
@@ -30,9 +39,9 @@ type RetrievalDebugData = {
   reflection: ReflectionResponse;
   primaryBookMetadata: BookMetadata | undefined;
   runtime: {
-    bible: ReturnType<typeof getBibleRuntimeStatus>;
-    passageIndex: ReturnType<typeof getPassageIndexRuntimeStatus>;
-    crossrefs: ReturnType<typeof getCrossReferenceRuntimeStatus>;
+    bible: RuntimeStatus;
+    passageIndex: RuntimeStatus;
+    crossrefs: RuntimeStatus;
   };
 };
 

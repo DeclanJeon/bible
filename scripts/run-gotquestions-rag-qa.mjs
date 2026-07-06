@@ -395,9 +395,6 @@ function resourceHrefs(answer) {
   return answer.resources?.map((resource) => resource.href) ?? [];
 }
 
-function resourceArticles(answer) {
-  return resourceIds(answer).map((id) => articleByResourceId.get(id)).filter(Boolean);
-}
 
 function stanceTagsForArticle(id) {
   const tags = new Set(STANCE_TAGS_BY_ARTICLE.get(id) ?? []);

@@ -31,6 +31,13 @@ export type BookMeta = {
 
 export type BibleLocale = "en" | "ko";
 
+export type BiblePassage = {
+  book: BookMeta | undefined;
+  reference: string;
+  verses: BibleVerse[];
+};
+
+
 const ROOT = process.cwd();
 const BIBLE_DB_PATH = path.join(ROOT, "data", "bible", "bible.sqlite");
 const KO_FALLBACK_ALLOWLIST_PATH = path.join(ROOT, "data", "passage-index", "ko-fallback-allowlist.json");
@@ -402,7 +409,7 @@ export function parseBibleReferenceSlug(slug: string): BibleReference | null {
   return parsed;
 }
 
-export async function getPassage(reference: BibleReference, locale?: string) {
+export async function getPassage(reference: BibleReference, locale?: string): Promise<BiblePassage> {
   const bibleLocale = resolveBibleLocale(locale);
   const [chapterVerses, books] = await Promise.all([
     loadChapterVerses(bibleLocale, reference.code, reference.chapter),

@@ -8,6 +8,7 @@ const defaultTitle = `성경 길찾기 | ${siteTitle(defaultLocale)}`;
 const defaultDescription = siteDescription(defaultLocale);
 const defaultImageAlt = siteImageAlt(defaultLocale);
 
+const ADSENSE_CLIENT = "ca-pub-6181820059897519";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -65,6 +66,7 @@ export const metadata: Metadata = {
     title: "성경 컴패니언",
   },
   other: {
+    "google-adsense-account": ADSENSE_CLIENT,
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
@@ -103,6 +105,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#12100d" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+        <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

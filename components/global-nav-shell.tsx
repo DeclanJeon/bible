@@ -13,6 +13,7 @@ export async function GlobalNavShell({ locale }: { locale: AppLocale }) {
     { key: "companion", href: `/${locale}/companion`, label: locale === "ko" ? "컴패니언" : "Companion" },
     { key: "faith-basics", href: `/${locale}/faith-basics`, label: locale === "ko" ? "신앙의 기본" : "Faith Basics" },
     { key: "faith-questions", href: `/${locale}/faith-questions`, label: locale === "ko" ? "신앙 질문" : "Faith Questions" },
+    { key: "letters", href: `/${locale}/letters`, label: locale === "ko" ? "말씀편지" : "Letters" },
     { key: "spirit-soul-body", href: `/${locale}/spirit-soul-body`, label: locale === "ko" ? "영혼육" : "Spirit/Soul/Body" },
     { key: "lanes", href: `/${locale}/lanes`, label: locale === "ko" ? "공부 레인" : "Lanes" },
     { key: "reviews", href: `/${locale}/reviews`, label: locale === "ko" ? "리뷰" : "Reviews" },

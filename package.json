@@ -22,6 +22,7 @@
     "qa:open-ended": "node scripts/run-open-ended-bible-qa.mjs --fixture qa/open-ended-bible-qa.json --locale ko",
     "qa:doctrine": "node scripts/run-doctrine-diversity-qa.mjs --fixture qa/doctrine-diversity-qa.json --locale ko",
     "qa:faith-questions": "node scripts/run-faith-question-qa.mjs",
+    "qa:letters": "node scripts/run-letters-qa.mjs",
     "ingest:crossrefs": "python3 scripts/ingest_openbible_crossrefs.py && node scripts/build-crossref-sqlite.mjs",
     "ingest:phrases": "python3 scripts/ingest_phrase_crossrefs.py && node scripts/build-crossref-sqlite.mjs",
     "build:crossref-db": "node scripts/build-crossref-sqlite.mjs",

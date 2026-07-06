@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Languages, Layers, Search, Shield, Sparkles, type LucideIcon } from "lucide-react";
+import { ArrowRight, Languages, Layers, Mail, Search, Shield, Sparkles, type LucideIcon } from "lucide-react";
 import { UI_COPY, localizeStoryCluster, localizeTopicLabel } from "@/lib/content";
 import { buildPageMetadata, siteDescription } from "@/lib/page-metadata";
 import { STORY_CLUSTERS, getTopicStarts } from "@/lib/app-data";
@@ -62,6 +62,14 @@ export default async function HomePage({ params }: Props) {
             href: `/${locale}/companion`,
           },
           {
+            key: "letters",
+            icon: Mail,
+            title: "말씀편지",
+            description: "익명 고민을 말씀 카드로 중계",
+            body: "이메일을 서로 노출하지 않고, 고민과 답변을 시스템이 말씀 카드로 대신 전달합니다.",
+            href: `/${locale}/letters`,
+          },
+          {
             key: "lanes",
             icon: Layers,
             title: "공부 레인",
@@ -94,6 +102,14 @@ export default async function HomePage({ params }: Props) {
             description: "Connect a lived question to Scripture",
             body: "Route any concern into primary passages, linked texts, and context.",
             href: `/${locale}/companion`,
+          },
+          {
+            key: "letters",
+            icon: Mail,
+            title: "Letters",
+            description: "Anonymous concerns as Scripture cards",
+            body: "Relay concerns and replies as Scripture cards without exposing either email address.",
+            href: `/${locale}/letters`,
           },
           {
             key: "lanes",

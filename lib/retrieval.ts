@@ -3,7 +3,7 @@ import { findPassageUnit, type BiblePassageUnit } from "@/lib/bible-passage-inde
 import { findCandidatePassageUnits } from "@/lib/passage-index-db";
 import { createEmbedding, cosineSimilarity as cosineEmbeddingSimilarity, getEmbeddingProviderConfig } from "@/lib/embeddings";
 import { STORY_CLUSTERS, type StoryCluster } from "@/lib/app-data";
-import { localizeStoryCluster, resolveAppLocale } from "@/lib/content";
+import { localizeStoryCluster, resolveAppLocale, type AppLocale } from "@/lib/content";
 import { answerBundleReferences, buildAnswerBundle, type AnswerBundle } from "@/lib/answer-bundle";
 import { retrieveHybridPassageCandidates, type HybridPassageCandidate } from "@/lib/hybrid-retrieval";
 import { rerankPassageCandidates } from "@/lib/passage-reranker";
@@ -757,7 +757,7 @@ function confidenceFor(score: number, passageScore: number, matchedConcepts: num
 }
 
 type ClusterRetrievalScoreParams = {
-  appLocale: ReturnType<typeof resolveAppLocale>;
+  appLocale: AppLocale;
   expandedPrompt: string;
   promptTokens: string[];
   promptTf: Map<string, number>;
@@ -948,7 +948,7 @@ function isOffTopicEverydayPrompt(prompt: string) {
   return (hasEverydayChoice || hasVagueNonConcern) && !hasSpiritualFrame;
 }
 
-function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions, rationale: string, question?: QuestionUnderstanding): RetrievalResult {
+function lowConfidenceFallback(appLocale: AppLocale, options: RetrievalOptions, rationale: string, question?: QuestionUnderstanding): RetrievalResult {
   const cluster = localizeStoryCluster(STORY_CLUSTERS[0], appLocale);
   return {
     cluster,
@@ -972,7 +972,7 @@ function lowConfidenceFallback(appLocale: ReturnType<typeof resolveAppLocale>, o
   };
 }
 
-function buildAnswerBundleRetrieval(bundle: AnswerBundle, appLocale: ReturnType<typeof resolveAppLocale>, options: RetrievalOptions): RetrievalResult {
+function buildAnswerBundleRetrieval(bundle: AnswerBundle, appLocale: AppLocale, options: RetrievalOptions): RetrievalResult {
   const primaryReference = bundle.primary.unit.reference;
   const cluster = localizeStoryCluster(STORY_CLUSTERS.find((entry) => entry.primary.code === primaryReference.code) ?? STORY_CLUSTERS[0], appLocale);
   const references = answerBundleReferences(bundle);
@@ -1018,7 +1018,7 @@ function buildAnswerBundleRetrieval(bundle: AnswerBundle, appLocale: ReturnType<
 function buildPassageUnitFallbackRetrieval(
   candidates: HybridPassageCandidate[],
   question: QuestionUnderstanding,
-  appLocale: ReturnType<typeof resolveAppLocale>,
+  appLocale: AppLocale,
   options: RetrievalOptions,
 ): RetrievalResult | null {
   const primary = candidates[0];
