@@ -6,7 +6,7 @@ import { resolveLocale } from "@/lib/server-locale";
 import { auth } from "@/auth";
 import { LetterWriteForm } from "@/components/letter-forms";
 import { TrustNotice } from "@/components/letter-card-visual";
-import { GoogleSignInButton } from "@/components/auth-buttons";
+import { SignInButton } from "@/components/auth-buttons";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -28,10 +28,10 @@ export default async function LetterWritePage({ params }: Props) {
           <ShieldCheck className="mx-auto h-12 w-12 text-[var(--gold)]" />
           <h1 className="mt-5 text-3xl font-bold text-[var(--ink)]">{locale === "ko" ? "로그인이 필요합니다" : "Sign in required"}</h1>
           <p className="mt-4 text-base leading-7 text-[var(--ink-muted)]">
-            {locale === "ko" ? "고민을 보내려면 Google 계정으로 로그인하세요. 이메일은 상대에게 공개되지 않습니다." : "Sign in with Google to send a concern. Your email is never shown to others."}
+            {locale === "ko" ? "고민을 보내려면 로그인하세요. 이메일은 상대에게 공개되지 않습니다." : "Sign in to send a concern. Your email is never shown to others."}
           </p>
           <div className="mt-7">
-            <GoogleSignInButton locale={locale} />
+            <SignInButton locale={locale} />
           </div>
         </section>
       </main>

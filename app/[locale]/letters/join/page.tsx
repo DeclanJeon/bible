@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
 import { auth } from "@/auth";
 import { getLetterParticipantSession } from "@/lib/letters";
-import { GoogleSignInButton, SignOutButton } from "@/components/auth-buttons";
+import { SignInButton, SignOutButton } from "@/components/auth-buttons";
 import { LetterRelayJoinForm } from "@/components/letter-forms";
 import { TrustNotice } from "@/components/letter-card-visual";
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPageMetadata(
     locale,
     locale === "ko" ? "빛의 릴레이 참여" : "Join the Light Relay",
-    locale === "ko" ? "Google 로그인으로 빛의 릴레이에 참여합니다." : "Join the Light Relay with Google sign-in.",
+    locale === "ko" ? "로그인으로 빛의 릴레이에 참여합니다." : "Join the Light Relay by signing in.",
     "/letters/join",
   );
 }
@@ -45,19 +45,19 @@ export default async function LetterJoinPage({ params }: Props) {
           <h1 className="mt-5 text-3xl font-bold leading-tight text-[var(--ink)] sm:text-4xl">
             {session?.user
               ? (locale === "ko" ? `${session.user.name ?? session.user.email}님, 환영합니다.` : `Welcome, ${session.user.name ?? session.user.email}.`)
-              : (locale === "ko" ? "Google로 시작하고 빛의 릴레이에 참여하세요." : "Start with Google and join the Light Relay.")}
+              : (locale === "ko" ? "로그인하고 빛의 릴레이에 참여하세요." : "Sign in and join the Light Relay.")}
           </h1>
           <p className="mt-4 text-base leading-7 text-[var(--ink-muted)]">
             {locale === "ko"
-              ? "Google 계정으로 로그인하면 익명 고민을 보내고, 빛 전달자가 되어 다른 사람의 고민에 답변할 수 있습니다. 이메일은 상대에게 공개되지 않습니다."
-              : "Sign in with Google to send anonymous concerns and become a light bearer who answers others' concerns. Emails are never shown to other participants."}
+              ? "로그인하면 익명 고민을 보내고, 빛 전달자가 되어 다른 사람의 고민에 답변할 수 있습니다. 이메일은 상대에게 공개되지 않습니다."
+              : "Sign in to send anonymous concerns and become a light bearer who answers others' concerns. Emails are never shown to other participants."}
           </p>
           <div className="mt-7">
             {session?.user ? (
               <LetterRelayJoinForm locale={locale} participant={participant} userEmail={session.user.email ?? ""} />
             ) : (
               <div className="space-y-5">
-                <GoogleSignInButton locale={locale} />
+                <SignInButton locale={locale} />
                 <p className="text-xs text-[var(--ink-muted)]">
                   {locale === "ko"
                     ? "로그인하면 자동으로 빛의 릴레이 참여자로 등록됩니다. 수신 여부는 설정에서 변경할 수 있습니다."
@@ -75,7 +75,7 @@ export default async function LetterJoinPage({ params }: Props) {
               {locale === "ko" ? "참여 방식" : "How it works"}
             </div>
             <ol className="mt-3 list-decimal space-y-2 pl-5">
-              <li>{locale === "ko" ? "Google 계정으로 로그인합니다." : "Sign in with your Google account."}</li>
+              <li>{locale === "ko" ? "로그인합니다." : "Sign in."}</li>
               <li>{locale === "ko" ? "익명으로 고민을 작성하고 보냅니다." : "Write and send a concern anonymously."}</li>
               <li>{locale === "ko" ? "빛 전달자가 성구를 골라 답변합니다." : "A light bearer picks Scripture and answers."}</li>
               <li>{locale === "ko" ? "(선택) 다음 빛 전달자가 됩니다." : "(Optional) Become the next light bearer."}</li>

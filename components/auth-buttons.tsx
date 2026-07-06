@@ -7,7 +7,7 @@ import { Loader2, LogIn, LogOut } from "lucide-react";
 
 import type { AppLocale } from "@/lib/content";
 
-export function GoogleSignInButton({ locale, className }: { locale: AppLocale; className?: string }) {
+export function SignInButton({ locale, className }: { locale: AppLocale; className?: string }) {
   const { status } = useSession();
 
   if (status === "authenticated") {
@@ -22,7 +22,7 @@ export function GoogleSignInButton({ locale, className }: { locale: AppLocale; c
       className={className ?? "inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--gold)] px-8 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)] disabled:cursor-not-allowed disabled:opacity-50"}
     >
       {status === "loading" ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
-      {locale === "ko" ? "Google로 시작하기" : "Sign in with Google"}
+      {locale === "ko" ? "시작하기" : "Start"}
     </button>
   );
 }
@@ -54,7 +54,7 @@ export function AuthStatus({ locale }: { locale: AppLocale }) {
   }
 
   if (status !== "authenticated" || !session?.user) {
-    return <GoogleSignInButton locale={locale} className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-[var(--gold)] px-4 py-1.5 text-xs font-bold text-white transition hover:bg-[var(--gold-hover)]" />;
+    return <SignInButton locale={locale} className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-[var(--gold)] px-4 py-1.5 text-xs font-bold text-white transition hover:bg-[var(--gold-hover)]" />;
   }
 
   return (
