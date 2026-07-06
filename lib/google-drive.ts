@@ -20,6 +20,13 @@ type OAuthRefreshClient = {
 };
 
 
+type N8nUploadResponse = {
+  id?: string;
+  fileId?: string;
+  imageUrl?: string;
+  url?: string;
+};
+
 type DriveUploadResult =
   | { ok: true; fileId: string; imageUrl: string }
   | { ok: false; error: string };
@@ -35,6 +42,11 @@ let tokenCache: { accessToken: string; expiresAtMs: number } | null = null;
 
 export function letterCardDriveFolderId() {
   return process.env.LETTERS_CARD_IMAGE_DRIVE_FOLDER_ID || process.env.LETTERS_GOOGLE_DRIVE_FOLDER_ID || DEFAULT_DRIVE_FOLDER_ID;
+}
+
+function n8nImageUploadUrl() {
+  const value = process.env.LETTERS_N8N_IMAGE_UPLOAD_URL || process.env.LETTERS_CARD_IMAGE_UPLOAD_WEBHOOK_URL;
+  return value?.trim() || null;
 }
 
 function decodeServiceAccountJson(value: string) {
@@ -196,15 +208,53 @@ function publicDriveImageUrl(fileId: string) {
 }
 
 export function isLetterCardDriveConfigured() {
-  return oauthRefreshClientFromEnv() !== null || serviceAccountFromEnv() !== null;
+  return n8nImageUploadUrl() !== null || oauthRefreshClientFromEnv() !== null || serviceAccountFromEnv() !== null;
+}
+
+async function uploadLetterCardImageViaN8n(input: UploadLetterCardImageInput, uploadUrl: string): Promise<DriveUploadResult> {
+  const mimeType = input.mimeType || "image/png";
+  const fileBuffer = await readFile(input.localPath);
+  const formData = new FormData();
+  formData.append("data", new Blob([fileBuffer], { type: mimeType }), input.fileName);
+  formData.append("fileName", input.fileName);
+  formData.append("mimeType", mimeType);
+  formData.append("folderId", input.folderId || letterCardDriveFolderId());
+
+  const headers: HeadersInit = {};
+  const token = process.env.LETTERS_N8N_IMAGE_UPLOAD_TOKEN?.trim();
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(uploadUrl, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    return { ok: false, error: `n8n Drive image upload failed: ${response.status} ${text.slice(0, 200)}` };
+  }
+
+  const payload = await response.json() as N8nUploadResponse;
+  const fileId = payload.fileId || payload.id;
+  if (!fileId) {
+    return { ok: false, error: "n8n Drive image upload response did not include file id" };
+  }
+
+  return { ok: true, fileId, imageUrl: payload.imageUrl || payload.url || publicDriveImageUrl(fileId) };
 }
 
 export async function uploadLetterCardImage(input: UploadLetterCardImageInput): Promise<DriveUploadResult> {
+  const n8nUploadUrl = n8nImageUploadUrl();
+  if (n8nUploadUrl) {
+    return uploadLetterCardImageViaN8n(input, n8nUploadUrl);
+  }
+
   const accessToken = await getConfiguredAccessToken();
   if (!accessToken) {
     return { ok: false, error: "Google Drive OAuth refresh token or service account env is not configured" };
   }
-
   try {
     const folderId = input.folderId || letterCardDriveFolderId();
     const mimeType = input.mimeType || "image/png";

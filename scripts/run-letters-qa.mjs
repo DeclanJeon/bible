@@ -527,6 +527,82 @@ try {
   assert(typeof fallback.metadata?.reason === "string" && fallback.metadata.reason.includes("LETTERS_ENABLE_CODEX_IMAGEN"), "disabled Imagen fallback must explain the enabling env flag", fallback);
   assert(remoteExecCount === 0, "disabled Imagen fallback must not call ssh or the Codex Imagen CLI", { remoteExecCount });
 
+  const driveEnv = {
+    LETTERS_N8N_IMAGE_UPLOAD_URL: process.env.LETTERS_N8N_IMAGE_UPLOAD_URL,
+    LETTERS_CARD_IMAGE_UPLOAD_WEBHOOK_URL: process.env.LETTERS_CARD_IMAGE_UPLOAD_WEBHOOK_URL,
+    LETTERS_N8N_IMAGE_UPLOAD_TOKEN: process.env.LETTERS_N8N_IMAGE_UPLOAD_TOKEN,
+    LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN: process.env.LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN,
+    GOOGLE_DRIVE_REFRESH_TOKEN: process.env.GOOGLE_DRIVE_REFRESH_TOKEN,
+    LETTERS_GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON: process.env.LETTERS_GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON,
+    GOOGLE_SERVICE_ACCOUNT_JSON: process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    LETTERS_GOOGLE_DRIVE_CLIENT_EMAIL: process.env.LETTERS_GOOGLE_DRIVE_CLIENT_EMAIL,
+    GOOGLE_SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    LETTERS_GOOGLE_DRIVE_PRIVATE_KEY: process.env.LETTERS_GOOGLE_DRIVE_PRIVATE_KEY,
+    GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
+  };
+  const restoreDriveEnv = () => {
+    for (const [key, value] of Object.entries(driveEnv)) {
+      if (value === undefined) {
+        delete process.env[key];
+      } else {
+        process.env[key] = value;
+      }
+    }
+  };
+  try {
+    const n8nFetchCalls = [];
+    const n8nUploadUrl = "https://n8n.ponslink.test/webhook/letter-card-upload-secret";
+    process.env.LETTERS_N8N_IMAGE_UPLOAD_URL = n8nUploadUrl;
+    process.env.LETTERS_N8N_IMAGE_UPLOAD_TOKEN = "qa-n8n-token";
+    delete process.env.LETTERS_CARD_IMAGE_UPLOAD_WEBHOOK_URL;
+    delete process.env.LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN;
+    delete process.env.GOOGLE_DRIVE_REFRESH_TOKEN;
+    delete process.env.LETTERS_GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON;
+    delete process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+    delete process.env.LETTERS_GOOGLE_DRIVE_CLIENT_EMAIL;
+    delete process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    delete process.env.LETTERS_GOOGLE_DRIVE_PRIVATE_KEY;
+    delete process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url, options = {}) => {
+      n8nFetchCalls.push({ url, options });
+      assert(url === n8nUploadUrl, "n8n Drive upload must use the configured webhook URL", { url });
+      assert(options.method === "POST", "n8n Drive upload must POST generated image data", options);
+      assert(options.headers?.authorization === "Bearer qa-n8n-token", "n8n Drive upload must forward optional webhook bearer token", options.headers);
+      assert(options.body instanceof FormData, "n8n Drive upload must send multipart form data", { bodyType: options.body?.constructor?.name });
+      assert(options.body.get("fileName") === "card-n8n.png", "n8n Drive upload must include generated file name", { value: options.body.get("fileName") });
+      assert(options.body.get("mimeType") === "image/png", "n8n Drive upload must include generated MIME type", { value: options.body.get("mimeType") });
+      assert(options.body.get("folderId") === "qa-n8n-folder", "n8n Drive upload must include the selected Drive folder id", { value: options.body.get("folderId") });
+      assert(options.body.get("data") instanceof Blob, "n8n Drive upload must include the image binary field named data", { value: options.body.get("data")?.constructor?.name });
+      return Response.json({ id: "qa-n8n-file", imageUrl: "https://drive.google.com/uc?export=view&id=qa-n8n-file" });
+    };
+    try {
+      const drive = loadTsModule("lib/google-drive.ts", {
+        "node:fs/promises": {
+          readFile: async (path) => {
+            assert(path === "/tmp/card-n8n.png", "n8n Drive upload must read the generated local image path", { path });
+            return Buffer.from("png-bytes");
+          },
+        },
+      });
+      assert(drive.isLetterCardDriveConfigured() === true, "n8n upload webhook env must satisfy Drive image storage configuration");
+      const n8nUpload = await drive.uploadLetterCardImage({
+        localPath: "/tmp/card-n8n.png",
+        fileName: "card-n8n.png",
+        folderId: "qa-n8n-folder",
+        mimeType: "image/png",
+      });
+      assert(n8nUpload.ok === true && n8nUpload.fileId === "qa-n8n-file", "n8n Drive upload must return the webhook file id", n8nUpload);
+      assert(n8nUpload.imageUrl === "https://drive.google.com/uc?export=view&id=qa-n8n-file", "n8n Drive upload must return the webhook public image URL", n8nUpload);
+      assert(n8nFetchCalls.length === 1, "n8n Drive upload must call the webhook exactly once", n8nFetchCalls);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  } finally {
+    restoreDriveEnv();
+  }
+
   const enabledImagenEnv = {
     LETTERS_ENABLE_CODEX_IMAGEN: process.env.LETTERS_ENABLE_CODEX_IMAGEN,
     LETTERS_CODEX_IMAGEN_BIN: process.env.LETTERS_CODEX_IMAGEN_BIN,
