@@ -153,23 +153,50 @@ function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
   assert(failures.length === 0, "stored generated cards must keep the returned Drive image URL instead of a persistent server image route", failures);
 }
 
+const MIC_PROMPT_MARKER = "micah-locale-regression";
+
+function recommendationPrimaryFor(prompt, locale) {
+  if (prompt.includes(MIC_PROMPT_MARKER)) {
+    return {
+      reference: { code: "MIC", chapter: 6, startVerse: 8, endVerse: 8 },
+      text: locale === "ko"
+        ? "사람아 주께서 선한 것이 무엇임을 네게 보이셨나니"
+        : "He has shown you, O man, what is good.",
+      reason: locale === "ko"
+        ? "정의와 인자와 겸손한 동행을 붙듭니다."
+        : "It anchors justice, mercy, and humble walking with God.",
+    };
+  }
+
+  return {
+    reference: { code: "PSA", chapter: 23, startVerse: 1, endVerse: 4 },
+    text: locale === "ko" ? "여호와는 나의 목자시니 내게 부족함이 없으리로다" : "The LORD is my shepherd; I shall not want.",
+    reason: locale === "ko" ? "하나님의 돌보심을 붙듭니다." : "It anchors comfort in God's care.",
+  };
+}
+
 function makeRecommendation(prompt, locale) {
   const crisis = /crisis|self[-\s]?harm|자해|죽고 싶/i.test(prompt);
+  const primary = recommendationPrimaryFor(prompt, locale);
   return {
     safety: {
       level: crisis ? "crisis" : "safe",
       reasons: crisis ? ["crisis-language"] : [],
     },
     recommendation: {
-      primary: {
-        reference: { code: "PSA", chapter: 23, startVerse: 1, endVerse: 4 },
-        text: locale === "ko" ? "여호와는 나의 목자시니 내게 부족함이 없으리로다" : "The LORD is my shepherd; I shall not want.",
-        reason: locale === "ko" ? "하나님의 돌보심을 붙듭니다." : "It anchors comfort in God's care.",
-      },
-      readerHref: `/${locale}/bible/PSA.23.1`,
+      primary,
+      readerHref: `/${locale}/bible/${primary.reference.code}.${primary.reference.chapter}.${primary.reference.startVerse}`,
       confidence: 0.91,
     },
   };
+}
+
+function assertLocalizedMicahCard(card, label, expected) {
+  assert(card?.title === expected.title, `${label} card title must use the selected output locale`, { expected, card });
+  assert(card?.shareUrl?.includes(`/${expected.locale}/letters/card/`), `${label} card share URL must use the selected output locale`, { expected, card });
+  assert(card?.scripture?.reference === expected.reference, `${label} scripture reference must use the selected locale book title`, { expected, scripture: card?.scripture });
+  assert(card?.scripture?.reference !== "MIC 6:8", `${label} scripture reference must not expose the canonical book code as the user-facing label`, card?.scripture);
+  assert(card?.scripture?.href === `/${expected.locale}/bible/MIC.6.8`, `${label} scripture href must use the selected output locale`, { expected, scripture: card?.scripture });
 }
 
 async function flushAsyncWork() {
@@ -204,6 +231,12 @@ try {
   delete process.env.LETTERS_ENABLE_CODEX_IMAGEN;
 
   const letters = loadTsModule("lib/letters.ts", {
+    "@/lib/book-metadata": {
+      getBookMetadata: (code, locale) => ({
+        code,
+        title: locale === "ko" ? ({ MIC: "미가", PSA: "시편" }[code] ?? code) : ({ MIC: "Micah", PSA: "Psalm" }[code] ?? code),
+      }),
+    },
     "@/lib/content": {
       resolveAppLocale: (locale) => (locale === "en" ? "en" : "ko"),
     },
@@ -390,6 +423,89 @@ try {
   const storedAfterAnswer = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
   assert(!storedAfterAnswer.includes(normalLetter.replyToken), "raw reply token must remain absent after answering");
   assert(!storedAfterAnswer.includes(answer.readToken), "raw answer read token must never be persisted; only readTokenHash may be stored");
+
+  const deferLocaleRegressionDispatch = () => undefined;
+  const englishKoRouteLetter = await letters.createAnonymousLetter({
+    locale: "ko",
+    acceptLanguage: "en-US,en;q=0.9",
+    countryCode: "US",
+    category: "concern",
+    shareVisibility: "unlisted",
+    authorEmail: "locale-route-author-en@example.test",
+    body: `${MIC_PROMPT_MARKER}: I want to do justice, love mercy, and walk humbly today.`,
+    scheduleDispatch: deferLocaleRegressionDispatch,
+  });
+  assert(englishKoRouteLetter.ok === true, "non-Korean browser/country on a /ko route should still create the letter", englishKoRouteLetter);
+  assert(englishKoRouteLetter.bundle?.letter?.locale === "en", "non-Korean browser/country on a /ko route must select English as the letter locale", englishKoRouteLetter.bundle?.letter);
+  assertLocalizedMicahCard(englishKoRouteLetter.bundle?.card, "non-Korean /ko route letter", {
+    locale: "en",
+    title: "Anonymous Concern",
+    reference: "Micah 6:8",
+  });
+
+  const englishKoRouteAnswer = await letters.createLetterAnswer({
+    locale: "ko",
+    token: englishKoRouteLetter.replyToken,
+    acceptLanguage: "en-US,en;q=0.9",
+    countryCode: "US",
+    body: `${MIC_PROMPT_MARKER}: A grounded answer should stay in English for this non-Korean request context.`,
+  });
+  assert(englishKoRouteAnswer.ok === true, "non-Korean browser/country on a /ko route should still accept the answer", englishKoRouteAnswer);
+  assertLocalizedMicahCard(englishKoRouteAnswer.answerCard, "non-Korean /ko route answer", {
+    locale: "en",
+    title: "Anonymous reply",
+    reference: "Micah 6:8",
+  });
+  assert(emailCalls.at(-1)?.text.includes(`/en/letters/answer/${englishKoRouteAnswer.readToken}`), "non-Korean /ko route answer email must use the selected English answer URL", emailCalls.at(-1));
+
+  const koreanCountryLetter = await letters.createAnonymousLetter({
+    locale: "en",
+    acceptLanguage: "en-US,en;q=0.9",
+    countryCode: "KR",
+    category: "concern",
+    shareVisibility: "unlisted",
+    authorEmail: "locale-country-author-ko@example.test",
+    body: `${MIC_PROMPT_MARKER}: I want to practice justice, mercy, and humility while visiting Korea.`,
+    scheduleDispatch: deferLocaleRegressionDispatch,
+  });
+  assert(koreanCountryLetter.ok === true, "KR country requests should still create the letter", koreanCountryLetter);
+  assert(koreanCountryLetter.bundle?.letter?.locale === "ko", "KR country must select Korean as the letter locale", koreanCountryLetter.bundle?.letter);
+  assertLocalizedMicahCard(koreanCountryLetter.bundle?.card, "KR country letter", {
+    locale: "ko",
+    title: "익명의 고민",
+    reference: "미가 6:8",
+  });
+
+  const koreanLanguageLetter = await letters.createAnonymousLetter({
+    locale: "en",
+    acceptLanguage: "ko-KR,ko;q=0.9,en;q=0.5",
+    category: "concern",
+    shareVisibility: "unlisted",
+    authorEmail: "locale-browser-author-ko@example.test",
+    body: `${MIC_PROMPT_MARKER}: The browser primary language should choose Korean when request country is not provided.`,
+    scheduleDispatch: deferLocaleRegressionDispatch,
+  });
+  assert(koreanLanguageLetter.ok === true, "Korean browser language requests should still create the letter", koreanLanguageLetter);
+  assert(koreanLanguageLetter.bundle?.letter?.locale === "ko", "Korean primary browser language must select Korean as the letter locale", koreanLanguageLetter.bundle?.letter);
+  assertLocalizedMicahCard(koreanLanguageLetter.bundle?.card, "Korean browser language letter", {
+    locale: "ko",
+    title: "익명의 고민",
+    reference: "미가 6:8",
+  });
+
+  const koreanLanguageAnswer = await letters.createLetterAnswer({
+    locale: "en",
+    token: koreanLanguageLetter.replyToken,
+    acceptLanguage: "ko-KR,ko;q=0.9,en;q=0.5",
+    body: `${MIC_PROMPT_MARKER}: 브라우저 언어가 한국어이면 답장 카드와 링크도 한국어여야 합니다.`,
+  });
+  assert(koreanLanguageAnswer.ok === true, "Korean browser language requests should still accept the answer", koreanLanguageAnswer);
+  assertLocalizedMicahCard(koreanLanguageAnswer.answerCard, "Korean browser language answer", {
+    locale: "ko",
+    title: "익명의 답장",
+    reference: "미가 6:8",
+  });
+  assert(emailCalls.at(-1)?.text.includes(`/ko/letters/answer/${koreanLanguageAnswer.readToken}`), "Korean browser language answer email must use the selected Korean answer URL", emailCalls.at(-1));
 
   const participantEmail = "participant@example.test";
   const participantOtpRequest = await letters.requestLetterParticipantOtp({
@@ -812,6 +928,8 @@ try {
     contracts: [
       "public bundles omit user email fields, token hashes, and raw token fields",
       "createAnonymousLetter and createLetterAnswer return required results/emails without awaiting unresolved image generation promises",
+      "createAnonymousLetter and createLetterAnswer select output locale from request country/browser language instead of trusting the route locale alone",
+      "letter scripture references localize book titles for MIC 6:8 in Korean and English user-facing output",
       "letter and reply contact info is rejected before delivery/token consumption",
       "crisis safety blocks helper dispatch and public delivery metadata",
       "reply tokens are stored hashed, single-use, and required to resolve answer bundles",

@@ -3,6 +3,7 @@ import { mkdir, open, readFile, rename, stat, unlink, writeFile } from "node:fs/
 import { dirname, join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 
+import { getBookMetadata } from "@/lib/book-metadata";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
 import { buildBibleReferenceHref } from "@/lib/navigation";
 import { buildPassageRecommendation } from "@/lib/passage-response";
@@ -240,6 +241,27 @@ function normalizePreferredLocale(value: unknown): AppLocale | null {
   return value === "en" || value === "ko" ? value : null;
 }
 
+
+function resolveLetterRequestLocale(input: { locale?: string; acceptLanguage?: string; countryCode?: string }): AppLocale {
+  const country = input.countryCode?.trim().toUpperCase();
+  if (country === "KR") {
+    return "ko";
+  }
+
+  const accepted = input.acceptLanguage?.split(",")[0]?.trim().toLowerCase() ?? "";
+  if (accepted.startsWith("ko")) {
+    return "ko";
+  }
+  if (accepted) {
+    return "en";
+  }
+  if (country) {
+    return "en";
+  }
+
+  return resolveAppLocale(input.locale);
+}
+
 function normalizeMaxLettersPerDay(value: unknown) {
   const parsed = typeof value === "number" ? value : typeof value === "string" ? Number.parseInt(value, 10) : Number.NaN;
   return PARTICIPANT_MAX_LETTERS_PER_DAY_OPTIONS.includes(parsed as typeof PARTICIPANT_MAX_LETTERS_PER_DAY_OPTIONS[number]) ? parsed : undefined;
@@ -355,9 +377,10 @@ function categoryLabel(category: LetterCategory, locale: AppLocale) {
   return (locale === "ko" ? ko : en)[category];
 }
 
-function referenceLabel(reference: { code: string; chapter: number; startVerse: number; endVerse: number }) {
+function referenceLabel(reference: { code: string; chapter: number; startVerse: number; endVerse: number }, locale: AppLocale) {
   const verse = reference.startVerse === reference.endVerse ? `${reference.chapter}:${reference.startVerse}` : `${reference.chapter}:${reference.startVerse}-${reference.endVerse}`;
-  return `${reference.code} ${verse}`;
+  const bookTitle = getBookMetadata(reference.code, locale)?.title ?? reference.code;
+  return `${bookTitle} ${verse}`;
 }
 
 function fallbackScripture(locale: AppLocale): ScriptureSuggestion {
@@ -698,7 +721,7 @@ async function buildScriptureSuggestion(prompt: string, locale: AppLocale, reque
 
   return {
     scripture: {
-      reference: referenceLabel(primary.reference),
+      reference: referenceLabel(primary.reference, locale),
       text: primary.text,
       reason: primary.reason,
       href: build.recommendation.readerHref ?? buildBibleReferenceHref(primary.reference, { locale, from: "letters" }),
@@ -1408,7 +1431,7 @@ export async function createAnonymousLetter(input: {
   countryCode?: string;
   scheduleDispatch?: (work: () => Promise<void>) => void;
 }) {
-  const locale = resolveAppLocale(input.locale);
+  const locale = resolveLetterRequestLocale(input);
   const body = normalizeBody(input.body);
   const authorEmail = normalizeEmail(input.authorEmail);
   const authorNickname = normalizeNickname(input.authorNickname);
@@ -1569,7 +1592,7 @@ export async function createLetterAnswer(input: {
     return { ok: false as const, error: "missing-letter" as const };
   }
 
-  const locale = resolveAppLocale(input.locale ?? letter.locale);
+  const locale = resolveLetterRequestLocale({ locale: input.locale ?? letter.locale, acceptLanguage: input.acceptLanguage, countryCode: input.countryCode });
   const requestedScriptureRef = normalizeScriptureReference(input.scriptureRef);
   if (requestedScriptureRef === null) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
