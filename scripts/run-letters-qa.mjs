@@ -93,30 +93,64 @@ function assertPublicBundleSanitized(bundle, label, forbiddenValues = []) {
   assert(forbiddenValueLeaks.length === 0, `${label} public bundle must not expose user email values`, forbiddenValueLeaks);
 }
 
-function expectedLocalizedCardImageSrc(cardId, locale) {
+const LETTER_CARD_DRIVE_FOLDER_ID = "1MsLyYIsnAH93ZvPokzie784BuBqj4PE7";
+const LETTER_CARD_DRIVE_FOLDER_ENV = "LETTERS_CARD_IMAGE_DRIVE_FOLDER_ID";
+
+function expectedDriveCardImageSrc(cardId) {
+  return `https://drive.google.com/uc?export=view&id=qa-drive-${cardId}`;
+}
+
+function htmlAttributeValue(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function localizedCardImageRoute(cardId, locale) {
   const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bible.ponslink.test").replace(/\/$/, "");
   return `${baseUrl}/${locale}/api/letters/card/${cardId}/image`;
 }
 
-function forbiddenUnlocalizedCardImageSrc(cardId) {
+function unlocalizedCardImageRoute(cardId) {
   const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bible.ponslink.test").replace(/\/$/, "");
   return `${baseUrl}/api/letters/card/${cardId}/image`;
 }
 
-function assertEmailsUseLocalizedCardImageRoutes(checks) {
+function assertEmailsUseReturnedDriveCardImageUrls(checks) {
   const failures = [];
-  for (const { label, message, cardId, locale } of checks) {
+  for (const { label, message, cardId, locale, expectedImageUrl } of checks) {
     const html = message?.html ?? "";
-    const expected = expectedLocalizedCardImageSrc(cardId, locale);
-    const forbidden = forbiddenUnlocalizedCardImageSrc(cardId);
-    if (!html.includes(`src="${expected}"`)) {
-      failures.push({ label, expected, html });
+    const forbiddenRouteFragment = `/api/letters/card/${cardId}/image`;
+    if (!html.includes(`src="${htmlAttributeValue(expectedImageUrl)}"`)) {
+      failures.push({ label, expectedImageUrl, expectedHtmlSrc: htmlAttributeValue(expectedImageUrl), html });
     }
-    if (html.includes(`src="${forbidden}"`)) {
-      failures.push({ label, forbidden, html });
+    if (html.includes(forbiddenRouteFragment)) {
+      failures.push({
+        label,
+        forbiddenRouteFragment,
+        localizedRoute: localizedCardImageRoute(cardId, locale),
+        unlocalizedRoute: unlocalizedCardImageRoute(cardId),
+        html,
+      });
     }
   }
-  assert(failures.length === 0, "letter and reply email HTML must use localized card image routes", failures);
+  assert(failures.length === 0, "generated letter and reply email HTML must use returned Drive image URLs, not server image routes", failures);
+}
+
+function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
+  const failures = [];
+  for (const { label, cardId, expectedImageUrl } of checks) {
+    const card = cards.find((entry) => entry.id === cardId);
+    if (card?.imageUrl !== expectedImageUrl) {
+      failures.push({ label, cardId, expectedImageUrl, actualImageUrl: card?.imageUrl });
+    }
+    if (typeof card?.imageUrl === "string" && card.imageUrl.includes(`/api/letters/card/${cardId}/image`)) {
+      failures.push({ label, cardId, forbiddenImageUrl: card.imageUrl });
+    }
+  }
+  assert(failures.length === 0, "stored generated cards must keep the returned Drive image URL instead of a persistent server image route", failures);
 }
 
 function makeRecommendation(prompt, locale) {
@@ -155,6 +189,7 @@ function assertNoGenerationMetadata(bundle, label, forbiddenValues = []) {
 const originalEnv = { ...process.env };
 const tempDir = await mkdtemp(join(tmpdir(), "letters-qa-"));
 const cardGenerationCalls = [];
+const cardGenerationResults = new Map();
 const cardGenerationWaiters = [];
 const emailCalls = [];
 
@@ -184,9 +219,15 @@ try {
     "@/lib/letter-card-generator": {
       queueCardImageGeneration: (card, context) => {
         const call = { cardId: card.id, kind: card.kind, locale: context.locale };
+        const result = {
+          status: "ready",
+          imageUrl: expectedDriveCardImageSrc(card.id),
+          metadata: { provider: "codex-imagen", reason: "test mock" },
+        };
         cardGenerationCalls.push(call);
+        cardGenerationResults.set(card.id, result);
         cardGenerationWaiters.shift()?.(call);
-        return Promise.resolve({ status: "ready", imageUrl: `/api/letters/card/${card.id}/image`, metadata: { provider: "codex-imagen", reason: "test mock" } });
+        return Promise.resolve(result);
       },
     },
     "@/lib/letter-email": {
@@ -283,9 +324,18 @@ try {
   assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
   assert(emailCalls.length === 2 && emailCalls[1].to === authorEmail, "accepted replies should notify only the original author", emailCalls);
   assert(emailCalls[1].text.includes(`/ko/letters/answer/${answer.readToken}`), "author notification must contain the tokenized answer URL");
-  assertEmailsUseLocalizedCardImageRoutes([
-    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko" },
-    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko" },
+  const questionDriveImageUrl = cardGenerationResults.get(normalLetter.bundle.card.id)?.imageUrl;
+  const answerDriveImageUrl = cardGenerationResults.get(answer.answerCard.id)?.imageUrl;
+  assert(questionDriveImageUrl === expectedDriveCardImageSrc(normalLetter.bundle.card.id), "letter image generation stub must return a public Drive URL for the question card", { questionDriveImageUrl });
+  assert(answerDriveImageUrl === expectedDriveCardImageSrc(answer.answerCard.id), "letter image generation stub must return a public Drive URL for the answer card", { answerDriveImageUrl });
+  assertEmailsUseReturnedDriveCardImageUrls([
+    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko", expectedImageUrl: questionDriveImageUrl },
+    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko", expectedImageUrl: answerDriveImageUrl },
+  ]);
+  const storedAfterDriveImages = JSON.parse(await readFile(process.env.LETTERS_DATA_FILE, "utf8"));
+  assertCardsStoreReturnedDriveImageUrls(storedAfterDriveImages.cards, [
+    { label: "question card", cardId: normalLetter.bundle.card.id, expectedImageUrl: questionDriveImageUrl },
+    { label: "answer card", cardId: answer.answerCard.id, expectedImageUrl: answerDriveImageUrl },
   ]);
 
   const secondAnswer = await letters.createLetterAnswer({
@@ -457,6 +507,14 @@ try {
         throw new Error(`remote image command should be disabled during QA: ${JSON.stringify(args)}`);
       },
     },
+    "@/lib/google-drive": {
+      letterCardDriveFolderId: () => {
+        throw new Error("disabled Imagen fallback must not resolve a Drive folder");
+      },
+      uploadLetterCardImage: async () => {
+        throw new Error("disabled Imagen fallback must not upload to Drive");
+      },
+    },
   });
   const fallback = await disabledCardGenerator.queueCardImageGeneration({
     id: "card-disabled",
@@ -477,6 +535,7 @@ try {
     LETTERS_CODEX_IMAGEN_MODEL: process.env.LETTERS_CODEX_IMAGEN_MODEL,
     LETTERS_CARD_PROMPT_DIR: process.env.LETTERS_CARD_PROMPT_DIR,
     LETTERS_CARD_OUTPUT_DIR: process.env.LETTERS_CARD_OUTPUT_DIR,
+    [LETTER_CARD_DRIVE_FOLDER_ENV]: process.env[LETTER_CARD_DRIVE_FOLDER_ENV],
   };
   const restoreEnabledImagenEnv = () => {
     for (const [key, value] of Object.entries(enabledImagenEnv)) {
@@ -498,9 +557,12 @@ try {
     const remoteDir = `/tmp/bible-letters-codex-imagen/${enabledCardId}`;
     const remotePromptPath = `${remoteDir}/prompt.txt`;
     const remoteOutputPath = `${remoteDir}/output.png`;
+    const driveFolderId = "qa-drive-folder-override";
+    const drivePublicImageUrl = expectedDriveCardImageSrc(enabledCardId);
     const localFiles = new Set();
     const remoteFiles = new Set();
     const execCalls = [];
+    const driveUploads = [];
 
     process.env.LETTERS_ENABLE_CODEX_IMAGEN = "1";
     process.env.LETTERS_CODEX_IMAGEN_HOST = imagenHost;
@@ -508,6 +570,7 @@ try {
     process.env.LETTERS_CODEX_IMAGEN_MODEL = "qa-model";
     process.env.LETTERS_CARD_PROMPT_DIR = promptDir;
     process.env.LETTERS_CARD_OUTPUT_DIR = outputDir;
+    process.env[LETTER_CARD_DRIVE_FOLDER_ENV] = driveFolderId;
     delete process.env.LETTERS_CODEX_IMAGEN_LOCAL;
 
     const execFileStub = (command, args, options, callback) => {
@@ -566,6 +629,16 @@ try {
       });
     });
 
+    const uploadLetterCardImage = async ({ localPath, fileName, folderId, mimeType }) => {
+      driveUploads.push({ localPath, fileName, folderId, mimeType });
+      assert(localPath === localOutputPath, "Drive upload must receive the generated local output image path", { localPath, localOutputPath });
+      assert(fileName === `${enabledCardId}.png`, "Drive upload must use the generated card image file name", { fileName });
+      assert(folderId === driveFolderId, "Drive upload must honor the configured letters card Drive folder override", { folderId, driveFolderId, defaultFolderId: LETTER_CARD_DRIVE_FOLDER_ID });
+      assert(mimeType === "image/png", "Drive upload must preserve the generated PNG MIME type", { mimeType });
+      assert(localFiles.has(localOutputPath), "Drive upload must happen after the remote output is downloaded and before local output cleanup", { localOutputPath, localFiles: [...localFiles] });
+      return { ok: true, imageUrl: drivePublicImageUrl, fileId: `qa-drive-${enabledCardId}` };
+    };
+
     const enabledCardGenerator = loadTsModule("lib/letter-card-generator.ts", {
       "node:child_process": {
         execFile: execFileStub,
@@ -581,6 +654,10 @@ try {
         rm: async (path) => {
           localFiles.delete(path);
         },
+      },
+      "@/lib/google-drive": {
+        letterCardDriveFolderId: () => driveFolderId,
+        uploadLetterCardImage,
       },
     });
 
@@ -606,9 +683,11 @@ try {
     }, { body: "이미지 생성 성공 후 로컬 파일 정리 확인", locale: "ko" });
 
     assert(ready.status === "ready", "Codex Imagen enabled mode must return ready when the adapter reports a generated image", ready);
-    assert(ready.imageUrl === `/ko/api/letters/card/${enabledCardId}/image`, "Codex Imagen enabled mode must return a localized public imageUrl for the generated image", ready);
+    assert(ready.imageUrl === drivePublicImageUrl, "Codex Imagen enabled mode must return the public Drive URL returned by uploadLetterCardImage", ready);
+    assert(!String(ready.imageUrl).includes(`/api/letters/card/${enabledCardId}/image`), "Codex Imagen enabled mode must not return a persistent server image route for new generated images", ready);
+    assert(driveUploads.length === 1, "Codex Imagen enabled mode must upload the generated local output image to Google Drive exactly once", driveUploads);
     assert(!localFiles.has(localPromptPath), "Codex Imagen enabled mode must remove the local prompt artifact after completion", { localPromptPath, localFiles: [...localFiles] });
-    assert(localFiles.has(localOutputPath), "Codex Imagen enabled mode must keep the local output image for serving", { localOutputPath, localFiles: [...localFiles] });
+    assert(!localFiles.has(localOutputPath), "Codex Imagen enabled mode must remove the local output image after Drive upload", { localOutputPath, localFiles: [...localFiles], driveUploads });
     assert(execCalls.some((call) => call.command === "ssh" && call.args[1].includes(imagenCli)), "Codex Imagen enabled mode must invoke the generator through the remote adapter command", execCalls);
     assert(execCalls.some((call) => call.command === "scp" && call.args.at(-1) === `${imagenHost}:${remotePromptPath}`), "Codex Imagen enabled mode must upload the local prompt through the adapter path", execCalls);
     assert(execCalls.some((call) => call.command === "scp" && call.args.at(-2) === `${imagenHost}:${remoteOutputPath}`), "Codex Imagen enabled mode must download the remote output through the adapter path before cleanup", execCalls);
@@ -673,9 +752,9 @@ try {
       "relay accept sets canReceiveLetters through session token",
       "reply bundle includes scripture recommendation for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
-      "letter and reply email HTML use localized card image routes instead of root API paths",
+      "letter and reply email HTML use returned Drive image URLs and reject localized/root server card image routes",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
-      "Codex Imagen enabled mode returns ready with localized imageUrl and keeps local output for serving",
+      "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],
     artifacts: {

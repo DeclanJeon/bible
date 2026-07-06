@@ -1,14 +1,16 @@
 import { execFile } from "node:child_process";
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, extname, join } from "node:path";
+import { tmpdir } from "node:os";
 import { promisify } from "node:util";
 
 import type { AppLocale } from "@/lib/content";
+import { letterCardDriveFolderId, uploadLetterCardImage } from "@/lib/google-drive";
 import type { GenerationStatus, LetterCard } from "@/lib/letters";
 
 const execFileAsync = promisify(execFile);
-const DEFAULT_PROMPT_DIR = join(process.cwd(), ".data", "letter-card-prompts");
-const DEFAULT_OUTPUT_DIR = join(process.cwd(), ".data", "letter-card-images");
+const DEFAULT_PROMPT_DIR = join(tmpdir(), "bible-letter-card-prompts");
+const DEFAULT_OUTPUT_DIR = join(tmpdir(), "bible-letter-card-images");
 const DEFAULT_REMOTE_ROOT = "/tmp/bible-letters-codex-imagen";
 const DEFAULT_TIMEOUT_SECONDS = 900;
 
@@ -228,15 +230,33 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
     const remoteImagePath = generated?.decodedPath || generated?.path || remoteOutputPath;
 
     await copyRemoteToLocal(remoteImagePath, localOutputPath);
+    const driveFolderId = letterCardDriveFolderId();
+    const upload = await uploadLetterCardImage({
+      localPath: localOutputPath,
+      fileName: outputName,
+      folderId: driveFolderId,
+      mimeType: "image/png",
+    });
+    if (!upload.ok) {
+      return {
+        status: "failed",
+        metadata: {
+          provider: "codex-imagen",
+          driveFolderId,
+          error: upload.error,
+        },
+      };
+    }
 
     return {
       status: "ready",
-      imageUrl: `/${context.locale}/api/letters/card/${card.id}/image`,
+      imageUrl: upload.imageUrl,
       metadata: {
         provider: "codex-imagen",
         model: parsed.model || CODEX_IMAGEN_MODEL,
         remoteSha256: generated?.sha256,
         revisedPrompt: generated?.revised_prompt ?? null,
+        driveFileId: upload.fileId,
       },
     };
   } catch (error) {
@@ -250,6 +270,7 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
   } finally {
     await Promise.allSettled([
       rm(localPromptPath, { force: true }),
+      rm(localOutputPath, { force: true }),
       runRemoteShell(`rm -rf ${shellQuote(remoteDir)}`, 15_000),
     ]);
   }

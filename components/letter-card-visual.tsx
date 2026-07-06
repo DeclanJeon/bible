@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { BookOpenText, Flag, ImageDown, Share2 } from "lucide-react";
 
 import type { AppLocale } from "@/lib/content";
@@ -27,7 +26,10 @@ export function LetterCardVisual({ card, locale }: { card: LetterCard; locale: A
   return (
     <article className="overflow-hidden rounded-[32px] border border-[var(--hairline)] bg-[var(--surface-1)] shadow-sm">
       {card.imageUrl ? (
-        <Image src={card.imageUrl} alt={`${card.title} ${card.scripture.reference}`} width={1024} height={1024} unoptimized className="aspect-square w-full object-cover" />
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Drive image URLs are runtime external assets; do not proxy them through the production server. */}
+          <img src={card.imageUrl} alt={`${card.title} ${card.scripture.reference}`} className="aspect-square w-full object-cover" loading="lazy" decoding="async" />
+        </>
       ) : (
         <div className="aspect-square bg-[radial-gradient(circle_at_25%_10%,rgba(221,157,74,0.20),transparent_32%),linear-gradient(145deg,#fffaf0,#efe3ce)] p-6 text-[var(--ink)] sm:p-8">
           <div className="flex h-full flex-col justify-between rounded-[24px] border border-[rgba(120,74,20,0.18)] bg-white/60 p-5 shadow-inner sm:p-7">

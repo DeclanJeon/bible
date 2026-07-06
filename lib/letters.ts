@@ -781,8 +781,12 @@ function makeShareUrl(path: string) {
   return `${publicBaseUrl()}${path}`;
 }
 
-function makeCardImageUrl(cardId: string, locale: AppLocale) {
-  return makeShareUrl(`/${locale}/api/letters/card/${cardId}/image`);
+function makeCardImageSrc(imageUrl: string, locale: AppLocale) {
+  if (/^https?:\/\//i.test(imageUrl)) {
+    return imageUrl;
+  }
+  const localizedPath = imageUrl.startsWith("/api/letters/card/") ? `/${locale}${imageUrl}` : imageUrl;
+  return localizedPath.startsWith("/") ? makeShareUrl(localizedPath) : imageUrl;
 }
 
 function publicCard(card: LetterCard | null | undefined): LetterCard | null {
@@ -1502,8 +1506,8 @@ export async function createAnonymousLetter(input: {
       const footerHtml = unsubscribeUrl
         ? `<p><a href="${unsubscribeUrl}">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a></p>`
         : "";
-      const imageHtml = imageResult.status === "ready"
-        ? `<p><img src="${makeCardImageUrl(card.id, locale)}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
+      const imageHtml = imageResult.imageUrl
+        ? `<p><img src="${escapeHtml(makeCardImageSrc(imageResult.imageUrl, locale))}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
         : "";
       const email = await sendSystemEmail({
         to: recipientEmail,
@@ -1633,8 +1637,8 @@ export async function createLetterAnswer(input: {
   const imageResult = await queueCardImageGeneration(answerCard, { body: answerBody, locale });
   await updateCardGeneration(answerCard.id, imageResult);
   const answerUrl = makeShareUrl(`/${locale}/letters/answer/${readToken}`);
-  const imageHtml = imageResult.status === "ready"
-    ? `<p><img src="${makeCardImageUrl(answerCard.id, locale)}" alt="${escapeHtml(answerCard.title)}" style="max-width:100%;border-radius:12px;" /></p>`
+  const imageHtml = imageResult.imageUrl
+    ? `<p><img src="${escapeHtml(makeCardImageSrc(imageResult.imageUrl, locale))}" alt="${escapeHtml(answerCard.title)}" style="max-width:100%;border-radius:12px;" /></p>`
     : "";
   const email = await sendSystemEmail({
     to: letter.authorEmail,
