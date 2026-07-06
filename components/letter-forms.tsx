@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useMemo, useState, useTransition } from "react";
 import { CheckCircle2, Loader2, Mail, Send, ShieldCheck } from "lucide-react";
 
@@ -413,15 +414,14 @@ export function LetterUnsubscribeForm({ locale, token }: { locale: AppLocale; to
   );
 }
 
-export function LetterWriteForm({ locale, participant }: { locale: AppLocale; participant?: ParticipantSummary | null }) {
+export function LetterWriteForm({ locale, authorEmail }: { locale: AppLocale; authorEmail: string }) {
   const [body, setBody] = useState("");
-  const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [category, setCategory] = useState("concern");
   const visibility = "unlisted";
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const canSubmit = body.trim().length >= 20 && body.length <= 1200 && (Boolean(participant) || email.includes("@"));
+  const canSubmit = body.trim().length >= 20 && body.length <= 1200;
   const countClass = body.length > 1200 ? "text-red-700" : "text-[var(--ink-muted)]";
 
   function submit(event: FormEvent<HTMLFormElement>) {
@@ -431,7 +431,7 @@ export function LetterWriteForm({ locale, participant }: { locale: AppLocale; pa
       const response = await fetch(`/${locale}/api/letters`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ body, authorEmail: participant ? undefined : email, authorNickname: nickname, category, shareVisibility: visibility }),
+        body: JSON.stringify({ body, authorEmail, authorNickname: nickname, category, shareVisibility: visibility }),
       });
       const result = await response.json() as { error?: string; letterId?: string; cardId?: string };
       if (!response.ok || result.error || !result.cardId) {
@@ -444,27 +444,10 @@ export function LetterWriteForm({ locale, participant }: { locale: AppLocale; pa
 
   return (
     <form onSubmit={submit} className="space-y-5">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2 text-sm font-semibold text-[var(--ink)]">
-          {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
-          <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
-        </label>
-        {participant ? (
-          <div className="space-y-2 text-sm font-semibold text-[var(--ink)]">
-            {locale === "ko" ? "답장 알림 이메일" : "Reply notification email"}
-            <div className="flex min-h-12 items-center rounded-xl border border-[var(--gold-border)] bg-[var(--gold-soft)] px-4 text-[var(--ink)]">
-              {participant.maskedEmail}
-            </div>
-            <span className="block text-xs font-normal leading-5 text-[var(--ink-muted)]">{locale === "ko" ? "인증한 이메일로 카드 링크와 답장 알림을 받습니다." : "Your verified email receives the card link and reply notifications."}</span>
-          </div>
-        ) : (
-          <label className="space-y-2 text-sm font-semibold text-[var(--ink)]">
-            {locale === "ko" ? "답장 알림 이메일" : "Reply notification email"}
-            <input value={email} onChange={(event) => setEmail(event.target.value)} required type="email" autoComplete="email" className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
-            <span className="block text-xs font-normal leading-5 text-[var(--ink-muted)]">{locale === "ko" ? "카드 링크와 답장 알림을 받을 주소입니다. 수신 참여는 별도의 이메일 인증 후 선택할 수 있습니다." : "Used for your card link and reply notifications. Receiving other letters is optional after email verification."}</span>
-          </label>
-        )}
-      </div>
+      <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
+        {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
+        <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+      </label>
       <input type="hidden" name="shareVisibility" value={visibility} />
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
         {locale === "ko" ? "분류" : "Category"}
@@ -598,6 +581,91 @@ export function RelayParticipationCTA({ locale }: { locale: AppLocale }) {
         </button>
       </div>
       <p className="mt-3 text-xs text-[var(--ink-muted)]">{locale === "ko" ? "언제든 설정에서 변경할 수 있습니다." : "You can change this anytime in settings."}</p>
+    </div>
+  );
+}
+
+export function LetterRelayJoinForm({ locale, participant, userEmail }: { locale: AppLocale; participant: ParticipantSummary | null; userEmail: string }) {
+  const [canReceive, setCanReceive] = useState(participant?.canReceiveLetters === true);
+  const [nickname, setNickname] = useState(participant?.nickname ?? "");
+  const [message, setMessage] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  function joinRelay() {
+    setMessage(null);
+    startTransition(async () => {
+      const response = await fetch(`/${locale}/api/letters/participants/relay-accept`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+      });
+      const result = await response.json().catch(() => ({})) as { error?: string; participant?: ParticipantSummary };
+      if (!response.ok || result.error) {
+        setMessage(participantErrorMessage(result.error ?? "unknown", locale));
+        return;
+      }
+      setMessage(locale === "ko" ? "빛의 릴레이에 참여합니다!" : "You joined the Light Relay!");
+    });
+  }
+
+  function saveSettings() {
+    setMessage(null);
+    startTransition(async () => {
+      const response = await fetch(`/${locale}/api/letters/participants/settings`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ nickname, canReceiveLetters: canReceive }),
+      });
+      const result = await response.json().catch(() => ({})) as { error?: string; participant?: ParticipantSummary };
+      if (!response.ok || result.error) {
+        setMessage(participantErrorMessage(result.error ?? "unknown", locale));
+        return;
+      }
+      setMessage(locale === "ko" ? "설정을 저장했습니다." : "Settings saved.");
+    });
+  }
+
+  if (!participant) {
+    return (
+      <div className="space-y-5">
+        <p className="text-sm text-[var(--ink-muted)]">
+          {locale === "ko" ? "아직 릴레이 참여자가 아닙니다. 아래 버튼으로 참여하세요." : "You are not yet a relay participant. Join below."}
+        </p>
+        <button type="button" onClick={joinRelay} disabled={isPending} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--gold)] px-8 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)] disabled:cursor-not-allowed disabled:opacity-50">
+          {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+          {locale === "ko" ? "빛의 릴레이에 참여하기" : "Join the Light Relay"}
+        </button>
+        {message ? <p className="text-sm font-semibold text-[var(--ink)]" role="status">{message}</p> : null}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-5">
+      <div className="rounded-[28px] border border-[var(--hairline)] bg-[var(--surface-1)] p-6">
+        <p className="text-sm font-semibold text-[var(--gold)]">{userEmail}</p>
+        <h2 className="mt-2 text-xl font-bold text-[var(--ink)]">{locale === "ko" ? "릴레이 설정" : "Relay settings"}</h2>
+      </div>
+      <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
+        {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
+        <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+      </label>
+      <label className="flex gap-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4 text-sm leading-6 text-[var(--ink)]">
+        <input checked={canReceive} onChange={(event) => setCanReceive(event.target.checked)} type="checkbox" className="mt-1 h-4 w-4 accent-[var(--gold)]" />
+        <span>
+          <span className="block font-bold">{locale === "ko" ? "빛의 릴레이 참여" : "Light Relay participation"}</span>
+          <span className="mt-1 block text-[var(--ink-muted)]">{locale === "ko" ? "다른 사람의 고민을 받고 성구를 골라 위로의 답변을 보냅니다." : "Receive another person's concern, pick a Scripture, and send comfort."}</span>
+        </span>
+      </label>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {message ? <p className="text-sm font-semibold text-[var(--ink)]" role="status">{message}</p> : <span />}
+        <button type="button" onClick={saveSettings} disabled={isPending} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)] disabled:cursor-not-allowed disabled:opacity-50">
+          {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}
+          {locale === "ko" ? "설정 저장" : "Save settings"}
+        </button>
+      </div>
+      <Link href={`/${locale}/letters/write`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-bold text-white transition hover:bg-[var(--gold-hover)]">
+        {locale === "ko" ? "고민 보내기" : "Send a concern"}
+      </Link>
     </div>
   );
 }

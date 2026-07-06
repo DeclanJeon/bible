@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 
 import { OG_IMAGE_URL, SITE_URL, siteDescription, siteImageAlt, siteKeywords, siteTitle } from "@/lib/page-metadata";
+import { SessionProvider } from "@/components/session-provider";
 import "./globals.css";
+
 
 const defaultLocale = "ko";
 const defaultTitle = `성경 길찾기 | ${siteTitle(defaultLocale)}`;
@@ -184,7 +186,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body><SessionProvider>{children}</SessionProvider></body>
     </html>
   );
 }
