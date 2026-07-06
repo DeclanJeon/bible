@@ -231,7 +231,7 @@ export async function queueCardImageGeneration(card: LetterCard, context: { body
 
     return {
       status: "ready",
-      imageUrl: `/api/letters/card/${card.id}/image`,
+      imageUrl: `/${context.locale}/api/letters/card/${card.id}/image`,
       metadata: {
         provider: "codex-imagen",
         model: parsed.model || CODEX_IMAGEN_MODEL,

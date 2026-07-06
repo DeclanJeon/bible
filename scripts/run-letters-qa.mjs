@@ -93,6 +93,32 @@ function assertPublicBundleSanitized(bundle, label, forbiddenValues = []) {
   assert(forbiddenValueLeaks.length === 0, `${label} public bundle must not expose user email values`, forbiddenValueLeaks);
 }
 
+function expectedLocalizedCardImageSrc(cardId, locale) {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bible.ponslink.test").replace(/\/$/, "");
+  return `${baseUrl}/${locale}/api/letters/card/${cardId}/image`;
+}
+
+function forbiddenUnlocalizedCardImageSrc(cardId) {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bible.ponslink.test").replace(/\/$/, "");
+  return `${baseUrl}/api/letters/card/${cardId}/image`;
+}
+
+function assertEmailsUseLocalizedCardImageRoutes(checks) {
+  const failures = [];
+  for (const { label, message, cardId, locale } of checks) {
+    const html = message?.html ?? "";
+    const expected = expectedLocalizedCardImageSrc(cardId, locale);
+    const forbidden = forbiddenUnlocalizedCardImageSrc(cardId);
+    if (!html.includes(`src="${expected}"`)) {
+      failures.push({ label, expected, html });
+    }
+    if (html.includes(`src="${forbidden}"`)) {
+      failures.push({ label, forbidden, html });
+    }
+  }
+  assert(failures.length === 0, "letter and reply email HTML must use localized card image routes", failures);
+}
+
 function makeRecommendation(prompt, locale) {
   const crisis = /crisis|self[-\s]?harm|자해|죽고 싶/i.test(prompt);
   return {
@@ -160,7 +186,7 @@ try {
         const call = { cardId: card.id, kind: card.kind, locale: context.locale };
         cardGenerationCalls.push(call);
         cardGenerationWaiters.shift()?.(call);
-        return Promise.resolve({ status: "skipped", metadata: { provider: "codex-imagen", reason: "test mock" } });
+        return Promise.resolve({ status: "ready", imageUrl: `/api/letters/card/${card.id}/image`, metadata: { provider: "codex-imagen", reason: "test mock" } });
       },
     },
     "@/lib/letter-email": {
@@ -257,6 +283,10 @@ try {
   assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
   assert(emailCalls.length === 2 && emailCalls[1].to === authorEmail, "accepted replies should notify only the original author", emailCalls);
   assert(emailCalls[1].text.includes(`/ko/letters/answer/${answer.readToken}`), "author notification must contain the tokenized answer URL");
+  assertEmailsUseLocalizedCardImageRoutes([
+    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko" },
+    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko" },
+  ]);
 
   const secondAnswer = await letters.createLetterAnswer({
     locale: "ko",
@@ -576,7 +606,7 @@ try {
     }, { body: "이미지 생성 성공 후 로컬 파일 정리 확인", locale: "ko" });
 
     assert(ready.status === "ready", "Codex Imagen enabled mode must return ready when the adapter reports a generated image", ready);
-    assert(ready.imageUrl === `/api/letters/card/${enabledCardId}/image`, "Codex Imagen enabled mode must return a public imageUrl for the generated image", ready);
+    assert(ready.imageUrl === `/ko/api/letters/card/${enabledCardId}/image`, "Codex Imagen enabled mode must return a localized public imageUrl for the generated image", ready);
     assert(!localFiles.has(localPromptPath), "Codex Imagen enabled mode must remove the local prompt artifact after completion", { localPromptPath, localFiles: [...localFiles] });
     assert(localFiles.has(localOutputPath), "Codex Imagen enabled mode must keep the local output image for serving", { localOutputPath, localFiles: [...localFiles] });
     assert(execCalls.some((call) => call.command === "ssh" && call.args[1].includes(imagenCli)), "Codex Imagen enabled mode must invoke the generator through the remote adapter command", execCalls);
@@ -643,8 +673,9 @@ try {
       "relay accept sets canReceiveLetters through session token",
       "reply bundle includes scripture recommendation for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
+      "letter and reply email HTML use localized card image routes instead of root API paths",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
-      "Codex Imagen enabled mode returns ready with imageUrl and keeps local output for serving",
+      "Codex Imagen enabled mode returns ready with localized imageUrl and keeps local output for serving",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],
     artifacts: {
