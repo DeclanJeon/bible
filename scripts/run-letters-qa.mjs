@@ -174,28 +174,98 @@ function assertEmailHtmlContainsGeneratedImage({ label, message, expectedImageUr
   assert(failures.length === 0, `${label} email HTML must embed the generated remote image with useful alt text`, failures);
 }
 
+function forbiddenCardImageRoutes(cardId, locale) {
+  return [
+    { name: "localized absolute server image route", value: localizedCardImageRoute(cardId, locale) },
+    { name: "root absolute server image route", value: unlocalizedCardImageRoute(cardId) },
+    { name: "localized server image route path", value: `/${locale}/api/letters/card/${cardId}/image` },
+    { name: "root server image route path", value: `/api/letters/card/${cardId}/image` },
+  ];
+}
+
+function assertEmailHtmlUsesImageHeroBeforeCtaAndTextFallback({
+  label,
+  message,
+  card,
+  expectedImageUrl,
+  expectedCtaPath,
+  expectedCtaText,
+  expectedFallbackLabel,
+}) {
+  const html = message?.html ?? "";
+  const expectedSrc = `src="${htmlAttributeValue(expectedImageUrl)}"`;
+  const expectedCtaHref = htmlAttributeValue(expectedCtaPath);
+  const expectedCtaLabel = htmlAttributeValue(expectedCtaText);
+  const expectedTextFallbackLabel = htmlAttributeValue(expectedFallbackLabel);
+  const imageIndex = html.indexOf(expectedSrc);
+  const ctaHrefIndex = html.indexOf(expectedCtaHref);
+  const ctaLabelIndex = html.indexOf(expectedCtaLabel);
+  const ctaEndIndex = Math.max(ctaHrefIndex, ctaLabelIndex);
+  const fallbackLabelIndex = html.indexOf(expectedTextFallbackLabel);
+  const fallbackFragments = [
+    { name: "fallback label", value: expectedFallbackLabel, index: fallbackLabelIndex },
+    { name: "fallback scripture reference", value: card?.scripture?.reference, index: html.indexOf(htmlAttributeValue(card?.scripture?.reference)) },
+    { name: "fallback scripture text", value: card?.scripture?.text, index: html.indexOf(htmlAttributeValue(card?.scripture?.text)) },
+    { name: "fallback body", value: card?.summary, index: html.indexOf(htmlAttributeValue(card?.summary)) },
+  ].filter(({ value }) => typeof value === "string" && value.length > 0);
+  const missingFragments = [
+    { name: "image src", index: imageIndex, value: expectedImageUrl },
+    { name: "CTA URL", index: ctaHrefIndex, value: expectedCtaPath },
+    { name: "CTA text", index: ctaLabelIndex, value: expectedCtaText },
+    ...fallbackFragments,
+  ].filter(({ index }) => index < 0);
+  const orderingFailures = [];
+  if (imageIndex >= 0 && ctaHrefIndex >= 0 && imageIndex > ctaHrefIndex) {
+    orderingFailures.push({ expected: "generated image before CTA URL", imageIndex, ctaHrefIndex });
+  }
+  if (ctaEndIndex >= 0 && fallbackLabelIndex >= 0 && ctaEndIndex > fallbackLabelIndex) {
+    orderingFailures.push({ expected: "CTA before visible text fallback label", ctaEndIndex, fallbackLabelIndex });
+  }
+  for (const fragment of fallbackFragments.filter(({ name }) => name !== "fallback label")) {
+    if (fallbackLabelIndex >= 0 && fragment.index >= 0 && fallbackLabelIndex > fragment.index) {
+      orderingFailures.push({ expected: "visible text fallback label before fallback body fragment", fragment: fragment.name, fallbackLabelIndex, fragmentIndex: fragment.index });
+    }
+    if (ctaEndIndex >= 0 && fragment.index >= 0 && ctaEndIndex > fragment.index) {
+      orderingFailures.push({ expected: "CTA before text fallback body fragment", fragment: fragment.name, ctaEndIndex, fragmentIndex: fragment.index });
+    }
+  }
+
+  assert(
+    missingFragments.length === 0 && orderingFailures.length === 0,
+    `${label} email HTML must render the generated image as the hero, place the CTA before the visible text fallback, and label the fallback block`,
+    { missingFragments, orderingFailures, html },
+  );
+}
 
 function assertEmailsUseReturnedDriveCardImageUrls(checks) {
   const failures = [];
-  for (const { label, message, cardId, locale, expectedImageUrl, expectedAltText } of checks) {
+  for (const { label, message, card, cardId, locale, expectedImageUrl, expectedAltText, expectedCtaPath, expectedCtaText, expectedFallbackLabel, forbiddenValues = [] } of checks) {
     const html = message?.html ?? "";
-    const forbiddenRouteFragment = `/api/letters/card/${cardId}/image`;
     try {
       assertEmailHtmlContainsGeneratedImage({ label, message, expectedImageUrl, expectedAltText });
     } catch (error) {
       failures.push({ label, error: error.message });
     }
-    if (html.includes(forbiddenRouteFragment)) {
+    try {
+      assertEmailHtmlUsesImageHeroBeforeCtaAndTextFallback({ label, message, card, expectedImageUrl, expectedCtaPath, expectedCtaText, expectedFallbackLabel });
+    } catch (error) {
+      failures.push({ label, error: error.message });
+    }
+    try {
+      assertEmailHtmlDoesNotLeakInternalValues(message, label, forbiddenValues);
+    } catch (error) {
+      failures.push({ label, error: error.message });
+    }
+    const routeLeaks = forbiddenCardImageRoutes(cardId, locale).filter(({ value }) => html.includes(value));
+    if (routeLeaks.length > 0) {
       failures.push({
         label,
-        forbiddenRouteFragment,
-        localizedRoute: localizedCardImageRoute(cardId, locale),
-        unlocalizedRoute: unlocalizedCardImageRoute(cardId),
+        routeLeaks,
         html,
       });
     }
   }
-  assert(failures.length === 0, "generated letter and reply email HTML must use returned Drive image URLs, not server image routes, with useful alt text", failures);
+  assert(failures.length === 0, "generated letter and reply email HTML must use returned Drive image URLs as the hero before privacy-safe CTAs, reject localized/root server image routes, and expose only a labeled text fallback after the CTA", failures);
 }
 
 function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
@@ -433,11 +503,33 @@ try {
   assert(questionDriveImageUrl === expectedDriveCardImageSrc(normalLetter.bundle.card.id), "letter image generation stub must return a public Drive URL for the question card", { questionDriveImageUrl });
   assert(answerDriveImageUrl === expectedDriveCardImageSrc(answer.answerCard.id), "letter image generation stub must return a public Drive URL for the answer card", { answerDriveImageUrl });
   assertEmailsUseReturnedDriveCardImageUrls([
-    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko", expectedImageUrl: questionDriveImageUrl, expectedAltText: normalLetter.bundle.card.title },
-    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko", expectedImageUrl: answerDriveImageUrl, expectedAltText: answer.answerCard.title },
+    {
+      label: "letter notification",
+      message: emailCalls[0],
+      card: normalLetter.bundle.card,
+      cardId: normalLetter.bundle.card.id,
+      locale: "ko",
+      expectedImageUrl: questionDriveImageUrl,
+      expectedAltText: normalLetter.bundle.card.title,
+      expectedCtaPath: `/ko/letters/reply/${normalLetter.replyToken}`,
+      expectedCtaText: "답변과 성구 보내기",
+      expectedFallbackLabel: "텍스트로 읽기",
+      forbiddenValues: [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
+    },
+    {
+      label: "reply notification",
+      message: emailCalls[1],
+      card: answer.answerCard,
+      cardId: answer.answerCard.id,
+      locale: "ko",
+      expectedImageUrl: answerDriveImageUrl,
+      expectedAltText: answer.answerCard.title,
+      expectedCtaPath: `/ko/letters/answer/${answer.readToken}`,
+      expectedCtaText: "답변 카드 보기",
+      expectedFallbackLabel: "텍스트로 읽기",
+      forbiddenValues: [authorEmail, helperEmail, ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
+    },
   ]);
-  assertEmailHtmlDoesNotLeakInternalValues(emailCalls[0], "image-ready letter notification", [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"]);
-  assertEmailHtmlDoesNotLeakInternalValues(emailCalls[1], "image-ready reply notification", [authorEmail, helperEmail, ...sensitiveGenerationMetadataValues, "SMTP env is not configured"]);
   const storedAfterDriveImages = JSON.parse(await readFile(process.env.LETTERS_DATA_FILE, "utf8"));
   assertCardsStoreReturnedDriveImageUrls(storedAfterDriveImages.cards, [
     { label: "question card", cardId: normalLetter.bundle.card.id, expectedImageUrl: questionDriveImageUrl },
@@ -1254,7 +1346,7 @@ try {
       "relay accept sets canReceiveLetters through session token",
       "reply bundle includes scripture recommendation for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
-      "letter and reply email HTML use returned Drive image URLs with useful alt text, reject localized/root server card image routes, and keep designed scripture card blocks when images are missing",
+      "letter and reply email HTML use returned Drive image URLs as the hero before privacy-safe CTAs, reject localized/root server card image routes, expose only a labeled text fallback after the CTA, and keep designed scripture card blocks when images are missing",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "letter POST API route returns 202 accepted:true without serializing bundle/cardId/letterId and schedules createAnonymousLetter after acknowledgement",

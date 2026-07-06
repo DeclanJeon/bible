@@ -830,19 +830,18 @@ function buildLetterEmailHtml(input: {
     ?? (input.locale === "ko"
       ? "이메일은 서로에게 보이지 않습니다. 모든 편지와 답장은 시스템을 통해서만 전달됩니다."
       : "Email addresses are hidden from each other. Every letter and reply is relayed only through the system.");
-
-  return `
-<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0;padding:0;background:#f7f0e3;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:#271d13;">
-  <tr>
-    <td align="center" style="padding:28px 14px;">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:separate;border-spacing:0;">
-        <tr>
-          <td style="padding:0 4px 14px 4px;text-align:center;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#b18435;">Bible Hyperlink Companion</div>
-            <div style="margin-top:8px;font-size:20px;line-height:1.35;font-weight:800;color:#271d13;">${escapeHtml(input.eyebrow)}</div>
-          </td>
-        </tr>
-        ${imageHtml}
+  const textFallbackLabel = input.locale === "ko" ? "텍스트로 읽기" : "Read as text";
+  const textFallbackIntro = input.locale === "ko"
+    ? "이미지가 보이지 않을 때를 위해 같은 내용을 텍스트로 남겨두었습니다."
+    : "The same content is included as text in case the image does not load.";
+  const ctaHtml = `
+              <tr>
+                <td align="center" style="padding:24px 26px 28px 26px;">
+                  <a href="${escapeHtml(input.ctaUrl)}" style="display:block;border-radius:16px;background:#c79a41;color:#fffaf0;text-decoration:none;padding:15px 22px;font-size:16px;font-weight:900;letter-spacing:-0.01em;">${escapeHtml(input.ctaLabel)}</a>
+                  <div style="margin-top:18px;border-top:1px solid #eadcc3;padding-top:14px;font-size:12px;line-height:1.7;color:#786a5a;">${privacyHtml}</div>
+                </td>
+              </tr>`;
+  const fullCardHtml = `
         <tr>
           <td style="overflow:hidden;border:1px solid #dec99d;border-radius:28px;background:#fffaf0;padding:0;box-shadow:0 14px 36px rgba(66,45,19,0.12);">
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:separate;border-spacing:0;">
@@ -866,15 +865,48 @@ function buildLetterEmailHtml(input: {
                   </table>
                 </td>
               </tr>
+              ${ctaHtml}
+            </table>
+          </td>
+        </tr>`;
+  const imageBackedHtml = `
+        ${imageHtml}
+        <tr>
+          <td style="overflow:hidden;border:1px solid #dec99d;border-radius:24px;background:#fffaf0;padding:0;box-shadow:0 10px 28px rgba(66,45,19,0.10);">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:separate;border-spacing:0;">
+              ${ctaHtml}
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:14px 4px 0 4px;">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-radius:18px;border:1px solid #eadcc3;background:#fffdf8;">
               <tr>
-                <td align="center" style="padding:0 26px 28px 26px;">
-                  <a href="${escapeHtml(input.ctaUrl)}" style="display:block;border-radius:16px;background:#c79a41;color:#fffaf0;text-decoration:none;padding:15px 22px;font-size:16px;font-weight:900;letter-spacing:-0.01em;">${escapeHtml(input.ctaLabel)}</a>
-                  <div style="margin-top:18px;border-top:1px solid #eadcc3;padding-top:14px;font-size:12px;line-height:1.7;color:#786a5a;">${privacyHtml}</div>
+                <td style="padding:16px 18px 15px 18px;">
+                  <div style="font-size:12px;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;color:#8a6425;">${escapeHtml(textFallbackLabel)}</div>
+                  <div style="margin-top:6px;font-size:12px;line-height:1.6;color:#786a5a;">${escapeHtml(textFallbackIntro)}</div>
+                  <div style="margin-top:12px;font-size:13px;line-height:1.6;font-weight:800;color:#8a6425;">${escapeHtml(input.card.scripture.reference)}</div>
+                  <div style="margin-top:6px;font-size:14px;line-height:1.65;color:#4c4032;">${escapeHtml(input.card.scripture.text)}</div>
+                  <div style="margin-top:14px;font-size:13px;font-weight:800;color:#8a6425;">${escapeHtml(input.bodyLabel)}</div>
+                  <div style="margin-top:6px;font-size:14px;line-height:1.65;color:#4c4032;">${escapeHtml(input.card.summary)}</div>
                 </td>
               </tr>
             </table>
           </td>
+        </tr>`;
+
+  return `
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0;padding:0;background:#f7f0e3;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:#271d13;">
+  <tr>
+    <td align="center" style="padding:28px 14px;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:separate;border-spacing:0;">
+        <tr>
+          <td style="padding:0 4px 14px 4px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#b18435;">Bible Hyperlink Companion</div>
+            <div style="margin-top:8px;font-size:20px;line-height:1.35;font-weight:800;color:#271d13;">${escapeHtml(input.eyebrow)}</div>
+          </td>
         </tr>
+        ${imageSrc ? imageBackedHtml : fullCardHtml}
       </table>
     </td>
   </tr>
