@@ -812,6 +812,75 @@ function makeCardImageSrc(imageUrl: string, locale: AppLocale) {
   return localizedPath.startsWith("/") ? makeShareUrl(localizedPath) : imageUrl;
 }
 
+function buildLetterEmailHtml(input: {
+  card: LetterCard;
+  imageUrl?: string;
+  ctaUrl: string;
+  ctaLabel: string;
+  locale: AppLocale;
+  eyebrow: string;
+  bodyLabel: string;
+  privacyHtml?: string;
+}) {
+  const imageSrc = input.imageUrl ? makeCardImageSrc(input.imageUrl, input.locale) : null;
+  const imageHtml = imageSrc
+    ? `<tr><td style="padding:0 0 18px 0;"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(input.card.title)}" style="display:block;width:100%;max-width:560px;border:0;border-radius:24px;outline:none;text-decoration:none;" /></td></tr>`
+    : "";
+  const privacyHtml = input.privacyHtml
+    ?? (input.locale === "ko"
+      ? "이메일은 서로에게 보이지 않습니다. 모든 편지와 답장은 시스템을 통해서만 전달됩니다."
+      : "Email addresses are hidden from each other. Every letter and reply is relayed only through the system.");
+
+  return `
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0;padding:0;background:#f7f0e3;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:#271d13;">
+  <tr>
+    <td align="center" style="padding:28px 14px;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:separate;border-spacing:0;">
+        <tr>
+          <td style="padding:0 4px 14px 4px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#b18435;">Bible Hyperlink Companion</div>
+            <div style="margin-top:8px;font-size:20px;line-height:1.35;font-weight:800;color:#271d13;">${escapeHtml(input.eyebrow)}</div>
+          </td>
+        </tr>
+        ${imageHtml}
+        <tr>
+          <td style="overflow:hidden;border:1px solid #dec99d;border-radius:28px;background:#fffaf0;padding:0;box-shadow:0 14px 36px rgba(66,45,19,0.12);">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:separate;border-spacing:0;">
+              <tr>
+                <td style="padding:30px 26px 24px 26px;text-align:center;">
+                  <div style="display:inline-block;border:1px solid #d2ac5c;border-radius:999px;background:#c79a41;color:#fffaf0;padding:8px 18px;font-size:13px;font-weight:800;letter-spacing:0.08em;">${escapeHtml(input.card.title)}</div>
+                  <div style="margin:22px auto 0 auto;max-width:500px;font-size:24px;line-height:1.55;font-weight:800;color:#271d13;">${escapeHtml(input.card.scripture.text)}</div>
+                  <div style="margin:18px auto 0 auto;width:68px;height:1px;background:#d2ac5c;"></div>
+                  <div style="margin-top:12px;font-size:14px;line-height:1.5;font-weight:800;color:#8a6425;">${escapeHtml(input.card.scripture.reference)}</div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:0 26px 24px 26px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-radius:18px;border:1px solid #eadcc3;background:#fffdf8;">
+                    <tr>
+                      <td style="padding:18px 18px 16px 18px;">
+                        <div style="font-size:13px;font-weight:800;color:#8a6425;">${escapeHtml(input.bodyLabel)}</div>
+                        <div style="margin-top:8px;font-size:15px;line-height:1.75;color:#4c4032;">${escapeHtml(input.card.summary)}</div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="padding:0 26px 28px 26px;">
+                  <a href="${escapeHtml(input.ctaUrl)}" style="display:block;border-radius:16px;background:#c79a41;color:#fffaf0;text-decoration:none;padding:15px 22px;font-size:16px;font-weight:900;letter-spacing:-0.01em;">${escapeHtml(input.ctaLabel)}</a>
+                  <div style="margin-top:18px;border-top:1px solid #eadcc3;padding-top:14px;font-size:12px;line-height:1.7;color:#786a5a;">${privacyHtml}</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>`.trim();
+}
+
 function publicCard(card: LetterCard | null | undefined): LetterCard | null {
   if (!card) {
     return null;
@@ -1526,17 +1595,20 @@ export async function createAnonymousLetter(input: {
       const footerText = unsubscribeUrl
         ? (locale === "ko" ? `\n\n수신을 중단하려면: ${unsubscribeUrl}` : `\n\nStop receiving letters: ${unsubscribeUrl}`)
         : "";
-      const footerHtml = unsubscribeUrl
-        ? `<p><a href="${unsubscribeUrl}">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a></p>`
-        : "";
-      const imageHtml = imageResult.imageUrl
-        ? `<p><img src="${escapeHtml(makeCardImageSrc(imageResult.imageUrl, locale))}" alt="${escapeHtml(card.title)}" style="max-width:100%;border-radius:12px;" /></p>`
-        : "";
       const email = await sendSystemEmail({
         to: recipientEmail,
         subject: locale === "ko" ? "익명의 말씀편지가 도착했습니다" : "An anonymous Scripture letter arrived",
         text: `${card.title}\n\n${card.summary}\n\n${scripture.reference}\n${scripture.text}\n\n${replyUrl}${footerText}`,
-        html: `<p><strong>${escapeHtml(card.title)}</strong></p>${imageHtml}<p>${escapeHtml(card.summary)}</p><blockquote>${escapeHtml(scripture.text)}</blockquote><p>${escapeHtml(scripture.reference)}</p><p><a href="${replyUrl}">답변과 성구 보내기</a></p>${footerHtml}`,
+        html: buildLetterEmailHtml({
+          card,
+          imageUrl: imageResult.imageUrl,
+          ctaUrl: replyUrl,
+          ctaLabel: locale === "ko" ? "답변과 성구 보내기" : "Send a reply and Scripture",
+          locale,
+          eyebrow: locale === "ko" ? "익명의 말씀편지가 도착했습니다" : "An anonymous Scripture letter arrived",
+          bodyLabel: locale === "ko" ? "보낸 마음" : "Letter excerpt",
+          privacyHtml: `${locale === "ko" ? "이메일은 서로에게 보이지 않습니다. 모든 편지와 답장은 시스템을 통해서만 전달됩니다." : "Email addresses are hidden from each other. Every letter and reply is relayed only through the system."}${unsubscribeUrl ? `<br /><br /><a href="${escapeHtml(unsubscribeUrl)}" style="color:#8a6425;font-weight:800;text-decoration:underline;">${locale === "ko" ? "말씀편지 수신 중단" : "Stop receiving Scripture letters"}</a>` : ""}`,
+        }),
       });
       await mutateLettersFile((data) => {
         const storedLetter = data.letters.find((entry) => entry.id === letter.id);
@@ -1565,6 +1637,7 @@ export async function createLetterAnswer(input: {
   scriptureRef?: unknown;
   acceptLanguage?: string;
   countryCode?: string;
+  scheduleDispatch?: (work: () => Promise<void>) => void;
 }) {
   const answerBody = normalizeBody(input.body, 8, MAX_ANSWER_LENGTH);
   const responderNickname = normalizeNickname(input.responderNickname);
@@ -1657,41 +1730,36 @@ export async function createLetterAnswer(input: {
   if (!reserveResult.ok) {
     return reserveResult;
   }
-  const imageResult = await queueCardImageGeneration(answerCard, { body: answerBody, locale });
-  await updateCardGeneration(answerCard.id, imageResult);
   const answerUrl = makeShareUrl(`/${locale}/letters/answer/${readToken}`);
-  const imageHtml = imageResult.imageUrl
-    ? `<p><img src="${escapeHtml(makeCardImageSrc(imageResult.imageUrl, locale))}" alt="${escapeHtml(answerCard.title)}" style="max-width:100%;border-radius:12px;" /></p>`
-    : "";
-  const email = await sendSystemEmail({
-    to: letter.authorEmail,
-    subject: locale === "ko" ? "익명의 답장이 도착했습니다" : "Your anonymous reply arrived",
-    text: `${answerCard.title}\n\n${answerCard.summary}\n\n${selectedScripture.reference}\n\n${answerUrl}`,
-    html: `<p><strong>${escapeHtml(answerCard.title)}</strong></p>${imageHtml}<p>${escapeHtml(answerCard.summary)}</p><blockquote>${escapeHtml(selectedScripture.text)}</blockquote><p>${escapeHtml(selectedScripture.reference)}</p><p><a href="${answerUrl}">답변 카드 보기</a></p>`,
-  });
-  if (!email.ok) {
-    await mutateLettersFile((draft) => {
-      const storedDelivery = draft.deliveries.find((entry) => entry.replyTokenHash === hash);
-      if (storedDelivery && storedDelivery.status === "opened") {
-        storedDelivery.status = reserveResult.previousStatus;
-      }
-      draft.answers = draft.answers.filter((entry) => entry.id !== answer.id);
-      draft.cards = draft.cards.filter((entry) => entry.id !== answerCard.id);
+  await scheduleLetterDispatch(async () => {
+    const imageResult = await queueCardImageGeneration(answerCard, { body: answerBody, locale });
+    await updateCardGeneration(answerCard.id, imageResult);
+    const email = await sendSystemEmail({
+      to: letter.authorEmail,
+      subject: locale === "ko" ? "익명의 답장이 도착했습니다" : "Your anonymous reply arrived",
+      text: `${answerCard.title}\n\n${answerCard.summary}\n\n${selectedScripture.reference}\n\n${answerUrl}`,
+      html: buildLetterEmailHtml({
+        card: answerCard,
+        imageUrl: imageResult.imageUrl,
+        ctaUrl: answerUrl,
+        ctaLabel: locale === "ko" ? "답변 카드 보기" : "View answer card",
+        locale,
+        eyebrow: locale === "ko" ? "익명의 답장이 도착했습니다" : "Your anonymous reply arrived",
+        bodyLabel: locale === "ko" ? "도착한 답장" : "Reply excerpt",
+      }),
     });
-    return { ok: false as const, error: "email-failed" as const };
-  }
-
-  await mutateLettersFile((draft) => {
-    const storedLetter = draft.letters.find((entry) => entry.id === letter.id);
-    const storedDelivery = draft.deliveries.find((entry) => entry.replyTokenHash === hash);
-    if (storedLetter) {
-      storedLetter.status = "answered";
-      storedLetter.updatedAt = now;
-    }
-    if (storedDelivery && storedDelivery.status === "opened") {
-      storedDelivery.status = "answered";
-    }
-  });
+    await mutateLettersFile((draft) => {
+      const storedLetter = draft.letters.find((entry) => entry.id === letter.id);
+      const storedDelivery = draft.deliveries.find((entry) => entry.replyTokenHash === hash);
+      if (storedLetter) {
+        storedLetter.status = email.ok ? "answered" : "matched";
+        storedLetter.updatedAt = now;
+      }
+      if (storedDelivery && storedDelivery.status === "opened") {
+        storedDelivery.status = email.ok ? "answered" : reserveResult.previousStatus;
+      }
+    });
+  }, input.scheduleDispatch);
 
 
   return { ok: true as const, answer, answerCard, readToken };

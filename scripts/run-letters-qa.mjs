@@ -118,13 +118,72 @@ function unlocalizedCardImageRoute(cardId) {
   return `${baseUrl}/api/letters/card/${cardId}/image`;
 }
 
+function assertEmailHtmlDoesNotLeakInternalValues(message, label, forbiddenValues = []) {
+  const html = message?.html ?? "";
+  const forbiddenFragments = [
+    "authorEmail",
+    "recipientEmail",
+    "replyTokenHash",
+    "readTokenHash",
+    "generationMetadata",
+    ...forbiddenValues,
+  ].filter(Boolean);
+  const leaks = forbiddenFragments.filter((fragment) => html.includes(fragment));
+  assert(leaks.length === 0, `${label} email HTML must not expose internal metadata, token fields, raw emails, or provider errors`, { leaks, html });
+}
+
+function assertEmailHtmlContainsDesignedFallbackCard({ label, message, card, expectedCtaPath, expectedCtaText, forbiddenValues = [] }) {
+  const html = message?.html ?? "";
+  const expectedFragments = [
+    { name: "card title", value: card?.title },
+    { name: "card summary", value: card?.summary },
+    { name: "scripture reference", value: card?.scripture?.reference },
+    { name: "scripture text", value: card?.scripture?.text },
+    { name: "CTA URL", value: expectedCtaPath },
+    { name: "CTA text", value: expectedCtaText },
+  ];
+  const missingFragments = expectedFragments
+    .filter(({ value }) => typeof value === "string" && value.length > 0)
+    .filter(({ value }) => !html.includes(htmlAttributeValue(value)))
+    .map(({ name, value }) => ({ name, value }));
+  const hasEmailSafeCardWrapper = /<(?:table|td|div)\b[^>]*style="[^"]*(?:background|border|border-radius|padding)[^"]*"/i.test(html);
+  const hasBrokenImagePlaceholder = /<img\b[^>]*\bsrc=(?:""|'')/i.test(html);
+
+  assert(
+    missingFragments.length === 0 && hasEmailSafeCardWrapper && !hasBrokenImagePlaceholder,
+    `${label} email HTML must render a designed card with scripture and CTA when image generation returns no image URL`,
+    { missingFragments, hasEmailSafeCardWrapper, hasBrokenImagePlaceholder, html },
+  );
+  assertEmailHtmlDoesNotLeakInternalValues(message, label, forbiddenValues);
+}
+
+function assertEmailHtmlContainsGeneratedImage({ label, message, expectedImageUrl, expectedAltText }) {
+  const html = message?.html ?? "";
+  const expectedSrc = htmlAttributeValue(expectedImageUrl);
+  const expectedAlt = htmlAttributeValue(expectedAltText);
+  const failures = [];
+  if (!/^https?:\/\//i.test(expectedImageUrl)) {
+    failures.push({ label, expectedImageUrl, reason: "expected image URL is not remote" });
+  }
+  if (!html.includes(`src="${expectedSrc}"`)) {
+    failures.push({ label, expectedImageUrl, expectedHtmlSrc: expectedSrc, html });
+  }
+  if (!html.includes(`alt="${expectedAlt}"`)) {
+    failures.push({ label, expectedAltText, expectedHtmlAlt: expectedAlt, html });
+  }
+  assert(failures.length === 0, `${label} email HTML must embed the generated remote image with useful alt text`, failures);
+}
+
+
 function assertEmailsUseReturnedDriveCardImageUrls(checks) {
   const failures = [];
-  for (const { label, message, cardId, locale, expectedImageUrl } of checks) {
+  for (const { label, message, cardId, locale, expectedImageUrl, expectedAltText } of checks) {
     const html = message?.html ?? "";
     const forbiddenRouteFragment = `/api/letters/card/${cardId}/image`;
-    if (!html.includes(`src="${htmlAttributeValue(expectedImageUrl)}"`)) {
-      failures.push({ label, expectedImageUrl, expectedHtmlSrc: htmlAttributeValue(expectedImageUrl), html });
+    try {
+      assertEmailHtmlContainsGeneratedImage({ label, message, expectedImageUrl, expectedAltText });
+    } catch (error) {
+      failures.push({ label, error: error.message });
     }
     if (html.includes(forbiddenRouteFragment)) {
       failures.push({
@@ -136,7 +195,7 @@ function assertEmailsUseReturnedDriveCardImageUrls(checks) {
       });
     }
   }
-  assert(failures.length === 0, "generated letter and reply email HTML must use returned Drive image URLs, not server image routes", failures);
+  assert(failures.length === 0, "generated letter and reply email HTML must use returned Drive image URLs, not server image routes, with useful alt text", failures);
 }
 
 function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
@@ -154,6 +213,12 @@ function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
 }
 
 const MIC_PROMPT_MARKER = "micah-locale-regression";
+const IMAGE_FALLBACK_MARKER = "image-fallback-regression";
+const IMAGE_FALLBACK_PROVIDER_ERRORS = [
+  "image renderer failed with provider stack trace",
+  "codex-imagen internal queue skipped image generation",
+];
+
 
 function recommendationPrimaryFor(prompt, locale) {
   if (prompt.includes(MIC_PROMPT_MARKER)) {
@@ -252,11 +317,17 @@ try {
     "@/lib/letter-card-generator": {
       queueCardImageGeneration: (card, context) => {
         const call = { cardId: card.id, kind: card.kind, locale: context.locale };
-        const result = {
-          status: "ready",
-          imageUrl: expectedDriveCardImageSrc(card.id),
-          metadata: { provider: "codex-imagen", reason: "test mock" },
-        };
+        const forceMissingImage = String(context.body).includes(IMAGE_FALLBACK_MARKER);
+        const result = forceMissingImage
+          ? {
+              status: card.kind === "question" ? "failed" : "skipped",
+              metadata: { provider: "codex-imagen", error: IMAGE_FALLBACK_PROVIDER_ERRORS[card.kind === "question" ? 0 : 1] },
+            }
+          : {
+              status: "ready",
+              imageUrl: expectedDriveCardImageSrc(card.id),
+              metadata: { provider: "codex-imagen", reason: "test mock" },
+            };
         cardGenerationCalls.push(call);
         cardGenerationResults.set(card.id, result);
         cardGenerationWaiters.shift()?.(call);
@@ -362,14 +433,69 @@ try {
   assert(questionDriveImageUrl === expectedDriveCardImageSrc(normalLetter.bundle.card.id), "letter image generation stub must return a public Drive URL for the question card", { questionDriveImageUrl });
   assert(answerDriveImageUrl === expectedDriveCardImageSrc(answer.answerCard.id), "letter image generation stub must return a public Drive URL for the answer card", { answerDriveImageUrl });
   assertEmailsUseReturnedDriveCardImageUrls([
-    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko", expectedImageUrl: questionDriveImageUrl },
-    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko", expectedImageUrl: answerDriveImageUrl },
+    { label: "letter notification", message: emailCalls[0], cardId: normalLetter.bundle.card.id, locale: "ko", expectedImageUrl: questionDriveImageUrl, expectedAltText: normalLetter.bundle.card.title },
+    { label: "reply notification", message: emailCalls[1], cardId: answer.answerCard.id, locale: "ko", expectedImageUrl: answerDriveImageUrl, expectedAltText: answer.answerCard.title },
   ]);
+  assertEmailHtmlDoesNotLeakInternalValues(emailCalls[0], "image-ready letter notification", [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"]);
+  assertEmailHtmlDoesNotLeakInternalValues(emailCalls[1], "image-ready reply notification", [authorEmail, helperEmail, ...sensitiveGenerationMetadataValues, "SMTP env is not configured"]);
   const storedAfterDriveImages = JSON.parse(await readFile(process.env.LETTERS_DATA_FILE, "utf8"));
   assertCardsStoreReturnedDriveImageUrls(storedAfterDriveImages.cards, [
     { label: "question card", cardId: normalLetter.bundle.card.id, expectedImageUrl: questionDriveImageUrl },
     { label: "answer card", cardId: answer.answerCard.id, expectedImageUrl: answerDriveImageUrl },
   ]);
+
+  const fallbackAuthorEmail = "fallback-author@example.test";
+  const fallbackLetter = await letters.createAnonymousLetter({
+    locale: "ko",
+    category: "concern",
+    shareVisibility: "unlisted",
+    authorEmail: fallbackAuthorEmail,
+    body: `${IMAGE_FALLBACK_MARKER}: 이미지 생성이 실패해도 말씀과 답장 버튼이 담긴 카드형 이메일을 받아야 합니다.`,
+  });
+  await flushAsyncWork();
+  assert(fallbackLetter.ok === true, "letter creation should still succeed when image generation returns no image URL", fallbackLetter);
+  const fallbackLetterImageResult = cardGenerationResults.get(fallbackLetter.bundle.card.id);
+  assert(fallbackLetterImageResult?.status === "failed" && fallbackLetterImageResult.imageUrl === undefined, "image fallback letter fixture must simulate a failed generator result with no imageUrl", fallbackLetterImageResult);
+  const fallbackEmailHtmlFailures = [];
+  const fallbackLetterEmail = emailCalls.at(-1);
+  try {
+    assertEmailHtmlContainsDesignedFallbackCard({
+      label: "image-missing letter notification",
+      message: fallbackLetterEmail,
+      card: fallbackLetter.bundle.card,
+      expectedCtaPath: `/ko/letters/reply/${fallbackLetter.replyToken}`,
+      expectedCtaText: "답변과 성구 보내기",
+      forbiddenValues: [fallbackAuthorEmail, helperEmail, "creator@example.test", ...IMAGE_FALLBACK_PROVIDER_ERRORS],
+    });
+  } catch (error) {
+    fallbackEmailHtmlFailures.push(error.message);
+  }
+
+  const fallbackAnswer = await letters.createLetterAnswer({
+    locale: "ko",
+    token: fallbackLetter.replyToken,
+    responderNickname: "말씀동행",
+    body: `${IMAGE_FALLBACK_MARKER}: 이미지가 생략되어도 답장 카드의 말씀과 확인 버튼은 HTML 안에서 분명해야 합니다.`,
+    scriptureRef: "시편 23:1",
+  });
+  await flushAsyncWork();
+  assert(fallbackAnswer.ok === true, "answer creation should still succeed when image generation is skipped with no imageUrl", fallbackAnswer);
+  const fallbackAnswerImageResult = cardGenerationResults.get(fallbackAnswer.answerCard.id);
+  assert(fallbackAnswerImageResult?.status === "skipped" && fallbackAnswerImageResult.imageUrl === undefined, "image fallback answer fixture must simulate a skipped generator result with no imageUrl", fallbackAnswerImageResult);
+  const fallbackAnswerEmail = emailCalls.at(-1);
+  try {
+    assertEmailHtmlContainsDesignedFallbackCard({
+      label: "image-skipped answer notification",
+      message: fallbackAnswerEmail,
+      card: fallbackAnswer.answerCard,
+      expectedCtaPath: `/ko/letters/answer/${fallbackAnswer.readToken}`,
+      expectedCtaText: "답변 카드 보기",
+      forbiddenValues: [fallbackAuthorEmail, helperEmail, "creator@example.test", fallbackLetter.replyToken, ...IMAGE_FALLBACK_PROVIDER_ERRORS],
+    });
+  } catch (error) {
+    fallbackEmailHtmlFailures.push(error.message);
+  }
+  assert(fallbackEmailHtmlFailures.length === 0, "image-missing letter and answer email HTML must keep designed scripture card blocks and privacy-safe CTAs", fallbackEmailHtmlFailures);
 
   const secondAnswer = await letters.createLetterAnswer({
     locale: "ko",
@@ -947,7 +1073,7 @@ try {
       "relay accept sets canReceiveLetters through session token",
       "reply bundle includes scripture recommendation for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
-      "letter and reply email HTML use returned Drive image URLs and reject localized/root server card image routes",
+      "letter and reply email HTML use returned Drive image URLs with useful alt text, reject localized/root server card image routes, and keep designed scripture card blocks when images are missing",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
