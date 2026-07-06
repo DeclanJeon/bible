@@ -13,6 +13,13 @@ type ServiceAccount = {
   tokenUri: string;
 };
 
+type OAuthRefreshClient = {
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+};
+
+
 type DriveUploadResult =
   | { ok: true; fileId: string; imageUrl: string }
   | { ok: false; error: string };
@@ -76,7 +83,7 @@ function base64Url(value: Buffer | string) {
   return Buffer.from(value).toString("base64").replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
-async function getAccessToken(serviceAccount: ServiceAccount) {
+async function getServiceAccountAccessToken(serviceAccount: ServiceAccount) {
   if (tokenCache && tokenCache.expiresAtMs > Date.now() + 60_000) {
     return tokenCache.accessToken;
   }
@@ -119,6 +126,58 @@ async function getAccessToken(serviceAccount: ServiceAccount) {
   return payload.access_token;
 }
 
+function oauthRefreshClientFromEnv(): OAuthRefreshClient | null {
+  const refreshToken = process.env.LETTERS_GOOGLE_DRIVE_REFRESH_TOKEN || process.env.GOOGLE_DRIVE_REFRESH_TOKEN;
+  const clientId = process.env.LETTERS_GOOGLE_DRIVE_OAUTH_CLIENT_ID || process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.LETTERS_GOOGLE_DRIVE_OAUTH_CLIENT_SECRET || process.env.GOOGLE_CLIENT_SECRET;
+  if (!refreshToken || !clientId || !clientSecret) {
+    return null;
+  }
+  return { refreshToken, clientId, clientSecret };
+}
+
+async function getOAuthRefreshAccessToken(client: OAuthRefreshClient) {
+  if (tokenCache && tokenCache.expiresAtMs > Date.now() + 60_000) {
+    return tokenCache.accessToken;
+  }
+
+  const response = await fetch(DRIVE_TOKEN_URL, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: client.clientId,
+      client_secret: client.clientSecret,
+      refresh_token: client.refreshToken,
+      grant_type: "refresh_token",
+    }),
+  });
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(`Google Drive refresh token request failed: ${response.status} ${text.slice(0, 200)}`);
+  }
+  const payload = await response.json() as { access_token?: string; expires_in?: number };
+  if (!payload.access_token) {
+    throw new Error("Google Drive refresh token response did not include access_token");
+  }
+  tokenCache = {
+    accessToken: payload.access_token,
+    expiresAtMs: Date.now() + Math.max(60, payload.expires_in ?? 3600) * 1000,
+  };
+  return payload.access_token;
+}
+
+async function getConfiguredAccessToken() {
+  const oauthClient = oauthRefreshClientFromEnv();
+  if (oauthClient) {
+    return getOAuthRefreshAccessToken(oauthClient);
+  }
+  const serviceAccount = serviceAccountFromEnv();
+  if (serviceAccount) {
+    return getServiceAccountAccessToken(serviceAccount);
+  }
+  return null;
+}
+
 function multipartBody(metadata: Record<string, unknown>, fileBuffer: Buffer, mimeType: string, boundary: string) {
   return Buffer.concat([
     Buffer.from(`--${boundary}\r\ncontent-type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n`),
@@ -137,19 +196,18 @@ function publicDriveImageUrl(fileId: string) {
 }
 
 export function isLetterCardDriveConfigured() {
-  return serviceAccountFromEnv() !== null;
+  return oauthRefreshClientFromEnv() !== null || serviceAccountFromEnv() !== null;
 }
 
 export async function uploadLetterCardImage(input: UploadLetterCardImageInput): Promise<DriveUploadResult> {
-  const serviceAccount = serviceAccountFromEnv();
-  if (!serviceAccount) {
-    return { ok: false, error: "Google Drive service account env is not configured" };
+  const accessToken = await getConfiguredAccessToken();
+  if (!accessToken) {
+    return { ok: false, error: "Google Drive OAuth refresh token or service account env is not configured" };
   }
 
   try {
     const folderId = input.folderId || letterCardDriveFolderId();
     const mimeType = input.mimeType || "image/png";
-    const accessToken = await getAccessToken(serviceAccount);
     const fileBuffer = await readFile(input.localPath);
     const boundary = `bible-letter-card-${Date.now().toString(36)}`;
     const uploadResponse = await fetch(`${DRIVE_UPLOAD_URL}?uploadType=multipart&supportsAllDrives=true&fields=id`, {
