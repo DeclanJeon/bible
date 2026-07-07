@@ -7,6 +7,7 @@ import { getBookMetadata } from "@/lib/book-metadata";
 import { getPassage, type BibleReference } from "@/lib/bible";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
 import { buildBibleReferenceHref } from "@/lib/navigation";
+import { parseBibleReferences } from "@/lib/bible-reference-parser";
 import { buildPassageRecommendation } from "@/lib/passage-response";
 import type { SafetyAssessment } from "@/lib/safety";
 import { queueCardImageGeneration } from "@/lib/letter-card-generator";
@@ -801,6 +802,54 @@ async function passageVerseText(reference: BibleReference, locale: AppLocale, fa
   } catch {
     return compactScriptureText(fallbackText);
   }
+}
+
+function scriptureSelectionKey(value: string) {
+  return value.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+function customScriptureReason(locale: AppLocale) {
+  return locale === "ko"
+    ? "답변자가 직접 고른 성구입니다."
+    : "This Scripture was chosen directly by the responder.";
+}
+
+async function resolveReplyScriptureSelection(
+  letter: AnonymousLetter,
+  locale: AppLocale,
+  requestedScriptureRef: string | undefined,
+  answerBody: string,
+  requestMeta?: { acceptLanguage?: string; countryCode?: string },
+): Promise<ScriptureSuggestion> {
+  if (!requestedScriptureRef) {
+    return (await buildScriptureSuggestion(`${letter.body}\n\n${answerBody}`, locale, requestMeta)).scripture;
+  }
+
+  const requestedKey = scriptureSelectionKey(requestedScriptureRef);
+  const suggestions = await buildReplyScriptureSuggestions(letter, locale);
+  const selectedSuggestion = suggestions.find((suggestion) => scriptureSelectionKey(suggestion.reference) === requestedKey);
+  if (selectedSuggestion) {
+    return selectedSuggestion;
+  }
+
+  const parsedReference = parseBibleReferences(requestedScriptureRef)[0];
+  if (parsedReference) {
+    return {
+      reference: referenceLabel(parsedReference, locale),
+      text: await passageVerseText(parsedReference, locale, ""),
+      reason: customScriptureReason(locale),
+      href: buildBibleReferenceHref(parsedReference, { locale, from: "letters" }),
+      confidence: "medium",
+    };
+  }
+
+  return {
+    reference: requestedScriptureRef,
+    text: requestedScriptureRef,
+    reason: customScriptureReason(locale),
+    href: null,
+    confidence: "low",
+  };
 }
 
 async function buildReplyScriptureSuggestions(letter: AnonymousLetter, locale: AppLocale) {
@@ -1865,9 +1914,13 @@ export async function createLetterAnswer(input: {
   if (requestedScriptureRef === null) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
   }
-  const selectedScripture = requestedScriptureRef
-    ? { ...letter.scripture, reference: requestedScriptureRef, href: null }
-    : (await buildScriptureSuggestion(`${letter.body}\n\n${answerBody}`, locale, { acceptLanguage: input.acceptLanguage, countryCode: input.countryCode })).scripture;
+  const selectedScripture = await resolveReplyScriptureSelection(
+    letter,
+    locale,
+    requestedScriptureRef,
+    answerBody,
+    { acceptLanguage: input.acceptLanguage, countryCode: input.countryCode },
+  );
   const visualTheme = inferVisualTheme(answerBody, selectedScripture, locale);
   const readToken = createToken();
   const now = new Date().toISOString();

@@ -30,20 +30,20 @@ export function LetterCardVisual({ card, locale }: { card: LetterCard; locale: A
         // eslint-disable-next-line @next/next/no-img-element -- Generated letter cards are runtime first-party/proxied assets; Next Image remote config cannot know every stored card source.
         <img src={imageSrc} alt={`${card.title} ${card.scripture.reference}`} className="aspect-square w-full object-cover" loading="lazy" decoding="async" />
       ) : (
-        <div className="aspect-square bg-[radial-gradient(circle_at_25%_10%,rgba(221,157,74,0.20),transparent_32%),linear-gradient(145deg,#fffaf0,#efe3ce)] p-6 text-[var(--ink)] sm:p-8">
-          <div className="flex h-full flex-col justify-between rounded-[24px] border border-[rgba(120,74,20,0.18)] bg-white/60 p-5 shadow-inner sm:p-7">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--gold)]">Bible Hyperlink Companion</p>
-              <h2 className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">{card.title}</h2>
-            </div>
-            <blockquote className="my-6 text-xl font-semibold leading-9 sm:text-2xl sm:leading-10">
+        <div className="space-y-4 p-6 text-[var(--ink)] sm:p-8">
+          <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
+              {locale === "ko" ? "이미지 준비 중" : "Image preparing"}
+            </p>
+            <h2 className="mt-3 text-xl font-bold leading-tight">{card.scripture.reference}</h2>
+            <blockquote className="mt-4 text-base font-semibold leading-7 text-[var(--ink)]">
               “{card.scripture.text}”
             </blockquote>
-            <div>
-              <div className="h-px w-16 bg-[var(--gold)]/40" />
-              <p className="mt-3 text-sm font-semibold text-[var(--gold-deep)]">{card.scripture.reference}</p>
-              <p className="mt-2 text-sm leading-6 text-[var(--ink-muted)]">{card.visualTheme.coreMessage}</p>
-            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--ink-muted)]">
+              {locale === "ko"
+                ? "선택한 성구를 바탕으로 카드 이미지를 만들고 있습니다."
+                : "The card image is being generated from the selected Scripture."}
+            </p>
           </div>
         </div>
       )}

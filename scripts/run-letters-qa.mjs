@@ -462,6 +462,19 @@ try {
     "@/lib/navigation": {
       buildBibleReferenceHref: (reference, options) => `/${options?.locale ?? "ko"}/bible/${reference.code}.${reference.chapter}.${reference.startVerse}`,
     },
+    "@/lib/bible-reference-parser": {
+      parseBibleReferences: (input) => {
+        const normalized = String(input);
+        const match = normalized.match(/(?:시편|Psalm)\s*(\d+)\s*[:：]\s*(\d+)(?:\s*[-–~]\s*(\d+))?/i);
+        if (!match) return [];
+        return [{
+          code: "PSA",
+          chapter: Number(match[1]),
+          startVerse: Number(match[2]),
+          endVerse: Number(match[3] ?? match[2]),
+        }];
+      },
+    },
     "@/lib/letter-env": {
       loadLettersEmailEnv: () => undefined,
     },
@@ -582,6 +595,9 @@ try {
   assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
   assert(emailCalls.length === 2 && emailCalls[1].to === authorEmail, "accepted replies should notify only the original author", emailCalls);
   assert(emailCalls[1].text.includes(`/ko/letters/answer/${answer.readToken}`), "author notification must contain the tokenized answer URL");
+  assert(answer.answerCard.scripture.reference === "시편 23:1", "answer card must store the responder-selected Scripture reference", answer.answerCard.scripture);
+  assert(answer.answerCard.scripture.text.includes("추천 성구 본문 1"), "answer card must resolve the responder-selected Scripture text instead of reusing the original letter Scripture", answer.answerCard.scripture);
+  assert(!answer.answerCard.scripture.text.includes("여호와는 나의 목자"), "custom reply Scripture text must not leak the original recommendation text when the responder picked a different verse", answer.answerCard.scripture);
   const questionImageResult = cardGenerationResults.get(normalLetter.bundle.card.id);
   const answerDriveImageUrl = cardGenerationResults.get(answer.answerCard.id)?.imageUrl;
   assert(questionImageResult === undefined, "question cards must not generate images before the relay runner writes a reply", { questionImageResult, cardGenerationCalls });
