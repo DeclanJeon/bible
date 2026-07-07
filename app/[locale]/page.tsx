@@ -65,8 +65,8 @@ export default async function HomePage({ params }: Props) {
             key: "letters",
             icon: Mail,
             title: "말씀편지",
-            description: "익명 고민을 말씀 카드로 중계",
-            body: "이메일을 서로 노출하지 않고, 고민과 답변을 시스템이 말씀 카드로 대신 전달합니다.",
+            description: "성도 간 위로를 말씀 카드로 연결",
+            body: "성도들이 이메일을 드러내지 않고 서로의 고민과 말씀의 위로를 이어 갑니다.",
             href: `/${locale}/letters`,
           },
           {
@@ -107,8 +107,8 @@ export default async function HomePage({ params }: Props) {
             key: "letters",
             icon: Mail,
             title: "Letters",
-            description: "Anonymous concerns as Scripture cards",
-            body: "Relay concerns and replies as Scripture cards without exposing either email address.",
+            description: "Connect believers through Scripture cards",
+            body: "Believers can carry one another's concerns and Scripture-rooted comfort without exposing email addresses.",
             href: `/${locale}/letters`,
           },
           {

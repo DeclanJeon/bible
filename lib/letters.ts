@@ -196,7 +196,7 @@ const PARTICIPANT_SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 90;
 const LOCK_WAIT_MS = 5000;
 const LOCK_STALE_MS = 30000;
 const CONTACT_PATTERN = /(?:[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\b\d{2,4}[-.\s]?\d{3,4}[-.\s]?\d{4}\b|카톡|카카오톡|kakao|telegram|텔레그램)/i;
-const MASTER_RELAY_EMAIL = "syas0301@gmail.com";
+const MASTER_RELAY_EMAIL = "declan@ponslink.com";
 const SYSTEM_CREATOR_EMAIL = MASTER_RELAY_EMAIL;
 const CUTE_RANDOM_NICKNAMES = [
   "햇살친구",

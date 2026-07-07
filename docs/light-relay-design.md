@@ -312,7 +312,7 @@ function pickRecipient(data, authorEmail, locale) {
 
 ### 8.1 시스템 제작자
 
-- 이메일: `syas0301@gmail.com` (고정 테스트/마스터 릴레이)
+- 이메일: `declan@ponslink.com` (고정 테스트/마스터 릴레이)
 - 역할: 첫 릴레이 주자 + 영구 fallback
 - 작성자 본인은 수신 후보에서 제외하며, 닉네임을 비우면 귀여운 임의 닉네임을 자동 지정
 
