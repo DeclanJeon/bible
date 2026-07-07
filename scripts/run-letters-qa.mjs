@@ -434,7 +434,7 @@ try {
   process.env.NODE_ENV = "test";
   process.env.LETTERS_DATA_FILE = join(tempDir, "letters.json");
   process.env.LETTERS_RECIPIENT_EMAILS = "helper@example.test";
-  process.env.LETTERS_SYSTEM_CREATOR_EMAIL = "creator@example.test";
+  delete process.env.LETTERS_SYSTEM_CREATOR_EMAIL;
   process.env.NEXT_PUBLIC_SITE_URL = "https://bible.ponslink.test";
   process.env.LETTERS_EMAIL_ENCRYPTION_KEY = "qa-email-encryption-key";
   delete process.env.SMTP_HOST;
@@ -535,8 +535,8 @@ try {
   assert(typeof normalLetter.replyToken === "string" && normalLetter.replyToken.length > 20, "test-mode creation must return a one-time reply token for local QA");
   assert(normalLetter.bundle?.letter?.status === "matched", "non-crisis letter with a distinct configured recipient should be matched even when SMTP is skipped", normalLetter.bundle?.letter);
   assert(normalLetter.bundle?.delivery?.status === "skipped", "SMTP-disabled delivery should be recorded as skipped instead of attempting live mail", normalLetter.bundle?.delivery);
-  assert(emailCalls.length === 1 && emailCalls[0].to === "creator@example.test", "non-crisis dispatch should address the system creator as first recipient", emailCalls);
-  assertPublicBundleSanitized(normalLetter.bundle, "new letter", [authorEmail, "creator@example.test"]);
+  assert(emailCalls.length === 1 && emailCalls[0].to === "syas0301@gmail.com", "non-crisis dispatch should address the fixed master relay email as first fallback recipient", emailCalls);
+  assertPublicBundleSanitized(normalLetter.bundle, "new letter", [authorEmail, "syas0301@gmail.com"]);
 
   const storedAfterCreate = await readFile(process.env.LETTERS_DATA_FILE, "utf8");
   assert(!storedAfterCreate.includes(normalLetter.replyToken), "raw reply tokens must never be persisted; only replyTokenHash may be stored");
@@ -592,7 +592,7 @@ try {
     card: normalLetter.bundle.card,
     expectedCtaPath: `/ko/letters/reply/${normalLetter.replyToken}`,
     expectedCtaText: "답변과 성구 보내기",
-    forbiddenValues: [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
+    forbiddenValues: [authorEmail, helperEmail, "syas0301@gmail.com", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
   });
   assertEmailsUseReturnedDriveCardImageUrls([
     {
@@ -646,7 +646,7 @@ try {
       card: fallbackLetter.bundle.card,
       expectedCtaPath: `/ko/letters/reply/${fallbackLetter.replyToken}`,
       expectedCtaText: "답변과 성구 보내기",
-      forbiddenValues: [fallbackAuthorEmail, helperEmail, "creator@example.test", ...IMAGE_FALLBACK_PROVIDER_ERRORS],
+      forbiddenValues: [fallbackAuthorEmail, helperEmail, "syas0301@gmail.com", ...IMAGE_FALLBACK_PROVIDER_ERRORS],
     });
   } catch (error) {
     fallbackEmailHtmlFailures.push(error.message);
@@ -671,7 +671,7 @@ try {
       card: fallbackAnswer.answerCard,
       expectedCtaPath: `/ko/letters/answer/${fallbackAnswer.readToken}`,
       expectedCtaText: "답변 카드 보기",
-      forbiddenValues: [fallbackAuthorEmail, helperEmail, "creator@example.test", fallbackLetter.replyToken, ...IMAGE_FALLBACK_PROVIDER_ERRORS],
+      forbiddenValues: [fallbackAuthorEmail, helperEmail, "syas0301@gmail.com", fallbackLetter.replyToken, ...IMAGE_FALLBACK_PROVIDER_ERRORS],
     });
   } catch (error) {
     fallbackEmailHtmlFailures.push(error.message);
@@ -813,6 +813,7 @@ try {
     reference: "미가 6:8",
   });
   assert(emailCalls.at(-1)?.text.includes(`/ko/letters/answer/${koreanLanguageAnswer.readToken}`), "Korean browser language answer email must use the selected Korean answer URL", emailCalls.at(-1));
+  assert(typeof koreanLanguageAnswer.answer?.responderNickname === "string" && koreanLanguageAnswer.answer.responderNickname.length > 0, "blank responder nickname should be replaced with a cute random nickname", koreanLanguageAnswer.answer);
 
   const participantEmail = "participant@example.test";
   const participantOtpRequest = await letters.requestLetterParticipantOtp({
@@ -859,6 +860,16 @@ try {
   });
   assert(resumedSettings.ok === true && resumedSettings.participant.status === "active" && resumedSettings.participant.canReceiveLetters === true && resumedSettings.participant.selectionLimitPerDay === 1, "settings update should resume receiving with the configured cap", resumedSettings);
 
+  const blankNicknameSettings = await letters.updateLetterParticipantSettings({
+    sessionToken: verifiedParticipant.sessionToken,
+    nickname: "",
+  });
+  assert(blankNicknameSettings.ok === true && typeof blankNicknameSettings.participant.nickname === "string" && blankNicknameSettings.participant.nickname.length > 0, "blank participant nickname should be replaced with a cute random nickname", blankNicknameSettings);
+  await letters.updateLetterParticipantSettings({
+    sessionToken: verifiedParticipant.sessionToken,
+    nickname: "말씀동행",
+  });
+
     const participantMatchedLetter = await letters.createAnonymousLetter({
     locale: "ko",
     category: "question",
@@ -881,6 +892,7 @@ try {
   });
   await flushAsyncWork();
   assert(participantAuthoredLetter.ok === true, "participant-authored letter should be created before history lookup", participantAuthoredLetter);
+  assert(typeof participantAuthoredLetter.bundle?.letter?.authorNickname === "string" && participantAuthoredLetter.bundle.letter.authorNickname.length > 0, "blank author nickname should be replaced with a cute random nickname", participantAuthoredLetter.bundle?.letter);
   const participantHistory = await letters.getLetterParticipantHistory(verifiedParticipant.sessionToken);
   assert(participantHistory?.authored.some((item) => item.letter.id === participantAuthoredLetter.bundle.letter.id), "participant history should include letters authored by the verified participant", participantHistory);
   assert(participantHistory?.received.some((item) => item.letter.id === participantMatchedLetter.bundle.letter.id), "participant history should include letters delivered to the verified participant", participantHistory);
@@ -924,8 +936,10 @@ try {
   });
   await flushAsyncWork();
   assert(participantSelfLetter.ok === true, "letter creation should succeed when author is also a participant", participantSelfLetter);
-  assert(emailCalls.at(-1)?.to === "creator@example.test", "author participant must be excluded from recipient selection and fall back to system creator when no other participant is eligible", emailCalls.at(-1));
-  assertPublicBundleSanitized(participantSelfLetter.bundle, "participant self-exclusion letter", [participantEmail, "creator@example.test"]);
+  assert(emailCalls.at(-1)?.to === "syas0301@gmail.com", "author participant must be excluded from recipient selection and fall back to the fixed master relay email when no other participant is eligible", emailCalls.at(-1));
+  assertPublicBundleSanitized(participantSelfLetter.bundle, "participant self-exclusion letter", [participantEmail, "syas0301@gmail.com"]);
+  const relayAvailabilityForOnlyAuthor = await letters.getRelayAvailability(participantEmail);
+  assert(relayAvailabilityForOnlyAuthor.hasEligibleHumanRelay === false && relayAvailabilityForOnlyAuthor.usesMasterFallback === true, "relay availability should ask for more light bearers when only the author is registered", relayAvailabilityForOnlyAuthor);
 
 
   let remoteExecCount = 0;
@@ -1538,7 +1552,9 @@ try {
       "configured email encryption removes stored raw letter, participant, and delivery emails",
       "participant delivery emails include unsubscribe token links without persisting raw unsubscribe tokens",
       "active opted-in participants are selected before env fallback while excluding the author",
-      "system creator email is the primary fallback when no eligible relay participant exists",
+      "fixed master relay email is the primary fallback when no eligible relay participant exists",
+      "blank nicknames receive cute random defaults for participants, authors, and responders",
+      "relay availability reports no eligible human relay when only the author is registered",
       "public letter bundles strip scripture recommendation from author view",
       "relay accept sets canReceiveLetters through session token",
       "reply bundle and suggestion API include up to ten de-duplicated scripture recommendations for relay runner",

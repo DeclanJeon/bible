@@ -196,7 +196,40 @@ const PARTICIPANT_SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 90;
 const LOCK_WAIT_MS = 5000;
 const LOCK_STALE_MS = 30000;
 const CONTACT_PATTERN = /(?:[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\b\d{2,4}[-.\s]?\d{3,4}[-.\s]?\d{4}\b|카톡|카카오톡|kakao|telegram|텔레그램)/i;
-const SYSTEM_CREATOR_EMAIL = process.env.LETTERS_SYSTEM_CREATOR_EMAIL || "declan@ponslink.com";
+const MASTER_RELAY_EMAIL = "syas0301@gmail.com";
+const SYSTEM_CREATOR_EMAIL = MASTER_RELAY_EMAIL;
+const CUTE_RANDOM_NICKNAMES = [
+  "햇살친구",
+  "말씀새싹",
+  "은혜토끼",
+  "기쁨방울",
+  "소망별",
+  "평안구름",
+  "사랑콩",
+  "위로새",
+  "믿음나무",
+  "빛송이",
+  "기도고래",
+  "감사양",
+  "하늘다람쥐",
+  "샬롬곰",
+  "축복나비",
+  "온유달",
+  "진리별빛",
+  "은혜바람",
+  "소망씨앗",
+  "사랑열매",
+  "평화비둘기",
+  "말씀등불",
+  "기쁨여우",
+  "위로햇님",
+  "믿음펭귄",
+  "하늘민들레",
+  "샬롬고양이",
+  "은혜물결",
+  "소망종달새",
+  "빛의친구",
+] as const;
 
 let writeQueue = Promise.resolve();
 
@@ -344,6 +377,10 @@ function normalizeNickname(value: unknown) {
     return null;
   }
   return normalized;
+}
+
+function randomCuteNickname() {
+  return CUTE_RANDOM_NICKNAMES[randomInt(0, CUTE_RANDOM_NICKNAMES.length)];
 }
 
 function normalizeCategory(value: unknown): LetterCategory {
@@ -857,10 +894,15 @@ function isEligibleParticipantRecipient(participant: LetterParticipant, authorEm
   return windowCount < (participant.maxLettersPerDay ?? PARTICIPANT_SELECTION_MAX_PER_WINDOW);
 }
 
+function eligibleParticipantRecipients(data: LettersData, authorEmail: string | null | undefined, nowMs = Date.now()) {
+  const authorEmailHash = authorEmail ? hashValue(authorEmail) : "";
+  return data.participants.filter((participant) => isEligibleParticipantRecipient(participant, authorEmailHash, nowMs));
+}
+
 function pickRecipient(data: LettersData, authorEmail: string, locale: AppLocale) {
   const nowMs = Date.now();
   const authorEmailHash = hashValue(authorEmail);
-  const eligibleParticipants = data.participants.filter((participant) => isEligibleParticipantRecipient(participant, authorEmailHash, nowMs));
+  const eligibleParticipants = eligibleParticipantRecipients(data, authorEmail, nowMs);
   const localeMatched = eligibleParticipants.filter((participant) => (participant.preferredLocale ?? "ko") === locale);
   const participants = localeMatched.length ? localeMatched : eligibleParticipants;
   if (participants.length) {
@@ -1136,6 +1178,7 @@ export async function requestLetterParticipantOtp(input: {
   if (nickname === null) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
   }
+  const pendingNickname = nickname ?? randomCuteNickname();
 
   const otp = createOtp();
   const nowMs = Date.now();
@@ -1151,7 +1194,7 @@ export async function requestLetterParticipantOtp(input: {
         email,
         emailHash,
         nickname: undefined,
-        pendingNickname: nickname,
+        pendingNickname,
         status: "pending",
         canReceiveLetters: false,
         pendingCanReceiveLetters: input.canReceiveLetters === true,
@@ -1199,7 +1242,7 @@ export async function requestLetterParticipantOtp(input: {
     }
 
     participant.email = email;
-    participant.pendingNickname = nickname;
+    participant.pendingNickname = pendingNickname;
     participant.pendingCanReceiveLetters = input.canReceiveLetters === true;
     participant.pendingPreferredLocale = preferredLocale;
     participant.maxLettersPerDay = maxLettersPerDay;
@@ -1328,6 +1371,20 @@ export async function verifyLetterParticipantOtp(input: { email: unknown; otp: u
   });
 }
 
+export async function getRelayAvailability(authorEmail: string | null | undefined) {
+  const email = normalizeEmail(authorEmail);
+  const data = await readLettersFile();
+  const nowMs = Date.now();
+  const eligibleCount = eligibleParticipantRecipients(data, email, nowMs).length;
+  const activeReceiverCount = eligibleParticipantRecipients(data, null, nowMs).length;
+  return {
+    eligibleCount,
+    activeReceiverCount,
+    hasEligibleHumanRelay: eligibleCount > 0,
+    usesMasterFallback: eligibleCount === 0 && Boolean(SYSTEM_CREATOR_EMAIL && (!email || hashValue(SYSTEM_CREATOR_EMAIL) !== hashValue(email))),
+  };
+}
+
 export async function getLetterParticipantSession(sessionToken: string | null | undefined) {
   if (!sessionToken) {
     return null;
@@ -1370,6 +1427,7 @@ export async function updateLetterParticipantSettings(input: {
     return { ok: false as const, error: "not-authenticated" as const };
   }
   const nickname = input.nickname === undefined ? undefined : normalizeNickname(input.nickname);
+  const nicknameWasProvided = input.nickname !== undefined;
   if (nickname === null) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
   }
@@ -1385,8 +1443,8 @@ export async function updateLetterParticipantSettings(input: {
     if (input.canReceiveLetters !== undefined) {
       participant.canReceiveLetters = input.canReceiveLetters === true;
     }
-    if (nickname !== undefined) {
-      participant.nickname = nickname || undefined;
+    if (nicknameWasProvided) {
+      participant.nickname = nickname ?? randomCuteNickname();
     }
     if (preferredLocale) {
       participant.preferredLocale = preferredLocale;
@@ -1651,6 +1709,7 @@ export async function createAnonymousLetter(input: {
   if (authorNickname === null || CONTACT_PATTERN.test(body)) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
   }
+  const storedAuthorNickname = authorNickname ?? randomCuteNickname();
 
   const category = normalizeCategory(input.category);
   const shareVisibility = normalizeVisibility(input.shareVisibility);
@@ -1667,7 +1726,7 @@ export async function createAnonymousLetter(input: {
     body,
     authorEmail,
     authorEmailHash: hashValue(authorEmail),
-    authorNickname: authorNickname || undefined,
+    authorNickname: storedAuthorNickname,
     status: safety.level === "crisis" ? "blocked" : "created",
     shareVisibility,
     safety,
@@ -1782,6 +1841,7 @@ export async function createLetterAnswer(input: {
   if (responderNickname === null || CONTACT_PATTERN.test(answerBody)) {
     return { ok: false as const, error: "contact-info-not-allowed" as const };
   }
+  const storedResponderNickname = responderNickname ?? randomCuteNickname();
 
   const hash = tokenHash(input.token);
   const data = await readLettersFile();
@@ -1832,7 +1892,7 @@ export async function createLetterAnswer(input: {
     id: answerId,
     letterId: letter.id,
     deliveryId: delivery.id,
-    responderNickname: responderNickname || undefined,
+    responderNickname: storedResponderNickname,
     body: answerBody,
     scripture: selectedScripture,
     answerCardId: answerCard.id,

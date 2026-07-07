@@ -3,8 +3,10 @@ import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 
 import { LetterQuickSendForm } from "@/components/letter-quick-send-form";
+import { auth } from "@/auth";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
+import { getRelayAvailability } from "@/lib/letters";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,6 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LettersLandingPage({ params }: Props) {
   const { locale: requestedLocale } = await params;
   const locale = await resolveLocale(requestedLocale);
+  const session = await auth();
+  const relayAvailability = await getRelayAvailability(session?.user?.email ?? null);
 
   return (
     <main className="page-shell pb-28">
@@ -48,6 +52,21 @@ export default async function LettersLandingPage({ params }: Props) {
               : "Emails stay hidden; every letter and reply is relayed only through the system."}
           </span>
         </div>
+        {!relayAvailability.hasEligibleHumanRelay ? (
+          <div className="mt-6 max-w-2xl rounded-2xl border border-[var(--gold-border)] bg-[var(--gold-soft)] p-5 text-left text-sm leading-6 text-[var(--ink)]">
+            <p className="font-bold">
+              {locale === "ko" ? "따뜻한 세상의 빛이 되어 주세요." : "Become a warm light for someone."}
+            </p>
+            <p className="mt-1 text-[var(--ink-muted)]">
+              {locale === "ko"
+                ? "지금은 당신의 고민을 당신에게 다시 배정하지 않도록, 기다리는 빛 전달자가 더 필요합니다. 테스트용 마스터 계정이 안전하게 받지만, 실제 릴레이를 위해 참여해 주세요."
+                : "We never assign your own concern back to you. A test master account can receive it safely for now, but the real relay needs more light bearers."}
+            </p>
+            <Link href={`/${locale}/letters/join`} className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl bg-[var(--gold)] px-4 py-2 text-xs font-bold text-white">
+              {locale === "ko" ? "릴레이로 참여하기" : "Join the relay"}
+            </Link>
+          </div>
+        ) : null}
       </section>
 
       <section className="mx-auto flex max-w-lg justify-center gap-6 text-sm">

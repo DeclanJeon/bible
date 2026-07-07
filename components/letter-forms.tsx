@@ -237,6 +237,9 @@ export function LetterJoinForm({ locale }: { locale: AppLocale }) {
             <label className="space-y-2 text-sm font-semibold text-[var(--ink)]">
               {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
               <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} autoComplete="nickname" className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+              <p className="text-xs leading-5 text-[var(--ink-muted)]">
+                {locale === "ko" ? "비워두면 귀여운 임의 닉네임이 자동으로 지정됩니다." : "Leave it blank to receive a cute random nickname."}
+              </p>
             </label>
           </div>
           <label className="flex gap-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4 text-sm leading-6 text-[var(--ink)]">
@@ -358,6 +361,9 @@ export function LetterSettingsForm({ locale, participant }: { locale: AppLocale;
         <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
           {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
           <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} disabled={unsubscribed} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)] disabled:opacity-60" />
+          <p className="text-xs leading-5 text-[var(--ink-muted)]">
+            {locale === "ko" ? "비워두고 저장하면 귀여운 임의 닉네임이 지정됩니다." : "Leave it blank to receive a cute random nickname."}
+          </p>
         </label>
         <label className="flex gap-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4 text-sm leading-6 text-[var(--ink)]">
           <input checked={canReceiveLetters} onChange={(event) => setCanReceiveLetters(event.target.checked)} disabled={unsubscribed} type="checkbox" className="mt-1 h-4 w-4 accent-[var(--gold)] disabled:opacity-60" />
@@ -474,6 +480,9 @@ export function LetterWriteForm({ locale, authorEmail }: { locale: AppLocale; au
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
         {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
         <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+        <p className="text-xs leading-5 text-[var(--ink-muted)]">
+          {locale === "ko" ? "비워두면 귀여운 임의 닉네임으로 표시됩니다." : "Leave it blank to show a cute random nickname."}
+        </p>
       </label>
       <input type="hidden" name="shareVisibility" value={visibility} />
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
@@ -567,6 +576,9 @@ export function LetterReplyForm({
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
         {locale === "ko" ? "답변자 닉네임 (선택)" : "Responder nickname (optional)"}
         <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+        <p className="text-xs leading-5 text-[var(--ink-muted)]">
+          {locale === "ko" ? "비워두면 귀여운 임의 닉네임으로 답변이 전달됩니다." : "Leave it blank to send the reply with a cute random nickname."}
+        </p>
       </label>
 
       <section className="space-y-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4">
@@ -788,6 +800,9 @@ export function LetterRelayJoinForm({ locale, participant, userEmail }: { locale
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
         {locale === "ko" ? "닉네임 (선택)" : "Nickname (optional)"}
         <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
+        <p className="text-xs leading-5 text-[var(--ink-muted)]">
+          {locale === "ko" ? "비워두고 저장하면 귀여운 임의 닉네임이 지정됩니다." : "Leave it blank to receive a cute random nickname."}
+        </p>
       </label>
       <label className="flex gap-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4 text-sm leading-6 text-[var(--ink)]">
         <input checked={canReceive} onChange={(event) => setCanReceive(event.target.checked)} type="checkbox" className="mt-1 h-4 w-4 accent-[var(--gold)]" />
