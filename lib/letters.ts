@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 
 import { getBookMetadata } from "@/lib/book-metadata";
+import { getPassage, type BibleReference } from "@/lib/bible";
 import { resolveAppLocale, type AppLocale } from "@/lib/content";
 import { buildBibleReferenceHref } from "@/lib/navigation";
 import { buildPassageRecommendation } from "@/lib/passage-response";
@@ -736,6 +737,35 @@ function normalizeRecommendationConfidence(value: unknown): ScriptureSuggestion[
   return value === "high" || value === "medium" || value === "low" ? value : "medium";
 }
 
+function compactScriptureText(text: string) {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  for (const marker of ["핵심 구절:", "Key lines:"]) {
+    const markerIndex = normalized.indexOf(marker);
+    if (markerIndex >= 0) {
+      return normalized.slice(markerIndex + marker.length).trim();
+    }
+  }
+  if (
+    normalized.startsWith("본문을 직접 읽으며") ||
+    normalized.startsWith("Read this passage directly") ||
+    normalized.startsWith("Supporting passage") ||
+    normalized.startsWith("메인 성구를 보강")
+  ) {
+    return "";
+  }
+  return normalized;
+}
+
+async function passageVerseText(reference: BibleReference, locale: AppLocale, fallbackText: string) {
+  try {
+    const passage = await getPassage(reference, locale);
+    const text = passage.verses.map((verse) => `${verse.verse}. ${verse.text}`).join(" ");
+    return compactScriptureText(text);
+  } catch {
+    return compactScriptureText(fallbackText);
+  }
+}
+
 async function buildReplyScriptureSuggestions(letter: AnonymousLetter, locale: AppLocale) {
   const suggestions: ScriptureSuggestion[] = [];
   const seen = new Set<string>();
@@ -770,8 +800,8 @@ async function buildReplyScriptureSuggestions(letter: AnonymousLetter, locale: A
     for (const related of build.relatedPassageDetails ?? []) {
       pushSuggestion({
         reference: related.referenceLabel || referenceLabel(related.reference, locale),
-        text: related.excerpt,
-        reason: related.reason,
+        text: await passageVerseText(related.reference, locale, related.excerpt),
+        reason: "",
         href: related.href,
         confidence,
       });
@@ -1656,7 +1686,7 @@ export async function createAnonymousLetter(input: {
     visualTheme,
     shareUrl: makeShareUrl(`/${locale}/letters/card/${cardId}`),
     generationProvider: "codex-imagen",
-    generationStatus: "pending",
+    generationStatus: "skipped",
     visibility: shareVisibility,
     createdAt: now,
   };
@@ -1696,8 +1726,6 @@ export async function createAnonymousLetter(input: {
     await scheduleLetterDispatch(async () => {
       const { delivery, recipientEmail, unsubscribeToken } = deliveryReservation;
       const deliveryId = delivery.id;
-      const imageResult = await queueCardImageGeneration(card, { body, locale });
-      await updateCardGeneration(card.id, imageResult);
       const replyUrl = makeShareUrl(`/${locale}/letters/reply/${replyToken}`);
       const unsubscribeUrl = unsubscribeToken ? makeShareUrl(`/${locale}/letters/unsubscribe/${unsubscribeToken}`) : null;
       const footerText = unsubscribeUrl
@@ -1709,7 +1737,6 @@ export async function createAnonymousLetter(input: {
         text: `${card.title}\n\n${card.summary}\n\n${scripture.reference}\n${scripture.text}\n\n${replyUrl}${footerText}`,
         html: buildLetterEmailHtml({
           card,
-          imageUrl: imageResult.imageUrl,
           ctaUrl: replyUrl,
           ctaLabel: locale === "ko" ? "답변과 성구 보내기" : "Send a reply and Scripture",
           locale,

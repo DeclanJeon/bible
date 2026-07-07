@@ -447,6 +447,15 @@ try {
         title: locale === "ko" ? ({ MIC: "미가", PSA: "시편" }[code] ?? code) : ({ MIC: "Micah", PSA: "Psalm" }[code] ?? code),
       }),
     },
+    "@/lib/bible": {
+      getPassage: async (reference, locale) => ({
+        reference: `${locale === "ko" ? "시편" : "Psalm"} ${reference.chapter}:${reference.startVerse}`,
+        verses: Array.from({ length: reference.endVerse - reference.startVerse + 1 }, (_, index) => {
+          const verse = reference.startVerse + index;
+          return { verse, text: locale === "ko" ? `추천 성구 본문 ${verse}` : `Suggested passage text ${verse}` };
+        }),
+      }),
+    },
     "@/lib/content": {
       resolveAppLocale: (locale) => (locale === "en" ? "en" : "ko"),
     },
@@ -573,24 +582,19 @@ try {
   assert(typeof answer.readToken === "string" && answer.readToken.length > 20, "accepted replies must mint a read token for the author notification");
   assert(emailCalls.length === 2 && emailCalls[1].to === authorEmail, "accepted replies should notify only the original author", emailCalls);
   assert(emailCalls[1].text.includes(`/ko/letters/answer/${answer.readToken}`), "author notification must contain the tokenized answer URL");
-  const questionDriveImageUrl = cardGenerationResults.get(normalLetter.bundle.card.id)?.imageUrl;
+  const questionImageResult = cardGenerationResults.get(normalLetter.bundle.card.id);
   const answerDriveImageUrl = cardGenerationResults.get(answer.answerCard.id)?.imageUrl;
-  assert(questionDriveImageUrl === expectedDriveCardImageSrc(normalLetter.bundle.card.id), "letter image generation stub must return a public Drive URL for the question card", { questionDriveImageUrl });
-  assert(answerDriveImageUrl === expectedDriveCardImageSrc(answer.answerCard.id), "letter image generation stub must return a public Drive URL for the answer card", { answerDriveImageUrl });
+  assert(questionImageResult === undefined, "question cards must not generate images before the relay runner writes a reply", { questionImageResult, cardGenerationCalls });
+  assert(answerDriveImageUrl === expectedDriveCardImageSrc(answer.answerCard.id), "answer image generation stub must return a public Drive URL only after the reply is submitted", { answerDriveImageUrl });
+  assertEmailHtmlContainsDesignedFallbackCard({
+    label: "letter notification before relay reply",
+    message: emailCalls[0],
+    card: normalLetter.bundle.card,
+    expectedCtaPath: `/ko/letters/reply/${normalLetter.replyToken}`,
+    expectedCtaText: "답변과 성구 보내기",
+    forbiddenValues: [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
+  });
   assertEmailsUseReturnedDriveCardImageUrls([
-    {
-      label: "letter notification",
-      message: emailCalls[0],
-      card: normalLetter.bundle.card,
-      cardId: normalLetter.bundle.card.id,
-      locale: "ko",
-      expectedImageUrl: questionDriveImageUrl,
-      expectedAltText: normalLetter.bundle.card.title,
-      expectedCtaPath: `/ko/letters/reply/${normalLetter.replyToken}`,
-      expectedCtaText: "답변과 성구 보내기",
-      expectedFallbackLabel: "텍스트로 읽기",
-      forbiddenValues: [authorEmail, helperEmail, "creator@example.test", ...sensitiveGenerationMetadataValues, "SMTP env is not configured"],
-    },
     {
       label: "reply notification",
       message: emailCalls[1],
@@ -606,17 +610,18 @@ try {
     },
   ]);
   const storedAfterDriveImages = JSON.parse(await readFile(process.env.LETTERS_DATA_FILE, "utf8"));
-  assertCardsStoreReturnedDriveImageUrls(storedAfterDriveImages.cards, [
-    { label: "question card", cardId: normalLetter.bundle.card.id, expectedImageUrl: questionDriveImageUrl },
-    { label: "answer card", cardId: answer.answerCard.id, expectedImageUrl: answerDriveImageUrl },
-  ]);
   const storedQuestionCard = storedAfterDriveImages.cards.find((card) => card.id === normalLetter.bundle.card.id);
   const storedAnswerCard = storedAfterDriveImages.cards.find((card) => card.id === answer.answerCard.id);
+  assert(storedQuestionCard?.generationStatus === "skipped" && storedQuestionCard.imageUrl === undefined, "stored question card must stay image-less until a reply exists", storedQuestionCard);
+  assertCardsStoreReturnedDriveImageUrls(storedAfterDriveImages.cards, [
+    { label: "answer card", cardId: answer.answerCard.id, expectedImageUrl: answerDriveImageUrl },
+  ]);
+  assert(letters.makeCardPageImageSrc(storedQuestionCard, "ko") === null, "reply page question card must render the non-image fallback before the relay answer is submitted", storedQuestionCard);
   assertCardPageImagesUseServerProxy(letters, [
-    { label: "reply page question card", card: storedQuestionCard, locale: "ko" },
     { label: "answer/share page answer card", card: storedAnswerCard, locale: "ko" },
   ]);
-  assert(await letters.getStoredCardImageUrl(normalLetter.bundle.card.id) === questionDriveImageUrl, "card image route must resolve stored Drive image URLs by card id");
+  assert(await letters.getStoredCardImageUrl(normalLetter.bundle.card.id) === null, "card image route must not resolve an image URL for question cards before a relay answer is submitted");
+  assert(await letters.getStoredCardImageUrl(answer.answerCard.id) === answerDriveImageUrl, "card image route must resolve stored Drive image URLs for generated answer cards");
   assert(await letters.getStoredCardImageUrl("../bad-card-id") === null, "card image route lookup must reject unsafe card ids");
   await assertCardImageRouteProxiesStoredDriveImage();
 
@@ -629,9 +634,9 @@ try {
     body: `${IMAGE_FALLBACK_MARKER}: 이미지 생성이 실패해도 말씀과 답장 버튼이 담긴 카드형 이메일을 받아야 합니다.`,
   });
   await flushAsyncWork();
-  assert(fallbackLetter.ok === true, "letter creation should still succeed when image generation returns no image URL", fallbackLetter);
+  assert(fallbackLetter.ok === true, "letter creation should still succeed without generating a pre-reply question image", fallbackLetter);
   const fallbackLetterImageResult = cardGenerationResults.get(fallbackLetter.bundle.card.id);
-  assert(fallbackLetterImageResult?.status === "failed" && fallbackLetterImageResult.imageUrl === undefined, "image fallback letter fixture must simulate a failed generator result with no imageUrl", fallbackLetterImageResult);
+  assert(fallbackLetterImageResult === undefined, "image fallback letter fixture must not call the image generator for question cards", fallbackLetterImageResult);
   const fallbackEmailHtmlFailures = [];
   const fallbackLetterEmail = emailCalls.at(-1);
   try {
@@ -893,6 +898,8 @@ try {
   assert(runnerBundle?.letter.scripture.reference.length > 0, "reply bundle letter must include scripture for relay runner", runnerBundle?.letter.scripture);
   const routeSuggestions = await letters.suggestReplyScriptures(normalLetter.replyToken);
   assert(routeSuggestions.ok === true && routeSuggestions.suggestions.length === 10, "reply suggestion API contract must return the same capped ten scripture options", routeSuggestions);
+  const relatedRunnerSuggestion = runnerBundle.scriptureRecommendations.find((suggestion) => suggestion.reference.includes("23:5"));
+  assert(relatedRunnerSuggestion && relatedRunnerSuggestion.reason === "" && !relatedRunnerSuggestion.text.includes("추천 이유") && !relatedRunnerSuggestion.text.includes("메인 성구"), "relay runner related scripture suggestions must carry only scripture text, not explanatory helper copy", relatedRunnerSuggestion);
 
   // Relay contract: accept relay participation
   const relayResult = await letters.acceptRelayParticipation(verifiedParticipant.sessionToken);
@@ -1357,6 +1364,7 @@ try {
     });
     const replyText = formText(replyForm);
     assert(replyText.includes("추천 중 선택") && replyText.includes("직접 입력") && replyText.includes("1/2") && replyText.includes("다음"), "LetterReplyForm must render suggested/custom scripture controls and slide navigation", replyText);
+    assert(!replyText.includes("high") && !replyText.includes("돌보심"), "LetterReplyForm suggested scripture card must hide confidence and explanatory reason copy", replyText);
     const scriptureDots = collectFormNodes(replyForm, (node) => node.type === "button" && typeof node.props?.["aria-label"] === "string" && node.props["aria-label"].includes("추천 성구 선택"));
     assert(scriptureDots.length === 2, "LetterReplyForm must render one slide selector per scripture suggestion", scriptureDots.map((node) => node.props?.["aria-label"]));
 
@@ -1535,7 +1543,7 @@ try {
       "relay accept sets canReceiveLetters through session token",
       "reply bundle and suggestion API include up to ten de-duplicated scripture recommendations for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
-      "letter and reply email HTML use returned Drive image URLs as the hero before privacy-safe CTAs, reject localized/root server card image routes, expose only a labeled text fallback after the CTA, and keep designed scripture card blocks when images are missing",
+      "pre-reply letter emails keep designed HTML cards without image generation, while submitted answer emails use returned Drive image URLs as the hero before privacy-safe CTAs",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "letter POST API route returns 202 accepted:true without serializing bundle/cardId/letterId and schedules createAnonymousLetter after acknowledgement",

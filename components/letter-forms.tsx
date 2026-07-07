@@ -604,19 +604,13 @@ export function LetterReplyForm({
         {scriptureMode === "suggested" && selectedSuggestion ? (
           <div className="space-y-3">
             <div className="rounded-2xl border border-[var(--gold-border)] bg-[var(--gold-soft)] p-4">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
-                    {locale === "ko" ? "추천 성구" : "Suggested Scripture"} {selectedIndex + 1}/{suggestions.length}
-                  </p>
-                  <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">{selectedSuggestion.reference}</h3>
-                </div>
-                <span className="rounded-full border border-[var(--gold-border)] px-2 py-1 text-[11px] font-bold text-[var(--gold)]">
-                  {selectedSuggestion.confidence}
-                </span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
+                  {locale === "ko" ? "추천 성구" : "Suggested Scripture"} {selectedIndex + 1}/{suggestions.length}
+                </p>
+                <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">{selectedSuggestion.reference}</h3>
               </div>
               {selectedSuggestion.text ? <p className="mt-3 text-sm leading-6 text-[var(--ink)]">{selectedSuggestion.text}</p> : null}
-              {selectedSuggestion.reason ? <p className="mt-3 text-xs leading-5 text-[var(--ink-muted)]">{selectedSuggestion.reason}</p> : null}
             </div>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex gap-2">
