@@ -384,28 +384,72 @@ export default async function CompanionPage({ params, searchParams }: Props) {
         <aside className="space-y-6 lg:sticky lg:top-[calc(var(--nav-height)+1.5rem)]">
           {recommendation.background ? (
             <section className="glass rounded-2xl p-5 sm:p-6">
-              <div className="section-title text-base">{appLocale === "ko" ? "배경과 역사" : "Background and history"}</div>
+              <div className="section-title text-base">{appLocale === "ko" ? "본문의 배경" : "Passage background"}</div>
               <div className="mt-4 space-y-4 text-sm leading-7 text-ink-muted">
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "책과 이야기" : "Book and story"}</div>
-                  <p className="mt-1.5">{recommendation.background.storyContext}</p>
+                <div className="rounded-2xl border border-[var(--hairline)] bg-surface-2 p-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "본문이 놓인 자리" : "Where this passage sits"}</div>
+                  <p className="mt-2">{recommendation.background.storyContext}</p>
+                  {recommendation.background.setting?.literary && recommendation.background.setting.literary !== recommendation.background.storyContext ? (
+                    <p className="mt-2">{recommendation.background.setting.literary}</p>
+                  ) : null}
+                  {recommendation.background.setting?.historical ? (
+                    <p className="mt-2">{recommendation.background.setting.historical}</p>
+                  ) : null}
+                  {recommendation.background.setting?.cultural ? (
+                    <p className="mt-2">{recommendation.background.setting.cultural}</p>
+                  ) : null}
                 </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "정경적 문맥" : "Canonical context"}</div>
-                  <p className="mt-1.5">{recommendation.background.canonicalContext}</p>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "시대·장소·청중" : "Date / place / audience"}</div>
-                  <p className="mt-1.5">
-                    {compactLines(recommendation.background.date)} {compactLines(recommendation.background.place)} {compactLines(recommendation.background.audience)}
-                  </p>
-                </div>
-                {recommendation.background.author ? (
+
+                {recommendation.background.people?.length ? (
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "저자" : "Author"}</div>
-                    <p className="mt-1.5">{recommendation.background.author}</p>
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "등장 인물과 상황" : "People and situation"}</div>
+                    <div className="mt-2 space-y-2">
+                      {recommendation.background.people.slice(0, 3).map((person) => (
+                        <div key={`${person.name}-${person.role}`} className="rounded-xl border border-[var(--hairline)] bg-surface-2 p-3">
+                          <div className="font-semibold text-ink">{person.name}</div>
+                          <p className="mt-1 text-xs leading-5">{person.role}</p>
+                          <p className="mt-1 text-xs leading-5 text-[var(--ink-subtle)]">{person.relevance}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
+
+
+                {recommendation.background.message ? (
+                  <div className="rounded-2xl border border-[var(--hairline)] bg-surface-2 p-4">
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "이 말씀이 전하는 메시지" : "What this passage says"}</div>
+                    <p className="mt-2"><span className="font-semibold text-ink">{appLocale === "ko" ? "처음 들은 의미: " : "First meaning: "}</span>{recommendation.background.message.original}</p>
+                    <p className="mt-2"><span className="font-semibold text-ink">{appLocale === "ko" ? "성경 전체 흐름: " : "Whole-Bible thread: "}</span>{recommendation.background.message.theological}</p>
+                    <p className="mt-2"><span className="font-semibold text-ink">{appLocale === "ko" ? "오늘의 연결: " : "For today: "}</span>{recommendation.background.message.pastoral}</p>
+                  </div>
+                ) : recommendation.background.canonicalContext ? (
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "정경적 문맥" : "Canonical context"}</div>
+                    <p className="mt-1.5">{recommendation.background.canonicalContext}</p>
+                  </div>
+                ) : null}
+
+                {recommendation.background.application ? (
+                  <div className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/10 p-4">
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "오늘 붙들 문장" : "A sentence to hold today"}</div>
+                    <p className="mt-2 font-semibold text-ink">{recommendation.background.application.takeaway}</p>
+                    <p className="mt-2">{recommendation.background.application.comfort}</p>
+                    <p className="mt-2 text-xs leading-5 text-[var(--ink-subtle)]">{recommendation.background.application.prayerPrompt}</p>
+                  </div>
+                ) : null}
+
+                {recommendation.background.message?.cautions.length ? (
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{appLocale === "ko" ? "조심해서 읽을 점" : "Reading cautions"}</div>
+                    <ul className="mt-2 space-y-1.5">
+                      {recommendation.background.message.cautions.map((caution) => (
+                        <li key={caution} className="rounded-xl border border-[var(--hairline)] bg-surface-2 px-3 py-2 text-xs leading-5">{caution}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
               </div>
             </section>
           ) : null}

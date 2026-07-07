@@ -80,6 +80,18 @@ function companionHelpTexts(html) {
   return [...html.matchAll(/(?:어떻게 도움이 되나|How it helps)<\/div><p class="mt-2 text-sm leading-7 text-\[var\(--muted\)\]">([^<]+)<\/p>/g)].map((match) => match[1]);
 }
 
+function assertExpectedPrimaryStable(html, expectedPrimary, probeId) {
+  const start = html.indexOf("메인 성구") >= 0 ? html.indexOf("메인 성구") : html.indexOf("Primary passage");
+  const endCandidates = ["왜 이 성구인가", "Why this passage fits"]
+    .map((marker) => html.indexOf(marker))
+    .filter((index) => index > start);
+  const end = endCandidates.length ? Math.min(...endCandidates) : html.length;
+  const primarySection = start >= 0 ? html.slice(start, end) : html;
+  const passed = primarySection.includes(expectedPrimary);
+  assert(passed, `${probeId} changed expected primary reference ${expectedPrimary}`);
+  return { type: "expectedPrimaryStable", expected: expectedPrimary, passed };
+}
+
 function assertCompanionCounselQuality(html, probeId) {
   const codeLabels = companionRelatedLabels(html).filter((label) => /^[1-3]?[A-Z]{2,3} \d+:\d+/.test(label.trim()));
   assert(codeLabels.length === 0, `${probeId} exposes untranslated Bible code labels: ${codeLabels.join(", ")}`);
@@ -146,6 +158,7 @@ probes.push(
     query: "사람은 어떻게 살아야 하는 것일까?",
     requiredAll: ["미가 6:8", "관련 성구 상담 노트"],
     requiredAny: ["마태복음 22:37-40", "전도서 12:13-14"],
+    expectedPrimary: "미가 6:8",
     forbidden: ["히브리서 13:21-25"],
   },
   {
@@ -153,6 +166,7 @@ probes.push(
     query: "사람은 왜 사는가?",
     requiredAll: ["에베소서 2:10", "관련 성구 상담 노트"],
     requiredAny: ["시편 139:13-16", "창세기 1:26-28", "전도서 12:13-14"],
+    expectedPrimary: "에베소서 2:10",
     forbidden: ["히브리서 13:21-25"],
   },
   {
@@ -160,6 +174,7 @@ probes.push(
     query: "죽음 이후에는 어떻게 되나요?",
     requiredAll: ["로마서 6:22-23", "관련 성구 상담 노트"],
     requiredAny: ["고린도전서 15:54-58", "요한복음 11:25-26", "요한계시록 21:3-4"],
+    expectedPrimary: "로마서 6:22-23",
     forbidden: ["요한계시록 17:5-8"],
   },
 );
@@ -167,7 +182,7 @@ probes.push(
   {
     id: "anxiety-care",
     query: "불안하고 두려울 때 어떤 말씀을 읽어야 하나요?",
-    requiredAll: ["관련 성구 상담 노트"],
+    requiredAll: ["관련 성구 상담 노트", "본문이 놓인 자리", "등장 인물과 상황", "이 말씀이 전하는 메시지", "오늘 붙들 문장", "조심해서 읽을 점"],
     requiredAny: ["마태복음 11:28-30", "빌립보서 4:6-7", "시편", "이사야"],
     forbidden: [],
   },
@@ -275,6 +290,9 @@ try {
       const passed = includesAny(html, probe.requiredAnyLinks);
       assertions.push({ type: "requiredAnyLinks", needles: probe.requiredAnyLinks, passed });
       assert(passed, `${probe.id} missing any link marker ${probe.requiredAnyLinks.join(", ")}`);
+    }
+    if (probe.expectedPrimary) {
+      assertions.push(assertExpectedPrimaryStable(html, probe.expectedPrimary, probe.id));
     }
     for (const needle of probe.forbidden ?? []) {
       const passed = !html.includes(needle);
