@@ -24,8 +24,8 @@ export default async function LetterSentPage({ params }: Props) {
             <p className="font-bold">{locale === "ko" ? "따뜻한 세상의 빛이 되어 주세요." : "Become a warm light for someone."}</p>
             <p className="mt-1 text-[var(--ink-muted)]">
               {locale === "ko"
-                ? "시스템은 작성자 본인에게 답변을 맡기지 않습니다. 지금은 테스트용 마스터 계정이 받을 수 있지만, 진짜 릴레이가 이어지려면 한 사람이 더 필요해요."
-                : "The system never asks the author to answer their own concern. A test master account can receive this for now, but the real relay needs one more person."}
+                ? "시스템은 작성자 본인에게 답변을 맡기지 않습니다. 진짜 릴레이가 이어지려면 한 사람이 더 필요해요."
+                : "The system never asks the author to answer their own concern. The real relay needs one more person."}
             </p>
             <Link href={`/${locale}/letters/join`} className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl bg-[var(--gold)] px-4 py-2 text-xs font-bold text-white">
               {locale === "ko" ? "릴레이로 참여하기" : "Join the relay"}

@@ -59,8 +59,8 @@ export default async function LettersLandingPage({ params }: Props) {
             </p>
             <p className="mt-1 text-[var(--ink-muted)]">
               {locale === "ko"
-                ? "지금은 당신의 고민을 당신에게 다시 배정하지 않도록, 기다리는 빛 전달자가 더 필요합니다. 테스트용 마스터 계정이 안전하게 받지만, 실제 릴레이를 위해 참여해 주세요."
-                : "We never assign your own concern back to you. A test master account can receive it safely for now, but the real relay needs more light bearers."}
+                ? "당신의 고민이 당신에게 다시 배정되지 않도록, 기다리는 빛 전달자가 더 필요합니다."
+                : "The relay needs more light bearers so your own concern is never assigned back to you."}
             </p>
             <Link href={`/${locale}/letters/join`} className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl bg-[var(--gold)] px-4 py-2 text-xs font-bold text-white">
               {locale === "ko" ? "릴레이로 참여하기" : "Join the relay"}
