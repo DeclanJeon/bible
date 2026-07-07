@@ -39,7 +39,7 @@ export default async function LetterReplyPage({ params }: Props) {
             {locale === "ko" ? "아래 추천 성구 중 하나를 고르거나 직접 입력하세요. 답변은 시스템이 카드뉴스로 만들어 작성자에게 전달합니다. 당신의 이메일은 보이지 않습니다." : "Pick one of the recommended scriptures or enter your own. The system turns your answer into a card and delivers it. Your email is never shown."}
           </p>
           <div className="mt-7">
-            <LetterReplyForm locale={locale} token={token} defaultScripture={bundle.letter.scripture.reference} />
+            <LetterReplyForm locale={locale} token={token} defaultScripture={bundle.letter.scripture.reference} scriptureSuggestions={bundle.scriptureRecommendations} />
           </div>
         </div>
       </section>

@@ -5,6 +5,11 @@ import { FormEvent, useMemo, useState, useTransition } from "react";
 import { CheckCircle2, Loader2, Mail, Send, ShieldCheck } from "lucide-react";
 
 import type { AppLocale } from "@/lib/content";
+import type { ScriptureSuggestion } from "@/lib/letters";
+
+type ReplyScriptureMode = "suggested" | "custom";
+
+const MAX_REPLY_SCRIPTURE_SUGGESTIONS = 10;
 
 const CATEGORY_OPTIONS = {
   ko: [
@@ -40,6 +45,32 @@ function errorMessage(error: string | null, locale: AppLocale) {
     "expired-token": "This reply link has expired.",
   };
   return (locale === "ko" ? ko : en)[error] ?? error;
+}
+
+function normalizeReplyScriptureSuggestions(suggestions: ScriptureSuggestion[], fallbackReference: string) {
+  const seen = new Set<string>();
+  const normalized: ScriptureSuggestion[] = [];
+  for (const suggestion of suggestions) {
+    const reference = suggestion.reference.replace(/\s+/g, " ").trim();
+    if (!reference || seen.has(reference)) {
+      continue;
+    }
+    seen.add(reference);
+    normalized.push({ ...suggestion, reference });
+    if (normalized.length >= MAX_REPLY_SCRIPTURE_SUGGESTIONS) {
+      break;
+    }
+  }
+  if (normalized.length === 0 && fallbackReference.trim()) {
+    normalized.push({
+      reference: fallbackReference.trim(),
+      text: "",
+      reason: "",
+      href: null,
+      confidence: "low",
+    });
+  }
+  return normalized;
 }
 
 type ParticipantSummary = {
@@ -470,13 +501,48 @@ export function LetterWriteForm({ locale, authorEmail }: { locale: AppLocale; au
   );
 }
 
-export function LetterReplyForm({ locale, token, defaultScripture }: { locale: AppLocale; token: string; defaultScripture: string }) {
+export function LetterReplyForm({
+  locale,
+  token,
+  defaultScripture,
+  scriptureSuggestions = [],
+}: {
+  locale: AppLocale;
+  token: string;
+  defaultScripture: string;
+  scriptureSuggestions?: ScriptureSuggestion[];
+}) {
+  const suggestions = useMemo(
+    () => normalizeReplyScriptureSuggestions(scriptureSuggestions, defaultScripture),
+    [defaultScripture, scriptureSuggestions],
+  );
   const [body, setBody] = useState("");
   const [nickname, setNickname] = useState("");
-  const [scriptureRef, setScriptureRef] = useState(defaultScripture);
+  const [scriptureRef, setScriptureRef] = useState(suggestions[0]?.reference ?? defaultScripture);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scriptureMode, setScriptureMode] = useState<ReplyScriptureMode>(suggestions.length > 0 ? "suggested" : "custom");
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const canSubmit = useMemo(() => body.trim().length >= 8 && body.length <= 1400, [body]);
+  const canSubmit = useMemo(() => body.trim().length >= 8 && body.length <= 1400 && scriptureRef.trim().length > 0, [body, scriptureRef]);
+  const selectedSuggestion = suggestions[selectedIndex] ?? suggestions[0] ?? null;
+
+  function chooseSuggestion(index: number) {
+    const suggestion = suggestions[index];
+    if (!suggestion) {
+      return;
+    }
+    setSelectedIndex(index);
+    setScriptureMode("suggested");
+    setScriptureRef(suggestion.reference);
+  }
+
+  function moveSuggestion(delta: number) {
+    if (suggestions.length === 0) {
+      return;
+    }
+    const nextIndex = (selectedIndex + delta + suggestions.length) % suggestions.length;
+    chooseSuggestion(nextIndex);
+  }
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -502,10 +568,94 @@ export function LetterReplyForm({ locale, token, defaultScripture }: { locale: A
         {locale === "ko" ? "답변자 닉네임 (선택)" : "Responder nickname (optional)"}
         <input value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={32} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
       </label>
-      <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
-        {locale === "ko" ? "함께 보낼 성구" : "Scripture to send"}
-        <input value={scriptureRef} onChange={(event) => setScriptureRef(event.target.value)} className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]" />
-      </label>
+
+      <section className="space-y-3 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-1)] p-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-bold text-[var(--ink)]">{locale === "ko" ? "함께 보낼 성구" : "Scripture to send"}</p>
+            <p className="mt-1 text-xs leading-5 text-[var(--ink-muted)]">
+              {locale === "ko"
+                ? `시스템 추천 성구 ${suggestions.length}개 중 고르거나 직접 입력할 수 있습니다.`
+                : `Choose from ${suggestions.length} system suggestions or enter your own reference.`}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--input-bg)] p-1 text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => {
+                setScriptureMode("suggested");
+                if (selectedSuggestion) setScriptureRef(selectedSuggestion.reference);
+              }}
+              disabled={suggestions.length === 0}
+              className={`min-h-10 rounded-lg px-3 transition disabled:cursor-not-allowed disabled:opacity-40 ${scriptureMode === "suggested" ? "bg-[var(--gold)] text-white" : "text-[var(--ink-muted)] hover:text-[var(--ink)]"}`}
+            >
+              {locale === "ko" ? "추천 중 선택" : "Suggestions"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setScriptureMode("custom")}
+              className={`min-h-10 rounded-lg px-3 transition ${scriptureMode === "custom" ? "bg-[var(--gold)] text-white" : "text-[var(--ink-muted)] hover:text-[var(--ink)]"}`}
+            >
+              {locale === "ko" ? "직접 입력" : "Custom"}
+            </button>
+          </div>
+        </div>
+
+        {scriptureMode === "suggested" && selectedSuggestion ? (
+          <div className="space-y-3">
+            <div className="rounded-2xl border border-[var(--gold-border)] bg-[var(--gold-soft)] p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
+                    {locale === "ko" ? "추천 성구" : "Suggested Scripture"} {selectedIndex + 1}/{suggestions.length}
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">{selectedSuggestion.reference}</h3>
+                </div>
+                <span className="rounded-full border border-[var(--gold-border)] px-2 py-1 text-[11px] font-bold text-[var(--gold)]">
+                  {selectedSuggestion.confidence}
+                </span>
+              </div>
+              {selectedSuggestion.text ? <p className="mt-3 text-sm leading-6 text-[var(--ink)]">{selectedSuggestion.text}</p> : null}
+              {selectedSuggestion.reason ? <p className="mt-3 text-xs leading-5 text-[var(--ink-muted)]">{selectedSuggestion.reason}</p> : null}
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex gap-2">
+                <button type="button" onClick={() => moveSuggestion(-1)} className="min-h-11 rounded-xl border border-[var(--hairline)] px-4 text-sm font-bold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
+                  {locale === "ko" ? "이전" : "Previous"}
+                </button>
+                <button type="button" onClick={() => moveSuggestion(1)} className="min-h-11 rounded-xl border border-[var(--hairline)] px-4 text-sm font-bold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
+                  {locale === "ko" ? "다음" : "Next"}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {suggestions.map((suggestion, index) => (
+                  <button
+                    key={suggestion.reference}
+                    type="button"
+                    onClick={() => chooseSuggestion(index)}
+                    aria-label={locale === "ko" ? `${index + 1}번째 추천 성구 선택` : `Choose suggestion ${index + 1}`}
+                    className={`h-2.5 w-7 rounded-full transition ${index === selectedIndex ? "bg-[var(--gold)]" : "bg-[var(--hairline)] hover:bg-[var(--gold-border)]"}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
+            {locale === "ko" ? "직접 고른 성구" : "Custom Scripture"}
+            <input
+              value={scriptureRef}
+              onChange={(event) => {
+                setScriptureMode("custom");
+                setScriptureRef(event.target.value);
+              }}
+              placeholder={locale === "ko" ? "예: 요한복음 3:16" : "Example: John 3:16"}
+              className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 outline-none focus:border-[var(--input-focus-border)]"
+            />
+          </label>
+        )}
+      </section>
+
       <label className="block space-y-2 text-sm font-semibold text-[var(--ink)]">
         {locale === "ko" ? "답변" : "Reply"}
         <textarea value={body} onChange={(event) => setBody(event.target.value)} required minLength={8} maxLength={1400} rows={9} placeholder={locale === "ko" ? "정답을 말하기보다, 읽고 마음에 남은 위로를 적어주세요." : "You do not need a perfect answer. Share the comfort that stayed with you."} className="w-full resize-y rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] px-4 py-3 leading-7 outline-none focus:border-[var(--input-focus-border)]" />

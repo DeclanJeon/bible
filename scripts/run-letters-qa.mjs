@@ -282,6 +282,70 @@ function assertCardsStoreReturnedDriveImageUrls(cards, checks) {
   assert(failures.length === 0, "stored generated cards must keep the returned Drive image URL instead of a persistent server image route", failures);
 }
 
+function assertCardPageImagesUseServerProxy(letters, checks) {
+  const failures = [];
+  for (const { label, card, locale } of checks) {
+    const imageSrc = letters.makeCardPageImageSrc(card, locale);
+    const expectedSrc = `/${locale}/api/letters/card/${card.id}/image`;
+    if (imageSrc !== expectedSrc) {
+      failures.push({ label, expectedSrc, actualImageSrc: imageSrc });
+    }
+    if (typeof imageSrc === "string" && imageSrc.includes("drive.google.com")) {
+      failures.push({ label, reason: "page image source must not use the raw Drive URL", imageSrc });
+    }
+  }
+  assert(failures.length === 0, "letter/card pages must render generated images through the first-party image route so Drive redirects cannot break the browser view", failures);
+}
+
+async function assertCardImageRouteProxiesStoredDriveImage() {
+  const expectedImageUrl = expectedDriveCardImageSrc("card-route");
+  const fetchCalls = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url, options = {}) => {
+    fetchCalls.push({ url: String(url), options });
+    return new Response("webp-bytes", {
+      status: 200,
+      headers: { "content-type": "image/webp" },
+    });
+  };
+
+  try {
+    const route = loadTsModule("app/[locale]/api/letters/card/[cardId]/image/route.ts", {
+      "node:fs/promises": {
+        stat: async () => {
+          throw new Error("local image missing");
+        },
+        readFile: async () => {
+          throw new Error("remote proxy test must not read a local image file");
+        },
+      },
+      "next/server": {
+        NextResponse: class TestNextResponse extends Response {
+          static json(body, init) {
+            return Response.json(body, init);
+          }
+        },
+      },
+      "@/lib/letters": {
+        getStoredCardImageUrl: async (cardId) => {
+          assert(cardId === "card-route", "card image route must sanitize and pass the requested card id to storage lookup", { cardId });
+          return expectedImageUrl;
+        },
+      },
+    });
+    const response = await route.GET(new Request("https://bible.ponslink.test/ko/api/letters/card/card-route/image"), {
+      params: Promise.resolve({ cardId: "card-route" }),
+    });
+    assert(response.status === 200, "card image route must return proxied remote image responses", { status: response.status });
+    assert(response.headers.get("content-type") === "image/webp", "card image route must preserve remote image content type", { contentType: response.headers.get("content-type") });
+    assert(response.headers.get("x-content-type-options") === "nosniff", "card image route must keep proxied image responses nosniff-protected", { headers: Object.fromEntries(response.headers.entries()) });
+    assert(await response.text() === "webp-bytes", "card image route must stream the remote image body");
+    assert(fetchCalls.length === 1 && fetchCalls[0].url === expectedImageUrl && fetchCalls[0].options.redirect === "follow", "card image route must fetch the stored Drive URL with redirects enabled", fetchCalls);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
 const MIC_PROMPT_MARKER = "micah-locale-regression";
 const IMAGE_FALLBACK_MARKER = "image-fallback-regression";
 const IMAGE_FALLBACK_PROVIDER_ERRORS = [
@@ -313,6 +377,16 @@ function recommendationPrimaryFor(prompt, locale) {
 function makeRecommendation(prompt, locale) {
   const crisis = /crisis|self[-\s]?harm|자해|죽고 싶/i.test(prompt);
   const primary = recommendationPrimaryFor(prompt, locale);
+  const relatedPassageDetails = Array.from({ length: 11 }, (_, index) => {
+    const verse = index + 5;
+    return {
+      reference: { code: "PSA", chapter: 23, startVerse: verse, endVerse: verse },
+      referenceLabel: locale === "ko" ? `시편 23:${verse}` : `Psalm 23:${verse}`,
+      excerpt: locale === "ko" ? `${verse}. 추천 성구 본문 ${verse}` : `${verse}. Suggested passage text ${verse}`,
+      reason: locale === "ko" ? `추천 이유 ${verse}` : `Suggestion reason ${verse}`,
+      href: `/${locale}/bible/PSA.23.${verse}`,
+    };
+  });
   return {
     safety: {
       level: crisis ? "crisis" : "safe",
@@ -323,6 +397,7 @@ function makeRecommendation(prompt, locale) {
       readerHref: `/${locale}/bible/${primary.reference.code}.${primary.reference.chapter}.${primary.reference.startVerse}`,
       confidence: 0.91,
     },
+    relatedPassageDetails,
   };
 }
 
@@ -535,6 +610,15 @@ try {
     { label: "question card", cardId: normalLetter.bundle.card.id, expectedImageUrl: questionDriveImageUrl },
     { label: "answer card", cardId: answer.answerCard.id, expectedImageUrl: answerDriveImageUrl },
   ]);
+  const storedQuestionCard = storedAfterDriveImages.cards.find((card) => card.id === normalLetter.bundle.card.id);
+  const storedAnswerCard = storedAfterDriveImages.cards.find((card) => card.id === answer.answerCard.id);
+  assertCardPageImagesUseServerProxy(letters, [
+    { label: "reply page question card", card: storedQuestionCard, locale: "ko" },
+    { label: "answer/share page answer card", card: storedAnswerCard, locale: "ko" },
+  ]);
+  assert(await letters.getStoredCardImageUrl(normalLetter.bundle.card.id) === questionDriveImageUrl, "card image route must resolve stored Drive image URLs by card id");
+  assert(await letters.getStoredCardImageUrl("../bad-card-id") === null, "card image route lookup must reject unsafe card ids");
+  await assertCardImageRouteProxiesStoredDriveImage();
 
   const fallbackAuthorEmail = "fallback-author@example.test";
   const fallbackLetter = await letters.createAnonymousLetter({
@@ -803,8 +887,12 @@ try {
 
   // Relay contract: reply bundle includes scripture for relay runner
   const runnerBundle = await letters.getReplyBundle(normalLetter.replyToken);
-  assert(runnerBundle?.scriptureRecommendations?.length > 0, "reply bundle must include scripture recommendations for relay runner", runnerBundle?.scriptureRecommendations);
+  assert(runnerBundle?.scriptureRecommendations?.length === 10, "reply bundle must include up to ten scripture recommendations for relay runner", runnerBundle?.scriptureRecommendations);
+  assert(new Set(runnerBundle.scriptureRecommendations.map((suggestion) => suggestion.reference)).size === runnerBundle.scriptureRecommendations.length, "reply bundle scripture recommendations must be de-duplicated by reference", runnerBundle.scriptureRecommendations);
+  assert(runnerBundle.scriptureRecommendations[0]?.reference === normalLetter.bundle.card.scripture.reference, "reply bundle must keep the original system-selected scripture as the first recommendation", runnerBundle.scriptureRecommendations);
   assert(runnerBundle?.letter.scripture.reference.length > 0, "reply bundle letter must include scripture for relay runner", runnerBundle?.letter.scripture);
+  const routeSuggestions = await letters.suggestReplyScriptures(normalLetter.replyToken);
+  assert(routeSuggestions.ok === true && routeSuggestions.suggestions.length === 10, "reply suggestion API contract must return the same capped ten scripture options", routeSuggestions);
 
   // Relay contract: accept relay participation
   const relayResult = await letters.acceptRelayParticipation(verifiedParticipant.sessionToken);
@@ -1203,6 +1291,13 @@ try {
     collectFormNodes(node.props?.children, predicate, matches);
     return matches;
   }
+  function formText(node) {
+    if (node === undefined || node === null || typeof node === "boolean") return "";
+    if (typeof node === "string" || typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map((child) => formText(child)).join("");
+    if (typeof node === "object") return formText(node.props?.children);
+    return "";
+  }
   try {
     const letterForms = loadTsModule("components/letter-forms.tsx", {
       "next/link": { default: (props) => formElement("a", props) },
@@ -1249,6 +1344,100 @@ try {
     assert(submitButton?.props?.disabled !== true, "LetterWriteForm submit button should not be disabled only because a concern POST is pending", submitButton?.props);
     const pendingIcons = collectFormNodes(submitButton, (node) => typeof node.type === "function").map((node) => node.type.displayName ?? node.type.name);
     assert(!pendingIcons.includes("Loader2") && pendingIcons.includes("Send"), "LetterWriteForm submit button should not render a pending spinner for quick concern submission", pendingIcons);
+
+    letterFormRenderState = { values: ["답변 본문은 충분한 길이입니다.", "", "시편 23:1", 0, "suggested", null], isPending: false };
+    const replyForm = letterForms.LetterReplyForm({
+      locale: "ko",
+      token: "form-reply-token",
+      defaultScripture: "시편 23:1",
+      scriptureSuggestions: [
+        { reference: "시편 23:1", text: "여호와는 나의 목자시니", reason: "돌보심", href: "/ko/bible/PSA.23.1", confidence: "high" },
+        { reference: "미가 6:8", text: "오직 공의를 행하며", reason: "공의와 인자", href: "/ko/bible/MIC.6.8", confidence: "medium" },
+      ],
+    });
+    const replyText = formText(replyForm);
+    assert(replyText.includes("추천 중 선택") && replyText.includes("직접 입력") && replyText.includes("1/2") && replyText.includes("다음"), "LetterReplyForm must render suggested/custom scripture controls and slide navigation", replyText);
+    const scriptureDots = collectFormNodes(replyForm, (node) => node.type === "button" && typeof node.props?.["aria-label"] === "string" && node.props["aria-label"].includes("추천 성구 선택"));
+    assert(scriptureDots.length === 2, "LetterReplyForm must render one slide selector per scripture suggestion", scriptureDots.map((node) => node.props?.["aria-label"]));
+
+    const quickSessionStorage = () => {
+      const store = new Map();
+      return {
+        getItem: (key) => store.get(key) ?? null,
+        setItem: (key, value) => store.set(key, String(value)),
+        removeItem: (key) => store.delete(key),
+        _store: store,
+      };
+    };
+    let quickRenderState = { values: [], isPending: false };
+    let quickSessionState = { status: "unauthenticated", data: null };
+    const quickTransitionPromises = [];
+    const quickSignInCalls = [];
+    const quickFetchCalls = [];
+    const quickSend = loadTsModule("components/letter-quick-send-form.tsx", {
+      "next-auth/react": {
+        useSession: () => quickSessionState,
+        signIn: (...args) => {
+          quickSignInCalls.push(args);
+          return Promise.resolve();
+        },
+      },
+      "react": {
+        useState: (initial) => {
+          const value = quickRenderState.values.length > 0 ? quickRenderState.values.shift() : initial;
+          return [value, () => undefined];
+        },
+        useMemo: (factory) => factory(),
+        useCallback: (callback) => callback,
+        useRef: (initial) => ({ current: initial }),
+        useEffect: (effect) => effect(),
+        useTransition: () => [
+          quickRenderState.isPending,
+          (callback) => {
+            const result = callback();
+            quickTransitionPromises.push(result);
+            return result;
+          },
+        ],
+      },
+      "react/jsx-runtime": {
+        jsx: formElement,
+        jsxs: formElement,
+        Fragment: Symbol.for("react.fragment"),
+      },
+      "lucide-react": {
+        Loader2: formIcon("Loader2"),
+        Send: formIcon("Send"),
+      },
+    });
+
+    const unauthenticatedStorage = quickSessionStorage();
+    globalThis.window = { location: { href: "about:blank" }, sessionStorage: unauthenticatedStorage };
+    globalThis.fetch = (...args) => {
+      quickFetchCalls.push(args);
+      return Promise.resolve(Response.json({ ok: true }, { status: 202 }));
+    };
+    quickRenderState = { values: ["로그인 전에 작성한 고민은 충분한 길이를 갖습니다.", null], isPending: false };
+    quickSessionState = { status: "unauthenticated", data: null };
+    const unauthenticatedQuickForm = quickSend.LetterQuickSendForm({ locale: "ko" });
+    const [unauthenticatedQuickFormNode] = collectFormNodes(unauthenticatedQuickForm, (node) => node.type === "form");
+    unauthenticatedQuickFormNode.props.onSubmit({ preventDefault: () => undefined });
+    assert(quickSignInCalls.length === 1 && quickSignInCalls[0][0] === "google" && quickSignInCalls[0][1]?.callbackUrl === "/ko/letters", "LetterQuickSendForm must route unauthenticated sends through Google sign-in with the letters callback", quickSignInCalls);
+    assert(unauthenticatedStorage.getItem("letters.pendingConcern.ko")?.includes("로그인 전에 작성한 고민"), "LetterQuickSendForm must preserve the pending concern before sign-in", unauthenticatedStorage._store);
+    assert(quickFetchCalls.length === 0, "LetterQuickSendForm must not POST the concern before authentication", quickFetchCalls);
+
+    const authenticatedStorage = quickSessionStorage();
+    authenticatedStorage.setItem("letters.pendingConcern.ko", JSON.stringify({ body: "로그인 후 자동 전송할 고민은 충분한 길이입니다.", createdAt: Date.now() }));
+    globalThis.window = { location: { href: "about:blank" }, sessionStorage: authenticatedStorage };
+    quickRenderState = { values: ["", null], isPending: false };
+    quickSessionState = { status: "authenticated", data: { user: { email: "quick-author@example.test" } } };
+    quickSend.LetterQuickSendForm({ locale: "ko" });
+    await Promise.all(quickTransitionPromises.splice(0));
+    assert(quickFetchCalls.length === 1, "LetterQuickSendForm must POST the pending concern after Google sign-in", quickFetchCalls);
+    const quickPayload = JSON.parse(quickFetchCalls[0][1]?.body ?? "{}");
+    assert(quickPayload.body === "로그인 후 자동 전송할 고민은 충분한 길이입니다." && quickPayload.authorEmail === "quick-author@example.test" && quickPayload.category === "concern", "LetterQuickSendForm must submit the pending concern with the signed-in Google email", quickPayload);
+    assert(authenticatedStorage.getItem("letters.pendingConcern.ko") === null, "LetterQuickSendForm must clear pending concern after accepted submit", authenticatedStorage._store);
+    assert(globalThis.window.location.href === "/ko/letters/sent", "LetterQuickSendForm must navigate to the sent page after accepted submit", { href: globalThis.window.location.href });
   } finally {
     globalThis.fetch = originalFetch;
     if (originalWindow === undefined) {
@@ -1344,13 +1533,13 @@ try {
       "system creator email is the primary fallback when no eligible relay participant exists",
       "public letter bundles strip scripture recommendation from author view",
       "relay accept sets canReceiveLetters through session token",
-      "reply bundle includes scripture recommendation for relay runner",
+      "reply bundle and suggestion API include up to ten de-duplicated scripture recommendations for relay runner",
       "public letter and card bundles strip stored question/answer card generationMetadata and sensitive metadata values",
       "letter and reply email HTML use returned Drive image URLs as the hero before privacy-safe CTAs, reject localized/root server card image routes, expose only a labeled text fallback after the CTA, and keep designed scripture card blocks when images are missing",
       "Codex Imagen disabled mode returns skipped provider metadata without remote execution",
       "Codex Imagen enabled mode uploads generated output to Drive, returns the Drive URL, and deletes local prompt/output artifacts",
       "letter POST API route returns 202 accepted:true without serializing bundle/cardId/letterId and schedules createAnonymousLetter after acknowledgement",
-      "LetterWriteForm starts the concern POST, navigates to sent immediately, and keeps the submit button out of pending-spinner state",
+      "LetterWriteForm starts the concern POST, LetterReplyForm renders scripture slide controls, and LetterQuickSendForm preserves unauthenticated concerns for Google sign-in then auto-sends to the sent page",
       "PM2 ecosystem passes n8n and Google Drive image upload env through to production workers",
       "reply API route returns only answerId/readToken and does not serialize answer internals",
     ],

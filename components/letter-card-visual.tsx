@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BookOpenText, Flag, ImageDown, Share2 } from "lucide-react";
 
 import type { AppLocale } from "@/lib/content";
-import type { LetterCard, PublicLetterBundle } from "@/lib/letters";
+import { makeCardPageImageSrc, type LetterCard, type PublicLetterBundle } from "@/lib/letters";
 
 export function TrustNotice({ locale }: { locale: AppLocale }) {
   return (
@@ -23,13 +23,12 @@ export function LetterStatusBadge({ status, locale }: { status: string; locale: 
 }
 
 export function LetterCardVisual({ card, locale }: { card: LetterCard; locale: AppLocale }) {
+  const imageSrc = makeCardPageImageSrc(card, locale);
   return (
     <article className="overflow-hidden rounded-[32px] border border-[var(--hairline)] bg-[var(--surface-1)] shadow-sm">
-      {card.imageUrl ? (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element -- Drive image URLs are runtime external assets; do not proxy them through the production server. */}
-          <img src={card.imageUrl} alt={`${card.title} ${card.scripture.reference}`} className="aspect-square w-full object-cover" loading="lazy" decoding="async" />
-        </>
+      {imageSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element -- Generated letter cards are runtime first-party/proxied assets; Next Image remote config cannot know every stored card source.
+        <img src={imageSrc} alt={`${card.title} ${card.scripture.reference}`} className="aspect-square w-full object-cover" loading="lazy" decoding="async" />
       ) : (
         <div className="aspect-square bg-[radial-gradient(circle_at_25%_10%,rgba(221,157,74,0.20),transparent_32%),linear-gradient(145deg,#fffaf0,#efe3ce)] p-6 text-[var(--ink)] sm:p-8">
           <div className="flex h-full flex-col justify-between rounded-[24px] border border-[rgba(120,74,20,0.18)] bg-white/60 p-5 shadow-inner sm:p-7">
@@ -60,6 +59,7 @@ export function LetterCardVisual({ card, locale }: { card: LetterCard; locale: A
 
 export function LetterActionPanel({ bundle, card, locale }: { bundle: PublicLetterBundle; card: LetterCard; locale: AppLocale }) {
   const href = card.shareUrl || `/${locale}/letters/card/${bundle.letter.id}`;
+  const imageSrc = makeCardPageImageSrc(card, locale);
   return (
     <aside className="glass h-fit rounded-[28px] p-5 lg:sticky lg:top-24">
       <div className="flex flex-wrap items-center gap-2">
@@ -73,8 +73,8 @@ export function LetterActionPanel({ bundle, card, locale }: { bundle: PublicLett
             {locale === "ko" ? "말씀 전체 읽기" : "Read passage"}
           </Link>
         ) : null}
-        {card.imageUrl ? (
-          <a href={card.imageUrl} download className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] px-4 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
+        {imageSrc ? (
+          <a href={imageSrc} download className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] px-4 py-2 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold-border)]">
             <ImageDown className="h-4 w-4" />
             {locale === "ko" ? "이미지로 저장" : "Save image"}
           </a>

@@ -178,6 +178,7 @@ const LETTERS_PATH = process.env.LETTERS_DATA_FILE || DEFAULT_LETTERS_PATH;
 const MAX_BODY_LENGTH = 1200;
 const MIN_BODY_LENGTH = 20;
 const MAX_ANSWER_LENGTH = 1400;
+const MAX_REPLY_SCRIPTURE_SUGGESTIONS = 10;
 const MAX_NICKNAME_LENGTH = 32;
 const MAX_STORED_LETTERS = 5000;
 const TOKEN_TTL_MS = 1000 * 60 * 60 * 24 * 14;
@@ -731,6 +732,57 @@ async function buildScriptureSuggestion(prompt: string, locale: AppLocale, reque
   };
 }
 
+function normalizeRecommendationConfidence(value: unknown): ScriptureSuggestion["confidence"] {
+  return value === "high" || value === "medium" || value === "low" ? value : "medium";
+}
+
+async function buildReplyScriptureSuggestions(letter: AnonymousLetter, locale: AppLocale) {
+  const suggestions: ScriptureSuggestion[] = [];
+  const seen = new Set<string>();
+  const pushSuggestion = (suggestion: ScriptureSuggestion) => {
+    const reference = suggestion.reference.replace(/\s+/g, " ").trim();
+    if (!reference || seen.has(reference) || suggestions.length >= MAX_REPLY_SCRIPTURE_SUGGESTIONS) {
+      return;
+    }
+    seen.add(reference);
+    suggestions.push({ ...suggestion, reference });
+  };
+
+  pushSuggestion(letter.scripture);
+
+  try {
+    const build = await buildPassageRecommendation(letter.body, {
+      locale,
+      includeRelatedPassageDetails: true,
+      includeExternalResources: false,
+    });
+    const confidence = normalizeRecommendationConfidence(build.recommendation.confidence);
+    const primary = build.recommendation.primary;
+    if (primary) {
+      pushSuggestion({
+        reference: referenceLabel(primary.reference, locale),
+        text: primary.text,
+        reason: primary.reason,
+        href: build.recommendation.readerHref ?? buildBibleReferenceHref(primary.reference, { locale, from: "letters" }),
+        confidence,
+      });
+    }
+    for (const related of build.relatedPassageDetails ?? []) {
+      pushSuggestion({
+        reference: related.referenceLabel || referenceLabel(related.reference, locale),
+        text: related.excerpt,
+        reason: related.reason,
+        href: related.href,
+        confidence,
+      });
+    }
+  } catch {
+    // The original card scripture is already available; suggestion expansion must not break a reply link.
+  }
+
+  return suggestions.slice(0, MAX_REPLY_SCRIPTURE_SUGGESTIONS);
+}
+
 function configuredRecipients() {
   loadLettersEmailEnv();
   const raw = process.env.LETTERS_RECIPIENT_EMAILS || process.env.PONSLINK_ADMIN_EMAILS || "";
@@ -802,6 +854,19 @@ function publicBaseUrl() {
 
 function makeShareUrl(path: string) {
   return `${publicBaseUrl()}${path}`;
+}
+
+function sanitizeCardId(cardId: string) {
+  return cardId.replace(/[^a-zA-Z0-9_-]/g, "");
+}
+
+export function makeLetterCardImageRoute(cardId: string, locale: AppLocale) {
+  const safeCardId = sanitizeCardId(cardId);
+  return safeCardId ? `/${locale}/api/letters/card/${safeCardId}/image` : null;
+}
+
+export function makeCardPageImageSrc(card: Pick<LetterCard, "id" | "imageUrl">, locale: AppLocale) {
+  return card.imageUrl ? makeLetterCardImageRoute(card.id, locale) : null;
 }
 
 function makeCardImageSrc(imageUrl: string, locale: AppLocale) {
@@ -1477,6 +1542,16 @@ export async function getCardBundle(cardId: string) {
   return letter ? { ...publicBundle(data, letter), card: publicCard(card), requestedCard: publicCard(card) ?? undefined } : null;
 }
 
+export async function getStoredCardImageUrl(cardId: string) {
+  const safeCardId = sanitizeCardId(cardId);
+  if (!safeCardId) {
+    return null;
+  }
+  const data = await readLettersFile();
+  const card = data.cards.find((entry) => entry.id === safeCardId);
+  return typeof card?.imageUrl === "string" && card.imageUrl.length > 0 ? card.imageUrl : null;
+}
+
 export async function getReplyBundle(token: string) {
   const hash = tokenHash(token);
   const data = await readLettersFile();
@@ -1489,7 +1564,8 @@ export async function getReplyBundle(token: string) {
     return null;
   }
   const bundle = publicBundle(data, letter, { includePrivateAnswer: true });
-  return { ...bundle, delivery: { status: delivery.status, expiresAt: delivery.expiresAt }, scriptureRecommendations: [letter.scripture] };
+  const scriptureRecommendations = await buildReplyScriptureSuggestions(letter, letter.locale);
+  return { ...bundle, delivery: { status: delivery.status, expiresAt: delivery.expiresAt }, scriptureRecommendations };
 }
 
 export async function getAnswerBundle(token: string) {
@@ -1808,7 +1884,7 @@ export async function suggestReplyScriptures(token: string) {
   if (!letter) {
     return { ok: false as const, error: "invalid-token" as const };
   }
-  return { ok: true as const, suggestions: [letter.scripture] };
+  return { ok: true as const, suggestions: await buildReplyScriptureSuggestions(letter, letter.locale) };
 }
 
 export async function updateCardVisibility(cardId: string, visibility: LetterVisibility) {
