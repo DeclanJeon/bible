@@ -11,6 +11,7 @@ import {
   Languages,
   Layers,
   Menu,
+  Mail,
   MoreHorizontal,
   MessageSquare,
   Moon,
@@ -26,6 +27,7 @@ type NavLink = {
   key: string;
   href: string;
   label: string;
+  secondary?: boolean;
 };
 
 type AppLocale = "ko" | "en";
@@ -52,7 +54,7 @@ const ICONS: Record<string, LucideIcon> = {
   home: Home,
   bible: BookOpen,
   hanja: Languages,
-  companion: Sparkles,
+  letters: Mail,
   "faith-basics": Shield,
   "faith-questions": HelpCircle,
   "spirit-soul-body": Heart,
@@ -246,16 +248,19 @@ export function GlobalNav({
     setDrawerOpen(false);
     window.requestAnimationFrame(() => returnFocusRef.current?.focus());
   }, []);
+  const primaryLinks = links.filter((link) => !link.secondary);
+  const secondaryLinks = links.filter((link) => link.secondary);
+  const secondaryActive = secondaryLinks.some((link) => activeKey ? link.key === activeKey : isActive(link.href, pathname));
   const bottomLinks = [
     links.find((link) => link.key === "home"),
     links.find((link) => link.key === "bible"),
-    links.find((link) => link.key === "companion"),
-    links.find((link) => link.key === "lanes"),
+    links.find((link) => link.key === "letters"),
+    links.find((link) => link.key === "faith-questions"),
   ].filter((link): link is NavLink => Boolean(link));
   const bottomLabels =
     locale === "ko"
-      ? { bible: "성경", companion: "컴패니언", lanes: "레인", more: "더보기" }
-      : { bible: "Bible", companion: "Companion", lanes: "Lanes", more: "More" };
+      ? { bible: "성경", letters: "편지", "faith-questions": "질문", more: "더보기" }
+      : { bible: "Bible", letters: "Letters", "faith-questions": "Questions", more: "More" };
 
 
   return (
@@ -271,7 +276,7 @@ export function GlobalNav({
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
-            {links.map(({ key, href, label }) => {
+            {primaryLinks.map(({ key, href, label }) => {
               const Icon = ICONS[key] ?? Sparkles;
               const active = activeKey ? key === activeKey : isActive(href, pathname);
               return (
@@ -291,6 +296,43 @@ export function GlobalNav({
               );
             })}
           </nav>
+            {secondaryLinks.length ? (
+              <div className="group relative hidden lg:block">
+                <button
+                  type="button"
+                  className={`relative flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                    secondaryActive ? "text-gold" : "text-ink-muted hover:text-ink"
+                  }`}
+                  aria-haspopup="menu"
+                >
+                  <MoreHorizontal className="h-4 w-4" />
+                  <span>{bottomLabels.more}</span>
+                  {secondaryActive ? (
+                    <span className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-gold" />
+                  ) : null}
+                </button>
+                <div className="invisible absolute right-0 top-full z-10 min-w-52 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="rounded-2xl border border-[var(--hairline)] bg-surface-1 p-2 shadow-xl">
+                    {secondaryLinks.map(({ key, href, label }) => {
+                      const Icon = ICONS[key] ?? Sparkles;
+                      const active = activeKey ? key === activeKey : isActive(href, pathname);
+                      return (
+                        <Link
+                          key={key}
+                          href={href}
+                          className={`flex min-h-10 items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition ${
+                            active ? "bg-[var(--gold-soft)] text-gold" : "text-ink-muted hover:bg-surface-2 hover:text-ink"
+                          }`}
+                        >
+                          <Icon className="h-4 w-4 shrink-0" />
+                          <span>{label}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ) : null}
 
           <div className="flex items-center gap-1">
             <ThemeToggle label={copy.theme} />
