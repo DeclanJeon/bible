@@ -147,7 +147,7 @@ export function LetterQuickSendForm({ locale }: { locale: AppLocale }) {
         />
         <div className="mt-2 flex flex-col gap-3 border-t border-[var(--hairline)] px-2 pt-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-[var(--ink-muted)]">
-            {body.length}/{MAX_CONCERN_LENGTH} · {locale === "ko" ? "로그인이 필요하면 Google 로그인 후 바로 전송됩니다." : "If needed, Google sign-in happens first and then sends automatically."}
+            {body.length}/{MAX_CONCERN_LENGTH} · {locale === "ko" ? "로그인 후에도 작성한 내용은 유지됩니다." : "Your draft stays saved after sign-in."}
           </p>
           <button
             type="submit"

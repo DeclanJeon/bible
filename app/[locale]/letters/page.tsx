@@ -34,8 +34,8 @@ export default async function LettersLandingPage({ params }: Props) {
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--ink-muted)]">
           {locale === "ko"
-            ? "보내기를 누르면 로그인 상태를 확인합니다. 로그인이 필요하면 Google 로그인 후 같은 고민을 바로 전송합니다."
-            : "Press send. If sign-in is needed, Google sign-in runs first and then sends the same concern automatically."}
+            ? "고민을 보내면, 예수님의 사랑이 먼저 당신에게 전달됩니다."
+            : "Send your concern, and the love of Jesus reaches you first."}
         </p>
         <div className="mt-10 w-full">
           <LetterQuickSendForm locale={locale} />
