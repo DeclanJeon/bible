@@ -142,7 +142,7 @@ export function LetterQuickSendForm({ locale }: { locale: AppLocale }) {
           rows={3}
           minLength={MIN_CONCERN_LENGTH}
           maxLength={MAX_CONCERN_LENGTH}
-          placeholder={locale === "ko" ? "지금 마음에 있는 고민을 적어주세요." : "Write what is weighing on your heart."}
+          placeholder={locale === "ko" ? "지금 마음에 있는 사연을 들려주세요." : "Write what is weighing on your heart."}
           className="max-h-64 min-h-28 w-full resize-y rounded-[24px] border-0 bg-transparent px-4 py-3 text-base leading-7 text-[var(--ink)] outline-none placeholder:text-[var(--ink-subtle)] sm:text-lg"
         />
         <div className="mt-2 flex flex-col gap-3 border-t border-[var(--hairline)] px-2 pt-3 sm:flex-row sm:items-center sm:justify-between">

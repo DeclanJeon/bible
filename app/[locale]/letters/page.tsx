@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = await resolveLocale(requestedLocale);
   return buildPageMetadata(
     locale,
-    locale === "ko" ? "빛의 릴레이" : "Light Relay",
-    locale === "ko" ? "고민을 보내면, 예수님의 사랑이 먼저 당신에게 전달됩니다." : "Send your concern, and the love of Jesus reaches you first.",
+    locale === "ko" ? "빛의 릴레이 — 말씀편지 사연" : "Light Relay — Scripture letter stories",
+    locale === "ko" ? "사연을 보내면, 예수님의 사랑이 먼저 당신에게 전달됩니다." : "Send your story, and the love of Jesus reaches you first.",
     "/letters",
   );
 }
@@ -34,12 +34,12 @@ export default async function LettersLandingPage({ params }: Props) {
           {locale === "ko" ? "빛의 릴레이" : "Light Relay"}
         </p>
         <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[var(--ink)] sm:text-5xl lg:text-6xl">
-          {locale === "ko" ? "지금 마음에 있는 고민을 적어주세요." : "Write what is weighing on your heart."}
+          {locale === "ko" ? "지금 마음에 있는 사연을 들려주세요." : "Write what is weighing on your heart."}
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--ink-muted)]">
           {locale === "ko"
-            ? "고민을 보내면, 예수님의 사랑이 먼저 당신에게 전달됩니다."
-            : "Send your concern, and the love of Jesus reaches you first."}
+            ? "사연을 보내면, 예수님의 사랑이 먼저 당신에게 전달됩니다."
+            : "Send your story, and the love of Jesus reaches you first."}
         </p>
         <div className="mt-10 w-full">
           <LetterQuickSendForm locale={locale} />

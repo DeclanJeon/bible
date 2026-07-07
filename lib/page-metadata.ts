@@ -18,6 +18,10 @@ function absoluteUrl(path: string) {
 }
 
 export const OG_IMAGE_URL = absoluteUrl("/og-image.png");
+
+type PageMetadataOptions = {
+  imagePath?: string;
+};
 export function siteImageAlt(locale: AppLocale) {
   return locale === "ko"
     ? "성경 길찾기 - 고민 한 문장을 본문, 맥락, 교차참조로 연결하는 성경 공부 앱"
@@ -47,12 +51,23 @@ export function siteKeywords(locale: AppLocale) {
 }
 
 
-export function buildPageMetadata(locale: AppLocale, title: string, description: string, path?: string): Metadata {
+function pageOgImageUrl(locale: AppLocale, title: string, description: string, path?: string) {
+  const params = new URLSearchParams({
+    locale,
+    title,
+    description: description || siteDescription(locale),
+    path: localizedPath(normalizePath(path), locale),
+  });
+  return absoluteUrl(`/api/og?${params.toString()}`);
+}
+
+export function buildPageMetadata(locale: AppLocale, title: string, description: string, path?: string, options: PageMetadataOptions = {}): Metadata {
   const siteName = UI_COPY[locale].siteTitle;
   const fullTitle = `${title} | ${siteName}`;
   const pathname = normalizePath(path);
   const canonicalPath = localizedPath(pathname, locale);
   const url = absoluteUrl(canonicalPath);
+  const imageUrl = options.imagePath ? absoluteUrl(options.imagePath) : pageOgImageUrl(locale, title, description, pathname);
 
   return {
     title,
@@ -75,7 +90,7 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
       locale: locale === "ko" ? "ko_KR" : "en_US",
       images: [
         {
-          url: OG_IMAGE_URL,
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: siteImageAlt(locale),
@@ -86,7 +101,7 @@ export function buildPageMetadata(locale: AppLocale, title: string, description:
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [OG_IMAGE_URL],
+      images: [imageUrl],
     },
   };
 }
