@@ -186,7 +186,14 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body><SessionProvider>{children}</SessionProvider></body>
+      <body>
+        <a className="skip-link" href="#site-content">
+          본문으로 건너뛰기
+        </a>
+        <SessionProvider>
+          <div id="site-content">{children}</div>
+        </SessionProvider>
+      </body>
     </html>
   );
 }

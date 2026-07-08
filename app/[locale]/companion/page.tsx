@@ -135,16 +135,16 @@ export default async function CompanionPage({ params, searchParams }: Props) {
   ]);
 
   return (
-    <main className="page-shell">
-
-      <section className="mt-6 glass rounded-2xl p-5 sm:p-6 lg:rounded-3xl lg:p-8">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+    <main className="page-shell-wide">
+      <section className="glass relative mt-3 overflow-hidden rounded-[1.6rem] p-4 sm:mt-6 sm:rounded-[2rem] sm:p-7 lg:rounded-[2.5rem] lg:p-10">
+        <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-[var(--gold-soft)] blur-3xl" />
+        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <div className="section-title text-base">{appLocale === "ko" ? "사용자 입력" : "Prompt"}</div>
-            <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl lg:text-5xl">
+            <div className="section-title">{appLocale === "ko" ? "사용자 입력" : "Prompt"}</div>
+            <h1 className="mt-3 max-w-4xl text-[2rem] font-[850] leading-[0.98] tracking-[-0.055em] text-[var(--ink)] text-balance sm:text-5xl lg:text-6xl">
               {appLocale === "ko" ? "가장 연결되는 본문부터 읽습니다" : "Start with the most connected passage"}
             </h1>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)] sm:text-lg">
+            <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--muted)] sm:mt-5 sm:text-lg sm:leading-8">
               {appLocale === "ko"
                 ? "질문을 성경의 언어로 다시 읽고, 중심 본문과 연결 본문을 먼저 제시한 뒤 배경과 문맥을 붙입니다."
                 : "The companion rewrites the question in biblical language, then starts with a primary passage, related passages, and compact background context."}
@@ -152,14 +152,14 @@ export default async function CompanionPage({ params, searchParams }: Props) {
           </div>
           <Link
             href={buildBibleHref({ locale: appLocale })}
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[var(--hairline-strong)] px-4 py-2.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/30 hover:text-[var(--gold)]"
+            className="inline-flex min-h-[44px] w-fit items-center gap-2 rounded-full border border-[var(--hairline-strong)] bg-[var(--surface-1)] px-4 py-2.5 text-sm font-bold text-[var(--ink)] shadow-sm transition hover:border-[var(--gold)]/30 hover:bg-[var(--gold-soft)] hover:text-[var(--gold)]"
           >
             <BookOpenText className="h-4 w-4" />
             {UI_COPY[appLocale].sidebar.navBible}
           </Link>
         </div>
-        <form action={`/${appLocale}/companion`} className="mt-5 flex items-center gap-2 sm:gap-3">
-          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-3 py-2.5 sm:px-5 sm:py-3">
+        <form action={`/${appLocale}/companion`} className="relative mt-5 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center">
+          <div className="flex min-w-0 flex-1 items-center gap-3 rounded-[1.15rem] border border-[var(--hairline-strong)] bg-[var(--surface-2)] px-4 py-3 shadow-inner sm:rounded-2xl sm:px-5 sm:py-4">
             <Search className="h-4 w-4 shrink-0 text-[var(--muted)] sm:h-5 sm:w-5" />
             <input
               type="text"
@@ -172,7 +172,7 @@ export default async function CompanionPage({ params, searchParams }: Props) {
           </div>
           <button
             type="submit"
-            className="shrink-0 rounded-lg bg-[var(--gold)] px-4 py-2.5 text-xs font-semibold text-[var(--canvas)] transition hover:bg-[var(--gold)]/90 min-h-[44px] sm:px-5 sm:py-3 sm:text-sm"
+            className="min-h-[50px] w-full shrink-0 rounded-[1.15rem] bg-[var(--gold)] px-5 py-3 text-sm font-bold text-[var(--canvas)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--gold-hover)] sm:min-h-[52px] sm:w-auto sm:rounded-2xl sm:px-6"
           >
             {UI_COPY[appLocale].prompt.submit}
           </button>
@@ -204,9 +204,9 @@ export default async function CompanionPage({ params, searchParams }: Props) {
         </div>
       </section>
 
-      <section className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)] lg:items-start">
-        <div className="space-y-6">
-          <article className="rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.08] p-5 sm:p-6 lg:p-8">
+      <section className="mt-5 grid gap-5 sm:mt-6 sm:gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.75fr)] xl:items-start">
+        <div className="space-y-5 sm:space-y-6">
+          <article className="relative overflow-hidden rounded-[1.6rem] border border-[var(--gold)]/20 bg-[var(--gold)]/[0.08] p-4 shadow-[var(--shadow-soft)] sm:rounded-[2rem] sm:p-6 lg:p-8">
             <div className="section-title text-base">{appLocale === "ko" ? "메인 성구" : "Primary passage"}</div>
             {recommendation.primary && primaryPassage && (recommendation.state === "direct" || recommendation.state === "safety_first") ? (
               <>

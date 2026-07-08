@@ -103,7 +103,7 @@ function ThemeToggle({ label }: { label: string }) {
     <button
       type="button"
       onClick={toggle}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-transparent text-ink-muted transition hover:border-[var(--hairline)] hover:bg-surface-2 hover:text-ink"
       aria-label={label}
       aria-pressed={theme === "dark"}
       title={label}
@@ -184,7 +184,7 @@ function MobileDrawer({
         onClick={onClose}
         aria-label={copy.close}
       />
-      <nav ref={panelRef} className="absolute right-0 top-0 flex h-full w-72 flex-col border-l border-[var(--hairline)] bg-surface-1 shadow-2xl">
+      <nav ref={panelRef} className="absolute right-0 top-0 flex h-full w-80 max-w-[86vw] flex-col border-l border-[var(--hairline)] bg-[var(--surface-1)] shadow-2xl shadow-black/20">
         <div className="flex items-center justify-between border-b border-[var(--hairline)] px-4 py-4">
           <span className="flex items-center gap-2 text-sm font-semibold text-ink">
             <Image src="/logo.svg" alt="" width={20} height={20} className="h-5 w-5 rounded" priority />
@@ -209,9 +209,9 @@ function MobileDrawer({
                 key={key}
                 href={href}
                 onClick={onClose}
-                className={`flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                className={`flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition ${
                   active
-                    ? "bg-[var(--gold-soft)] text-gold"
+                    ? "bg-[var(--gold-soft)] text-gold shadow-sm"
                     : "text-ink-muted hover:bg-surface-2 hover:text-ink"
                 }`}
               >
@@ -265,14 +265,14 @@ export function GlobalNav({
 
   return (
     <>
-      <header className="sticky top-0 z-nav w-full border-b border-[var(--hairline)] bg-[var(--nav-bg)] backdrop-blur-lg">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 lg:px-6">
+      <header className="sticky top-0 z-nav w-full px-2 pt-2 lg:px-5 lg:pt-3">
+        <div className="mx-auto flex h-[3.25rem] min-h-[3.25rem] max-w-7xl items-center justify-between rounded-[1.15rem] border border-[var(--hairline)] bg-[var(--nav-bg)] px-2.5 shadow-[var(--shadow-soft)] backdrop-blur-xl sm:h-14 sm:min-h-14 sm:rounded-[1.35rem] sm:px-3 lg:px-4">
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 text-base font-semibold tracking-tight text-ink transition-opacity hover:opacity-80"
+            className="flex min-w-0 items-center gap-2 rounded-full px-2 py-1 text-sm font-bold tracking-tight text-ink transition hover:bg-surface-2 sm:text-base"
           >
             <Image src="/logo.svg" alt="" width={20} height={20} className="h-5 w-5 rounded" priority />
-            {copy.siteTitle}
+            <span className="truncate">{copy.siteTitle}</span>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
@@ -283,15 +283,13 @@ export function GlobalNav({
                 <Link
                   key={key}
                   href={href}
-                  className={`relative flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                    active ? "text-gold" : "text-ink-muted hover:text-ink"
+                  className={`relative flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition ${
+                    active ? "bg-[var(--gold-soft)] text-gold" : "text-ink-muted hover:bg-surface-2 hover:text-ink"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
                   <span>{label}</span>
-                  {active ? (
-                    <span className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-gold" />
-                  ) : null}
+
                 </Link>
               );
             })}
@@ -300,19 +298,17 @@ export function GlobalNav({
               <div className="group relative hidden lg:block">
                 <button
                   type="button"
-                  className={`relative flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                    secondaryActive ? "text-gold" : "text-ink-muted hover:text-ink"
+                  className={`relative flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition ${
+                    secondaryActive ? "bg-[var(--gold-soft)] text-gold" : "text-ink-muted hover:bg-surface-2 hover:text-ink"
                   }`}
                   aria-haspopup="menu"
                 >
                   <MoreHorizontal className="h-4 w-4" />
                   <span>{bottomLabels.more}</span>
-                  {secondaryActive ? (
-                    <span className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-gold" />
-                  ) : null}
+
                 </button>
                 <div className="invisible absolute right-0 top-full z-10 min-w-52 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="rounded-2xl border border-[var(--hairline)] bg-surface-1 p-2 shadow-xl">
+                  <div className="rounded-3xl border border-[var(--hairline)] bg-surface-1 p-2 shadow-[var(--shadow-lifted)]">
                     {secondaryLinks.map(({ key, href, label }) => {
                       const Icon = ICONS[key] ?? Sparkles;
                       const active = activeKey ? key === activeKey : isActive(href, pathname);
@@ -334,12 +330,12 @@ export function GlobalNav({
               </div>
             ) : null}
 
-          <div className="flex items-center gap-1">
+          <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
             <ThemeToggle label={copy.theme} />
             <button
               type="button"
               onClick={(event) => openDrawer(event.currentTarget)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition hover:bg-surface-2 hover:text-ink lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-transparent text-ink-muted transition hover:border-[var(--hairline)] hover:bg-surface-2 hover:text-ink lg:hidden"
               aria-label={copy.open}
               aria-expanded={drawerOpen}
               aria-controls={drawerId}
@@ -352,8 +348,8 @@ export function GlobalNav({
 
       <MobileDrawer open={drawerOpen} onClose={closeDrawer} links={links} copy={copy} drawerId={drawerId} />
 
-      <nav className="fixed inset-x-0 bottom-0 z-nav border-t border-[var(--hairline)] bg-[var(--nav-bg)] backdrop-blur-lg lg:hidden">
-        <div className="mx-auto flex h-16 max-w-lg items-center justify-around px-2 pb-[env(safe-area-inset-bottom,0px)]">
+      <nav className="mobile-bottom-nav lg:hidden" aria-label={copy.navigation}>
+        <div className="mobile-bottom-nav-inner">
           {bottomLinks.map(({ key, href, label }) => {
             const Icon = ICONS[key] ?? Sparkles;
             const active = activeKey ? key === activeKey : isActive(href, pathname);
@@ -362,11 +358,11 @@ export function GlobalNav({
               <Link
                 key={key}
                 href={href}
-                className={`relative flex min-w-12 flex-col items-center gap-0.5 rounded-lg px-2 py-1.5 text-[11px] font-medium transition-colors ${
-                  active ? "text-gold" : "text-ink-muted hover:text-ink"
+                className={`mobile-bottom-nav-item ${
+                  active ? "bg-[var(--gold-soft)] text-gold" : "text-ink-muted hover:text-ink"
                 }`}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-[1.15rem] w-[1.15rem] sm:h-5 sm:w-5" />
                 <span>{shortLabel}</span>
                 {active ? <span className="absolute bottom-1 h-0.5 w-1 rounded-full bg-gold" /> : null}
               </Link>
@@ -375,7 +371,7 @@ export function GlobalNav({
           <button
             type="button"
             onClick={(event) => openDrawer(event.currentTarget)}
-            className="flex min-w-12 flex-col items-center gap-0.5 rounded-lg px-2 py-1.5 text-[11px] font-medium text-ink-muted transition-colors hover:text-ink"
+            className="mobile-bottom-nav-item text-ink-muted hover:text-ink"
             aria-expanded={drawerOpen}
             aria-controls={drawerId}
           >

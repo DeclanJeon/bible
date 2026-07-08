@@ -138,67 +138,103 @@ export default async function HomePage({ params }: Props) {
         ];
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 pb-28 pt-12 lg:pb-10 lg:pt-20">
-      <section className="flex flex-col items-center text-center">
-        <h1 className="gradient-text mb-4 text-4xl font-[800] leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-          {locale === "ko" ? "성경 길찾기" : copy.heroTitle}
-        </h1>
-        <p className="mb-8 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-          {locale === "ko"
-            ? "마음을 한 문장으로 적으면, 본문과 연결과 맥락으로 바로 안내합니다."
-            : copy.heroSubtitle}
-        </p>
+    <main className="page-shell-wide page-enter">
+      <section className="relative overflow-hidden rounded-[1.6rem] border border-[var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-soft)] sm:rounded-[2.25rem] sm:p-8 lg:p-12">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--gold-soft)] blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[var(--sage-glow)] blur-3xl" />
+        <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:items-center">
+          <div className="text-left">
+            <p className="section-title mb-4 sm:mb-5">{locale === "ko" ? "본문과 마음을 잇는 길" : "Scripture pathfinder"}</p>
+            <h1 className="hero-title gradient-text">
+              {locale === "ko" ? "성경 길찾기" : copy.heroTitle}
+            </h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-ink-muted sm:mt-6 sm:text-xl sm:leading-8">
+              {locale === "ko"
+                ? "마음을 한 문장으로 적으면, 본문과 연결과 맥락으로 바로 안내합니다."
+                : copy.heroSubtitle}
+            </p>
 
-        <form action={`/${locale}/companion`} className="relative mb-6 w-full max-w-xl">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-muted" />
-          <input
-            name="prompt"
-            type="search"
-            required
-            minLength={2}
-            aria-label={UI_COPY[locale].prompt.placeholder}
-            placeholder={locale === "ko" ? "지금 마음에 지고 있는 것을 적어 주세요." : UI_COPY[locale].prompt.placeholder}
-            className="h-12 w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] pl-12 pr-4 text-base text-ink shadow-sm outline-none transition focus:border-[var(--input-focus-border)] focus:shadow-md placeholder:text-[var(--input-placeholder)]"
-          />
-        </form>
+            <form action={`/${locale}/companion`} className="relative mt-6 w-full max-w-2xl sm:mt-8">
+              <Search className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-muted" />
+              <input
+                name="prompt"
+                type="search"
+                required
+                minLength={2}
+                aria-label={UI_COPY[locale].prompt.placeholder}
+                placeholder={locale === "ko" ? "지금 마음에 지고 있는 것을 적어 주세요." : UI_COPY[locale].prompt.placeholder}
+                className="h-[3.25rem] w-full rounded-[1.15rem] border border-[var(--input-border)] bg-[var(--input-bg)] pl-14 pr-4 text-base font-medium text-ink shadow-[var(--shadow-soft)] outline-none transition placeholder:text-[var(--input-placeholder)] focus:border-[var(--input-focus-border)] sm:h-14 sm:rounded-2xl"
+              />
+            </form>
 
-        <div className="flex flex-wrap justify-center gap-2">
-          {visibleTopics.map((topic) => (
-            <Link
-              key={topic.slug}
-              href={`/${locale}/companion?prompt=${encodeURIComponent(topic.starterPrompt)}`}
-              className="rounded-full border border-[var(--hairline)] bg-surface-1 px-4 py-1.5 text-sm font-medium text-ink shadow-sm transition-colors hover:border-[var(--gold-border)] hover:bg-[var(--gold-soft)] hover:text-gold"
-            >
-              {topic.label}
-            </Link>
-          ))}
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1 scrollbar-thin sm:mt-5 sm:flex-wrap sm:overflow-visible sm:pb-0">
+              {visibleTopics.map((topic) => (
+                <Link
+                  key={topic.slug}
+                  href={`/${locale}/companion?prompt=${encodeURIComponent(topic.starterPrompt)}`}
+                  className="shrink-0 rounded-full border border-[var(--hairline)] bg-surface-1 px-3.5 py-2 text-sm font-semibold text-ink-muted shadow-sm transition hover:border-[var(--gold-border)] hover:bg-[var(--gold-soft)] hover:text-gold sm:px-4"
+                >
+                  {topic.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative hidden md:block">
+            <div className="rounded-[2rem] border border-[var(--gold-border)] bg-[var(--gold-soft)] p-4 shadow-[var(--shadow-lifted)] lg:-rotate-1">
+              <div className="rounded-[1.5rem] bg-[var(--surface-1)] p-5">
+                <div className="section-title">{locale === "ko" ? "오늘의 동선" : "Today's path"}</div>
+                <div className="mt-5 space-y-3">
+                  {featureCards.slice(0, 3).map((feature, index) => {
+                    const Icon = feature.icon;
+                    return (
+                      <Link
+                        key={feature.key}
+                        href={feature.href}
+                        className="group flex items-start gap-4 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] p-4 transition hover:border-[var(--gold-border)] hover:bg-[var(--gold-soft)]"
+                      >
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-1)] text-gold shadow-sm">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold tabular-nums text-gold">0{index + 1}</span>
+                            <h2 className="text-base font-bold tracking-tight text-ink">{feature.title}</h2>
+                          </div>
+                          <p className="mt-1 text-sm leading-6 text-ink-muted">{feature.description}</p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:mt-20">
+      <section className="mt-5 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2 xl:grid-cols-6">
         {featureCards.map((feature, index) => {
           const Icon = feature.icon;
           return (
             <Link
               key={feature.key}
               href={feature.href}
-              className="group relative overflow-hidden rounded-card border border-[var(--hairline)] bg-surface-1 p-6 text-left shadow-sm transition hover:shadow-md"
+              className={`group relative overflow-hidden rounded-[1.25rem] border border-[var(--hairline)] bg-surface-1 p-4 text-left shadow-sm transition hover:-translate-y-1 hover:border-[var(--gold-border)] hover:shadow-[var(--shadow-lifted)] sm:rounded-[1.5rem] sm:p-5 ${
+                index === 0 ? "xl:col-span-2 xl:row-span-2 xl:p-7" : "xl:col-span-2"
+              }`}
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--gold-soft)]">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/35 to-transparent opacity-0 transition group-hover:opacity-100" />
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--gold-soft)]">
                   <Icon className="h-5 w-5 text-gold" />
                 </div>
-                <div>
-                  <h2 className="text-base font-semibold text-ink">{feature.title}</h2>
-                  <p className="text-sm text-ink-muted">{feature.description}</p>
-                </div>
+                <ArrowRight className="mt-1 h-4 w-4 text-ink-subtle transition-transform group-hover:translate-x-1 group-hover:text-gold" />
               </div>
-              <p className="mt-6 text-sm leading-relaxed text-ink-muted">{feature.body}</p>
-              <div className="mt-6 flex items-center justify-end gap-1 text-sm font-medium text-gold">
-                {locale === "ko" ? "바로가기" : "Open"}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </div>
+              <h2 className="mt-4 text-base font-bold tracking-tight text-ink sm:mt-5 sm:text-lg">{feature.title}</h2>
+              <p className="mt-2 text-sm font-semibold text-ink-muted">{feature.description}</p>
+              <p className="mt-3 text-sm leading-6 text-ink-muted sm:mt-5 sm:leading-7">{feature.body}</p>
             </Link>
           );
         })}
