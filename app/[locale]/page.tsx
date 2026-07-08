@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpenText, Mail, Search, Sparkles } from "lucide-react";
 import { UI_COPY, localizeStoryCluster, localizeTopicLabel } from "@/lib/content";
@@ -66,8 +67,8 @@ export default async function HomePage({ params }: Props) {
         <div className="pointer-events-none absolute -right-12 top-1/3 hidden h-64 w-64 rounded-full bg-[var(--amber-glow)] blur-3xl md:block" />
 
         <div className="relative w-full max-w-4xl">
-          <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-[1.35rem] border border-[var(--gold-border)] bg-[linear-gradient(145deg,var(--gold-soft),var(--surface-1))] shadow-[var(--shadow-soft)] sm:h-20 sm:w-20 sm:rounded-[1.75rem]">
-            <span className="text-3xl font-[850] tracking-[-0.08em] text-gold sm:text-4xl">길</span>
+          <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-[1.35rem] border border-[var(--gold-border)] bg-[linear-gradient(145deg,var(--gold-soft),var(--surface-1))] p-2 shadow-[var(--shadow-soft)] sm:h-20 sm:w-20 sm:rounded-[1.75rem] sm:p-2.5">
+            <Image src="/logo.svg" alt={locale === "ko" ? "성경 길찾기 로고" : "Bible Companion logo"} width={64} height={64} priority className="h-full w-full rounded-[1rem] object-contain sm:rounded-[1.25rem]" />
           </div>
 
           <h1 className="mx-auto max-w-3xl text-[clamp(3rem,12vw,6.4rem)] font-[850] leading-[0.92] tracking-[-0.08em] text-[var(--ink)] text-balance">
