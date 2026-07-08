@@ -1,4 +1,5 @@
 import { BibleBookSearch } from "@/components/bible-book-search";
+import { AutoCloseDetails } from "@/components/auto-close-details";
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -215,36 +216,36 @@ export default async function BiblePage({ params, searchParams }: Props) {
                   <span aria-hidden="true" />
                 )}
 
-                <details className="group relative">
-                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-center rounded-2xl bg-[var(--gold)] px-5 text-sm font-bold text-[var(--canvas)] shadow-sm transition hover:bg-[var(--gold-hover)] [&::-webkit-details-marker]:hidden">
-                    {copy.chapters}
-                  </summary>
-                  <div className="absolute right-1/2 z-30 mt-3 max-h-[min(72dvh,34rem)] w-[min(calc(100vw-1.75rem),42rem)] translate-x-1/2 overflow-y-auto rounded-[1.5rem] border border-[var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-lifted)] scrollbar-thin sm:right-0 sm:translate-x-0">
-                    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)]">
-                      <div className="lg:hidden">
-                        <div className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--gold)]">{copy.books}</div>
-                        <BibleBookSearch
-                          books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
-                          selectedCode={reader.selectedBook.code}
-                          locale={locale}
-                          copy={{
-                            old: copy.testament.old,
-                            new: copy.testament.new,
-                            searchPlaceholder: copy.searchPlaceholder,
-                            books: copy.books,
-                          }}
-                        />
+                <AutoCloseDetails
+                  className="group relative"
+                  summary={copy.chapters}
+                  summaryClassName="flex min-h-[44px] cursor-pointer list-none items-center justify-center rounded-2xl bg-[var(--gold)] px-5 text-sm font-bold text-[var(--canvas)] shadow-sm transition hover:bg-[var(--gold-hover)] [&::-webkit-details-marker]:hidden"
+                  panelClassName="absolute right-1/2 z-30 mt-3 max-h-[min(72dvh,34rem)] w-[min(calc(100vw-1.75rem),42rem)] translate-x-1/2 overflow-y-auto rounded-[1.5rem] border border-[var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-lifted)] scrollbar-thin sm:right-0 sm:translate-x-0"
+                >
+                  <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)]">
+                    <div className="lg:hidden">
+                      <div className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--gold)]">{copy.books}</div>
+                      <BibleBookSearch
+                        books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
+                        selectedCode={reader.selectedBook.code}
+                        locale={locale}
+                        copy={{
+                          old: copy.testament.old,
+                          new: copy.testament.new,
+                          searchPlaceholder: copy.searchPlaceholder,
+                          books: copy.books,
+                        }}
+                      />
+                    </div>
+                    <div className="order-first md:order-none md:col-start-2 lg:col-start-1">
+                      <div className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--muted)]">
+                        <BookOpen className="h-4 w-4 text-[var(--gold)]" />
+                        {reader.selectedBook.name} · {copy.chapters}
                       </div>
-                      <div className="order-first md:order-none md:col-start-2 lg:col-start-1">
-                        <div className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--muted)]">
-                          <BookOpen className="h-4 w-4 text-[var(--gold)]" />
-                          {reader.selectedBook.name} · {copy.chapters}
-                        </div>
-                        {renderChapterLinks("grid grid-cols-5 gap-2 sm:grid-cols-6")}
-                      </div>
+                      {renderChapterLinks("grid grid-cols-5 gap-2 sm:grid-cols-6")}
                     </div>
                   </div>
-                </details>
+                </AutoCloseDetails>
 
                 {reader.next && nextBook ? (
                   <Link
