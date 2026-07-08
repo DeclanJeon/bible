@@ -192,20 +192,20 @@ export default async function BiblePage({ params, searchParams }: Props) {
         </aside>
 
         <div className="min-w-0">
-          <section className="glass sticky top-[calc(var(--nav-height)+0.5rem)] z-20 rounded-2xl p-3 shadow-lg shadow-black/5 sm:p-4 lg:top-[calc(var(--nav-height)+1rem)]">
-            <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+          <section className="glass rounded-[1.35rem] p-3 shadow-[var(--shadow-soft)] sm:rounded-2xl sm:p-4 lg:rounded-[1.75rem]">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="min-w-0">
                 <div className="section-title text-xs sm:text-sm">{copy.current}</div>
-                <h1 className="mt-1 truncate text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl lg:text-4xl">
+                <h1 className="mt-1 truncate text-[1.75rem] font-[850] leading-none tracking-[-0.045em] text-[var(--ink)] sm:text-3xl lg:text-4xl">
                   {reader.selectedBook.name} {reader.selectedChapter}{copy.chapter}
                 </h1>
               </div>
 
-              <div className="grid grid-cols-[1fr_auto_1fr] items-stretch gap-2">
+              <div className="grid grid-cols-[minmax(2.75rem,1fr)_auto_minmax(2.75rem,1fr)] items-stretch gap-2 lg:w-auto">
                 {reader.previous && previousBook ? (
                   <Link
                     href={buildBibleHref({ book: reader.previous.code, chapter: reader.previous.chapter, locale, from: sourceTag })}
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:bg-[var(--gold-soft)] hover:text-[var(--gold)]"
                     aria-label={`${copy.previous}: ${previousBook.name} ${reader.previous.chapter}${copy.chapter}`}
                   >
                     <ArrowLeft className="h-4 w-4" />
@@ -216,13 +216,13 @@ export default async function BiblePage({ params, searchParams }: Props) {
                 )}
 
                 <details className="group relative">
-                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-center rounded-xl bg-[var(--gold)] px-4 text-sm font-bold text-[var(--canvas)] transition hover:bg-[var(--gold-hover)] [&::-webkit-details-marker]:hidden">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-center rounded-2xl bg-[var(--gold)] px-5 text-sm font-bold text-[var(--canvas)] shadow-sm transition hover:bg-[var(--gold-hover)] [&::-webkit-details-marker]:hidden">
                     {copy.chapters}
                   </summary>
-                  <div className="absolute right-1/2 z-30 mt-3 max-h-[min(70dvh,34rem)] w-[min(calc(100vw-2rem),42rem)] translate-x-1/2 overflow-y-auto rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 shadow-2xl shadow-black/20 scrollbar-thin sm:right-0 sm:translate-x-0">
+                  <div className="absolute right-1/2 z-30 mt-3 max-h-[min(72dvh,34rem)] w-[min(calc(100vw-1.75rem),42rem)] translate-x-1/2 overflow-y-auto rounded-[1.5rem] border border-[var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-lifted)] scrollbar-thin sm:right-0 sm:translate-x-0">
                     <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)]">
                       <div className="lg:hidden">
-                        <div className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--gold)]">{copy.books}</div>
+                        <div className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--gold)]">{copy.books}</div>
                         <BibleBookSearch
                           books={reader.books.map((item) => ({ code: item.code, name: item.name, testament: item.testament }))}
                           selectedCode={reader.selectedBook.code}
@@ -236,7 +236,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
                         />
                       </div>
                       <div className="order-first md:order-none md:col-start-2 lg:col-start-1">
-                        <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
+                        <div className="mb-3 flex items-center gap-2 text-sm font-bold text-[var(--muted)]">
                           <BookOpen className="h-4 w-4 text-[var(--gold)]" />
                           {reader.selectedBook.name} · {copy.chapters}
                         </div>
@@ -249,7 +249,7 @@ export default async function BiblePage({ params, searchParams }: Props) {
                 {reader.next && nextBook ? (
                   <Link
                     href={buildBibleHref({ book: reader.next.code, chapter: reader.next.chapter, locale, from: sourceTag })}
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-2xl border border-[var(--hairline)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--ink)] transition hover:border-[var(--gold)]/40 hover:bg-[var(--gold-soft)] hover:text-[var(--gold)]"
                     aria-label={`${copy.next}: ${nextBook.name} ${reader.next.chapter}${copy.chapter}`}
                   >
                     <span className="hidden sm:inline">{copy.next}</span>
@@ -261,12 +261,10 @@ export default async function BiblePage({ params, searchParams }: Props) {
               </div>
             </div>
 
-            <div className="mt-3 hidden rounded-xl border border-[var(--hairline)] bg-[var(--surface-2)] p-3 lg:block">
-              {renderChapterLinks("flex max-h-24 flex-wrap gap-2 overflow-y-auto pr-1 scrollbar-thin")}
-            </div>
+
           </section>
 
-          <article className="mt-4 rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-4 sm:p-6 lg:max-h-[calc(100dvh-var(--nav-height)-12rem)] lg:overflow-y-auto lg:p-8 lg:scrollbar-thin">
+          <article className="mt-4 rounded-[1.6rem] border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-4 shadow-[var(--shadow-soft)] sm:rounded-[2rem] sm:p-6 lg:p-8">
             <div className="verse-container reading-column space-y-3 text-[var(--ink)] sm:space-y-4">
               {reader.verses.map((verse) => {
                 const highlighted = verseIsHighlighted(highlightedRange, verse.verse);
