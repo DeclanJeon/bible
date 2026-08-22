@@ -61,14 +61,30 @@ function verseLead(unit) {
   return (m ? m[0] : stripped).slice(0, 200);
 }
 
-function pickKeyVerses(code, chapter, units) {
+function themeWordsFor(unit, locale) {
+  const axes = (unit.axisValues ?? []).filter((t) => typeof t === "string");
+  const labels = locale === "ko"
+    ? axes.filter((t) => /[가-힣]/.test(t))
+    : axes.filter((t) => /^[A-Za-z]{3,}$/.test(t) && !/^(God|Israel|Moses|church)$/.test(t));
+  return labels.slice(0, 3).join("·");
+}
+
+function pickKeyVerses(code, chapter, units, locale) {
+  // 절-단위 유닛을 우선(강조절로 더 자연스럽), 그다음 구간 유닛.
   const pool = units
     .filter((u) => u.reference && Number.isInteger(u.crossReferenceDegree))
     .sort((a, b) => b.crossReferenceDegree - a.crossReferenceDegree);
-  const chosen = pool.slice(0, 2).map((u, i) => ({
-    reference: `${code} ${chapter}:${u.reference.startVerse}${u.reference.endVerse > u.reference.startVerse ? `-${u.reference.endVerse}` : ""}`,
-    why: i === 0 ? "연결 성구가 가장 많은 절 (본문 기준 자동 선택)" : "연결 성구가 많은 절 (본문 기준 자동 선택)",
-  }));
+  const single = pool.filter((u) => u.reference.endVerse === u.reference.startVerse);
+  const multi = pool.filter((u) => u.reference.endVerse > u.reference.startVerse);
+  const ordered = single.length >= 2 ? single : [...single, ...multi];
+  const chosen = ordered.slice(0, 2).map((u, i) => {
+    const ref = `${code} ${chapter}:${u.reference.startVerse}${u.reference.endVerse > u.reference.startVerse ? `-${u.reference.endVerse}` : ""}`;
+    const themes = themeWordsFor(u, locale);
+    const why = themes
+      ? (i === 0 ? `${themes}을 붙들어 읽기 좋은 절` : `${themes} 축이 또렷한 절`)
+      : (i === 0 ? "이 장에서 연결이 가장 탄탄한 절" : "이 장에서 연결이 많은 절");
+    return { reference: ref, why };
+  });
   return chosen.length
     ? chosen
     : [{ reference: `${code} ${chapter}:1`, why: "이 장의 첫 절" }];
@@ -126,7 +142,7 @@ async function buildIndex(locale) {
         overview: buildOverview(code, chapter, unitChapter, book.name),
         theological: buildTheological(unitChapter),
         cautions: buildCautions(unitChapter[0]?.genre),
-        keyVerses: pickKeyVerses(code, chapter, unitChapter),
+        keyVerses: pickKeyVerses(code, chapter, unitChapter, locale),
         sources: [
           { id: "passage-index", title: "Passage index (LLM 요약 + 본문 발췌)", url: "local://data/passage-index", license: "Internal", retrievedAt: GENERATED_AT, sourceTier: 2 },
           { id: "world-english-bible", title: "World English Bible", url: "https://ebible.org/bible/details.php?id=eng-web&all=1", license: "Public domain", retrievedAt: GENERATED_AT, sourceTier: 1 },
