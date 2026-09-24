@@ -5,7 +5,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { notFound } from "next/navigation";
+import { ChapterBackgroundCard } from "@/components/chapter-background-card";
 import { getBibleReaderState } from "@/lib/bible";
+import { getChapterBackground } from "@/lib/chapter-background";
 import { buildBibleHref, buildBibleReferenceHref, buildCompanionHref } from "@/lib/navigation";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/server-locale";
@@ -136,7 +138,10 @@ export default async function BiblePage({ params, searchParams }: Props) {
         endVerse: highlightedRange.endVerse,
       }
     : null;
-  const supportSuggestions = supportReference ? await getPassageCrossReferences(supportReference, 5, locale) : [];
+  const [supportSuggestions, chapterBackground] = await Promise.all([
+    supportReference ? getPassageCrossReferences(supportReference, 5, locale) : Promise.resolve([] as Awaited<ReturnType<typeof getPassageCrossReferences>>),
+    getChapterBackground({ code: reader.selectedBook.code, chapter: reader.selectedChapter, locale }),
+  ]);
 
   const renderChapterLinks = (className: string) => (
     <div className={className}>
@@ -264,6 +269,12 @@ export default async function BiblePage({ params, searchParams }: Props) {
 
 
           </section>
+
+          {chapterBackground ? (
+            <div className="mt-4">
+              <ChapterBackgroundCard background={chapterBackground} locale={locale} />
+            </div>
+          ) : null}
 
           <article className="mt-4 rounded-[1.6rem] border border-[var(--gold)]/20 bg-[var(--gold)]/[0.07] p-4 shadow-[var(--shadow-soft)] sm:rounded-[2rem] sm:p-6 lg:p-8">
             <div className="verse-container reading-column space-y-3 text-[var(--ink)] sm:space-y-4">
